@@ -1,0 +1,26 @@
+{
+    "sourceFile": "connection.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1627963715117,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1627963775236,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n // } else if($environment == 'local') {\r\n //     $url = 'http://localhost/indovica/';\r\n //     $conn = mysqli_connect('localhost', 'root', '', 'indovica');\r\n // }\r\n-\r\n+$url = 'http://localhost:1080/ksk/';\r\n $base_url   = $url;\r\n-$admin_url  = $url.\"admin\";\r\n-$vendor_url = $url.\"vendor\";\r\n+// $admin_url  = $url.\"admin\";\r\n+// $vendor_url = $url.\"vendor\";\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1627963872176,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,8 @@\n //     $url = 'http://localhost/indovica/';\r\n //     $conn = mysqli_connect('localhost', 'root', '', 'indovica');\r\n // }\r\n $url = 'http://localhost:1080/ksk/';\r\n-$base_url   = $url;\r\n+// $base_url   = $url;\r\n // $admin_url  = $url.\"admin\";\r\n // $vendor_url = $url.\"vendor\";\r\n ?>\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1627963715117,
+            "name": "Commit-0",
+            "content": "<?php\r\n// require 'vendor/autoload.php';\r\n// $environment = 'development';\r\n\r\n// if($environment == 'development') {\r\n//     $url  = 'https://indovica.id/';\r\n//     $conn = mysqli_connect('localhost', 'indovica_projectlukisan', 'indovica_projectlukisan', 'indovica_projectlukisan');\r\n// } else if($environment == 'local') {\r\n//     $url = 'http://localhost/indovica/';\r\n//     $conn = mysqli_connect('localhost', 'root', '', 'indovica');\r\n// }\r\n\r\n$base_url   = $url;\r\n$admin_url  = $url.\"admin\";\r\n$vendor_url = $url.\"vendor\";\r\n?>"
+        }
+    ]
+}
