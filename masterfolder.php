@@ -221,87 +221,7 @@ require 'connection.php';
 							</ul>
 						</li>
                       
-                        <!-- Tables -->
-                        <li class="nav-item-header">
-                            <div class="text-uppercase font-size-xs line-height-xs">Tables</div> <i class="icon-menu"
-                                title="Tables"></i>
-                        </li>
-                        <li class="nav-item nav-item-submenu">
-                            <a href="#" class="nav-link"><i class="icon-table2"></i> <span>Basic tables</span></a>
-                            <ul class="nav nav-group-sub" data-submenu-title="Basic tables">
-                                <li class="nav-item"><a href="table_basic.html" class="nav-link">Basic examples</a></li>
-                                <li class="nav-item"><a href="table_sizing.html" class="nav-link">Table sizing</a></li>
-                                <li class="nav-item"><a href="table_borders.html" class="nav-link">Table borders</a>
-                                </li>
-                                <li class="nav-item"><a href="table_styling.html" class="nav-link">Table styling</a>
-                                </li>
-                                <li class="nav-item"><a href="table_elements.html" class="nav-link">Table elements</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item nav-item-submenu">
-                            <a href="#" class="nav-link"><i class="icon-grid7"></i> <span>Data tables</span></a>
-                            <ul class="nav nav-group-sub" data-submenu-title="Data tables">
-                                <li class="nav-item"><a href="datatable_basic.html" class="nav-link">Basic
-                                        initialization</a></li>
-                                <li class="nav-item"><a href="datatable_styling.html" class="nav-link">Basic styling</a>
-                                </li>
-                                <li class="nav-item"><a href="datatable_advanced.html" class="nav-link">Advanced
-                                        examples</a></li>
-                                <li class="nav-item"><a href="datatable_sorting.html" class="nav-link">Sorting
-                                        options</a></li>
-                                <li class="nav-item"><a href="datatable_api.html" class="nav-link">Using API</a></li>
-                                <li class="nav-item"><a href="datatable_data_sources.html" class="nav-link">Data
-                                        sources</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item nav-item-submenu">
-                            <a href="#" class="nav-link"><i class="icon-alignment-unalign"></i> <span>Data tables
-                                    extensions</span></a>
-                            <ul class="nav nav-group-sub" data-submenu-title="Data tables extensions">
-                                <li class="nav-item"><a href="datatable_extension_reorder.html" class="nav-link">Columns
-                                        reorder</a></li>
-                                <li class="nav-item"><a href="datatable_extension_row_reorder.html" class="nav-link">Row
-                                        reorder</a></li>
-                                <li class="nav-item"><a href="datatable_extension_fixed_columns.html"
-                                        class="nav-link">Fixed columns</a></li>
-                                <li class="nav-item"><a href="datatable_extension_fixed_header.html"
-                                        class="nav-link">Fixed header</a></li>
-                                <li class="nav-item"><a href="datatable_extension_autofill.html" class="nav-link">Auto
-                                        fill</a></li>
-                                <li class="nav-item"><a href="datatable_extension_key_table.html" class="nav-link">Key
-                                        table</a></li>
-                                <li class="nav-item"><a href="datatable_extension_scroller.html"
-                                        class="nav-link">Scroller</a></li>
-                                <li class="nav-item"><a href="datatable_extension_select.html"
-                                        class="nav-link">Select</a></li>
-                                <li class="nav-item nav-item-submenu">
-                                    <a href="#" class="nav-link">Buttons</a>
-                                    <ul class="nav nav-group-sub">
-                                        <li class="nav-item"><a href="datatable_extension_buttons_init.html"
-                                                class="nav-link">Initialization</a></li>
-                                        <li class="nav-item"><a href="datatable_extension_buttons_flash.html"
-                                                class="nav-link">Flash buttons</a></li>
-                                        <li class="nav-item"><a href="datatable_extension_buttons_print.html"
-                                                class="nav-link">Print buttons</a></li>
-                                        <li class="nav-item"><a href="datatable_extension_buttons_html5.html"
-                                                class="nav-link">HTML5 buttons</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item"><a href="datatable_extension_colvis.html" class="nav-link">Columns
-                                        visibility</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item nav-item-submenu">
-                            <a href="#" class="nav-link"><i class="icon-versions"></i> <span>Responsive
-                                    tables</span></a>
-                            <ul class="nav nav-group-sub" data-submenu-title="Responsive tables">
-                                <li class="nav-item"><a href="table_responsive.html" class="nav-link">Responsive basic
-                                        tables</a></li>
-                                <li class="nav-item"><a href="datatable_responsive.html" class="nav-link">Responsive
-                                        data tables</a></li>
-                            </ul>
-                        </li>
+                      
                     </ul>
                 </div>
             </div>
@@ -319,15 +239,8 @@ require 'connection.php';
                         <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
                     </div>
                 </div>
-              
             </div>
-            <!-- /page header -->
-
-
-            <!-- Content area -->
             <div class="content">
-
-                <!-- Main charts -->
                 <div class="row">
                     <div class="col-xl-12">
 
@@ -523,48 +436,10 @@ require 'connection.php';
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
-                    <!-- /main charts -->
-
-
-
-                    <!-- /dashboard content -->
-
                 </div>
-                <!-- /content area -->
-
-
-                <!-- Footer -->
-                <!-- <div class="navbar navbar-expand-lg navbar-light">
-				<div class="text-center d-lg-none w-100">
-					<button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse" data-target="#navbar-footer">
-						<i class="icon-unfold mr-2"></i>
-						Footer
-					</button>
-				</div>
-
-				<div class="navbar-collapse collapse" id="navbar-footer">
-					<span class="navbar-text">
-						&copy; 2015 - 2018. <a href="#">Limitless Web App Kit</a> by <a href="http://themeforest.net/user/Kopyov" target="_blank">Eugene Kopyov</a>
-					</span>
-
-					<ul class="navbar-nav ml-lg-auto">
-						<li class="nav-item"><a href="https://kopyov.ticksy.com/" class="navbar-nav-link" target="_blank"><i class="icon-lifebuoy mr-2"></i> Support</a></li>
-						<li class="nav-item"><a href="http://demo.interface.club/limitless/docs/" class="navbar-nav-link" target="_blank"><i class="icon-file-text2 mr-2"></i> Docs</a></li>
-						<li class="nav-item"><a href="https://themeforest.net/item/limitless-responsive-web-application-kit/13080328?ref=kopyov" class="navbar-nav-link font-weight-semibold"><span class="text-pink-400"><i class="icon-cart2 mr-2"></i> Purchase</span></a></li>
-					</ul>
-				</div>
-			</div> -->
-                <!-- /footer -->
-
             </div>
-            <!-- /main content -->
-
         </div>
-        <!-- /page content -->
-<!-- Modal Add Folder -->
-
 <div class="modal fade" id="myModal">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
