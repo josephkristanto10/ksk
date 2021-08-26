@@ -1,5 +1,7 @@
 <?php
 require 'connection.php';
+$sql = "select * FROM `master_other_location` inner join city on city.id = master_other_location.city ";
+$res = $conn->query($sql);
 
 ?>
 <!DOCTYPE html>
@@ -256,29 +258,27 @@ require 'connection.php';
 							<table class="table table-bordered table-hover datatable-highlight">
 								<thead>
 									<tr>
-										<th>No</th>
-										<th>Code</th>
-										<th>Address</th>
+										<th>Location Name</th>
 										<th>City</th>
-										<th>Desc 1</th>
-										<th>Desc 2</th>
-										<th>Modified By</th>
-										<th>Date Created</th>
+										<th>Desc1</th>
+										<th>Desc2</th>
 										<th class="text-center">Status</th>
 										<th class="text-center">Action</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-
-										<td>XA-1</td>
-										<td>Lantai 1</td>
-										<td>Ruangan Meeting</td>
-										<td>1</td>
-										<td>Folder A</td>
-										<td>-</td>
-										<td>02-08-2021</td>
+								<?php
+                                if($res->num_rows>0)
+                                {
+                                    while($r = mysqli_fetch_array($res))
+                                    {
+                                        echo
+                                        '	<tr>
+										<td>'.$r['locationname'].'</td>
+										<td>'.$r['name'].'</td>
+										<td>'.$r['desc1'].'</td>
+										<td>'.$r['desc2'].'</td>
+										
 										<td><span class="badge badge-success">Active</span></td>
 										<td class="text-center">
 											<div class="list-icons">
@@ -297,153 +297,15 @@ require 'connection.php';
 												</div>
 											</div>
 										</td>
-									</tr>
-									<tr>
-										<td>2</td>
-
-										<td>XA-1</td>
-										<td>Lantai 2</td>
-										<td>Ruangan Meeting</td>
-										<td>2</td>
-										<td>Folder B</td>
-										<td>-</td>
-										<td>03-08-2021</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>3</td>
-
-										<td>XA-1</td>
-										<td>Lantai 3</td>
-										<td>Ruangan Penyimpanan</td>
-										<td>3</td>
-										<td>Folder C</td>
-										<td>-</td>
-										<td>05-08-2021</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>4</td>
-
-										<td>XA-2</td>
-										<td>Lantai 1</td>
-										<td>Ruangan Berdiskusi</td>
-										<td>4</td>
-										<td>Folder Z</td>
-										<td>-</td>
-										<td>20-08-2021</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>5</td>
-
-										<td>XA-2</td>
-										<td>Lantai 2</td>
-										<td>Ruang Tamu</td>
-										<td>5</td>
-										<td>Folder D</td>
-										<td>-</td>
-										<td>16-08-2021</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>6</td>
-
-										<td>XA-2</td>
-										<td>Lantai 3</td>
-										<td>Ruangan Istirahat</td>
-										<td>6</td>
-										<td>Folder Q</td>
-										<td>-</td>
-										<td>22-08-2021</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-
+									</tr>';
+                                    }
+                                    
+                                }
+                                else{
+                                    
+                                }
+									
+								?>
 								</tbody>
 							</table>
 						</div>

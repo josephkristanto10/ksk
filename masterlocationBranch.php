@@ -1,6 +1,8 @@
 <?php
 require 'connection.php';
-
+$sql = "select * from location_branch";
+$res = $conn->query($sql);
+$listbranch = array();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -242,10 +244,16 @@ require 'connection.php';
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>X-5</td>
-                                        <td>Surabaya</td>
-                                        <td>Silahkan Isikan deskripsi disini</td>
+                                   <?php
+                                if($res->num_rows>0)
+                                {
+                                    while($r = mysqli_fetch_array($res))
+                                    {
+                                        echo
+                                        '<tr>
+                                        <td>'.$r['code'].'</td>
+                                        <td>'.$r['branch'].'</td>
+                                        <td>'.$r['description'].'</td>
                                         <td><span class="badge badge-success">Active</span></td>
                                         <td class="text-center">
                                             <div class="list-icons">
@@ -264,53 +272,15 @@ require 'connection.php';
                                                 </div>
                                             </div>
                                         </td>
-                                    </tr>
-									<tr>
-                                        <td>X-56</td>
-                                        <td>Jakarta</td>
-                                        <td>Silahkan Isikan deskripsi disini</td>
-                                        <td><span class="badge badge-success">Active</span></td>
-                                        <td class="text-center">
-                                            <div class="list-icons">
-                                                <div class="dropdown">
-                                                    <a href="#" class="list-icons-item" data-toggle="dropdown">
-                                                        <i class="icon-menu9"></i>
-                                                    </a>
-
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item"><i class="icon-check"></i>
-                                                            Set Active</a>
-                                                        <a class="dropdown-item"><i
-                                                                class="icon-cross3"></i> Set Inactive</a>
-                                                   
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-									<tr>
-                                        <td>X-58</td>
-                                        <td>Bandung</td>
-                                        <td>Silahkan Isikan deskripsi disini</td>
-                                        <td><span class="badge badge-success">Active</span></td>
-                                        <td class="text-center">
-                                            <div class="list-icons">
-                                                <div class="dropdown">
-                                                    <a href="#" class="list-icons-item" data-toggle="dropdown">
-                                                        <i class="icon-menu9"></i>
-                                                    </a>
-
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item"><i class="icon-check"></i>
-                                                            Set Active</a>
-                                                        <a class="dropdown-item"><i
-                                                                class="icon-cross3"></i> Set Inactive</a>
-                                                   
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    </tr>';
+                                    }
+                                    
+                                }
+                                else{
+                                    
+                                }
+									
+								?>
                                   
                                 </tbody>
                             </table>

@@ -1,6 +1,14 @@
 <?php
 require 'connection.php';
 
+$sql = "select r.barcode, r.code as rackcode, r.rackname, r.rows, r.col, r.description, lsc.name as sistername, lbranch.branch, lbuilding.description as buildingname, lfloor.floor, lroom.room FROM rack r
+inner join location_sister_company lsc on lsc.id = r.idsistercompany 
+inner join location_branch lbranch on lbranch.idbranch = r.idbranch
+inner join location_building lbuilding on lbuilding.id = r.idbuilding
+inner join location_floor lfloor on lfloor.id = r.idfloor
+inner join location_room lroom on lroom.id = r.idroom";
+$res = $conn->query($sql);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,6 +59,14 @@ require 'connection.php';
 	<!-- /theme JS files -->
 
 	<script src="<?=$url;?>global_assets/js/demo_pages/datatables_advanced.js"></script>
+	<script src="<?=$url;?>global_assets/js/plugins/tables/datatables/datatables.min.js"></script>
+	<!-- <script src="<?=$url;?>global_assets/js/plugins/tables/datatables/extensions/responsive.min.js"></script> -->
+	<script src="<?=$url;?>global_assets/js/plugins/forms/selects/select2.min.js"></script>
+
+	<script src="<?=$url;?>assets/js/app.js"></script>
+	<!-- <script src="<?=$url;?>global_assets/js/demo_pages/datatables_responsive.js"></script> -->
+	<script src="<?=$url;?>global_assets/js/demo_pages/datatables_extension_fixed_columns.js"></script>
+	<script src="<?=$url;?>global_assets/js/plugins/tables/datatables/extensions/fixed_columns.min.js"></script>
 	<style>
 		th {
 			background-color: #324148;
@@ -256,10 +272,7 @@ require 'connection.php';
 									class="icon-width"></i> <span>City</span></a></li>
 							</ul>
 						</li>
-						<li class="nav-item"><a href="masterpic.php" class="nav-link"><i class="icon-width"></i>
-								<span>PIC</span></a></li>
-						<li class="nav-item"><a href="masterpicdepartment.php" class="nav-link"><i
-									class="icon-width"></i> <span>PIC (Department)</span></a></li>
+						
 					</ul>
 				</div>
 			</div>
@@ -284,27 +297,43 @@ require 'connection.php';
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="card">
-							<table class="table table-bordered table-hover datatable-highlight">
+							<table class="table datatable-fixed-left">
 								<thead>
 									<tr>
+									<th>Code</th>
 										<th>Barcode</th>
-										<th>Code</th>
+										<th>Sister Company</th>
+										<th>Branch</th>
+										<th>Building</th>
 										<th>Floor</th>
 										<th>Rooms</th>
 										<th>Rack</th>
+										<th>Row</th>
+										<th>Col</th>
 										<th>Description</th>
 										<th class="text-center">Status</th>
 										<th class="text-center">Action</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td><img src="<?=$url?>assets/qrcode.jpg" style="width:50px;height:50px;"></td>
-										<td>XA-1</td>
-										<td>Lantai 1</td>
-										<td>Ruangan Meeting</td>
-										<td>1</td>
-										<td>-</td>
+								<?php
+								if($res->num_rows>0)
+                                {
+                                    while($r = mysqli_fetch_array($res))
+                                    {
+                                        echo
+                                        '	<tr>
+										<td>'.$r['rackcode'].'</td>
+										<td>'.$r['barcode'].'</td>
+										<td>'.$r['sistername'].'</td>
+										<td>'.$r['branch'].'</td>
+										<td>'.$r['buildingname'].'</td>
+                                        <td>'.$r['floor'].'</td>
+                                        <td>'.$r['room'].'</td>
+										<td>'.$r['rackname'].'</td>
+                                        <td>'.$r['rows'].'</td>
+										<td>'.$r['col'].'</td>
+										<td>'.$r['description'].'</td>
 										<td><span class="badge badge-success">Active</span></td>
 										<td class="text-center">
 											<div class="list-icons">
@@ -323,138 +352,17 @@ require 'connection.php';
 												</div>
 											</div>
 										</td>
-									</tr>
-									<tr>
-										<td><img src="<?=$url?>assets/qrcode.jpg" style="width:50px;height:50px;"></td>
-										<td>XA-1</td>
-										<td>Lantai 2</td>
-										<td>Ruangan Meeting</td>
-										<td>2</td>
-										<td>-</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td><img src="<?=$url?>assets/qrcode.jpg" style="width:50px;height:50px;"></td>
-										<td>XA-1</td>
-										<td>Lantai 3</td>
-										<td>Ruangan Penyimpanan</td>
-										<td>3</td>
-										<td>-</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td><img src="<?=$url?>assets/qrcode.jpg" style="width:50px;height:50px;"></td>
-										<td>XA-2</td>
-										<td>Lantai 1</td>
-										<td>Ruangan Berdiskusi</td>
-										<td>4</td>
-										<td>-</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td><img src="<?=$url?>assets/qrcode.jpg" style="width:50px;height:50px;"></td>
-										<td>XA-2</td>
-										<td>Lantai 2</td>
-										<td>Ruang Tamu</td>
-										<td>5</td>
-										<td>-</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td><img src="<?=$url?>assets/qrcode.jpg" style="width:50px;height:50px;"></td>
-										<td>XA-2</td>
-										<td>Lantai 3</td>
-										<td>Ruangan Istirahat</td>
-										<td>6</td>
-										<td>-</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-
+									</tr>';
+                                    }
+                                    
+                                }
+                                else{
+                                    
+                                }
+									
+								?>
+									
+									
 								</tbody>
 							</table>
 						</div>

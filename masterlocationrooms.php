@@ -1,6 +1,12 @@
 <?php
 require 'connection.php';
-
+$sql = "select lr.barcode, lr.code, lr.room, lr.description, lsc.name as sistername, lbranch.branch as branch, 
+		lbuilding.description as buildingname, lfloor.floor FROM location_room lr 
+		inner join location_sister_company lsc on lsc.id = lr.idsistercompany 
+		inner join location_branch lbranch on lbranch.idbranch = lr.idbranch 
+		inner join location_building lbuilding on lbuilding.id = lr.idbuilding 
+		inner join location_floor lfloor on lfloor.id = lr.idfloor";
+$res = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -272,6 +278,9 @@ require 'connection.php';
 									<tr>
 										<th>Barcode</th>
 										<th>Code</th>
+										<th>SisterCompany</th>
+										<th>Branch</th>
+										<th>Building</th>
 										<th>Floor</th>
 										<th>Rooms</th>
 										<th>Description</th>
@@ -280,12 +289,22 @@ require 'connection.php';
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td><img src="<?=$url?>assets/qrcode.jpg" style="width:50px;height:50px;"></td>
-										<td>XA-1</td>
-										<td>Lantai 1</td>
-										<td>Ruangan Meeting</td>
-										<td>-</td>
+
+								<?php
+								if($res->num_rows>0)
+                                {
+                                    while($r = mysqli_fetch_array($res))
+                                    {
+                                        echo
+                                        '	<tr>
+										<td>'.$r['barcode'].'</td>
+										<td>'.$r['code'].'</td>
+										<td>'.$r['sistername'].'</td>
+										<td>'.$r['branch'].'</td>
+                                        <td>'.$r['buildingname'].'</td>
+                                        <td>'.$r['floor'].'</td>
+                                        <td>'.$r['room'].'</td>
+                                        <td>'.$r['description'].'</td>
 										<td><span class="badge badge-success">Active</span></td>
 										<td class="text-center">
 											<div class="list-icons">
@@ -304,132 +323,16 @@ require 'connection.php';
 												</div>
 											</div>
 										</td>
-									</tr>
-									<tr>
-										<td><img src="<?=$url?>assets/qrcode.jpg" style="width:50px;height:50px;"></td>
-										<td>XA-1</td>
-										<td>Lantai 2</td>
-										<td>Ruangan Meeting</td>
-										<td>-</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td><img src="<?=$url?>assets/qrcode.jpg" style="width:50px;height:50px;"></td>
-										<td>XA-1</td>
-										<td>Lantai 3</td>
-										<td>Ruangan Penyimpanan</td>
-										<td>-</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td><img src="<?=$url?>assets/qrcode.jpg" style="width:50px;height:50px;"></td>
-										<td>XA-2</td>
-										<td>Lantai 1</td>
-										<td>Ruangan Berdiskusi</td>
-										<td>-</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td><img src="<?=$url?>assets/qrcode.jpg" style="width:50px;height:50px;"></td>
-										<td>XA-2</td>
-										<td>Lantai 2</td>
-										<td>Ruang Tamu</td>
-										<td>-</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td><img src="<?=$url?>assets/qrcode.jpg" style="width:50px;height:50px;"></td>
-										<td>XA-2</td>
-										<td>Lantai 3</td>
-										<td>Ruangan Istirahat</td>
-										<td>-</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
+									</tr>';
+                                    }
+                                    
+                                }
+                                else{
+                                    
+                                }
+									
+								?>
+								
 
 								</tbody>
 							</table>

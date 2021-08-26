@@ -1,6 +1,10 @@
 <?php
 require 'connection.php';
-
+$sql = "select lscb.code, lsc.name, lscb.description, lb.branch FROM location_setup_sister_branch lscb 
+		inner join location_sister_company lsc on lsc.id = lscb.idsistercompany 
+		inner join location_branch lb on lb.idbranch = lscb.idbranch ";
+$res = $conn->query($sql);
+$listsetup = array();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -272,11 +276,18 @@ require 'connection.php';
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>001-0001</td>
-										<td>PT Karunia Kasih B</td>
-										<td>Surabaya</td>
-										<td>Silahkan isi dengan deskripsi yang dibutuhkan</td>
+
+								<?php
+                                if($res->num_rows>0)
+                                {
+                                    while($r = mysqli_fetch_array($res))
+                                    {
+                                        echo
+                                        '<tr>
+										<td>'.$r['code'].'</td>
+										<td>'.$r['name'].'</td>
+										<td>'.$r['branch'].'</td>
+										<td>'.$r['description'].'</td>
 										<td><span class="badge badge-success">Active</span></td>
 										<td class="text-center">
 											<div class="list-icons">
@@ -295,55 +306,17 @@ require 'connection.php';
 												</div>
 											</div>
 										</td>
-									</tr>
-									<tr>
-										<td>001-0002</td>
-										<td>PT Karunia Kasih B</td>
-										<td>Malang</td>
-										<td>Silahkan isi dengan deskripsi yang dibutuhkan</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>002-0001</td>
-										<td>CV Suka Maju</td>
-										<td>Surabaya</td>
-										<td>Silahkan isi dengan deskripsi yang dibutuhkan</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
+									</tr>';
+                                    }
+                                    
+                                }
+                                else{
+                                    
+                                }
+									
+								?>
+									
+									
 								</tbody>
 							</table>
 						</div>

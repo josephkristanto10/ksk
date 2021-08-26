@@ -1,5 +1,13 @@
 <?php
 require 'connection.php';
+$sql = "select k.nik, k.nama as namakaryawan, k.alamat, k.nohp, lsc.name as sistername, lbranch.branch, 
+		lbuilding.description as buildingname, divi.divisi, depa.department FROM karyawan k 
+		inner join location_sister_company lsc on lsc.id = k.idsistercompany
+		inner join location_branch lbranch on lbranch.idbranch = k.idbranch
+		inner join location_building lbuilding on lbuilding.id = k.idbuilding
+		inner join divisi divi on divi.id = k.iddivisi
+		inner join department depa on depa.id = k.iddepartment";
+$res = $conn->query($sql);
 
 ?>
 <!DOCTYPE html>
@@ -50,7 +58,9 @@ require 'connection.php';
 	<script src="<?=$url;?>global_assets/js/demo_charts/pages/dashboard/light/bullets.js"></script>
 	<!-- /theme JS files -->
 
-	<script src="<?=$url;?>global_assets/js/demo_pages/datatables_advanced.js"></script>
+	<!-- <script src="<?=$url;?>global_assets/js/demo_pages/datatables_advanced.js"></script> -->
+	<script src="<?=$url;?>global_assets/js/plugins/forms/selects/select2.min.js"></script>
+    <script src="<?=$url;?>global_assets/js/plugins/tables/datatables/datatables.min.js"></script>
 	<style>
 		th {
 			background-color: #324148;
@@ -68,6 +78,12 @@ require 'connection.php';
 			transform: translate(0, -50%);
 			top: 50%;
 			margin: 0 auto;
+		}
+		#datatable_serverside_info, #datatable_serverside_paginate{
+            margin-top:50px;
+        }
+		.card{
+			padding:15px;
 		}
 	</style>
 </head>
@@ -259,170 +275,22 @@ require 'connection.php';
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="card">
-							<table class="table table-bordered table-hover datatable-highlight">
+						<table id = "datatable_serverside" class="table table-hover table-bordered display nowrap w-100">
 								<thead>
 									<tr>
+										<th>Barcode</th>
 										<th>NIK</th>
-										<th>Name</th>
-										<th>Address</th>
-										<th>Division</th>
-										<th>Handphone</th>
+										<th>Name Employee</th>
+										<th>Branch</th>
+										<th>Department</th>
+										<th>Rank</th>
+										<th>Description</th>
+										<th>Email</th>
 										<th class="text-center">Status</th>
 										<th class="text-center">Action</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td>35382732</td>
-										<td>Joseph</td>
-										<td>Jalan Prambodo V / 3</td>
-										<td>Staff Purchasing</td>
-										<td>08374636333</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>35355532</td>
-										<td>Budi</td>
-										<td>Jalan Bubutan 5 / 33</td>
-										<td>Staff Sewing</td>
-										<td>0855556333</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>35257742</td>
-										<td>Karman</td>
-										<td>Jalan Mulyosari blok b no 119</td>
-										<td>Staff Human Resource</td>
-										<td>0822226344</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>33334445</td>
-										<td>Michael</td>
-										<td>Jalan Wonorejo blok xx no 29</td>
-										<td>Staff Sewing</td>
-										<td>0834576355</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>37283425</td>
-										<td>Kartika</td>
-										<td>Jalan Bayam no 29</td>
-										<td>Staff Sewing</td>
-										<td>0834324455</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>37333005</td>
-										<td>Rachel</td>
-										<td>Jalan Lele no 129</td>
-										<td>Staff Sewing</td>
-										<td>0834324455</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-								</tbody>
+							
 							</table>
 						</div>
 					</div>
@@ -472,3 +340,42 @@ require 'connection.php';
 		</div>
 </body>
 </html>
+<script>
+$(function() {
+      loadData();
+   });
+	function loadData() {
+      $("#datatable_serverside").DataTable({
+         processing: true,
+         deferRender: true,
+         serverSide: true,
+         destroy: true,
+         iDisplayInLength: 10,
+         scrollX: true,
+         order: [[0, 'asc']],
+         ajax: { 
+            url: 'process/masterstaff.php',
+            method: 'POST',
+            data: { tipe: "load"  }
+        },
+         columns: [
+			{ name: 'Barcode', className: 'text-center align-middle' },
+            { name: 'NIK', className: 'text-center align-middle' },
+            { name: 'EmployeeName', className: 'text-center align-middle' },
+            { name: 'Branch', className: 'text-center align-middle' },
+			{ name: 'Department', className: 'text-center align-middle' },
+			{ name: 'Rank', className: 'text-center align-middle' },
+			{ name: 'Description', className: 'text-center align-middle' },
+			{ name: 'Email', className: 'text-center align-middle' },
+			{ name: 'Status', className: 'text-center align-middle' },
+            { name: 'Action', searchable: false, orderable: false, className: 'text-center align-middle' }
+            
+         ]
+      });
+   };
+
+   // Reload table
+   function success() {
+      $('#datatable_serverside').DataTable().ajax.reload(null, false);
+   };
+</script>

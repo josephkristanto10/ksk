@@ -1,6 +1,11 @@
 <?php
 require 'connection.php';
-
+$sql = "select hc.code, hc.description, hc.id, hc.name , hc.address, hc.notelp, hc.modified, hc.created, city.name as cityname, 
+		prov.name as provincename, coun.name as countryname 
+		FROM holding_company hc inner join city on city.id = hc.idcity 
+		inner join province prov on prov.id = hc.idprovince
+		inner join country coun on coun.id = hc.idcountry ";
+$res = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -258,7 +263,7 @@ require 'connection.php';
 					<div class="page-title d-flex">
 						<div class="row" style="width:100%;">
 							<div class="col-xl-12">
-							<a href="#myModal" data-toggle="modal">
+							<a href="#myModal" data-toggle="modal" >
 								<button class="btn btn-info" style="background-color:#26a69a !important;width:200px;"><i
 										class="icon-add"></i> &nbsp Holding Company </button>
 	</a>
@@ -292,15 +297,21 @@ require 'connection.php';
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>0001</td>
-										<td>PT. KKS</td>
-										<td>PT. Kasih Karunia Sejati</td>
-										<td>Pandanlandung No.51</td>
-                                        <td>Indonesia</td>
-                                        <td>Jawa Timur</td>
-                                        <td>Malang</td>
-                                        <td>08385948388</td>
+								<?php
+								if($res->num_rows>0)
+                                {
+                                    while($r = mysqli_fetch_array($res))
+                                    {
+                                        echo
+                                        '	<tr>
+										<td>'.$r['code'].'</td>
+										<td>'.$r['name'].'</td>
+										<td>'.$r['description'].'</td>
+										<td>'.$r['address'].'</td>
+                                        <td>'.$r['countryname'].'</td>
+                                        <td>'.$r['provincename'].'</td>
+                                        <td>'.$r['cityname'].'</td>
+                                        <td>'.$r['notelp'].'</td>
 										<td><span class="badge badge-success">Active</span></td>
 										<td class="text-center">
 											<div class="list-icons">
@@ -319,91 +330,16 @@ require 'connection.php';
 												</div>
 											</div>
 										</td>
-									</tr>
-                                    <tr>
-										<td>0001</td>
-										<td>PT. KKS</td>
-										<td>PT. Kasih Karunia Sejati</td>
-										<td>Pandanlandung No.51</td>
-                                        <td>Indonesia</td>
-                                        <td>Jawa Timur</td>
-                                        <td>Malang</td>
-                                        <td>08385948388</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-                                    <tr>
-										<td>0001</td>
-										<td>PT. KKS</td>
-										<td>PT. Kasih Karunia Sejati</td>
-										<td>Pandanlandung No.51</td>
-                                        <td>Indonesia</td>
-                                        <td>Jawa Timur</td>
-                                        <td>Malang</td>
-                                        <td>08385948388</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-                                    <tr>
-										<td>0001</td>
-										<td>PT. KKS</td>
-										<td>PT. Kasih Karunia Sejati</td>
-										<td>Pandanlandung No.51</td>
-                                        <td>Indonesia</td>
-                                        <td>Jawa Timur</td>
-                                        <td>Malang</td>
-                                        <td>08385948388</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
+									</tr>';
+                                    }
+                                    
+                                }
+                                else{
+                                    
+                                }
+									
+								?>
+								
 								</tbody>
 							</table>
 						</div>

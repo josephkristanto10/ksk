@@ -1,0 +1,814 @@
+{
+    "sourceFile": "process/masterkategoriassetsprocess.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 199,
+            "patches": [
+                {
+                    "date": 1629445421817,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1629448087945,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n <?php\r\n-\r\n+echo \"test\";\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629448397238,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,4 @@\n <?php\r\n+$mytype = $_POST['tipe'];\r\n echo \"test\";\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629448408399,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n <?php\r\n $mytype = $_POST['tipe'];\r\n+if($mytype == \"\")\r\n echo \"test\";\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629448414278,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,8 @@\n <?php\r\n $mytype = $_POST['tipe'];\r\n-if($mytype == \"\")\r\n-echo \"test\";\r\n+if($mytype == \"add\")\r\n+{\r\n+    echo \"test\";\r\n+}\r\n+\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629448422793,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n <?php\r\n $mytype = $_POST['tipe'];\r\n if($mytype == \"add\")\r\n {\r\n-    echo \"test\";\r\n+    descrip: description,\r\n+                    mygroup : group\r\n }\r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629448444967,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n <?php\r\n $mytype = $_POST['tipe'];\r\n if($mytype == \"add\")\r\n {\r\n-    descrip: description,\r\n-                    mygroup : group\r\n+    $descrip = $_POST['descrip']description\r\n+    $mygroup = group\r\n }\r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629448453340,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n <?php\r\n $mytype = $_POST['tipe'];\r\n if($mytype == \"add\")\r\n {\r\n-    $descrip = $_POST['descrip']description\r\n-    $mygroup = group\r\n+    $descrip = $_POST['descrip'];\r\n+    $mygroup = $_POST['mygroup'];\r\n }\r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629448462230,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,8 @@\n if($mytype == \"add\")\r\n {\r\n     $descrip = $_POST['descrip'];\r\n     $mygroup = $_POST['mygroup'];\r\n+    ()\r\n }\r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629448667523,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,8 @@\n if($mytype == \"add\")\r\n {\r\n     $descrip = $_POST['descrip'];\r\n     $mygroup = $_POST['mygroup'];\r\n-    ()\r\n+    $sql = \"insert into kategori_asset()\";\r\n }\r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629448700646,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n if($mytype == \"add\")\r\n {\r\n     $descrip = $_POST['descrip'];\r\n     $mygroup = $_POST['mygroup'];\r\n+    $select = $_POST['select'];\r\n     $sql = \"insert into kategori_asset()\";\r\n }\r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629448729975,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n if($mytype == \"add\")\r\n {\r\n     $descrip = $_POST['descrip'];\r\n     $mygroup = $_POST['mygroup'];\r\n-    $select = $_POST['select'];\r\n-    $sql = \"insert into kategori_asset()\";\r\n+    $select = $_POST['myselect'];\r\n+    $sql = \"insert into kategori_asset values(NULL, )\";\r\n }\r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629448749796,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,8 @@\n {\r\n     $descrip = $_POST['descrip'];\r\n     $mygroup = $_POST['mygroup'];\r\n     $select = $_POST['myselect'];\r\n-    $sql = \"insert into kategori_asset values(NULL, )\";\r\n+    $sql = \"insert into kategori_asset values(NULL, \".$group.\")\";\r\n }\r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629448764378,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,8 @@\n {\r\n     $descrip = $_POST['descrip'];\r\n     $mygroup = $_POST['mygroup'];\r\n     $select = $_POST['myselect'];\r\n-    $sql = \"insert into kategori_asset values(NULL, \".$group.\")\";\r\n+    $sql = \"insert into kategori_asset values(NULL, $group)\";\r\n }\r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629448770879,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,8 @@\n {\r\n     $descrip = $_POST['descrip'];\r\n     $mygroup = $_POST['mygroup'];\r\n     $select = $_POST['myselect'];\r\n-    $sql = \"insert into kategori_asset values(NULL, $group)\";\r\n+    $sql = \"insert into kategori_asset values(NULL, $group, $select)\";\r\n }\r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629448781316,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,8 @@\n {\r\n     $descrip = $_POST['descrip'];\r\n     $mygroup = $_POST['mygroup'];\r\n     $select = $_POST['myselect'];\r\n-    $sql = \"insert into kategori_asset values(NULL, $group, $select)\";\r\n+    $sql = \"insert into kategori_asset values(NULL, $mygroup, $select, descrip)\";\r\n }\r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629448789503,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,7 +5,8 @@\n     $descrip = $_POST['descrip'];\r\n     $mygroup = $_POST['mygroup'];\r\n     $select = $_POST['myselect'];\r\n     $sql = \"insert into kategori_asset values(NULL, $mygroup, $select, descrip)\";\r\n+    $res = \r\n }\r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629448807365,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,13 @@\n <?php\r\n+require 'connection.php';\r\n $mytype = $_POST['tipe'];\r\n if($mytype == \"add\")\r\n {\r\n     $descrip = $_POST['descrip'];\r\n     $mygroup = $_POST['mygroup'];\r\n     $select = $_POST['myselect'];\r\n     $sql = \"insert into kategori_asset values(NULL, $mygroup, $select, descrip)\";\r\n-    $res = \r\n+    $res = $conn;\r\n }\r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629448813798,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,8 @@\n     $descrip = $_POST['descrip'];\r\n     $mygroup = $_POST['mygroup'];\r\n     $select = $_POST['myselect'];\r\n     $sql = \"insert into kategori_asset values(NULL, $mygroup, $select, descrip)\";\r\n-    $res = $conn;\r\n+    $res = $conn->query($sql);;\r\n }\r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629448819664,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n {\r\n     $descrip = $_POST['descrip'];\r\n     $mygroup = $_POST['mygroup'];\r\n     $select = $_POST['myselect'];\r\n-    $sql = \"insert into kategori_asset values(NULL, $mygroup, $select, descrip)\";\r\n-    $res = $conn->query($sql);;\r\n+    $sql = \"insert into kategori_asset values(NULL, $mygroup, $select, $descrip)\";\r\n+    $res = $conn->query($sql);\r\n }\r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629448828237,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,7 +7,8 @@\n     $mygroup = $_POST['mygroup'];\r\n     $select = $_POST['myselect'];\r\n     $sql = \"insert into kategori_asset values(NULL, $mygroup, $select, $descrip)\";\r\n     $res = $conn->query($sql);\r\n+    if()\r\n }\r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629448963237,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,13 @@\n     $mygroup = $_POST['mygroup'];\r\n     $select = $_POST['myselect'];\r\n     $sql = \"insert into kategori_asset values(NULL, $mygroup, $select, $descrip)\";\r\n     $res = $conn->query($sql);\r\n-    if()\r\n+    if ($mysqli->affected_rows==1){\r\n+        echo \"success\";\r\n+    }\r\n+    else {\r\n+        echo \"fail\";\r\n+    }\r\n }\r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629448971198,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n     $mygroup = $_POST['mygroup'];\r\n     $select = $_POST['myselect'];\r\n     $sql = \"insert into kategori_asset values(NULL, $mygroup, $select, $descrip)\";\r\n     $res = $conn->query($sql);\r\n-    if ($mysqli->affected_rows==1){\r\n+    if ($conn->affected_rows>0){\r\n         echo \"success\";\r\n     }\r\n     else {\r\n         echo \"fail\";\r\n"
+                },
+                {
+                    "date": 1629451330244,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,19 +1,80 @@\n <?php\r\n require 'connection.php';\r\n-$mytype = $_POST['tipe'];\r\n-if($mytype == \"add\")\r\n-{\r\n-    $descrip = $_POST['descrip'];\r\n-    $mygroup = $_POST['mygroup'];\r\n-    $select = $_POST['myselect'];\r\n-    $sql = \"insert into kategori_asset values(NULL, $mygroup, $select, $descrip)\";\r\n-    $res = $conn->query($sql);\r\n-    if ($conn->affected_rows>0){\r\n-        echo \"success\";\r\n+require '../../../connection.php';\r\n+\r\n+$where_like = [\r\n+    'id',\r\n+    'foto',\r\n+    'kodeproduk',\r\n+    'expired',\r\n+    'nama',\r\n+    'harga_jual',\r\n+    'hpp',\r\n+    'status',\r\n+    'tampil'\r\n+];\r\n+\r\n+$response = $_REQUEST;\r\n+$start    = $response['start'];\r\n+$length   = $response['length'];\r\n+$order    = $where_like[$response['order'][0]['column']];\r\n+$dir      = $response['order'][0]['dir'];\r\n+$search   = $response['search']['value'];\r\n+\r\n+$total_data = mysqli_query($conn, \"SELECT id, foto, kodeproduk, nama, harga_jual, hpp, qty,expired, status FROM produk\");\r\n+\r\n+if(empty($search)) {\r\n+    $query_data = mysqli_query($conn, \"SELECT id, foto, kodeproduk, nama, harga_jual, hpp, qty, status,expired, tampil FROM produk ORDER BY $order $dir LIMIT $start, $length\");\r\n+\r\n+    $total_filtered = mysqli_query($conn, \"SELECT id, foto, kodeproduk, nama, harga_jual, hpp, qty, status, expired, tampil FROM produk\");\r\n+} else {\r\n+    $query_data = mysqli_query($conn, \"SELECT id, foto, kodeproduk, nama, harga_jual, hpp, qty, status, expired, tampil FROM produk WHERE kodeproduk LIKE '%$search%' OR nama LIKE '%$search%' ORDER BY $order $dir LIMIT $start, $length\");\r\n+\r\n+    $total_filtered = mysqli_query($conn, \"SELECT id, foto, kodeproduk, nama, harga_jual, hpp, qty, status,tampil FROM produk WHERE kodeproduk LIKE '%$search%' OR nama LIKE '%$search%'\");\r\n+}\r\n+\r\n+$response['data'] = [];\r\n+$nomor            = $start + 1;\r\n+\r\n+if($query_data) {\r\n+    while($row = mysqli_fetch_assoc($query_data)) {\r\n+        \r\n+        $foto = explode(',', $row['foto']);\r\n+        if($foto[0] && file_exists('../../../assets/foto_produk/' . $foto[0] . '')) {\r\n+            $gambar = '<img src=\"../../../assets/foto_produk/' . $foto[0] . '\" style=\"max-width:50px; max-height:50px;\">';\r\n+        } else {\r\n+            $gambar = '<img src=\"../../../assets/empty.png\" style=\"max-width:50px; max-height:50px;\">';\r\n+        }\r\n+\r\n+        $response['data'][] = [\r\n+            $nomor,\r\n+            $gambar,\r\n+            $row['kodeproduk'],\r\n+            $row['nama'],\r\n+            $row['expired'] .' Bulan',\r\n+            'Rp ' . number_format($row['harga_jual'], 2, ',', '.'),\r\n+            'Rp ' . number_format($row['hpp'], 2, ',', '.'),\r\n+            $row['status'],\r\n+            $row['tampil'],\r\n+            '\r\n+                <button type=\"button\" onclick=\"detail(' . $row['id'] . ')\" class=\"btn btn-warning btn-sm\">Edit</button>\r\n+                <button type=\"button\" onclick=\"hapus(' . $row['id'] . ')\" class=\"btn btn-danger btn-sm\">Hapus</button>\r\n+            '\r\n+        ];\r\n+        $nomor++;\r\n     }\r\n-    else {\r\n-        echo \"fail\";\r\n-    }\r\n }\r\n \r\n+$response['recordsTotal'] = 0;\r\n+if($total_data <> FALSE) {\r\n+    $response['recordsTotal'] = mysqli_num_rows($total_data);\r\n+}\r\n+\r\n+$response['recordsFiltered'] = 0;\r\n+if($total_filtered <> FALSE) {\r\n+    $response['recordsFiltered'] = mysqli_num_rows($total_filtered);\r\n+}\r\n+\r\n+\r\n+echo json_encode($response);\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629451584461,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,6 @@\n <?php\r\n require 'connection.php';\r\n-require '../../../connection.php';\r\n \r\n $where_like = [\r\n     'id',\r\n     'foto',\r\n@@ -20,9 +19,9 @@\n $order    = $where_like[$response['order'][0]['column']];\r\n $dir      = $response['order'][0]['dir'];\r\n $search   = $response['search']['value'];\r\n \r\n-$total_data = mysqli_query($conn, \"SELECT id, foto, kodeproduk, nama, harga_jual, hpp, qty,expired, status FROM produk\");\r\n+$total_data = mysqli_query($conn, \"select * from kategori_asset \");\r\n \r\n if(empty($search)) {\r\n     $query_data = mysqli_query($conn, \"SELECT id, foto, kodeproduk, nama, harga_jual, hpp, qty, status,expired, tampil FROM produk ORDER BY $order $dir LIMIT $start, $length\");\r\n \r\n"
+                },
+                {
+                    "date": 1629451608266,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n \r\n $total_data = mysqli_query($conn, \"select * from kategori_asset \");\r\n \r\n if(empty($search)) {\r\n-    $query_data = mysqli_query($conn, \"SELECT id, foto, kodeproduk, nama, harga_jual, hpp, qty, status,expired, tampil FROM produk ORDER BY $order $dir LIMIT $start, $length\");\r\n+    $query_data = mysqli_query($conn, \"select * from kategori_assetORDER BY $order $dir LIMIT $start, $length\");\r\n \r\n     $total_filtered = mysqli_query($conn, \"SELECT id, foto, kodeproduk, nama, harga_jual, hpp, qty, status, expired, tampil FROM produk\");\r\n } else {\r\n     $query_data = mysqli_query($conn, \"SELECT id, foto, kodeproduk, nama, harga_jual, hpp, qty, status, expired, tampil FROM produk WHERE kodeproduk LIKE '%$search%' OR nama LIKE '%$search%' ORDER BY $order $dir LIMIT $start, $length\");\r\n"
+                },
+                {
+                    "date": 1629451615556,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n \r\n $total_data = mysqli_query($conn, \"select * from kategori_asset \");\r\n \r\n if(empty($search)) {\r\n-    $query_data = mysqli_query($conn, \"select * from kategori_assetORDER BY $order $dir LIMIT $start, $length\");\r\n+    $query_data = mysqli_query($conn, \"select * from kategori_asset ORDER BY $order $dir LIMIT $start, $length\");\r\n \r\n     $total_filtered = mysqli_query($conn, \"SELECT id, foto, kodeproduk, nama, harga_jual, hpp, qty, status, expired, tampil FROM produk\");\r\n } else {\r\n     $query_data = mysqli_query($conn, \"SELECT id, foto, kodeproduk, nama, harga_jual, hpp, qty, status, expired, tampil FROM produk WHERE kodeproduk LIKE '%$search%' OR nama LIKE '%$search%' ORDER BY $order $dir LIMIT $start, $length\");\r\n"
+                },
+                {
+                    "date": 1629451680526,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,17 +1,12 @@\n <?php\r\n require 'connection.php';\r\n \r\n $where_like = [\r\n-    'id',\r\n-    'foto',\r\n-    'kodeproduk',\r\n-    'expired',\r\n     'nama',\r\n-    'harga_jual',\r\n-    'hpp',\r\n-    'status',\r\n-    'tampil'\r\n+    'assignto',\r\n+    'description'\r\n+   \r\n ];\r\n \r\n $response = $_REQUEST;\r\n $start    = $response['start'];\r\n"
+                },
+                {
+                    "date": 1629451708331,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,8 @@\n $where_like = [\r\n     'nama',\r\n     'assignto',\r\n     'description'\r\n-   \r\n ];\r\n \r\n $response = $_REQUEST;\r\n $start    = $response['start'];\r\n"
+                },
+                {
+                    "date": 1629451792445,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \r\n if(empty($search)) {\r\n     $query_data = mysqli_query($conn, \"select * from kategori_asset ORDER BY $order $dir LIMIT $start, $length\");\r\n \r\n-    $total_filtered = mysqli_query($conn, \"SELECT id, foto, kodeproduk, nama, harga_jual, hpp, qty, status, expired, tampil FROM produk\");\r\n+    $total_filtered = mysqli_query($conn, \"select * from kategori_asset \");\r\n } else {\r\n     $query_data = mysqli_query($conn, \"SELECT id, foto, kodeproduk, nama, harga_jual, hpp, qty, status, expired, tampil FROM produk WHERE kodeproduk LIKE '%$search%' OR nama LIKE '%$search%' ORDER BY $order $dir LIMIT $start, $length\");\r\n \r\n     $total_filtered = mysqli_query($conn, \"SELECT id, foto, kodeproduk, nama, harga_jual, hpp, qty, status,tampil FROM produk WHERE kodeproduk LIKE '%$search%' OR nama LIKE '%$search%'\");\r\n"
+                },
+                {
+                    "date": 1629451842801,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n     $query_data = mysqli_query($conn, \"select * from kategori_asset ORDER BY $order $dir LIMIT $start, $length\");\r\n \r\n     $total_filtered = mysqli_query($conn, \"select * from kategori_asset \");\r\n } else {\r\n-    $query_data = mysqli_query($conn, \"SELECT id, foto, kodeproduk, nama, harga_jual, hpp, qty, status, expired, tampil FROM produk WHERE kodeproduk LIKE '%$search%' OR nama LIKE '%$search%' ORDER BY $order $dir LIMIT $start, $length\");\r\n+    $query_data = mysqli_query($conn, \"select * from kategori_asset  WHERE kodeproduk LIKE '%$search%' OR nama LIKE '%$search%' ORDER BY $order $dir LIMIT $start, $length\");\r\n \r\n     $total_filtered = mysqli_query($conn, \"SELECT id, foto, kodeproduk, nama, harga_jual, hpp, qty, status,tampil FROM produk WHERE kodeproduk LIKE '%$search%' OR nama LIKE '%$search%'\");\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1629451870468,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n     $query_data = mysqli_query($conn, \"select * from kategori_asset ORDER BY $order $dir LIMIT $start, $length\");\r\n \r\n     $total_filtered = mysqli_query($conn, \"select * from kategori_asset \");\r\n } else {\r\n-    $query_data = mysqli_query($conn, \"select * from kategori_asset  WHERE kodeproduk LIKE '%$search%' OR nama LIKE '%$search%' ORDER BY $order $dir LIMIT $start, $length\");\r\n+    $query_data = mysqli_query($conn, \"select * from kategori_asset WHERE nama LIKE '%$search%' OR assign LIKE '%$search%' ORDER BY $order $dir LIMIT $start, $length\");\r\n \r\n     $total_filtered = mysqli_query($conn, \"SELECT id, foto, kodeproduk, nama, harga_jual, hpp, qty, status,tampil FROM produk WHERE kodeproduk LIKE '%$search%' OR nama LIKE '%$search%'\");\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1629451915212,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n     $total_filtered = mysqli_query($conn, \"select * from kategori_asset \");\r\n } else {\r\n     $query_data = mysqli_query($conn, \"select * from kategori_asset WHERE nama LIKE '%$search%' OR assign LIKE '%$search%' ORDER BY $order $dir LIMIT $start, $length\");\r\n \r\n-    $total_filtered = mysqli_query($conn, \"SELECT id, foto, kodeproduk, nama, harga_jual, hpp, qty, status,tampil FROM produk WHERE kodeproduk LIKE '%$search%' OR nama LIKE '%$search%'\");\r\n+    $total_filtered = mysqli_query($conn, \"select * from kategori_asset WHERE nama LIKE '%$search%' OR assign LIKE '%$search%'\");\r\n }\r\n \r\n $response['data'] = [];\r\n $nomor            = $start + 1;\r\n"
+                },
+                {
+                    "date": 1629451923152,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,11 +20,11 @@\n     $query_data = mysqli_query($conn, \"select * from kategori_asset ORDER BY $order $dir LIMIT $start, $length\");\r\n \r\n     $total_filtered = mysqli_query($conn, \"select * from kategori_asset \");\r\n } else {\r\n-    $query_data = mysqli_query($conn, \"select * from kategori_asset WHERE nama LIKE '%$search%' OR assign LIKE '%$search%' ORDER BY $order $dir LIMIT $start, $length\");\r\n+    $query_data = mysqli_query($conn, \"select * from kategori_asset WHERE nama LIKE '%$search%' OR assignto LIKE '%$search%' ORDER BY $order $dir LIMIT $start, $length\");\r\n \r\n-    $total_filtered = mysqli_query($conn, \"select * from kategori_asset WHERE nama LIKE '%$search%' OR assign LIKE '%$search%'\");\r\n+    $total_filtered = mysqli_query($conn, \"select * from kategori_asset WHERE nama LIKE '%$search%' OR assignto LIKE '%$search%'\");\r\n }\r\n \r\n $response['data'] = [];\r\n $nomor            = $start + 1;\r\n"
+                },
+                {
+                    "date": 1629451943541,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,16 +30,8 @@\n $nomor            = $start + 1;\r\n \r\n if($query_data) {\r\n     while($row = mysqli_fetch_assoc($query_data)) {\r\n-        \r\n-        $foto = explode(',', $row['foto']);\r\n-        if($foto[0] && file_exists('../../../assets/foto_produk/' . $foto[0] . '')) {\r\n-            $gambar = '<img src=\"../../../assets/foto_produk/' . $foto[0] . '\" style=\"max-width:50px; max-height:50px;\">';\r\n-        } else {\r\n-            $gambar = '<img src=\"../../../assets/empty.png\" style=\"max-width:50px; max-height:50px;\">';\r\n-        }\r\n-\r\n         $response['data'][] = [\r\n             $nomor,\r\n             $gambar,\r\n             $row['kodeproduk'],\r\n"
+                },
+                {
+                    "date": 1629451952836,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,8 @@\n     $total_filtered = mysqli_query($conn, \"select * from kategori_asset WHERE nama LIKE '%$search%' OR assignto LIKE '%$search%'\");\r\n }\r\n \r\n $response['data'] = [];\r\n-$nomor            = $start + 1;\r\n \r\n if($query_data) {\r\n     while($row = mysqli_fetch_assoc($query_data)) {\r\n         $response['data'][] = [\r\n"
+                },
+                {
+                    "date": 1629451966372,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,10 +30,9 @@\n \r\n if($query_data) {\r\n     while($row = mysqli_fetch_assoc($query_data)) {\r\n         $response['data'][] = [\r\n-            $nomor,\r\n-            $gambar,\r\n+            $row['nama'],\r\n             $row['kodeproduk'],\r\n             $row['nama'],\r\n             $row['expired'] .' Bulan',\r\n             'Rp ' . number_format($row['harga_jual'], 2, ',', '.'),\r\n"
+                },
+                {
+                    "date": 1629451985252,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,10 +31,10 @@\n if($query_data) {\r\n     while($row = mysqli_fetch_assoc($query_data)) {\r\n         $response['data'][] = [\r\n             $row['nama'],\r\n-            $row['kodeproduk'],\r\n-            $row['nama'],\r\n+            $row['assignto'],\r\n+            $row['description'],\r\n             $row['expired'] .' Bulan',\r\n             'Rp ' . number_format($row['harga_jual'], 2, ',', '.'),\r\n             'Rp ' . number_format($row['hpp'], 2, ',', '.'),\r\n             $row['status'],\r\n"
+                },
+                {
+                    "date": 1629452033086,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,14 +32,9 @@\n     while($row = mysqli_fetch_assoc($query_data)) {\r\n         $response['data'][] = [\r\n             $row['nama'],\r\n             $row['assignto'],\r\n-            $row['description'],\r\n-            $row['expired'] .' Bulan',\r\n-            'Rp ' . number_format($row['harga_jual'], 2, ',', '.'),\r\n-            'Rp ' . number_format($row['hpp'], 2, ',', '.'),\r\n-            $row['status'],\r\n-            $row['tampil'],\r\n+            $row['description'],            \r\n             '\r\n                 <button type=\"button\" onclick=\"detail(' . $row['id'] . ')\" class=\"btn btn-warning btn-sm\">Edit</button>\r\n                 <button type=\"button\" onclick=\"hapus(' . $row['id'] . ')\" class=\"btn btn-danger btn-sm\">Hapus</button>\r\n             '\r\n"
+                },
+                {
+                    "date": 1629452489079,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n <?php\r\n-require 'connection.php';\r\n+require '../connection.php';\r\n \r\n $where_like = [\r\n     'nama',\r\n     'assignto',\r\n@@ -38,9 +38,8 @@\n                 <button type=\"button\" onclick=\"detail(' . $row['id'] . ')\" class=\"btn btn-warning btn-sm\">Edit</button>\r\n                 <button type=\"button\" onclick=\"hapus(' . $row['id'] . ')\" class=\"btn btn-danger btn-sm\">Hapus</button>\r\n             '\r\n         ];\r\n-        $nomor++;\r\n     }\r\n }\r\n \r\n $response['recordsTotal'] = 0;\r\n"
+                },
+                {
+                    "date": 1629452581158,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,8 +32,9 @@\n     while($row = mysqli_fetch_assoc($query_data)) {\r\n         $response['data'][] = [\r\n             $row['nama'],\r\n             $row['assignto'],\r\n+            $row['description'],\r\n             $row['description'],            \r\n             '\r\n                 <button type=\"button\" onclick=\"detail(' . $row['id'] . ')\" class=\"btn btn-warning btn-sm\">Edit</button>\r\n                 <button type=\"button\" onclick=\"hapus(' . $row['id'] . ')\" class=\"btn btn-danger btn-sm\">Hapus</button>\r\n"
+                },
+                {
+                    "date": 1629452588285,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,8 +33,9 @@\n         $response['data'][] = [\r\n             $row['nama'],\r\n             $row['assignto'],\r\n             $row['description'],\r\n+            $row['description'],\r\n             $row['description'],            \r\n             '\r\n                 <button type=\"button\" onclick=\"detail(' . $row['id'] . ')\" class=\"btn btn-warning btn-sm\">Edit</button>\r\n                 <button type=\"button\" onclick=\"hapus(' . $row['id'] . ')\" class=\"btn btn-danger btn-sm\">Hapus</button>\r\n"
+                },
+                {
+                    "date": 1629452700924,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n             $row['description'],\r\n             $row['description'],            \r\n             '\r\n                 <button type=\"button\" onclick=\"detail(' . $row['id'] . ')\" class=\"btn btn-warning btn-sm\">Edit</button>\r\n-                <button type=\"button\" onclick=\"hapus(' . $row['id'] . ')\" class=\"btn btn-danger btn-sm\">Hapus</button>\r\n+               \r\n             '\r\n         ];\r\n     }\r\n }\r\n"
+                },
+                {
+                    "date": 1629452761918,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,8 +36,9 @@\n             $row['description'],\r\n             $row['description'],\r\n             $row['description'],            \r\n             '\r\n+            <span class=\"badge badge-success\">Active</span>\r\n                 <button type=\"button\" onclick=\"detail(' . $row['id'] . ')\" class=\"btn btn-warning btn-sm\">Edit</button>\r\n                \r\n             '\r\n         ];\r\n"
+                },
+                {
+                    "date": 1629452774314,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,11 +34,11 @@\n             $row['nama'],\r\n             $row['assignto'],\r\n             $row['description'],\r\n             $row['description'],\r\n-            $row['description'],            \r\n+            '<span class=\"badge badge-success\">Active</span>',            \r\n             '\r\n-            <span class=\"badge badge-success\">Active</span>\r\n+                 \r\n                 <button type=\"button\" onclick=\"detail(' . $row['id'] . ')\" class=\"btn btn-warning btn-sm\">Edit</button>\r\n                \r\n             '\r\n         ];\r\n"
+                },
+                {
+                    "date": 1629452817894,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,8 @@\n         $response['data'][] = [\r\n             $row['nama'],\r\n             $row['assignto'],\r\n             $row['description'],\r\n-            $row['description'],\r\n             '<span class=\"badge badge-success\">Active</span>',            \r\n             '\r\n                  \r\n                 <button type=\"button\" onclick=\"detail(' . $row['id'] . ')\" class=\"btn btn-warning btn-sm\">Edit</button>\r\n"
+                },
+                {
+                    "date": 1629452996070,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,10 @@\n         $response['data'][] = [\r\n             $row['nama'],\r\n             $row['assignto'],\r\n             $row['description'],\r\n-            '<span class=\"badge badge-success\">Active</span>',            \r\n+            '<span class=\"badge badge-success\">Active</span>',   \r\n+            '<span class=\"badge badge-success\">Active</span>',          \r\n             '\r\n                  \r\n                 <button type=\"button\" onclick=\"detail(' . $row['id'] . ')\" class=\"btn btn-warning btn-sm\">Edit</button>\r\n                \r\n"
+                },
+                {
+                    "date": 1629453020162,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,10 @@\n \r\n $where_like = [\r\n     'nama',\r\n     'assignto',\r\n-    'description'\r\n+    'description',\r\n+    'status'\r\n ];\r\n \r\n $response = $_REQUEST;\r\n $start    = $response['start'];\r\n"
+                },
+                {
+                    "date": 1629453033255,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n $where_like = [\r\n     'nama',\r\n     'assignto',\r\n     'description',\r\n+    'status',\r\n     'status'\r\n ];\r\n \r\n $response = $_REQUEST;\r\n"
+                },
+                {
+                    "date": 1629453058086,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n     'nama',\r\n     'assignto',\r\n     'description',\r\n     'status',\r\n-    'status'\r\n+    \r\n ];\r\n \r\n $response = $_REQUEST;\r\n $start    = $response['start'];\r\n@@ -35,15 +35,14 @@\n         $response['data'][] = [\r\n             $row['nama'],\r\n             $row['assignto'],\r\n             $row['description'],\r\n-            '<span class=\"badge badge-success\">Active</span>',   \r\n-            '<span class=\"badge badge-success\">Active</span>',          \r\n-            '\r\n+            '<span class=\"badge badge-success\">Active</span>',           \r\n+            // '\r\n                  \r\n-                <button type=\"button\" onclick=\"detail(' . $row['id'] . ')\" class=\"btn btn-warning btn-sm\">Edit</button>\r\n+            //     <button type=\"button\" onclick=\"detail(' . $row['id'] . ')\" class=\"btn btn-warning btn-sm\">Edit</button>\r\n                \r\n-            '\r\n+            // '\r\n         ];\r\n     }\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1629453229867,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,10 @@\n         $response['data'][] = [\r\n             $row['nama'],\r\n             $row['assignto'],\r\n             $row['description'],\r\n-            '<span class=\"badge badge-success\">Active</span>',           \r\n+            '<span class=\"badge badge-success\">Active</span>',       \r\n+            '<span class=\"badge badge-success\">Active</span>',             \r\n             // '\r\n                  \r\n             //     <button type=\"button\" onclick=\"detail(' . $row['id'] . ')\" class=\"btn btn-warning btn-sm\">Edit</button>\r\n                \r\n"
+                },
+                {
+                    "date": 1629453337986,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,9 @@\n \r\n     $total_filtered = mysqli_query($conn, \"select * from kategori_asset WHERE nama LIKE '%$search%' OR assignto LIKE '%$search%'\");\r\n }\r\n \r\n-$response['data'] = [];\r\n+// $response['data'] = [];\r\n \r\n if($query_data) {\r\n     while($row = mysqli_fetch_assoc($query_data)) {\r\n         $response['data'][] = [\r\n"
+                },
+                {
+                    "date": 1629453344282,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,9 @@\n \r\n     $total_filtered = mysqli_query($conn, \"select * from kategori_asset WHERE nama LIKE '%$search%' OR assignto LIKE '%$search%'\");\r\n }\r\n \r\n-// $response['data'] = [];\r\n+$response['data'] = [];\r\n \r\n if($query_data) {\r\n     while($row = mysqli_fetch_assoc($query_data)) {\r\n         $response['data'][] = [\r\n"
+                },
+                {
+                    "date": 1629453407898,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,8 @@\n         $response['data'][] = [\r\n             $row['nama'],\r\n             $row['assignto'],\r\n             $row['description'],\r\n-            '<span class=\"badge badge-success\">Active</span>',       \r\n             '<span class=\"badge badge-success\">Active</span>',             \r\n             // '\r\n                  \r\n             //     <button type=\"button\" onclick=\"detail(' . $row['id'] . ')\" class=\"btn btn-warning btn-sm\">Edit</button>\r\n"
+                },
+                {
+                    "date": 1629453577406,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n         $response['data'][] = [\r\n             $row['nama'],\r\n             $row['assignto'],\r\n             $row['description'],\r\n-            '<span class=\"badge badge-success\">Active</span>',             \r\n+            '<span class=\"badge badge-success\">Active</span>'             \r\n             // '\r\n                  \r\n             //     <button type=\"button\" onclick=\"detail(' . $row['id'] . ')\" class=\"btn btn-warning btn-sm\">Edit</button>\r\n                \r\n"
+                },
+                {
+                    "date": 1629453585053,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,10 @@\n         $response['data'][] = [\r\n             $row['nama'],\r\n             $row['assignto'],\r\n             $row['description'],\r\n-            '<span class=\"badge badge-success\">Active</span>'             \r\n+            '<span class=\"badge badge-success\">Active</span>',\r\n+            '<span class=\"badge badge-success\">Active</span>'    \r\n             // '\r\n                  \r\n             //     <button type=\"button\" onclick=\"detail(' . $row['id'] . ')\" class=\"btn btn-warning btn-sm\">Edit</button>\r\n                \r\n"
+                },
+                {
+                    "date": 1629454763109,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,13 +37,8 @@\n             $row['assignto'],\r\n             $row['description'],\r\n             '<span class=\"badge badge-success\">Active</span>',\r\n             '<span class=\"badge badge-success\">Active</span>'    \r\n-            // '\r\n-                 \r\n-            //     <button type=\"button\" onclick=\"detail(' . $row['id'] . ')\" class=\"btn btn-warning btn-sm\">Edit</button>\r\n-               \r\n-            // '\r\n         ];\r\n     }\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1629454770978,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,9 +36,9 @@\n             $row['nama'],\r\n             $row['assignto'],\r\n             $row['description'],\r\n             '<span class=\"badge badge-success\">Active</span>',\r\n-            '<span class=\"badge badge-success\">Active</span>'    \r\n+            '<span class=\"badge badge-success\">Active</span>'\r\n         ];\r\n     }\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1629455183755,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,8 +36,9 @@\n             $row['nama'],\r\n             $row['assignto'],\r\n             $row['description'],\r\n             '<span class=\"badge badge-success\">Active</span>',\r\n+            '<span class=\"badge badge-success\">Active</span>',\r\n             '<span class=\"badge badge-success\">Active</span>'\r\n         ];\r\n     }\r\n }\r\n"
+                },
+                {
+                    "date": 1629459654413,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,8 @@\n     'nama',\r\n     'assignto',\r\n     'description',\r\n     'status',\r\n-    \r\n ];\r\n \r\n $response = $_REQUEST;\r\n $start    = $response['start'];\r\n"
+                },
+                {
+                    "date": 1629462003064,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,9 +36,8 @@\n             $row['assignto'],\r\n             $row['description'],\r\n             '<span class=\"badge badge-success\">Active</span>',\r\n             '<span class=\"badge badge-success\">Active</span>',\r\n-            '<span class=\"badge badge-success\">Active</span>'\r\n         ];\r\n     }\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1629462129534,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n     'nama',\r\n     'assignto',\r\n     'description',\r\n     'status',\r\n+    'action'\r\n ];\r\n \r\n $response = $_REQUEST;\r\n $start    = $response['start'];\r\n@@ -35,9 +36,9 @@\n             $row['nama'],\r\n             $row['assignto'],\r\n             $row['description'],\r\n             '<span class=\"badge badge-success\">Active</span>',\r\n-            '<span class=\"badge badge-success\">Active</span>',\r\n+            '<span class=\"badge badge-success\">Active</span>'\r\n         ];\r\n     }\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1629462141690,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n     'nama',\r\n     'assignto',\r\n     'description',\r\n     'status',\r\n-    'action'\r\n+    \r\n ];\r\n \r\n $response = $_REQUEST;\r\n $start    = $response['start'];\r\n"
+                },
+                {
+                    "date": 1629462549079,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n $where_like = [\r\n     'nama',\r\n     'assignto',\r\n     'description',\r\n-    'status',\r\n+    'status'\r\n     \r\n ];\r\n \r\n $response = $_REQUEST;\r\n"
+                },
+                {
+                    "date": 1629462684591,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,9 +36,9 @@\n             $row['nama'],\r\n             $row['assignto'],\r\n             $row['description'],\r\n             '<span class=\"badge badge-success\">Active</span>',\r\n-            '<span class=\"badge badge-success\">Active</span>'\r\n+            // '<span class=\"badge badge-success\">Active</span>'\r\n         ];\r\n     }\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1629462702494,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,9 +36,9 @@\n             $row['nama'],\r\n             $row['assignto'],\r\n             $row['description'],\r\n             '<span class=\"badge badge-success\">Active</span>',\r\n-            // '<span class=\"badge badge-success\">Active</span>'\r\n+            '<span class=\"badge badge-success\">Active</span>'\r\n         ];\r\n     }\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1629462819016,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,8 +41,11 @@\n         ];\r\n     }\r\n }\r\n \r\n+var_dump($response['data']);\r\n+die;\r\n+\r\n $response['recordsTotal'] = 0;\r\n if($total_data <> FALSE) {\r\n     $response['recordsTotal'] = mysqli_num_rows($total_data);\r\n }\r\n"
+                },
+                {
+                    "date": 1629462845676,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n         ];\r\n     }\r\n }\r\n \r\n-var_dump($response['data']);\r\n+echo json_encode($response['data']);\r\n die;\r\n \r\n $response['recordsTotal'] = 0;\r\n if($total_data <> FALSE) {\r\n"
+                },
+                {
+                    "date": 1629462878336,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,11 +41,8 @@\n         ];\r\n     }\r\n }\r\n \r\n-echo json_encode($response['data']);\r\n-die;\r\n-\r\n $response['recordsTotal'] = 0;\r\n if($total_data <> FALSE) {\r\n     $response['recordsTotal'] = mysqli_num_rows($total_data);\r\n }\r\n"
+                },
+                {
+                    "date": 1629463204642,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,9 +36,23 @@\n             $row['nama'],\r\n             $row['assignto'],\r\n             $row['description'],\r\n             '<span class=\"badge badge-success\">Active</span>',\r\n-            '<span class=\"badge badge-success\">Active</span>'\r\n+            ' <div class=\"list-icons\">\r\n+            <div class=\"dropdown\">\r\n+                <a href=\"#\" class=\"list-icons-item\" data-toggle=\"dropdown\">\r\n+                    <i class=\"icon-menu9\"></i>\r\n+                </a>\r\n+\r\n+                <div class=\"dropdown-menu dropdown-menu-right\">\r\n+                    <a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n+                        Set Active</a>\r\n+                    <a class=\"dropdown-item\"><i\r\n+                            class=\"icon-cross3\"></i> Set Inactive</a>\r\n+               \r\n+                </div>\r\n+            </div>\r\n+        </div>'\r\n         ];\r\n     }\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1629463545621,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,8 @@\n $where_like = [\r\n     'nama',\r\n     'assignto',\r\n     'description',\r\n-    'status'\r\n     \r\n ];\r\n \r\n $response = $_REQUEST;\r\n"
+                },
+                {
+                    "date": 1629463561169,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n $where_like = [\r\n     'nama',\r\n     'assignto',\r\n     'description',\r\n+    'status'\r\n     \r\n ];\r\n \r\n $response = $_REQUEST;\r\n"
+                },
+                {
+                    "date": 1629463567528,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,8 @@\n $where_like = [\r\n     'nama',\r\n     'assignto',\r\n     'description',\r\n-    'status'\r\n     \r\n ];\r\n \r\n $response = $_REQUEST;\r\n"
+                },
+                {
+                    "date": 1629463589372,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n $where_like = [\r\n     'nama',\r\n     'assignto',\r\n     'description',\r\n+    'status'\r\n     \r\n ];\r\n \r\n $response = $_REQUEST;\r\n"
+                },
+                {
+                    "date": 1629463727672,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,8 +31,13 @@\n $response['data'] = [];\r\n \r\n if($query_data) {\r\n     while($row = mysqli_fetch_assoc($query_data)) {\r\n+        $mystats = \"\";\r\n+        if($row['status'] == \"Active\")\r\n+        {\r\n+            $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n+        }\r\n         $response['data'][] = [\r\n             $row['nama'],\r\n             $row['assignto'],\r\n             $row['description'],\r\n"
+                },
+                {
+                    "date": 1629463735522,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,8 +36,12 @@\n         if($row['status'] == \"Active\")\r\n         {\r\n             $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n         }\r\n+        else\r\n+        {\r\n+            $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n+        }\r\n         $response['data'][] = [\r\n             $row['nama'],\r\n             $row['assignto'],\r\n             $row['description'],\r\n"
+                },
+                {
+                    "date": 1629463740685,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n             $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n         }\r\n         else\r\n         {\r\n-            $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n+            $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n         }\r\n         $response['data'][] = [\r\n             $row['nama'],\r\n             $row['assignto'],\r\n"
+                },
+                {
+                    "date": 1629463756641,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n         $response['data'][] = [\r\n             $row['nama'],\r\n             $row['assignto'],\r\n             $row['description'],\r\n-            '<span class=\"badge badge-success\">Active</span>',\r\n+            $mystats,\r\n             ' <div class=\"list-icons\">\r\n             <div class=\"dropdown\">\r\n                 <a href=\"#\" class=\"list-icons-item\" data-toggle=\"dropdown\">\r\n                     <i class=\"icon-menu9\"></i>\r\n"
+                },
+                {
+                    "date": 1629464287617,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,80 +1,87 @@\n <?php\r\n require '../connection.php';\r\n+$tipe = $_POST['tipe'];\r\n+if($tipe == \"load\")\r\n+{\r\n \r\n-$where_like = [\r\n-    'nama',\r\n-    'assignto',\r\n-    'description',\r\n-    'status'\r\n+    $where_like = [\r\n+        'nama',\r\n+        'assignto',\r\n+        'description',\r\n+        'status'\r\n+        \r\n+    ];\r\n     \r\n-];\r\n-\r\n-$response = $_REQUEST;\r\n-$start    = $response['start'];\r\n-$length   = $response['length'];\r\n-$order    = $where_like[$response['order'][0]['column']];\r\n-$dir      = $response['order'][0]['dir'];\r\n-$search   = $response['search']['value'];\r\n-\r\n-$total_data = mysqli_query($conn, \"select * from kategori_asset \");\r\n-\r\n-if(empty($search)) {\r\n-    $query_data = mysqli_query($conn, \"select * from kategori_asset ORDER BY $order $dir LIMIT $start, $length\");\r\n-\r\n-    $total_filtered = mysqli_query($conn, \"select * from kategori_asset \");\r\n-} else {\r\n-    $query_data = mysqli_query($conn, \"select * from kategori_asset WHERE nama LIKE '%$search%' OR assignto LIKE '%$search%' ORDER BY $order $dir LIMIT $start, $length\");\r\n-\r\n-    $total_filtered = mysqli_query($conn, \"select * from kategori_asset WHERE nama LIKE '%$search%' OR assignto LIKE '%$search%'\");\r\n-}\r\n-\r\n-$response['data'] = [];\r\n-\r\n-if($query_data) {\r\n-    while($row = mysqli_fetch_assoc($query_data)) {\r\n-        $mystats = \"\";\r\n-        if($row['status'] == \"Active\")\r\n-        {\r\n-            $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n+    $response = $_REQUEST;\r\n+    $start    = $response['start'];\r\n+    $length   = $response['length'];\r\n+    $order    = $where_like[$response['order'][0]['column']];\r\n+    $dir      = $response['order'][0]['dir'];\r\n+    $search   = $response['search']['value'];\r\n+    \r\n+    $total_data = mysqli_query($conn, \"select * from kategori_asset \");\r\n+    \r\n+    if(empty($search)) {\r\n+        $query_data = mysqli_query($conn, \"select * from kategori_asset ORDER BY $order $dir LIMIT $start, $length\");\r\n+    \r\n+        $total_filtered = mysqli_query($conn, \"select * from kategori_asset \");\r\n+    } else {\r\n+        $query_data = mysqli_query($conn, \"select * from kategori_asset WHERE nama LIKE '%$search%' OR assignto LIKE '%$search%' ORDER BY $order $dir LIMIT $start, $length\");\r\n+    \r\n+        $total_filtered = mysqli_query($conn, \"select * from kategori_asset WHERE nama LIKE '%$search%' OR assignto LIKE '%$search%'\");\r\n+    }\r\n+    \r\n+    $response['data'] = [];\r\n+    \r\n+    if($query_data) {\r\n+        while($row = mysqli_fetch_assoc($query_data)) {\r\n+            $mystats = \"\";\r\n+            if($row['status'] == \"Active\")\r\n+            {\r\n+                $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n+            }\r\n+            else\r\n+            {\r\n+                $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n+            }\r\n+            $response['data'][] = [\r\n+                $row['nama'],\r\n+                $row['assignto'],\r\n+                $row['description'],\r\n+                $mystats,\r\n+                ' <div class=\"list-icons\">\r\n+                <div class=\"dropdown\">\r\n+                    <a href=\"#\" class=\"list-icons-item\" data-toggle=\"dropdown\">\r\n+                        <i class=\"icon-menu9\"></i>\r\n+                    </a>\r\n+    \r\n+                    <div class=\"dropdown-menu dropdown-menu-right\">\r\n+                        <a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n+                            Set Active</a>\r\n+                        <a class=\"dropdown-item\"><i\r\n+                                class=\"icon-cross3\"></i> Set Inactive</a>\r\n+                   \r\n+                    </div>\r\n+                </div>\r\n+            </div>'\r\n+            ];\r\n         }\r\n-        else\r\n-        {\r\n-            $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n-        }\r\n-        $response['data'][] = [\r\n-            $row['nama'],\r\n-            $row['assignto'],\r\n-            $row['description'],\r\n-            $mystats,\r\n-            ' <div class=\"list-icons\">\r\n-            <div class=\"dropdown\">\r\n-                <a href=\"#\" class=\"list-icons-item\" data-toggle=\"dropdown\">\r\n-                    <i class=\"icon-menu9\"></i>\r\n-                </a>\r\n-\r\n-                <div class=\"dropdown-menu dropdown-menu-right\">\r\n-                    <a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n-                        Set Active</a>\r\n-                    <a class=\"dropdown-item\"><i\r\n-                            class=\"icon-cross3\"></i> Set Inactive</a>\r\n-               \r\n-                </div>\r\n-            </div>\r\n-        </div>'\r\n-        ];\r\n     }\r\n-}\r\n+    \r\n+    $response['recordsTotal'] = 0;\r\n+    if($total_data <> FALSE) {\r\n+        $response['recordsTotal'] = mysqli_num_rows($total_data);\r\n+    }\r\n+    \r\n+    $response['recordsFiltered'] = 0;\r\n+    if($total_filtered <> FALSE) {\r\n+        $response['recordsFiltered'] = mysqli_num_rows($total_filtered);\r\n+    }\r\n+    \r\n+    \r\n+    echo json_encode($response);\r\n \r\n-$response['recordsTotal'] = 0;\r\n-if($total_data <> FALSE) {\r\n-    $response['recordsTotal'] = mysqli_num_rows($total_data);\r\n-}\r\n \r\n-$response['recordsFiltered'] = 0;\r\n-if($total_filtered <> FALSE) {\r\n-    $response['recordsFiltered'] = mysqli_num_rows($total_filtered);\r\n }\r\n \r\n-\r\n-echo json_encode($response);\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629464446273,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -75,13 +75,10 @@\n     \r\n     $response['recordsFiltered'] = 0;\r\n     if($total_filtered <> FALSE) {\r\n         $response['recordsFiltered'] = mysqli_num_rows($total_filtered);\r\n-    }\r\n+    }  \r\n     \r\n-    \r\n     echo json_encode($response);\r\n-\r\n-\r\n }\r\n-\r\n+if($tipe == \"load\")\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629464451366,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -79,6 +79,8 @@\n     }  \r\n     \r\n     echo json_encode($response);\r\n }\r\n-if($tipe == \"load\")\r\n+else if($tipe == \"load\"){\r\n+    \r\n+}\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629464458826,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -79,8 +79,9 @@\n     }  \r\n     \r\n     echo json_encode($response);\r\n }\r\n-else if($tipe == \"load\"){\r\n-    \r\n+else if($tipe == \"add\"){\r\n+    echo \"add\";\r\n+\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629464950708,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -80,8 +80,8 @@\n     \r\n     echo json_encode($response);\r\n }\r\n else if($tipe == \"add\"){\r\n-    echo \"add\";\r\n+    $sql = \"select * from \";\r\n \r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629464983493,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -80,8 +80,8 @@\n     \r\n     echo json_encode($response);\r\n }\r\n else if($tipe == \"add\"){\r\n-    $sql = \"select * from \";\r\n+    $sql = \"INSERT into kategori_asset values(NULL, )\";\r\n \r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629465001443,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -80,8 +80,9 @@\n     \r\n     echo json_encode($response);\r\n }\r\n else if($tipe == \"add\"){\r\n+    \r\n     $sql = \"INSERT into kategori_asset values(NULL, )\";\r\n \r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629465032029,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -80,9 +80,9 @@\n     \r\n     echo json_encode($response);\r\n }\r\n else if($tipe == \"add\"){\r\n-    \r\n+    $group = $_POST['mygroup']\r\n     $sql = \"INSERT into kategori_asset values(NULL, )\";\r\n \r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629465064670,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -80,9 +80,10 @@\n     \r\n     echo json_encode($response);\r\n }\r\n else if($tipe == \"add\"){\r\n-    $group = $_POST['mygroup']\r\n+    $group = $_POST['mygroup'];\r\n+    $description = $_POST[''];\r\n     $sql = \"INSERT into kategori_asset values(NULL, )\";\r\n \r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629465126554,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,9 +81,9 @@\n     echo json_encode($response);\r\n }\r\n else if($tipe == \"add\"){\r\n     $group = $_POST['mygroup'];\r\n-    $description = $_POST[''];\r\n+    $description = $_POST['group'];\r\n     $sql = \"INSERT into kategori_asset values(NULL, )\";\r\n \r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629465142077,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,9 +81,10 @@\n     echo json_encode($response);\r\n }\r\n else if($tipe == \"add\"){\r\n     $group = $_POST['mygroup'];\r\n-    $description = $_POST['group'];\r\n+    $description = $_POST['descrip'];\r\n+    $select = $_POST[''];\r\n     $sql = \"INSERT into kategori_asset values(NULL, )\";\r\n \r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629465147130,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -82,9 +82,9 @@\n }\r\n else if($tipe == \"add\"){\r\n     $group = $_POST['mygroup'];\r\n     $description = $_POST['descrip'];\r\n-    $select = $_POST[''];\r\n+    $select = $_POST['myselect'];\r\n     $sql = \"INSERT into kategori_asset values(NULL, )\";\r\n \r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629465173972,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -83,8 +83,8 @@\n else if($tipe == \"add\"){\r\n     $group = $_POST['mygroup'];\r\n     $description = $_POST['descrip'];\r\n     $select = $_POST['myselect'];\r\n-    $sql = \"INSERT into kategori_asset values(NULL, )\";\r\n+    $sql = \"INSERT into kategori_asset values(NULL, $group, $select, $description , 'Active')\";\r\n \r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629465188970,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -84,7 +84,7 @@\n     $group = $_POST['mygroup'];\r\n     $description = $_POST['descrip'];\r\n     $select = $_POST['myselect'];\r\n     $sql = \"INSERT into kategori_asset values(NULL, $group, $select, $description , 'Active')\";\r\n-\r\n+    $res = $conn->query($sql);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629465283454,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -83,8 +83,8 @@\n else if($tipe == \"add\"){\r\n     $group = $_POST['mygroup'];\r\n     $description = $_POST['descrip'];\r\n     $select = $_POST['myselect'];\r\n-    $sql = \"INSERT into kategori_asset values(NULL, $group, $select, $description , 'Active')\";\r\n+    $sql = \"INSERT into kategori_asset values(NULL, $group, \"test\", $description , 'Active')\";\r\n     $res = $conn->query($sql);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629465299499,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -83,8 +83,8 @@\n else if($tipe == \"add\"){\r\n     $group = $_POST['mygroup'];\r\n     $description = $_POST['descrip'];\r\n     $select = $_POST['myselect'];\r\n-    $sql = \"INSERT into kategori_asset values(NULL, $group, \"test\", $description , 'Active')\";\r\n+    $sql = \"INSERT into kategori_asset values(NULL, $group, 'test', $description , 'Active')\";\r\n     $res = $conn->query($sql);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629465437218,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -83,8 +83,8 @@\n else if($tipe == \"add\"){\r\n     $group = $_POST['mygroup'];\r\n     $description = $_POST['descrip'];\r\n     $select = $_POST['myselect'];\r\n-    $sql = \"INSERT into kategori_asset values(NULL, $group, 'test', $description , 'Active')\";\r\n+    $sql = \"INSERT into kategori_asset values(NULL, '$group', '$select', '$description' , 'Active')\";\r\n     $res = $conn->query($sql);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629465497262,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -83,8 +83,8 @@\n else if($tipe == \"add\"){\r\n     $group = $_POST['mygroup'];\r\n     $description = $_POST['descrip'];\r\n     $select = $_POST['myselect'];\r\n-    $sql = \"INSERT into kategori_asset values(NULL, '$group', '$select', '$description' , 'Active')\";\r\n+    $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', \".$select.\", '\".$description.\"' , 'Active')\";\r\n     $res = $conn->query($sql);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629465624046,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -83,8 +83,9 @@\n else if($tipe == \"add\"){\r\n     $group = $_POST['mygroup'];\r\n     $description = $_POST['descrip'];\r\n     $select = $_POST['myselect'];\r\n+    $myselect = implode(\",\", $select)\r\n     $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', \".$select.\", '\".$description.\"' , 'Active')\";\r\n     $res = $conn->query($sql);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629465630893,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -83,9 +83,9 @@\n else if($tipe == \"add\"){\r\n     $group = $_POST['mygroup'];\r\n     $description = $_POST['descrip'];\r\n     $select = $_POST['myselect'];\r\n-    $myselect = implode(\",\", $select)\r\n-    $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', \".$select.\", '\".$description.\"' , 'Active')\";\r\n+    $myselect = implode(\",\", $select);\r\n+    $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', \".my$select.\", '\".$description.\"' , 'Active')\";\r\n     $res = $conn->query($sql);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629465693350,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -84,8 +84,9 @@\n     $group = $_POST['mygroup'];\r\n     $description = $_POST['descrip'];\r\n     $select = $_POST['myselect'];\r\n     $myselect = implode(\",\", $select);\r\n-    $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', \".my$select.\", '\".$description.\"' , 'Active')\";\r\n+    \r\n+    $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', \".$myselect.\", '\".$description.\"' , 'Active')\";\r\n     $res = $conn->query($sql);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629465716721,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -83,10 +83,10 @@\n else if($tipe == \"add\"){\r\n     $group = $_POST['mygroup'];\r\n     $description = $_POST['descrip'];\r\n     $select = $_POST['myselect'];\r\n-    $myselect = implode(\",\", $select);\r\n-    \r\n+    $myselect = count($select);\r\n+    for()\r\n     $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', \".$myselect.\", '\".$description.\"' , 'Active')\";\r\n     $res = $conn->query($sql);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629465728813,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -84,9 +84,12 @@\n     $group = $_POST['mygroup'];\r\n     $description = $_POST['descrip'];\r\n     $select = $_POST['myselect'];\r\n     $myselect = count($select);\r\n-    for()\r\n+    for($i = 0 ; $i < $myselect; $i++)\r\n+    {\r\n+        \r\n+    }\r\n     $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', \".$myselect.\", '\".$description.\"' , 'Active')\";\r\n     $res = $conn->query($sql);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629465736216,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -84,11 +84,12 @@\n     $group = $_POST['mygroup'];\r\n     $description = $_POST['descrip'];\r\n     $select = $_POST['myselect'];\r\n     $myselect = count($select);\r\n+    $pilihan = \"\";\r\n     for($i = 0 ; $i < $myselect; $i++)\r\n     {\r\n-        \r\n+\r\n     }\r\n     $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', \".$myselect.\", '\".$description.\"' , 'Active')\";\r\n     $res = $conn->query($sql);\r\n }\r\n"
+                },
+                {
+                    "date": 1629465745990,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -87,9 +87,9 @@\n     $myselect = count($select);\r\n     $pilihan = \"\";\r\n     for($i = 0 ; $i < $myselect; $i++)\r\n     {\r\n-\r\n+        if()\r\n     }\r\n     $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', \".$myselect.\", '\".$description.\"' , 'Active')\";\r\n     $res = $conn->query($sql);\r\n }\r\n"
+                },
+                {
+                    "date": 1629465795444,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -87,9 +87,12 @@\n     $myselect = count($select);\r\n     $pilihan = \"\";\r\n     for($i = 0 ; $i < $myselect; $i++)\r\n     {\r\n-        if()\r\n+        if($i == ($myselect-1))\r\n+        {\r\n+            $pilihan .= $select[$i];\r\n+        }\r\n     }\r\n     $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', \".$myselect.\", '\".$description.\"' , 'Active')\";\r\n     $res = $conn->query($sql);\r\n }\r\n"
+                },
+                {
+                    "date": 1629465806870,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -91,8 +91,11 @@\n         if($i == ($myselect-1))\r\n         {\r\n             $pilihan .= $select[$i];\r\n         }\r\n+        else{\r\n+            $pilihan .= $select[$i];\r\n+        }\r\n     }\r\n     $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', \".$myselect.\", '\".$description.\"' , 'Active')\";\r\n     $res = $conn->query($sql);\r\n }\r\n"
+                },
+                {
+                    "date": 1629465813093,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -92,9 +92,9 @@\n         {\r\n             $pilihan .= $select[$i];\r\n         }\r\n         else{\r\n-            $pilihan .= $select[$i];\r\n+            $pilihan .= $select[$i].\",\";\r\n         }\r\n     }\r\n     $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', \".$myselect.\", '\".$description.\"' , 'Active')\";\r\n     $res = $conn->query($sql);\r\n"
+                },
+                {
+                    "date": 1629465828403,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -92,9 +92,9 @@\n         {\r\n             $pilihan .= $select[$i];\r\n         }\r\n         else{\r\n-            $pilihan .= $select[$i].\",\";\r\n+            $pilihan .= $select[$i].\", \";\r\n         }\r\n     }\r\n     $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', \".$myselect.\", '\".$description.\"' , 'Active')\";\r\n     $res = $conn->query($sql);\r\n"
+                },
+                {
+                    "date": 1629465845587,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -95,8 +95,8 @@\n         else{\r\n             $pilihan .= $select[$i].\", \";\r\n         }\r\n     }\r\n-    $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', \".$myselect.\", '\".$description.\"' , 'Active')\";\r\n+    $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', \".$pilihan.\", '\".$description.\"' , 'Active')\";\r\n     $res = $conn->query($sql);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629465852765,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -95,8 +95,8 @@\n         else{\r\n             $pilihan .= $select[$i].\", \";\r\n         }\r\n     }\r\n-    $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', \".$pilihan.\", '\".$description.\"' , 'Active')\";\r\n+    $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', '\".$pilihan.\"', '\".$description.\"' , 'Active')\";\r\n     $res = $conn->query($sql);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629465987422,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,6 +97,10 @@\n         }\r\n     }\r\n     $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', '\".$pilihan.\"', '\".$description.\"' , 'Active')\";\r\n     $res = $conn->query($sql);\r\n+    if(($con -> affected_rows)>0)\r\n+    {\r\n+        \r\n+    }\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629465999989,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -99,8 +99,8 @@\n     $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', '\".$pilihan.\"', '\".$description.\"' , 'Active')\";\r\n     $res = $conn->query($sql);\r\n     if(($con -> affected_rows)>0)\r\n     {\r\n-        \r\n+        echo \"sukses\";\r\n     }\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629466005479,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -101,6 +101,9 @@\n     if(($con -> affected_rows)>0)\r\n     {\r\n         echo \"sukses\";\r\n     }\r\n+    else{\r\n+        echo \"tidak\";\r\n+    }\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629466125267,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,9 +97,9 @@\n         }\r\n     }\r\n     $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', '\".$pilihan.\"', '\".$description.\"' , 'Active')\";\r\n     $res = $conn->query($sql);\r\n-    if(($con -> affected_rows)>0)\r\n+    if(($conn -> affected_rows)>0)\r\n     {\r\n         echo \"sukses\";\r\n     }\r\n     else{\r\n"
+                },
+                {
+                    "date": 1629466559489,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -99,11 +99,11 @@\n     $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', '\".$pilihan.\"', '\".$description.\"' , 'Active')\";\r\n     $res = $conn->query($sql);\r\n     if(($conn -> affected_rows)>0)\r\n     {\r\n-        echo \"sukses\";\r\n+        return \"sukses\";\r\n     }\r\n     else{\r\n-        echo \"tidak\";\r\n+        return \"tidak\";\r\n     }\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629466579415,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,13 +97,13 @@\n         }\r\n     }\r\n     $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', '\".$pilihan.\"', '\".$description.\"' , 'Active')\";\r\n     $res = $conn->query($sql);\r\n-    if(($conn -> affected_rows)>0)\r\n-    {\r\n-        return \"sukses\";\r\n-    }\r\n-    else{\r\n-        return \"tidak\";\r\n-    }\r\n+    // if(($conn -> affected_rows)>0)\r\n+    // {\r\n+    //     return \"sukses\";\r\n+    // }\r\n+    // else{\r\n+    //     return \"tidak\";\r\n+    // }\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629466727195,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,13 +97,14 @@\n         }\r\n     }\r\n     $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', '\".$pilihan.\"', '\".$description.\"' , 'Active')\";\r\n     $res = $conn->query($sql);\r\n-    // if(($conn -> affected_rows)>0)\r\n-    // {\r\n-    //     return \"sukses\";\r\n-    // }\r\n-    // else{\r\n-    //     return \"tidak\";\r\n-    // }\r\n+    // echo \"test\";\r\n+    if(($conn -> affected_rows)>0)\r\n+    {\r\n+        return \"sukses\";\r\n+    }\r\n+    else{\r\n+        return \"tidak\";\r\n+    }\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629466743499,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -100,11 +100,11 @@\n     $res = $conn->query($sql);\r\n     // echo \"test\";\r\n     if(($conn -> affected_rows)>0)\r\n     {\r\n-        return \"sukses\";\r\n+        echo \"sukses\";\r\n     }\r\n     else{\r\n-        return \"tidak\";\r\n+        echo \"tidak\";\r\n     }\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629687675940,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -106,5 +106,9 @@\n     else{\r\n         echo \"tidak\";\r\n     }\r\n }\r\n+else if($tipe == \"change\")\r\n+{\r\n+    \r\n+}\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629688209232,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n             {\r\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n             }\r\n             $response['data'][] = [\r\n-                $row['nama'],\r\n+                \"<label id =''>\".$row['nama'],\r\n                 $row['assignto'],\r\n                 $row['description'],\r\n                 $mystats,\r\n                 ' <div class=\"list-icons\">\r\n@@ -108,7 +108,7 @@\n     }\r\n }\r\n else if($tipe == \"change\")\r\n {\r\n-    \r\n+\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629688215148,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n             {\r\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n             }\r\n             $response['data'][] = [\r\n-                \"<label id =''>\".$row['nama'],\r\n+                \"<label id =''>\".$row['nama'].\"<label id =''>\",\r\n                 $row['assignto'],\r\n                 $row['description'],\r\n                 $mystats,\r\n                 ' <div class=\"list-icons\">\r\n"
+                },
+                {
+                    "date": 1629688220853,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n             {\r\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n             }\r\n             $response['data'][] = [\r\n-                \"<label id =''>\".$row['nama'].\"<label id =''>\",\r\n+                \"<label id =''>\".$row['nama'].\"</label>\",\r\n                 $row['assignto'],\r\n                 $row['description'],\r\n                 $mystats,\r\n                 ' <div class=\"list-icons\">\r\n"
+                },
+                {
+                    "date": 1629688241741,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n             {\r\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n             }\r\n             $response['data'][] = [\r\n-                \"<label id =''>\".$row['nama'].\"</label>\",\r\n+                \"<label id ='\".$row['id'].\"'>\".$row['nama'].\"</label>\",\r\n                 $row['assignto'],\r\n                 $row['description'],\r\n                 $mystats,\r\n                 ' <div class=\"list-icons\">\r\n"
+                },
+                {
+                    "date": 1629688254226,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n             {\r\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n             }\r\n             $response['data'][] = [\r\n-                \"<label id ='\".$row['id'].\"'>\".$row['nama'].\"</label>\",\r\n+                \"<label id ='nama\".$row['id'].\"'>\".$row['nama'].\"</label>\",\r\n                 $row['assignto'],\r\n                 $row['description'],\r\n                 $mystats,\r\n                 ' <div class=\"list-icons\">\r\n"
+                },
+                {
+                    "date": 1629688260222,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,11 +45,11 @@\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n             }\r\n             $response['data'][] = [\r\n                 \"<label id ='nama\".$row['id'].\"'>\".$row['nama'].\"</label>\",\r\n-                $row['assignto'],\r\n-                $row['description'],\r\n-                $mystats,\r\n+                \"<label id ='nama\".$row['id'].\"'>\"$row['assignto'],\r\n+                \"<label id ='nama\".$row['id'].\"'>\"$row['description'],\r\n+                \"<label id ='nama\".$row['id'].\"'>\"$mystats,\r\n                 ' <div class=\"list-icons\">\r\n                 <div class=\"dropdown\">\r\n                     <a href=\"#\" class=\"list-icons-item\" data-toggle=\"dropdown\">\r\n                         <i class=\"icon-menu9\"></i>\r\n"
+                },
+                {
+                    "date": 1629688295843,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,11 +45,11 @@\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n             }\r\n             $response['data'][] = [\r\n                 \"<label id ='nama\".$row['id'].\"'>\".$row['nama'].\"</label>\",\r\n-                \"<label id ='nama\".$row['id'].\"'>\"$row['assignto'],\r\n-                \"<label id ='nama\".$row['id'].\"'>\"$row['description'],\r\n-                \"<label id ='nama\".$row['id'].\"'>\"$mystats,\r\n+                \"<label id ='assignto\".$row['id'].\"'>\".$row['assignto'],\r\n+                \"<label id ='description\".$row['id'].\"'>\".$row['description'],\r\n+                \"<label id ='status\".$row['id'].\"'>\"$mystats,\r\n                 ' <div class=\"list-icons\">\r\n                 <div class=\"dropdown\">\r\n                     <a href=\"#\" class=\"list-icons-item\" data-toggle=\"dropdown\">\r\n                         <i class=\"icon-menu9\"></i>\r\n"
+                },
+                {
+                    "date": 1629688305595,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,11 +45,11 @@\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n             }\r\n             $response['data'][] = [\r\n                 \"<label id ='nama\".$row['id'].\"'>\".$row['nama'].\"</label>\",\r\n-                \"<label id ='assignto\".$row['id'].\"'>\".$row['assignto'],\r\n-                \"<label id ='description\".$row['id'].\"'>\".$row['description'],\r\n-                \"<label id ='status\".$row['id'].\"'>\"$mystats,\r\n+                \"<label id ='assignto\".$row['id'].\"'>\".$row['assignto'].\"</label>\",\r\n+                \"<label id ='description\".$row['id'].\"'>\".$row['description'].\"</label>\",\r\n+                \"<label id ='status\".$row['id'].\"'>\".$mystats.\"</label>\",\r\n                 ' <div class=\"list-icons\">\r\n                 <div class=\"dropdown\">\r\n                     <a href=\"#\" class=\"list-icons-item\" data-toggle=\"dropdown\">\r\n                         <i class=\"icon-menu9\"></i>\r\n"
+                },
+                {
+                    "date": 1629688332197,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,8 +57,10 @@\n     \r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n                         <a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n                             Set Active</a>\r\n+                        <a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n+                            Set Active</a>\r\n                         <a class=\"dropdown-item\"><i\r\n                                 class=\"icon-cross3\"></i> Set Inactive</a>\r\n                    \r\n                     </div>\r\n"
+                },
+                {
+                    "date": 1629688340815,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,9 +56,9 @@\n                     </a>\r\n     \r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n                         <a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n-                            Set Active</a>\r\n+                            Edit</a>\r\n                         <a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n                             Set Active</a>\r\n                         <a class=\"dropdown-item\"><i\r\n                                 class=\"icon-cross3\"></i> Set Inactive</a>\r\n"
+                },
+                {
+                    "date": 1629688367048,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n                         <i class=\"icon-menu9\"></i>\r\n                     </a>\r\n     \r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n-                        <a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n+                        <a class=\"dropdown-item\" id =\"'.$row['id'].'\"><i class=\"icon-check\"></i>\r\n                             Edit</a>\r\n                         <a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n                             Set Active</a>\r\n                         <a class=\"dropdown-item\"><i\r\n"
+                },
+                {
+                    "date": 1629688544944,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n                         <i class=\"icon-menu9\"></i>\r\n                     </a>\r\n     \r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n-                        <a class=\"dropdown-item\" id =\"'.$row['id'].'\"><i class=\"icon-check\"></i>\r\n+                        <a class=\"dropdown-item\" id =\"click'.$row['id'].'\"><i class=\"icon-check\"></i>\r\n                             Edit</a>\r\n                         <a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n                             Set Active</a>\r\n                         <a class=\"dropdown-item\"><i\r\n"
+                },
+                {
+                    "date": 1629688611627,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n                         <i class=\"icon-menu9\"></i>\r\n                     </a>\r\n     \r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n-                        <a class=\"dropdown-item\" id =\"click'.$row['id'].'\"><i class=\"icon-check\"></i>\r\n+                        <a class=\"dropdown-item\" id =\"click'.$row['id'].'\" onclick = ''><i class=\"icon-check\"></i>\r\n                             Edit</a>\r\n                         <a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n                             Set Active</a>\r\n                         <a class=\"dropdown-item\"><i\r\n"
+                },
+                {
+                    "date": 1629688620247,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n                         <i class=\"icon-menu9\"></i>\r\n                     </a>\r\n     \r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n-                        <a class=\"dropdown-item\" id =\"click'.$row['id'].'\" onclick = ''><i class=\"icon-check\"></i>\r\n+                        <a class=\"dropdown-item\" id =\"click'.$row['id'].'\" onclick = \"myclick()\"><i class=\"icon-check\"></i>\r\n                             Edit</a>\r\n                         <a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n                             Set Active</a>\r\n                         <a class=\"dropdown-item\"><i\r\n"
+                },
+                {
+                    "date": 1629688627972,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n                         <i class=\"icon-menu9\"></i>\r\n                     </a>\r\n     \r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n-                        <a class=\"dropdown-item\" id =\"click'.$row['id'].'\" onclick = \"myclick()\"><i class=\"icon-check\"></i>\r\n+                        <a class=\"dropdown-item\" id =\"click'.$row['id'].'\" onclick = \"changekategori()\"><i class=\"icon-check\"></i>\r\n                             Edit</a>\r\n                         <a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n                             Set Active</a>\r\n                         <a class=\"dropdown-item\"><i\r\n"
+                },
+                {
+                    "date": 1629688789119,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n                         <i class=\"icon-menu9\"></i>\r\n                     </a>\r\n     \r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n-                        <a class=\"dropdown-item\" id =\"click'.$row['id'].'\" onclick = \"changekategori()\"><i class=\"icon-check\"></i>\r\n+                        <a class=\"dropdown-item\" id =\"click'.$row['id'].'\" onclick = \"changekategori(this)\"><i class=\"icon-check\"></i>\r\n                             Edit</a>\r\n                         <a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n                             Set Active</a>\r\n                         <a class=\"dropdown-item\"><i\r\n"
+                },
+                {
+                    "date": 1629688848688,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n                         <i class=\"icon-menu9\"></i>\r\n                     </a>\r\n     \r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n-                        <a class=\"dropdown-item\" id =\"click'.$row['id'].'\" onclick = \"changekategori(this)\"><i class=\"icon-check\"></i>\r\n+                        <a class=\"dropdown-item\" id =\"click-'.$row['id'].'\" onclick = \"changekategori(this)\"><i class=\"icon-check\"></i>\r\n                             Edit</a>\r\n                         <a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n                             Set Active</a>\r\n                         <a class=\"dropdown-item\"><i\r\n"
+                },
+                {
+                    "date": 1629689108291,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n                         <i class=\"icon-menu9\"></i>\r\n                     </a>\r\n     \r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n-                        <a class=\"dropdown-item\" id =\"click-'.$row['id'].'\" onclick = \"changekategori(this)\"><i class=\"icon-check\"></i>\r\n+                        <a class=\"dropdown-item\" id =\"click-'.$row['id'].'\" onclick = \"openmodal(this)\"><i class=\"icon-check\"></i>\r\n                             Edit</a>\r\n                         <a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n                             Set Active</a>\r\n                         <a class=\"dropdown-item\"><i\r\n"
+                },
+                {
+                    "date": 1629689165100,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n                         <i class=\"icon-menu9\"></i>\r\n                     </a>\r\n     \r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n-                        <a class=\"dropdown-item\" id =\"click-'.$row['id'].'\" onclick = \"openmodal(this)\"><i class=\"icon-check\"></i>\r\n+                        <a class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodal(this)\"><i class=\"icon-check\"></i>\r\n                             Edit</a>\r\n                         <a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n                             Set Active</a>\r\n                         <a class=\"dropdown-item\"><i\r\n"
+                },
+                {
+                    "date": 1629689190199,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n                         <i class=\"icon-menu9\"></i>\r\n                     </a>\r\n     \r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n-                        <a class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodal(this)\"><i class=\"icon-check\"></i>\r\n+                        <a href=\"#myModal\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodal(this)\"><i class=\"icon-check\"></i>\r\n                             Edit</a>\r\n                         <a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n                             Set Active</a>\r\n                         <a class=\"dropdown-item\"><i\r\n"
+                },
+                {
+                    "date": 1629689296205,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n                         <i class=\"icon-menu9\"></i>\r\n                     </a>\r\n     \r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n-                        <a href=\"#myModal\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodal(this)\"><i class=\"icon-check\"></i>\r\n+                        <a href=\"#editModal\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodal(this)\"><i class=\"icon-check\"></i>\r\n                             Edit</a>\r\n                         <a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n                             Set Active</a>\r\n                         <a class=\"dropdown-item\"><i\r\n"
+                },
+                {
+                    "date": 1629689348733,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n                         <i class=\"icon-menu9\"></i>\r\n                     </a>\r\n     \r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n-                        <a href=\"#editModal\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodal(this)\"><i class=\"icon-check\"></i>\r\n+                        <a  class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodal(this)\"><i class=\"icon-check\"></i>\r\n                             Edit</a>\r\n                         <a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n                             Set Active</a>\r\n                         <a class=\"dropdown-item\"><i\r\n"
+                },
+                {
+                    "date": 1629689402756,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n                         <i class=\"icon-menu9\"></i>\r\n                     </a>\r\n     \r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n-                        <a  class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodal(this)\"><i class=\"icon-check\"></i>\r\n+                        <a href=\"#editModal\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodal(this)\"><i class=\"icon-check\"></i>\r\n                             Edit</a>\r\n                         <a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n                             Set Active</a>\r\n                         <a class=\"dropdown-item\"><i\r\n"
+                },
+                {
+                    "date": 1629691381068,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -110,7 +110,10 @@\n     }\r\n }\r\n else if($tipe == \"change\")\r\n {\r\n-\r\n+    $group = $_POST['mygroup'];\r\n+    $description = $_POST['descrip'];\r\n+    $select = $_POST['myselect'];\r\n+    $myselect = count($select);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629691389031,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -110,8 +110,9 @@\n     }\r\n }\r\n else if($tipe == \"change\")\r\n {\r\n+    $id  = $_POST['idchage']\r\n     $group = $_POST['mygroup'];\r\n     $description = $_POST['descrip'];\r\n     $select = $_POST['myselect'];\r\n     $myselect = count($select);\r\n"
+                },
+                {
+                    "date": 1629691394165,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -110,9 +110,9 @@\n     }\r\n }\r\n else if($tipe == \"change\")\r\n {\r\n-    $id  = $_POST['idchage']\r\n+    $id  = $_POST['idchange'];\r\n     $group = $_POST['mygroup'];\r\n     $description = $_POST['descrip'];\r\n     $select = $_POST['myselect'];\r\n     $myselect = count($select);\r\n"
+                },
+                {
+                    "date": 1629691417539,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -115,6 +115,17 @@\n     $group = $_POST['mygroup'];\r\n     $description = $_POST['descrip'];\r\n     $select = $_POST['myselect'];\r\n     $myselect = count($select);\r\n+    $pilihan = \"\";\r\n+    for($i = 0 ; $i < $myselect; $i++)\r\n+    {\r\n+        if($i == ($myselect-1))\r\n+        {\r\n+            $pilihan .= $select[$i];\r\n+        }\r\n+        else{\r\n+            $pilihan .= $select[$i].\", \";\r\n+        }\r\n+    }\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629691444496,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -126,6 +126,7 @@\n         else{\r\n             $pilihan .= $select[$i].\", \";\r\n         }\r\n     }\r\n+    $sql = \"update \";\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629691468026,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -126,7 +126,7 @@\n         else{\r\n             $pilihan .= $select[$i].\", \";\r\n         }\r\n     }\r\n-    $sql = \"update \";\r\n+    $sql = \"update kategori_asset set nama = \"..\"\";\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629691481406,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -126,7 +126,7 @@\n         else{\r\n             $pilihan .= $select[$i].\", \";\r\n         }\r\n     }\r\n-    $sql = \"update kategori_asset set nama = \"..\"\";\r\n+    $sql = \"update kategori_asset set nama = '\".$group.\"', '\";\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629691488213,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -126,7 +126,7 @@\n         else{\r\n             $pilihan .= $select[$i].\", \";\r\n         }\r\n     }\r\n-    $sql = \"update kategori_asset set nama = '\".$group.\"', '\";\r\n+    $sql = \"update kategori_asset set nama = '\".$group.\"', '\".\"'\";\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629691500845,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -126,7 +126,7 @@\n         else{\r\n             $pilihan .= $select[$i].\", \";\r\n         }\r\n     }\r\n-    $sql = \"update kategori_asset set nama = '\".$group.\"', '\".\"'\";\r\n+    $sql = \"update kategori_asset set nama = '\".$group.\"', assignto = '\"..\"'\";\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629691513799,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -126,7 +126,7 @@\n         else{\r\n             $pilihan .= $select[$i].\", \";\r\n         }\r\n     }\r\n-    $sql = \"update kategori_asset set nama = '\".$group.\"', assignto = '\"..\"'\";\r\n+    $sql = \"update kategori_asset set nama = '\".$group.\"', assignto = '\".$pilihan.\"', description\";\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629691531176,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -126,7 +126,7 @@\n         else{\r\n             $pilihan .= $select[$i].\", \";\r\n         }\r\n     }\r\n-    $sql = \"update kategori_asset set nama = '\".$group.\"', assignto = '\".$pilihan.\"', description\";\r\n+    $sql = \"update kategori_asset set nama = '\".$group.\"', assignto = '\".$pilihan.\"', description = '\".\"'\";\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629691565152,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -126,7 +126,7 @@\n         else{\r\n             $pilihan .= $select[$i].\", \";\r\n         }\r\n     }\r\n-    $sql = \"update kategori_asset set nama = '\".$group.\"', assignto = '\".$pilihan.\"', description = '\".\"'\";\r\n+    $sql = \"update kategori_asset set nama = '\".$group.\"', assignto = '\".$pilihan.\"', description = '\".$description.\"' where id = '\"..\"'\";\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629691571864,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -126,7 +126,7 @@\n         else{\r\n             $pilihan .= $select[$i].\", \";\r\n         }\r\n     }\r\n-    $sql = \"update kategori_asset set nama = '\".$group.\"', assignto = '\".$pilihan.\"', description = '\".$description.\"' where id = '\"..\"'\";\r\n+    $sql = \"update kategori_asset set nama = '\".$group.\"', assignto = '\".$pilihan.\"', description = '\".$description.\"' where id = '\".$id.\"'\";\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629691583957,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -99,9 +99,8 @@\n         }\r\n     }\r\n     $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', '\".$pilihan.\"', '\".$description.\"' , 'Active')\";\r\n     $res = $conn->query($sql);\r\n-    // echo \"test\";\r\n     if(($conn -> affected_rows)>0)\r\n     {\r\n         echo \"sukses\";\r\n     }\r\n"
+                },
+                {
+                    "date": 1629691589078,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -126,6 +126,15 @@\n             $pilihan .= $select[$i].\", \";\r\n         }\r\n     }\r\n     $sql = \"update kategori_asset set nama = '\".$group.\"', assignto = '\".$pilihan.\"', description = '\".$description.\"' where id = '\".$id.\"'\";\r\n+    $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', '\".$pilihan.\"', '\".$description.\"' , 'Active')\";\r\n+    $res = $conn->query($sql);\r\n+    if(($conn -> affected_rows)>0)\r\n+    {\r\n+        echo \"sukses\";\r\n+    }\r\n+    else{\r\n+        echo \"tidak\";\r\n+    }\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629693255787,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,143 @@\n+<?php\r\n+require '../connection.php';\r\n+$tipe = $_POST['tipe'];\r\n+if($tipe == \"load\")\r\n+{\r\n+\r\n+    $where_like = [\r\n+        'nama',\r\n+        'assignto',\r\n+        'description',\r\n+        'status'\r\n+        \r\n+    ];\r\n+    \r\n+    $response = $_REQUEST;\r\n+    $start    = $response['start'];\r\n+    $length   = $response['length'];\r\n+    $order    = $where_like[$response['order'][0]['column']];\r\n+    $dir      = $response['order'][0]['dir'];\r\n+    $search   = $response['search']['value'];\r\n+    \r\n+    $total_data = mysqli_query($conn, \"select * from kategori_asset \");\r\n+    \r\n+    if(empty($search)) {\r\n+        $query_data = mysqli_query($conn, \"select * from kategori_asset ORDER BY $order $dir LIMIT $start, $length\");\r\n+    \r\n+        $total_filtered = mysqli_query($conn, \"select * from kategori_asset \");\r\n+    } else {\r\n+        $query_data = mysqli_query($conn, \"select * from kategori_asset WHERE nama LIKE '%$search%' OR assignto LIKE '%$search%' ORDER BY $order $dir LIMIT $start, $length\");\r\n+    \r\n+        $total_filtered = mysqli_query($conn, \"select * from kategori_asset WHERE nama LIKE '%$search%' OR assignto LIKE '%$search%'\");\r\n+    }\r\n+    \r\n+    $response['data'] = [];\r\n+    \r\n+    if($query_data) {\r\n+        while($row = mysqli_fetch_assoc($query_data)) {\r\n+            $mystats = \"\";\r\n+            if($row['status'] == \"Active\")\r\n+            {\r\n+                $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n+            }\r\n+            else\r\n+            {\r\n+                $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n+            }\r\n+            if()\r\n+            {\r\n+                \r\n+            }\r\n+            $response['data'][] = [\r\n+                \"<label id ='nama\".$row['id'].\"'>\".$row['nama'].\"</label>\",\r\n+                \"<label id ='assignto\".$row['id'].\"'>\".$row['assignto'].\"</label>\",\r\n+                \"<label id ='description\".$row['id'].\"'>\".$row['description'].\"</label>\",\r\n+                \"<label id ='status\".$row['id'].\"'>\".$mystats.\"</label>\",\r\n+                ' <div class=\"list-icons\">\r\n+                <div class=\"dropdown\">\r\n+                    <a href=\"#\" class=\"list-icons-item\" data-toggle=\"dropdown\">\r\n+                        <i class=\"icon-menu9\"></i>\r\n+                    </a>\r\n+    \r\n+                    <div class=\"dropdown-menu dropdown-menu-right\">\r\n+                        <a href=\"#editModal\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodal(this)\"><i class=\"icon-check\"></i>\r\n+                            Edit</a>\r\n+                        <a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n+                            Set Active</a>\r\n+                        <a class=\"dropdown-item\"><i\r\n+                                class=\"icon-cross3\"></i> Set Inactive</a>\r\n+                   \r\n+                    </div>\r\n+                </div>\r\n+            </div>'\r\n+            ];\r\n+        }\r\n+    }\r\n+    \r\n+    $response['recordsTotal'] = 0;\r\n+    if($total_data <> FALSE) {\r\n+        $response['recordsTotal'] = mysqli_num_rows($total_data);\r\n+    }\r\n+    \r\n+    $response['recordsFiltered'] = 0;\r\n+    if($total_filtered <> FALSE) {\r\n+        $response['recordsFiltered'] = mysqli_num_rows($total_filtered);\r\n+    }  \r\n+    \r\n+    echo json_encode($response);\r\n+}\r\n+else if($tipe == \"add\"){\r\n+    $group = $_POST['mygroup'];\r\n+    $description = $_POST['descrip'];\r\n+    $select = $_POST['myselect'];\r\n+    $myselect = count($select);\r\n+    $pilihan = \"\";\r\n+    for($i = 0 ; $i < $myselect; $i++)\r\n+    {\r\n+        if($i == ($myselect-1))\r\n+        {\r\n+            $pilihan .= $select[$i];\r\n+        }\r\n+        else{\r\n+            $pilihan .= $select[$i].\", \";\r\n+        }\r\n+    }\r\n+    $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', '\".$pilihan.\"', '\".$description.\"' , 'Active')\";\r\n+    $res = $conn->query($sql);\r\n+    if(($conn -> affected_rows)>0)\r\n+    {\r\n+        echo \"sukses\";\r\n+    }\r\n+    else{\r\n+        echo \"tidak\";\r\n+    }\r\n+}\r\n+else if($tipe == \"change\")\r\n+{\r\n+    $id  = $_POST['idchange'];\r\n+    $group = $_POST['mygroup'];\r\n+    $description = $_POST['descrip'];\r\n+    $select = $_POST['myselect'];\r\n+    $myselect = count($select);\r\n+    $pilihan = \"\";\r\n+    for($i = 0 ; $i < $myselect; $i++)\r\n+    {\r\n+        if($i == ($myselect-1))\r\n+        {\r\n+            $pilihan .= $select[$i];\r\n+        }\r\n+        else{\r\n+            $pilihan .= $select[$i].\", \";\r\n+        }\r\n+    }\r\n+    $sql = \"update kategori_asset set nama = '\".$group.\"', assignto = '\".$pilihan.\"', description = '\".$description.\"' where id = '\".$id.\"'\";\r\n+    $res = $conn->query($sql);\r\n+    if(($conn -> affected_rows)>0)\r\n+    {\r\n+        echo \"sukses\";\r\n+    }\r\n+    else{\r\n+        echo \"tidak\";\r\n+    }\r\n+}\r\n+?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629693346954,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -139,145 +139,5 @@\n     else{\r\n         echo \"tidak\";\r\n     }\r\n }\r\n-?>\n-<?php\r\n-require '../connection.php';\r\n-$tipe = $_POST['tipe'];\r\n-if($tipe == \"load\")\r\n-{\r\n-\r\n-    $where_like = [\r\n-        'nama',\r\n-        'assignto',\r\n-        'description',\r\n-        'status'\r\n-        \r\n-    ];\r\n-    \r\n-    $response = $_REQUEST;\r\n-    $start    = $response['start'];\r\n-    $length   = $response['length'];\r\n-    $order    = $where_like[$response['order'][0]['column']];\r\n-    $dir      = $response['order'][0]['dir'];\r\n-    $search   = $response['search']['value'];\r\n-    \r\n-    $total_data = mysqli_query($conn, \"select * from kategori_asset \");\r\n-    \r\n-    if(empty($search)) {\r\n-        $query_data = mysqli_query($conn, \"select * from kategori_asset ORDER BY $order $dir LIMIT $start, $length\");\r\n-    \r\n-        $total_filtered = mysqli_query($conn, \"select * from kategori_asset \");\r\n-    } else {\r\n-        $query_data = mysqli_query($conn, \"select * from kategori_asset WHERE nama LIKE '%$search%' OR assignto LIKE '%$search%' ORDER BY $order $dir LIMIT $start, $length\");\r\n-    \r\n-        $total_filtered = mysqli_query($conn, \"select * from kategori_asset WHERE nama LIKE '%$search%' OR assignto LIKE '%$search%'\");\r\n-    }\r\n-    \r\n-    $response['data'] = [];\r\n-    \r\n-    if($query_data) {\r\n-        while($row = mysqli_fetch_assoc($query_data)) {\r\n-            $mystats = \"\";\r\n-            if($row['status'] == \"Active\")\r\n-            {\r\n-                $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n-            }\r\n-            else\r\n-            {\r\n-                $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n-            }\r\n-            $response['data'][] = [\r\n-                \"<label id ='nama\".$row['id'].\"'>\".$row['nama'].\"</label>\",\r\n-                \"<label id ='assignto\".$row['id'].\"'>\".$row['assignto'].\"</label>\",\r\n-                \"<label id ='description\".$row['id'].\"'>\".$row['description'].\"</label>\",\r\n-                \"<label id ='status\".$row['id'].\"'>\".$mystats.\"</label>\",\r\n-                ' <div class=\"list-icons\">\r\n-                <div class=\"dropdown\">\r\n-                    <a href=\"#\" class=\"list-icons-item\" data-toggle=\"dropdown\">\r\n-                        <i class=\"icon-menu9\"></i>\r\n-                    </a>\r\n-    \r\n-                    <div class=\"dropdown-menu dropdown-menu-right\">\r\n-                        <a href=\"#editModal\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodal(this)\"><i class=\"icon-check\"></i>\r\n-                            Edit</a>\r\n-                        <a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n-                            Set Active</a>\r\n-                        <a class=\"dropdown-item\"><i\r\n-                                class=\"icon-cross3\"></i> Set Inactive</a>\r\n-                   \r\n-                    </div>\r\n-                </div>\r\n-            </div>'\r\n-            ];\r\n-        }\r\n-    }\r\n-    \r\n-    $response['recordsTotal'] = 0;\r\n-    if($total_data <> FALSE) {\r\n-        $response['recordsTotal'] = mysqli_num_rows($total_data);\r\n-    }\r\n-    \r\n-    $response['recordsFiltered'] = 0;\r\n-    if($total_filtered <> FALSE) {\r\n-        $response['recordsFiltered'] = mysqli_num_rows($total_filtered);\r\n-    }  \r\n-    \r\n-    echo json_encode($response);\r\n-}\r\n-else if($tipe == \"add\"){\r\n-    $group = $_POST['mygroup'];\r\n-    $description = $_POST['descrip'];\r\n-    $select = $_POST['myselect'];\r\n-    $myselect = count($select);\r\n-    $pilihan = \"\";\r\n-    for($i = 0 ; $i < $myselect; $i++)\r\n-    {\r\n-        if($i == ($myselect-1))\r\n-        {\r\n-            $pilihan .= $select[$i];\r\n-        }\r\n-        else{\r\n-            $pilihan .= $select[$i].\", \";\r\n-        }\r\n-    }\r\n-    $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', '\".$pilihan.\"', '\".$description.\"' , 'Active')\";\r\n-    $res = $conn->query($sql);\r\n-    if(($conn -> affected_rows)>0)\r\n-    {\r\n-        echo \"sukses\";\r\n-    }\r\n-    else{\r\n-        echo \"tidak\";\r\n-    }\r\n-}\r\n-else if($tipe == \"change\")\r\n-{\r\n-    $id  = $_POST['idchange'];\r\n-    $group = $_POST['mygroup'];\r\n-    $description = $_POST['descrip'];\r\n-    $select = $_POST['myselect'];\r\n-    $myselect = count($select);\r\n-    $pilihan = \"\";\r\n-    for($i = 0 ; $i < $myselect; $i++)\r\n-    {\r\n-        if($i == ($myselect-1))\r\n-        {\r\n-            $pilihan .= $select[$i];\r\n-        }\r\n-        else{\r\n-            $pilihan .= $select[$i].\", \";\r\n-        }\r\n-    }\r\n-    $sql = \"update kategori_asset set nama = '\".$group.\"', assignto = '\".$pilihan.\"', description = '\".$description.\"' where id = '\".$id.\"'\";\r\n-    $sql = \"INSERT into kategori_asset values(NULL, '\".$group.\"', '\".$pilihan.\"', '\".$description.\"' , 'Active')\";\r\n-    $res = $conn->query($sql);\r\n-    if(($conn -> affected_rows)>0)\r\n-    {\r\n-        echo \"sukses\";\r\n-    }\r\n-    else{\r\n-        echo \"tidak\";\r\n-    }\r\n-}\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629693360314,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,11 +43,11 @@\n             else\r\n             {\r\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n             }\r\n-            if()\r\n+            if($row[''])\r\n             {\r\n-                \r\n+\r\n             }\r\n             $response['data'][] = [\r\n                 \"<label id ='nama\".$row['id'].\"'>\".$row['nama'].\"</label>\",\r\n                 \"<label id ='assignto\".$row['id'].\"'>\".$row['assignto'].\"</label>\",\r\n"
+                },
+                {
+                    "date": 1629693381809,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,12 +43,9 @@\n             else\r\n             {\r\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n             }\r\n-            if($row[''])\r\n-            {\r\n-\r\n-            }\r\n+            \r\n             $response['data'][] = [\r\n                 \"<label id ='nama\".$row['id'].\"'>\".$row['nama'].\"</label>\",\r\n                 \"<label id ='assignto\".$row['id'].\"'>\".$row['assignto'].\"</label>\",\r\n                 \"<label id ='description\".$row['id'].\"'>\".$row['description'].\"</label>\",\r\n"
+                },
+                {
+                    "date": 1629693387108,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,8 +38,9 @@\n             $mystats = \"\";\r\n             if($row['status'] == \"Active\")\r\n             {\r\n                 $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n+                $myaction = \r\n             }\r\n             else\r\n             {\r\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n"
+                },
+                {
+                    "date": 1629693413968,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,10 @@\n             $mystats = \"\";\r\n             if($row['status'] == \"Active\")\r\n             {\r\n                 $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n-                $myaction = \r\n+                $myaction = '<a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n+                Set Active</a>';\r\n             }\r\n             else\r\n             {\r\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n@@ -59,10 +60,9 @@\n     \r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n                         <a href=\"#editModal\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodal(this)\"><i class=\"icon-check\"></i>\r\n                             Edit</a>\r\n-                        <a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n-                            Set Active</a>\r\n+                        \r\n                         <a class=\"dropdown-item\"><i\r\n                                 class=\"icon-cross3\"></i> Set Inactive</a>\r\n                    \r\n                     </div>\r\n"
+                },
+                {
+                    "date": 1629693419085,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,8 +44,10 @@\n             }\r\n             else\r\n             {\r\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n+                $myaction = '<a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n+                Set Active</a>';\r\n             }\r\n             \r\n             $response['data'][] = [\r\n                 \"<label id ='nama\".$row['id'].\"'>\".$row['nama'].\"</label>\",\r\n"
+                },
+                {
+                    "date": 1629693424455,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -63,10 +63,9 @@\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n                         <a href=\"#editModal\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodal(this)\"><i class=\"icon-check\"></i>\r\n                             Edit</a>\r\n                         \r\n-                        <a class=\"dropdown-item\"><i\r\n-                                class=\"icon-cross3\"></i> Set Inactive</a>\r\n+                        \r\n                    \r\n                     </div>\r\n                 </div>\r\n             </div>'\r\n"
+                },
+                {
+                    "date": 1629693431953,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,10 +44,10 @@\n             }\r\n             else\r\n             {\r\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n-                $myaction = '<a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n-                Set Active</a>';\r\n+                $myaction = '<a class=\"dropdown-item\"><i\r\n+                class=\"icon-cross3\"></i> Set Inactive</a>';\r\n             }\r\n             \r\n             $response['data'][] = [\r\n                 \"<label id ='nama\".$row['id'].\"'>\".$row['nama'].\"</label>\",\r\n"
+                },
+                {
+                    "date": 1629693439064,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n             if($row['status'] == \"Active\")\r\n             {\r\n                 $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n                 $myaction = '<a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n-                Set Active</a>';\r\n+                Set InActive</a>';\r\n             }\r\n             else\r\n             {\r\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n"
+                },
+                {
+                    "date": 1629693444166,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,9 +45,9 @@\n             else\r\n             {\r\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n                 $myaction = '<a class=\"dropdown-item\"><i\r\n-                class=\"icon-cross3\"></i> Set Inactive</a>';\r\n+                class=\"icon-cross3\"></i> Set Active</a>';\r\n             }\r\n             \r\n             $response['data'][] = [\r\n                 \"<label id ='nama\".$row['id'].\"'>\".$row['nama'].\"</label>\",\r\n"
+                },
+                {
+                    "date": 1629693507848,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -63,9 +63,9 @@\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n                         <a href=\"#editModal\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodal(this)\"><i class=\"icon-check\"></i>\r\n                             Edit</a>\r\n                         \r\n-                        \r\n+                        '..'\r\n                    \r\n                     </div>\r\n                 </div>\r\n             </div>'\r\n"
+                },
+                {
+                    "date": 1629693518704,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -63,9 +63,9 @@\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n                         <a href=\"#editModal\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodal(this)\"><i class=\"icon-check\"></i>\r\n                             Edit</a>\r\n                         \r\n-                        '..'\r\n+                        '.$myaction.'\r\n                    \r\n                     </div>\r\n                 </div>\r\n             </div>'\r\n"
+                },
+                {
+                    "date": 1629693569315,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n             $mystats = \"\";\r\n             if($row['status'] == \"Active\")\r\n             {\r\n                 $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n-                $myaction = '<a class=\"dropdown-item\"><i class=\"icon-check\"></i>\r\n+                $myaction = '<a class=\"dropdown-item\" onclick = \"inactive()\"><i class=\"icon-check\"></i>\r\n                 Set InActive</a>';\r\n             }\r\n             else\r\n             {\r\n"
+                },
+                {
+                    "date": 1629693574769,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n             $mystats = \"\";\r\n             if($row['status'] == \"Active\")\r\n             {\r\n                 $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n-                $myaction = '<a class=\"dropdown-item\" onclick = \"inactive()\"><i class=\"icon-check\"></i>\r\n+                $myaction = '<a class=\"dropdown-item\" onclick = \"inactive(\"\")\"><i class=\"icon-check\"></i>\r\n                 Set InActive</a>';\r\n             }\r\n             else\r\n             {\r\n"
+                },
+                {
+                    "date": 1629693585934,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n             $mystats = \"\";\r\n             if($row['status'] == \"Active\")\r\n             {\r\n                 $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n-                $myaction = '<a class=\"dropdown-item\" onclick = \"inactive(\"\")\"><i class=\"icon-check\"></i>\r\n+                $myaction = '<a class=\"dropdown-item\" onclick = \"setstatus(\"\")\"><i class=\"icon-check\"></i>\r\n                 Set InActive</a>';\r\n             }\r\n             else\r\n             {\r\n"
+                },
+                {
+                    "date": 1629693604275,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n             $mystats = \"\";\r\n             if($row['status'] == \"Active\")\r\n             {\r\n                 $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n-                $myaction = '<a class=\"dropdown-item\" onclick = \"setstatus(\"\")\"><i class=\"icon-check\"></i>\r\n+                $myaction = '<a class=\"dropdown-item\" onclick = \"setstatus(\"inactive\")\"><i class=\"icon-check\"></i>\r\n                 Set InActive</a>';\r\n             }\r\n             else\r\n             {\r\n"
+                },
+                {
+                    "date": 1629693616351,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n             }\r\n             else\r\n             {\r\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n-                $myaction = '<a class=\"dropdown-item\"><i\r\n+                $myaction = '<a class=\"dropdown-item\" onclick = \"setstatus(\"inactive\")\"><i\r\n                 class=\"icon-cross3\"></i> Set Active</a>';\r\n             }\r\n             \r\n             $response['data'][] = [\r\n"
+                },
+                {
+                    "date": 1629693680676,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n             }\r\n             else\r\n             {\r\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n-                $myaction = '<a class=\"dropdown-item\" onclick = \"setstatus(\"inactive\")\"><i\r\n+                $myaction = '<a class=\"dropdown-item\" onclick = \"setstatus(\"active\")\"><i\r\n                 class=\"icon-cross3\"></i> Set Active</a>';\r\n             }\r\n             \r\n             $response['data'][] = [\r\n"
+                },
+                {
+                    "date": 1629693731694,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n             $mystats = \"\";\r\n             if($row['status'] == \"Active\")\r\n             {\r\n                 $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n-                $myaction = '<a class=\"dropdown-item\" onclick = \"setstatus(\"inactive\")\"><i class=\"icon-check\"></i>\r\n+                $myaction = '<a class=\"dropdown-item\" onclick = \"setstatus(inactive)\"><i class=\"icon-check\"></i>\r\n                 Set InActive</a>';\r\n             }\r\n             else\r\n             {\r\n"
+                },
+                {
+                    "date": 1629693815864,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,15 +38,15 @@\n             $mystats = \"\";\r\n             if($row['status'] == \"Active\")\r\n             {\r\n                 $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n-                $myaction = '<a class=\"dropdown-item\" onclick = \"setstatus(inactive)\"><i class=\"icon-check\"></i>\r\n+                $myaction = \"<a class='dropdown-item' onclick = setstatus('inactive')><i class=\"icon-check\"></i>\r\n                 Set InActive</a>';\r\n             }\r\n             else\r\n             {\r\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n-                $myaction = '<a class=\"dropdown-item\" onclick = \"setstatus(\"active\")\"><i\r\n+                $myaction = '<a class=\"dropdown-item\" onclick = \"setstatus(active)\"><i\r\n                 class=\"icon-cross3\"></i> Set Active</a>';\r\n             }\r\n             \r\n             $response['data'][] = [\r\n"
+                },
+                {
+                    "date": 1629693849656,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,10 +37,11 @@\n         while($row = mysqli_fetch_assoc($query_data)) {\r\n             $mystats = \"\";\r\n             if($row['status'] == \"Active\")\r\n             {\r\n+                $myactionsetto = \"inactive\";\r\n                 $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n-                $myaction = \"<a class='dropdown-item' onclick = setstatus('inactive')><i class=\"icon-check\"></i>\r\n+                $myaction = \"<a class='dropdown-item' onclick = setstatus(\"'\"\"><i class=\"icon-check\"></i>\r\n                 Set InActive</a>';\r\n             }\r\n             else\r\n             {\r\n"
+                },
+                {
+                    "date": 1629693860082,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n             if($row['status'] == \"Active\")\r\n             {\r\n                 $myactionsetto = \"inactive\";\r\n                 $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n-                $myaction = \"<a class='dropdown-item' onclick = setstatus(\"'\"\"><i class=\"icon-check\"></i>\r\n+                $myaction = \"<a class='dropdown-item' onclick = setstatus('\"..\"')><i class=\"icon-check\"></i>\r\n                 Set InActive</a>';\r\n             }\r\n             else\r\n             {\r\n"
+                },
+                {
+                    "date": 1629693866229,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n             if($row['status'] == \"Active\")\r\n             {\r\n                 $myactionsetto = \"inactive\";\r\n                 $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n-                $myaction = \"<a class='dropdown-item' onclick = setstatus('\"..\"')><i class=\"icon-check\"></i>\r\n+                $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$myactionsetto.\"')><i class=\"icon-check\"></i>\r\n                 Set InActive</a>';\r\n             }\r\n             else\r\n             {\r\n"
+                },
+                {
+                    "date": 1629693875492,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n             if($row['status'] == \"Active\")\r\n             {\r\n                 $myactionsetto = \"inactive\";\r\n                 $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n-                $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$myactionsetto.\"')><i class=\"icon-check\"></i>\r\n+                $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$myactionsetto.\"')><i class='icon-check'></i>\r\n                 Set InActive</a>';\r\n             }\r\n             else\r\n             {\r\n"
+                },
+                {
+                    "date": 1629693885820,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n             {\r\n                 $myactionsetto = \"inactive\";\r\n                 $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n                 $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$myactionsetto.\"')><i class='icon-check'></i>\r\n-                Set InActive</a>';\r\n+                Set InActive</a>'\"\r\n             }\r\n             else\r\n             {\r\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n"
+                },
+                {
+                    "date": 1629693903270,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,15 +40,16 @@\n             {\r\n                 $myactionsetto = \"inactive\";\r\n                 $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n                 $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$myactionsetto.\"')><i class='icon-check'></i>\r\n-                Set InActive</a>'\"\r\n+                Set InActive</a>'\";\r\n             }\r\n             else\r\n             {\r\n+                $myactionsetto = \"inactive\";\r\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n-                $myaction = '<a class=\"dropdown-item\" onclick = \"setstatus(active)\"><i\r\n-                class=\"icon-cross3\"></i> Set Active</a>';\r\n+                $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$myactionsetto.\"')><i class='icon-check'></i>\r\n+                Set InActive</a>'\";\r\n             }\r\n             \r\n             $response['data'][] = [\r\n                 \"<label id ='nama\".$row['id'].\"'>\".$row['nama'].\"</label>\",\r\n"
+                },
+                {
+                    "date": 1629693977324,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,14 +39,14 @@\n             if($row['status'] == \"Active\")\r\n             {\r\n                 $myactionsetto = \"inactive\";\r\n                 $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n-                $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$myactionsetto.\"')><i class='icon-check'></i>\r\n+                $myaction = \"<a class='dropdown-item' onclick = setstatus('\"..\"-\".$myactionsetto.\"')><i class='icon-check'></i>\r\n                 Set InActive</a>'\";\r\n             }\r\n             else\r\n             {\r\n-                $myactionsetto = \"inactive\";\r\n+                $myactionsetto = \"active\";\r\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n                 $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$myactionsetto.\"')><i class='icon-check'></i>\r\n                 Set InActive</a>'\";\r\n             }\r\n"
+                },
+                {
+                    "date": 1629693982662,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n             if($row['status'] == \"Active\")\r\n             {\r\n                 $myactionsetto = \"inactive\";\r\n                 $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n-                $myaction = \"<a class='dropdown-item' onclick = setstatus('\"..\"-\".$myactionsetto.\"')><i class='icon-check'></i>\r\n+                $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$row['id'].\"-\".$myactionsetto.\"')><i class='icon-check'></i>\r\n                 Set InActive</a>'\";\r\n             }\r\n             else\r\n             {\r\n"
+                },
+                {
+                    "date": 1629693992492,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,9 +46,9 @@\n             else\r\n             {\r\n                 $myactionsetto = \"active\";\r\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n-                $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$myactionsetto.\"')><i class='icon-check'></i>\r\n+                $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$row['id'].\"-\".$myactionsetto.\"')><i class='icon-check'></i>\r\n                 Set InActive</a>'\";\r\n             }\r\n             \r\n             $response['data'][] = [\r\n"
+                },
+                {
+                    "date": 1629694173857,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -140,5 +140,9 @@\n     else{\r\n         echo \"tidak\";\r\n     }\r\n }\r\n+else if($tipe == \"setstatus\")\r\n+{\r\n+    \r\n+}\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629694186024,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -142,7 +142,7 @@\n     }\r\n }\r\n else if($tipe == \"setstatus\")\r\n {\r\n-    \r\n+    $myid = $_POST['myidchange']\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629694193702,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -142,7 +142,8 @@\n     }\r\n }\r\n else if($tipe == \"setstatus\")\r\n {\r\n-    $myid = $_POST['myidchange']\r\n+    $myid = $_POST['myidchange'];\r\n+    $status = $_POST['stat'];\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629694309311,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -144,6 +144,7 @@\n else if($tipe == \"setstatus\")\r\n {\r\n     $myid = $_POST['myidchange'];\r\n     $status = $_POST['stat'];\r\n+    $sql = \"udpate kategori_asset set\"\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629694317298,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -144,7 +144,7 @@\n else if($tipe == \"setstatus\")\r\n {\r\n     $myid = $_POST['myidchange'];\r\n     $status = $_POST['stat'];\r\n-    $sql = \"udpate kategori_asset set\"\r\n+    $sql = \"udpate kategori_asset set status = \".\"\"\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629694323580,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -143,8 +143,8 @@\n }\r\n else if($tipe == \"setstatus\")\r\n {\r\n     $myid = $_POST['myidchange'];\r\n-    $status = $_POST['stat'];\r\n-    $sql = \"udpate kategori_asset set status = \".\"\"\r\n+    $stat = $_POST['stat'];\r\n+    $sql = \"udpate kategori_asset set status = \".$stat.\"\"\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629694338342,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -144,7 +144,7 @@\n else if($tipe == \"setstatus\")\r\n {\r\n     $myid = $_POST['myidchange'];\r\n     $stat = $_POST['stat'];\r\n-    $sql = \"udpate kategori_asset set status = \".$stat.\"\"\r\n+    $sql = \"udpate kategori_asset set status = '\".$stat.\"' where id = '\"\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629694351859,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -144,7 +144,8 @@\n else if($tipe == \"setstatus\")\r\n {\r\n     $myid = $_POST['myidchange'];\r\n     $stat = $_POST['stat'];\r\n-    $sql = \"udpate kategori_asset set status = '\".$stat.\"' where id = '\"\r\n+    $sql = \"udpate kategori_asset set status = '\".$stat.\"' where id = '\";\r\n+    $res = $conn->query($sql);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629694357081,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -144,8 +144,8 @@\n else if($tipe == \"setstatus\")\r\n {\r\n     $myid = $_POST['myidchange'];\r\n     $stat = $_POST['stat'];\r\n-    $sql = \"udpate kategori_asset set status = '\".$stat.\"' where id = '\";\r\n+    $sql = \"udpate kategori_asset set status = '\".$stat.\"' where id = ''\";\r\n     $res = $conn->query($sql);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629694369389,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -144,8 +144,8 @@\n else if($tipe == \"setstatus\")\r\n {\r\n     $myid = $_POST['myidchange'];\r\n     $stat = $_POST['stat'];\r\n-    $sql = \"udpate kategori_asset set status = '\".$stat.\"' where id = ''\";\r\n+    $sql = \"udpate kategori_asset set status = '\".$stat.\"' where id = '\"..\"'\";\r\n     $res = $conn->query($sql);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629694375027,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -144,8 +144,8 @@\n else if($tipe == \"setstatus\")\r\n {\r\n     $myid = $_POST['myidchange'];\r\n     $stat = $_POST['stat'];\r\n-    $sql = \"udpate kategori_asset set status = '\".$stat.\"' where id = '\"..\"'\";\r\n+    $sql = \"udpate kategori_asset set status = '\".$stat.\"' where id = '\".$myid.\"'\";\r\n     $res = $conn->query($sql);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629694484757,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -144,8 +144,8 @@\n else if($tipe == \"setstatus\")\r\n {\r\n     $myid = $_POST['myidchange'];\r\n     $stat = $_POST['stat'];\r\n-    $sql = \"udpate kategori_asset set status = '\".$stat.\"' where id = '\".$myid.\"'\";\r\n+    $sql = \"update kategori_asset set status = '\".$stat.\"' where id = '\".$myid.\"'\";\r\n     $res = $conn->query($sql);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629694896522,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,9 +47,9 @@\n             {\r\n                 $myactionsetto = \"active\";\r\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n                 $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$row['id'].\"-\".$myactionsetto.\"')><i class='icon-check'></i>\r\n-                Set InActive</a>'\";\r\n+                Set Active</a>'\";\r\n             }\r\n             \r\n             $response['data'][] = [\r\n                 \"<label id ='nama\".$row['id'].\"'>\".$row['nama'].\"</label>\",\r\n"
+                },
+                {
+                    "date": 1629694940238,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,16 +37,16 @@\n         while($row = mysqli_fetch_assoc($query_data)) {\r\n             $mystats = \"\";\r\n             if($row['status'] == \"Active\")\r\n             {\r\n-                $myactionsetto = \"inactive\";\r\n+                $myactionsetto = \"InActive\";\r\n                 $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n                 $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$row['id'].\"-\".$myactionsetto.\"')><i class='icon-check'></i>\r\n                 Set InActive</a>'\";\r\n             }\r\n             else\r\n             {\r\n-                $myactionsetto = \"active\";\r\n+                $myactionsetto = \"Active\";\r\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n                 $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$row['id'].\"-\".$myactionsetto.\"')><i class='icon-check'></i>\r\n                 Set Active</a>'\";\r\n             }\r\n"
+                }
+            ],
+            "date": 1629445421817,
+            "name": "Commit-0",
+            "content": "<?php\r\n\r\n?>"
+        }
+    ]
+}

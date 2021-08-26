@@ -1,0 +1,134 @@
+{
+    "sourceFile": "process/mastercountry.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 29,
+            "patches": [
+                {
+                    "date": 1629947247270,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1629947254110,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n if($tipe == \"load\")\r\n {\r\n \r\n     $where_like = [\r\n-        'divisi',\r\n+        'country',\r\n         'description',\r\n         'status'\r\n     ];\r\n     \r\n"
+                },
+                {
+                    "date": 1629947259564,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,8 @@\n {\r\n \r\n     $where_like = [\r\n         'country',\r\n-        'description',\r\n         'status'\r\n     ];\r\n     \r\n     $response = $_REQUEST;\r\n"
+                },
+                {
+                    "date": 1629947301448,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n     $order    = $where_like[$response['order'][0]['column']];\r\n     $dir      = $response['order'][0]['dir'];\r\n     $search   = $response['search']['value'];\r\n     \r\n-    $total_data = mysqli_query($conn, \"select * from divisi \");\r\n+    $total_data = mysqli_query($conn, \"select * from country \");\r\n     \r\n     if(empty($search)) {\r\n         $query_data = mysqli_query($conn, \"select * from divisi ORDER BY $order $dir LIMIT $start, $length\");\r\n     \r\n"
+                },
+                {
+                    "date": 1629947307226,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,11 +18,11 @@\n     \r\n     $total_data = mysqli_query($conn, \"select * from country \");\r\n     \r\n     if(empty($search)) {\r\n-        $query_data = mysqli_query($conn, \"select * from divisi ORDER BY $order $dir LIMIT $start, $length\");\r\n+        $query_data = mysqli_query($conn, \"select * from country ORDER BY $order $dir LIMIT $start, $length\");\r\n     \r\n-        $total_filtered = mysqli_query($conn, \"select * from divisi \");\r\n+        $total_filtered = mysqli_query($conn, \"select * from country \");\r\n     } else {\r\n         $query_data = mysqli_query($conn, \"select * from divisi WHERE divisi LIKE '%$search%' OR description  LIKE '%$search%' OR status LIKE '%$search%' ORDER BY $order $dir LIMIT $start, $length\");\r\n     \r\n         $total_filtered = mysqli_query($conn, \"select * from divisi WHERE divisi LIKE '%$search%' OR description  LIKE '%$search%' OR status LIKE '%$search%' \");\r\n"
+                },
+                {
+                    "date": 1629947368315,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n         $query_data = mysqli_query($conn, \"select * from country ORDER BY $order $dir LIMIT $start, $length\");\r\n     \r\n         $total_filtered = mysqli_query($conn, \"select * from country \");\r\n     } else {\r\n-        $query_data = mysqli_query($conn, \"select * from divisi WHERE divisi LIKE '%$search%' OR description  LIKE '%$search%' OR status LIKE '%$search%' ORDER BY $order $dir LIMIT $start, $length\");\r\n+        $query_data = mysqli_query($conn, \"select * from divisi WHERE name LIKE '%$search%'  OR status LIKE '%$search%' ORDER BY $order $dir LIMIT $start, $length\");\r\n     \r\n         $total_filtered = mysqli_query($conn, \"select * from divisi WHERE divisi LIKE '%$search%' OR description  LIKE '%$search%' OR status LIKE '%$search%' \");\r\n     }\r\n     \r\n"
+                },
+                {
+                    "date": 1629947436758,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n         $query_data = mysqli_query($conn, \"select * from country ORDER BY $order $dir LIMIT $start, $length\");\r\n     \r\n         $total_filtered = mysqli_query($conn, \"select * from country \");\r\n     } else {\r\n-        $query_data = mysqli_query($conn, \"select * from divisi WHERE name LIKE '%$search%'  OR status LIKE '%$search%' ORDER BY $order $dir LIMIT $start, $length\");\r\n+        $query_data = mysqli_query($conn, \"select * from country WHERE name LIKE '%$search%' OR status LIKE '%$search%' ORDER BY $order $dir LIMIT $start, $length\");\r\n     \r\n         $total_filtered = mysqli_query($conn, \"select * from divisi WHERE divisi LIKE '%$search%' OR description  LIKE '%$search%' OR status LIKE '%$search%' \");\r\n     }\r\n     \r\n"
+                },
+                {
+                    "date": 1629947448001,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n         $total_filtered = mysqli_query($conn, \"select * from country \");\r\n     } else {\r\n         $query_data = mysqli_query($conn, \"select * from country WHERE name LIKE '%$search%' OR status LIKE '%$search%' ORDER BY $order $dir LIMIT $start, $length\");\r\n     \r\n-        $total_filtered = mysqli_query($conn, \"select * from divisi WHERE divisi LIKE '%$search%' OR description  LIKE '%$search%' OR status LIKE '%$search%' \");\r\n+        $total_filtered = mysqli_query($conn, \"select * from country WHERE name LIKE '%$search%' OR status LIKE '%$search%'\");\r\n     }\r\n     \r\n     $response['data'] = [];\r\n     \r\n"
+                },
+                {
+                    "date": 1629947458548,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,9 +48,9 @@\n                 Set Active</a>'\";\r\n             }\r\n             \r\n             $response['data'][] = [\r\n-                \"<label id ='divisi\".$row['id'].\"'>\".$row['divisi'].\"</label>\",\r\n+                \"<label id ='country\".$row['id'].\"'>\".$row['divisi'].\"</label>\",\r\n                 \"<label id ='description\".$row['id'].\"'>\".$row['description'].\"</label>\",\r\n                 \"<label id ='status\".$row['id'].\"'>\".$mystats.\"</label>\",\r\n                 ' <div class=\"list-icons\">\r\n                 <div class=\"dropdown\">\r\n"
+                },
+                {
+                    "date": 1629947463649,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,10 +48,9 @@\n                 Set Active</a>'\";\r\n             }\r\n             \r\n             $response['data'][] = [\r\n-                \"<label id ='country\".$row['id'].\"'>\".$row['divisi'].\"</label>\",\r\n-                \"<label id ='description\".$row['id'].\"'>\".$row['description'].\"</label>\",\r\n+                \"<label id ='country\".$row['id'].\"'>\".$row['country'].\"</label>\",\r\n                 \"<label id ='status\".$row['id'].\"'>\".$mystats.\"</label>\",\r\n                 ' <div class=\"list-icons\">\r\n                 <div class=\"dropdown\">\r\n                     <a href=\"#\" class=\"list-icons-item\" data-toggle=\"dropdown\">\r\n"
+                },
+                {
+                    "date": 1629947477101,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,9 +48,9 @@\n                 Set Active</a>'\";\r\n             }\r\n             \r\n             $response['data'][] = [\r\n-                \"<label id ='country\".$row['id'].\"'>\".$row['country'].\"</label>\",\r\n+                \"<label id ='country\".$row['id'].\"'>\".$row['name'].\"</label>\",\r\n                 \"<label id ='status\".$row['id'].\"'>\".$mystats.\"</label>\",\r\n                 ' <div class=\"list-icons\">\r\n                 <div class=\"dropdown\">\r\n                     <a href=\"#\" class=\"list-icons-item\" data-toggle=\"dropdown\">\r\n"
+                },
+                {
+                    "date": 1629947542355,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n if($tipe == \"load\")\r\n {\r\n \r\n     $where_like = [\r\n-        'country',\r\n+        'name',\r\n         'status'\r\n     ];\r\n     \r\n     $response = $_REQUEST;\r\n"
+                },
+                {
+                    "date": 1629947576319,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -113,8 +113,8 @@\n else if($tipe == \"setstatus\")\r\n {\r\n     $myid = $_POST['myidchange'];\r\n     $stat = $_POST['stat'];\r\n-    $sql = \"update divisi set status = '\".$stat.\"' where id = '\".$myid.\"'\";\r\n+    $sql = \"update country set status = '\".$stat.\"' where id = '\".$myid.\"'\";\r\n     $res = $conn->query($sql);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629948862161,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,9 +50,9 @@\n             \r\n             $response['data'][] = [\r\n                 \"<label id ='country\".$row['id'].\"'>\".$row['name'].\"</label>\",\r\n                 \"<label id ='status\".$row['id'].\"'>\".$mystats.\"</label>\",\r\n-                ' <div class=\"list-icons\">\r\n+                ' \r\n                 <div class=\"dropdown\">\r\n                     <a href=\"#\" class=\"list-icons-item\" data-toggle=\"dropdown\">\r\n                         <i class=\"icon-menu9\"></i>\r\n                     </a>\r\n@@ -64,9 +64,9 @@\n                         '.$myaction.'\r\n                    \r\n                     </div>\r\n                 </div>\r\n-            </div>'\r\n+            '\r\n             ];\r\n         }\r\n     }\r\n     \r\n"
+                },
+                {
+                    "date": 1629948883110,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,9 +50,9 @@\n             \r\n             $response['data'][] = [\r\n                 \"<label id ='country\".$row['id'].\"'>\".$row['name'].\"</label>\",\r\n                 \"<label id ='status\".$row['id'].\"'>\".$mystats.\"</label>\",\r\n-                ' \r\n+                ' <div class=\"list-icons\">\r\n                 <div class=\"dropdown\">\r\n                     <a href=\"#\" class=\"list-icons-item\" data-toggle=\"dropdown\">\r\n                         <i class=\"icon-menu9\"></i>\r\n                     </a>\r\n@@ -64,9 +64,9 @@\n                         '.$myaction.'\r\n                    \r\n                     </div>\r\n                 </div>\r\n-            '\r\n+            </div>'\r\n             ];\r\n         }\r\n     }\r\n     \r\n"
+                },
+                {
+                    "date": 1629949112163,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,9 @@\n             else\r\n             {\r\n                 $myactionsetto = \"Active\";\r\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n-                $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$row['id'].\"-\".$myactionsetto.\"')><i class='icon-check'></i>\r\n+                $myaction = \"<a class='dropdown-item' onclick = \"setstatus('\".$row['id'].\"-\".$myactionsetto.\"')\"><i class='icon-check'></i>\r\n                 Set Active</a>'\";\r\n             }\r\n             \r\n             $response['data'][] = [\r\n"
+                },
+                {
+                    "date": 1629949123078,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,9 @@\n             else\r\n             {\r\n                 $myactionsetto = \"Active\";\r\n                 $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n-                $myaction = \"<a class='dropdown-item' onclick = \"setstatus('\".$row['id'].\"-\".$myactionsetto.\"')\"><i class='icon-check'></i>\r\n+                $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$row['id'].\"-\".$myactionsetto.\"')><i class='icon-check'></i>\r\n                 Set Active</a>'\";\r\n             }\r\n             \r\n             $response['data'][] = [\r\n"
+                },
+                {
+                    "date": 1629949620887,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,11 +59,9 @@\n     \r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n                         <a href=\"#editModal\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodal(this)\"><i class=\"icon-check\"></i>\r\n                             Edit</a>\r\n-                        \r\n                         '.$myaction.'\r\n-                   \r\n                     </div>\r\n                 </div>\r\n             </div>'\r\n             ];\r\n"
+                },
+                {
+                    "date": 1629950121357,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -80,9 +80,9 @@\n     \r\n     echo json_encode($response);\r\n }\r\n else if($tipe == \"add\"){\r\n-    $divisi = $_POST['mydivisi'];\r\n+    $divisi = $_POST['mycountry'];\r\n     $description = $_POST['mydescription'];\r\n     $sql = \"INSERT into divisi values(NULL, '\".$divisi.\"', '\".$description.\"', 'Active')\";\r\n     $res = $conn->query($sql);\r\n     if(($conn -> affected_rows)>0)\r\n"
+                },
+                {
+                    "date": 1629950132102,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -80,9 +80,9 @@\n     \r\n     echo json_encode($response);\r\n }\r\n else if($tipe == \"add\"){\r\n-    $divisi = $_POST['mycountry'];\r\n+    $country = $_POST['mycountry'];\r\n     $description = $_POST['mydescription'];\r\n     $sql = \"INSERT into divisi values(NULL, '\".$divisi.\"', '\".$description.\"', 'Active')\";\r\n     $res = $conn->query($sql);\r\n     if(($conn -> affected_rows)>0)\r\n"
+                },
+                {
+                    "date": 1629950137589,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,10 +81,9 @@\n     echo json_encode($response);\r\n }\r\n else if($tipe == \"add\"){\r\n     $country = $_POST['mycountry'];\r\n-    $description = $_POST['mydescription'];\r\n-    $sql = \"INSERT into divisi values(NULL, '\".$divisi.\"', '\".$description.\"', 'Active')\";\r\n+    $sql = \"INSERT into country values(NULL, '\".$divisi.\"', '\".$description.\"', 'Active')\";\r\n     $res = $conn->query($sql);\r\n     if(($conn -> affected_rows)>0)\r\n     {\r\n         echo \"sukses\";\r\n"
+                },
+                {
+                    "date": 1629950157354,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,9 +81,9 @@\n     echo json_encode($response);\r\n }\r\n else if($tipe == \"add\"){\r\n     $country = $_POST['mycountry'];\r\n-    $sql = \"INSERT into country values(NULL, '\".$divisi.\"', '\".$description.\"', 'Active')\";\r\n+    $sql = \"INSERT into country values(NULL, '\".$country.\"', 'Active')\";\r\n     $res = $conn->query($sql);\r\n     if(($conn -> affected_rows)>0)\r\n     {\r\n         echo \"sukses\";\r\n"
+                },
+                {
+                    "date": 1629950705198,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -96,9 +96,9 @@\n {\r\n     $id  = $_POST['myid'];\r\n     $divisi = $_POST['mydivisi'];\r\n     $description = $_POST['mydescription'];\r\n-    $sql = \"update divisi set divisi = '\".$divisi.\"', description = '\".$description.\"' where id = '\".$id.\"'\";\r\n+    $sql = \"update country set divisi = '\".$divisi.\"', description = '\".$description.\"' where id = '\".$id.\"'\";\r\n     $res = $conn->query($sql);\r\n     if(($conn -> affected_rows)>0)\r\n     {\r\n         echo \"sukses\";\r\n"
+                },
+                {
+                    "date": 1629950711475,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -94,11 +94,11 @@\n }\r\n else if($tipe == \"change\")\r\n {\r\n     $id  = $_POST['myid'];\r\n-    $divisi = $_POST['mydivisi'];\r\n+    $country = $_POST['mydivisi'];\r\n     $description = $_POST['mydescription'];\r\n-    $sql = \"update country set divisi = '\".$divisi.\"', description = '\".$description.\"' where id = '\".$id.\"'\";\r\n+    $sql = \"update country set country = '\".$divisi.\"', description = '\".$description.\"' where id = '\".$id.\"'\";\r\n     $res = $conn->query($sql);\r\n     if(($conn -> affected_rows)>0)\r\n     {\r\n         echo \"sukses\";\r\n"
+                },
+                {
+                    "date": 1629950718744,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -94,9 +94,9 @@\n }\r\n else if($tipe == \"change\")\r\n {\r\n     $id  = $_POST['myid'];\r\n-    $country = $_POST['mydivisi'];\r\n+    $country = $_POST['mycountry'];\r\n     $description = $_POST['mydescription'];\r\n     $sql = \"update country set country = '\".$divisi.\"', description = '\".$description.\"' where id = '\".$id.\"'\";\r\n     $res = $conn->query($sql);\r\n     if(($conn -> affected_rows)>0)\r\n"
+                },
+                {
+                    "date": 1629950727460,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -96,9 +96,9 @@\n {\r\n     $id  = $_POST['myid'];\r\n     $country = $_POST['mycountry'];\r\n     $description = $_POST['mydescription'];\r\n-    $sql = \"update country set country = '\".$divisi.\"', description = '\".$description.\"' where id = '\".$id.\"'\";\r\n+    $sql = \"update country set country = '\".$country.\"', description = '\".$description.\"' where id = '\".$id.\"'\";\r\n     $res = $conn->query($sql);\r\n     if(($conn -> affected_rows)>0)\r\n     {\r\n         echo \"sukses\";\r\n"
+                },
+                {
+                    "date": 1629950732624,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -96,9 +96,9 @@\n {\r\n     $id  = $_POST['myid'];\r\n     $country = $_POST['mycountry'];\r\n     $description = $_POST['mydescription'];\r\n-    $sql = \"update country set country = '\".$country.\"', description = '\".$description.\"' where id = '\".$id.\"'\";\r\n+    $sql = \"update country set country = '\".$country.\"', where id = '\".$id.\"'\";\r\n     $res = $conn->query($sql);\r\n     if(($conn -> affected_rows)>0)\r\n     {\r\n         echo \"sukses\";\r\n"
+                },
+                {
+                    "date": 1629950738030,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -96,9 +96,9 @@\n {\r\n     $id  = $_POST['myid'];\r\n     $country = $_POST['mycountry'];\r\n     $description = $_POST['mydescription'];\r\n-    $sql = \"update country set country = '\".$country.\"', where id = '\".$id.\"'\";\r\n+    $sql = \"update country set country = '\".$country.\"' where id = '\".$id.\"'\";\r\n     $res = $conn->query($sql);\r\n     if(($conn -> affected_rows)>0)\r\n     {\r\n         echo \"sukses\";\r\n"
+                },
+                {
+                    "date": 1629950747983,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -96,9 +96,9 @@\n {\r\n     $id  = $_POST['myid'];\r\n     $country = $_POST['mycountry'];\r\n     $description = $_POST['mydescription'];\r\n-    $sql = \"update country set country = '\".$country.\"' where id = '\".$id.\"'\";\r\n+    $sql = \"update country set name = '\".$country.\"' where id = '\".$id.\"'\";\r\n     $res = $conn->query($sql);\r\n     if(($conn -> affected_rows)>0)\r\n     {\r\n         echo \"sukses\";\r\n"
+                },
+                {
+                    "date": 1629950895249,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -95,9 +95,8 @@\n else if($tipe == \"change\")\r\n {\r\n     $id  = $_POST['myid'];\r\n     $country = $_POST['mycountry'];\r\n-    $description = $_POST['mydescription'];\r\n     $sql = \"update country set name = '\".$country.\"' where id = '\".$id.\"'\";\r\n     $res = $conn->query($sql);\r\n     if(($conn -> affected_rows)>0)\r\n     {\r\n"
+                }
+            ],
+            "date": 1629947247270,
+            "name": "Commit-0",
+            "content": "<?php\r\nrequire '../connection.php';\r\n$tipe = $_POST['tipe'];\r\nif($tipe == \"load\")\r\n{\r\n\r\n    $where_like = [\r\n        'divisi',\r\n        'description',\r\n        'status'\r\n    ];\r\n    \r\n    $response = $_REQUEST;\r\n    $start    = $response['start'];\r\n    $length   = $response['length'];\r\n    $order    = $where_like[$response['order'][0]['column']];\r\n    $dir      = $response['order'][0]['dir'];\r\n    $search   = $response['search']['value'];\r\n    \r\n    $total_data = mysqli_query($conn, \"select * from divisi \");\r\n    \r\n    if(empty($search)) {\r\n        $query_data = mysqli_query($conn, \"select * from divisi ORDER BY $order $dir LIMIT $start, $length\");\r\n    \r\n        $total_filtered = mysqli_query($conn, \"select * from divisi \");\r\n    } else {\r\n        $query_data = mysqli_query($conn, \"select * from divisi WHERE divisi LIKE '%$search%' OR description  LIKE '%$search%' OR status LIKE '%$search%' ORDER BY $order $dir LIMIT $start, $length\");\r\n    \r\n        $total_filtered = mysqli_query($conn, \"select * from divisi WHERE divisi LIKE '%$search%' OR description  LIKE '%$search%' OR status LIKE '%$search%' \");\r\n    }\r\n    \r\n    $response['data'] = [];\r\n    \r\n    if($query_data) {\r\n        while($row = mysqli_fetch_assoc($query_data)) {\r\n            $mystats = \"\";\r\n            if($row['status'] == \"Active\")\r\n            {\r\n                $myactionsetto = \"InActive\";\r\n                $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n                $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$row['id'].\"-\".$myactionsetto.\"')><i class='icon-check'></i>\r\n                Set InActive</a>'\";\r\n            }\r\n            else\r\n            {\r\n                $myactionsetto = \"Active\";\r\n                $mystats = '<span class=\"badge badge-danger\">InActive</span>';\r\n                $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$row['id'].\"-\".$myactionsetto.\"')><i class='icon-check'></i>\r\n                Set Active</a>'\";\r\n            }\r\n            \r\n            $response['data'][] = [\r\n                \"<label id ='divisi\".$row['id'].\"'>\".$row['divisi'].\"</label>\",\r\n                \"<label id ='description\".$row['id'].\"'>\".$row['description'].\"</label>\",\r\n                \"<label id ='status\".$row['id'].\"'>\".$mystats.\"</label>\",\r\n                ' <div class=\"list-icons\">\r\n                <div class=\"dropdown\">\r\n                    <a href=\"#\" class=\"list-icons-item\" data-toggle=\"dropdown\">\r\n                        <i class=\"icon-menu9\"></i>\r\n                    </a>\r\n    \r\n                    <div class=\"dropdown-menu dropdown-menu-right\">\r\n                        <a href=\"#editModal\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodal(this)\"><i class=\"icon-check\"></i>\r\n                            Edit</a>\r\n                        \r\n                        '.$myaction.'\r\n                   \r\n                    </div>\r\n                </div>\r\n            </div>'\r\n            ];\r\n        }\r\n    }\r\n    \r\n    $response['recordsTotal'] = 0;\r\n    if($total_data <> FALSE) {\r\n        $response['recordsTotal'] = mysqli_num_rows($total_data);\r\n    }\r\n    \r\n    $response['recordsFiltered'] = 0;\r\n    if($total_filtered <> FALSE) {\r\n        $response['recordsFiltered'] = mysqli_num_rows($total_filtered);\r\n    }  \r\n    \r\n    echo json_encode($response);\r\n}\r\nelse if($tipe == \"add\"){\r\n    $divisi = $_POST['mydivisi'];\r\n    $description = $_POST['mydescription'];\r\n    $sql = \"INSERT into divisi values(NULL, '\".$divisi.\"', '\".$description.\"', 'Active')\";\r\n    $res = $conn->query($sql);\r\n    if(($conn -> affected_rows)>0)\r\n    {\r\n        echo \"sukses\";\r\n    }\r\n    else{\r\n        echo \"tidak\";\r\n    }\r\n}\r\nelse if($tipe == \"change\")\r\n{\r\n    $id  = $_POST['myid'];\r\n    $divisi = $_POST['mydivisi'];\r\n    $description = $_POST['mydescription'];\r\n    $sql = \"update divisi set divisi = '\".$divisi.\"', description = '\".$description.\"' where id = '\".$id.\"'\";\r\n    $res = $conn->query($sql);\r\n    if(($conn -> affected_rows)>0)\r\n    {\r\n        echo \"sukses\";\r\n    }\r\n    else{\r\n        echo \"tidak\";\r\n    }\r\n}\r\nelse if($tipe == \"setstatus\")\r\n{\r\n    $myid = $_POST['myidchange'];\r\n    $stat = $_POST['stat'];\r\n    $sql = \"update divisi set status = '\".$stat.\"' where id = '\".$myid.\"'\";\r\n    $res = $conn->query($sql);\r\n}\r\n?>"
+        }
+    ]
+}

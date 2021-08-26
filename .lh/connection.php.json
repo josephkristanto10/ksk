@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 4,
             "patches": [
                 {
                     "date": 1627963715117,
@@ -16,6 +16,14 @@
                 {
                     "date": 1627963872176,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,8 @@\n //     $url = 'http://localhost/indovica/';\r\n //     $conn = mysqli_connect('localhost', 'root', '', 'indovica');\r\n // }\r\n $url = 'http://localhost:1080/ksk/';\r\n-$base_url   = $url;\r\n+// $base_url   = $url;\r\n // $admin_url  = $url.\"admin\";\r\n // $vendor_url = $url.\"vendor\";\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629343157585,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,14 +3,15 @@\n // $environment = 'development';\r\n \r\n // if($environment == 'development') {\r\n //     $url  = 'https://indovica.id/';\r\n-//     $conn = mysqli_connect('localhost', 'indovica_projectlukisan', 'indovica_projectlukisan', 'indovica_projectlukisan');\r\n+//     \r\n // } else if($environment == 'local') {\r\n //     $url = 'http://localhost/indovica/';\r\n //     $conn = mysqli_connect('localhost', 'root', '', 'indovica');\r\n // }\r\n $url = 'http://localhost:1080/ksk/';\r\n+$conn = mysqli_connect('localhost', 'backupyo_emba', 'root', '');\r\n // $base_url   = $url;\r\n // $admin_url  = $url.\"admin\";\r\n // $vendor_url = $url.\"vendor\";\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629345142643,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n //     $url = 'http://localhost/indovica/';\r\n //     $conn = mysqli_connect('localhost', 'root', '', 'indovica');\r\n // }\r\n $url = 'http://localhost:1080/ksk/';\r\n-$conn = mysqli_connect('localhost', 'backupyo_emba', 'root', '');\r\n+$conn = mysqli_connect('localhost', 'root', '', 'backupyo_emba');\r\n // $base_url   = $url;\r\n // $admin_url  = $url.\"admin\";\r\n // $vendor_url = $url.\"vendor\";\r\n ?>\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1627963715117,

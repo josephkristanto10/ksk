@@ -1,5 +1,13 @@
 <?php
 require 'connection.php';
+$sql = "select  lsc.id, lsc.code, lsc.name, lsc.address, lsc.telp, 
+        lsc.description, coun.name as countryname, prov.name as provincename, 
+        city.name as cityname from location_sister_company lsc 
+        inner join country coun on coun.id = lsc.country 
+        inner join province prov on prov.id = lsc.province
+        inner join city city on city.id = lsc.city";
+$res = $conn->query($sql);
+$listcompany = array();
 
 ?>
 <!DOCTYPE html>
@@ -258,175 +266,49 @@ require 'connection.php';
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td><img src = "<?=$url?>assets/qrcode.jpg" style = "width:50px;height:50px;"></td>
-                                        <td>XA-1</td>
-                                        <td>Lantai 1</td>
-                                        <td>Ruangan Meeting</td>
-                                        <td>1</td>
-                                        <td>Folder A</td>
-                                        <td>-</td>
-                                        <td><span class="badge badge-success">Active</span></td>
-                                        <td class="text-center">
-                                            <div class="list-icons">
-                                                <div class="dropdown">
-                                                    <a href="#" class="list-icons-item" data-toggle="dropdown">
-                                                        <i class="icon-menu9"></i>
-                                                    </a>
 
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item"><i class="icon-check"></i>
-                                                            Set Active</a>
-                                                        <a class="dropdown-item"><i
-                                                                class="icon-cross3"></i> Set Inactive</a>
-                                                   
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td><img src = "<?=$url?>assets/qrcode.jpg" style = "width:50px;height:50px;"></td>
-                                        <td>XA-1</td>
-                                        <td>Lantai 2</td>
-                                        <td>Ruangan Meeting</td>
-                                        <td>2</td>
-                                        <td>Folder B</td>
-                                        <td>-</td>
-                                        <td><span class="badge badge-success">Active</span></td>
-                                        <td class="text-center">
-                                            <div class="list-icons">
-                                                <div class="dropdown">
-                                                    <a href="#" class="list-icons-item" data-toggle="dropdown">
-                                                        <i class="icon-menu9"></i>
-                                                    </a>
-
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item"><i class="icon-check"></i>
-                                                            Set Active</a>
-                                                        <a class="dropdown-item"><i
-                                                                class="icon-cross3"></i> Set Inactive</a>
-                                                   
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td><img src = "<?=$url?>assets/qrcode.jpg" style = "width:50px;height:50px;"></td>
-                                        <td>XA-1</td>
-                                        <td>Lantai 3</td>
-                                        <td>Ruangan Penyimpanan</td>
-                                        <td>3</td>
-                                        <td>Folder C</td>
-                                        <td>-</td>
-                                        <td><span class="badge badge-success">Active</span></td>
-                                        <td class="text-center">
-                                            <div class="list-icons">
-                                                <div class="dropdown">
-                                                    <a href="#" class="list-icons-item" data-toggle="dropdown">
-                                                        <i class="icon-menu9"></i>
-                                                    </a>
-
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item"><i class="icon-check"></i>
-                                                            Set Active</a>
-                                                        <a class="dropdown-item"><i
-                                                                class="icon-cross3"></i> Set Inactive</a>
-                                                   
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td><img src = "<?=$url?>assets/qrcode.jpg" style = "width:50px;height:50px;"></td>
-                                        <td>XA-2</td>
-                                        <td>Lantai 1</td>
-                                        <td>Ruangan Berdiskusi</td>
-                                        <td>4</td>
-                                        <td>Folder Z</td>
-                                        <td>-</td>
-                                        <td><span class="badge badge-success">Active</span></td>
-                                        <td class="text-center">
-                                            <div class="list-icons">
-                                                <div class="dropdown">
-                                                    <a href="#" class="list-icons-item" data-toggle="dropdown">
-                                                        <i class="icon-menu9"></i>
-                                                    </a>
-
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item"><i class="icon-check"></i>
-                                                            Set Active</a>
-                                                        <a class="dropdown-item"><i
-                                                                class="icon-cross3"></i> Set Inactive</a>
-                                                   
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td><img src = "<?=$url?>assets/qrcode.jpg" style = "width:50px;height:50px;"></td>
-                                        <td>XA-2</td>
-                                        <td>Lantai 2</td>
-                                        <td>Ruang Tamu</td>
-                                        <td>5</td>
-                                        <td>Folder D</td>
-                                        <td>-</td>
-                                        <td><span class="badge badge-success">Active</span></td>
-                                        <td class="text-center">
-                                            <div class="list-icons">
-                                                <div class="dropdown">
-                                                    <a href="#" class="list-icons-item" data-toggle="dropdown">
-                                                        <i class="icon-menu9"></i>
-                                                    </a>
-
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item"><i class="icon-check"></i>
-                                                            Set Active</a>
-                                                        <a class="dropdown-item"><i
-                                                                class="icon-cross3"></i> Set Inactive</a>
-                                                   
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td><img src = "<?=$url?>assets/qrcode.jpg" style = "width:50px;height:50px;"></td>
-                                        <td>XA-2</td>
-                                        <td>Lantai 3</td>
-                                        <td>Ruangan Istirahat</td>
-                                        <td>6</td>
-                                        <td>Folder Q</td>
-                                        <td>-</td>
-                                        <td><span class="badge badge-success">Active</span></td>
-                                        <td class="text-center">
-                                            <div class="list-icons">
-                                                <div class="dropdown">
-                                                    <a href="#" class="list-icons-item" data-toggle="dropdown">
-                                                        <i class="icon-menu9"></i>
-                                                    </a>
-
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item"><i class="icon-check"></i>
-                                                            Set Active</a>
-                                                        <a class="dropdown-item"><i
-                                                                class="icon-cross3"></i> Set Inactive</a>
-                                                   
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                  
+                                <?php
+                                if($res->num_rows>0)
+                                {
+                                    while($r = mysqli_fetch_array($res))
+                                    {
+                                        echo
+                                    ' <tr>
+                                   <td>'.$r['code'].'</td>
+                                   <td>'.$r['name'].'</td>
+                                   <td>'.$r['description'].'</td>
+                                   <td>'.$r['address'].'</td>
+                                   <td>'.$r['countryname'].'</td>
+                                   <td>'.$r['provincename'].'</td>
+                                   <td>'.$r['cityname'].'</td>
+                                   <td>'.$r['telp'].'</td>
+                                   <td><span class="badge badge-success">Active</span></td>
+                                   <td class="text-center">
+                                       <div class="list-icons">
+                                           <div class="dropdown">
+                                               <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                                   <i class="icon-menu9"></i>
+                                               </a>
+   
+                                               <div class="dropdown-menu dropdown-menu-right">
+                                                   <a class="dropdown-item"><i class="icon-check"></i>
+                                                       Set Active</a>
+                                                   <a class="dropdown-item"><i
+                                                           class="icon-cross3"></i> Set Inactive</a>
+                                              
+                                               </div>
+                                           </div>
+                                       </div>
+                                   </td>
+                               </tr>';
+                                    }
+                                    
+                                }
+                                else{
+                                    
+                                }
+                            
+                                ?>
                                 </tbody>
                             </table>
                         </div>

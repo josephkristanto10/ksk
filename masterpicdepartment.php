@@ -1,6 +1,13 @@
 <?php
 require 'connection.php';
-
+$sql = "SELECT k.nik, k.nama, k.nohp, divi.divisi, depa.department FROM logpicdepartment lpd 
+inner join karyawan k on k.nik = lpd.iduser 
+inner join location_sister_company lsc on lsc.id = k.idsistercompany 
+inner join location_branch lbranch on lbranch.idbranch = k.idbranch 
+inner join location_building lbuilding on lbuilding.id = k.idbuilding 
+inner join divisi divi on divi.id = k.iddivisi 
+inner join department depa on depa.id = k.iddepartment ";
+$res = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -260,6 +267,7 @@ require 'connection.php';
 
 										<th>NIK</th>
 										<th>Name</th>
+										<th>Divisi</th>
 										<th>Department</th>
 										<th>Handphone</th>
 										<th class="text-center">Status</th>
@@ -267,11 +275,19 @@ require 'connection.php';
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>35382732</td>
-										<td>Joseph</td>
-										<td>Purchasing</td>
-										<td>08374637624</td>
+									
+								<?php
+                                if($res->num_rows>0)
+                                {
+                                    while($r = mysqli_fetch_array($res))
+                                    {
+                                        echo
+                                        '<tr>
+										<td>'.$r['nik'].'</td>
+										<td>'.$r['nama'].'</td>
+										<td>'.$r['divisi'].'</td>
+										<td>'.$r['department'].'</td>
+										<td>'.$r['nohp'].'</td>
 										<td><span class="badge badge-success">Active</span></td>
 										<td class="text-center">
 											<div class="list-icons">
@@ -282,7 +298,7 @@ require 'connection.php';
 
 													<div class="dropdown-menu dropdown-menu-right">
 														<a class="dropdown-item"><i class="icon-check"></i>
-															Change PIC</a>
+															Set Active</a>
 														<a class="dropdown-item"><i class="icon-cross3"></i> Set
 															Inactive</a>
 
@@ -290,55 +306,15 @@ require 'connection.php';
 												</div>
 											</div>
 										</td>
-									</tr>
-									<tr>
-										<td>33242766</td>
-										<td>Karman</td>
-										<td>Human Resource</td>
-										<td>08374637624</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Change PIC</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>37333005</td>
-										<td>Rachel</td>
-										<td>Sewing</td>
-										<td>08224117624</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Change PIC</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
+									</tr>';
+                                    }
+                                    
+                                }
+                                else{
+                                    
+                                }
+									
+								?>
 								</tbody>
 							</table>
 						</div>

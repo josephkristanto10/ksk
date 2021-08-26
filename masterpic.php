@@ -1,6 +1,15 @@
 <?php
 require 'connection.php';
-
+$sql = "select k.nohp,k.nik, k.nama, lsc.name as sistername, lbranch.branch, lbuilding.description as buildingname, lfloor.floor, lroom.room, lp.updatedat, depa.department, divi.divisi from logpic lp 
+inner join karyawan k on k.nik = lp.iduser
+inner join divisi divi on divi.id = lp.iddivisi
+inner join department depa on depa.id = lp.iddepartment
+inner join location_sister_company lsc on lsc.id = lp.idsistercompany 
+inner join location_branch lbranch on lbranch.idbranch = lp.idbranch
+inner join location_building lbuilding on lbuilding.id = lp.idbuilding 
+inner join location_floor lfloor on lfloor.id = lp.idfloor
+inner join location_room lroom on lroom.id = lp.idroom";
+$res = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,6 +60,11 @@ require 'connection.php';
 	<!-- /theme JS files -->
 
 	<script src="<?=$url;?>global_assets/js/demo_pages/datatables_advanced.js"></script>
+
+	<script src="<?=$url;?>global_assets/js/plugins/tables/datatables/datatables.min.js"></script>
+    <script src="<?=$url;?>global_assets/js/plugins/forms/selects/select2.min.js"></script>
+    <script src="<?=$url;?>global_assets/js/demo_pages/datatables_extension_fixed_columns.js"></script>
+	<script src="<?=$url;?>global_assets/js/plugins/tables/datatables/extensions/fixed_columns.min.js"></script>
 	<style>
 		th {
 			background-color: #324148;
@@ -257,25 +271,41 @@ require 'connection.php';
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="card">
-							<table class="table table-bordered table-hover datatable-highlight">
+							<table class="table datatable-fixed-left">
 								<thead>
 									<tr>
 										<th>NIK</th>
 										<th>Name</th>
+										<th>SisterCompany</th>
+										<th>Branch</th>
+										<th>Building</th>
+										<th>Floor</th>
+										<th>Rooms</th>
+										<th>Divisi</th>
 										<th>Department</th>
-										<th>Location</th>
 										<th>Handphone</th>
 										<th class="text-center">Status</th>
 										<th class="text-center">Action</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>35355532</td>
-										<td>Budi</td>
-										<td>Sewing</td>
-										<td>Ruangan Pribadi</td>
-										<td>0855556333</td>
+								<?php
+                                if($res->num_rows>0)
+                                {
+                                    while($r = mysqli_fetch_array($res))
+                                    {
+                                        echo
+                                        '<tr>
+										<td>'.$r['nik'].'</td>
+										<td>'.$r['nama'].'</td>
+										<td>'.$r['sistername'].'</td>
+										<td>'.$r['branch'].'</td>
+										<td>'.$r['buildingname'].'</td>
+										<td>'.$r['floor'].'</td>
+										<td>'.$r['room'].'</td>
+										<td>'.$r['divisi'].'</td>
+										<td>'.$r['department'].'</td>
+										<td>'.$r['nohp'].'</td>
 										<td><span class="badge badge-success">Active</span></td>
 										<td class="text-center">
 											<div class="list-icons">
@@ -286,7 +316,7 @@ require 'connection.php';
 
 													<div class="dropdown-menu dropdown-menu-right">
 														<a class="dropdown-item"><i class="icon-check"></i>
-															Change PIC</a>
+															Set Active</a>
 														<a class="dropdown-item"><i class="icon-cross3"></i> Set
 															Inactive</a>
 
@@ -294,57 +324,16 @@ require 'connection.php';
 												</div>
 											</div>
 										</td>
-									</tr>
-									<tr>
-										<td>33334445</td>
-										<td>Michael</td>
-										<td>Sewing</td>
-										<td>Ruangan Meeting</td>
-										<td>0834576355</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Change PIC</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>37283425</td>
-										<td>Kartika</td>
-										<td>Sewing</td>
-										<td>Ruangan Penyimpanan</td>
-										<td>0834324455</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Change PIC</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
+									</tr>';
+                                    }
+                                    
+                                }
+                                else{
+                                    
+                                }
+									
+								?>
+									
 								</tbody>
 							</table>
 						</div>

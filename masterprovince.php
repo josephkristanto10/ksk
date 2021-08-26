@@ -1,6 +1,15 @@
 <?php
 require 'connection.php';
-
+$sql = "select * from country";
+$res = $conn->query($sql);
+$Myrows = array();
+if($res->num_rows>0)
+ {
+    while($r = mysqli_fetch_array($res))
+      {
+          $Myrows[] = $r;
+       }
+ }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +59,8 @@ require 'connection.php';
     <script src="<?=$url;?>global_assets/js/demo_charts/pages/dashboard/light/bullets.js"></script>
     <!-- /theme JS files -->
 
-    <script src="<?=$url;?>global_assets/js/demo_pages/datatables_advanced.js"></script>
+    <script src="<?=$url;?>global_assets/js/plugins/forms/selects/select2.min.js"></script>
+    <script src="<?=$url;?>global_assets/js/plugins/tables/datatables/datatables.min.js"></script>
     <style>
         th {
             background-color: #324148;
@@ -75,8 +85,14 @@ require 'connection.php';
 		}
 
 		.modal-body {
-			height: 65vh;
+			height: 250px;
 			overflow-y: auto;
+		}
+        #datatable_serverside_info, #datatable_serverside_paginate{
+            margin-top:50px;
+        }
+		.card{
+			padding:15px;
 		}
     </style>
 </head>
@@ -97,7 +113,7 @@ require 'connection.php';
 				<i class="icon-paragraph-justify3"></i>
 			</button>
 		</div>
-		<div class="collapse navbar-collapse" id="navbar-mobile" ">
+		<div class="collapse navbar-collapse" id="navbar-mobile" >
 				<li class="nav-item dropdown dropdown-user" >
 					<a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
 						<img src="<?=$url;?>assets/logonexus.png" class="rounded-circle mr-2" height="34" alt="">
@@ -235,93 +251,16 @@ require 'connection.php';
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="card">
-                        <table class="table table-bordered table-hover datatable-highlight">
+                        <table id = "datatable_serverside" class="table table-hover table-bordered display nowrap w-100">
                                 <thead>
                                     <tr>
-                                        <th>Code</th>
                                         <th>Country</th>     
-                                        <th>Province</th>                    
-                                        <th>Description</th>
+                                        <th>Province</th>      
                                         <th class="text-center">Status</th>
                                         <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Jateng</td>
-                                        <td>Indonesia</td>
-                                        <td>Jawa Tengah</td>
-                                        <td>Silahkan Isikan deskripsi disini</td>
-                                        <td><span class="badge badge-success">Active</span></td>
-                                        <td class="text-center">
-                                            <div class="list-icons">
-                                                <div class="dropdown">
-                                                    <a href="#" class="list-icons-item" data-toggle="dropdown">
-                                                        <i class="icon-menu9"></i>
-                                                    </a>
-
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item"><i class="icon-check"></i>
-                                                            Set Active</a>
-                                                        <a class="dropdown-item"><i
-                                                                class="icon-cross3"></i> Set Inactive</a>
-                                                   
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jabar</td>
-                                        <td>Indonesia</td>
-                                        <td>Jawa Barat</td>
-                                        <td>Silahkan Isikan deskripsi disini</td>
-                                        <td><span class="badge badge-success">Active</span></td>
-                                        <td class="text-center">
-                                            <div class="list-icons">
-                                                <div class="dropdown">
-                                                    <a href="#" class="list-icons-item" data-toggle="dropdown">
-                                                        <i class="icon-menu9"></i>
-                                                    </a>
-
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item"><i class="icon-check"></i>
-                                                            Set Active</a>
-                                                        <a class="dropdown-item"><i
-                                                                class="icon-cross3"></i> Set Inactive</a>
-                                                   
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jatim</td>
-                                        <td>Indonesia</td>
-                                        <td>Jawa Timur</td>
-                                        <td>Silahkan Isikan deskripsi disini</td>
-                                        <td><span class="badge badge-success">Active</span></td>
-                                        <td class="text-center">
-                                            <div class="list-icons">
-                                                <div class="dropdown">
-                                                    <a href="#" class="list-icons-item" data-toggle="dropdown">
-                                                        <i class="icon-menu9"></i>
-                                                    </a>
-
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item"><i class="icon-check"></i>
-                                                            Set Active</a>
-                                                        <a class="dropdown-item"><i
-                                                                class="icon-cross3"></i> Set Inactive</a>
-                                                   
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    
-                                  
-                                </tbody>
+                                
                             </table>
                         </div>
 
@@ -340,29 +279,79 @@ require 'connection.php';
 
 					</div>
 					<div class="modal-body">
+                        <form id = "myform">
 						<div class="form-group">
-							<label for="code">Code</label>
-							<input type="text" class="form-control" id="code">
-							<br>
-							<label for="description">Province</label>
-							<input type="text" class="form-control" id="description">
-							<br>
-							<label for="description">Description</label>
-							<input type="text" class="form-control" id="description">
-							<br>
-                            <br>
-							<label for="cars">Country:</label>
-							<select id="cars" name="cars" class="form-control">
-								<option value="volvo">Indonesia</option>
-								<option value="saab">Malaysia</option>
-                                <option value="saab">Thailand</option>
+                        <label for="cars">Country:</label>
+							<select id="country" name="country" class="form-control">
+                                <?php
+                                    for($i = 0 ; $i < count($Myrows); $i++)
+                                    {
+                                        
+                                            echo '<option value="'.$Myrows[$i]['id'].'">'.$Myrows[$i]['name'].'</option>';
+                                       
+                                      
+                                    }
+                                 
+                                ?>
 							</select>
 							<br>
+							<label for="description">Province</label>
+							<input type="text" class="form-control" id="province">
+					
+                            <br>
+							
 							<div style = "float:right;margin-bottom:20px;">
-							<button type="button" class="btn btn-primary" style = "margin-right:10px;" onclick="">Save</button>
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+							<button type="button" class="btn btn-primary" style = "margin-right:10px;" onclick="adddata()">Save</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" id = "canceladd">Cancel</button>
 							</div>
 						</div>
+
+                                </form>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+        <div class="modal fade" id="myModaledit">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header" style="background-color:#324148;color:white;height:60px;">
+						<h5 class="modal-title">Edit Province</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+
+					</div>
+					<div class="modal-body">
+                        <form id = "myformedit">
+						<div class="form-group">
+                            <input type = "hidden" id = "idchange">
+                        <label for="cars">Country:</label>
+							<select id="countryedit" name="countryedit" class="form-control">
+                                <?php
+                                  for($i = 0 ; $i < count($Myrows); $i++)
+                                  {
+                                      
+                                          echo '<option value="'.$Myrows[$i]['id'].'">'.$Myrows[$i]['name'].'</option>';
+                                     
+                                    
+                                  }
+                                 
+                                ?>
+							</select>
+							<br>
+							<label for="description">Province</label>
+							<input type="text" class="form-control" id="provinceedit">
+					
+                            <br>
+							
+							<div style = "float:right;margin-bottom:20px;">
+							<button type="button" class="btn btn-primary" style = "margin-right:10px;" onclick="changedata()">Save</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" id = "canceledit">Cancel</button>
+							</div>
+						</div>
+
+                                </form>
 					</div>
 					
 				</div>
@@ -372,3 +361,191 @@ require 'connection.php';
 </body>
 
 </html>
+<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+<script>
+$(function() {
+      loadData();
+   });
+	function loadData() {
+      $("#datatable_serverside").DataTable({
+         processing: true,
+         deferRender: true,
+         serverSide: true,
+         destroy: true,
+         iDisplayInLength: 10,
+         scrollX: true,
+         order: [[0, 'asc']],
+         ajax: { 
+            url: 'process/masterprovince.php',
+            method: 'POST',
+            data: { tipe: "load"  }
+        },
+         columns: [
+            { name: 'Country', className: 'text-center align-middle' },
+            { name: 'Province', className: 'text-center align-middle' },
+            { name: 'Status', className: 'text-center align-middle' },
+            { name: 'Action', searchable: false, orderable: false, className: 'text-center align-middle' }
+            
+         ]
+      });
+   };
+
+   // Reload table
+   function success() {
+      $('#datatable_serverside').DataTable().ajax.reload(null, false);
+   };
+
+   function changedata(){
+	var id = $("#idchange").val();
+	var country = $("#countryedit").val();
+	var province = $("#provinceedit").val();;
+
+	$.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/masterprovince.php",
+                method: 'POST',
+                data: {
+                    tipe: "change",
+                    myid : id,
+                    mycountry : country,
+                    myprovince : province
+                    
+                },
+                success: function (result) {
+                    if(result == "sukses")
+                    {
+                        success();
+                        Swal.fire({
+                                title: 'Data Changed',
+                                text: 'Data Changed Successfully',
+                                icon: 'success',
+                                confirmButtonColor: '#53d408',
+                                allowOutsideClick: false,
+                            }).then((result) => {
+                                $("#myformedit").trigger("reset");
+                                $("#canceledit").click();
+                            });
+                    }
+                    else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Duplicated Sub Group Name',
+                            text: 'Duplicate Entry For This Sub Group',
+                            confirmButtonColor: '#e00d0d',
+                        });
+                    }
+                   
+                  
+                  
+                }
+            });
+
+	
+   }
+   function openmodaledit(element){
+	var idelement = element.id.split("-");
+	var country = $("#country" + idelement[1]).text();
+	var province = $("#province" + idelement[1]).text();
+	var indexcountry = $('#countryedit option[value='+idelement[2]+']').prop('selected', true);
+	$('#provinceedit').val(province);
+	$("#idchange").val(idelement[1]);
+   }
+   function adddata(){
+	var country = $("#country").val();
+    var province = $('#province').val();
+    if(province == "")
+    {
+                         Swal.fire({
+                            icon: 'error',
+                            title: 'Empty Field',
+                            text: 'Province tidak boleh kosong',
+                            confirmButtonColor: '#e00d0d',
+                        });
+    }
+    else{
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/masterprovince.php",
+                method: 'POST',
+                data: {
+                    tipe: "add",
+                    mycountry: country,
+                    myprovince : province
+                    
+                },
+                success: function (result) {
+                   
+                     if(result == "sukses")
+                    {
+                        success();
+                        Swal.fire({
+                                title: 'Data Saved',
+                                text: 'Data Inputted Successfully',
+                                icon: 'success',
+                                confirmButtonColor: '#53d408',
+                                allowOutsideClick: false,
+                            }).then((result) => {
+                                $("#myform").trigger("reset");
+                                $("#canceladd").click();
+                            });
+                    }
+                    else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Data Exists',
+                            text: 'Duplicate Entry For This Province',
+                            confirmButtonColor: '#e00d0d',
+                        });
+                    }
+                  
+                  
+                }
+            });
+    }
+          
+}
+
+   function setstatus(setactionto){
+    var elements = setactionto.split("-");
+    var myid = elements[0];
+    var mystat = elements[1];
+    $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/masterprovince.php",
+                method: 'POST',
+                data: {
+                    tipe: "setstatus",
+                    myidchange : myid,
+                    stat: mystat
+                },
+                success: function (result) {
+                  
+                        success();
+                        Swal.fire({
+                                title: 'Status Changed',
+                                text: 'Status Changed Successfully',
+                                icon: 'success',
+                                confirmButtonColor: '#53d408',
+                                allowOutsideClick: false,
+                            }).then((result) => {
+                                
+                            });
+                                    
+                   
+                }
+            });
+}
+
+</script>

@@ -1,6 +1,11 @@
 <?php
 require 'connection.php';
-
+$sql = "select lb.code, lb.barcode, lb.description, lsc.name, lbranch.branch from location_building lb 
+		inner join location_setup_sister_branch lssb on lssb.idsetupsisterbranch = lb.idsetupsisterbranch 
+		inner join location_sister_company lsc on lsc.id = lssb.idsistercompany 
+		inner join location_branch lbranch on lbranch.idbranch = lssb.idbranch";
+$res = $conn->query($sql);
+$listcompany = array();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -196,6 +201,8 @@ require 'connection.php';
 								<span>PIC</span></a></li>
 						<li class="nav-item"><a href="masterpicdepartment.php" class="nav-link"><i
 									class="icon-width"></i> <span>PIC (Department)</span></a></li>
+							</ul>
+	</li>
 						<li class="nav-item nav-item-submenu nav-item-open">
 							<a href="#" class="nav-link active"><i class="icon-table2"></i> <span>Location</span></a>
 							<ul class="nav nav-group-sub" data-submenu-title="Basic tables" style="display:block;">
@@ -255,8 +262,9 @@ require 'connection.php';
 							<table class="table table-bordered table-hover datatable-highlight">
 								<thead>
 									<tr>
+									<th>Code</th>
 										<th>Barcode</th>
-										<th>Code</th>
+										
 										<th>Location</th>
 										<th>Description</th>
 										<th class="text-center">Status</th>
@@ -264,11 +272,17 @@ require 'connection.php';
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
+								<?php
+								if($res->num_rows>0)
+                                {
+                                    while($r = mysqli_fetch_array($res))
+                                    {
+                                        echo
+                                        '<tr>
+										<td>'.$r['code'].'</td>
 										<td><img src="<?=$url?>assets/qrcode.jpg" style="width:50px;height:50px;"></td>
-										<td>XA-1</td>
-									<td style = "line-height:1.8;font-size:16px !important;"><b>Sister Company 1</b> <br><span class="badge badge-success"  style = "background-color:#26a69a !important;font-size:12px;">Branch Surabaya</span></td>
-										<td>Gedung Axa</td>
+										<td style = "line-height:1.8;font-size:16px !important;"><b>'.$r['name'].'</b> <br><span class="badge badge-success"  style = "background-color:#26a69a !important;font-size:12px;">'.$r['branch'].'</span></td>
+										<td>'.$r['description'].'</td>
 										<td><span class="badge badge-success">Active</span></td>
 										<td class="text-center">
 											<div class="list-icons">
@@ -287,56 +301,15 @@ require 'connection.php';
 												</div>
 											</div>
 										</td>
-									</tr>
-									<tr>
-										<td><img src="<?=$url?>assets/qrcode.jpg" style="width:50px;height:50px;"></td>
-										<td>XA-2</td>
-										<td style = "line-height:1.8; font-size:16px !important;"><b>Sister Company 2</b> <br><span class="badge badge-success"  style = "background-color:#26a69a !important;font-size:12px !important;">Branch Surabaya</span></td>
-										<td>Gedung Axa</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td><img src="<?=$url?>assets/qrcode.jpg" style="width:50px;height:50px;"></td>
-										<td>XA-2</td>
-										<td style = "line-height:1.8; font-size:16px !important;"><b>Sister Company 2</b> <br><span class="badge badge-success" style = "background-color:#26a69a !important; font-size:12px !important;">Branch Malang</span></td>
-										<td>Gedung Axa</td>
-										<td><span class="badge badge-success">Active</span></td>
-										<td class="text-center">
-											<div class="list-icons">
-												<div class="dropdown">
-													<a href="#" class="list-icons-item" data-toggle="dropdown">
-														<i class="icon-menu9"></i>
-													</a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="icon-check"></i>
-															Set Active</a>
-														<a class="dropdown-item"><i class="icon-cross3"></i> Set
-															Inactive</a>
-
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-
+									</tr>';
+                                    }
+                                    
+                                }
+                                else{
+                                    
+                                }
+									
+								?>
 								</tbody>
 							</table>
 						</div>
