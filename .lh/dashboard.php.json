@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 1,
+            "activePatchIndex": 3,
             "patches": [
                 {
                     "date": 1631719294255,
@@ -12,6 +12,14 @@
                 {
                     "date": 1631719317036,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,9 @@\n-\n+<?php\n+require_once 'layout/header.php';\n+require_once 'layout/sidebar.php';\n+require_once 'layout/footer.php';\n+?>\n \t\t<div class=\"content-wrapper\">\n \t\t\t<div class=\"page-header page-header-light\">\n \t\t\t\t<div class=\"page-header-content header-elements-md-inline\">\n \t\t\t\t\t<div class=\"page-title d-flex\">\n"
+                },
+                {
+                    "date": 1631721279025,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n <?php\n require_once 'layout/header.php';\n require_once 'layout/sidebar.php';\n require_once 'layout/footer.php';\n-?>\n \t\t<div class=\"content-wrapper\">\n \t\t\t<div class=\"page-header page-header-light\">\n \t\t\t\t<div class=\"page-header-content header-elements-md-inline\">\n \t\t\t\t\t<div class=\"page-title d-flex\">\n"
+                },
+                {
+                    "date": 1631721285392,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n <?php\n require_once 'layout/header.php';\n require_once 'layout/sidebar.php';\n require_once 'layout/footer.php';\n+?>\n \t\t<div class=\"content-wrapper\">\n \t\t\t<div class=\"page-header page-header-light\">\n \t\t\t\t<div class=\"page-header-content header-elements-md-inline\">\n \t\t\t\t\t<div class=\"page-title d-flex\">\n"
                 }
             ],
             "date": 1631719294255,

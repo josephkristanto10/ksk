@@ -16,27 +16,31 @@
             </a>
         </div>
         <div class="sidebar-content">
+            
             <div class="sidebar-user">
                 <div class="card-body">
                     <div class="media">
-                        <div class="mr-3">
-                            <a href="#"><img src="<?=$url;?>assets/logonexus.png" width="38" height="38"
-                                    class="rounded-circle" alt=""></a>
-                        </div>
+                        
 
                         <div class="media-body">
-                            <div class="media-title font-weight-semibold">Admin Nexus</div>
-                            <div class="font-size-xs opacity-50">
-                                <i class="icon-pin font-size-sm"></i> &nbsp;Indonesia
-                            </div>
+                        <div class="sidebar-section sidebar-section-body user-menu-vertical text-center">
+					<div class="card-img-actions d-inline-block">
+						<img class="img-fluid rounded-circle" src="<?=$url;?>assets/myprofile.png" width="120" height="120" alt="">
+					</div>
+					<div class="sidebar-resize-hide position-relative mt-2">
+                        <div class="cursor-pointer">
+                            <h6 class="font-weight-semibold mb-0"><?=  $_SESSION['username'];?></h6>
+                            <span class="d-block text-muted">Nexus Admin</span>
+                        </div>
+			    	</div>
+				</div>
                         </div>
 
-                        <div class="ml-3 align-self-center">
-                            <a href="#" class="text-white"><i class="icon-cog3"></i></a>
-                        </div>
+                       
                     </div>
                 </div>
             </div>
+            
             <!-- <div class="card card-sidebar-mobile"> -->
                 <ul class="nav nav-sidebar" data-nav-type="accordion">
                     <li class="nav-item-header">
@@ -174,7 +178,7 @@
                       $myurl == "masterotherloc.php" ||
                       $myurl == "mastercountry.php" || 
                       $myurl == "masterprovince.php" || 
-                      $myurl == "mastercity.php" ) ? " active" : ''; ?>"><i class="icon-table2"></i> <span>Location</span></a>
+                      $myurl == "mastercity.php" ) ? " active" : ''; ?>"><i class="icon-map4"></i> <span>Location</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="Basic tables" style = " <?php 
                                     echo ($myurl == "masterlocationSisterCompany.php" || 
                                     $myurl == "masterlocationBranch.php"  || 
@@ -277,8 +281,10 @@
                   </li> -->
                 </ul>
             <!-- </div> -->
+            
         </div>
     </div>
+    
 
 <script type="text/javascript">
     $(document).ready(function(){

@@ -12,15 +12,21 @@ if($res -> num_rows>0)
 		$listcompany[] = $r;
 	}
 }
-$idlist = "";
+$idlist = $listcompany[0]['id'];
 if(isset($_SESSION['idsister']))
 {
 	$idlist = $_SESSION['idsister'];
 }
-$name = "";
+else{
+	$_SESSION['idsister'] = $listcompany[0]['id'];
+}
+$name = $listcompany[0]['name'];
 if(isset($_SESSION['namasister']))
 {
 	$name = $_SESSION['namasister'];
+}
+else{
+	$_SESSION['namasister'] = $listcompany[0]['name'];
 }
 ?>
 <!DOCTYPE html>
@@ -150,13 +156,16 @@ if(!isset($_SESSION['iduser']))
 </head>
 
 <body>
-	<div class="navbar navbar-expand-md navbar-dark">
-		<div class="navbar-brand">
-			<a href="index.html" class="d-inline-block">
-				<img src="../../../../global_assets/images/logo_light.png" alt="">
-			</a>
-		</div>
-
+	<div class="navbar navbar-expand-md navbar-dark" style = "height:60px;">
+	
+	<div class="navbar navbar-dark bg-dark-100 navbar-static border-0" style="height:55px;margin-top:0px;margin-left:20px;margin-right:20px;">
+				<div class="navbar-brand flex-fill wmin-0 text-center">
+					<a href="ksk/dashboards.php" class="d-inline-block">
+                        <h5 class="sidebar-resize-hide mb-0 text-white text-uppercase font-weight-bold" style="font-size:18.5px;">My Nexus Asset</h5>
+                     
+					</a>
+				</div>
+			</div>
 		<div class="d-md-none">
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-mobile">
 				<i class="icon-tree5"></i>
@@ -276,11 +285,11 @@ if(!isset($_SESSION['iduser']))
 
 			<ul class="navbar-nav">
 				<li class="nav-item dropdown">
-					<a href="#" class="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown">
+					<!-- <a href="#" class="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown">
 						<i class="icon-people"></i>
 						<span class="d-md-none ml-2">Users</span>
-					</a>
-
+					</a> -->
+				
 					<div class="dropdown-menu dropdown-menu-right dropdown-content wmin-md-300">
 						<div class="dropdown-content-header">
 							<span class="font-weight-semibold">Users online</span>
@@ -477,8 +486,7 @@ if(!isset($_SESSION['iduser']))
 				<li class="nav-item dropdown dropdown-user">
 					<a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle"
 						data-toggle="dropdown">
-						<img src="../../../../global_assets/images/placeholders/placeholder.jpg"
-							class="rounded-circle mr-2" height="34" alt="">
+						<img src="<?=$url;?>assets/agency.png" height="28" alt=""> &nbsp &nbsp
 
 						<span id="namecompany"><?= $name?></span>
 					</a>
@@ -501,12 +509,12 @@ if(!isset($_SESSION['iduser']))
 
 				<li class="nav-item dropdown dropdown-user">
 
-					<a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle"
+					<!-- <a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle"
 						data-toggle="dropdown">
 						<img src="../../../../global_assets/images/placeholders/placeholder.jpg"
 							class="rounded-circle mr-2" height="34" alt="">
 						<span>Victoria</span>
-					</a>
+					</a> -->
 
 					<div class="dropdown-menu dropdown-menu-right">
 						<a href="#" class="dropdown-item"><i class="icon-user-plus"></i> My profile</a>
