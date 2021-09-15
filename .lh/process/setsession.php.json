@@ -1,0 +1,58 @@
+{
+    "sourceFile": "process/setsession.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 10,
+            "patches": [
+                {
+                    "date": 1630561143760,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1630561164720,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,5 @@\n+<?php\r\n+\r\n+\r\n+\r\n+?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630561174946,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n <?php\r\n+$idsister = $_POST['']\r\n \r\n \r\n-\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630561187625,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n <?php\r\n-$idsister = $_POST['']\r\n+$idsister = $_POST['idsister'];\r\n+$namasister = $_POST['namasister'];\r\n \r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630561201233,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,8 @@\n <?php\r\n+session_start();\r\n $idsister = $_POST['idsister'];\r\n $namasister = $_POST['namasister'];\r\n \r\n+$\r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630561214826,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,7 +2,7 @@\n session_start();\r\n $idsister = $_POST['idsister'];\r\n $namasister = $_POST['namasister'];\r\n \r\n-$\r\n+$_SESSION['']\r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630561221043,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,7 +2,7 @@\n session_start();\r\n $idsister = $_POST['idsister'];\r\n $namasister = $_POST['namasister'];\r\n \r\n-$_SESSION['']\r\n+$_SESSION[''] = $idsister;\r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630561227233,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,7 +2,8 @@\n session_start();\r\n $idsister = $_POST['idsister'];\r\n $namasister = $_POST['namasister'];\r\n \r\n-$_SESSION[''] = $idsister;\r\n+$_SESSION['idsister'] = $idsister;\r\n+$_SESSION['idsister'] = $idsister;\r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630561556400,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n session_start();\r\n $idsister = $_POST['idsister'];\r\n $namasister = $_POST['namasister'];\r\n \r\n+\r\n $_SESSION['idsister'] = $idsister;\r\n-$_SESSION['idsister'] = $idsister;\r\n+$_SESSION['namasister'] = $namasister;\r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630561565693,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,5 +6,7 @@\n \r\n $_SESSION['idsister'] = $idsister;\r\n $_SESSION['namasister'] = $namasister;\r\n \r\n+echo $_SESSION['namasister'];\r\n+\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630561589361,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,7 +6,5 @@\n \r\n $_SESSION['idsister'] = $idsister;\r\n $_SESSION['namasister'] = $namasister;\r\n \r\n-echo $_SESSION['namasister'];\r\n-\r\n ?>\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1630561143760,
+            "name": "Commit-0",
+            "content": ""
+        }
+    ]
+}

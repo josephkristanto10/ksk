@@ -1,236 +1,29 @@
 <?php
-require 'connection.php';
-$sql = "select  lsc.id, lsc.code, lsc.name, lsc.address, lsc.telp, 
-        lsc.description, coun.name as countryname, prov.name as provincename, 
-        city.name as cityname from location_sister_company lsc 
-        inner join country coun on coun.id = lsc.country 
-        inner join province prov on prov.id = lsc.province
-        inner join city city on city.id = lsc.city";
+require_once 'layout/header.php';
+require_once 'layout/sidebar.php';
+require_once 'layout/footer.php';
+$country = array();
+$holding = array();
+$sql = "select * from country";
+$sqlholding = "select * from holding_company";
+$resholding = $conn->query($sqlholding);
 $res = $conn->query($sql);
-$listcompany = array();
-
+if($res->num_rows>0)
+{
+    while($r = mysqli_fetch_array($res))
+    {
+        $country[] = $r;
+    }
+}
+if($resholding->num_rows>0)
+{
+    while($r = mysqli_fetch_array($resholding))
+    {
+        $holding[] = $r;
+    }
+}
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>NEXUS - Integrated System</title>
-
-    <!-- Global stylesheets -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet"
-        type="text/css">
-    <link href="<?=$url;?>global_assets/css/icons/icomoon/styles.min.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/bootstrap_limitless.min.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/layout.min.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/components.min.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/colors.min.css" rel="stylesheet" type="text/css">
-    <link rel="shortcut icon" type="image/png" href="assets/logonexus.png" />
-    <!-- /global stylesheets -->
-
-    <!-- Core JS files -->
-    <script src="<?=$url;?>global_assets/js/main/jquery.min.js"></script>
-    <script src="<?=$url;?>global_assets/js/main/bootstrap.bundle.min.js"></script>
-    <script src="<?=$url;?>global_assets/js/plugins/loaders/blockui.min.js"></script>
-    <!-- /core JS files -->
-
-    <!-- Theme JS files -->
-    <script src="<?=$url;?>global_assets/js/plugins/visualization/d3/d3.min.js"></script>
-    <script src="<?=$url;?>global_assets/js/plugins/visualization/d3/d3_tooltip.js"></script>
-    <script src="<?=$url;?>global_assets/js/plugins/forms/styling/switchery.min.js"></script>
-    <script src="<?=$url;?>global_assets/js/plugins/ui/moment/moment.min.js"></script>
-    <script src="<?=$url;?>global_assets/js/plugins/pickers/daterangepicker.js"></script>
-
-    <script src="assets/js/app.js"></script>
-    <script src="<?=$url;?>global_assets/js/demo_pages/dashboard.js"></script>
-    <script src="<?=$url;?>global_assets/js/demo_charts/pages/dashboard/light/streamgraph.js"></script>
-    <script src="<?=$url;?>global_assets/js/demo_charts/pages/dashboard/light/sparklines.js"></script>
-    <script src="<?=$url;?>global_assets/js/demo_charts/pages/dashboard/light/lines.js"></script>
-    <script src="<?=$url;?>global_assets/js/demo_charts/pages/dashboard/light/areas.js"></script>
-    <script src="<?=$url;?>global_assets/js/demo_charts/pages/dashboard/light/donuts.js"></script>
-    <script src="<?=$url;?>global_assets/js/demo_charts/pages/dashboard/light/bars.js"></script>
-    <script src="<?=$url;?>global_assets/js/demo_charts/pages/dashboard/light/progress.js"></script>
-    <script src="<?=$url;?>global_assets/js/demo_charts/pages/dashboard/light/heatmaps.js"></script>
-    <script src="<?=$url;?>global_assets/js/demo_charts/pages/dashboard/light/pies.js"></script>
-    <script src="<?=$url;?>global_assets/js/demo_charts/pages/dashboard/light/bullets.js"></script>
-    <!-- /theme JS files -->
-
-    <script src="<?=$url;?>global_assets/js/demo_pages/datatables_advanced.js"></script>
-    <style>
-        th {
-            background-color: #324148;
-            color: white;
-            text-align: center;
-        }
-        td{
-            color:#000000 !important;
-            text-align:center;
-        }
-    	#myModal .modal-dialog {
-			-webkit-transform: translate(0, -50%);
-			-o-transform: translate(0, -50%);
-			transform: translate(0, -50%);
-			top: 50%;
-			margin: 0 auto;
-		}
-
-		/* Important part */
-		.modal-dialog {
-			overflow-y: initial !important
-		}
-
-		.modal-body {
-			height: 65vh;
-			overflow-y: auto;
-		}
-    </style>
-</head>
-
-<body>
-    <div class="navbar navbar-expand-md navbar-dark">
-		<div class="navbar-brand">
-			<a href="index.html" class="d-inline-block">
-				<img src="<?=$url;?>global_assets/images/logo_light.png" alt="">
-			</a>
-		</div>
-
-		<div class="d-md-none">
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-mobile">
-				<i class="icon-tree5"></i>
-			</button>
-			<button class="navbar-toggler sidebar-mobile-main-toggle" type="button">
-				<i class="icon-paragraph-justify3"></i>
-			</button>
-		</div>
-
-		<div class="collapse navbar-collapse" id="navbar-mobile" >
-			<span class="badge  ml-md-3 mr-md-auto" style = "background-color:#324148;" > </span>
-
-			<ul class="navbar-nav">
-				<li class="nav-item dropdown dropdown-user" >
-					<a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
-						<img src="<?=$url;?>assets/logonexus.png" class="rounded-circle mr-2" height="34" alt="">
-						<span>Admin</span>
-					</a>
-
-					<div class="dropdown-menu dropdown-menu-right">
-						<a href="#" class="dropdown-item"><i class="icon-user-plus"></i> My profile</a>
-						<a href="#" class="dropdown-item"><i class="icon-coins"></i> My balance</a>
-						<a href="#" class="dropdown-item"><i class="icon-comment-discussion"></i> Messages <span class="badge badge-pill bg-blue ml-auto">58</span></a>
-						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item"><i class="icon-cog5"></i> Account settings</a>
-						<a href="#" class="dropdown-item"><i class="icon-switch2"></i> Logout</a>
-					</div>
-				</li>
-			</ul>
-		</div>
-	</div>
-    <div class="page-content">
-        <div class="sidebar sidebar-dark sidebar-main sidebar-expand-md">
-            <div class="sidebar-mobile-toggler text-center">
-                <a href="#" class="sidebar-mobile-main-toggle">
-                    <i class="icon-arrow-left8"></i>
-                </a>
-                Navigation
-                <a href="#" class="sidebar-mobile-expand">
-                    <i class="icon-screen-full"></i>
-                    <i class="icon-screen-normal"></i>
-                </a>
-            </div>
-            <div class="sidebar-content">
-                <div class="card card-sidebar-mobile">
-                    <ul class="nav nav-sidebar" data-nav-type="accordion">
-                        <li class="nav-item-header">
-                            <div class="text-uppercase font-size-xs line-height-xs">Main</div> <i class="icon-menu"
-                                title="Main"></i>
-                        </li>
-                        <li class="nav-item">
-                            <a href="index.php" class="nav-link ">
-                                <i class="icon-home4"></i>
-                                <span>
-                                    Dashboard
-                                </span>
-                            </a>
-                        </li>
-                        <li class="nav-item-header">
-                            <div class="text-uppercase font-size-xs line-height-xs">Master</div> <i class="icon-menu"
-                                title="Master"></i>
-                        </li>
-                        <li class="nav-item nav-item-submenu">
-						<li class="nav-item"><a href="../../../RTL/default/full/index.html" class="nav-link"><i
-									class="icon-width"></i> <span>Assets</span></a></li>
-						</li>
-                        <li class="nav-item"><a href="masterholdingcompany.php" class="nav-link"><i
-									class="icon-width"></i> <span>Holding Company</span></a></li>
-						</li>
-						<li class="nav-item nav-item-submenu">
-                            <a href="#" class="nav-link"><i class="icon-table2"></i> <span>Asset Group</span></a>
-                            <ul class="nav nav-group-sub" data-submenu-title="Basic tables">
-							<li class="nav-item"><a href="masterkategoriassets.php" class="nav-link">Group</a></li>
-							<li class="nav-item"><a href="mastersubkategoriassets.php" class="nav-link">Sub Group</a></li>
-							<li class="nav-item"><a href="mastercategorysubgroup.php" class="nav-link">Category</a></li>
-                            </ul>
-                        </li>
-						<li class="nav-item nav-item-submenu ">
-							<a href="#" class="nav-link"><i class="icon-table2"></i> <span>Department</span></a>
-							<ul class="nav nav-group-sub" data-submenu-title="Basic tables" >
-							<li class="nav-item"><a href="masterdivision.php" class="nav-link"><i
-                                    class="icon-width"></i> <span>Division</span></a></li>
-                        </li>
-                        <li class="nav-item"><a  href="masterdepartment.php" class="nav-link "><i
-                                    class="icon-width"></i> <span>Department</span></a></li>
-                        </li>
-						
-							</ul>
-						</li>
-						<li class="nav-item nav-item-submenu ">
-							<a href="#" class="nav-link "><i class="icon-table2"></i> <span>User Asset</span></a>
-							<ul class="nav nav-group-sub" data-submenu-title="Basic tables">
-							<li class="nav-item"><a href="masterstaff.php" class="nav-link"><i class="icon-width"></i>
-								<span>Staff</span></a></li>
-						<li class="nav-item"><a href="masterpic.php" class="nav-link"><i class="icon-width"></i>
-								<span>PIC</span></a></li>
-						<li class="nav-item"><a href="masterpicdepartment.php" class="nav-link"><i
-									class="icon-width"></i> <span>PIC (Department)</span></a></li>
-							</ul>
-       
-					
-                        <li class="nav-item nav-item-submenu nav-item-open">
-                            <a href="#" class="nav-link active"><i class="icon-table2"></i> <span>Location</span></a>
-                            <ul class="nav nav-group-sub" data-submenu-title="Basic tables" style = "display:block;">
-                                <!-- <li class="nav-item"><a href="masterlocationarea.php" class="nav-link ">Area</a></li> -->
-								<li class="nav-item"><a  class="nav-link active">Sister Company</a></li>
-								<li class="nav-item"><a href="masterlocationBranch.php" class="nav-link">Branch</a></li>
-								<li class="nav-item"><a href="mastersistercompanyandbranch.php" class="nav-link">Sister Company & Branch</a></li>
-                                <li class="nav-item"><a href="masterlocationbuilding.php" class="nav-link ">Building</a></li>
-                                <li class="nav-item"><a href="masterlocationfloor.php"  class="nav-link">Floor</a></li>
-								<li class="nav-item"><a href="masterlocationSetupfloor.php" class="nav-link">Building & Floor</a></li>
-                                <li class="nav-item"><a href="masterlocationrooms.php" class="nav-link">Rooms</a></li>
-                                <li class="nav-item"><a href="masterrack.php" class="nav-link ">Rack</a></li>
-                                <li class="nav-item"><a href="masterfolder.php" class="nav-link ">Folder</a></li>
-                                <li class="nav-item"><a href="masterotherloc.php" class="nav-link">Other Location</a>
-                                </li>
-                            </ul>
-                        </li>
-              
-						<li class="nav-item nav-item-submenu ">
-							<a href="#" class="nav-link "><i class="icon-table2"></i> <span>Location Group</span></a>
-							<ul class="nav nav-group-sub" data-submenu-title="Basic tables">
-							<li class="nav-item"><a href="mastercountry.php" class="nav-link"><i class="icon-width"></i>
-								<span>Country</span></a></li>
-						<li class="nav-item"><a href="masterprovince.php" class="nav-link"><i class="icon-width"></i>
-								<span>Province</span></a></li>
-						<li class="nav-item"><a href="mastercity.php" class="nav-link"><i
-									class="icon-width"></i> <span>City</span></a></li>
-							</ul>
-						</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
         <div class="content-wrapper">
             <div class="page-header page-header-light">
             <div class="page-header-content header-elements-md-inline">
@@ -249,7 +42,7 @@ $listcompany = array();
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="card">
-                        <table class="table table-bordered table-hover datatable-highlight">
+                        <table id = "datatable_serverside" class="table table-hover table-bordered display nowrap w-100">
                                 <thead>
                                     <tr>
 
@@ -266,50 +59,6 @@ $listcompany = array();
                                     </tr>
                                 </thead>
                                 <tbody>
-
-                                <?php
-                                if($res->num_rows>0)
-                                {
-                                    while($r = mysqli_fetch_array($res))
-                                    {
-                                        echo
-                                    ' <tr>
-                                   <td>'.$r['code'].'</td>
-                                   <td>'.$r['name'].'</td>
-                                   <td>'.$r['description'].'</td>
-                                   <td>'.$r['address'].'</td>
-                                   <td>'.$r['countryname'].'</td>
-                                   <td>'.$r['provincename'].'</td>
-                                   <td>'.$r['cityname'].'</td>
-                                   <td>'.$r['telp'].'</td>
-                                   <td><span class="badge badge-success">Active</span></td>
-                                   <td class="text-center">
-                                       <div class="list-icons">
-                                           <div class="dropdown">
-                                               <a href="#" class="list-icons-item" data-toggle="dropdown">
-                                                   <i class="icon-menu9"></i>
-                                               </a>
-   
-                                               <div class="dropdown-menu dropdown-menu-right">
-                                                   <a class="dropdown-item"><i class="icon-check"></i>
-                                                       Set Active</a>
-                                                   <a class="dropdown-item"><i
-                                                           class="icon-cross3"></i> Set Inactive</a>
-                                              
-                                               </div>
-                                           </div>
-                                       </div>
-                                   </td>
-                               </tr>';
-                                    }
-                                    
-                                }
-                                else{
-                                    
-                                }
-                            
-                                ?>
-                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -327,38 +76,134 @@ $listcompany = array();
 
 					</div>
 					<div class="modal-body">
+                        <form id = "myform">
 						<div class="form-group">
 							<label for="code">Code</label>
 							<input type="text" class="form-control" id="code">
+
+                            <br>
+                            <label for="description">Holding Company</label>
+							<select class="form-control" id="holding">
+                                <?php
+                                for($i = 0 ; $i < count($holding); $i++)
+                                {
+                                    echo '<option value = "'.$holding[$i]['id'].'">'.$holding[$i]['name'].'</option>';
+                                }
+                                ?>
+                            </select>
 							<br>
 							<label for="description">Name</label>
-							<input type="text" class="form-control" id="description">
+							<input type="text" class="form-control" id="name">
 							<br>
 							<label for="description">Description</label>
 							<input type="text" class="form-control" id="description">
 							<br>
 							<label for="description">Address</label>
-							<input type="text" class="form-control" id="description">
+							<input type="text" class="form-control" id="address">
+							<br>
+                            <label for="description">Country</label>
+							<select class="form-control" id="country">
+                                <?php
+                                for($i = 0 ; $i < count($country); $i++)
+                                {
+                                    echo '<option value = "'.$country[$i]['id'].'">'.$country[$i]['name'].'</option>';
+                                }
+                                ?>
+                            </select>
 							<br>
 							<label for="description">Province</label>
-							<input type="text" class="form-control" id="description">
+                            <select class="form-control" id="province">
+                            </select>
 							<br>
 							<label for="description">City</label>
-							<input type="text" class="form-control" id="description">
+							<select class="form-control" id="city">
+                            </select>
 							<br>
-							<label for="description">Country</label>
-							<input type="text" class="form-control" id="description">
-							<br>
+							
 							<label for="description">Telp</label>
-							<input type="text" class="form-control" id="description">
+							<input type="text" class="form-control" id="telp">
 							<br>
 							
 							
 							<div style = "float:right;margin-bottom:20px;">
-							<button type="button" class="btn btn-primary" style = "margin-right:10px;" onclick="">Submit</button>
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary" style = "margin-right:10px;" onclick="adddata()">Save</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" id = "canceladd" >Cancel</button>
 							</div>
 						</div>
+                            </form>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
+        <div class="modal fade" id="myModaledit">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header" style="background-color:#324148;color:white;height:60px;">
+						<h5 class="modal-title">Edit Sister Company</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+
+					</div>
+					<div class="modal-body">
+                        <form id = "myformedit">
+						<div class="form-group">
+                            <input type = "hidden" id = "idchange">
+							<label for="code">Code</label>
+							<input type="text" class="form-control" id="codeedit">
+
+                            <br>
+                            <label for="description">Holding Company</label>
+							<select class="form-control" id="holdingedit">
+                                <?php
+                                for($i = 0 ; $i < count($holding); $i++)
+                                {
+                                    echo '<option value = "'.$holding[$i]['id'].'">'.$holding[$i]['name'].'</option>';
+                                }
+                                ?>
+                            </select>
+							<br>
+							<label for="description">Name</label>
+							<input type="text" class="form-control" id="nameedit">
+							<br>
+							<label for="description">Description</label>
+							<input type="text" class="form-control" id="descriptionedit">
+							<br>
+							<label for="description">Address</label>
+							<input type="text" class="form-control" id="addressedit">
+							<br>
+                            <label for="description">Country</label>
+							<select class="form-control" id="countryedit">
+                                <?php
+                                for($i = 0 ; $i < count($country); $i++)
+                                {
+                                    echo '<option value = "'.$country[$i]['id'].'">'.$country[$i]['name'].'</option>';
+                                }
+                                ?>
+                            </select>
+							<br>
+							<label for="description">Province</label>
+                            <select class="form-control" id="provinceedit">
+                            </select>
+							<br>
+							<label for="description">City</label>
+							<select class="form-control" id="cityedit">
+                            </select>
+							<br>
+							
+							<label for="description">Telp</label>
+							<input type="text" class="form-control" id="telpedit">
+							<br>
+							
+							
+							<div style = "float:right;margin-bottom:20px;">
+							<button type="button" class="btn btn-primary" style = "margin-right:10px;" onclick="changedata()">Save</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" id = "canceledit" >Cancel</button>
+							</div>
+						</div>
+                            </form>
 					</div>
 					
 				</div>
@@ -368,3 +213,406 @@ $listcompany = array();
 </body>
 
 </html>
+<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+<script>
+    $(function() {
+      loadData();
+   });
+	function loadData() {
+      $("#datatable_serverside").DataTable({
+         processing: true,
+         deferRender: true,
+         serverSide: true,
+         destroy: true,
+         iDisplayInLength: 10,
+         scrollX: true,
+         order: [[0, 'asc']],
+         ajax: { 
+            url: 'process/mastersistercompany.php',
+            method: 'POST',
+            data: { tipe: "load"  }
+        },
+         columns: [
+            { name: 'Code', searchable: false, className: 'text-center align-middle' },
+            { name: 'Name', searchable: false, className: 'text-center align-middle' },
+            { name: 'Desc', searchable: false, className: 'text-center align-middle' },
+            { name: 'Address', className: 'text-center align-middle' },
+            { name: 'Country', searchable: false, className: 'text-center align-middle' },
+            { name: 'Province', className: 'text-center align-middle' },
+            { name: 'City', searchable: false, className: 'text-center align-middle' },
+            { name: 'No HP', className: 'text-center align-middle' },
+            { name: 'Status', className: 'text-center align-middle' },
+            { name: 'Action', searchable: false, orderable: false, className: 'text-center align-middle' }
+            
+         ]
+      });
+   };
+
+   // Reload table
+   function success() {
+      $('#datatable_serverside').DataTable().ajax.reload(null, false);
+   };
+   var globalprovince = "";
+   var globalcity = "";
+   function openmodaledit(element){
+
+    var idelement = element.id.split("-");
+    var idcountry = idelement[2];
+    var idprovince = idelement[3];
+    var idcity = idelement[4];
+    var idholding = idelement[5];
+
+    globalprovince = idprovince;
+    globalcity = idcity;
+
+    var code = $("#code" + idelement[1]).text();
+    var name = $("#name" + idelement[1]).text();
+    var description = $("#desc" + idelement[1]).text();
+    var address = $("#address" + idelement[1]).text();
+    var telp = $("#telp" + idelement[1]).text();
+
+    $('#countryedit option[value='+idcountry+']').prop('selected', true);
+    $('#holdingedit option[value='+idholding+']').prop('selected', true);
+    $("#countryedit").trigger('change');
+
+    $('#codeedit').val(code);
+    $('#nameedit').val(name);
+    $('#descriptionedit').val(description);
+    $('#addressedit').val(address);
+    $("#telpedit").val(telp);
+    $("#idchange").val(idelement[1]);
+    }
+
+   function adddata(){
+       var mycode = $("#code").val();
+       var myname = $("#name").val();
+       var mydesc = $("#description").val();
+       var myaddre = $("#address").val();
+       var mycountry = $("#country").val();
+       var myprovince = $("#province").val();
+       var mycity = $("#city").val();
+       var mytelp = $("#telp").val();
+       var myholding = $("#holding").val();
+      if(myprovince == null || mycity == null || mycode == ""|| myname == ""|| mydesc == ""|| myaddre == ""|| mytelp == "")
+      {
+                      Swal.fire({
+                            icon: 'error',
+                            title: 'Empty Field',
+                            text: 'Province / City / Code / Nama / Description / Address/ Telp tidak boleh kosong',
+                            confirmButtonColor: '#e00d0d',
+                        });
+      }
+      else{
+
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/mastersistercompany.php",
+                method: 'POST',
+                data: {
+                    tipe: "add",
+                    code : mycode,
+                    name : myname,
+                    desc : mydesc,
+                    address : myaddre,
+                    country : mycountry,
+                    province : myprovince,
+                    city : mycity,
+                    holding : myholding,
+                    telp : mytelp
+                    
+                },
+                success: function (result) {
+                
+                    if(result == "sukses")
+                    {
+                        success();
+                        Swal.fire({
+                                title: 'Data Saved',
+                                text: 'Data Inputted Successfully',
+                                icon: 'success',
+                                confirmButtonColor: '#53d408',
+                                allowOutsideClick: false,
+                            }).then((result) => {
+                                $("#myform").trigger("reset");
+                                $("#canceladd").click();
+                            });
+                    }
+                    else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Data Exists',
+                            text: 'Duplicate Entry For This Code & Name',
+                            confirmButtonColor: '#e00d0d',
+                        });
+                    }
+                  
+                  
+                }
+            });
+
+      }
+    
+
+   }
+
+   $("#country").on('change', function(){
+	   var myid = this.value;
+		$.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/mastersistercompany.php",
+                method: 'POST',
+                data: {
+                    tipe: "getprovince",
+                    idcountry : myid
+                    
+                },
+                success: function (result) {
+                  
+                    if(result == "none")
+                    {
+						$("#province").html("");
+						$("#province").trigger('change');
+                    }
+                    else{
+                        $("#province").html(result).promise().done(function()
+						{
+							  $("#province").trigger('change');
+							});
+                    }
+                   
+                  
+                  
+                }
+            });
+   }).trigger('change');
+   $("#countryedit").on('change', function(){
+	   var myid = this.value;
+		$.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/mastersistercompany.php",
+                method: 'POST',
+                data: {
+                    tipe: "getprovince",
+                    idcountry : myid
+                    
+                },
+                success: function (result) {
+                  
+                    if(result == "none")
+                    {
+						$("#provinceedit").html("");
+						$("#provinceedit").trigger('change');
+                    }
+                    else{
+                        $("#provinceedit").html(result).promise().done(function()
+						{
+                            if(!globalprovince =="")
+							{
+								// alert(globalid);
+								$('#provinceedit').find('option[value="'+globalprovince+'"]').prop('selected', true);
+							}
+							  $("#provinceedit").trigger('change');
+							});
+                    }
+                   
+                  
+                  
+                }
+            });
+   }).trigger('change');
+   $("#province").on('change', function(){
+	   var myid = this.value;
+		$.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/mastersistercompany.php",
+                method: 'POST',
+                data: {
+                    tipe: "getcity",
+                    idprovince : myid
+                    
+                },
+                success: function (result) {
+                    if(result == "none")
+                    {
+						$("#city").html("");
+						
+                    }
+                    else{
+                        $("#city").html(result).promise().done(function()
+						{
+							
+							});
+                    }
+                   
+                  
+                  
+                }
+            });
+   }).trigger('change');
+   $("#provinceedit").on('change', function(){
+	   var myid = this.value;
+		$.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/mastersistercompany.php",
+                method: 'POST',
+                data: {
+                    tipe: "getcity",
+                    idprovince : myid
+                    
+                },
+                success: function (result) {
+                    if(result == "none")
+                    {
+						$("#cityedit").html("");
+						
+                    }
+                    else{
+                        $("#cityedit").html(result).promise().done(function()
+						{
+							
+                            if(!globalcity =="")
+							{
+								// alert(globalid);
+								$('#cityedit').find('option[value="'+globalcity+'"]').prop('selected', true);
+							}
+							});
+                    }
+                   
+                  
+                  
+                }
+            });
+   }).trigger('change');
+
+   function setstatus(setactionto){
+    var elements = setactionto.split("-");
+    var myid = elements[0];
+    var mystat = elements[1];
+    $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/mastersistercompany.php",
+                method: 'POST',
+                data: {
+                    tipe: "setstatus",
+                    myidchange : myid,
+                    stat: mystat
+                },
+                success: function (result) {
+                  
+                        success();
+                        Swal.fire({
+                                title: 'Status Changed',
+                                text: 'Status Changed Successfully',
+                                icon: 'success',
+                                confirmButtonColor: '#53d408',
+                                allowOutsideClick: false,
+                            }).then((result) => {
+                                
+                            });
+                                    
+                   
+                }
+            });
+}
+
+function changedata(){
+	 var changeid = $("#idchange").val();
+     var changecode = $("#codeedit").val();
+	 var changename = $("#nameedit").val();
+	 var changeholding = $("#holdingedit").val();
+	 var changedesc = $("#descriptionedit").val();
+	 var changeaddress = $("#addressedit").val();
+	 var changecountry = $("#countryedit").val();
+	 var changeprovince = $("#provinceedit").val();
+	 var changecity = $("#cityedit").val();
+	 var changetelp = $("#telpedit").val();
+	 if(changecode == "" || changename == "" || changecountry == null 
+     || changeholding == null  || changeprovince == null || 
+     changecity == null || changetelp == "null" || changedesc == "" || changeaddress == "" )
+	 {
+						Swal.fire({
+                            icon: 'error',
+                            title: 'Empty Field',
+                            text: 'Code / Name / Address / Country / Province / City / Telp / Description Tidak Boleh Kosong',
+                            confirmButtonColor: '#e00d0d',
+                        });
+	 }
+	 else{
+		$.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/mastersistercompany.php",
+                method: 'POST',
+                data: {
+                    tipe: "changedata",
+					myid : changeid,
+					mycode: changecode,
+                    myname : changename,
+					myholding : changeholding,
+					mydesc : changedesc,
+                    myaddress : changeaddress,
+					mycountry : changecountry,
+					myprovince : changeprovince,
+					mycity : changecity,
+					mytelp : changetelp
+                    
+                },
+                success: function (result) {
+					if(result == "sukses")
+					{
+						success();
+  							Swal.fire({
+                                title: 'Data Changed',
+                                text: 'Data Changed Successfully',
+                                icon: 'success',
+                                confirmButtonColor: '#53d408',
+                                allowOutsideClick: false,
+                            }).then((result) => {
+                                $("#myformedit").trigger("reset");
+                                $("#canceledit").click();
+                            });
+					}
+					else{
+						Swal.fire({
+                            icon: 'error',
+                            title: 'Duplicated Employee Data',
+                            text: 'Duplicate Entry For This Employee Data',
+                            confirmButtonColor: '#e00d0d',
+                        });
+					}
+                 
+                   
+                  
+                  
+                }
+            });
+	 }
+   }
+</script>

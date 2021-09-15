@@ -1,0 +1,278 @@
+{
+    "sourceFile": "layout/footer.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 65,
+            "patches": [
+                {
+                    "date": 1630555379598,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1630555393199,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,6 @@\n <script>\r\n-\r\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n \t\t\t\talert(\"test\");\r\n \t\t\t}\r\n-\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630555439827,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n <script>\r\n+      alert(\"Hello! I am an alert box!\");\r\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n \t\t\t\talert(\"test\");\r\n \t\t\t}\r\n"
+                },
+                {
+                    "date": 1630555448641,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n <script>\r\n-      alert(\"Hello! I am an alert box!\");\r\n+   \r\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n \t\t\t\talert(\"test\");\r\n \t\t\t}\r\n"
+                },
+                {
+                    "date": 1630555464928,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,6 @@\n    \r\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n \t\t\t\talert(\"test\");\r\n-\t\t\t}\r\n+\t\t\t};\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630555607400,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,5 @@\n <script>\r\n-   \r\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n \t\t\t\talert(\"test\");\r\n \t\t\t};\r\n"
+                },
+                {
+                    "date": 1630555762819,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n <script>\r\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n-\t\t\t\talert(\"test\");\r\n+\t\t\t\t\r\n \t\t\t};\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630555773836,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n <script>\r\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n-\t\t\t\t\r\n+\t\t\t\talert(id + \" - \" + name);\r\n \t\t\t};\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630555982732,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n <script>\r\n-\t\tfunction setsister(id, name)\r\n+\t\tfunction setsister(id)\r\n \t\t\t{\r\n-\t\t\t\talert(id + \" - \" + name);\r\n+\t\t\t\talert(id);\r\n \t\t\t};\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630556931796,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n <script>\r\n \t\tfunction setsister(id)\r\n \t\t\t{\r\n-\t\t\t\talert(id);\r\n+\t\t\t\tconsole.log()\r\n \t\t\t};\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630556946473,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n <script>\r\n \t\tfunction setsister(id)\r\n \t\t\t{\r\n-\t\t\t\tconsole.log()\r\n+\t\t\t\tconsole.log(id);\r\n \t\t\t};\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630557211814,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n <script>\r\n \t\tfunction setsister(id)\r\n \t\t\t{\r\n-\t\t\t\tconsole.log(id);\r\n+\t\t\t\tconsole.log(id + \" \");\r\n \t\t\t};\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630557257682,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n <script>\r\n-\t\tfunction setsister(id)\r\n+\t\tfunction setsister(id, name)\r\n \t\t\t{\r\n \t\t\t\tconsole.log(id + \" \");\r\n \t\t\t};\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630557271901,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n <script>\r\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n-\t\t\t\tconsole.log(id + \" \");\r\n+\t\t\t\t\r\n \t\t\t};\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630558898482,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n <script>\r\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n-\t\t\t\t\r\n+\t\t\t\t$idlist =  $listcompany[0]['id'];\r\n+$name = $listcompany[0]['name'];\r\n \t\t\t};\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630558903884,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <script>\r\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n \t\t\t\t$idlist =  $listcompany[0]['id'];\r\n-$name = $listcompany[0]['name'];\r\n+                $name = $listcompany[0]['name'];    \r\n \t\t\t};\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630558916261,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <script>\r\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n-\t\t\t\t$idlist =  $listcompany[0]['id'];\r\n+\t\t\t\t$idlist =  $id;\r\n                 $name = $listcompany[0]['name'];    \r\n \t\t\t};\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630558924555,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <script>\r\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n-\t\t\t\t$idlist =  $id;\r\n-                $name = $listcompany[0]['name'];    \r\n+\t\t\t\tvar idlist =  id;\r\n+                var name = $listcompany[0]['name'];    \r\n \t\t\t};\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630558956463,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <script>\r\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n \t\t\t\tvar idlist =  id;\r\n-                var name = $listcompany[0]['name'];    \r\n+                var name = name;    \r\n \t\t\t};\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630558961979,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <script>\r\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n \t\t\t\tvar idlist =  id;\r\n-                var name = name;    \r\n+                var name = name;\r\n \t\t\t};\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630558982214,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <script>\r\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n-\t\t\t\tvar idlist =  id;\r\n+\t\t\t\tvar idlist = id;\r\n                 var name = name;\r\n \t\t\t};\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630559102852,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,7 @@\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n \t\t\t\tvar idlist = id;\r\n                 var name = name;\r\n+                sessionStorage.setItem(\"lastname\", \"Smith\");\r\n \t\t\t};\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630559153392,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,7 +2,7 @@\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n \t\t\t\tvar idlist = id;\r\n                 var name = name;\r\n-                sessionStorage.setItem(\"lastname\", \"Smith\");\r\n+                sessionStorage.setItem(\"idcompany\", \"Smith\");\r\n \t\t\t};\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630559160383,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,7 +2,7 @@\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n \t\t\t\tvar idlist = id;\r\n                 var name = name;\r\n-                sessionStorage.setItem(\"idcompany\", \"Smith\");\r\n+                sessionStorage.setItem(\"idcompany\", id);\r\n \t\t\t};\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630559167703,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,6 +3,7 @@\n \t\t\t{\r\n \t\t\t\tvar idlist = id;\r\n                 var name = name;\r\n                 sessionStorage.setItem(\"idcompany\", id);\r\n+                sessionStorage.setItem(\"namecompany\", id);\r\n \t\t\t};\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630559176188,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,7 @@\n \t\t\t{\r\n \t\t\t\tvar idlist = id;\r\n                 var name = name;\r\n                 sessionStorage.setItem(\"idcompany\", id);\r\n-                sessionStorage.setItem(\"namecompany\", id);\r\n+                sessionStorage.setItem(\"namecompany\", name);\r\n \t\t\t};\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630559608521,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,5 +5,8 @@\n                 var name = name;\r\n                 sessionStorage.setItem(\"idcompany\", id);\r\n                 sessionStorage.setItem(\"namecompany\", name);\r\n \t\t\t};\r\n+        function loadsession(){\r\n+            \r\n+        }\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630559615498,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,7 +6,8 @@\n                 sessionStorage.setItem(\"idcompany\", id);\r\n                 sessionStorage.setItem(\"namecompany\", name);\r\n \t\t\t};\r\n         function loadsession(){\r\n-            \r\n+                sessionStorage.setItem(\"idcompany\", id);\r\n+                sessionStorage.setItem(\"namecompany\", name);\r\n         }\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630559625543,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n                 sessionStorage.setItem(\"idcompany\", id);\r\n                 sessionStorage.setItem(\"namecompany\", name);\r\n \t\t\t};\r\n         function loadsession(){\r\n+            sessionStorage.getItem(\"lastname\");\r\n                 sessionStorage.setItem(\"idcompany\", id);\r\n                 sessionStorage.setItem(\"namecompany\", name);\r\n         }\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630559630655,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n <script>\r\n+    loadsession()\r\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n \t\t\t\tvar idlist = id;\r\n                 var name = name;\r\n"
+                },
+                {
+                    "date": 1630559642762,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n \t\t\t\tvar idlist = id;\r\n                 var name = name;\r\n                 sessionStorage.setItem(\"idcompany\", id);\r\n                 sessionStorage.setItem(\"namecompany\", name);\r\n+                loadsession()\r\n \t\t\t};\r\n         function loadsession(){\r\n             sessionStorage.getItem(\"lastname\");\r\n                 sessionStorage.setItem(\"idcompany\", id);\r\n"
+                },
+                {
+                    "date": 1630559651462,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,11 +5,12 @@\n \t\t\t\tvar idlist = id;\r\n                 var name = name;\r\n                 sessionStorage.setItem(\"idcompany\", id);\r\n                 sessionStorage.setItem(\"namecompany\", name);\r\n-                loadsession()\r\n+                loadsession();\r\n \t\t\t};\r\n         function loadsession(){\r\n+            $();\r\n             sessionStorage.getItem(\"lastname\");\r\n                 sessionStorage.setItem(\"idcompany\", id);\r\n                 sessionStorage.setItem(\"namecompany\", name);\r\n         }\r\n"
+                },
+                {
+                    "date": 1630559669658,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n                 sessionStorage.setItem(\"namecompany\", name);\r\n                 loadsession();\r\n \t\t\t};\r\n         function loadsession(){\r\n-            $();\r\n+            $(\"#namecompany\");\r\n             sessionStorage.getItem(\"lastname\");\r\n                 sessionStorage.setItem(\"idcompany\", id);\r\n                 sessionStorage.setItem(\"namecompany\", name);\r\n         }\r\n"
+                },
+                {
+                    "date": 1630559695049,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,10 +8,8 @@\n                 sessionStorage.setItem(\"namecompany\", name);\r\n                 loadsession();\r\n \t\t\t};\r\n         function loadsession(){\r\n-            $(\"#namecompany\");\r\n-            sessionStorage.getItem(\"lastname\");\r\n-                sessionStorage.setItem(\"idcompany\", id);\r\n-                sessionStorage.setItem(\"namecompany\", name);\r\n+            $(\"#namecompany\").text(sessionStorage.getItem(\"namecompany\");\r\n+           \r\n         }\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630559714904,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,8 @@\n                 sessionStorage.setItem(\"namecompany\", name);\r\n                 loadsession();\r\n \t\t\t};\r\n         function loadsession(){\r\n-            $(\"#namecompany\").text(sessionStorage.getItem(\"namecompany\");\r\n+            $(\"#namecompany\").text(sessionStorage.getItem(\"namecompany\"));\r\n            \r\n         }\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630560210053,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,14 @@\n                 sessionStorage.setItem(\"namecompany\", name);\r\n                 loadsession();\r\n \t\t\t};\r\n         function loadsession(){\r\n+\r\n+\r\n+            const item = {\r\n+\t\tvalue: value,\r\n+\t\texpiry: now.getTime() + ttl,\r\n+\t}\r\n             $(\"#namecompany\").text(sessionStorage.getItem(\"namecompany\"));\r\n            \r\n         }\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630560226049,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,19 +3,20 @@\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n \t\t\t\tvar idlist = id;\r\n                 var name = name;\r\n+                const item = {\r\n+                value: value,\r\n+                expiry: now.getTime() + ttl,\r\n+            }\r\n                 sessionStorage.setItem(\"idcompany\", id);\r\n                 sessionStorage.setItem(\"namecompany\", name);\r\n                 loadsession();\r\n \t\t\t};\r\n         function loadsession(){\r\n \r\n \r\n-            const item = {\r\n-\t\tvalue: value,\r\n-\t\texpiry: now.getTime() + ttl,\r\n-\t}\r\n+           \r\n             $(\"#namecompany\").text(sessionStorage.getItem(\"namecompany\"));\r\n            \r\n         }\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630560242783,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,11 +4,11 @@\n \t\t\t{\r\n \t\t\t\tvar idlist = id;\r\n                 var name = name;\r\n                 const item = {\r\n-                value: value,\r\n-                expiry: now.getTime() + ttl,\r\n-            }\r\n+                    value: value,\r\n+                    expiry: id + ttl,\r\n+                 }\r\n                 sessionStorage.setItem(\"idcompany\", id);\r\n                 sessionStorage.setItem(\"namecompany\", name);\r\n                 loadsession();\r\n \t\t\t};\r\n"
+                },
+                {
+                    "date": 1630560249739,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n                 var name = name;\r\n                 const item = {\r\n                     value: value,\r\n                     expiry: id + ttl,\r\n-                 }\r\n+                }\r\n                 sessionStorage.setItem(\"idcompany\", id);\r\n                 sessionStorage.setItem(\"namecompany\", name);\r\n                 loadsession();\r\n \t\t\t};\r\n"
+                },
+                {
+                    "date": 1630560678884,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \t\t\t{\r\n \t\t\t\tvar idlist = id;\r\n                 var name = name;\r\n                 const item = {\r\n-                    value: value,\r\n+                    value: id,\r\n                     expiry: id + ttl,\r\n                 }\r\n                 sessionStorage.setItem(\"idcompany\", id);\r\n                 sessionStorage.setItem(\"namecompany\", name);\r\n"
+                },
+                {
+                    "date": 1630560686093,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n \t\t\t\tvar idlist = id;\r\n                 var name = name;\r\n                 const item = {\r\n                     value: id,\r\n-                    expiry: id + ttl,\r\n+                    expiry: 3600,\r\n                 }\r\n                 sessionStorage.setItem(\"idcompany\", id);\r\n                 sessionStorage.setItem(\"namecompany\", name);\r\n                 loadsession();\r\n"
+                },
+                {
+                    "date": 1630560784302,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,14 @@\n                 const item = {\r\n                     value: id,\r\n                     expiry: 3600,\r\n                 }\r\n-                sessionStorage.setItem(\"idcompany\", id);\r\n+                const item = {\r\n+                    value: id,\r\n+                    expiry: 3600,\r\n+                }\r\n+\r\n+                sessionStorage.setItem(\"idcompany\", JSON.stringify(item));\r\n                 sessionStorage.setItem(\"namecompany\", name);\r\n                 loadsession();\r\n \t\t\t};\r\n         function loadsession(){\r\n"
+                },
+                {
+                    "date": 1630560794344,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,15 +7,15 @@\n                 const item = {\r\n                     value: id,\r\n                     expiry: 3600,\r\n                 }\r\n-                const item = {\r\n-                    value: id,\r\n+                const item2 = {\r\n+                    value: name,\r\n                     expiry: 3600,\r\n                 }\r\n \r\n                 sessionStorage.setItem(\"idcompany\", JSON.stringify(item));\r\n-                sessionStorage.setItem(\"namecompany\", name);\r\n+                sessionStorage.setItem(\"namecompany\", JSON.stringify(item));\r\n                 loadsession();\r\n \t\t\t};\r\n         function loadsession(){\r\n \r\n"
+                },
+                {
+                    "date": 1630560799730,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n                     expiry: 3600,\r\n                 }\r\n \r\n                 sessionStorage.setItem(\"idcompany\", JSON.stringify(item));\r\n-                sessionStorage.setItem(\"namecompany\", JSON.stringify(item));\r\n+                sessionStorage.setItem(\"namecompany\", JSON.stringify(item2));\r\n                 loadsession();\r\n \t\t\t};\r\n         function loadsession(){\r\n \r\n"
+                },
+                {
+                    "date": 1630560858934,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,20 +3,9 @@\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n \t\t\t\tvar idlist = id;\r\n                 var name = name;\r\n-                const item = {\r\n-                    value: id,\r\n-                    expiry: 3600,\r\n-                }\r\n-                const item2 = {\r\n-                    value: name,\r\n-                    expiry: 3600,\r\n-                }\r\n-\r\n-                sessionStorage.setItem(\"idcompany\", JSON.stringify(item));\r\n-                sessionStorage.setItem(\"namecompany\", JSON.stringify(item2));\r\n-                loadsession();\r\n+              \r\n \t\t\t};\r\n         function loadsession(){\r\n \r\n \r\n"
+                },
+                {
+                    "date": 1630560867863,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n \t\t\t\tvar idlist = id;\r\n                 var name = name;\r\n-              \r\n+                <?php $name = ''?>\r\n \t\t\t};\r\n         function loadsession(){\r\n \r\n \r\n"
+                },
+                {
+                    "date": 1630560877394,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n \t\t\t\tvar idlist = id;\r\n                 var name = name;\r\n-                <?php $name = ''?>\r\n+                <?php $name = ?>\r\n \t\t\t};\r\n         function loadsession(){\r\n \r\n \r\n"
+                },
+                {
+                    "date": 1630561005308,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,9 @@\n <script>\r\n     loadsession()\r\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n-\t\t\t\tvar idlist = id;\r\n-                var name = name;\r\n-                <?php $name = ?>\r\n+                var href = $(this).val();$.session.set(\"yoursessioname\", \"storevalue\");}) }\r\n \t\t\t};\r\n         function loadsession(){\r\n \r\n \r\n"
+                },
+                {
+                    "date": 1630561023706,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,11 @@\n <script>\r\n     loadsession()\r\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n-                var href = $(this).val();$.session.set(\"yoursessioname\", \"storevalue\");}) }\r\n+                var href = $(this).val();\r\n+                $.session.set(\"yoursessioname\", \"storevalue\");}) }\r\n+                alert($.session.get(\"yoursessioname\"));\r\n \t\t\t};\r\n         function loadsession(){\r\n \r\n \r\n"
+                },
+                {
+                    "date": 1630561039160,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,16 +1,13 @@\n <script>\r\n     loadsession()\r\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n-                var href = $(this).val();\r\n+                // var href = $(this).val();\r\n                 $.session.set(\"yoursessioname\", \"storevalue\");}) }\r\n                 alert($.session.get(\"yoursessioname\"));\r\n \t\t\t};\r\n         function loadsession(){\r\n-\r\n-\r\n-           \r\n             $(\"#namecompany\").text(sessionStorage.getItem(\"namecompany\"));\r\n            \r\n         }\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630561044382,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,7 +7,6 @@\n                 alert($.session.get(\"yoursessioname\"));\r\n \t\t\t};\r\n         function loadsession(){\r\n             $(\"#namecompany\").text(sessionStorage.getItem(\"namecompany\"));\r\n-           \r\n         }\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630561059028,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n     loadsession()\r\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n                 // var href = $(this).val();\r\n-                $.session.set(\"yoursessioname\", \"storevalue\");}) }\r\n+                $.session.set(\"yoursessioname\", \"storevalue\");\r\n                 alert($.session.get(\"yoursessioname\"));\r\n \t\t\t};\r\n         function loadsession(){\r\n             $(\"#namecompany\").text(sessionStorage.getItem(\"namecompany\"));\r\n"
+                },
+                {
+                    "date": 1630561273855,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,50 @@\n <script>\r\n     loadsession()\r\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n-                // var href = $(this).val();\r\n-                $.session.set(\"yoursessioname\", \"storevalue\");\r\n-                alert($.session.get(\"yoursessioname\"));\r\n+                $.ajaxSetup({\r\n+                headers: {\r\n+                    'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')\r\n+                }\r\n+            });\r\n+            $.ajax({\r\n+                url: \"process/masterdrivingforce.php\",\r\n+                method: 'POST',\r\n+                data: {\r\n+                    tipe: \"add\",\r\n+                    mydrivingforce: drivingforce,\r\n+                    mydescription : description\r\n+                    \r\n+                },\r\n+                success: function (result) {\r\n+                //    alert(result);\r\n+                     if(result == \"sukses\")\r\n+                    {\r\n+                        success();\r\n+                        Swal.fire({\r\n+                                title: 'Data Saved',\r\n+                                text: 'Data Inputted Successfully',\r\n+                                icon: 'success',\r\n+                                confirmButtonColor: '#53d408',\r\n+                                allowOutsideClick: false,\r\n+                            }).then((result) => {\r\n+                                $(\"#myform\").trigger(\"reset\");\r\n+                                $(\"#canceladd\").click();\r\n+                            });\r\n+                    }\r\n+                    else{\r\n+                        Swal.fire({\r\n+                            icon: 'error',\r\n+                            title: 'Data Exists',\r\n+                            text: 'Duplicate Entry For This Driving Force',\r\n+                            confirmButtonColor: '#e00d0d',\r\n+                        });\r\n+                    }\r\n+                  \r\n+                  \r\n+                }\r\n+            });\r\n \t\t\t};\r\n         function loadsession(){\r\n             $(\"#namecompany\").text(sessionStorage.getItem(\"namecompany\"));\r\n         }\r\n"
+                },
+                {
+                    "date": 1630561282057,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,50 +1,50 @@\n <script>\r\n     loadsession()\r\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n-                $.ajaxSetup({\r\n-                headers: {\r\n-                    'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')\r\n-                }\r\n-            });\r\n-            $.ajax({\r\n-                url: \"process/masterdrivingforce.php\",\r\n-                method: 'POST',\r\n-                data: {\r\n-                    tipe: \"add\",\r\n-                    mydrivingforce: drivingforce,\r\n-                    mydescription : description\r\n+                    $.ajaxSetup({\r\n+                    headers: {\r\n+                        'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')\r\n+                    }\r\n+                });\r\n+                $.ajax({\r\n+                    url: \"process/masterdrivingforce.php\",\r\n+                    method: 'POST',\r\n+                    data: {\r\n+                        tipe: \"add\",\r\n+                        mydrivingforce: drivingforce,\r\n+                        mydescription : description\r\n+                        \r\n+                    },\r\n+                    success: function (result) {\r\n+                    //    alert(result);\r\n+                        if(result == \"sukses\")\r\n+                        {\r\n+                            success();\r\n+                            Swal.fire({\r\n+                                    title: 'Data Saved',\r\n+                                    text: 'Data Inputted Successfully',\r\n+                                    icon: 'success',\r\n+                                    confirmButtonColor: '#53d408',\r\n+                                    allowOutsideClick: false,\r\n+                                }).then((result) => {\r\n+                                    $(\"#myform\").trigger(\"reset\");\r\n+                                    $(\"#canceladd\").click();\r\n+                                });\r\n+                        }\r\n+                        else{\r\n+                            Swal.fire({\r\n+                                icon: 'error',\r\n+                                title: 'Data Exists',\r\n+                                text: 'Duplicate Entry For This Driving Force',\r\n+                                confirmButtonColor: '#e00d0d',\r\n+                            });\r\n+                        }\r\n                     \r\n-                },\r\n-                success: function (result) {\r\n-                //    alert(result);\r\n-                     if(result == \"sukses\")\r\n-                    {\r\n-                        success();\r\n-                        Swal.fire({\r\n-                                title: 'Data Saved',\r\n-                                text: 'Data Inputted Successfully',\r\n-                                icon: 'success',\r\n-                                confirmButtonColor: '#53d408',\r\n-                                allowOutsideClick: false,\r\n-                            }).then((result) => {\r\n-                                $(\"#myform\").trigger(\"reset\");\r\n-                                $(\"#canceladd\").click();\r\n-                            });\r\n+                    \r\n                     }\r\n-                    else{\r\n-                        Swal.fire({\r\n-                            icon: 'error',\r\n-                            title: 'Data Exists',\r\n-                            text: 'Duplicate Entry For This Driving Force',\r\n-                            confirmButtonColor: '#e00d0d',\r\n-                        });\r\n-                    }\r\n-                  \r\n-                  \r\n-                }\r\n-            });\r\n+                });\r\n \t\t\t};\r\n         function loadsession(){\r\n             $(\"#namecompany\").text(sessionStorage.getItem(\"namecompany\"));\r\n         }\r\n"
+                },
+                {
+                    "date": 1630561287465,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,5 @@\n-<script>\r\n-    loadsession()\r\n+<script>\\\r\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n                     $.ajaxSetup({\r\n                     headers: {\r\n@@ -44,8 +43,6 @@\n                     \r\n                     }\r\n                 });\r\n \t\t\t};\r\n-        function loadsession(){\r\n-            $(\"#namecompany\").text(sessionStorage.getItem(\"namecompany\"));\r\n-        }\r\n+      \r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630561297452,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,14 @@\n-<script>\\\r\n+<script>\r\n \t\tfunction setsister(id, name)\r\n \t\t\t{\r\n                     $.ajaxSetup({\r\n                     headers: {\r\n                         'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')\r\n                     }\r\n                 });\r\n                 $.ajax({\r\n-                    url: \"process/masterdrivingforce.php\",\r\n+                    url: \"process/setsession.php\",\r\n                     method: 'POST',\r\n                     data: {\r\n                         tipe: \"add\",\r\n                         mydrivingforce: drivingforce,\r\n"
+                },
+                {
+                    "date": 1630561308109,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n                     url: \"process/setsession.php\",\r\n                     method: 'POST',\r\n                     data: {\r\n                         tipe: \"add\",\r\n-                        mydrivingforce: drivingforce,\r\n+                        idsister: drivingforce,\r\n                         mydescription : description\r\n                         \r\n                     },\r\n                     success: function (result) {\r\n"
+                },
+                {
+                    "date": 1630561318905,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,11 +9,10 @@\n                 $.ajax({\r\n                     url: \"process/setsession.php\",\r\n                     method: 'POST',\r\n                     data: {\r\n-                        tipe: \"add\",\r\n                         idsister: drivingforce,\r\n-                        mydescription : description\r\n+                        namasister : description\r\n                         \r\n                     },\r\n                     success: function (result) {\r\n                     //    alert(result);\r\n"
+                },
+                {
+                    "date": 1630561337628,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,36 +9,15 @@\n                 $.ajax({\r\n                     url: \"process/setsession.php\",\r\n                     method: 'POST',\r\n                     data: {\r\n-                        idsister: drivingforce,\r\n-                        namasister : description\r\n+                        idsister: id,\r\n+                        namasister : name\r\n                         \r\n                     },\r\n                     success: function (result) {\r\n-                    //    alert(result);\r\n-                        if(result == \"sukses\")\r\n-                        {\r\n-                            success();\r\n-                            Swal.fire({\r\n-                                    title: 'Data Saved',\r\n-                                    text: 'Data Inputted Successfully',\r\n-                                    icon: 'success',\r\n-                                    confirmButtonColor: '#53d408',\r\n-                                    allowOutsideClick: false,\r\n-                                }).then((result) => {\r\n-                                    $(\"#myform\").trigger(\"reset\");\r\n-                                    $(\"#canceladd\").click();\r\n-                                });\r\n-                        }\r\n-                        else{\r\n-                            Swal.fire({\r\n-                                icon: 'error',\r\n-                                title: 'Data Exists',\r\n-                                text: 'Duplicate Entry For This Driving Force',\r\n-                                confirmButtonColor: '#e00d0d',\r\n-                            });\r\n-                        }\r\n+                            $()\r\n+                       \r\n                     \r\n                     \r\n                     }\r\n                 });\r\n"
+                },
+                {
+                    "date": 1630561359265,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n                         namasister : name\r\n                         \r\n                     },\r\n                     success: function (result) {\r\n-                            $()\r\n+                            $(\"#namecompany\").val()\r\n                        \r\n                     \r\n                     \r\n                     }\r\n"
+                },
+                {
+                    "date": 1630561369630,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,12 +14,9 @@\n                         namasister : name\r\n                         \r\n                     },\r\n                     success: function (result) {\r\n-                            $(\"#namecompany\").val()\r\n-                       \r\n-                    \r\n-                    \r\n+                            $(\"#namecompany\").val(\"\");                     \r\n                     }\r\n                 });\r\n \t\t\t};\r\n       \r\n"
+                },
+                {
+                    "date": 1630561400988,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n                         namasister : name\r\n                         \r\n                     },\r\n                     success: function (result) {\r\n-                            $(\"#namecompany\").val(\"\");                     \r\n+                            $(\"#namecompany\").val(name);                     \r\n                     }\r\n                 });\r\n \t\t\t};\r\n       \r\n"
+                },
+                {
+                    "date": 1630562683382,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,10 @@\n                         namasister : name\r\n                         \r\n                     },\r\n                     success: function (result) {\r\n-                            $(\"#namecompany\").val(name);                     \r\n+                            $(\"#namecompany\").text(name);\r\n+                                                 \r\n                     }\r\n                 });\r\n \t\t\t};\r\n       \r\n"
+                },
+                {
+                    "date": 1631675891540,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,9 @@\n                         \r\n                     },\r\n                     success: function (result) {\r\n                             $(\"#namecompany\").text(name);\r\n+                            alert(\"test\");\r\n                                                  \r\n                     }\r\n                 });\r\n \t\t\t};\r\n"
+                },
+                {
+                    "date": 1631675942229,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n                         \r\n                     },\r\n                     success: function (result) {\r\n                             $(\"#namecompany\").text(name);\r\n-                            alert(\"test\");\r\n+                           \r\n                                                  \r\n                     }\r\n                 });\r\n \t\t\t};\r\n"
+                },
+                {
+                    "date": 1631675952469,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n                         \r\n                     },\r\n                     success: function (result) {\r\n                             $(\"#namecompany\").text(name);\r\n-                           \r\n+                            location.reload(); \r\n                                                  \r\n                     }\r\n                 });\r\n \t\t\t};\r\n"
+                }
+            ],
+            "date": 1630555379598,
+            "name": "Commit-0",
+            "content": "<script>\r\n\r\n\t\tfunction setsister(id, name)\r\n\t\t\t{\r\n\t\t\t\talert(\"test\");\r\n\t\t\t}\r\n\r\n</script>"
+        }
+    ]
+}
