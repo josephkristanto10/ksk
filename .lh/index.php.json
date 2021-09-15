@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 129,
+            "activePatchIndex": 130,
             "patches": [
                 {
                     "date": 1627963805059,
@@ -524,6 +524,10 @@
                 {
                     "date": 1631718485344,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n     <link rel=\"shortcut icon\" type=\"image/png\" href=\"<?=$url;?>assets/icon.png\" />\r\n </head>\r\n \r\n <body\r\n-    style=\"background:url('<?=$url;?>assets/bgloginblue-min.jpg'); background-position:center; background-repeat:no-repeat; background-size:cover;\">\r\n+    style=\"background:url('<?=$url;?>assets/bgloginbluecompressed.jpg'); background-position:center; background-repeat:no-repeat; background-size:cover;\">\r\n     <div class=\"page-content\">\r\n         <div class=\"content-wrapper\">\r\n             <div class=\"content-inner\">\r\n                 <div class=\"content d-flex justify-content-center align-items-center\">\r\n"
+                },
+                {
+                    "date": 1631722294094,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,10 +5,11 @@\n <!DOCTYPE html>\r\n <html lang=\"en\">\r\n \r\n <head>\r\n-    <meta charset=\"utf-8\">\r\n-    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n+<meta charset=\"utf-8\">\r\n+\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n+\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\r\n     <!-- <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"> -->\r\n     <title>NEXUS Asset - Integrated System</title>\r\n \r\n     <!-- Global stylesheets -->\r\n"
                 }
             ],
             "date": 1627963805059,
