@@ -1,5 +1,7 @@
 <?php
 session_start();
+// session_destroy();
+
 require 'connection.php';
 $sql = "select * from location_sister_company";
 $res = $conn->query($sql);
@@ -25,6 +27,39 @@ if(isset($_SESSION['namasister']))
 <html lang="en">
 
 <head>
+
+	<?php
+if(!isset($_SESSION['iduser']))
+{
+	?>
+	<style>
+		body{
+			background-color:#115591;
+		}
+	</style>
+	<?php
+	echo " ";
+	echo"<div style = 'position:absolute;width:100%;height:100%;background-color:#115591;z-index:700'></div>";
+	echo "
+	<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+	<script>
+	Swal.fire({
+		icon: 'info',
+		title: 'Nexus Admin Area',
+		text: 'Please Sign In First',
+		allowOutsideClick: false,
+		confirmButtonColor: '#3495eb',
+	}).then((result) => {
+		window.location.replace('index.php');
+	});;
+	</script>
+	";
+	die;
+}
+
+?>
+
+
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -111,7 +146,6 @@ if(isset($_SESSION['namasister']))
 		.card {
 			padding: 15px;
 		}
-	
 	</style>
 </head>
 
@@ -445,12 +479,12 @@ if(isset($_SESSION['namasister']))
 						data-toggle="dropdown">
 						<img src="../../../../global_assets/images/placeholders/placeholder.jpg"
 							class="rounded-circle mr-2" height="34" alt="">
-							
-						<span id = "namecompany"><?= $name?></span>
-					</a>
-						<div class="dropdown-menu dropdown-menu-right">
 
-							<?php
+						<span id="namecompany"><?= $name?></span>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right">
+
+						<?php
 								for($i = 0 ; $i < count($listcompany);$i++) 
 								{
 								
@@ -460,9 +494,9 @@ if(isset($_SESSION['namasister']))
 								}
 							?>
 
-						</div>
+					</div>
 
-					
+
 				</li>
 
 				<li class="nav-item dropdown dropdown-user">
@@ -487,6 +521,3 @@ if(isset($_SESSION['namasister']))
 			</ul>
 		</div>
 	</div>
-
-
-

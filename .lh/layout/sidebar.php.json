@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 225,
+            "activePatchIndex": 226,
             "patches": [
                 {
                     "date": 1630468563981,
@@ -908,6 +908,10 @@
                 {
                     "date": 1631693249457,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -217,9 +217,9 @@\n \r\n \r\n                         <!-- ENd Document -->\r\n \r\n-                        <li class=\"nav-item\"><a href=\"masterotherloc.php\" class=\"nav-link <?php echo ($myurl == \"masterotherloc.php\"  ) ? \" active\" : ''; ?>\">Other Location</a>\r\n+                        <!-- <li class=\"nav-item\"><a href=\"masterotherloc.php\" class=\"nav-link <?php echo ($myurl == \"masterotherloc.php\"  ) ? \" active\" : ''; ?>\">Other Location</a> -->\r\n                         </li>\r\n                     </ul>\r\n                     </li>\r\n                     <!-- <li class=\"nav-item\"><a href = \"masterholdingcompany.php\" class=\"nav-link <?php echo ($myurl == \"masterholdingcompany.php\") ? \"active\" : ''; ?>\"><i class=\"icon-width\"></i> <span>Holding Company</span></a>\r\n"
+                },
+                {
+                    "date": 1631716388650,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,9 @@\n                         <div class=\"text-uppercase font-size-xs line-height-xs\">Main</div> <i class=\"icon-menu\"\r\n                             title=\"Main\"></i>\r\n                     </li>\r\n                     <li class=\"nav-item\">\r\n-                        <a href=\"index.php\" class=\"nav-link \">\r\n+                        <a href=\"dashboard.php\" class=\"nav-link \">\r\n                             <i class=\"icon-home4\"></i>\r\n                             <span>\r\n                                 Dashboard\r\n                             </span>\r\n"
                 }
             ],
             "date": 1630468563981,

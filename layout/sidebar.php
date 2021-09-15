@@ -44,7 +44,7 @@
                             title="Main"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="index.php" class="nav-link ">
+                        <a href="dashboard.php" class="nav-link ">
                             <i class="icon-home4"></i>
                             <span>
                                 Dashboard

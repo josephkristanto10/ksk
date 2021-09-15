@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 152,
+            "activePatchIndex": 235,
             "patches": [
                 {
                     "date": 1630468397363,
@@ -616,6 +616,338 @@
                 {
                     "date": 1631169398350,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n \t<!-- Global stylesheets -->\r\n \t<link href=\"https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900\" rel=\"stylesheet\"\r\n \t\ttype=\"text/css\">\r\n \t<link href=\"<?=$url;?>global_assets/css/icons/icomoon/styles.min.css\" rel=\"stylesheet\" type=\"text/css\">\r\n-\t<link href=\"<?=$url;?>global_assets/css/icons/icomoon/styles.min.css\" rel=\"stylesheet\" type=\"text/css\">\r\n+\t<link href=\"<?=$url;?>global_assets/css/icons/material/styles.min.css\" rel=\"stylesheet\" type=\"text/css\">\r\n \t<link href=\"assets/css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\">\r\n \t<link href=\"assets/css/bootstrap_limitless.min.css\" rel=\"stylesheet\" type=\"text/css\">\r\n \t<link href=\"assets/css/layout.min.css\" rel=\"stylesheet\" type=\"text/css\">\r\n \t<link href=\"assets/css/components.min.css\" rel=\"stylesheet\" type=\"text/css\">\r\n"
+                },
+                {
+                    "date": 1631716451357,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n <?php\r\n session_start();\r\n+if(isset())\r\n require 'connection.php';\r\n $sql = \"select * from location_sister_company\";\r\n $res = $conn->query($sql);\r\n $listcompany = array();\r\n"
+                },
+                {
+                    "date": 1631716457340,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <?php\r\n session_start();\r\n-if(isset())\r\n+if(isset($_SESSION['iduser']))\r\n require 'connection.php';\r\n $sql = \"select * from location_sister_company\";\r\n $res = $conn->query($sql);\r\n $listcompany = array();\r\n"
+                },
+                {
+                    "date": 1631716477810,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,10 @@\n <?php\r\n session_start();\r\n if(isset($_SESSION['iduser']))\r\n+{\r\n+\r\n+}\r\n require 'connection.php';\r\n $sql = \"select * from location_sister_company\";\r\n $res = $conn->query($sql);\r\n $listcompany = array();\r\n"
+                },
+                {
+                    "date": 1631716494142,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,14 @@\n <?php\r\n session_start();\r\n-if(isset($_SESSION['iduser']))\r\n+if(!isset($_SESSION['iduser']))\r\n {\r\n-\r\n+\tSwal.fire({\r\n+\t\ticon: 'error',\r\n+\t\ttitle: 'User not found',\r\n+\t\ttext: 'User doesnt exists',\r\n+\t\tconfirmButtonColor: '#e00d0d',\r\n+\t});\r\n }\r\n require 'connection.php';\r\n $sql = \"select * from location_sister_company\";\r\n $res = $conn->query($sql);\r\n"
+                },
+                {
+                    "date": 1631716504444,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,16 @@\n <?php\r\n session_start();\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n+\techo \"\r\n \tSwal.fire({\r\n \t\ticon: 'error',\r\n \t\ttitle: 'User not found',\r\n \t\ttext: 'User doesnt exists',\r\n \t\tconfirmButtonColor: '#e00d0d',\r\n \t});\r\n+\t\"\r\n }\r\n require 'connection.php';\r\n $sql = \"select * from location_sister_company\";\r\n $res = $conn->query($sql);\r\n"
+                },
+                {
+                    "date": 1631716515127,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,14 +2,16 @@\n session_start();\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n \techo \"\r\n+\t<script>\r\n \tSwal.fire({\r\n \t\ticon: 'error',\r\n \t\ttitle: 'User not found',\r\n \t\ttext: 'User doesnt exists',\r\n \t\tconfirmButtonColor: '#e00d0d',\r\n \t});\r\n+\t</script>\r\n \t\"\r\n }\r\n require 'connection.php';\r\n $sql = \"select * from location_sister_company\";\r\n"
+                },
+                {
+                    "date": 1631716522805,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n session_start();\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n \techo \"\r\n+\t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n \t\ticon: 'error',\r\n \t\ttitle: 'User not found',\r\n"
+                },
+                {
+                    "date": 1631716530722,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n \t\ttext: 'User doesnt exists',\r\n \t\tconfirmButtonColor: '#e00d0d',\r\n \t});\r\n \t</script>\r\n-\t\"\r\n+\t\";\r\n }\r\n require 'connection.php';\r\n $sql = \"select * from location_sister_company\";\r\n $res = $conn->query($sql);\r\n"
+                },
+                {
+                    "date": 1631716539307,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n \t\ticon: 'error',\r\n-\t\ttitle: 'User not found',\r\n+\t\ttitle: 'Forbidden Page',\r\n \t\ttext: 'User doesnt exists',\r\n \t\tconfirmButtonColor: '#e00d0d',\r\n \t});\r\n \t</script>\r\n"
+                },
+                {
+                    "date": 1631716544597,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n \t<script>\r\n \tSwal.fire({\r\n \t\ticon: 'error',\r\n \t\ttitle: 'Forbidden Page',\r\n-\t\ttext: 'User doesnt exists',\r\n+\t\ttext: 'Please Login FIrst',\r\n \t\tconfirmButtonColor: '#e00d0d',\r\n \t});\r\n \t</script>\r\n \t\";\r\n"
+                },
+                {
+                    "date": 1631716557396,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,10 @@\n \t<script>\r\n \tSwal.fire({\r\n \t\ticon: 'error',\r\n \t\ttitle: 'Forbidden Page',\r\n-\t\ttext: 'Please Login FIrst',\r\n+\t\ttext: 'Please Login First',\r\n+\t\tallowOutsideClick: false,\r\n \t\tconfirmButtonColor: '#e00d0d',\r\n \t});\r\n \t</script>\r\n \t\";\r\n"
+                },
+                {
+                    "date": 1631716565771,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,11 @@\n \t\ttitle: 'Forbidden Page',\r\n \t\ttext: 'Please Login First',\r\n \t\tallowOutsideClick: false,\r\n \t\tconfirmButtonColor: '#e00d0d',\r\n-\t});\r\n+\t}).then((result) => {\r\n+\t\twindow.location.replace(\"dashboard.php\");\r\n+\t});;\r\n \t</script>\r\n \t\";\r\n }\r\n require 'connection.php';\r\n"
+                },
+                {
+                    "date": 1631716587010,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n \t\ttext: 'Please Login First',\r\n \t\tallowOutsideClick: false,\r\n \t\tconfirmButtonColor: '#e00d0d',\r\n \t}).then((result) => {\r\n-\t\twindow.location.replace(\"dashboard.php\");\r\n+\t\twindow.location.replace('index.php');\r\n \t});;\r\n \t</script>\r\n \t\";\r\n }\r\n"
+                },
+                {
+                    "date": 1631716644697,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n <?php\r\n session_start();\r\n+session_destroy\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n"
+                },
+                {
+                    "date": 1631716688358,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <?php\r\n session_start();\r\n-session_destroy\r\n+session_destroy();\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n"
+                },
+                {
+                    "date": 1631716710113,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n session_start();\r\n session_destroy();\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n+\techo \"<h1>testestsetewstsetse</h1>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631716744754,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,9 @@\n \t\twindow.location.replace('index.php');\r\n \t});;\r\n \t</script>\r\n \t\";\r\n+\tdie;\r\n }\r\n require 'connection.php';\r\n $sql = \"select * from location_sister_company\";\r\n $res = $conn->query($sql);\r\n"
+                },
+                {
+                    "date": 1631716750396,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,8 @@\n session_start();\r\n session_destroy();\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n-\techo \"<h1>testestsetewstsetse</h1>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631716771216,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n \t\twindow.location.replace('index.php');\r\n \t});;\r\n \t</script>\r\n \t\";\r\n-\tdie;\r\n+\tbreakl\r\n }\r\n require 'connection.php';\r\n $sql = \"select * from location_sister_company\";\r\n $res = $conn->query($sql);\r\n"
+                },
+                {
+                    "date": 1631716776466,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n \t\twindow.location.replace('index.php');\r\n \t});;\r\n \t</script>\r\n \t\";\r\n-\tbreakl\r\n+\t\r\n }\r\n require 'connection.php';\r\n $sql = \"select * from location_sister_company\";\r\n $res = $conn->query($sql);\r\n"
+                },
+                {
+                    "date": 1631716793352,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n session_start();\r\n session_destroy();\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n+\techo\"test\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631716809530,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,8 +19,11 @@\n \t</script>\r\n \t\";\r\n \t\r\n }\r\n+else{\r\n+\t\r\n+}\r\n require 'connection.php';\r\n $sql = \"select * from location_sister_company\";\r\n $res = $conn->query($sql);\r\n $listcompany = array();\r\n"
+                },
+                {
+                    "date": 1631716832660,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,11 +19,8 @@\n \t</script>\r\n \t\";\r\n \t\r\n }\r\n-else{\r\n-\t\r\n-}\r\n require 'connection.php';\r\n $sql = \"select * from location_sister_company\";\r\n $res = $conn->query($sql);\r\n $listcompany = array();\r\n"
+                },
+                {
+                    "date": 1631716906238,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n session_start();\r\n session_destroy();\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n-\techo\"test\";\r\n+\techo\"<div style = 'position:absolute;'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631716912133,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n session_start();\r\n session_destroy();\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n-\techo\"<div style = 'position:absolute;'></div>\";\r\n+\techo\"<div style = 'position:absolute;width:100%;'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631716922403,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n session_start();\r\n session_destroy();\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n-\techo\"<div style = 'position:absolute;width:100%;'></div>\";\r\n+\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:red;'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631716942025,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n session_start();\r\n session_destroy();\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n-\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:red;'></div>\";\r\n+\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:red;z-index'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631716958966,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n session_start();\r\n session_destroy();\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n-\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:red;z-index'></div>\";\r\n+\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631716965958,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n session_start();\r\n session_destroy();\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n-\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n+\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:blue;z-index:10000'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631716991001,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n session_start();\r\n session_destroy();\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n-\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:blue;z-index:10000'></div>\";\r\n+\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631717110633,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n session_start();\r\n session_destroy();\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n-\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n+\techo\"<div style = 'width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631717135273,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,8 @@\n session_start();\r\n session_destroy();\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n-\techo\"<div style = 'width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n@@ -17,8 +16,10 @@\n \t\twindow.location.replace('index.php');\r\n \t});;\r\n \t</script>\r\n \t\";\r\n+\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n+\r\n \t\r\n }\r\n require 'connection.php';\r\n $sql = \"select * from location_sister_company\";\r\n"
+                },
+                {
+                    "date": 1631717140414,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n session_start();\r\n session_destroy();\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n+\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n@@ -16,10 +17,8 @@\n \t\twindow.location.replace('index.php');\r\n \t});;\r\n \t</script>\r\n \t\";\r\n-\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n-\r\n \t\r\n }\r\n require 'connection.php';\r\n $sql = \"select * from location_sister_company\";\r\n"
+                },
+                {
+                    "date": 1631717148765,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n session_start();\r\n session_destroy();\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n-\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n+\t// echo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631717167964,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,10 @@\n <?php\r\n session_start();\r\n-session_destroy();\r\n+// session_destroy();\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n+\t\r\n \t// echo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n"
+                },
+                {
+                    "date": 1631717244838,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n // session_destroy();\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n \t\r\n+\techo \"test\";\r\n \t// echo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n"
+                },
+                {
+                    "date": 1631717250001,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n if(!isset($_SESSION['iduser']))\r\n {\r\n \t\r\n \techo \"test\";\r\n-\t// echo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n+\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631717255844,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n // session_destroy();\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n \t\r\n-\techo \"test\";\r\n+\techo \"\";\r\n \techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n"
+                },
+                {
+                    "date": 1631717266202,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n if(!isset($_SESSION['iduser']))\r\n {\r\n \t\r\n \techo \"\";\r\n-\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n+\t// echo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631717324557,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,28 +1,8 @@\n <?php\r\n session_start();\r\n // session_destroy();\r\n-if(!isset($_SESSION['iduser']))\r\n-{\r\n-\t\r\n-\techo \"\";\r\n-\t// echo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n-\techo \"\r\n-\t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n-\t<script>\r\n-\tSwal.fire({\r\n-\t\ticon: 'error',\r\n-\t\ttitle: 'Forbidden Page',\r\n-\t\ttext: 'Please Login First',\r\n-\t\tallowOutsideClick: false,\r\n-\t\tconfirmButtonColor: '#e00d0d',\r\n-\t}).then((result) => {\r\n-\t\twindow.location.replace('index.php');\r\n-\t});;\r\n-\t</script>\r\n-\t\";\r\n-\t\r\n-}\r\n+\r\n require 'connection.php';\r\n $sql = \"select * from location_sister_company\";\r\n $res = $conn->query($sql);\r\n $listcompany = array();\r\n"
+                },
+                {
+                    "date": 1631717330212,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -115,9 +115,29 @@\n \t\t}\r\n \t\r\n \t</style>\r\n </head>\r\n-\r\n+if(!isset($_SESSION['iduser']))\r\n+{\r\n+\t\r\n+\techo \"\";\r\n+\t// echo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n+\techo \"\r\n+\t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n+\t<script>\r\n+\tSwal.fire({\r\n+\t\ticon: 'error',\r\n+\t\ttitle: 'Forbidden Page',\r\n+\t\ttext: 'Please Login First',\r\n+\t\tallowOutsideClick: false,\r\n+\t\tconfirmButtonColor: '#e00d0d',\r\n+\t}).then((result) => {\r\n+\t\twindow.location.replace('index.php');\r\n+\t});;\r\n+\t</script>\r\n+\t\";\r\n+\t\r\n+}\r\n <body>\r\n \t<div class=\"navbar navbar-expand-md navbar-dark\">\r\n \t\t<div class=\"navbar-brand\">\r\n \t\t\t<a href=\"index.html\" class=\"d-inline-block\">\r\n"
+                },
+                {
+                    "date": 1631717339854,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -115,8 +115,9 @@\n \t\t}\r\n \t\r\n \t</style>\r\n </head>\r\n+<?php\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n \t\r\n \techo \"\";\r\n@@ -136,8 +137,9 @@\n \t</script>\r\n \t\";\r\n \t\r\n }\r\n+?>\r\n <body>\r\n \t<div class=\"navbar navbar-expand-md navbar-dark\">\r\n \t\t<div class=\"navbar-brand\">\r\n \t\t\t<a href=\"index.html\" class=\"d-inline-block\">\r\n"
+                },
+                {
+                    "date": 1631717354706,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,28 @@\n <?php\r\n session_start();\r\n // session_destroy();\r\n-\r\n+if(!isset($_SESSION['iduser']))\r\n+{\r\n+\t\r\n+\techo \"\";\r\n+\t// echo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n+\techo \"\r\n+\t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n+\t<script>\r\n+\tSwal.fire({\r\n+\t\ticon: 'error',\r\n+\t\ttitle: 'Forbidden Page',\r\n+\t\ttext: 'Please Login First',\r\n+\t\tallowOutsideClick: false,\r\n+\t\tconfirmButtonColor: '#e00d0d',\r\n+\t}).then((result) => {\r\n+\t\twindow.location.replace('index.php');\r\n+\t});;\r\n+\t</script>\r\n+\t\";\r\n+\t\r\n+}\r\n require 'connection.php';\r\n $sql = \"select * from location_sister_company\";\r\n $res = $conn->query($sql);\r\n $listcompany = array();\r\n@@ -115,31 +135,9 @@\n \t\t}\r\n \t\r\n \t</style>\r\n </head>\r\n-<?php\r\n-if(!isset($_SESSION['iduser']))\r\n-{\r\n-\t\r\n-\techo \"\";\r\n-\t// echo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n-\techo \"\r\n-\t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n-\t<script>\r\n-\tSwal.fire({\r\n-\t\ticon: 'error',\r\n-\t\ttitle: 'Forbidden Page',\r\n-\t\ttext: 'Please Login First',\r\n-\t\tallowOutsideClick: false,\r\n-\t\tconfirmButtonColor: '#e00d0d',\r\n-\t}).then((result) => {\r\n-\t\twindow.location.replace('index.php');\r\n-\t});;\r\n-\t</script>\r\n-\t\";\r\n-\t\r\n-}\r\n-?>\r\n+\r\n <body>\r\n \t<div class=\"navbar navbar-expand-md navbar-dark\">\r\n \t\t<div class=\"navbar-brand\">\r\n \t\t\t<a href=\"index.html\" class=\"d-inline-block\">\r\n"
+                },
+                {
+                    "date": 1631717382029,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,28 +1,8 @@\n <?php\r\n session_start();\r\n // session_destroy();\r\n-if(!isset($_SESSION['iduser']))\r\n-{\r\n-\t\r\n-\techo \"\";\r\n-\t// echo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n-\techo \"\r\n-\t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n-\t<script>\r\n-\tSwal.fire({\r\n-\t\ticon: 'error',\r\n-\t\ttitle: 'Forbidden Page',\r\n-\t\ttext: 'Please Login First',\r\n-\t\tallowOutsideClick: false,\r\n-\t\tconfirmButtonColor: '#e00d0d',\r\n-\t}).then((result) => {\r\n-\t\twindow.location.replace('index.php');\r\n-\t});;\r\n-\t</script>\r\n-\t\";\r\n-\t\r\n-}\r\n+\r\n require 'connection.php';\r\n $sql = \"select * from location_sister_company\";\r\n $res = $conn->query($sql);\r\n $listcompany = array();\r\n"
+                },
+                {
+                    "date": 1631717394080,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,29 @@\n }\r\n ?>\r\n <!DOCTYPE html>\r\n <html lang=\"en\">\r\n-\r\n+if(!isset($_SESSION['iduser']))\r\n+{\r\n+\t\r\n+\techo \".\";\r\n+\t// echo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n+\techo \"\r\n+\t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n+\t<script>\r\n+\tSwal.fire({\r\n+\t\ticon: 'error',\r\n+\t\ttitle: 'Forbidden Page',\r\n+\t\ttext: 'Please Login First',\r\n+\t\tallowOutsideClick: false,\r\n+\t\tconfirmButtonColor: '#e00d0d',\r\n+\t}).then((result) => {\r\n+\t\twindow.location.replace('index.php');\r\n+\t});;\r\n+\t</script>\r\n+\t\";\r\n+\t\r\n+}\r\n <head>\r\n \t<meta charset=\"utf-8\">\r\n \t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n \t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\r\n"
+                },
+                {
+                    "date": 1631717399225,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,8 +24,9 @@\n }\r\n ?>\r\n <!DOCTYPE html>\r\n <html lang=\"en\">\r\n+<?php\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n \t\r\n \techo \".\";\r\n@@ -45,8 +46,9 @@\n \t</script>\r\n \t\";\r\n \t\r\n }\r\n+?>\r\n <head>\r\n \t<meta charset=\"utf-8\">\r\n \t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n \t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\r\n"
+                },
+                {
+                    "date": 1631717404382,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n if(!isset($_SESSION['iduser']))\r\n {\r\n \t\r\n \techo \".\";\r\n-\t// echo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n+\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631717413405,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n if(!isset($_SESSION['iduser']))\r\n {\r\n \t\r\n \techo \".\";\r\n-\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:10000'></div>\";\r\n+\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:500'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631717441255,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n if(!isset($_SESSION['iduser']))\r\n {\r\n \t\r\n \techo \".\";\r\n-\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:grey;z-index:500'></div>\";\r\n+\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:##d1d1d1;z-index:500'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631717462643,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n if(!isset($_SESSION['iduser']))\r\n {\r\n \t\r\n \techo \".\";\r\n-\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:##d1d1d1;z-index:500'></div>\";\r\n+\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#d1d1d1;z-index:600'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631717469877,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n if(!isset($_SESSION['iduser']))\r\n {\r\n \t\r\n \techo \".\";\r\n-\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#d1d1d1;z-index:600'></div>\";\r\n+\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#d1d1d1;z-index:700'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631717508589,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,8 +24,9 @@\n }\r\n ?>\r\n <!DOCTYPE html>\r\n <html lang=\"en\">\r\n+<head>\r\n <?php\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n \t\r\n@@ -47,9 +48,9 @@\n \t\";\r\n \t\r\n }\r\n ?>\r\n-<head>\r\n+\r\n \t<meta charset=\"utf-8\">\r\n \t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n \t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\r\n \t<title>NEXUS - Integrated System</title>\r\n"
+                },
+                {
+                    "date": 1631717513926,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,8 +25,11 @@\n ?>\r\n <!DOCTYPE html>\r\n <html lang=\"en\">\r\n <head>\r\n+.swal-modal {\r\n+    z-index: 99999;\r\n+}\r\n <?php\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n \t\r\n"
+                },
+                {
+                    "date": 1631717529094,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,11 +25,10 @@\n ?>\r\n <!DOCTYPE html>\r\n <html lang=\"en\">\r\n <head>\r\n-.swal-modal {\r\n-    z-index: 99999;\r\n-}\r\n+\t<style>\r\n+\t\t</style>\r\n <?php\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n \t\r\n"
+                },
+                {
+                    "date": 1631717613510,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,8 +26,11 @@\n <!DOCTYPE html>\r\n <html lang=\"en\">\r\n <head>\r\n \t<style>\r\n+\t\t.swal-modal {\r\n+    z-index: 99999;\r\n+}\r\n \t\t</style>\r\n <?php\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n@@ -49,8 +52,9 @@\n \t</script>\r\n \t\";\r\n \t\r\n }\r\n+else{\r\n ?>\r\n \r\n \t<meta charset=\"utf-8\">\r\n \t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n"
+                },
+                {
+                    "date": 1631717630441,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,9 +52,9 @@\n \t</script>\r\n \t\";\r\n \t\r\n }\r\n-else{\r\n+\r\n ?>\r\n \r\n \t<meta charset=\"utf-8\">\r\n \t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n"
+                },
+                {
+                    "date": 1631717677298,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,13 +25,9 @@\n ?>\r\n <!DOCTYPE html>\r\n <html lang=\"en\">\r\n <head>\r\n-\t<style>\r\n-\t\t.swal-modal {\r\n-    z-index: 99999;\r\n-}\r\n-\t\t</style>\r\n+\t\r\n <?php\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n \t\r\n@@ -54,8 +50,13 @@\n \t\r\n }\r\n \r\n ?>\r\n+<style>\r\n+\t\t.swal-modal {\r\n+    z-index: 99999;\r\n+}\r\n+\t\t</style>\r\n \r\n \t<meta charset=\"utf-8\">\r\n \t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n \t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\r\n"
+                },
+                {
+                    "date": 1631717696118,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,9 +51,9 @@\n }\r\n \r\n ?>\r\n <style>\r\n-\t\t.swal-modal {\r\n+\t\t.swal2-modal {\r\n     z-index: 99999;\r\n }\r\n \t\t</style>\r\n \r\n"
+                },
+                {
+                    "date": 1631717710621,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,9 +46,9 @@\n \t\twindow.location.replace('index.php');\r\n \t});;\r\n \t</script>\r\n \t\";\r\n-\t\r\n+\tdie;\r\n }\r\n \r\n ?>\r\n <style>\r\n"
+                },
+                {
+                    "date": 1631717720963,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n if(!isset($_SESSION['iduser']))\r\n {\r\n \t\r\n \techo \".\";\r\n-\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#d1d1d1;z-index:700'></div>\";\r\n+\t// echo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#d1d1d1;z-index:700'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631717765647,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n \t\ticon: 'error',\r\n-\t\ttitle: 'Forbidden Page',\r\n+\t\ttitle: 'Nexus Access Area',\r\n \t\ttext: 'Please Login First',\r\n \t\tallowOutsideClick: false,\r\n \t\tconfirmButtonColor: '#e00d0d',\r\n \t}).then((result) => {\r\n"
+                },
+                {
+                    "date": 1631717783902,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,9 +36,9 @@\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n-\t\ticon: 'error',\r\n+\t\ticon: 'info',\r\n \t\ttitle: 'Nexus Access Area',\r\n \t\ttext: 'Please Login First',\r\n \t\tallowOutsideClick: false,\r\n \t\tconfirmButtonColor: '#e00d0d',\r\n"
+                },
+                {
+                    "date": 1631717819261,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,10 +30,10 @@\n <?php\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n \t\r\n-\techo \".\";\r\n-\t// echo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#d1d1d1;z-index:700'></div>\";\r\n+\t// echo \".\";\r\n+\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#d1d1d1;z-index:700'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631717828521,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n if(!isset($_SESSION['iduser']))\r\n {\r\n \t\r\n \t// echo \".\";\r\n-\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#d1d1d1;z-index:700'></div>\";\r\n+\t// echo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#d1d1d1;z-index:700'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631717861338,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n <?php\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n \t\r\n-\t// echo \".\";\r\n+\techo \".\";\r\n \t// echo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#d1d1d1;z-index:700'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n"
+                },
+                {
+                    "date": 1631717880703,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n \t\ticon: 'info',\r\n \t\ttitle: 'Nexus Access Area',\r\n \t\ttext: 'Please Login First',\r\n \t\tallowOutsideClick: false,\r\n-\t\tconfirmButtonColor: '#e00d0d',\r\n+\t\tconfirmButtonColor: '##3495eb',\r\n \t}).then((result) => {\r\n \t\twindow.location.replace('index.php');\r\n \t});;\r\n \t</script>\r\n"
+                },
+                {
+                    "date": 1631717902399,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,18 +31,18 @@\n if(!isset($_SESSION['iduser']))\r\n {\r\n \t\r\n \techo \".\";\r\n-\t// echo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#d1d1d1;z-index:700'></div>\";\r\n+\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#d1d1d1;z-index:700'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n \t\ticon: 'info',\r\n \t\ttitle: 'Nexus Access Area',\r\n \t\ttext: 'Please Login First',\r\n \t\tallowOutsideClick: false,\r\n-\t\tconfirmButtonColor: '##3495eb',\r\n+\t\tconfirmButtonColor: '#3495eb',\r\n \t}).then((result) => {\r\n \t\twindow.location.replace('index.php');\r\n \t});;\r\n \t</script>\r\n"
+                },
+                {
+                    "date": 1631717907558,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n <?php\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n \t\r\n-\techo \".\";\r\n+\techo \" \";\r\n \techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#d1d1d1;z-index:700'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n"
+                },
+                {
+                    "date": 1631717916977,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n if(!isset($_SESSION['iduser']))\r\n {\r\n \t\r\n \techo \" \";\r\n-\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#d1d1d1;z-index:700'></div>\";\r\n+\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:##3495eb;z-index:700'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631717941385,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,15 +25,19 @@\n ?>\r\n <!DOCTYPE html>\r\n <html lang=\"en\">\r\n <head>\r\n-\t\r\n+<style>\r\n+\t\t.swal2-modal {\r\n+    z-index: 99999;\r\n+}\r\n+\t\t</style>\r\n <?php\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n \t\r\n \techo \" \";\r\n-\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:##3495eb;z-index:700'></div>\";\r\n+\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#3495eb;z-index:700'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n@@ -50,14 +54,10 @@\n \tdie;\r\n }\r\n \r\n ?>\r\n-<style>\r\n-\t\t.swal2-modal {\r\n-    z-index: 99999;\r\n-}\r\n-\t\t</style>\r\n \r\n+\r\n \t<meta charset=\"utf-8\">\r\n \t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n \t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\r\n \t<title>NEXUS - Integrated System</title>\r\n"
+                },
+                {
+                    "date": 1631717972560,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,17 +25,19 @@\n ?>\r\n <!DOCTYPE html>\r\n <html lang=\"en\">\r\n <head>\r\n-<style>\r\n+\r\n+<?php\r\n+if(!isset($_SESSION['iduser']))\r\n+{\r\n+\t?>\r\n+\t<style>\r\n \t\t.swal2-modal {\r\n     z-index: 99999;\r\n }\r\n \t\t</style>\r\n-<?php\r\n-if(!isset($_SESSION['iduser']))\r\n-{\r\n-\t\r\n+\t\t<?php\r\n \techo \" \";\r\n \techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#3495eb;z-index:700'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n"
+                },
+                {
+                    "date": 1631717977770,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,20 +24,21 @@\n }\r\n ?>\r\n <!DOCTYPE html>\r\n <html lang=\"en\">\r\n+\r\n <head>\r\n \r\n-<?php\r\n+\t<?php\r\n if(!isset($_SESSION['iduser']))\r\n {\r\n \t?>\r\n \t<style>\r\n \t\t.swal2-modal {\r\n-    z-index: 99999;\r\n-}\r\n-\t\t</style>\r\n-\t\t<?php\r\n+\t\t\tz-index: 99999;\r\n+\t\t}\r\n+\t</style>\r\n+\t<?php\r\n \techo \" \";\r\n \techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#3495eb;z-index:700'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n@@ -144,9 +145,8 @@\n \r\n \t\t.card {\r\n \t\t\tpadding: 15px;\r\n \t\t}\r\n-\t\r\n \t</style>\r\n </head>\r\n \r\n <body>\r\n@@ -478,14 +478,14 @@\n \t\t\t\t\t<a href=\"#\" class=\"navbar-nav-link d-flex align-items-center dropdown-toggle\"\r\n \t\t\t\t\t\tdata-toggle=\"dropdown\">\r\n \t\t\t\t\t\t<img src=\"../../../../global_assets/images/placeholders/placeholder.jpg\"\r\n \t\t\t\t\t\t\tclass=\"rounded-circle mr-2\" height=\"34\" alt=\"\">\r\n-\t\t\t\t\t\t\t\r\n-\t\t\t\t\t\t<span id = \"namecompany\"><?= $name?></span>\r\n+\r\n+\t\t\t\t\t\t<span id=\"namecompany\"><?= $name?></span>\r\n \t\t\t\t\t</a>\r\n-\t\t\t\t\t\t<div class=\"dropdown-menu dropdown-menu-right\">\r\n+\t\t\t\t\t<div class=\"dropdown-menu dropdown-menu-right\">\r\n \r\n-\t\t\t\t\t\t\t<?php\r\n+\t\t\t\t\t\t<?php\r\n \t\t\t\t\t\t\t\tfor($i = 0 ; $i < count($listcompany);$i++) \r\n \t\t\t\t\t\t\t\t{\r\n \t\t\t\t\t\t\t\t\r\n \t\t\t\t\t\t\t\t\techo \"<a class='dropdown-item' onclick = setsister('\".$listcompany[$i]['id'].\"','\".$listcompany[$i]['name'].\"')><i class='icon-check'></i>\r\n@@ -493,11 +493,11 @@\n \t\t\t\t\t\t\t\t\t// echo \"<a class='dropdown-item' onclick = setsister('\".$listcompany[$i]['id'].\"-\".$listcompany[$i]['name'].\"')><i class='icon-user-plus' ></i>\".$listcompany[$i]['name'].\"</a>\";\r\n \t\t\t\t\t\t\t\t}\r\n \t\t\t\t\t\t\t?>\r\n \r\n-\t\t\t\t\t\t</div>\r\n+\t\t\t\t\t</div>\r\n \r\n-\t\t\t\t\t\r\n+\r\n \t\t\t\t</li>\r\n \r\n \t\t\t\t<li class=\"nav-item dropdown dropdown-user\">\r\n \r\n@@ -519,8 +519,5 @@\n \t\t\t\t\t</div>\r\n \t\t\t\t</li>\r\n \t\t\t</ul>\r\n \t\t</div>\r\n-\t</div>\r\n-\r\n-\r\n-\r\n+\t</div>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1631717988274,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,10 +32,10 @@\n if(!isset($_SESSION['iduser']))\r\n {\r\n \t?>\r\n \t<style>\r\n-\t\t.swal2-modal {\r\n-\t\t\tz-index: 99999;\r\n+\t\tbody{\r\n+\t\t\t\r\n \t\t}\r\n \t</style>\r\n \t<?php\r\n \techo \" \";\r\n"
+                },
+                {
+                    "date": 1631717999960,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n {\r\n \t?>\r\n \t<style>\r\n \t\tbody{\r\n-\t\t\t\r\n+\t\t\tbackground-color:#3495eb;\r\n \t\t}\r\n \t</style>\r\n \t<?php\r\n \techo \" \";\r\n"
+                },
+                {
+                    "date": 1631718052550,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,10 +44,10 @@\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n \t\ticon: 'info',\r\n-\t\ttitle: 'Nexus Access Area',\r\n-\t\ttext: 'Please Login First',\r\n+\t\ttitle: 'Nexus Admin Area',\r\n+\t\ttext: 'Please Sign In First',\r\n \t\tallowOutsideClick: false,\r\n \t\tconfirmButtonColor: '#3495eb',\r\n \t}).then((result) => {\r\n \t\twindow.location.replace('index.php');\r\n"
+                },
+                {
+                    "date": 1631718071347,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,9 +47,9 @@\n \t\ticon: 'info',\r\n \t\ttitle: 'Nexus Admin Area',\r\n \t\ttext: 'Please Sign In First',\r\n \t\tallowOutsideClick: false,\r\n-\t\tconfirmButtonColor: '#3495eb',\r\n+\t\tconfirmButtonColor: '#115591',\r\n \t}).then((result) => {\r\n \t\twindow.location.replace('index.php');\r\n \t});;\r\n \t</script>\r\n"
+                },
+                {
+                    "date": 1631718082741,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,9 +47,9 @@\n \t\ticon: 'info',\r\n \t\ttitle: 'Nexus Admin Area',\r\n \t\ttext: 'Please Sign In First',\r\n \t\tallowOutsideClick: false,\r\n-\t\tconfirmButtonColor: '#115591',\r\n+\t\tconfirmButtonColor: '#3495eb',\r\n \t}).then((result) => {\r\n \t\twindow.location.replace('index.php');\r\n \t});;\r\n \t</script>\r\n"
+                },
+                {
+                    "date": 1631718091303,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,14 +33,14 @@\n {\r\n \t?>\r\n \t<style>\r\n \t\tbody{\r\n-\t\t\tbackground-color:#3495eb;\r\n+\t\t\tbackground-color:#115591;\r\n \t\t}\r\n \t</style>\r\n \t<?php\r\n \techo \" \";\r\n-\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#3495eb;z-index:700'></div>\";\r\n+\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#115591;z-index:700'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631718253670,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n {\r\n \t?>\r\n \t<style>\r\n \t\tbody{\r\n-\t\t\tbackground-color:#115591;\r\n+\t\t\tbackground:url('<?=$url;?>assets/bgloginblue.jpg'); background-position:center; background-repeat:no-repeat; background-size:cover;\r\n \t\t}\r\n \t</style>\r\n \t<?php\r\n \techo \" \";\r\n"
+                },
+                {
+                    "date": 1631718268350,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n \t\t}\r\n \t</style>\r\n \t<?php\r\n \techo \" \";\r\n-\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#115591;z-index:700'></div>\";\r\n+\t// echo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#115591;z-index:700'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631718278909,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n \t\t}\r\n \t</style>\r\n \t<?php\r\n \techo \" \";\r\n-\t// echo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#115591;z-index:700'></div>\";\r\n+\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#115591;z-index:700'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631718305856,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n \t\t}\r\n \t</style>\r\n \t<?php\r\n \techo \" \";\r\n-\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#115591;z-index:700'></div>\";\r\n+\t// echo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#115591;z-index:700'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1631718403858,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,14 +33,14 @@\n {\r\n \t?>\r\n \t<style>\r\n \t\tbody{\r\n-\t\t\tbackground:url('<?=$url;?>assets/bgloginblue.jpg'); background-position:center; background-repeat:no-repeat; background-size:cover;\r\n+\t\t\tbackground-color:#115591;\r\n \t\t}\r\n \t</style>\r\n \t<?php\r\n \techo \" \";\r\n-\t// echo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#115591;z-index:700'></div>\";\r\n+\techo\"<div style = 'position:absolute;width:100%;height:100%;background-color:#115591;z-index:700'></div>\";\r\n \techo \"\r\n \t<script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>\r\n \t<script>\r\n \tSwal.fire({\r\n"
                 }
             ],
             "date": 1630468397363,
