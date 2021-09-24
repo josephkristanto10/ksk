@@ -81,6 +81,7 @@ if(!isset($_SESSION['iduser']))
 	<link href="assets/css/layout.min.css" rel="stylesheet" type="text/css">
 	<link href="assets/css/components.min.css" rel="stylesheet" type="text/css">
 	<link href="assets/css/colors.min.css" rel="stylesheet" type="text/css">
+	<!-- <link href="assets/css/colors.min.css" rel="stylesheet" type="text/css"> -->
 	<link rel="shortcut icon" type="image/png" href="assets/logonexus.png" />
 	<!-- /global stylesheets -->
 
@@ -97,7 +98,10 @@ if(!isset($_SESSION['iduser']))
 	<script src="<?=$url;?>global_assets/js/plugins/ui/moment/moment.min.js"></script>
 	<script src="<?=$url;?>global_assets/js/plugins/pickers/daterangepicker.js"></script>
 	<script type="text/javascript" src="<?=$url;?>global_assets/js/plugins/pickers/pickadate/picker.js"></script>
+	<script type="text/javascript" src="<?=$url;?>global_assets/js/plugins/pickers/pickadate/picker.time.js"></script>
 	<script type="text/javascript" src="<?=$url;?>global_assets/js/plugins/pickers/pickadate/picker.date.js"></script>
+	<script src="<?=$url;?>global_assets/js/plugins/pickers/anytime.min.js"></script>
+	<script src="<?=$url;?>global_assets/js/demo_pages/picker_date.js"></script>
 
 	<script src="assets/js/app.js"></script>
 	<script src="<?=$url;?>global_assets/js/demo_pages/dashboard.js"></script>
@@ -115,6 +119,20 @@ if(!isset($_SESSION['iduser']))
 
 	<script src="<?=$url;?>global_assets/js/plugins/forms/selects/select2.min.js"></script>
 	<script src="<?=$url;?>global_assets/js/plugins/tables/datatables/datatables.min.js"></script>
+
+	<script src="<?=$url;?>global_assets/js/plugins/forms/wizards/steps.min.js"></script>
+	<script src="<?=$url;?>global_assets/js/plugins/forms/styling/uniform.min.js"></script>
+	<script src="<?=$url;?>global_assets/js/demo_pages/form_wizard.js"></script>
+	<script src="<?=$url;?>global_assets/js/plugins/forms/validation/validate.min.js"></script>
+	<script src="<?=$url;?>global_assets/js/plugins/loaders/blockui.min.js"></script>
+	<!-- <script src="<?=$url;?>global_assets/js/plugins/uploaders/dropzone.min.js"></script>
+	<script src="<?=$url;?>global_assets/js/demo_pages/uploader_dropzone.js"></script> -->
+	<script src="<?=$url;?>global_assets/js/plugins/uploaders/fileinput/plugins/purify.min.js"></script>
+	<script src="<?=$url;?>global_assets/js/plugins/uploaders/fileinput/plugins/sortable.min.js"></script>
+	<script src="<?=$url;?>global_assets/js/plugins/uploaders/fileinput/fileinput.min.js"></script>
+<script src="<?=$url;?>global_assets/js/demo_pages/uploader_bootstrap.js"></script>
+<script src="<?=$url;?>global_assets/js/plugins/ui/perfect_scrollbar.min.js"></script>
+	<!-- <script src="<?=$url;?>global_assets/js/demo_pages/uploader_plupload.js"></script> -->
 	<style>
 		th {
 			background-color: #324148;
@@ -155,7 +173,7 @@ if(!isset($_SESSION['iduser']))
 	</style>
 </head>
 
-<body>
+<body class = 'custom-scrollbars'>
 	<div class="navbar navbar-expand-md navbar-dark" style = "height:60px;">
 	
 	<div class="navbar navbar-dark bg-dark-100 navbar-static border-0" style="height:55px;margin-top:0px;margin-left:20px;margin-right:20px;">

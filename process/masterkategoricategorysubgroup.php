@@ -9,6 +9,7 @@ if($tipe == "load")
         'subgroup',
         'category',
         'description',
+        'template',
         'status'
         
     ];
@@ -20,16 +21,16 @@ if($tipe == "load")
     $dir      = $response['order'][0]['dir'];
     $search   = $response['search']['value'];
     
-    $total_data = mysqli_query($conn, "select c.id, ka.id as idgroup , ks.id as idsubgroup, ka.nama as namagroup, ks.subgroup as namasubgroup, c.category , c.description as categorydesc, c.status from kategori_categorysubgroup c inner join kategori_asset ka on ka.id = c.idgroup inner join kategori_subgroup ks on ks.id = c.idsubgroup");
+    $total_data = mysqli_query($conn, "select c.id, ka.id as idgroup , ks.id as idsubgroup, ka.nama as namagroup, ks.subgroup as namasubgroup, c.category , c.description as categorydesc, c.status, template.id as idtemplate, template.template from kategori_categorysubgroup c inner join kategori_asset ka on ka.id = c.idgroup inner join kategori_subgroup ks on ks.id = c.idsubgroup inner join template on template.id = c.idtemplate");
     
     if(empty($search)) {
-        $query_data = mysqli_query($conn, "select c.id, ka.id as idgroup , ks.id as idsubgroup, ka.nama as namagroup, ks.subgroup as namasubgroup, c.category , c.description as categorydesc, c.status from kategori_categorysubgroup c inner join kategori_asset ka on ka.id = c.idgroup inner join kategori_subgroup ks on ks.id = c.idsubgroup ORDER BY $order $dir LIMIT $start, $length");
+        $query_data = mysqli_query($conn, "select c.id, ka.id as idgroup , ks.id as idsubgroup, ka.nama as namagroup, ks.subgroup as namasubgroup, c.category , c.description as categorydesc, c.status, template.id as idtemplate, template.template from kategori_categorysubgroup c inner join kategori_asset ka on ka.id = c.idgroup inner join kategori_subgroup ks on ks.id = c.idsubgroup inner join template on template.id = c.idtemplate ORDER BY $order $dir LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "select c.id, ka.id as idgroup , ks.id as idsubgroup, ka.nama as namagroup, ks.subgroup as namasubgroup, c.category , c.description as categorydesc, c.status from kategori_categorysubgroup c inner join kategori_asset ka on ka.id = c.idgroup inner join kategori_subgroup ks on ks.id = c.idsubgroup");
+        $total_filtered = mysqli_query($conn, "select c.id, ka.id as idgroup , ks.id as idsubgroup, ka.nama as namagroup, ks.subgroup as namasubgroup, c.category , c.description as categorydesc, c.status, template.id as idtemplate, template.template from kategori_categorysubgroup c inner join kategori_asset ka on ka.id = c.idgroup inner join kategori_subgroup ks on ks.id = c.idsubgroup inner join template on template.id = c.idtemplate");
     } else {
-        $query_data = mysqli_query($conn, "select c.id, ka.id as idgroup , ks.id as idsubgroup, ka.nama as namagroup, ks.subgroup as namasubgroup, c.category , c.description as categorydesc, c.status from kategori_categorysubgroup c inner join kategori_asset ka on ka.id = c.idgroup inner join kategori_subgroup ks on ks.id = c.idsubgroup WHERE ka.nama LIKE '%$search%' OR ks.subgroup LIKE '%$search%' OR c.category LIKE '%$search%' OR c.description LIKE '%$search%'   ORDER BY $order $dir LIMIT $start, $length");
+        $query_data = mysqli_query($conn, "select c.id, ka.id as idgroup , ks.id as idsubgroup, ka.nama as namagroup, ks.subgroup as namasubgroup, c.category , c.description as categorydesc, c.status, template.id as idtemplate, template.template from kategori_categorysubgroup c inner join kategori_asset ka on ka.id = c.idgroup inner join kategori_subgroup ks on ks.id = c.idsubgroup inner join template on template.id = c.idtemplate WHERE ka.nama LIKE '%$search%' OR ks.subgroup LIKE '%$search%' OR c.category LIKE '%$search%' OR c.description LIKE '%$search%'   ORDER BY $order $dir LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "select c.id, ka.id as idgroup , ks.id as idsubgroup, ka.nama as namagroup, ks.subgroup as namasubgroup, c.category , c.description as categorydesc, c.status from kategori_categorysubgroup c inner join kategori_asset ka on ka.id = c.idgroup inner join kategori_subgroup ks on ks.id = c.idsubgroup WHERE ka.nama LIKE '%$search%' OR ks.subgroup LIKE '%$search%' OR c.category LIKE '%$search%' OR c.description LIKE '%$search%' ");
+        $total_filtered = mysqli_query($conn, "select c.id, ka.id as idgroup , ks.id as idsubgroup, ka.nama as namagroup, ks.subgroup as namasubgroup, c.category , c.description as categorydesc, c.status, template.id as idtemplate, template.template from kategori_categorysubgroup c inner join kategori_asset ka on ka.id = c.idgroup inner join kategori_subgroup ks on ks.id = c.idsubgroup inner join template on template.id = c.idtemplate WHERE ka.nama LIKE '%$search%' OR ks.subgroup LIKE '%$search%' OR c.category LIKE '%$search%' OR c.description LIKE '%$search%' ");
     }
     
     $response['data'] = [];
@@ -56,6 +57,7 @@ if($tipe == "load")
                 "<label id ='nama".$row['id']."'>".$row['namagroup']."</label>",
                 "<label id ='subgroup".$row['id']."'>".$row['namasubgroup']."</label>",
                 "<label id ='category".$row['id']."'>".$row['category']."</label>",
+                "<label id ='template".$row['id']."'>".$row['template']."</label>",
                 "<label id ='description".$row['id']."'>".$row['categorydesc']."</label>",
                 "<label id ='status".$row['id']."'>".$mystats."</label>",
                 ' <div class="list-icons">
@@ -65,7 +67,7 @@ if($tipe == "load")
                     </a>
     
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a href="#myModaledit" data-toggle="modal" class="dropdown-item" id ="click-'.$row['id']."-".$row['idgroup']."-".$row['idsubgroup'].'"  onclick = "openmodaledit(this)"><i class="icon-check"></i>
+                        <a href="#myModaledit" data-toggle="modal" class="dropdown-item" id ="click-'.$row['id']."-".$row['idgroup']."-".$row['idsubgroup'].'-'.$row['idtemplate'].'"  onclick = "openmodaledit(this)"><i class="icon-check"></i>
                             Edit</a>
                         
                         '.$myaction.'
@@ -89,6 +91,7 @@ if($tipe == "load")
     
     echo json_encode($response);
 }
+
 else if($tipe == "getsubgroup")
 {
     $getid = $_POST['idgroup'];
@@ -113,7 +116,8 @@ else if($tipe == "addcategory"){
     $mygroup = $_POST['group'];
     $mysubgroup = $_POST['sub'];
     $mydesc = $_POST['desc'];
-    $sql = "INSERT into kategori_categorysubgroup values(NULL, '".$mygroup."', '".$mysubgroup."', '".$mycat."', '".$mydesc."' , 'Active')";
+    $mytemplate = $_POST['template'];
+    $sql = "INSERT into kategori_categorysubgroup values(NULL, '".$mygroup."', '".$mysubgroup."','".$mytemplate."', '".$mycat."', '".$mydesc."' , 'Active')";
     $res = $conn->query($sql);
     if(($conn -> affected_rows)>0)
     {
@@ -129,8 +133,9 @@ else if($tipe == "changedata")
     $cat = $_POST['mycategory'];
     $group = $_POST['mygroup'];
     $description = $_POST['mydesc'];
+    $template = $_POST['mytemplate'];
     $mysubgroup = $_POST['mysubgroup'];
-    $sql = "update kategori_categorysubgroup set idgroup = '".$group."', idsubgroup = '".$mysubgroup."', category = '".$cat."', description = '".$description."' where id = '".$id."'";
+    $sql = "update kategori_categorysubgroup set idgroup = '".$group."', idsubgroup = '".$mysubgroup."', category = '".$cat."', idtemplate = '".$template."', description = '".$description."' where id = '".$id."'";
     $res = $conn->query($sql);
     if(($conn -> affected_rows)>0)
     {

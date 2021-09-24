@@ -24,9 +24,9 @@ if($res -> num_rows>0)
 					<div class="page-title d-flex">
 						<div class="row" style="width:100%;">
 							<div class="col-xl-12">
-								<a href="#myModal" data-toggle="modal"><button class="btn btn-info"
-										style="background-color:#26a69a !important;width:150px;"><i
-											class="icon-add"></i> &nbsp Add Building</button></a>
+								<a href="#myModal" data-toggle="modal"> <button type="button" style = "background-color:#26a69a !important; color:white; width:150px;" class="btn btn-indigo btn-labeled btn-labeled-left" onclick="cancel()" data-toggle="modal" data-target="#modal_form">
+                            <b><i class="icon-plus-circle2"></i></b> Add Building
+                        </button></a>
 							</div>
 						</div>
 						<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>

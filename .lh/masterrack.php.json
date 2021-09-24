@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 781,
+            "activePatchIndex": 782,
             "patches": [
                 {
                     "date": 1627978322729,
@@ -3132,6 +3132,10 @@
                 {
                     "date": 1631695468832,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -131,9 +131,9 @@\n                 <form id=\"myformedit\">\r\n                     <div class=\"form-group\">\r\n                         <input type=\"hidden\" id=\"idchange\">\r\n                         <label for=\"code\">Code</label>\r\n-                        <input type=\"text\" class=\"form-control\" id=\"codeedit\">\r\n+                        <input type=\"text\" class=\"form-control\" id=\"codeedit\" disabled>\r\n                         <br>\r\n                         <label for=\"cars\">Sister:</label>\r\n                         <input type=\"text\" class=\"form-control\" id=\"sisteredit\" value=\"<?= $name ?>\" style=\"color:grey;\"\r\n                             readonly>\r\n"
+                },
+                {
+                    "date": 1632457446534,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,11 +24,13 @@\n             <h4><span class=\"font-weight-semibold\">Master Rack</span></h4>\r\n             <div class=\"page-title d-flex\">\r\n                 <div class=\"row\" style=\"width:100%;\">\r\n                     <div class=\"col-xl-12\">\r\n-                        <a href=\"#myModal\" data-toggle=\"modal\"> <button onclick=\"setbranchonclick()\"\r\n-                                class=\"btn btn-info\" style=\"background-color:#26a69a !important;width:120px;\"><i\r\n-                                    class=\"icon-add\"></i> &nbsp Add Rack</button></a>\r\n+                        <a href=\"#myModal\" data-toggle=\"modal\"> \r\n+                                    <button type=\"button\" style = \"background-color:#26a69a !important; color:white; width:150px;\" class=\"btn btn-indigo btn-labeled btn-labeled-left\"  onclick=\"setbranchonclick()\" data-toggle=\"modal\" data-target=\"#modal_form\">\r\n+                                        <b><i class=\"icon-plus-circle2\"></i></b> Add Rack\r\n+                                    </button>\r\n+                                </a>\r\n                     </div>\r\n                 </div>\r\n                 <a href=\"#\" class=\"header-elements-toggle text-default d-md-none\"><i class=\"icon-more\"></i></a>\r\n             </div>\r\n"
                 }
             ],
             "date": 1627978322729,

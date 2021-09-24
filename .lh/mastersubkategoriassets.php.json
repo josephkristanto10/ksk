@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 289,
+            "activePatchIndex": 290,
             "patches": [
                 {
                     "date": 1628248487932,
@@ -1164,6 +1164,10 @@
                 {
                     "date": 1630575891696,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n <?php\r\n require_once 'layout/header.php';\r\n require_once 'layout/sidebar.php';\r\n+require_once 'layout/footer.php';\r\n $sql = \"select * from kategori_asset\";\r\n $res = $conn->query($sql);\r\n $res2 = $conn->query($sql);\r\n ?>\r\n@@ -134,9 +135,9 @@\n \t\t\t\t</div>\r\n \t\t</div>\r\n \t\t<!-- End Modal -->\r\n \t</div>\r\n-\t\t\t\t\t\t\t\r\n+\t\t\t\t\t\t\t</div>\r\n \t\t\t\t\t\t\r\n \r\n </body>\r\n \r\n"
+                },
+                {
+                    "date": 1632472219289,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,10 +12,11 @@\n \t\t\t\t\t<h4><span class=\"font-weight-semibold\">Master Sub Group</span></h4>\r\n \t\t\t\t\t<div class=\"page-title d-flex\">\r\n \t\t\t\t\t\t<div class=\"row\" style=\"width:100%;\">\r\n \t\t\t\t\t\t\t<div class=\"col-xl-12\">\r\n-\t\t\t\t\t\t\t<a href=\"#myModal\" data-toggle=\"modal\"><button class=\"btn btn-info\" style=\"background-color:#26a69a !important;width:200px;\"><i\r\n-\t\t\t\t\t\t\t\t\t\tclass=\"icon-add\"></i> &nbsp Add Sub Group </button></a>\r\n+\t\t\t\t\t\t\t<a href=\"#myModal\" data-toggle=\"modal\"><button type=\"button\" style = \"background-color:#26a69a !important; color:white; width:200px;\" class=\"btn btn-indigo btn-labeled btn-labeled-left\" onclick=\"cancel()\" data-toggle=\"modal\" data-target=\"#modal_form\">\r\n+                            <b><i class=\"icon-plus-circle2\"></i></b> Add Category\r\n+                        </button></a>\r\n \t\t\t\t\t\t\t</div>\r\n \t\t\t\t\t\t</div>\r\n \t\t\t\t\t\t<a href=\"#\" class=\"header-elements-toggle text-default d-md-none\"><i class=\"icon-more\"></i></a>\r\n \t\t\t\t\t</div>\r\n"
                 }
             ],
             "date": 1628248487932,

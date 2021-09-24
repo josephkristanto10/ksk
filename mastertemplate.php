@@ -2,34 +2,14 @@
 require_once 'layout/header.php';
 require_once 'layout/sidebar.php';
 require_once 'layout/footer.php';
-$sql = "select * from country";
-$sqlrank = "select * from rank";
-$sqldepartment = "select * from department";
+$sql = "SELECT * FROM folder_custom";
 $res = $conn->query($sql);
-$mycountry = array();
+$mycustom = array();
 if($res->num_rows>0)
 {
     while($r = mysqli_fetch_array($res))
     {
-        $mycountry[] = $r;
-    }
-}
-$myrank = array();
-$resrank =  $conn->query($sqlrank);
-if($resrank->num_rows>0)
-{
-    while($r = mysqli_fetch_array($resrank))
-    {
-        $myrank[] = $r;
-    }
-}
-$mydept = array();
-$resdept =  $conn->query($sqldepartment);
-if($resdept->num_rows>0)
-{
-    while($r = mysqli_fetch_array($resdept))
-    {
-        $mydept[] = $r;
+        $mycustom[] = $r;
     }
 }
 
@@ -38,13 +18,11 @@ if($resdept->num_rows>0)
         <div class="content-wrapper">
             <div class="page-header page-header-light">
             <div class="page-header-content header-elements-md-inline">
-                <h4><span class="font-weight-semibold">Master Reason</span></h4> 
+                <h4><span class="font-weight-semibold">Master Template</span></h4> 
                     <div class="page-title d-flex">
                         <div class = "row" style = "width:100%;">
                             <div class = "col-xl-12" >
-							<a href="#myModal" data-toggle="modal">  <button type="button" style = "background-color:#26a69a !important; color:white; width:150px;" class="btn btn-indigo btn-labeled btn-labeled-left" onclick="cancel()" data-toggle="modal" data-target="#modal_form">
-                            <b><i class="icon-plus-circle2"></i></b> Add Reason
-                        </button></a>
+							<a href="#myModal" data-toggle="modal"> <button class = "btn btn-info" style = "background-color:#26a69a !important;width:175px;"><i class = "icon-add"></i> &nbsp Add Template</button></a>
                             </div>
                         </div>
                         <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -63,11 +41,13 @@ if($resdept->num_rows>0)
                     <div class="col-xl-12">
 
                         <div class="card">
+
+
                         <table id = "datatable_serverside" class="table table-hover table-bordered display nowrap w-100">
                                 <thead>
                                     <tr>  
-                                        <th>Reason</th>
-                                        <th>Description</th>
+                                        <th>Template</th>
+                                        <th>Asset Qty</th>
                                         <th class="text-center">Status</th>
                                         <th class="text-center">Action</th>
                                     </tr>
@@ -84,7 +64,7 @@ if($resdept->num_rows>0)
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header" style="background-color:#324148;color:white;height:60px;">
-						<h5 class="modal-title">Add Reason</h5>
+						<h5 class="modal-title">Add Template</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">×</span>
 						</button>
@@ -93,17 +73,24 @@ if($resdept->num_rows>0)
 					<div class="modal-body">
                         <form id= "myform">
 						<div class="form-group">
-					
-                            <label for="code">Reason</label><input type="text" name="code" id="reason" class="form-control"/>
-                            <br>
-                       
-                            <label for="description">Description</label><input type="text" name="description" id="description" class="form-control"/>
-                     
+                        <label for="description">Template Name :  </label>
+							<input type="text" class="form-control" id="template">
+							<br>
+                            <label for="description">Custom Field :  </label><br>
+                            <?php
+                            for($i = 0 ; $i< count($mycustom); $i++)
+                            {
+                                echo '
+                                <input type="checkbox" class="customfield" value = '.$mycustom[$i]['id'].'>
+                                <label for="custom">'.$mycustom[$i]['name'].'</label><br>';
+                            }
+                            ?>
+                        
 							<br>
 							<br>
 							<div style = "float:right;margin-bottom:20px;">
 							<button type="button" class="btn btn-primary" style = "margin-right:10px;" onclick="adddata()">Save</button>
-						    <button type="button" class="btn btn-secondary" data-dismiss="modal" id = "canceladd">Cancel</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" id = "canceladd">Cancel</button>
 							</div>
 						</div>
                       </form>
@@ -116,7 +103,7 @@ if($resdept->num_rows>0)
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header" style="background-color:#324148;color:white;height:60px;">
-						<h5 class="modal-title">Edit Reason</h5>
+						<h5 class="modal-title">Edit Driving Force</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">×</span>
 						</button>
@@ -125,17 +112,17 @@ if($resdept->num_rows>0)
 					<div class="modal-body">
                         <form id= "myformedit">
 						<div class="form-group">
-                            <input type = "hidden" id= "idchange">
-                            <label for="code">Reason</label><input type="text" name="code" id="reasonedit" class="form-control"/>
-                            <br>
-                       
-                            <label for="description">Description</label><input type="text" name="description" id="descriptionedit" class="form-control"/>
-                     
+                            <input type = "hidden" id = "idchange">
+                            <label for="description">Driving Force</label>
+							<input type="text" class="form-control" id="drivingforceedit">
+							<br>
+                            <label for="description">Description</label>
+							<input type="text" class="form-control" id="descriptionedit">
 							<br>
 							<br>
 							<div style = "float:right;margin-bottom:20px;">
 							<button type="button" class="btn btn-primary" style = "margin-right:10px;" onclick="changedata()">Save</button>
-						    <button type="button" class="btn btn-secondary" data-dismiss="modal" id = "canceledit">Cancel</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" id = "canceledit">Cancel</button>
 							</div>
 						</div>
                       </form>
@@ -150,6 +137,9 @@ if($resdept->num_rows>0)
 </html>
 <script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>
 <script>
+
+
+    
 $(function() {
       loadData();
    });
@@ -163,13 +153,13 @@ $(function() {
          scrollX: true,
          order: [[0, 'asc']],
          ajax: { 
-            url: 'process/masterreason.php',
+            url: 'process/mastertemplate.php',
             method: 'POST',
             data: { tipe: "load"  }
         },
          columns: [
-            { name: 'Reason', className: 'text-center align-middle' },
-            { name: 'Description', className: 'text-center align-middle' },
+            { name: 'Template', className: 'text-center align-middle' },
+            { name: 'AssetQty', className: 'text-center align-middle' },
             { name: 'Status', className: 'text-center align-middle' },
             { name: 'Action', searchable: false, orderable: false, className: 'text-center align-middle' }
             
@@ -181,29 +171,28 @@ $(function() {
    function success() {
       $('#datatable_serverside').DataTable().ajax.reload(null, false);
    };
-   var globalprovince = "";
-   var globalcity = "";
+   var globalid = "";
 
    function openmodaledit(element){
-	var idelement = element.id.split("-");
-	var reason = $("#reason" + idelement[1]).text();
-    var description = $("#description" + idelement[1]).text();
     
-    $("#reasonedit").val(reason);
+	var idelement = element.id.split("-");
+	var condition = $("#drivingforce" + idelement[1]).text();
+	var description = $("#description" + idelement[1]).text();
+	$("#drivingforceedit").val(condition);
     $("#descriptionedit").val(description);
     $("#idchange").val(idelement[1]);
    }
 
    function changedata(){
 	 var changeid = $("#idchange").val();
-     var reason = $("#reasonedit").val();
-     var description = $("#descriptionedit").val();
-    if(reason == "" || description == "" )
+	 var changedrivingforce = $("#drivingforceedit").val();
+	 var changedescription = $("#descriptionedit").val();
+	 if(changedrivingforce == "" || changedescription == "")
 	 {
-                       Swal.fire({
+						Swal.fire({
                             icon: 'error',
                             title: 'Empty Field',
-                            text: 'Requirement data cannot be empty',
+                            text: 'Condition / Description cannot be empty',
                             confirmButtonColor: '#e00d0d',
                         });
 	 }
@@ -214,13 +203,13 @@ $(function() {
                 }
             });
             $.ajax({
-                url: "process/masterreason.php",
+                url: "process/masterdrivingforce.php",
                 method: 'POST',
                 data: {
                     tipe: "changedata",
 					myid : changeid,
-                    myreason : reason,
-                    mydescription :  description
+					mychangedrivingforce: changedrivingforce,
+                    mychangedesription : changedescription
                     
                 },
                 success: function (result) {
@@ -242,8 +231,8 @@ $(function() {
 					else{
 						Swal.fire({
                             icon: 'error',
-                            title: 'Data Exists',
-                            text: 'Duplicate Entry For This Reason',
+                            title: 'Duplicated Driving Force',
+                            text: 'Duplicate Entry For This Driving Force',
                             confirmButtonColor: '#e00d0d',
                         });
 					}
@@ -256,10 +245,9 @@ $(function() {
 	 }
    }
    function adddata(){
-	var reason = $("#reason").val();
-    var description = $("#description").val();
-
-    if(reason == "" || description == "")
+    var template = $("#template").val();
+   
+    if(template == "" )
     {
                          Swal.fire({
                             icon: 'error',
@@ -269,22 +257,26 @@ $(function() {
                         });
     }
     else{
+        var selectedcustom = [];
+            $("input:checkbox[class=customfield]:checked").each(function(){
+                selectedcustom.push($(this).val());
+            });
         $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
             $.ajax({
-                url: "process/masterreason.php",
+                url: "process/mastertemplate.php",
                 method: 'POST',
                 data: {
                     tipe: "add",
-                    myreason : reason ,
-                    mydescription :  description
+                    mytemplate: template,
+                    myselected : selectedcustom
                     
                 },
                 success: function (result) {
-                //    alert(result);
+                   alert(result);
                      if(result == "sukses")
                     {
                         success();
@@ -303,7 +295,7 @@ $(function() {
                         Swal.fire({
                             icon: 'error',
                             title: 'Data Exists',
-                            text: 'Duplicate Entry For This Reason',
+                            text: 'Duplicate Entry For This template',
                             confirmButtonColor: '#e00d0d',
                         });
                     }
@@ -315,6 +307,10 @@ $(function() {
           
 }
 $("#country").on('change', function(){
+	//    alert("test");
+
+	
+	//  alert(myoptionid);
 	   var myid = this.value;
 		$.ajaxSetup({
                 headers: {
@@ -322,62 +318,31 @@ $("#country").on('change', function(){
                 }
             });
             $.ajax({
-                url: "process/masterrelation.php",
+                url: "process/mastercity.php",
                 method: 'POST',
                 data: {
                     tipe: "getprovince",
-                    idcountry : myid
-                    
-                },
-                success: function (result) {
-                  
-                    if(result == "none")
-                    {
-						$("#province").html("");
-						$("#province").trigger('change');
-                    }
-                    else{
-                        $("#province").html(result).promise().done(function()
-						{
-							  $("#province").trigger('change');
-							});
-                    }
-                   
-                  
-                  
-                }
-            });
-   }).trigger('change');
-   $("#province").on('change', function(){
-	   var myid = this.value;
-		$.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                url: "process/masterrelation.php",
-                method: 'POST',
-                data: {
-                    tipe: "getcity",
                     idprovince : myid
                     
                 },
                 success: function (result) {
+					// alert(result);
                     if(result == "none")
                     {
-						$("#city").html("");
-						
+						$("#province").html("");
                     }
-                    else{
-                        $("#city").html(result).promise().done(function()
-						{
-							
-							});
+                    else
+                    {
+                            $("#province").html(result).promise().done(function()
+                            {
+                                
+                                // if(!globalid =="")
+                                // {
+                                //     $('#subgroupedit').find('option[value="'+globalid+'"]').prop('selected', true);
+                                // }
+                            }
+                            );
                     }
-                   
-                  
-                  
                 }
             });
    }).trigger('change');
@@ -393,11 +358,11 @@ $("#country").on('change', function(){
                 }
             });
             $.ajax({
-                url: "process/masterrelation.php",
+                url: "process/mastercity.php",
                 method: 'POST',
                 data: {
                     tipe: "getprovince",
-                    idcountry : myid
+                    idprovince : myid
                     
                 },
                 success: function (result) {
@@ -411,50 +376,13 @@ $("#country").on('change', function(){
                             $("#provinceedit").html(result).promise().done(function()
                             {
                                 
-                                if(!globalprovince =="")
+                                if(!globalid =="")
                                 {
-                                    $('#provinceedit').find('option[value="'+globalprovince+'"]').prop('selected', true);
+                                    $('#provinceedit').find('option[value="'+globalid+'"]').prop('selected', true);
                                 }
                             }
                             );
-                            $("#provinceedit").trigger('change');
                     }
-                }
-            });
-   }).trigger('change');
-   $("#provinceedit").on('change', function(){
-	   var myid = this.value;
-		$.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                url: "process/masterrelation.php",
-                method: 'POST',
-                data: {
-                    tipe: "getcity",
-                    idprovince : myid
-                    
-                },
-                success: function (result) {
-                    if(result == "none")
-                    {
-						$("#cityedit").html("");
-						
-                    }
-                    else{
-                        $("#cityedit").html(result).promise().done(function()
-						{
-                            if(!globalcity =="")
-                                {
-                                    $('#cityedit').find('option[value="'+globalcity+'"]').prop('selected', true);
-                                }
-						});
-                    }
-                   
-                  
-                  
                 }
             });
    }).trigger('change');
@@ -468,7 +396,7 @@ $("#country").on('change', function(){
                 }
             });
             $.ajax({
-                url: "process/masterreason.php",
+                url: "process/masterdrivingforce.php",
                 method: 'POST',
                 data: {
                     tipe: "setstatus",

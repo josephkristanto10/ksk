@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 434,
+            "activePatchIndex": 476,
             "patches": [
                 {
                     "date": 1628517819558,
@@ -1744,6 +1744,174 @@
                 {
                     "date": 1630576002104,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n <?php\r\n \r\n require_once 'layout/header.php';\r\n require_once 'layout/sidebar.php';\r\n+require_once 'layout/footer.php';\r\n $sql = \"select *, c.description as categorydesc from kategori_categorysubgroup c inner join kategori_asset ka on ka.id = c.idgroup inner join kategori_subgroup ks on ks.id = c.idsubgroup \";\r\n $res = $conn->query($sql);\r\n $sqlaset = \"select * from kategori_asset\";\r\n $resultkategoriaset = $conn->query($sqlaset);\r\n"
+                },
+                {
+                    "date": 1632472148952,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,5 @@\n <?php\r\n-\r\n require_once 'layout/header.php';\r\n require_once 'layout/sidebar.php';\r\n require_once 'layout/footer.php';\r\n $sql = \"select *, c.description as categorydesc from kategori_categorysubgroup c inner join kategori_asset ka on ka.id = c.idgroup inner join kategori_subgroup ks on ks.id = c.idsubgroup \";\r\n@@ -64,9 +63,9 @@\n \t\t<div class=\"modal fade\" id=\"myModal\">\r\n \t\t\t<div class=\"modal-dialog\" role=\"document\">\r\n \t\t\t\t<div class=\"modal-content\">\r\n \t\t\t\t\t<div class=\"modal-header\" style=\"background-color:#324148;color:white;height:60px;\">\r\n-\t\t\t\t\t\t<h5 class=\"modal-title\">Add Category Sub Group</h5>\r\n+\t\t\t\t\t\t<h5 class=\"modal-title\">Add Category</h5>\r\n \t\t\t\t\t\t<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n \t\t\t\t\t\t\t<span aria-hidden=\"true\">×</span>\r\n \t\t\t\t\t\t</button>\r\n \r\n"
+                },
+                {
+                    "date": 1632472157397,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \t\t\t\t\t\t\t<div class=\"col-xl-12\">\r\n \t\t\t\t\t\t\t\t<a href=\"#myModal\" data-toggle=\"modal\">\r\n \t\t\t\t\t\t\t\t\t<button class=\"btn btn-info\"\r\n \t\t\t\t\t\t\t\t\t\tstyle=\"background-color:#26a69a !important;width:200px;\"><i\r\n-\t\t\t\t\t\t\t\t\t\t\tclass=\"icon-add\"></i> &nbsp Category Sub Group </button>\r\n+\t\t\t\t\t\t\t\t\t\t\tclass=\"icon-add\"></i> &nbsp Add Category </button>\r\n \t\t\t\t\t\t\t\t</a>\r\n \t\t\t\t\t\t\t</div>\r\n \t\t\t\t\t\t</div>\r\n \t\t\t\t\t\t<a href=\"#\" class=\"header-elements-toggle text-default d-md-none\"><i class=\"icon-more\"></i></a>\r\n"
+                },
+                {
+                    "date": 1632472200887,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,11 +23,11 @@\n \t\t\t\t\t<div class=\"page-title d-flex\">\r\n \t\t\t\t\t\t<div class=\"row\" style=\"width:100%;\">\r\n \t\t\t\t\t\t\t<div class=\"col-xl-12\">\r\n \t\t\t\t\t\t\t\t<a href=\"#myModal\" data-toggle=\"modal\">\r\n-\t\t\t\t\t\t\t\t\t<button class=\"btn btn-info\"\r\n-\t\t\t\t\t\t\t\t\t\tstyle=\"background-color:#26a69a !important;width:200px;\"><i\r\n-\t\t\t\t\t\t\t\t\t\t\tclass=\"icon-add\"></i> &nbsp Add Category </button>\r\n+\t\t\t\t\t\t\t\t<button type=\"button\" style = \"background-color:#26a69a !important; color:white; width:200px;\" class=\"btn btn-indigo btn-labeled btn-labeled-left\" onclick=\"cancel()\" data-toggle=\"modal\" data-target=\"#modal_form\">\r\n+                            <b><i class=\"icon-plus-circle2\"></i></b> Add Sister Company\r\n+                        </button>\r\n \t\t\t\t\t\t\t\t</a>\r\n \t\t\t\t\t\t\t</div>\r\n \t\t\t\t\t\t</div>\r\n \t\t\t\t\t\t<a href=\"#\" class=\"header-elements-toggle text-default d-md-none\"><i class=\"icon-more\"></i></a>\r\n"
+                },
+                {
+                    "date": 1632472337368,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n \t\t\t\t\t\t<div class=\"row\" style=\"width:100%;\">\r\n \t\t\t\t\t\t\t<div class=\"col-xl-12\">\r\n \t\t\t\t\t\t\t\t<a href=\"#myModal\" data-toggle=\"modal\">\r\n \t\t\t\t\t\t\t\t<button type=\"button\" style = \"background-color:#26a69a !important; color:white; width:200px;\" class=\"btn btn-indigo btn-labeled btn-labeled-left\" onclick=\"cancel()\" data-toggle=\"modal\" data-target=\"#modal_form\">\r\n-                            <b><i class=\"icon-plus-circle2\"></i></b> Add Sister Company\r\n+                            <b><i class=\"icon-plus-circle2\"></i></b> Add Category\r\n                         </button>\r\n \t\t\t\t\t\t\t\t</a>\r\n \t\t\t\t\t\t\t</div>\r\n \t\t\t\t\t\t</div>\r\n"
+                },
+                {
+                    "date": 1632472353356,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -72,13 +72,9 @@\n \t\t\t\t\t</div>\r\n \t\t\t\t\t<div class=\"modal-body\">\r\n \t\t\t\t\t\t<form id=\"myform\">\r\n \t\t\t\t\t\t\t<div class=\"form-group\">\r\n-\t\t\t\t\t\t\t\t<label for=\"code\">Category</label>\r\n-\t\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"category\">\r\n-\t\t\t\t\t\t\t\t<br>\r\n-\r\n-\t\t\t\t\t\t\t\t<label for=\"cars\">Group:</label>\r\n+\t\t\t\t\t\t\t<label for=\"cars\">Group:</label>\r\n \t\t\t\t\t\t\t\t<select id=\"group\" name=\"group\" class=\"form-control\">\r\n \t\t\t\t\t\t\t\t\t<?php\r\n \t\t\t\t\t\t\t\t\t\tif(count($row)>0)\r\n \t\t\t\t\t\t\t\t\t\t{\r\n@@ -94,8 +90,13 @@\n \t\t\t\t\t\t\t\t<label for=\"cars\">Sub Group:</label>\r\n \t\t\t\t\t\t\t\t<select id=\"subgroup\" name=\"subgroup\" class=\"form-control\">\r\n \t\t\t\t\t\t\t\t</select>\r\n \t\t\t\t\t\t\t\t<br>\r\n+\t\t\t\t\t\t\t\t<label for=\"code\">Category</label>\r\n+\t\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"category\">\r\n+\t\t\t\t\t\t\t\t<br>\r\n+\r\n+\t\t\t\t\t\t\t\t\r\n \t\t\t\t\t\t\t\t<label for=\"description\">Description</label>\r\n \t\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"descriptionadd\">\r\n \r\n \t\t\t\t\t\t\t</div>\r\n"
+                },
+                {
+                    "date": 1632472364198,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -91,9 +91,9 @@\n \t\t\t\t\t\t\t\t<select id=\"subgroup\" name=\"subgroup\" class=\"form-control\">\r\n \t\t\t\t\t\t\t\t</select>\r\n \t\t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t\t<label for=\"code\">Category</label>\r\n-\t\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"category\">\r\n+\t\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"category\" focus>\r\n \t\t\t\t\t\t\t\t<br>\r\n \r\n \t\t\t\t\t\t\t\t\r\n \t\t\t\t\t\t\t\t<label for=\"description\">Description</label>\r\n"
+                },
+                {
+                    "date": 1632472371317,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -91,9 +91,9 @@\n \t\t\t\t\t\t\t\t<select id=\"subgroup\" name=\"subgroup\" class=\"form-control\">\r\n \t\t\t\t\t\t\t\t</select>\r\n \t\t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t\t<label for=\"code\">Category</label>\r\n-\t\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"category\" focus>\r\n+\t\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"category\" >\r\n \t\t\t\t\t\t\t\t<br>\r\n \r\n \t\t\t\t\t\t\t\t\r\n \t\t\t\t\t\t\t\t<label for=\"description\">Description</label>\r\n"
+                },
+                {
+                    "date": 1632472411194,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -93,8 +93,19 @@\n \t\t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t\t<label for=\"code\">Category</label>\r\n \t\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"category\" >\r\n \t\t\t\t\t\t\t\t<br>\r\n+\t\t\t\t\t\t\t\t<select id=\"group\" name=\"group\" class=\"form-control\">\r\n+\t\t\t\t\t\t\t\t\t<?php\r\n+\t\t\t\t\t\t\t\t\t\tif(count($row)>0)\r\n+\t\t\t\t\t\t\t\t\t\t{\r\n+\t\t\t\t\t\t\t\t\t\t\tfor($i = 0 ; $i < count($row) ; $i++)\r\n+\t\t\t\t\t\t\t\t\t\t\t{\r\n+\t\t\t\t\t\t\t\t\t\t\t\techo '<option value=\"'.$row[$i]['id'].'\">'.$row[$i]['nama'].'</option>';\r\n+\t\t\t\t\t\t\t\t\t\t\t}\r\n+\t\t\t\t\t\t\t\t\t\t}\r\n+\t\t\t\t\t\t\t\t?>\r\n+\t\t\t\t\t\t\t\t</select>\r\n \r\n \t\t\t\t\t\t\t\t\r\n \t\t\t\t\t\t\t\t<label for=\"description\">Description</label>\r\n \t\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"descriptionadd\">\r\n"
+                },
+                {
+                    "date": 1632472416657,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -93,9 +93,9 @@\n \t\t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t\t<label for=\"code\">Category</label>\r\n \t\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"category\" >\r\n \t\t\t\t\t\t\t\t<br>\r\n-\t\t\t\t\t\t\t\t<select id=\"group\" name=\"group\" class=\"form-control\">\r\n+\t\t\t\t\t\t\t\t<select id=\"template\" name=\"group\" class=\"form-control\">\r\n \t\t\t\t\t\t\t\t\t<?php\r\n \t\t\t\t\t\t\t\t\t\tif(count($row)>0)\r\n \t\t\t\t\t\t\t\t\t\t{\r\n \t\t\t\t\t\t\t\t\t\t\tfor($i = 0 ; $i < count($row) ; $i++)\r\n@@ -104,8 +104,9 @@\n \t\t\t\t\t\t\t\t\t\t\t}\r\n \t\t\t\t\t\t\t\t\t\t}\r\n \t\t\t\t\t\t\t\t?>\r\n \t\t\t\t\t\t\t\t</select>\r\n+\t\t\t\t\t\t\t\t<br>\r\n \r\n \t\t\t\t\t\t\t\t\r\n \t\t\t\t\t\t\t\t<label for=\"description\">Description</label>\r\n \t\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"descriptionadd\">\r\n"
+                },
+                {
+                    "date": 1632472427938,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,20 @@\n \t{\r\n \t\t$row[] = $r;\r\n \t}\r\n }\r\n+$sql = \"select *, c.description as categorydesc from kategori_categorysubgroup c inner join kategori_asset ka on ka.id = c.idgroup inner join kategori_subgroup ks on ks.id = c.idsubgroup \";\r\n+$res = $conn->query($sql);\r\n+$sqlaset = \"select * from kategori_asset\";\r\n+$resultkategoriaset = $conn->query($sqlaset);\r\n+if($resultkategoriaset -> num_rows>0)\r\n+{\r\n+\twhile($r = mysqli_fetch_array($resultkategoriaset))\r\n+\t{\r\n+\t\t$row[] = $r;\r\n+\t}\r\n+}\r\n+\r\n ?>\r\n \r\n \r\n \t\t<div class=\"content-wrapper\">\r\n@@ -93,9 +105,9 @@\n \t\t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t\t<label for=\"code\">Category</label>\r\n \t\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"category\" >\r\n \t\t\t\t\t\t\t\t<br>\r\n-\t\t\t\t\t\t\t\t<select id=\"template\" name=\"group\" class=\"form-control\">\r\n+\t\t\t\t\t\t\t\t<select id=\"template\" name=\"template\" class=\"form-control\">\r\n \t\t\t\t\t\t\t\t\t<?php\r\n \t\t\t\t\t\t\t\t\t\tif(count($row)>0)\r\n \t\t\t\t\t\t\t\t\t\t{\r\n \t\t\t\t\t\t\t\t\t\t\tfor($i = 0 ; $i < count($row) ; $i++)\r\n"
+                },
+                {
+                    "date": 1632472435968,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n \t{\r\n \t\t$row[] = $r;\r\n \t}\r\n }\r\n-$sql = \"select *, c.description as categorydesc from kategori_categorysubgroup c inner join kategori_asset ka on ka.id = c.idgroup inner join kategori_subgroup ks on ks.id = c.idsubgroup \";\r\n+$sql = \"select * from template\";\r\n $res = $conn->query($sql);\r\n $sqlaset = \"select * from kategori_asset\";\r\n $resultkategoriaset = $conn->query($sqlaset);\r\n if($resultkategoriaset -> num_rows>0)\r\n"
+                },
+                {
+                    "date": 1632472456443,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n \t{\r\n \t\t$row[] = $r;\r\n \t}\r\n }\r\n-$sql = \"select * from template\";\r\n+$sql = \"select *\";\r\n $res = $conn->query($sql);\r\n $sqlaset = \"select * from kategori_asset\";\r\n $resultkategoriaset = $conn->query($sqlaset);\r\n if($resultkategoriaset -> num_rows>0)\r\n"
+                },
+                {
+                    "date": 1632472463151,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,11 +12,9 @@\n \t{\r\n \t\t$row[] = $r;\r\n \t}\r\n }\r\n-$sql = \"select *\";\r\n-$res = $conn->query($sql);\r\n-$sqlaset = \"select * from kategori_asset\";\r\n+$sql = \"select * template\";;\r\n $resultkategoriaset = $conn->query($sqlaset);\r\n if($resultkategoriaset -> num_rows>0)\r\n {\r\n \twhile($r = mysqli_fetch_array($resultkategoriaset))\r\n"
+                },
+                {
+                    "date": 1632472468806,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,10 +12,10 @@\n \t{\r\n \t\t$row[] = $r;\r\n \t}\r\n }\r\n-$sql = \"select * template\";;\r\n-$resultkategoriaset = $conn->query($sqlaset);\r\n+$sql = \"select * template\";\r\n+$restemplate = $conn->query($sql);\r\n if($resultkategoriaset -> num_rows>0)\r\n {\r\n \twhile($r = mysqli_fetch_array($resultkategoriaset))\r\n \t{\r\n"
+                },
+                {
+                    "date": 1632472475706,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,11 +14,11 @@\n \t}\r\n }\r\n $sql = \"select * template\";\r\n $restemplate = $conn->query($sql);\r\n-if($resultkategoriaset -> num_rows>0)\r\n+if($restemplate -> num_rows>0)\r\n {\r\n-\twhile($r = mysqli_fetch_array($resultkategoriaset))\r\n+\twhile($r = mysqli_fetch_array($restemplate))\r\n \t{\r\n \t\t$row[] = $r;\r\n \t}\r\n }\r\n"
+                },
+                {
+                    "date": 1632472543197,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,9 @@\n \t}\r\n }\r\n $sql = \"select * template\";\r\n $restemplate = $conn->query($sql);\r\n+$mytemplate = array();\r\n if($restemplate -> num_rows>0)\r\n {\r\n \twhile($r = mysqli_fetch_array($restemplate))\r\n \t{\r\n"
+                },
+                {
+                    "date": 1632472557998,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n if($restemplate -> num_rows>0)\r\n {\r\n \twhile($r = mysqli_fetch_array($restemplate))\r\n \t{\r\n-\t\t$row[] = $r;\r\n+\t\t$mytemplate[] = $r;\r\n \t}\r\n }\r\n \r\n ?>\r\n@@ -108,9 +108,9 @@\n \t\t\t\t\t\t\t\t<select id=\"template\" name=\"template\" class=\"form-control\">\r\n \t\t\t\t\t\t\t\t\t<?php\r\n \t\t\t\t\t\t\t\t\t\tif(count($row)>0)\r\n \t\t\t\t\t\t\t\t\t\t{\r\n-\t\t\t\t\t\t\t\t\t\t\tfor($i = 0 ; $i < count($row) ; $i++)\r\n+\t\t\t\t\t\t\t\t\t\t\tfor($i = 0 ; $i < count($mytemplate) ; $i++)\r\n \t\t\t\t\t\t\t\t\t\t\t{\r\n \t\t\t\t\t\t\t\t\t\t\t\techo '<option value=\"'.$row[$i]['id'].'\">'.$row[$i]['nama'].'</option>';\r\n \t\t\t\t\t\t\t\t\t\t\t}\r\n \t\t\t\t\t\t\t\t\t\t}\r\n"
+                },
+                {
+                    "date": 1632472570030,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -110,9 +110,9 @@\n \t\t\t\t\t\t\t\t\t\tif(count($row)>0)\r\n \t\t\t\t\t\t\t\t\t\t{\r\n \t\t\t\t\t\t\t\t\t\t\tfor($i = 0 ; $i < count($mytemplate) ; $i++)\r\n \t\t\t\t\t\t\t\t\t\t\t{\r\n-\t\t\t\t\t\t\t\t\t\t\t\techo '<option value=\"'.$row[$i]['id'].'\">'.$row[$i]['nama'].'</option>';\r\n+\t\t\t\t\t\t\t\t\t\t\t\techo '<option value=\"'.$mytemplate[$i]['id'].'\">'.$mytemplate[$i]['template'].'</option>';\r\n \t\t\t\t\t\t\t\t\t\t\t}\r\n \t\t\t\t\t\t\t\t\t\t}\r\n \t\t\t\t\t\t\t\t?>\r\n \t\t\t\t\t\t\t\t</select>\r\n"
+                },
+                {
+                    "date": 1632472578987,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -106,9 +106,9 @@\n \t\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"category\" >\r\n \t\t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t\t<select id=\"template\" name=\"template\" class=\"form-control\">\r\n \t\t\t\t\t\t\t\t\t<?php\r\n-\t\t\t\t\t\t\t\t\t\tif(count($row)>0)\r\n+\t\t\t\t\t\t\t\t\t\tif(count($mytemplate)>0)\r\n \t\t\t\t\t\t\t\t\t\t{\r\n \t\t\t\t\t\t\t\t\t\t\tfor($i = 0 ; $i < count($mytemplate) ; $i++)\r\n \t\t\t\t\t\t\t\t\t\t\t{\r\n \t\t\t\t\t\t\t\t\t\t\t\techo '<option value=\"'.$mytemplate[$i]['id'].'\">'.$mytemplate[$i]['template'].'</option>';\r\n"
+                },
+                {
+                    "date": 1632472602168,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n \t{\r\n \t\t$row[] = $r;\r\n \t}\r\n }\r\n-$sql = \"select * template\";\r\n+$sqltemplate = \"select * template\";\r\n $restemplate = $conn->query($sql);\r\n $mytemplate = array();\r\n if($restemplate -> num_rows>0)\r\n {\r\n"
+                },
+                {
+                    "date": 1632472618268,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n \t\t$row[] = $r;\r\n \t}\r\n }\r\n $sqltemplate = \"select * template\";\r\n-$restemplate = $conn->query($sql);\r\n+$restemplate = $conn->query($sqltemplate);\r\n $mytemplate = array();\r\n if($restemplate -> num_rows>0)\r\n {\r\n \twhile($r = mysqli_fetch_array($restemplate))\r\n"
+                },
+                {
+                    "date": 1632472624513,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n }\r\n $sqltemplate = \"select * template\";\r\n $restemplate = $conn->query($sqltemplate);\r\n $mytemplate = array();\r\n-if($restemplate -> num_rows>0)\r\n+if($restemplate->num_rows>0)\r\n {\r\n \twhile($r = mysqli_fetch_array($restemplate))\r\n \t{\r\n \t\t$mytemplate[] = $r;\r\n"
+                },
+                {
+                    "date": 1632472650922,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n \t{\r\n \t\t$row[] = $r;\r\n \t}\r\n }\r\n-$sqltemplate = \"select * template\";\r\n+$sqltemplate = \"select * from template\";\r\n $restemplate = $conn->query($sqltemplate);\r\n $mytemplate = array();\r\n if($restemplate->num_rows>0)\r\n {\r\n"
+                },
+                {
+                    "date": 1632472680355,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -101,23 +101,13 @@\n \t\t\t\t\t\t\t\t<label for=\"cars\">Sub Group:</label>\r\n \t\t\t\t\t\t\t\t<select id=\"subgroup\" name=\"subgroup\" class=\"form-control\">\r\n \t\t\t\t\t\t\t\t</select>\r\n \t\t\t\t\t\t\t\t<br>\r\n+\t\t\t\t\t\t\t\tv\r\n \t\t\t\t\t\t\t\t<label for=\"code\">Category</label>\r\n \t\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"category\" >\r\n \t\t\t\t\t\t\t\t<br>\r\n-\t\t\t\t\t\t\t\t<select id=\"template\" name=\"template\" class=\"form-control\">\r\n-\t\t\t\t\t\t\t\t\t<?php\r\n-\t\t\t\t\t\t\t\t\t\tif(count($mytemplate)>0)\r\n-\t\t\t\t\t\t\t\t\t\t{\r\n-\t\t\t\t\t\t\t\t\t\t\tfor($i = 0 ; $i < count($mytemplate) ; $i++)\r\n-\t\t\t\t\t\t\t\t\t\t\t{\r\n-\t\t\t\t\t\t\t\t\t\t\t\techo '<option value=\"'.$mytemplate[$i]['id'].'\">'.$mytemplate[$i]['template'].'</option>';\r\n-\t\t\t\t\t\t\t\t\t\t\t}\r\n-\t\t\t\t\t\t\t\t\t\t}\r\n-\t\t\t\t\t\t\t\t?>\r\n-\t\t\t\t\t\t\t\t</select>\r\n-\t\t\t\t\t\t\t\t<br>\r\n+\t\t\t\t\t\t\t\t\r\n \r\n \t\t\t\t\t\t\t\t\r\n \t\t\t\t\t\t\t\t<label for=\"description\">Description</label>\r\n \t\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"descriptionadd\">\r\n"
+                },
+                {
+                    "date": 1632472690001,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -101,9 +101,21 @@\n \t\t\t\t\t\t\t\t<label for=\"cars\">Sub Group:</label>\r\n \t\t\t\t\t\t\t\t<select id=\"subgroup\" name=\"subgroup\" class=\"form-control\">\r\n \t\t\t\t\t\t\t\t</select>\r\n \t\t\t\t\t\t\t\t<br>\r\n-\t\t\t\t\t\t\t\tv\r\n+\t\t\t\t\t\t\t\t<label for=\"cars\">Sub Group:</label>\r\n+\t\t\t\t\t\t\t\t<select id=\"template\" name=\"template\" class=\"form-control\">\r\n+\t\t\t\t\t\t\t\t\t<?php\r\n+\t\t\t\t\t\t\t\t\t\tif(count($mytemplate)>0)\r\n+\t\t\t\t\t\t\t\t\t\t{\r\n+\t\t\t\t\t\t\t\t\t\t\tfor($i = 0 ; $i < count($mytemplate) ; $i++)\r\n+\t\t\t\t\t\t\t\t\t\t\t{\r\n+\t\t\t\t\t\t\t\t\t\t\t\techo '<option value=\"'.$mytemplate[$i]['id'].'\">'.$mytemplate[$i]['template'].'</option>';\r\n+\t\t\t\t\t\t\t\t\t\t\t}\r\n+\t\t\t\t\t\t\t\t\t\t}\r\n+\t\t\t\t\t\t\t\t?>\r\n+\t\t\t\t\t\t\t\t</select>\r\n+\t\t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t\t<label for=\"code\">Category</label>\r\n \t\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"category\" >\r\n \t\t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t\t\r\n"
+                },
+                {
+                    "date": 1632472832214,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -101,9 +101,9 @@\n \t\t\t\t\t\t\t\t<label for=\"cars\">Sub Group:</label>\r\n \t\t\t\t\t\t\t\t<select id=\"subgroup\" name=\"subgroup\" class=\"form-control\">\r\n \t\t\t\t\t\t\t\t</select>\r\n \t\t\t\t\t\t\t\t<br>\r\n-\t\t\t\t\t\t\t\t<label for=\"cars\">Sub Group:</label>\r\n+\t\t\t\t\t\t\t\t<label for=\"cars\">Template :</label>\r\n \t\t\t\t\t\t\t\t<select id=\"template\" name=\"template\" class=\"form-control\">\r\n \t\t\t\t\t\t\t\t\t<?php\r\n \t\t\t\t\t\t\t\t\t\tif(count($mytemplate)>0)\r\n \t\t\t\t\t\t\t\t\t\t{\r\n@@ -380,8 +380,9 @@\n \r\n \tfunction adddata() {\r\n \t\tvar mycat = $(\"#category\").val();\r\n \t\tvar mygroup = $(\"#group\").val();\r\n+\t\tvar template = $(\"#template\").val();\r\n \t\tvar mysubgroup = $(\"#subgroup\").val();\r\n \t\tvar mydesc = $(\"#descriptionadd\").val();\r\n \t\tif (mycat == \"\" || mysubgroup == null) {\r\n \t\t\tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1632472849347,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -380,9 +380,9 @@\n \r\n \tfunction adddata() {\r\n \t\tvar mycat = $(\"#category\").val();\r\n \t\tvar mygroup = $(\"#group\").val();\r\n-\t\tvar template = $(\"#template\").val();\r\n+\t\tvar mytemplate = $(\"#template\").val();\r\n \t\tvar mysubgroup = $(\"#subgroup\").val();\r\n \t\tvar mydesc = $(\"#descriptionadd\").val();\r\n \t\tif (mycat == \"\" || mysubgroup == null) {\r\n \t\t\tSwal.fire({\r\n"
+                },
+                {
+                    "date": 1632472855507,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -405,8 +405,9 @@\n \t\t\t\t\ttipe: \"addcategory\",\r\n \t\t\t\t\tmycategory: mycat,\r\n \t\t\t\t\tgroup: mygroup,\r\n \t\t\t\t\tsub: mysubgroup,\r\n+\t\t\t\t\ttemplate : mytemplate;\r\n \t\t\t\t\tdesc: mydesc\r\n \r\n \t\t\t\t},\r\n \t\t\t\tsuccess: function (result) {\r\n"
+                },
+                {
+                    "date": 1632472862425,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -405,9 +405,9 @@\n \t\t\t\t\ttipe: \"addcategory\",\r\n \t\t\t\t\tmycategory: mycat,\r\n \t\t\t\t\tgroup: mygroup,\r\n \t\t\t\t\tsub: mysubgroup,\r\n-\t\t\t\t\ttemplate : mytemplate;\r\n+\t\t\t\t\ttemplate : mytemplate,\r\n \t\t\t\t\tdesc: mydesc\r\n \r\n \t\t\t\t},\r\n \t\t\t\tsuccess: function (result) {\r\n"
+                },
+                {
+                    "date": 1632473431024,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -238,8 +238,12 @@\n \t\t\t\t\tname: 'Category',\r\n \t\t\t\t\tclassName: 'text-center align-middle'\r\n \t\t\t\t},\r\n \t\t\t\t{\r\n+\t\t\t\t\tname: 'Category',\r\n+\t\t\t\t\tclassName: 'text-center align-middle'\r\n+\t\t\t\t},\r\n+\t\t\t\t{\r\n \t\t\t\t\tname: 'Description',\r\n \t\t\t\t\tclassName: 'text-center align-middle'\r\n \t\t\t\t},\r\n \t\t\t\t{\r\n"
+                },
+                {
+                    "date": 1632473439580,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,8 +59,9 @@\n \r\n \t\t\t\t\t\t\t\t\t\t<th>Group</th>\r\n \t\t\t\t\t\t\t\t\t\t<th>Sub Group</th>\r\n \t\t\t\t\t\t\t\t\t\t<th>Category</th>\r\n+\t\t\t\t\t\t\t\t\t\t<th>Category</th>\r\n \t\t\t\t\t\t\t\t\t\t<th>Description</th>\r\n \t\t\t\t\t\t\t\t\t\t<th class=\"text-center\">Status</th>\r\n \t\t\t\t\t\t\t\t\t\t<th class=\"text-center\">Action</th>\r\n \t\t\t\t\t\t\t\t\t</tr>\r\n@@ -238,9 +239,9 @@\n \t\t\t\t\tname: 'Category',\r\n \t\t\t\t\tclassName: 'text-center align-middle'\r\n \t\t\t\t},\r\n \t\t\t\t{\r\n-\t\t\t\t\tname: 'Category',\r\n+\t\t\t\t\tname: 'Template',\r\n \t\t\t\t\tclassName: 'text-center align-middle'\r\n \t\t\t\t},\r\n \t\t\t\t{\r\n \t\t\t\t\tname: 'Description',\r\n"
+                },
+                {
+                    "date": 1632473616547,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,9 +59,9 @@\n \r\n \t\t\t\t\t\t\t\t\t\t<th>Group</th>\r\n \t\t\t\t\t\t\t\t\t\t<th>Sub Group</th>\r\n \t\t\t\t\t\t\t\t\t\t<th>Category</th>\r\n-\t\t\t\t\t\t\t\t\t\t<th>Category</th>\r\n+\t\t\t\t\t\t\t\t\t\t<th>Template</th>\r\n \t\t\t\t\t\t\t\t\t\t<th>Description</th>\r\n \t\t\t\t\t\t\t\t\t\t<th class=\"text-center\">Status</th>\r\n \t\t\t\t\t\t\t\t\t\t<th class=\"text-center\">Action</th>\r\n \t\t\t\t\t\t\t\t\t</tr>\r\n@@ -180,8 +180,20 @@\n \t\t\t\t\t\t\t\t<label for=\"cars\">Sub Group:</label>\r\n \t\t\t\t\t\t\t\t<select id=\"subgroupedit\" name=\"subgroupedit\" class=\"form-control\">\r\n \t\t\t\t\t\t\t\t</select>\r\n \t\t\t\t\t\t\t\t<br>\r\n+\t\t\t\t\t\t\t\t<label for=\"cars\">Template :</label>\r\n+\t\t\t\t\t\t\t\t<select id=\"template\" name=\"template\" class=\"form-control\">\r\n+\t\t\t\t\t\t\t\t\t<?php\r\n+\t\t\t\t\t\t\t\t\t\tif(count($mytemplate)>0)\r\n+\t\t\t\t\t\t\t\t\t\t{\r\n+\t\t\t\t\t\t\t\t\t\t\tfor($i = 0 ; $i < count($mytemplate) ; $i++)\r\n+\t\t\t\t\t\t\t\t\t\t\t{\r\n+\t\t\t\t\t\t\t\t\t\t\t\techo '<option value=\"'.$mytemplate[$i]['id'].'\">'.$mytemplate[$i]['template'].'</option>';\r\n+\t\t\t\t\t\t\t\t\t\t\t}\r\n+\t\t\t\t\t\t\t\t\t\t}\r\n+\t\t\t\t\t\t\t\t?>\r\n+\t\t\t\t\t\t\t\t</select>\r\n \t\t\t\t\t\t\t\t<label for=\"description\">Description</label>\r\n \t\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"descriptionedit\">\r\n \r\n \t\t\t\t\t\t\t</div>\r\n"
+                },
+                {
+                    "date": 1632473634555,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -151,11 +151,9 @@\n \t\t\t\t\t\t<form id=\"myformedit\">\r\n \t\t\t\t\t\t\t<div class=\"form-group\">\r\n \t\t\t\t\t\t\t\t<input type=\"hidden\" id=\"idchange\">\r\n \t\t\t\t\t\t\t\t<input type=\"hidden\" id=\"idsubgroup\">\r\n-\t\t\t\t\t\t\t\t<label for=\"code\">Category</label>\r\n-\t\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"categoryedit\">\r\n-\t\t\t\t\t\t\t\t<br>\r\n+\t\t\t\t\t\t\t\t\r\n \r\n \t\t\t\t\t\t\t\t<label for=\"cars\">Group:</label>\r\n \t\t\t\t\t\t\t\t<select id=\"groupedit\" name=\"groupedit\" class=\"form-control\">\r\n \t\t\t\t\t\t\t\t\t<?php\r\n@@ -180,8 +178,11 @@\n \t\t\t\t\t\t\t\t<label for=\"cars\">Sub Group:</label>\r\n \t\t\t\t\t\t\t\t<select id=\"subgroupedit\" name=\"subgroupedit\" class=\"form-control\">\r\n \t\t\t\t\t\t\t\t</select>\r\n \t\t\t\t\t\t\t\t<br>\r\n+\t\t\t\t\t\t\t\t<label for=\"code\">Category</label>\r\n+\t\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"categoryedit\">\r\n+\t\t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t\t<label for=\"cars\">Template :</label>\r\n \t\t\t\t\t\t\t\t<select id=\"template\" name=\"template\" class=\"form-control\">\r\n \t\t\t\t\t\t\t\t\t<?php\r\n \t\t\t\t\t\t\t\t\t\tif(count($mytemplate)>0)\r\n@@ -192,8 +193,9 @@\n \t\t\t\t\t\t\t\t\t\t\t}\r\n \t\t\t\t\t\t\t\t\t\t}\r\n \t\t\t\t\t\t\t\t?>\r\n \t\t\t\t\t\t\t\t</select>\r\n+\t\t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t\t<label for=\"description\">Description</label>\r\n \t\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"descriptionedit\">\r\n \r\n \t\t\t\t\t\t\t</div>\r\n"
+                },
+                {
+                    "date": 1632473643283,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -182,9 +182,9 @@\n \t\t\t\t\t\t\t\t<label for=\"code\">Category</label>\r\n \t\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"categoryedit\">\r\n \t\t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t\t<label for=\"cars\">Template :</label>\r\n-\t\t\t\t\t\t\t\t<select id=\"template\" name=\"template\" class=\"form-control\">\r\n+\t\t\t\t\t\t\t\t<select id=\"templateedit\" name=\"templateedit\" class=\"form-control\">\r\n \t\t\t\t\t\t\t\t\t<?php\r\n \t\t\t\t\t\t\t\t\t\tif(count($mytemplate)>0)\r\n \t\t\t\t\t\t\t\t\t\t{\r\n \t\t\t\t\t\t\t\t\t\t\tfor($i = 0 ; $i < count($mytemplate) ; $i++)\r\n"
+                },
+                {
+                    "date": 1632473747637,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -319,8 +319,9 @@\n \r\n \tfunction openmodaledit(element) {\r\n \t\t// \r\n \t\tvar idelement = element.id.split(\"-\");\r\n+\t\tvar idtemplate = idelement[4];\r\n \t\t$(\"#idchange\").val(idelement[1]);\r\n \r\n \t\tvar namagrup = $(\"#nama\" + idelement[1]).text();\r\n \t\tvar subgruop = $(\"#subgroup\" + idelement[1]).text();\r\n"
+                },
+                {
+                    "date": 1632473758501,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -328,9 +328,9 @@\n \t\tglobalid = idelement[3];\r\n \t\tvar category = $(\"#category\" + idelement[1]).text();\r\n \t\tvar descgruop = $(\"#description\" + idelement[1]).text();\r\n \t\tvar selectgroup = $('#groupedit option[value=' + idelement[2] + ']').prop('selected', true);\r\n-\r\n+\t\tvar selectgroup = $('#groupedit option[value=' + idelement[2] + ']').prop('selected', true);\r\n \t\t// alert(idelement[3]);\r\n \t\t$(\"#groupedit\").trigger('change');\r\n \t\t$('#categoryedit').val(category);\r\n \t\t$('#descriptionedit').val(descgruop);\r\n"
+                },
+                {
+                    "date": 1632473766320,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -328,9 +328,9 @@\n \t\tglobalid = idelement[3];\r\n \t\tvar category = $(\"#category\" + idelement[1]).text();\r\n \t\tvar descgruop = $(\"#description\" + idelement[1]).text();\r\n \t\tvar selectgroup = $('#groupedit option[value=' + idelement[2] + ']').prop('selected', true);\r\n-\t\tvar selectgroup = $('#groupedit option[value=' + idelement[2] + ']').prop('selected', true);\r\n+\t\tvar templateselect = $('#templatepedit option[value=' + idelement[2] + ']').prop('selected', true);\r\n \t\t// alert(idelement[3]);\r\n \t\t$(\"#groupedit\").trigger('change');\r\n \t\t$('#categoryedit').val(category);\r\n \t\t$('#descriptionedit').val(descgruop);\r\n"
+                },
+                {
+                    "date": 1632473775420,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -319,18 +319,17 @@\n \r\n \tfunction openmodaledit(element) {\r\n \t\t// \r\n \t\tvar idelement = element.id.split(\"-\");\r\n-\t\tvar idtemplate = idelement[4];\r\n \t\t$(\"#idchange\").val(idelement[1]);\r\n \r\n \t\tvar namagrup = $(\"#nama\" + idelement[1]).text();\r\n \t\tvar subgruop = $(\"#subgroup\" + idelement[1]).text();\r\n \t\tglobalid = idelement[3];\r\n \t\tvar category = $(\"#category\" + idelement[1]).text();\r\n \t\tvar descgruop = $(\"#description\" + idelement[1]).text();\r\n \t\tvar selectgroup = $('#groupedit option[value=' + idelement[2] + ']').prop('selected', true);\r\n-\t\tvar templateselect = $('#templatepedit option[value=' + idelement[2] + ']').prop('selected', true);\r\n+\t\tvar templateselect = $('#templatepedit option[value=' + idelement[4] + ']').prop('selected', true);\r\n \t\t// alert(idelement[3]);\r\n \t\t$(\"#groupedit\").trigger('change');\r\n \t\t$('#categoryedit').val(category);\r\n \t\t$('#descriptionedit').val(descgruop);\r\n"
+                },
+                {
+                    "date": 1632473816369,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -327,9 +327,9 @@\n \t\tglobalid = idelement[3];\r\n \t\tvar category = $(\"#category\" + idelement[1]).text();\r\n \t\tvar descgruop = $(\"#description\" + idelement[1]).text();\r\n \t\tvar selectgroup = $('#groupedit option[value=' + idelement[2] + ']').prop('selected', true);\r\n-\t\tvar templateselect = $('#templatepedit option[value=' + idelement[4] + ']').prop('selected', true);\r\n+\t\tvar templateselect = $('#templateedit option[value=' + idelement[4] + ']').prop('selected', true);\r\n \t\t// alert(idelement[3]);\r\n \t\t$(\"#groupedit\").trigger('change');\r\n \t\t$('#categoryedit').val(category);\r\n \t\t$('#descriptionedit').val(descgruop);\r\n"
+                },
+                {
+                    "date": 1632473835369,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -340,8 +340,9 @@\n \t\tvar changeid = $(\"#idchange\").val();\r\n \t\tvar changecategory = $(\"#categoryedit\").val();\r\n \t\tvar changegroup = $(\"#groupedit\").val();\r\n \t\tvar changesubgroup = $(\"#subgroupedit\").val();\r\n+\t\tvar changegroup = $(\"#groupedit\").val();\r\n \t\tvar changedescription = $('#descriptionedit').val();\r\n \t\tif (changecategory == \"\" || changesubgroup == null || changedescription == \"\") {\r\n \t\t\tSwal.fire({\r\n \t\t\t\ticon: 'error',\r\n"
+                },
+                {
+                    "date": 1632473843592,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -340,9 +340,9 @@\n \t\tvar changeid = $(\"#idchange\").val();\r\n \t\tvar changecategory = $(\"#categoryedit\").val();\r\n \t\tvar changegroup = $(\"#groupedit\").val();\r\n \t\tvar changesubgroup = $(\"#subgroupedit\").val();\r\n-\t\tvar changegroup = $(\"#groupedit\").val();\r\n+\t\tvar changetemplate = $(\"#templateedit\").val();\r\n \t\tvar changedescription = $('#descriptionedit').val();\r\n \t\tif (changecategory == \"\" || changesubgroup == null || changedescription == \"\") {\r\n \t\t\tSwal.fire({\r\n \t\t\t\ticon: 'error',\r\n"
+                },
+                {
+                    "date": 1632473854896,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -364,8 +364,9 @@\n \t\t\t\t\tmyid: changeid,\r\n \t\t\t\t\tmycategory: changecategory,\r\n \t\t\t\t\tmygroup: changegroup,\r\n \t\t\t\t\tmysubgroup: changesubgroup,\r\n+\t\t\t\t\tmytemplate: changetemplate,\r\n \t\t\t\t\tmydesc: changedescription\r\n \r\n \t\t\t\t},\r\n \t\t\t\tsuccess: function (result) {\r\n"
                 }
             ],
             "date": 1628517819558,

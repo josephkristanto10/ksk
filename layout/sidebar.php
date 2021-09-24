@@ -1,7 +1,7 @@
 <?php
         $uriSegments = explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
         $myurl = $uriSegments[2];
-      
+     
 ?>
 <div class="page-content">
     <div class="sidebar sidebar-dark sidebar-main sidebar-expand-md">
@@ -59,9 +59,9 @@
                         <div class="text-uppercase font-size-xs line-height-xs">Asset</div> <i class="icon-menu"
                             title="Master"></i>
                     </li>
-                    <li class="nav-item nav-item-submenu <?php echo ($myurl == "masterkategoriassets.php" || $myurl == "mastersubkategoriassets.php" || $myurl == "mastercategorysubgroup.php" || $myurl == "mastercondition.php" || $myurl == "masterinitialcondition.php" || $myurl == "masterfuel.php" || $myurl == "masterdrivingforce.php" || $myurl == "masterassets.php" ) ? " nav-item-open" : ''; ?>">
-                        <a href="#" class="nav-link <?php echo ($myurl == "masterkategoriassets.php" || $myurl == "mastersubkategoriassets.php" || $myurl == "mastercategorysubgroup.php" || $myurl == "masterfuel.php" || $myurl == "masterdrivingforce.php"|| $myurl == "masterassets.php" ) ? " nav-item-open" : ''; ?>"><i class="icon-table2"></i> <span>Asset</span></a>
-                        <ul class="nav nav-group-sub" data-submenu-title="Basic tables" style = "<?php echo ($myurl == "masterkategoriassets.php" || $myurl == "mastersubkategoriassets.php" || $myurl == "mastercategorysubgroup.php" || $myurl == "mastercondition.php" || $myurl == "masterinitialcondition.php" || $myurl == "masterfuel.php" || $myurl == "masterdrivingforce.php" || $myurl == "masterassets.php") ? "display:block;" : ''; ?>">
+                    <li class="nav-item nav-item-submenu <?php echo ($myurl == "masterkategoriassets.php" || $myurl == "mastersubkategoriassets.php" || $myurl == "mastercategorysubgroup.php" || $myurl == "mastercondition.php" || $myurl == "masterinitialcondition.php" || $myurl == "masterfuel.php" || $myurl == "masterdrivingforce.php" || $myurl == "masterassets.php" || $myurl == "mastertemplate.php" ) ? " nav-item-open" : ''; ?>">
+                        <a href="#" class="nav-link <?php echo ($myurl == "masterkategoriassets.php" || $myurl == "mastersubkategoriassets.php" || $myurl == "mastercategorysubgroup.php" || $myurl == "masterfuel.php" || $myurl == "masterdrivingforce.php"|| $myurl == "masterassets.php" || $myurl == "mastertemplate.php" ) ? " nav-item-open" : ''; ?>"><i class="icon-table2"></i> <span>Asset</span></a>
+                        <ul class="nav nav-group-sub" data-submenu-title="Basic tables" style = "<?php echo ($myurl == "masterkategoriassets.php" || $myurl == "mastersubkategoriassets.php" || $myurl == "mastercategorysubgroup.php" || $myurl == "mastercondition.php" || $myurl == "masterinitialcondition.php" || $myurl == "masterfuel.php" || $myurl == "masterdrivingforce.php" || $myurl == "masterassets.php" || $myurl == "mastertemplate.php") ? "display:block;" : ''; ?>">
                              <li class="nav-item"><a href="masterassets.php" class="nav-link <?php echo ($myurl == "masterassets.php"  ) ? " active" : ''; ?>">Assets</a>
                             <li class="nav-item nav-item-submenu <?php echo ($myurl == "masterkategoriassets.php" || $myurl == "mastersubkategoriassets.php" || $myurl == "mastercategorysubgroup.php" ) ? " nav-item-open" : ''; ?>">
                                 <a href="#" class="nav-link <?php echo ($myurl == "masterkategoriassets.php" || $myurl == "mastersubkategoriassets.php" || $myurl == "mastercategorysubgroup.php" ) ? "active" : ''; ?>"> <span>Asset Group</span></a>
@@ -75,24 +75,22 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="nav-item nav-item-submenu <?php echo ($myurl == "mastercondition.php" || $myurl == "masterinitialcondition.php"  ) ? " nav-item-open" : ''; ?>">
-                                <a href="#" class="nav-link <?php echo ($myurl == "mastercondition.php" || $myurl == "masterinitialcondition.php"  ) ? " active" : ''; ?>"> <span>Asset Template</span></a>
-                                <ul class="nav nav-group-sub" data-submenu-title="Basic tables" style = "<?php echo ($myurl == "mastercondition.php" || $myurl == "masterinitialcondition.php"  ) ? " display:block;" : ''; ?>">
-                                    <li class="nav-item"><a class="nav-link <?php echo ($myurl == "masterinitialcondition.php"  ) ? " active" : ''; ?>" href="masterinitialcondition.php">Initial
-                                            Condition</a></li>
-                                    <li class="nav-item"><a href="mastercondition.php" class="nav-link <?php echo ($myurl == "mastercondition.php"  ) ? " active" : ''; ?>">Condition</a>
-                                    </li>
+                            <li class="nav-item nav-item-submenu <?php echo ($myurl == "mastertemplate.php" || $myurl == "mastertemplate.php"  ) ? " nav-item-open" : ''; ?>">
+                                <a href="#" class="nav-link <?php echo ($myurl == "mastertemplate.php" || $myurl == "mastertemplate.php"  ) ? " active" : ''; ?>"> <span>Asset Template</span></a>
 
-                                </ul>
-                            </li>
-                            <li class="nav-item nav-item-submenu <?php echo ($myurl == "masterfuel.php" || $myurl == "masterdrivingforce.php"  ) ? " nav-item-open" : ''; ?>">
-                                 <a href="#" class="nav-link <?php echo ($myurl == "masterfuel.php" || $myurl == "masterdrivingforce.php"  ) ? " active" : ''; ?>"> <span>Custom Field</span></a>
-                            
-                                <ul class="nav nav-group-sub" data-submenu-title="Basic tables" style = "<?php echo ($myurl == "masterfuel.php" || $myurl == "masterdrivingforce.php"  ) ? " display:block;" : ''; ?>">
-                                    <li class="nav-item"><a class="nav-link <?php echo ($myurl == "masterfuel.php"  ) ? " active" : ''; ?>" href="masterfuel.php">Fuel</a></li>
-                                    <li class="nav-item"><a href="masterdrivingforce.php" class="nav-link <?php echo ($myurl == "masterdrivingforce.php"  ) ? " active" : ''; ?>">Driving Force</a>
+                                <ul class="nav nav-group-sub" data-submenu-title="Basic tables" style = "<?php echo ($myurl == "mastertemplate.php" || $myurl == "masterinitialcondition.php"  ) ? " display:block;" : ''; ?>">
+                                <li class="nav-item"><a href="mastertemplate.php" class="nav-link <?php echo ($myurl == "mastertemplate.php"  ) ? " active" : ''; ?>">Template List</a>
                                     </li>
-
+                                <?php $sql = "select * from template"; $res = $conn->query($sql);
+                                if($res->num_rows>0)
+                                {
+                                    while($r = mysqli_fetch_array($res))
+                                    {
+                                        echo '<li class="nav-item"><a class="nav-link" >'.$r['template'].'</a></li>';
+                                    }
+                              
+                                }
+                                ?>
                                 </ul>
                             </li>
                             <li class="nav-item nav-item-submenu <?php echo ($myurl == "mastercondition.php" || $myurl == "masterinitialcondition.php"  ) ? " nav-item-open" : ''; ?>">

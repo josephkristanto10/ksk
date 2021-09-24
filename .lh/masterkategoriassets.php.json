@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 453,
+            "activePatchIndex": 454,
             "patches": [
                 {
                     "date": 1628248104275,
@@ -1820,6 +1820,10 @@
                 {
                     "date": 1630575956069,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n <?php\r\n require 'layout/header.php';\r\n+require 'layout/sidebar.php';\r\n require_once 'layout/footer.php';\r\n-require 'layout/sidebar.php';\r\n $sql = \"select * from kategori_asset \";\r\n $res = $conn->query($sql);\r\n ?>\r\n \r\n"
+                },
+                {
+                    "date": 1632472238429,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,11 @@\n                     <h4><span class=\"font-weight-semibold\">Master Group</span></h4> \r\n                     <div class=\"page-title d-flex\">\r\n                         <div class = \"row\" style = \"width:100%;\">\r\n                             <div class = \"col-xl-12\" >\r\n-                            <a href=\"#myModal\" data-toggle=\"modal\"><button class = \"btn btn-info\" style = \"background-color:#26a69a !important;width:170px;\"><i class = \"icon-add\"></i> &nbsp Add Group </button></a>\r\n+                            <a href=\"#myModal\" data-toggle=\"modal\"><button type=\"button\" style = \"background-color:#26a69a !important; color:white; width:200px;\" class=\"btn btn-indigo btn-labeled btn-labeled-left\" onclick=\"cancel()\" data-toggle=\"modal\" data-target=\"#modal_form\">\r\n+                            <b><i class=\"icon-plus-circle2\"></i></b> Add Category\r\n+                        </button></a>\r\n                             </div>\r\n                         </div>\r\n                         <a href=\"#\" class=\"header-elements-toggle text-default d-md-none\"><i class=\"icon-more\"></i></a>\r\n                     </div>\r\n"
                 }
             ],
             "date": 1628248104275,

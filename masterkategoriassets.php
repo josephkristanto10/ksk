@@ -13,7 +13,9 @@ $res = $conn->query($sql);
                     <div class="page-title d-flex">
                         <div class = "row" style = "width:100%;">
                             <div class = "col-xl-12" >
-                            <a href="#myModal" data-toggle="modal"><button class = "btn btn-info" style = "background-color:#26a69a !important;width:170px;"><i class = "icon-add"></i> &nbsp Add Group </button></a>
+                            <a href="#myModal" data-toggle="modal"><button type="button" style = "background-color:#26a69a !important; color:white; width:200px;" class="btn btn-indigo btn-labeled btn-labeled-left" onclick="cancel()" data-toggle="modal" data-target="#modal_form">
+                            <b><i class="icon-plus-circle2"></i></b> Add Group
+                        </button></a>
                             </div>
                         </div>
                         <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>

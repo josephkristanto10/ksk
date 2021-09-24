@@ -26,7 +26,8 @@ if($tipe == "load")
     
     $total_data = mysqli_query($conn, 
     
-    "SELECT ka.nama as groupname, ks.subgroup as subgroupname, kc.category as categoryname, ic.initial_condition, c.name as conditions, asset.* FROM `asset`
+    "SELECT ka.nama as groupname, ks.subgroup as subgroupname, kc.category as categoryname, ic.initial_condition, c.name as conditions, relation.company as myrelation, asset.* FROM `asset`
+    inner join relation on relation.id = asset.purchase_from 
     inner join kategori_asset ka on ka.id = asset.idgroup
     inner join kategori_subgroup ks on ks.id = asset.idsubgroup
     inner join kategori_categorysubgroup kc on kc.id = asset.idcategory
@@ -37,21 +38,24 @@ if($tipe == "load")
 );
     
     if(empty($search)) {
-        $query_data = mysqli_query($conn, "SELECT ka.nama as groupname, ks.subgroup as subgroupname, kc.category as categoryname, ic.initial_condition, c.name as conditions, asset.* FROM `asset`
+        $query_data = mysqli_query($conn, "SELECT ka.nama as groupname, ks.subgroup as subgroupname, kc.category as categoryname, ic.initial_condition, c.name as conditions, relation.company as myrelation, asset.* FROM `asset`
+         inner join relation on relation.id = asset.purchase_from 
         inner join kategori_asset ka on ka.id = asset.idgroup
         inner join kategori_subgroup ks on ks.id = asset.idsubgroup
         inner join kategori_categorysubgroup kc on kc.id = asset.idcategory
         inner join conditions c on c.id = asset.idcondition
         inner join initial_condition ic on ic.id = asset.idinitialcondition ORDER BY $order $dir LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "SELECT ka.nama as groupname, ks.subgroup as subgroupname, kc.category as categoryname, ic.initial_condition, c.name as conditions, asset.* FROM `asset`
+        $total_filtered = mysqli_query($conn, "SELECT ka.nama as groupname, ks.subgroup as subgroupname, kc.category as categoryname, ic.initial_condition, c.name as conditions, relation.company as myrelation, asset.* FROM `asset`
+         inner join relation on relation.id = asset.purchase_from 
         inner join kategori_asset ka on ka.id = asset.idgroup
         inner join kategori_subgroup ks on ks.id = asset.idsubgroup
         inner join kategori_categorysubgroup kc on kc.id = asset.idcategory
         inner join conditions c on c.id = asset.idcondition
         inner join initial_condition ic on ic.id = asset.idinitialcondition ");
     } else {
-        $query_data = mysqli_query($conn, "SELECT ka.nama as groupname, ks.subgroup as subgroupname, kc.category as categoryname, ic.initial_condition, c.name as conditions, asset.* FROM `asset`
+        $query_data = mysqli_query($conn, "SELECT ka.nama as groupname, ks.subgroup as subgroupname, kc.category as categoryname, ic.initial_condition, c.name as conditions, relation.company as myrelation, asset.* FROM `asset`
+         inner join relation on relation.id = asset.purchase_from 
         inner join kategori_asset ka on ka.id = asset.idgroup
         inner join kategori_subgroup ks on ks.id = asset.idsubgroup
         inner join kategori_categorysubgroup kc on kc.id = asset.idcategory
@@ -66,7 +70,8 @@ if($tipe == "load")
         OR asset.name LIKE '%$search%'
         OR asset.status LIKE '%$search%' ORDER BY $order $dir LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "SELECT ka.nama as groupname, ks.subgroup as subgroupname, kc.category as categoryname, ic.initial_condition, c.name as conditions, asset.* FROM `asset`
+        $total_filtered = mysqli_query($conn, "SELECT ka.nama as groupname, ks.subgroup as subgroupname, kc.category as categoryname, ic.initial_condition, c.name as conditions, relation.company as myrelation, asset.* FROM `asset`
+         inner join relation on relation.id = asset.purchase_from 
         inner join kategori_asset ka on ka.id = asset.idgroup
         inner join kategori_subgroup ks on ks.id = asset.idsubgroup
         inner join kategori_categorysubgroup kc on kc.id = asset.idcategory
@@ -103,6 +108,7 @@ if($tipe == "load")
             }
             
             $response['data'][] = [
+                "<a href= '#myModalDisplay'  data-toggle='modal'><span class='pointer-element badge badge-success' id ='".$row['id']."' onclick = 'openmodaldisplay(this)'  data-id='".$row['id']."'><i class='icon-plus3'></i></span></a>",
                 "<label id ='group".$row['id']."'>".$row['groupname']."</label>",
                 "<label id ='subgroup".$row['id']."'>".$row['subgroupname']."</label>",
                 "<label id ='category".$row['id']."'>".$row['categoryname']."</label>",
@@ -110,7 +116,17 @@ if($tipe == "load")
                 "<label id ='condition".$row['id']."'>".$row['conditions']."</label>",
                 "<label id ='noasset".$row['id']."'>".$row['noasset']."</label>",
                 "<label id ='name".$row['id']."'>".$row['name']."</label>",
-                "<label id ='status".$row['id']."'>".$mystats."</label>",
+                "<label id ='status".$row['id']."'>".$mystats."</label>"
+                ."<input type = 'hidden' id = 'nopo".$row['id']."' value = ".$row['noPo'].">"
+                ."<input type = 'hidden' id = 'relation".$row['id']."'  value = ".$row['myrelation'].">"
+                ."<input type = 'hidden' id = 'postingdate".$row['id']."'  value = ".$row['posting_date'].">"
+                ."<input type = 'hidden' id = 'purchaseprice".$row['id']."'  value = ".$row['purchase_price'].">"
+                ."<input type = 'hidden' id = 'ppn".$row['id']."'  value = ".$row['ppn'].">"
+                ."<input type = 'hidden' id = 'totalpurchaseprice".$row['id']."'  value = ".$row['total_purchase_price'].">"
+                ."<input type = 'hidden' id = 'economical".$row['id']."'  value = ".$row['economical'].">"
+                ."<input type = 'hidden' id = 'costpermonth".$row['id']."'  value = ".$row['cost_per_month'].">"
+                ."<input type = 'hidden' id = 'startdate".$row['id']."'  value = ".$row['start_date'].">"
+                ."<input type = 'hidden' id = 'enddate".$row['id']."'  value = ".$row['end_date'].">",
                 ' <div class="list-icons">
                 <div class="dropdown">
                     <a href="#" class="list-icons-item" data-toggle="dropdown">
@@ -141,6 +157,159 @@ if($tipe == "load")
     }  
     
     echo json_encode($response);
+}
+else if($tipe == "getallanswer")
+{
+
+    $idasset = $_POST['idassets'];
+    $sql = "select folder_custom.name as namequestion, custom_template_answer.answer from custom_template_answer 
+    inner join custom_to_template on custom_to_template.id = custom_template_answer.id_custom_to_template
+    inner join folder_custom on folder_custom.id = custom_to_template.idcustom
+    where custom_template_answer.idasset = '$idasset'";
+  
+    $res = $conn->query($sql);
+    if($res -> num_rows>0)
+    {
+        // echo $sql;
+        $mystring = "";
+        while($r = mysqli_fetch_array($res))
+        {
+        
+            $mystring .=  '
+            <div class="row">
+              <div class="col-md-12">
+                    <div class="form-group">
+                        <label>'.$r['namequestion'].' </label><br>
+                        <b><label>'.$r['answer'].'</label></b>
+                    </div>
+                </div>
+            </div>';
+        }
+        echo $mystring;
+    }
+    else{
+        echo "none";
+    }
+}
+else if($tipe == "getcustomquestion")
+{
+    $idtemplate = $_POST['idtemplate'];
+    $sql = "select folder_custom.*, custom_to_template.id as idquestion  from custom_to_template inner join folder_custom on folder_custom.id = custom_to_template.idcustom where custom_to_template.idtemplate = '$idtemplate'"; 
+    $res = $conn->query($sql);
+    if($res -> num_rows>0)
+    {
+        $mystring = "";
+        $mycode = "";
+        $myindex = 0 ;
+        while($r = mysqli_fetch_array($res))
+        {
+            if($myindex == 0)
+            {
+                $mycode .= $r['id'];
+            }
+            else{
+                $mycode .= ",".$r['id'];
+            }
+            $myindex++;
+           
+            $mystring .=  '
+            <div class="row">
+              <div class="col-md-12">
+                    <div class="form-group">
+                        <label>'.$r['name'].' </label>
+                        <input type="text" name="custom'.$r['idquestion'].'" placeholder="Enter '.$r['name'].'" class="form-control required" id = "startwarranty"><br>
+                    </div>
+                </div>
+            </div>';
+        }
+        echo $mycode."~~".$mystring;
+    }
+    else{
+        echo "none";
+    }
+
+}
+else if($tipe == "addassetform")
+{
+    $noasset = $_POST['noasset'];
+    $assetname = $_POST['name'];
+    $group = $_POST['group'];
+    $initialcondition = $_POST['initialcondition'];
+    $subgroup = $_POST['subgroup'];
+    $condition = $_POST['condition'];
+    $category = $_POST['category'];
+    $nopo = $_POST['nopo'];
+    $relation = $_POST['relation'];
+    $postingdate = $_POST['postingdate'];
+    $purchaseprice = $_POST['purchaseprice'];
+    $ppn = $_POST['ppn'];
+    $totalpurchaseprice = $_POST['totalpurchaseprice'];
+    $costpermonth = $_POST['costpermonth'];
+    $economicallifetime = $_POST['economicallifetime'];
+
+    $startwarranty = $_POST['startwarranty'];
+    $endwarranty = $_POST['endwarranty'];
+    $template = $_POST['template'];
+    
+    $mystartwarranty = NULL;
+    $myendwarranty = NULL;
+    $myfile = "";
+    if(isset($_POST['startwarranty']))
+    {
+        $mystartwarranty = $_POST['startwarranty'];
+    }
+    if(isset($_POST['endwarranty']))
+    {
+        $myendwarranty = $_POST['endwarranty'];
+    }
+    if(isset($_FILES['myfile']['tmp_name']))
+    {
+        // echo "test";
+        // echo count($_POST['myfile']);
+        $jumlah = count($_FILES['myfile']['tmp_name']);
+        for($i = 0 ; $i < $jumlah;$i++)
+        {
+            $filename = $_FILES['myfile']['name'][$i];
+            if($i == 0 )
+            {
+                $myfile .= $filename;
+            }
+            else{
+                $myfile .= ",".$filename;
+            }
+       
+        }
+        // $file = $_FILES['myfile']['tmp_name'];
+    }
+    // echo $myfile;
+    $mysessionsistercompany = $_SESSION['idsister'];
+    $sql = "INSERT into asset values(NULL, '$mysessionsistercompany', '$group', '$subgroup', '$category', '$initialcondition', 
+    '$condition', '$template','$noasset', '$assetname','$nopo', '$relation', '$postingdate', '$purchaseprice', '$ppn', '$totalpurchaseprice',
+    '$economicallifetime', '$costpermonth', '$mystartwarranty', '$myendwarranty', '$myfile', 'Active')";
+    $res = $conn->query($sql);
+    if(($conn -> affected_rows)>0)
+    {
+        $last_id = $conn->insert_id;
+        if($_POST['idcustomquestion']=="")
+        {
+            $splitidcustom = explode(',', $_POST['idcustomquestion']);
+            for($i = 0 ;$i < count($splitidcustom); $i++)
+            {
+                $currentid = $splitidcustom[$i];
+                $currentvalue = $_POST['custom'.$currentid];
+                $sqlinsertanswer = "INSERT into custom_template_answer values(NULL, '$currentid', '$last_id' , '$currentvalue')";
+                $resinsertanswer = $conn->query($sqlinsertanswer);
+            }
+        }
+        echo "sukses";
+
+    }
+    else{
+        echo "tidak";
+    }
+    
+
+
 }
 else if($tipe == "add"){
 

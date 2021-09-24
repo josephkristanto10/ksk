@@ -13,6 +13,17 @@ if($resultkategoriaset -> num_rows>0)
 		$row[] = $r;
 	}
 }
+$sqltemplate = "select * from template";
+$restemplate = $conn->query($sqltemplate);
+$mytemplate = array();
+if($restemplate->num_rows>0)
+{
+	while($r = mysqli_fetch_array($restemplate))
+	{
+		$mytemplate[] = $r;
+	}
+}
+
 ?>
 
 
@@ -24,9 +35,9 @@ if($resultkategoriaset -> num_rows>0)
 						<div class="row" style="width:100%;">
 							<div class="col-xl-12">
 								<a href="#myModal" data-toggle="modal">
-									<button class="btn btn-info"
-										style="background-color:#26a69a !important;width:200px;"><i
-											class="icon-add"></i> &nbsp Category Sub Group </button>
+								<button type="button" style = "background-color:#26a69a !important; color:white; width:200px;" class="btn btn-indigo btn-labeled btn-labeled-left" onclick="cancel()" data-toggle="modal" data-target="#modal_form">
+                            <b><i class="icon-plus-circle2"></i></b> Add Category
+                        </button>
 								</a>
 							</div>
 						</div>
@@ -49,6 +60,7 @@ if($resultkategoriaset -> num_rows>0)
 										<th>Group</th>
 										<th>Sub Group</th>
 										<th>Category</th>
+										<th>Template</th>
 										<th>Description</th>
 										<th class="text-center">Status</th>
 										<th class="text-center">Action</th>
@@ -64,7 +76,7 @@ if($resultkategoriaset -> num_rows>0)
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header" style="background-color:#324148;color:white;height:60px;">
-						<h5 class="modal-title">Add Category Sub Group</h5>
+						<h5 class="modal-title">Add Category</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">×</span>
 						</button>
@@ -73,11 +85,7 @@ if($resultkategoriaset -> num_rows>0)
 					<div class="modal-body">
 						<form id="myform">
 							<div class="form-group">
-								<label for="code">Category</label>
-								<input type="text" class="form-control" id="category">
-								<br>
-
-								<label for="cars">Group:</label>
+							<label for="cars">Group:</label>
 								<select id="group" name="group" class="form-control">
 									<?php
 										if(count($row)>0)
@@ -95,6 +103,25 @@ if($resultkategoriaset -> num_rows>0)
 								<select id="subgroup" name="subgroup" class="form-control">
 								</select>
 								<br>
+								<label for="cars">Template :</label>
+								<select id="template" name="template" class="form-control">
+									<?php
+										if(count($mytemplate)>0)
+										{
+											for($i = 0 ; $i < count($mytemplate) ; $i++)
+											{
+												echo '<option value="'.$mytemplate[$i]['id'].'">'.$mytemplate[$i]['template'].'</option>';
+											}
+										}
+								?>
+								</select>
+								<br>
+								<label for="code">Category</label>
+								<input type="text" class="form-control" id="category" >
+								<br>
+								
+
+								
 								<label for="description">Description</label>
 								<input type="text" class="form-control" id="descriptionadd">
 
@@ -125,9 +152,7 @@ if($resultkategoriaset -> num_rows>0)
 							<div class="form-group">
 								<input type="hidden" id="idchange">
 								<input type="hidden" id="idsubgroup">
-								<label for="code">Category</label>
-								<input type="text" class="form-control" id="categoryedit">
-								<br>
+								
 
 								<label for="cars">Group:</label>
 								<select id="groupedit" name="groupedit" class="form-control">
@@ -152,6 +177,22 @@ if($resultkategoriaset -> num_rows>0)
 								<br>
 								<label for="cars">Sub Group:</label>
 								<select id="subgroupedit" name="subgroupedit" class="form-control">
+								</select>
+								<br>
+								<label for="code">Category</label>
+								<input type="text" class="form-control" id="categoryedit">
+								<br>
+								<label for="cars">Template :</label>
+								<select id="templateedit" name="templateedit" class="form-control">
+									<?php
+										if(count($mytemplate)>0)
+										{
+											for($i = 0 ; $i < count($mytemplate) ; $i++)
+											{
+												echo '<option value="'.$mytemplate[$i]['id'].'">'.$mytemplate[$i]['template'].'</option>';
+											}
+										}
+								?>
 								</select>
 								<br>
 								<label for="description">Description</label>
@@ -210,6 +251,10 @@ if($resultkategoriaset -> num_rows>0)
 				},
 				{
 					name: 'Category',
+					className: 'text-center align-middle'
+				},
+				{
+					name: 'Template',
 					className: 'text-center align-middle'
 				},
 				{
@@ -283,7 +328,7 @@ if($resultkategoriaset -> num_rows>0)
 		var category = $("#category" + idelement[1]).text();
 		var descgruop = $("#description" + idelement[1]).text();
 		var selectgroup = $('#groupedit option[value=' + idelement[2] + ']').prop('selected', true);
-
+		var templateselect = $('#templateedit option[value=' + idelement[4] + ']').prop('selected', true);
 		// alert(idelement[3]);
 		$("#groupedit").trigger('change');
 		$('#categoryedit').val(category);
@@ -296,6 +341,7 @@ if($resultkategoriaset -> num_rows>0)
 		var changecategory = $("#categoryedit").val();
 		var changegroup = $("#groupedit").val();
 		var changesubgroup = $("#subgroupedit").val();
+		var changetemplate = $("#templateedit").val();
 		var changedescription = $('#descriptionedit').val();
 		if (changecategory == "" || changesubgroup == null || changedescription == "") {
 			Swal.fire({
@@ -319,6 +365,7 @@ if($resultkategoriaset -> num_rows>0)
 					mycategory: changecategory,
 					mygroup: changegroup,
 					mysubgroup: changesubgroup,
+					mytemplate: changetemplate,
 					mydesc: changedescription
 
 				},
@@ -355,6 +402,7 @@ if($resultkategoriaset -> num_rows>0)
 	function adddata() {
 		var mycat = $("#category").val();
 		var mygroup = $("#group").val();
+		var mytemplate = $("#template").val();
 		var mysubgroup = $("#subgroup").val();
 		var mydesc = $("#descriptionadd").val();
 		if (mycat == "" || mysubgroup == null) {
@@ -379,6 +427,7 @@ if($resultkategoriaset -> num_rows>0)
 					mycategory: mycat,
 					group: mygroup,
 					sub: mysubgroup,
+					template : mytemplate,
 					desc: mydesc
 
 				},
