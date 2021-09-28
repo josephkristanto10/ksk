@@ -83,13 +83,13 @@ if($resconditions -> num_rows>0)
 <div class="content-wrapper">
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
-            <h4><span class="font-weight-semibold">Master Assets</span></h4>
+            <h4><span class="font-weight-semibold">Displacement Transaction to department</span></h4>
             <div class="page-title d-flex">
                 <div class="row" style="width:100%;">
                     <div class="col-xl-12">
-                        <a href="#myModal" data-toggle="modal"><button class="btn btn-info"
-                                style="background-color:#26a69a !important;width:140px;"><i class="icon-add"></i> &nbsp
-                                Add Assets</button></a>
+                        <a href="#myModal" data-toggle="modal"><button type="button" style = "background-color:#26a69a !important; color:white; width:200px;" class="btn btn-indigo btn-labeled btn-labeled-left" onclick="cancel()" data-toggle="modal" data-target="#modal_form">
+                            <b><i class="icon-plus-circle2"></i></b> Add Transaction
+                        </button></a>
                     </div>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -104,20 +104,32 @@ if($resconditions -> num_rows>0)
                     <table id="datatable_serverside" class="table table-hover table-bordered display nowrap w-100">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th>Date</th>
+                                <th>Transaction</th>
                                 <th>No Asset</th>
-                                <th>Name</th>
-                                <th>Initial Condition</th>
-                                <th>Condition</th>
-                                <th>Group</th>
-                                <th>SubGroup</th>
-                                <th>Category</th>
+                                <th>Asset</th>
+                                <th>Room</th>
+                                <th>toRoom</th>
+                                <th>Remark</th>
+                                <th>Approval</th>
+                                <th>Lead Time</th>
 
-
-                                <th class="text-center">Status</th>
-                                <th class="text-center">Action</th>
                             </tr>
                         </thead>
+    </tbody>
+        <tr>
+            <td>2020-02-12</td>
+            <td>TRX-11</td>
+            <td>1121</td>
+            <td>Vas Bunga</td>
+            <td>Ruangan Pencakar Langit</td>
+            <td>Ruangan Tamu</td>
+            <td>Remark</td>
+            <td>Approved</td>
+            <td>2020-02-12 19:00:00</td>
+        </tr>
+
+</tbody>
 
                     </table>
                 </div>
@@ -892,7 +904,7 @@ echo date('d-m-Y');?>">
 
     };
     $(function () {
-        loadData();
+        // loadData();
     });
 
     function loadData() {

@@ -106,27 +106,33 @@ if($tipe == "load")
                 $myaction = "<a class='dropdown-item' onclick = setstatus('".$row['id']."-".$myactionsetto."')><i class='icon-check'></i>
                 Set Active</a>'";
             }
-            
+            $postingdate = date_format(date_create($row['posting_date']), "d-m-Y");
+            $startdate = date_format(date_create($row['start_date']), "d-m-Y");
+            $enddate = date_format(date_create($row['end_date']), "d-m-Y");
+            // $myrelation = str_replace( " ", ' ', $row['myrelation'] ); 
             $response['data'][] = [
                 "<a href= '#myModalDisplay'  data-toggle='modal'><span class='pointer-element badge badge-success' id ='".$row['id']."' onclick = 'openmodaldisplay(this)'  data-id='".$row['id']."'><i class='icon-plus3'></i></span></a>",
+                "<label id ='noasset".$row['id']."'>".$row['noasset']."</label>",
+                "<label id ='name".$row['id']."'>".$row['name']."</label>",
+                "<label id ='initial".$row['id']."'>".$row['initial_condition']."</label>",
+                "<label id ='condition".$row['id']."'>".$row['conditions']."</label>",
                 "<label id ='group".$row['id']."'>".$row['groupname']."</label>",
                 "<label id ='subgroup".$row['id']."'>".$row['subgroupname']."</label>",
                 "<label id ='category".$row['id']."'>".$row['categoryname']."</label>",
-                "<label id ='initial".$row['id']."'>".$row['initial_condition']."</label>",
-                "<label id ='condition".$row['id']."'>".$row['conditions']."</label>",
-                "<label id ='noasset".$row['id']."'>".$row['noasset']."</label>",
-                "<label id ='name".$row['id']."'>".$row['name']."</label>",
                 "<label id ='status".$row['id']."'>".$mystats."</label>"
-                ."<input type = 'hidden' id = 'nopo".$row['id']."' value = ".$row['noPo'].">"
-                ."<input type = 'hidden' id = 'relation".$row['id']."'  value = ".$row['myrelation'].">"
-                ."<input type = 'hidden' id = 'postingdate".$row['id']."'  value = ".$row['posting_date'].">"
-                ."<input type = 'hidden' id = 'purchaseprice".$row['id']."'  value = ".$row['purchase_price'].">"
-                ."<input type = 'hidden' id = 'ppn".$row['id']."'  value = ".$row['ppn'].">"
-                ."<input type = 'hidden' id = 'totalpurchaseprice".$row['id']."'  value = ".$row['total_purchase_price'].">"
-                ."<input type = 'hidden' id = 'economical".$row['id']."'  value = ".$row['economical'].">"
-                ."<input type = 'hidden' id = 'costpermonth".$row['id']."'  value = ".$row['cost_per_month'].">"
-                ."<input type = 'hidden' id = 'startdate".$row['id']."'  value = ".$row['start_date'].">"
-                ."<input type = 'hidden' id = 'enddate".$row['id']."'  value = ".$row['end_date'].">",
+                ."<input type = 'hidden' id = 'nopo".$row['id']."' value = '".$row['noPo']."'>"
+                ."<input type = 'hidden' id = 'relation".$row['id']."'  value = '".$row['myrelation']."'>"
+                ."<input type = 'hidden' id = 'postingdate".$row['id']."'  value = '".$postingdate."'>"
+                ."<input type = 'hidden' id = 'postingdateraw".$row['id']."'  value = '".$row['posting_date']."'>"
+                ."<input type = 'hidden' id = 'purchaseprice".$row['id']."'  value = '".$row['purchase_price']."'>"
+                ."<input type = 'hidden' id = 'ppn".$row['id']."'  value = '".$row['ppn']."'>"
+                ."<input type = 'hidden' id = 'totalpurchaseprice".$row['id']."'  value = '".$row['total_purchase_price']."'>"
+                ."<input type = 'hidden' id = 'economical".$row['id']."'  value = '".$row['economical']."'>"
+                ."<input type = 'hidden' id = 'costpermonth".$row['id']."'  value = '".$row['cost_per_month']."'>"
+                ."<input type = 'hidden' id = 'startdate".$row['id']."'  value = '".$startdate."'>"
+                ."<input type = 'hidden' id = 'enddate".$row['id']."'  value = '".$enddate."'>"
+                ."<input type = 'hidden' id = 'totalmonth".$row['id']."'  value = '".$row['totalmonth']."'>"
+                ."<input type = 'hidden' id = 'image".$row['id']."'  value = '".$row['image']."'>",
                 ' <div class="list-icons">
                 <div class="dropdown">
                     <a href="#" class="list-icons-item" data-toggle="dropdown">
@@ -157,6 +163,59 @@ if($tipe == "load")
     }  
     
     echo json_encode($response);
+}
+else if($tipe == "gettemplatecategory")
+{
+    $idcategory = $_POST['idcategory'];
+    $sql = "select template.id, template.template from kategori_categorysubgroup kcs inner join template on template.id = kcs.idtemplate where kcs.id = '$idcategory'";
+    $res = $conn->query($sql);
+    $row = mysqli_fetch_array($res);
+    
+    if($res->num_rows>0)
+    {
+        $idtemplate = $row['id'];
+        $nametemplate = $row['template'];
+        echo $idtemplate."~~~";
+        echo $nametemplate."~~~";
+        $sqls = "select folder_custom.*, custom_to_template.id as idquestion  from custom_to_template inner join folder_custom on folder_custom.id = custom_to_template.idcustom where custom_to_template.idtemplate = '$idtemplate'"; 
+        $ress = $conn->query($sqls);
+        // echo $sqls;
+        if($ress -> num_rows>0)
+        {
+            $mystring = "";
+            $mycode = "";
+            $myindex = 0 ;
+            while($r = mysqli_fetch_array($ress))
+            {
+                if($myindex == 0)
+                {
+                    $mycode .= $r['id'];
+                }
+                else{
+                    $mycode .= ",".$r['id'];
+                }
+                $myindex++;
+               
+                $mystring .=  '
+                <div class="row">
+                  <div class="col-md-12">
+                        <div class="form-group">
+                            <label>'.$r['name'].' </label>
+                            <input type="text" name="custom'.$r['idquestion'].'" placeholder="Enter '.$r['name'].'" class="form-control required" id = "startwarranty"><br>
+                        </div>
+                    </div>
+                </div>';
+            }
+            echo $mycode."~~".$mystring;
+        }
+        else{
+            echo "none";
+        }
+    }
+    else{
+        echo "another";
+    }
+
 }
 else if($tipe == "getallanswer")
 {
@@ -231,6 +290,23 @@ else if($tipe == "getcustomquestion")
 }
 else if($tipe == "addassetform")
 {
+ 
+    $statuspostingdate = "no";
+    $date1= date_create($_POST['postingdate']);
+   
+    $date2=date_create(date("Y-m-d"));
+    $diff=date_diff($date1,$date2);
+    $perbedaan =  $diff->format("%m");
+    if($perbedaan < 0)
+    {
+        $perbedaan = 0;
+    }
+    if(isset($_POST['statuspostingdate']))
+    {
+        $perbedaan+=1;
+        $statuspostingdate =  "yes";
+    }
+    $totalmonth = $perbedaan; 
     $noasset = $_POST['noasset'];
     $assetname = $_POST['name'];
     $group = $_POST['group'];
@@ -240,15 +316,15 @@ else if($tipe == "addassetform")
     $category = $_POST['category'];
     $nopo = $_POST['nopo'];
     $relation = $_POST['relation'];
-    $postingdate = $_POST['postingdate'];
+    $postingdate = date_format(date_create($_POST['postingdate']), "Y-m-d");
     $purchaseprice = $_POST['purchaseprice'];
     $ppn = $_POST['ppn'];
     $totalpurchaseprice = $_POST['totalpurchaseprice'];
     $costpermonth = $_POST['costpermonth'];
     $economicallifetime = $_POST['economicallifetime'];
 
-    $startwarranty = $_POST['startwarranty'];
-    $endwarranty = $_POST['endwarranty'];
+    $startwarranty = date_format(date_create($_POST['startwarranty']), "Y-m-d");
+    $endwarranty = date_format(date_create($_POST['endwarranty']), "Y-m-d");
     $template = $_POST['template'];
     
     $mystartwarranty = NULL;
@@ -264,12 +340,17 @@ else if($tipe == "addassetform")
     }
     if(isset($_FILES['myfile']['tmp_name']))
     {
+        if(!is_dir("../assets/attach/")) {
+            mkdir("../assets/attach/");
+        }
+        
         // echo "test";
         // echo count($_POST['myfile']);
         $jumlah = count($_FILES['myfile']['tmp_name']);
         for($i = 0 ; $i < $jumlah;$i++)
         {
-            $filename = $_FILES['myfile']['name'][$i];
+            $filename = "$noasset"."_".date("Y_m_d_H_i_s")."_".$_FILES['myfile']['name'][$i];
+            // $filename = $_FILES['myfile']['name'][$i];
             if($i == 0 )
             {
                 $myfile .= $filename;
@@ -277,6 +358,7 @@ else if($tipe == "addassetform")
             else{
                 $myfile .= ",".$filename;
             }
+            move_uploaded_file($_FILES["myfile"]["tmp_name"][$i], "../assets/attach/".$filename);
        
         }
         // $file = $_FILES['myfile']['tmp_name'];
@@ -284,13 +366,13 @@ else if($tipe == "addassetform")
     // echo $myfile;
     $mysessionsistercompany = $_SESSION['idsister'];
     $sql = "INSERT into asset values(NULL, '$mysessionsistercompany', '$group', '$subgroup', '$category', '$initialcondition', 
-    '$condition', '$template','$noasset', '$assetname','$nopo', '$relation', '$postingdate', '$purchaseprice', '$ppn', '$totalpurchaseprice',
+    '$condition', '$template','$noasset', '$assetname','$nopo', '$relation', '$postingdate', '$statuspostingdate', '$totalmonth', '$purchaseprice', '$ppn', '$totalpurchaseprice',
     '$economicallifetime', '$costpermonth', '$mystartwarranty', '$myendwarranty', '$myfile', 'Active')";
     $res = $conn->query($sql);
     if(($conn -> affected_rows)>0)
     {
         $last_id = $conn->insert_id;
-        if($_POST['idcustomquestion']=="")
+        if($_POST['idcustomquestion']!="" && $_POST['idcustomquestion']!="none")
         {
             $splitidcustom = explode(',', $_POST['idcustomquestion']);
             for($i = 0 ;$i < count($splitidcustom); $i++)

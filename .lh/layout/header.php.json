@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 322,
+            "activePatchIndex": 323,
             "patches": [
                 {
                     "date": 1630468397363,
@@ -1296,6 +1296,10 @@
                 {
                     "date": 1632475454539,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -130,9 +130,9 @@\n \t<script src=\"<?=$url;?>global_assets/js/plugins/uploaders/fileinput/plugins/purify.min.js\"></script>\r\n \t<script src=\"<?=$url;?>global_assets/js/plugins/uploaders/fileinput/plugins/sortable.min.js\"></script>\r\n \t<script src=\"<?=$url;?>global_assets/js/plugins/uploaders/fileinput/fileinput.min.js\"></script>\r\n <script src=\"<?=$url;?>global_assets/js/demo_pages/uploader_bootstrap.js\"></script>\r\n-<script src=\"<?=$url;?>global_assets/js/demo_pages/layout_fixed_sidebar_custom.js\"></script>\r\n+\r\n <script src=\"<?=$url;?>global_assets/js/plugins/ui/perfect_scrollbar.min.js\"></script>\r\n \t<!-- <script src=\"<?=$url;?>global_assets/js/demo_pages/uploader_plupload.js\"></script> -->\r\n \t<style>\r\n \t\tth {\r\n"
+                },
+                {
+                    "date": 1632810236922,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -130,9 +130,8 @@\n \t<script src=\"<?=$url;?>global_assets/js/plugins/uploaders/fileinput/plugins/purify.min.js\"></script>\r\n \t<script src=\"<?=$url;?>global_assets/js/plugins/uploaders/fileinput/plugins/sortable.min.js\"></script>\r\n \t<script src=\"<?=$url;?>global_assets/js/plugins/uploaders/fileinput/fileinput.min.js\"></script>\r\n <script src=\"<?=$url;?>global_assets/js/demo_pages/uploader_bootstrap.js\"></script>\r\n-\r\n <script src=\"<?=$url;?>global_assets/js/plugins/ui/perfect_scrollbar.min.js\"></script>\r\n \t<!-- <script src=\"<?=$url;?>global_assets/js/demo_pages/uploader_plupload.js\"></script> -->\r\n \t<style>\r\n \t\tth {\r\n"
                 }
             ],
             "date": 1630468397363,

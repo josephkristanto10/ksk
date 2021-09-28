@@ -83,13 +83,13 @@ if($resconditions -> num_rows>0)
 <div class="content-wrapper">
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
-            <h4><span class="font-weight-semibold">Master Assets</span></h4>
+            <h4><span class="font-weight-semibold">Asset's Mutation </span></h4>
             <div class="page-title d-flex">
                 <div class="row" style="width:100%;">
                     <div class="col-xl-12">
-                        <a href="#myModal" data-toggle="modal"><button class="btn btn-info"
-                                style="background-color:#26a69a !important;width:140px;"><i class="icon-add"></i> &nbsp
-                                Add Assets</button></a>
+                        <a href="#myModal" data-toggle="modal"><button type="button" style = "background-color:#26a69a !important; color:white; width:200px;" class="btn btn-indigo btn-labeled btn-labeled-left" onclick="cancel()" data-toggle="modal" data-target="#modal_form">
+                            <b><i class="icon-plus-circle2"></i></b> Add Transaction
+                        </button></a>
                     </div>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -105,19 +105,54 @@ if($resconditions -> num_rows>0)
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>No Asset</th>
-                                <th>Name</th>
-                                <th>Initial Condition</th>
+                                <th>No. Trx </th>
+                                <th>No. Asset</th>
+                                <th>Asset</th>
+                                <th>From Sister Company</th>
+                                <th>To Sister Company</th>
                                 <th>Condition</th>
-                                <th>Group</th>
-                                <th>SubGroup</th>
-                                <th>Category</th>
-
-
-                                <th class="text-center">Status</th>
-                                <th class="text-center">Action</th>
+                                <th>Approval</th>
+                                <th>Lead Time</th>
+                                
                             </tr>
                         </thead>
+    </tbody>
+        <tr>
+            <td><span class='pointer-element badge badge-success'><i class='icon-plus3'></i></span></td>
+            <td>TRX-11</td>
+            <td>132131</td>
+            <td>Meja</td>
+            <td>PT KKS</td>
+            <td>PT JMG</td>
+            <td>Good</td>
+            <td><span class="badge badge-success">Approved</span></td>
+            <td>2021-09-12</td>
+     
+        </tr>
+        <tr>
+            <td><span class='pointer-element badge badge-success'><i class='icon-plus3'></i></span></td>
+            <td>TRX-12</td>
+            <td>515121321</td>
+            <td>Kursi</td>
+            <td>PT JMG</td>
+            <td>CV BAS</td>
+            <td>Half</td>
+            <td><span class="badge badge-danger">Rejected</span></td>
+            <td>2021-09-12</td>
+        </tr>
+        <tr>
+            <td><span class='pointer-element badge badge-success'><i class='icon-plus3'></i></span></td>
+            <td>TRX-13</td>
+            <td>6623123</td>
+            <td>Printer</td>
+            <td>PT MBI</td>
+            <td>CV KAI</td>
+            <td>Good</td>
+            <td><span class="badge badge-success">Approved</span></td>
+            <td>2021-09-13</td>
+        </tr>
+
+</tbody>
 
                     </table>
                 </div>
@@ -892,7 +927,7 @@ echo date('d-m-Y');?>">
 
     };
     $(function () {
-        loadData();
+        // loadData();
     });
 
     function loadData() {
