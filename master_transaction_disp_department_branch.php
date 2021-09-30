@@ -12,17 +12,29 @@ if($resrelation -> num_rows>0)
 		$myrelation[] = $j;
 	}
 }
-$sqltemplate = "select * from template where status = 'Active'";
-$restemplate = $conn->query($sqltemplate);
-$mytemplate = array();
-if($restemplate -> num_rows>0)
+$sessionidsister = $idlist;
+$sqlbranch = "select lbranch.* from location_setup_sister_branch lssb 
+              inner join location_branch lbranch on lbranch.idbranch = lssb.idbranch where lssb.idsistercompany = '$sessionidsister'";
+$resbranch = $conn->query($sqlbranch);
+$mybranch = array();
+if($resbranch -> num_rows>0)
 {
-	while($j = mysqli_fetch_array($restemplate))
+	while($j = mysqli_fetch_array($resbranch))
 	{
-		$mytemplate[] = $j;
+		$mybranch[] = $j;
 	}
 }
-$sqlasset = "select * from kategori_asset";
+$sqlkategoriasset = "select * from kategori_asset";
+$reskategoriasset  = $conn->query($sqlkategoriasset);
+$mykategoriasset = array();
+if($reskategoriasset -> num_rows>0)
+{
+	while($j = mysqli_fetch_array($reskategoriasset))
+	{
+		$mykategoriasset[] = $j;
+	}
+}
+$sqlasset = "select asset.id, asset.noasset, asset.name from asset ";
 $resasset  = $conn->query($sqlasset);
 $myasset = array();
 if($resasset -> num_rows>0)
@@ -32,40 +44,29 @@ if($resasset -> num_rows>0)
 		$myasset[] = $j;
 	}
 }
-$sqlinitial = "select * from initial_condition";
-$resinitial  = $conn->query($sqlinitial);
-$myinitial = array();
-if($resinitial -> num_rows>0)
+$sqldepartment = "select * from department";
+$resdepartment  = $conn->query($sqldepartment);
+$mydepartment = array();
+if($resdepartment -> num_rows>0)
 {
-	while($j = mysqli_fetch_array($resinitial))
+	while($j = mysqli_fetch_array($resdepartment))
 	{
-		$myinitial[] = $j;
-	}
-}
-$sqlconditions = "select * from conditions";
-$resconditions  = $conn->query($sqlconditions);
-$myconditions = array();
-if($resconditions -> num_rows>0)
-{
-	while($j = mysqli_fetch_array($resconditions))
-	{
-		$myconditions[] = $j;
+		$mydepartment[] = $j;
 	}
 }
 ?>
 
 <head>
     <style>
-        
-        #myModalDisplay{
+        #myModalDisplay {
             height: 95vh !important;
         }
+
         .modal-body {
             width: 100%;
             height: 95vh !important;
-            padding: 0 !important;
-            margin: 0 !important;
-            
+
+
         }
 
         .fileinput-upload-button {
@@ -83,13 +84,16 @@ if($resconditions -> num_rows>0)
 <div class="content-wrapper">
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
-            <h4><span class="font-weight-semibold">Displacement Transaction to departmenth / other branch</span></h4>
+            <h4><span class="font-weight-semibold">Displacement transaction to other department</span></h4>
             <div class="page-title d-flex">
                 <div class="row" style="width:100%;">
                     <div class="col-xl-12">
-                        <a href="#myModal" data-toggle="modal"><button type="button" style = "background-color:#26a69a !important; color:white; width:200px;" class="btn btn-indigo btn-labeled btn-labeled-left" onclick="cancel()" data-toggle="modal" data-target="#modal_form">
-                            <b><i class="icon-plus-circle2"></i></b> Add Transaction
-                        </button></a>
+                        <a href="#myModal" data-toggle="modal"><button type="button"
+                                style="background-color:#26a69a !important; color:white; width:200px;"
+                                class="btn btn-indigo btn-labeled btn-labeled-left" onclick="cancel()"
+                                data-toggle="modal" data-target="#modal_form">
+                                <b><i class="icon-plus-circle2"></i></b> Add Transaction
+                            </button></a>
                     </div>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -104,34 +108,25 @@ if($resconditions -> num_rows>0)
                     <table id="datatable_serverside" class="table table-hover table-bordered display nowrap w-100">
                         <thead>
                             <tr>
-                                <th>#</th>
+                               <th>Approval</th>
                                 <th>Date</th>
                                 <th>Transaction</th>
+                                <th>Branch</th>
+                                <th>toBranch</th>
                                 <th>No Asset</th>
                                 <th>Asset</th>
                                 <th>Room</th>
                                 <th>toRoom</th>
                                 <th>Remark</th>
-                                <th>Approval</th>
+                               
                                 <th>Lead Time</th>
 
                             </tr>
                         </thead>
-    </tbody>
-        <tr>
-            <td><span class='pointer-element badge badge-success'><i class='icon-plus3'></i></span></td>
-            <td>2020-02-12</td>
-            <td>TRX-11</td>
-            <td>1121</td>
-            <td>Vas Bunga</td>
-            <td>Ruangan Pencakar Langit</td>
-            <td>Ruangan Tamu</td>
-            <td>Remark</td>
-            <td>Approved</td>
-            <td>2020-02-12 19:00:00</td>
-        </tr>
+                        </tbody>
+                       
 
-</tbody>
+                        </tbody>
 
                     </table>
                 </div>
@@ -139,7 +134,7 @@ if($resconditions -> num_rows>0)
         </div>
     </div>
 </div>
-<div class="modal fade " id="myModal">
+<div class="modal fade " id="myModals">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <!-- <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
@@ -601,7 +596,7 @@ echo date('d-m-Y');?>">
                             data-toggle="tab">General</a></li>
                     <li class="nav-item"><a href="#colored-rounded-justified-tab2" class="nav-link"
                             data-toggle="tab">Purchase</a></li>
-                    <li class="nav-item"><a id = "mydepreciation" href="#depreciation" class="nav-link"
+                    <li class="nav-item"><a id="mydepreciation" href="#depreciation" class="nav-link"
                             data-toggle="tab">Depreciation</a></li>
                     <li class="nav-item"><a href="#colored-rounded-justified-tab3" class="nav-link"
                             data-toggle="tab">Warranty </a></li>
@@ -714,22 +709,22 @@ echo date('d-m-Y');?>">
                             </div>
                         </div>
                         <br>
-                       
+
                     </div>
                     <div class="tab-pane fade" id="depreciation">
                         <div class="row" style="height:100% !important;margin-right:1px !important; overflow-y:auto;">
                             <div class="col-md-12">
                                 <h4><span class="font-weight-semibold">Depreciation Info</span></h4>
-                                <table  id="mydatatable" class="table table-hover table-bordered display ">
-                                    <thead >
-                                        <tr >
+                                <table id="mydatatable" class="table table-hover table-bordered display ">
+                                    <thead>
+                                        <tr>
                                             <th>Month</th>
                                             <th>Depreciation</th>
                                             <th>Book Value</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
-                                    <tbody id = "depreciationtablebody">
+                                    <tbody id="depreciationtablebody">
                                         <!-- <tr>
                                             <td>1</td>
                                             <td>Rp 1.000.000</td>
@@ -743,7 +738,7 @@ echo date('d-m-Y');?>">
                                             <td><b><i style = "font-size:17px; color : #ebba34;font-weight:bold;" class="mi-timer"></i><b></td>
                                         
                                         </tr> -->
-                                       
+
                                     </tbody>
 
                                 </table>
@@ -780,6 +775,112 @@ echo date('d-m-Y');?>">
         </div>
     </div>
 </div>
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
+                <h5 class="modal-title">Add Transaction</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="myforms">
+                    <div class="form-group">
+                    
+                          <label for="cars">Asset Group:</label>
+                        <select id="groups" name="groups" class="form-control">
+                            <?php
+                                        for($i = 0 ; $i < count($mykategoriasset); $i++)
+                                        {                                            
+                                                echo '<option value="'.$mykategoriasset[$i]['id'].'">'.$mykategoriasset[$i]['nama'].'</option>';                                       
+                                        }
+                                ?>
+                        </select>
+                        <br>
+                        <label for="cars">Asset:</label>
+                        <select id="asset" name="asset" class="form-control">
+                          
+                        </select>
+                        <br>
+                        <b>Asset Preview</b>
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <br>
+                                <label>No Asset</label>
+                                <br>
+                                <label id="noassetpreview">1123</label>
+                            </div>
+                            <div class="col-md-6">
+                                <br>
+                                <label>Asset</label>
+                                <br>
+                                <label id="assetpreview">Good</label>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <br>
+                                <label>Initial Condition</label>
+                                <br>
+                                <label id="initialpreview">Good</label>
+                            </div>
+                            <div class="col-md-6">
+                                <br>
+                                <label>Condition</label>
+                                <br>
+                                <label id="conditionpreview">Good</label>
+                            </div>
+                        </div>
+                        <hr>
+                        <label for="cars">Branch From:</label>
+                        <select id="branchfrom" name="branchfrom" class="form-control">
+                            <?php
+                                        for($i = 0 ; $i < count($mybranch); $i++)
+                                        {                                            
+                                                echo '<option value="'.$mybranch[$i]['idbranch'].'">'.$mybranch[$i]['branch'].'</option>';                                       
+                                        }
+                                ?>
+                        </select>
+                        <br>
+                     
+                        <label for="cars">From Room:</label>
+                        <select id="fromroom" name="fromroom" class="form-control">
+                        </select>
+                        <br>
+                        <label for="cars">Branch To:</label>
+                        <select id="branchto" name="branchto" class="form-control">
+                            <?php
+                                        for($i = 0 ; $i < count($mybranch); $i++)
+                                        {                                            
+                                                echo '<option value="'.$mybranch[$i]['idbranch'].'">'.$mybranch[$i]['branch'].'</option>';                                       
+                                        }
+                                ?>
+                        </select>
+                        <label for="cars">toroom:</label>
+                        <select id="toroom" name="toroom" class="form-control"> 
+                        </select>
+                        <br>
+                        <label for="cars">Remark :</label>
+                        <input id= "remark" type = "text" class="form-control"> 
+                        
+                        <br>
+                        <br>
+                        <div style="float:right;margin-bottom:20px;">
+                            <button type="button" class="btn btn-primary" style="margin-right:10px;"
+                                onclick="adddata()">Save</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                id="canceladd">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
 </body>
 
 </html>
@@ -787,9 +888,11 @@ echo date('d-m-Y');?>">
 <script>
     // $('body').scrollspy({ target: '.sidebar' });
     $("#group").trigger('change');
+    $("#groups").trigger('change');
     var myopenid = "";
     var globaltotalpurchaseprice = 0;
     var globalcostpermonth = 0;
+
     function openmodaldisplay(element) {
         //general
         myopenid = element.id;
@@ -820,8 +923,8 @@ echo date('d-m-Y');?>">
         var economicalpurchase = $("#economical" + myid).val();
         var costpermonthpurchase = $("#costpermonth" + myid).val();
 
-         globaltotalpurchaseprice = parseInt(totalpurchasepurchase);
-         globalcostpermonth = parseInt(costpermonthpurchase);
+        globaltotalpurchaseprice = parseInt(totalpurchasepurchase);
+        globalcostpermonth = parseInt(costpermonthpurchase);
 
         $("#nopolabelpurchase").text(nopopurchase);
         $("#purchasefromlabelpurchase").text(purchasefrompurchase);
@@ -906,7 +1009,7 @@ echo date('d-m-Y');?>">
 
     };
     $(function () {
-        // loadData();
+        loadData();
     });
 
     function loadData() {
@@ -921,7 +1024,7 @@ echo date('d-m-Y');?>">
                 [0, 'asc']
             ],
             ajax: {
-                url: 'process/masterassets.php',
+                url: 'process/master_transaction_disp_department_branch.php',
                 method: 'POST',
                 data: {
                     tipe: "load"
@@ -930,45 +1033,47 @@ echo date('d-m-Y');?>">
             columns: [
 
                 {
-                    name: '#',
+                    name: 'date',
                     className: 'text-center align-middle'
                 },
                 {
-                    name: 'No Asset',
+                    name: 'transaction',
                     className: 'text-center align-middle'
                 },
                 {
-                    name: 'Name',
+                    name: 'branchfrom',
                     className: 'text-center align-middle'
                 },
                 {
-                    name: 'Initial Condition',
+                    name: 'branchto',
                     className: 'text-center align-middle'
                 },
                 {
-                    name: 'Condition',
+                    name: 'noasset',
                     className: 'text-center align-middle'
                 },
                 {
-                    name: 'Group',
+                    name: 'asset',
                     className: 'text-center align-middle'
                 },
                 {
-                    name: 'SubGroup',
+                    name: 'roomfrom',
                     className: 'text-center align-middle'
                 },
                 {
-                    name: 'Category',
+                    name: 'toroom',
                     className: 'text-center align-middle'
                 },
                 {
-                    name: 'Status',
+                    name: 'remark',
                     className: 'text-center align-middle'
                 },
                 {
-                    name: 'Action',
-                    searchable: false,
-                    orderable: false,
+                    name: 'approval',
+                    className: 'text-center align-middle'
+                },
+                {
+                    name: 'leadtime',
                     className: 'text-center align-middle'
                 }
 
@@ -1173,15 +1278,15 @@ echo date('d-m-Y');?>">
     }).trigger('change');
 
     function adddata() {
-        var group = $("#group").val();
-        var subgroup = $('#subgroup').val();
-        var category = $('#category').val();
-        var initialcondition = $('#initialcondition').val();
-        var condition = $('#condition').val();
-        var noasset = $('#noasset').val();
-        var name = $('#name').val();
-        if (noasset == "" || name == "" || group == null || subgroup == null || category == null || initialcondition ==
-            null || condition == null) {
+        var group = $("#groups").val();
+        var asset = $('#asset').val();
+        var branchfrom = $('#branchfrom').val();
+        var branchto = $('#branchto').val();
+        var fromroom = $('#fromroom').val();
+        var toroom = $('#toroom').val();
+        var remark = $('#remark').val();
+        if (remark == "" || asset == null || branchfrom == null || branchto == null ||  fromroom ==
+            null || toroom == null) {
             Swal.fire({
                 icon: 'error',
                 title: 'Empty Field',
@@ -1195,17 +1300,17 @@ echo date('d-m-Y');?>">
                 }
             });
             $.ajax({
-                url: "process/masterassets.php",
+                url: "process/master_transaction_disp_department_branch.php",
                 method: 'POST',
                 data: {
                     tipe: "add",
-                    group: group,
-                    subgroup: subgroup,
-                    category: category,
-                    initialcondition: initialcondition,
-                    condition: condition,
-                    noasset: noasset,
-                    name: name
+                    mygroup: group,
+                    myasset: asset,
+                    mybranchfrom: branchfrom,
+                    mybranchto: branchto,
+                    myfromroom: fromroom,
+                    mytoroom: toroom,
+                    myremark: remark
 
                 },
                 success: function (result) {
@@ -1219,14 +1324,14 @@ echo date('d-m-Y');?>">
                             confirmButtonColor: '#53d408',
                             allowOutsideClick: false,
                         }).then((result) => {
-                            $("#myform").trigger("reset");
+                            $("#myforms").trigger("reset");
                             $("#canceladd").click();
                         });
                     } else {
                         Swal.fire({
                             icon: 'error',
-                            title: 'Data Exists',
-                            text: 'Duplicate Entry For This Asset',
+                            title: 'Insert Error ',
+                            text: 'Please check your data',
                             confirmButtonColor: '#e00d0d',
                         });
                     }
@@ -1329,7 +1434,7 @@ echo date('d-m-Y');?>">
                 if (result == "none") {
                     $("#customquestion").html(
                         "<span style = 'color:grey;'>There is no custom field on this template, Go Ahead</span>"
-                        );
+                    );
                     $("#idcustomquestion").val("");
                 } else {
                     var splitresult = result.split("~~");
@@ -1437,7 +1542,7 @@ echo date('d-m-Y');?>">
                 if (result == "none") {
                     $("#containercustominfo").html(
                         "<span style = 'color:grey;'>Oops, there is no custom field on this template</span>"
-                        );
+                    );
 
                 } else {
                     $("#containercustominfo").html(result);
@@ -1449,6 +1554,102 @@ echo date('d-m-Y');?>">
         });
     }
     $(document).ready(function () {
+        $("#groups").on("change", function(){
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_disp_department.php",
+                method: 'POST',
+                data: {
+                    tipe: "getassetlist",
+                    idgroup: myid
+                },
+                success: function (result) {
+                   
+                    // alert(result);
+                    $("#asset").html(result);
+                    $("#asset").trigger("change");
+                }
+
+            })
+        }).trigger("change");
+        $("#asset").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_disp_department.php",
+                method: 'POST',
+                data: {
+                    tipe: "getassetdesc",
+                    assetid: myid
+                },
+                success: function (result) {
+                    var mysplittter = result.split("~~");
+                    var noasset = mysplittter[0];
+                    var name = mysplittter[1];
+                    var condition = mysplittter[2];
+                    var initialcondition = mysplittter[3];
+
+                    $("#noassetpreview").text(noasset);
+                    $("#assetpreview").text(name);
+                    $("#conditionpreview").text(condition);
+                    $("#initialpreview").text(initialcondition);
+                }
+
+            })
+        }).trigger("change");
+        $("#branchfrom").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_disp_department.php",
+                method: 'POST',
+                data: {
+                    tipe: "getroom",
+                    idbranch: myid
+                },
+                success: function (result) {
+                    $("#fromroom").html("");
+                    $("#fromroom").append(result);
+                       
+                }
+
+            })
+        }).trigger("change");
+        $("#branchto").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_disp_department.php",
+                method: 'POST',
+                data: {
+                    tipe: "getroom",
+                    idbranch: myid
+                },
+                success: function (result) {
+                    $("#toroom").html("");
+                    $("#toroom").append(result);
+                       
+                }
+
+            })
+        }).trigger("change");
 
         $("a[href='#additionalinfo']").on("click", function () {
             var myid = this.id;
@@ -1456,44 +1657,45 @@ echo date('d-m-Y');?>">
             getallanswercustomquestion(myid);
 
         });
-        $("#mydepreciation").on("click", function(){
+        $("#mydepreciation").on("click", function () {
             $("#depreciationtablebody").html("");
             var postingdate = $("#postingdateraw" + myopenid).val();
-            var totalmonth = $("#totalmonth"+myopenid).val();
-            
+            var totalmonth = $("#totalmonth" + myopenid).val();
+
             var date1 = new Date(postingdate);
             var date2 = new Date(Date.now());
-            var diffYears = date2.getFullYear()-date1.getFullYear();
-            var diffMonths = date2.getMonth()-date1.getMonth();
-            var diffDays = date2.getDate()-date1.getDate();
+            var diffYears = date2.getFullYear() - date1.getFullYear();
+            var diffMonths = date2.getMonth() - date1.getMonth();
+            var diffDays = date2.getDate() - date1.getDate();
 
-            var months = (diffYears*12 + diffMonths);
-            var totalprice =  globaltotalpurchaseprice;
+            var months = (diffYears * 12 + diffMonths);
+            var totalprice = globaltotalpurchaseprice;
             // alert(date1);
-            for(var i = 0 ; i < parseInt(totalmonth); i++)
-            {
-                var month = i+1;
-                    totalprice -= globalcostpermonth;
-                if((i+1)<=parseInt(months))
-                {
-                   
-                    var mystring = '<tr><td>'+month+'</td><td>Rp '+globalcostpermonth+'</td><td>Rp '+totalprice+'</td><td><b><i style = "font-size:17px; color : #26a69a;font-weight:bold;" class="mi-check"></i><b></td></tr>';
+            for (var i = 0; i < parseInt(totalmonth); i++) {
+                var month = i + 1;
+                totalprice -= globalcostpermonth;
+                if ((i + 1) <= parseInt(months)) {
+
+                    var mystring = '<tr><td>' + month + '</td><td>Rp ' + globalcostpermonth +
+                        '</td><td>Rp ' + totalprice +
+                        '</td><td><b><i style = "font-size:17px; color : #26a69a;font-weight:bold;" class="mi-check"></i><b></td></tr>';
+                    $("#depreciationtablebody").append(mystring);
+                } else {
+                    var mystring = '<tr><td>' + month + '</td><td>Rp ' + globalcostpermonth +
+                        '</td><td>Rp ' + totalprice +
+                        '</td><td><b><i style = "font-size:17px; color : #ebba34;font-weight:bold;" class="mi-timer"></i><b></td></tr>';
                     $("#depreciationtablebody").append(mystring);
                 }
-                else{
-                    var mystring = '<tr><td>'+month+'</td><td>Rp '+globalcostpermonth+'</td><td>Rp '+totalprice+'</td><td><b><i style = "font-size:17px; color : #ebba34;font-weight:bold;" class="mi-timer"></i><b></td></tr>';
-                    $("#depreciationtablebody").append(mystring);
-                }
-              
+
             }
-           
-                                        // <tr>
-                                        //     <td>1</td>
-                                        //     <td>Rp 1.000.000</td>
-                                        //     <td>Rp 11.000.000</td>
-                                        //     <td><b><i style = "font-size:17px; color : #ebba34;font-weight:bold;" class="mi-timer"></i><b></td>
-                                        
-                                        // </tr>
+
+            // <tr>
+            //     <td>1</td>
+            //     <td>Rp 1.000.000</td>
+            //     <td>Rp 11.000.000</td>
+            //     <td><b><i style = "font-size:17px; color : #ebba34;font-weight:bold;" class="mi-timer"></i><b></td>
+
+            // </tr>
         });
 
         $('#templates').trigger('change');
@@ -1531,7 +1733,7 @@ echo date('d-m-Y');?>">
                     if (result == "another") {
                         $("#containercustominfo").html(
                             "<span style = 'color:red;'>Please choose another category, this category doesnt have template</span>"
-                            );
+                        );
 
                         $("#template").val("");
 
@@ -1545,7 +1747,7 @@ echo date('d-m-Y');?>">
                         if (mysplittter[1] == "none") {
                             $("#containercustominfo").html(
                                 "<span style = 'color:grey;'>Oops, there is no custom field on this template</span>"
-                                );
+                            );
                             $("#idcustomquestion").val("");
                         } else {
 
