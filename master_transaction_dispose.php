@@ -1400,65 +1400,7 @@ if($resconditions -> num_rows>0)
         // alert(purchaseprice);
     }
 </script>
-                                <th>#</th>
-                                <th>Date</th>
-                                <th>Transaction</th>
-                                <th>Asset</th>
-                                <th>Room</th>
-                                <th>Contact</th>
-                                <th>Company</th>
-                                <th>Start Date</th>
-                                <th>Due Date</th>
-                                <th>Approval</th>
-                                <th>Status</th>
-                                
-                            </tr>
-                        </thead>
-    </tbody>
-        <tr>
-            <td><span class='pointer-element badge badge-success'><i class='icon-plus3'></i></span></td>
-            <td>2020-02-12</td>
-            <td>TRX-11</td>
-            <td>Vas Bunga</td>
-            <td>Ruangan Pencakar Langit</td>
-            <td>Mr. Paijo</td>
-            <td>08384838343</td>
-            <td>2021-09-12 19:00:00</td>
-            <td>2021-09-21 19:00:00</td>
-            <td><span class="badge badge-success">Approved</span></td>
-            <td><span class="badge " style = "background-color:#26a69a;color:white;">Borrowed</span></td>
-        </tr>
-        <tr>
-            <td><span class='pointer-element badge badge-success'><i class='icon-plus3'></i></span></td>
-            <td>2020-02-12</td>
-            <td>TRX-14</td>
-            <td>Meja</td>
-            <td>Ruangan Tamu</td>
-            <td>Mr. Kevin</td>
-            <td>0838281712</td>
-            <td>2021-09-13 19:00:00</td>
-            <td>2021-09-21 19:00:00</td>
-            <td><span class="badge badge-success">Approved</span></td>
-            <td><span class="badge badge-success">Returned</span></td>
-        </tr>
-        <tr>
-            <td><span class='pointer-element badge badge-success'><i class='icon-plus3'></i></span></td>
-            <td>2020-02-13</td>
-            <td>TRX-12</td>
-            <td>Speaker</td>
-            <td>Ruangan Pencakar Langit</td>
-            <td>Mrs. Lisa</td>
-            <td>08283717232</td>
-            <td>2021-09-15 19:00:00</td>
-            <td>2021-09-21 19:00:00</td>
-            <td><span class="badge badge-danger">Rejected</span></td>
-            <td><span class="badge badge-danger">Rejected</span></td>
-        </tr>
-
-</tbody>
-
-                    </table>
-                </div>
+                            </div>
             </div>
         </div>
     </div>
