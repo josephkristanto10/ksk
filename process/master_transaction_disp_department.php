@@ -7,8 +7,6 @@ if($tipe == "load")
 {
 
     $where_like = [
-        'assetname',
-        'noasset',
         'branch',
         'roomfroom',
         'toroom',
@@ -26,51 +24,44 @@ if($tipe == "load")
     
     $total_data = mysqli_query($conn, 
     
-    "SELECT tdd.*, asset.noasset, asset.name as assetname, lbranch.branch, lfromroom.room as myfromroom, ltoroom.room as toroom  FROM transaction_displacement_department tdd
+    "SELECT tdd.*, lbranch.branch, lfromroom.room as myfromroom, ltoroom.room as toroom  FROM transaction_displacement_department tdd
     inner join location_branch lbranch on lbranch.idbranch = tdd.idbranch
     inner join location_room lfromroom on lfromroom.id = tdd.idfromroom 
-    inner join location_room ltoroom on ltoroom.id = tdd.idtoroom 
-    inner join asset on asset.id = tdd.idasset where tdd.idsister = '$myses'
+    inner join location_room ltoroom on ltoroom.id = tdd.idtoroom  where tdd.idsister = '$myses'
     "
 
 );
     
     if(empty($search)) {
-        $query_data = mysqli_query($conn, "SELECT tdd.*, asset.noasset, asset.name as assetname, lbranch.branch, lfromroom.room as myfromroom, ltoroom.room as toroom  FROM transaction_displacement_department tdd
+        $query_data = mysqli_query($conn, "SELECT tdd.*, lbranch.branch, lfromroom.room as myfromroom, ltoroom.room as toroom  FROM transaction_displacement_department tdd
         inner join location_branch lbranch on lbranch.idbranch = tdd.idbranch
         inner join location_room lfromroom on lfromroom.id = tdd.idfromroom
-        inner join location_room ltoroom on ltoroom.id = tdd.idtoroom 
-        inner join asset on asset.id = tdd.idasset where tdd.idsister = '$myses' ORDER BY $order $dir LIMIT $start, $length");
+        inner join location_room ltoroom on ltoroom.id = tdd.idtoroom  where tdd.idsister = '$myses' ORDER BY $order $dir LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "SELECT tdd.*, asset.noasset, asset.name as assetname, lbranch.branch, lfromroom.room as myfromroom, ltoroom.room as toroom  FROM transaction_displacement_department tdd
+        $total_filtered = mysqli_query($conn, "SELECT tdd.*, lbranch.branch, lfromroom.room as myfromroom, ltoroom.room as toroom  FROM transaction_displacement_department tdd
         inner join location_branch lbranch on lbranch.idbranch = tdd.idbranch
         inner join location_room lfromroom on lfromroom.id = tdd.idfromroom
-        inner join location_room ltoroom on ltoroom.id = tdd.idtoroom 
-        inner join asset on asset.id = tdd.idasset where tdd.idsister = '$myses' ");
+        inner join location_room ltoroom on ltoroom.id = tdd.idtoroom  where tdd.idsister = '$myses' ");
     } else {
-        $query_data = mysqli_query($conn, "SELECT tdd.*, asset.noasset, asset.name as assetname, lbranch.branch, lfromroom.room as myfromroom, ltoroom.room as toroom  FROM transaction_displacement_department tdd
+        $query_data = mysqli_query($conn, "SELECT tdd.*, lbranch.branch, lfromroom.room as myfromroom, ltoroom.room as toroom  FROM transaction_displacement_department tdd
         inner join location_branch lbranch on lbranch.idbranch = tdd.idbranch
         inner join location_room lfromroom on lfromroom.id = tdd.idfromroom
         inner join location_room ltoroom on ltoroom.id = tdd.idtoroom 
-        inner join asset on asset.id = tdd.idasset where tdd.idsister = '$myses' and (
+         where tdd.idsister = '$myses' and (
          tdd.notransaction LIKE '%$search%' 
         OR lbranch.branch LIKE '%$search%'
-        OR asset.noasset LIKE '%$search%'
-        OR asset.name LIKE '%$search%'
         OR lfromroom.room LIKE '%$search%'
         OR ltoroom.room LIKE '%$search%' 
         OR tdd.remark LIKE '%$search%'
         OR tdd.status_approval LIKE '%$search%' )  ORDER BY $order $dir LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "SELECT tdd.*, asset.noasset, asset.name as assetname, lbranch.branch, lfromroom.room as myfromroom, ltoroom.room as toroom  FROM transaction_displacement_department tdd
+        $total_filtered = mysqli_query($conn, "SELECT tdd.*, lbranch.branch, lfromroom.room as myfromroom, ltoroom.room as toroom  FROM transaction_displacement_department tdd
         inner join location_branch lbranch on lbranch.idbranch = tdd.idbranch
         inner join location_room lfromroom on lfromroom.id = tdd.idfromroom
         inner join location_room ltoroom on ltoroom.id = tdd.idtoroom 
         inner join asset on asset.id = tdd.idasset where tdd.idsister = '$myses' and (
          tdd.notransaction LIKE '%$search%' 
         OR lbranch.branch LIKE '%$search%'
-        OR asset.noasset LIKE '%$search%'
-        OR asset.name LIKE '%$search%'
         OR lfromroom.room LIKE '%$search%'
         OR ltoroom.room LIKE '%$search%' 
         OR tdd.remark LIKE '%$search%'
@@ -99,10 +90,8 @@ if($tipe == "load")
                 // "<a href= '#myModalDisplay'  data-toggle='modal'><span class='pointer-element badge badge-success' id ='".$row['id']."' onclick = 'openmodaldisplay(this)'  data-id='".$row['id']."'><i class='icon-plus3'></i></span></a>",
                 "<b><label id ='statusapproval".$row['id']."'  >".$myapproval."</label></b>",
                 "<label id ='mydate".$row['id']."'>".$row['mydate']."</label>",
-                "<label id ='notransaction".$row['id']."'>".$row['notransaction']."</label>",
+                "<a href = '#myModalDetailTransaction' id = '".$row['id']."' onclick = openmodaldetailtransaction(this) data-toggle='modal'><label id ='notransaction".$row['id']."'>".$row['notransaction']."</label></a>",
                 "<label id ='branch".$row['id']."'>".$row['branch']."</label>",
-                "<label id ='noasset".$row['id']."'>".$row['noasset']."</label>",
-                "<label id ='assetname".$row['id']."'>".$row['assetname']."</label>",
                 "<label id ='roomfrom".$row['id']."'>".$row['myfromroom']."</label>",
                 "<label id ='toroom".$row['id']."'>".$row['toroom']."</label>",
                 "<label id ='remark".$row['id']."'>".$row['remark']."</label>",
@@ -124,6 +113,7 @@ if($tipe == "load")
     
     echo json_encode($response);
 }
+
 else if($tipe == "gettemplatecategory")
 {
     $idcategory = $_POST['idcategory'];
@@ -355,9 +345,9 @@ else if($tipe == "addassetform")
 }
 else if($tipe == "add"){
 
+    $myselectedlist = $_POST['myselect'];
     $idsister = $myses;
     $mygroup = $_POST['mygroup'];
-    $myasset = $_POST['myasset'];
     $mybranch = $_POST['mybranch'];
     $mydepartment = $_POST['mydepartment'];
     $myfromroom = $_POST['myfromroom'];
@@ -365,8 +355,18 @@ else if($tipe == "add"){
     $myremark = $_POST['myremark'];
     date_default_timezone_set("Asia/Bangkok");
     $mydate = date("Y-m-d");
-    $sql = "INSERT INTO `transaction_displacement_department` VALUES (NULL, 'TRX---', '$idsister', '$mybranch', '$mygroup', '$myasset', '$mydepartment', '$myfromroom', '$mytoroom', '$myremark', 'pending', 'CURRENT_TIMESTAMP', '$mydate');";
+    $sql = "INSERT INTO `transaction_displacement_department` VALUES (NULL, 'TRX---', '$idsister', '$mybranch', '$mydepartment', '$myfromroom', '$mytoroom', '$myremark', 'pending', 'CURRENT_TIMESTAMP', '$mydate');";
     $res = $conn->query($sql);
+    $last_id = $conn->insert_id;
+
+    for($i = 0 ;  $i < count($myselectedlist) ; $i++)
+    {
+        $sqlupdate  = "UPDATE asset set status_transaction = 'placed' where id = '".$myselectedlist[$i]."'";
+        $resupdate =  $conn->query($sqlupdate);
+        $sqls = "INSERT INTO `transaction_displacement_department_log` VALUES (NULL, '$last_id', '".$myselectedlist[$i]."')";
+        $ress = $conn->query($sqls);
+      
+    }
     if(($conn -> affected_rows)>0)
     {
         echo "sukses";
@@ -457,6 +457,95 @@ else if($tipe == "getroom")
         while($r = mysqli_fetch_array($res))
         {
             $mystring .= "<option value = '".$r['id']."'> ".$r['room']."</option>";
+        }
+    }
+    echo $mystring;
+}
+else if($tipe == "getdetailtransaction")
+{
+    $idtransaction = $_POST['idtransaction'];
+    $sql = "select tddl.*, asset.name as assetname, asset.noasset  from transaction_displacement_department_log tddl inner join asset on asset.id = tddl.idasset where idtransaksi = '$idtransaction'";
+    $res = $conn->query($sql);
+    $mystring = "";
+    $mycountasset = 0;
+    $mynumber = 1;
+    if($res->num_rows>0)
+    {
+        $mycounter = 1;
+        while($r = mysqli_fetch_array($res))
+        {
+            $mycountasset += 1;
+            $mystring .= "<div class = 'row' style = 'margin-left:5px;'><label style = 'display:block;float:left;heigth:100px;font-size:12pt;' ><b>$mynumber. </b> &nbsp </label><label style = 'display:block;float:left' >".$r['assetname']."<br>".$r['noasset']."</label></div><br>";             
+            $mynumber ++;
+            
+        }
+        echo $mycountasset."||".$mystring;
+    }
+    else
+    {
+        echo "";
+    }
+
+}
+else if($tipe == "getasset")
+{
+    $idcategory = $_POST['idcategory'];
+    $sql =  "select * from asset where idcategory = '$idcategory' and status_transaction = 'placed'";
+    $res = $conn->query($sql);
+    $mystring = "";
+    if($res->num_rows>0)
+    {
+        $mycounter = 1;
+        while($r = mysqli_fetch_array($res))
+        {
+            if($mycounter == 1)
+            {
+                $mystring .= "<div class = 'row'><div class = 'col-md-6'><input class = 'mycheckbox' type = 'checkbox' value = '".$r['id']."' > ".$r['name']."</div>";
+                $mycounter = 2;
+            }
+            else{
+                $mystring .= "<div class = 'col-md-6'><input class = 'mycheckbox' type = 'checkbox' value = '".$r['id']."' > ".$r['name']."</div></div><br>";
+                $mycounter = 1;
+            }
+            
+        }
+        echo $mystring;
+    }
+    else
+    {
+        echo "";
+    }
+   
+
+}
+else if($tipe == "getsubgroup")
+{
+    $idgroup = $_POST['idgroup'];
+    $sql = "SELECT ks.* from kategori_subgroup ks inner join kategori_asset ka on ka.id = ks.idkategoriaset
+     where ka.id = '$idgroup'";
+    $res = $conn->query($sql);
+    $mystring = "";
+    if($res -> num_rows>0)
+    {
+        while($r = mysqli_fetch_array($res))
+        {
+            $mystring .= "<option value = '".$r['id']."'> ".$r['subgroup']."</option>";
+        }
+    }
+    echo $mystring;
+}
+else if($tipe == "getcategory")
+{
+    $idsubgroup = $_POST['idsubgroup'];
+    $sql = "SELECT kcs.* from kategori_categorysubgroup kcs 
+    where kcs.idsubgroup = '$idsubgroup'";
+    $res = $conn->query($sql);
+    $mystring = "";
+    if($res -> num_rows>0)
+    {
+        while($r = mysqli_fetch_array($res))
+        {
+            $mystring .= "<option value = '".$r['id']."'> ".$r['category']."</option>";
         }
     }
     echo $mystring;

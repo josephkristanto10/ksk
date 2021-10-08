@@ -8,8 +8,6 @@ if($tipe == "load")
 
     $where_like = [
         'notransaction',
-        'name',
-        'noasset',
         'approval'
         
     ];
@@ -23,28 +21,24 @@ if($tipe == "load")
     
     $total_data = mysqli_query($conn, 
     
-    "SELECT * from transaction_dispose inner join asset on asset.id =  transaction_dispose.idasset where asset.idsistercompany = '$myses'
+    "SELECT * from transaction_dispose where idsister = '$myses'
     "
 
 );
     
     if(empty($search)) {
-        $query_data = mysqli_query($conn, "SELECT * from transaction_dispose inner join asset on asset.id =  transaction_dispose.idasset where asset.idsistercompany = '$myses' ORDER BY $order $dir LIMIT $start, $length");
+        $query_data = mysqli_query($conn, "SELECT * from transaction_dispose where idsister = '$myses' ORDER BY $order $dir LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "SELECT * from transaction_dispose inner join asset on asset.id =  transaction_dispose.idasset where asset.idsistercompany = '$myses'");
+        $total_filtered = mysqli_query($conn, "SELECT * from transaction_dispose  where idsister = '$myses'");
     } else {
-        $query_data = mysqli_query($conn, "SELECT * from transaction_dispose inner join asset on asset.id =  transaction_dispose.idasset where asset.idsistercompany = '$myses' and (
+        $query_data = mysqli_query($conn, "SELECT * from transaction_dispose where idsister = '$myses' and (
             transaction_dispose.notransaction LIKE '%$search%' 
         OR transaction_dispose.mydate LIKE '%$search%'
-        OR asset.noasset LIKE '%$search%'
-        OR asset.name LIKE '%$search%'
         OR transaction_dispose.approval LIKE '%$search%' )  ORDER BY $order $dir LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "SELECT * from transaction_dispose inner join asset on asset.id =  transaction_dispose.idasset where asset.idsistercompany = '$myses' and (
+        $total_filtered = mysqli_query($conn, "SELECT * from transaction_dispose where idsister = '$myses' and (
             transaction_dispose.notransaction LIKE '%$search%' 
         OR transaction_dispose.mydate LIKE '%$search%'
-        OR asset.noasset LIKE '%$search%'
-        OR asset.name LIKE '%$search%'
         OR transaction_dispose.approval LIKE '%$search%' )");
     }
     
@@ -69,9 +63,7 @@ if($tipe == "load")
             $response['data'][] = [
                 "<b><label id ='statusapproval".$row['id']."'  >".$myapproval."</label></b>",
                 "<label id ='mydate".$row['id']."'>".$row['mydate']."</label>",
-                "<label id ='notransaction".$row['id']."'>".$row['notransaction']."</label>",
-                "<label id ='noasset".$row['id']."'>".$row['noasset']."</label>",
-                "<label id ='assetname".$row['id']."'>".$row['name']."</label>"
+                "<a href = '#myModalDetailTransaction' id = '".$row['id']."' onclick = openmodaldetailtransaction(this) data-toggle='modal'><label id ='notransaction".$row['id']."'>".$row['notransaction']."</label></a>",
             
             ];
         }
@@ -297,12 +289,20 @@ else if($tipe == "getroom")
 
 else if($tipe == "add"){
 
-    $mygroup = $_POST['mygroup'];
-    $myasset = $_POST['myasset'];
+    $myselectedlist = $_POST['myselected'];
     date_default_timezone_set("Asia/Bangkok");
     $mydate = date("Y-m-d");
-    $sql = "INSERT INTO `transaction_dispose` VALUES (NULL, '$mydate', 'TRX-020202', '$myasset', 'pending')";
+    $sql = "INSERT INTO `transaction_dispose` VALUES (NULL,'$myses', '$mydate', 'TRX-020202', 'pending')";
     $res = $conn->query($sql);
+    $last_id = $conn->insert_id;
+    for($i = 0 ;  $i < count($myselectedlist) ; $i++)
+    {
+        $sqlupdate  = "UPDATE asset set status_transaction = 'placed' where id = '".$myselectedlist[$i]."'";
+        $resupdate =  $conn->query($sqlupdate);
+        $sqls = "INSERT INTO `transaction_dispose_log` VALUES (NULL, '$last_id', '".$myselectedlist[$i]."')";
+        $ress = $conn->query($sqls);
+      
+    }
     // echo $sql;
     if(($conn -> affected_rows)>0)
     {
@@ -394,6 +394,95 @@ else if($tipe == "getroom")
         while($r = mysqli_fetch_array($res))
         {
             $mystring .= "<option value = '".$r['id']."'> ".$r['room']."</option>";
+        }
+    }
+    echo $mystring;
+}
+else if($tipe == "getdetailtransaction")
+{
+    $idtransaction = $_POST['idtransaction'];
+    $sql = "select td.*, asset.name as assetname, asset.noasset  from transaction_dispose_log td inner join asset on asset.id = td.idasset where idtransaksi = '$idtransaction'";
+    $res = $conn->query($sql);
+    $mystring = "";
+    $mycountasset = 0;
+    $mynumber = 1;
+    if($res->num_rows>0)
+    {
+        $mycounter = 1;
+        while($r = mysqli_fetch_array($res))
+        {
+            $mycountasset += 1;
+            $mystring .= "<div class = 'row' style = 'margin-left:5px;'><label style = 'display:block;float:left;heigth:100px;font-size:12pt;' ><b>$mynumber. </b> &nbsp </label><label style = 'display:block;float:left' >".$r['assetname']."<br>".$r['noasset']."</label></div><br>";             
+            $mynumber ++;
+            
+        }
+        echo $mycountasset."||".$mystring;
+    }
+    else
+    {
+        echo "";
+    }
+
+}
+else if($tipe == "getasset")
+{
+    $idcategory = $_POST['idcategory'];
+    $sql =  "select * from asset where idcategory = '$idcategory' and status_transaction = 'placed'";
+    $res = $conn->query($sql);
+    $mystring = "";
+    if($res->num_rows>0)
+    {
+        $mycounter = 1;
+        while($r = mysqli_fetch_array($res))
+        {
+            if($mycounter == 1)
+            {
+                $mystring .= "<div class = 'row'><div class = 'col-md-6'><input class = 'mycheckbox' type = 'checkbox' value = '".$r['id']."' > ".$r['name']."</div>";
+                $mycounter = 2;
+            }
+            else{
+                $mystring .= "<div class = 'col-md-6'><input class = 'mycheckbox' type = 'checkbox' value = '".$r['id']."' > ".$r['name']."</div></div><br>";
+                $mycounter = 1;
+            }
+            
+        }
+        echo $mystring;
+    }
+    else
+    {
+        echo "";
+    }
+   
+
+}
+else if($tipe == "getsubgroup")
+{
+    $idgroup = $_POST['idgroup'];
+    $sql = "SELECT ks.* from kategori_subgroup ks inner join kategori_asset ka on ka.id = ks.idkategoriaset
+     where ka.id = '$idgroup'";
+    $res = $conn->query($sql);
+    $mystring = "";
+    if($res -> num_rows>0)
+    {
+        while($r = mysqli_fetch_array($res))
+        {
+            $mystring .= "<option value = '".$r['id']."'> ".$r['subgroup']."</option>";
+        }
+    }
+    echo $mystring;
+}
+else if($tipe == "getcategory")
+{
+    $idsubgroup = $_POST['idsubgroup'];
+    $sql = "SELECT kcs.* from kategori_categorysubgroup kcs 
+    where kcs.idsubgroup = '$idsubgroup'";
+    $res = $conn->query($sql);
+    $mystring = "";
+    if($res -> num_rows>0)
+    {
+        while($r = mysqli_fetch_array($res))
+        {
+            $mystring .= "<option value = '".$r['id']."'> ".$r['category']."</option>";
         }
     }
     echo $mystring;

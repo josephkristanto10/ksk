@@ -132,8 +132,6 @@ if($resconditions -> num_rows>0)
                                 <th>Date</th>
                                 <th>Transaction</th>
                                 <th>Branch Personel</th>
-                                <th>No Asset</th>
-                                <th>Asset</th>
                                 <th>Room</th>
                                 <th>Nik</th>
                                 <th>Name</th>
@@ -226,54 +224,7 @@ if($resconditions -> num_rows>0)
                                 <label id="rankpreview">Good</label>
                             </div>
                         </div>
-                        <hr>
-                        <label for="cars" style="font-size:11pt;"><b>Asset Section</b></label><br>
-                        <label for="cars">Asset Group:</label>
-                        <select id="groups" name="groups" class="form-control">
-                            <?php
-                                        for($i = 0 ; $i < count($mykategoriasset); $i++)
-                                        {                                            
-                                                echo '<option value="'.$mykategoriasset[$i]['id'].'">'.$mykategoriasset[$i]['nama'].'</option>';                                       
-                                        }
-                                ?>
-                        </select>
-                        <br>
-                        <label for="cars">Asset:</label>
-                        <select id="asset" name="asset" class="form-control">
-
-                        </select>
-                        <br>
-                        <b>Asset Preview</b>
-                        <div class="row">
-
-                            <div class="col-md-6">
-                                <br>
-                                <label>No Asset</label>
-                                <br>
-                                <label id="noassetpreview">1123</label>
-                            </div>
-                            <div class="col-md-6">
-                                <br>
-                                <label>Asset</label>
-                                <br>
-                                <label id="assetpreview">Good</label>
-                            </div>
-                        </div>
-                        <div class="row">
-
-                            <div class="col-md-6">
-                                <br>
-                                <label>Initial Condition</label>
-                                <br>
-                                <label id="initialpreview">Good</label>
-                            </div>
-                            <div class="col-md-6">
-                                <br>
-                                <label>Condition</label>
-                                <br>
-                                <label id="conditionpreview">Good</label>
-                            </div>
-                        </div>
+                     
                         <hr>
                         <label for="cars" style="font-size:11pt;"><b>Room Section</b></label><br>
                         <label for="cars">Branch :</label>
@@ -314,7 +265,33 @@ if($resconditions -> num_rows>0)
 echo date('d-m-Y');?>">
 
                         </div>
+                        <hr>
+                        <label for="cars" style="font-size:11pt;"><b>Asset Section</b></label><br>
+                        <label for="cars">Asset Group:</label>
+                        <select id="groups" name="groups" class="form-control">
+                            <?php
+                                        for($i = 0 ; $i < count($mykategoriasset); $i++)
+                                        {                                            
+                                                echo '<option value="'.$mykategoriasset[$i]['id'].'">'.$mykategoriasset[$i]['nama'].'</option>';                                       
+                                        }
+                                ?>
+                        </select>
+                        <br>
+                        <label for="cars">Asset Sub Group:</label>
+                        <select id="subgroups" name="subgroups" class="form-control">
 
+                        </select>
+                        <br>
+                        <label for="cars">Asset Category:</label>
+                        <select id="categories" name="categories" class="form-control">
+
+                        </select>
+                        <br>
+                        <b>Asset Choose</b>
+                        <br><br>
+                        <div id="chooseaset" style="max-height:100px !important;">
+
+                        </div>
 
                         <br>
                         <br>
@@ -609,11 +586,42 @@ echo date('d-m-Y');?>">
         </div>
     </div>
 </div>
+<div class="modal fade " id="myModalDetailTransaction">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
+                <h5 class="modal-title">Transaction Detail</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+
+            </div>
+            <div class="modal-body" >
+
+            <label for="cars" style="font-size:11pt;"><b>Transaction Section</b></label><br><br>
+            <label for="idgroup" id = "detailnotransaction">Transaction No : -</label><br>
+            <label for="idgroup" id = "detaildate">Transaction Date : -</label><br>
+            <!-- <label for="idgroup" id = "detailcreate">Created By: -</label><br> -->
+            <hr style = "border-top: 3px dashed #d4d4d4;">
+            <label for="cars" style="font-size:11pt;"><b>Asset Section</b></label><br>
+            <label for="idgroup" id = "detailqty">Asset Count : 8 pcs</label><br>
+            <label for="idgroup">Asset List: </label>
+            <br><br>
+            <div id = "listtransaction">
+
+            </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
 </body>
 
 </html>
 <script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>
 <script>
+    var selected = [];
     $('#mystartdate').pickadate({
         format: 'dd-mm-yyyy'
     });
@@ -784,14 +792,6 @@ echo date('d-m-Y');?>">
                 },
                 {
                     name: 'Branch',
-                    className: 'text-center align-middle'
-                },
-                {
-                    name: 'No Asset',
-                    className: 'text-center align-middle'
-                },
-                {
-                    name: 'Name',
                     className: 'text-center align-middle'
                 },
                 {
@@ -1102,16 +1102,21 @@ echo date('d-m-Y');?>">
     }).trigger('change');
 
     function adddata() {
+        $("input:checkbox[class=mycheckbox]:checked").each(function () {
+            selected.push($(this).val());
+
+        });
+        var myselect = selected;
         var branchpersonel = $("#branchpersonel").val();
         var department = $('#department').val();
         var user = $('#user').val();
-        var group = $('#groups').val();
-        var asset = $('#asset').val();
         var branchroom = $('#branchroom').val();
         var room = $('#room').val();
         var startdate = $('#mystartdate').val();
         var enddate = $('#enddate').val();
-        if (startdate == "" || enddate == "" || user == null || asset == null) {
+      
+        if (selected.length > 0) {
+            if (startdate == "" || enddate == "" || user == null)  {
             Swal.fire({
                 icon: 'error',
                 title: 'Empty Field',
@@ -1132,8 +1137,7 @@ echo date('d-m-Y');?>">
                     mybranchpersonel: branchpersonel,
                     mydepartment: department,
                     myuser: user,
-                    mygroup: group,
-                    myasset: asset,
+                    myselected: myselect,
                     mybranchroom: branchroom,
                     myroom: room,
                     mystart: startdate,
@@ -1167,6 +1171,16 @@ echo date('d-m-Y');?>">
                 }
             });
         }
+        }
+        else{
+            Swal.fire({
+                icon: 'error',
+                title: 'No Asset Checked ',
+                text: 'Please choose at least 1 asset to be placed',
+                confirmButtonColor: '#e00d0d',
+            });
+        }
+        
 
 
     }
@@ -1240,93 +1254,8 @@ echo date('d-m-Y');?>">
     }
 
 
-    function mytemplatechange(element) {
-        //    alert("test");
-        var myid = element.value;
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            url: "process/masterassets.php",
-            method: 'POST',
-            data: {
-                tipe: "getcustomquestion",
-                idtemplate: myid
+ 
 
-            },
-            success: function (result) {
-                $("#customquestion").html("");
-                if (result == "none") {
-                    $("#customquestion").html(
-                        "<span style = 'color:grey;'>There is no custom field on this template, Go Ahead</span>"
-                    );
-                    $("#idcustomquestion").val("");
-                } else {
-                    var splitresult = result.split("~~");
-                    var allquestion = splitresult[1];
-                    $("#customquestion").html(allquestion);
-                    $("#idcustomquestion").val(splitresult[0]);
-                }
-
-
-
-            }
-        });
-
-    }
-
-    function addassetform() {
-        var form = $("#myform"); // You need to use standard javascript object here
-        var formData = new FormData(form[0]);
-
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            url: "process/masterassets.php",
-            method: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (result) {
-                // alert(result);
-                if (result == "sukses") {
-                    success();
-                    Swal.fire({
-                        title: 'Data Saved',
-                        text: 'Data Inputted Successfully',
-                        icon: 'success',
-                        confirmButtonColor: '#53d408',
-                        allowOutsideClick: false,
-                    }).then((result) => {
-                        // $( "#myform" ).steps('reset');
-                        $(".first a").click();
-                        $(".first").attr("class", "first current");
-                        $(".done").attr("class", "disabled");
-
-                        $("#myform").trigger("reset");
-
-                        $('#myModal').modal('toggle');
-                    });
-                } else {
-
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Data Exists',
-                        text: 'Duplicate Entry For This Asset',
-                        confirmButtonColor: '#e00d0d',
-                    });
-                }
-
-            }
-        });
-
-
-    }
 
     function isNumber(event) {
         // var iKeyCode = (evt.which) ? evt.which : event.keyCode;
@@ -1351,35 +1280,6 @@ echo date('d-m-Y');?>">
 
     };
 
-    function getallanswercustomquestion(idasset) {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            url: "process/masterassets.php",
-            method: 'POST',
-            data: {
-                tipe: "getallanswer",
-                idassets: idasset
-            },
-            success: function (result) {
-                // alert(result);
-                if (result == "none") {
-                    $("#containercustominfo").html(
-                        "<span style = 'color:grey;'>Oops, there is no custom field on this template</span>"
-                    );
-
-                } else {
-                    $("#containercustominfo").html(result);
-
-
-                }
-
-            }
-        });
-    }
     $(document).ready(function () {
 
 
@@ -1395,14 +1295,64 @@ echo date('d-m-Y');?>">
                 url: "process/master_transaction_lend_personel.php",
                 method: 'POST',
                 data: {
-                    tipe: "getassetlist",
+                    tipe: "getsubgroup",
                     idgroup: myid
                 },
                 success: function (result) {
 
                     // alert(result);
-                    $("#asset").html(result);
-                    $("#asset").trigger("change");
+                    $("#subgroups").html("");
+                    $("#subgroups").html(result);
+                    $("#subgroups").trigger("change");
+                }
+
+            })
+        }).trigger("change");
+        $("#subgroups").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_lend_personel.php",
+                method: 'POST',
+                data: {
+                    tipe: "getcategory",
+                    idsubgroup: myid
+                },
+                success: function (result) {
+
+                    // alert(result);
+                    $("#categories").html("");
+                    $("#categories").html(result);
+                    $("#categories").trigger("change");
+                }
+
+            })
+        }).trigger("change");
+
+
+        $("#categories").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_lend_personel.php",
+                method: 'POST',
+                data: {
+                    tipe: "getasset",
+                    idcategory: myid
+                },
+                success: function (result) {
+                    selected = [];
+                    // alert(result);
+                    $("#chooseaset").html("");
+                    $("#chooseaset").html(result);
                 }
 
             })
@@ -1576,5 +1526,50 @@ echo date('d-m-Y');?>">
             $("#costpermonth").val(costpermonth);
         }
         // alert(purchaseprice);
+    }
+    function openmodaldetailtransaction(element){
+        var myid = element.id;
+        var notransaction = $("#notransaction" + myid).text();
+        var datetransaction = $("#mydate" + myid).text();
+        var createdby = $("#nama" + myid).text();
+        var mydate = new Date(datetransaction);
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+        ];
+        $("#detailnotransaction").text("Transaction No : " + notransaction);
+        // $("#detailcreate").text("Created By : " + createdby)
+        $("#detaildate").text("Transaction Date : " + mydate.getDate() + " " + monthNames[mydate.getMonth()] + " " + mydate.getFullYear());
+           $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_lend_personel.php",
+                method: 'POST',
+                data: {
+                    tipe: "getdetailtransaction",
+                    idtransaction: myid
+                },
+                success: function (result) {
+                    // alert(result);
+                    if(result == "")
+                    {
+                        $("#detailqty").html("Asset Count : 0 pcs");
+                        $("#listtransaction").html("");
+                        $("#listtransaction").html(result);
+                    }
+                    else{
+                        var mysplit = result.split("||");
+                        var qty = mysplit[0];
+                        var data = mysplit[1];
+                        $("#listtransaction").html("");
+                        $("#listtransaction").html(data);
+                        $("#detailqty").html("Asset Count : "+qty+" pcs");
+                    }
+                    
+                }
+            });
+
     }
 </script>

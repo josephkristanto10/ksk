@@ -112,8 +112,6 @@ if($resdepartment -> num_rows>0)
                                 <th>Date</th>
                                 <th>Transaction</th>
                                 <th>Branch</th>
-                                <th>No Asset</th>
-                                <th>Asset</th>
                                 <th>Room</th>
                                 <th>toRoom</th>
                                 <th>Remark</th>
@@ -787,53 +785,6 @@ echo date('d-m-Y');?>">
                 <form id="myforms">
                     <div class="form-group">
                     
-                          <label for="cars">Asset Group:</label>
-                        <select id="groups" name="groups" class="form-control">
-                            <?php
-                                        for($i = 0 ; $i < count($mykategoriasset); $i++)
-                                        {                                            
-                                                echo '<option value="'.$mykategoriasset[$i]['id'].'">'.$mykategoriasset[$i]['nama'].'</option>';                                       
-                                        }
-                                ?>
-                        </select>
-                        <br>
-                        <label for="cars">Asset:</label>
-                        <select id="asset" name="asset" class="form-control">
-                          
-                        </select>
-                        <br>
-                        <b>Asset Preview</b>
-                        <div class="row">
-
-                            <div class="col-md-6">
-                                <br>
-                                <label>No Asset</label>
-                                <br>
-                                <label id="noassetpreview">1123</label>
-                            </div>
-                            <div class="col-md-6">
-                                <br>
-                                <label>Asset</label>
-                                <br>
-                                <label id="assetpreview">Good</label>
-                            </div>
-                        </div>
-                        <div class="row">
-
-                            <div class="col-md-6">
-                                <br>
-                                <label>Initial Condition</label>
-                                <br>
-                                <label id="initialpreview">Good</label>
-                            </div>
-                            <div class="col-md-6">
-                                <br>
-                                <label>Condition</label>
-                                <br>
-                                <label id="conditionpreview">Good</label>
-                            </div>
-                        </div>
-                        <hr>
                         <label for="cars">Branch:</label>
                         <select id="branch" name="branch" class="form-control">
                             <?php
@@ -864,7 +815,32 @@ echo date('d-m-Y');?>">
                         <br>
                         <label for="cars">Remark :</label>
                         <input id= "remark" type = "text" class="form-control"> 
-                        
+                        <label for="cars">Asset Group:</label>
+                        <select id="groups" name="groups" class="form-control">
+                            <?php
+                                        for($i = 0 ; $i < count($mykategoriasset); $i++)
+                                        {                                            
+                                                echo '<option value="'.$mykategoriasset[$i]['id'].'">'.$mykategoriasset[$i]['nama'].'</option>';                                       
+                                        }
+                                ?>
+                        </select>
+                        <br>
+                        <label for="cars">Asset Sub Group:</label>
+                        <select id="subgroups" name="subgroups" class="form-control">
+
+                        </select>
+                        <br>
+                        <label for="cars">Asset Category:</label>
+                        <select id="categories" name="categories" class="form-control">
+
+                        </select>
+                        <br>
+                        <b>Asset Choose</b>
+                        <br><br>
+                        <div id="chooseaset" style="max-height:100px !important;">
+
+                        </div>
+
                         <br>
                         <br>
                         <div style="float:right;margin-bottom:20px;">
@@ -880,11 +856,43 @@ echo date('d-m-Y');?>">
         </div>
     </div>
 </div>
+
+<div class="modal fade " id="myModalDetailTransaction">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
+                <h5 class="modal-title">Transaction Detail</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+
+            </div>
+            <div class="modal-body" >
+
+            <label for="cars" style="font-size:11pt;"><b>Transaction Section</b></label><br><br>
+            <label for="idgroup" id = "detailnotransaction">Transaction No : -</label><br>
+            <label for="idgroup" id = "detaildate">Transaction Date : -</label><br>
+            <!-- <label for="idgroup" id = "detailcreate">Created By: -</label><br> -->
+            <hr style = "border-top: 3px dashed #d4d4d4;">
+            <label for="cars" style="font-size:11pt;"><b>Asset Section</b></label><br>
+            <label for="idgroup" id = "detailqty">Asset Count : 8 pcs</label><br>
+            <label for="idgroup">Asset List: </label>
+            <br><br>
+            <div id = "listtransaction">
+
+            </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
 </body>
 
 </html>
 <script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>
 <script>
+    var selected = [];
     // $('body').scrollspy({ target: '.sidebar' });
     $("#group").trigger('change');
     $("#groups").trigger('change');
@@ -1043,14 +1051,14 @@ echo date('d-m-Y');?>">
                     name: 'branch',
                     className: 'text-center align-middle'
                 },
-                {
-                    name: 'noasset',
-                    className: 'text-center align-middle'
-                },
-                {
-                    name: 'asset',
-                    className: 'text-center align-middle'
-                },
+                // {
+                //     name: 'noasset',
+                //     className: 'text-center align-middle'
+                // },
+                // {
+                //     name: 'asset',
+                //     className: 'text-center align-middle'
+                // },
                 {
                     name: 'roomfrom',
                     className: 'text-center align-middle'
@@ -1273,14 +1281,19 @@ echo date('d-m-Y');?>">
     }).trigger('change');
 
     function adddata() {
-        var group = $("#groups").val();
-        var asset = $('#asset').val();
+        $("input:checkbox[class=mycheckbox]:checked").each(function () {
+            selected.push($(this).val());
+
+        });
+        if (selected.length > 0) {
+            var myselects = selected;
+            var group = $("#groups").val();
         var branch = $('#branch').val();
         var department = $('#department').val();
         var fromroom = $('#fromroom').val();
         var toroom = $('#toroom').val();
         var remark = $('#remark').val();
-        if (remark == "" || asset == null || department == null || branch == null || fromroom ==
+        if (remark == ""  || department == null || branch == null || fromroom ==
             null || toroom == null) {
             Swal.fire({
                 icon: 'error',
@@ -1299,8 +1312,8 @@ echo date('d-m-Y');?>">
                 method: 'POST',
                 data: {
                     tipe: "add",
+                    myselect : selected,
                     mygroup: group,
-                    myasset: asset,
                     mybranch: branch,
                     mydepartment: department,
                     myfromroom: fromroom,
@@ -1335,6 +1348,16 @@ echo date('d-m-Y');?>">
                 }
             });
         }
+        }
+        else{
+            Swal.fire({
+                icon: 'error',
+                title: 'No Asset Checked ',
+                text: 'Please choose at least 1 asset to be placed',
+                confirmButtonColor: '#e00d0d',
+            });
+        }
+      
 
 
     }
@@ -1549,7 +1572,7 @@ echo date('d-m-Y');?>">
         });
     }
     $(document).ready(function () {
-        $("#groups").on("change", function(){
+        $("#groups").on("change", function () {
             var myid = this.value;
             $.ajaxSetup({
                 headers: {
@@ -1560,14 +1583,64 @@ echo date('d-m-Y');?>">
                 url: "process/master_transaction_disp_department.php",
                 method: 'POST',
                 data: {
-                    tipe: "getassetlist",
+                    tipe: "getsubgroup",
                     idgroup: myid
                 },
                 success: function (result) {
-                   
+
                     // alert(result);
-                    $("#asset").html(result);
-                    $("#asset").trigger("change");
+                    $("#subgroups").html("");
+                    $("#subgroups").html(result);
+                    $("#subgroups").trigger("change");
+                }
+
+            })
+        }).trigger("change");
+        $("#subgroups").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_disp_department.php",
+                method: 'POST',
+                data: {
+                    tipe: "getcategory",
+                    idsubgroup: myid
+                },
+                success: function (result) {
+
+                    // alert(result);
+                    $("#categories").html("");
+                    $("#categories").html(result);
+                    $("#categories").trigger("change");
+                }
+
+            })
+        }).trigger("change");
+
+
+        $("#categories").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_disp_department.php",
+                method: 'POST',
+                data: {
+                    tipe: "getasset",
+                    idcategory: myid
+                },
+                success: function (result) {
+                    selected = [];
+                    // alert(result);
+                    $("#chooseaset").html("");
+                    $("#chooseaset").html(result);
                 }
 
             })
@@ -1786,5 +1859,50 @@ echo date('d-m-Y');?>">
             $("#costpermonth").val(costpermonth);
         }
         // alert(purchaseprice);
+    }
+    function openmodaldetailtransaction(element){
+        var myid = element.id;
+        var notransaction = $("#notransaction" + myid).text();
+        var datetransaction = $("#mydate" + myid).text();
+        var createdby = $("#nama" + myid).text();
+        var mydate = new Date(datetransaction);
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+        ];
+        $("#detailnotransaction").text("Transaction No : " + notransaction);
+        // $("#detailcreate").text("Created By : " + createdby)
+        $("#detaildate").text("Transaction Date : " + mydate.getDate() + " " + monthNames[mydate.getMonth()] + " " + mydate.getFullYear());
+           $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_disp_department.php",
+                method: 'POST',
+                data: {
+                    tipe: "getdetailtransaction",
+                    idtransaction: myid
+                },
+                success: function (result) {
+                    // alert(result);
+                    if(result == "")
+                    {
+                        $("#detailqty").html("Asset Count : 0 pcs");
+                        $("#listtransaction").html("");
+                        $("#listtransaction").html(result);
+                    }
+                    else{
+                        var mysplit = result.split("||");
+                        var qty = mysplit[0];
+                        var data = mysplit[1];
+                        $("#listtransaction").html("");
+                        $("#listtransaction").html(data);
+                        $("#detailqty").html("Asset Count : "+qty+" pcs");
+                    }
+                    
+                }
+            });
+
     }
 </script>

@@ -17,6 +17,7 @@ if($tipe == "checklogin")
         $passfromdb = $row['password'];
         if (password_verify($passwordfromuser, $passfromdb)) {
             $_SESSION['iduser'] = $row['id'];
+            $_SESSION['nik'] = $row['nik'];
             $_SESSION['username'] = $row['username'];
             echo 'ok';
         } else {

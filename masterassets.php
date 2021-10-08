@@ -113,13 +113,14 @@ if($resconditions -> num_rows>0)
                                 <th>SubGroup</th>
                                 <th>Category</th>
 
-
+                                <th class="text-center">Status Asset</th>
                                 <th class="text-center">Status</th>
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
 
                     </table>
+            
                 </div>
             </div>
         </div>
@@ -895,7 +896,9 @@ echo date('d-m-Y');?>">
         loadData();
     });
 
+
     function loadData() {
+     
         $("#datatable_serverside").DataTable({
             processing: true,
             deferRender: true,
@@ -948,6 +951,10 @@ echo date('d-m-Y');?>">
                     className: 'text-center align-middle'
                 },
                 {
+                    name: 'Status_Transaction',
+                    className: 'text-center align-middle'
+                },
+                {
                     name: 'Status',
                     className: 'text-center align-middle'
                 },
@@ -960,6 +967,9 @@ echo date('d-m-Y');?>">
 
             ]
         });
+        $(".dataTables_scroll").append('<br> <i class="mi-info" style = "color:#e37e02;margin-left:10px;"></i>  <label><b> Not Placed Yet</b></label>')
+        
+                   
     };
 
     // Reload table

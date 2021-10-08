@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 323,
+            "activePatchIndex": 324,
             "patches": [
                 {
                     "date": 1630468397363,
@@ -1300,6 +1300,10 @@
                 {
                     "date": 1632810236922,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -130,9 +130,8 @@\n \t<script src=\"<?=$url;?>global_assets/js/plugins/uploaders/fileinput/plugins/purify.min.js\"></script>\r\n \t<script src=\"<?=$url;?>global_assets/js/plugins/uploaders/fileinput/plugins/sortable.min.js\"></script>\r\n \t<script src=\"<?=$url;?>global_assets/js/plugins/uploaders/fileinput/fileinput.min.js\"></script>\r\n <script src=\"<?=$url;?>global_assets/js/demo_pages/uploader_bootstrap.js\"></script>\r\n-\r\n <script src=\"<?=$url;?>global_assets/js/plugins/ui/perfect_scrollbar.min.js\"></script>\r\n \t<!-- <script src=\"<?=$url;?>global_assets/js/demo_pages/uploader_plupload.js\"></script> -->\r\n \t<style>\r\n \t\tth {\r\n"
+                },
+                {
+                    "date": 1633662309048,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,9 +81,9 @@\n \t<link href=\"assets/css/layout.min.css\" rel=\"stylesheet\" type=\"text/css\">\r\n \t<link href=\"assets/css/components.min.css\" rel=\"stylesheet\" type=\"text/css\">\r\n \t<link href=\"assets/css/colors.min.css\" rel=\"stylesheet\" type=\"text/css\">\r\n \t<!-- <link href=\"assets/css/colors.min.css\" rel=\"stylesheet\" type=\"text/css\"> -->\r\n-\t<link rel=\"shortcut icon\" type=\"image/png\" href=\"assets/logonexus.png\" />\r\n+\t<link rel=\"shortcut icon\" type=\"image/png\" href=\"<?=$url;?>assets/icon.png\" />\r\n \t<!-- /global stylesheets -->\r\n \r\n \t<!-- Core JS files -->\r\n \t<script src=\"<?=$url;?>global_assets/js/main/jquery.min.js\"></script>\r\n"
                 }
             ],
             "date": 1630468397363,

@@ -107,9 +107,9 @@ if($resconditions -> num_rows>0)
             <div class="page-title d-flex">
                 <div class="row" style="width:100%;">
                     <div class="col-xl-12">
-                        <a href="#myModal" data-toggle="modal"><button type="button"
+                        <a href="#myModalAddSale" onclick = "startmodal()"  data-toggle="modal"><button type="button"
                                 style="background-color:#26a69a !important; color:white; width:200px;"
-                                class="btn btn-indigo btn-labeled btn-labeled-left" onclick="cancel()"
+                                class="btn btn-indigo btn-labeled btn-labeled-left" 
                                 data-toggle="modal" data-target="#modal_form">
                                 <b><i class="icon-plus-circle2"></i></b> Add Transaction
                             </button></a>
@@ -130,8 +130,6 @@ if($resconditions -> num_rows>0)
                                 <th>Approval</th>
                                 <th>Date</th>
                                 <th>No. Transaction</th>
-                                <th>ID Asset</th>
-                                <th>Asset</th>
 
                             </tr>
                         </thead>
@@ -142,7 +140,7 @@ if($resconditions -> num_rows>0)
         </div>
     </div>
 </div>
-<div class="modal fade" id="myModal">
+<!-- <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
@@ -220,7 +218,7 @@ if($resconditions -> num_rows>0)
 
         </div>
     </div>
-</div>
+</div> -->
 
 
 </div>
@@ -302,198 +300,97 @@ if($resconditions -> num_rows>0)
         </div>
     </div>
 </div>
-<div class="modal fade" id="myModalDisplay">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="myModalAddSale">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
-                <h5 class="modal-title">Asset Display</h5>
+                <h5 class="modal-title">Add Asset's Sale Transaction </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
 
             </div>
             <div class="modal-body" style="padding:10px !important;">
-
+                <form id = "myform" >
                 <ul class="nav nav-tabs nav-tabs-solid border-0 nav-justified rounded" id="mynav"
                     style="margin-top:10px;">
                     <li class="nav-item"><a id="myfirst" href="#first" class="nav-link rounded-left active"
-                            data-toggle="tab">General</a></li>
-                    <li class="nav-item"><a href="#colored-rounded-justified-tab2" class="nav-link"
-                            data-toggle="tab">Purchase</a></li>
-                    <li class="nav-item"><a id="mydepreciation" href="#depreciation" class="nav-link"
-                            data-toggle="tab">Depreciation</a></li>
-                    <li class="nav-item"><a href="#colored-rounded-justified-tab3" class="nav-link"
-                            data-toggle="tab">Warranty </a></li>
-                    <li class="nav-item"><a href="#colored-rounded-justified-tab4" class="nav-link"
-                            data-toggle="tab">Image </a></li>
-                    <li class="nav-item"><a href="#additionalinfo" class="nav-link" data-toggle="tab">Custom</a></li>
-
+                            data-toggle="tab">Asset</a></li>
+                    <li class="nav-item"><a id="mysecond" href="#second" class="nav-link" data-toggle="tab">Price</a>
+                    </li>
                 </ul>
 
                 <div class="tab-content" style="margin-left:10px;">
                     <div class="tab-pane fade show active" id="first">
-                        <h4><span class="font-weight-semibold">General Info</span></h4>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label for="noasset">Asset No.</label>
-                                <br>
-                                <b> <label for="noasset" id="noassetlabelgeneral">Asset No.</label></b>
-                            </div>
+                        <h4><span class="font-weight-semibold">Asset Section</span></h4>
 
-                            <div class="col-md-4">
-                                <label for="noasset">Asset Name</label>
-                                <br>
-                                <b> <label for="noasset" id="nameassetlabelgeneral">Asset No.</label></b>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="noasset">Asset Group</label>
-                                <br>
-                                <b> <label for="noasset" id="groupassetlabelgeneral">Asset No.</label></b>
-                            </div>
-                        </div>
+                        <label for="cars">Asset Group:</label>
+                        <select id="groups" name="groups" class="form-control">
+                            <?php
+                                        for($i = 0 ; $i < count($mykategoriasset); $i++)
+                                        {                                            
+                                                echo '<option value="'.$mykategoriasset[$i]['id'].'">'.$mykategoriasset[$i]['nama'].'</option>';                                       
+                                        }
+                                ?>
+                        </select>
                         <br>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label for="noasset">Asset Subgroup</label>
-                                <br>
-                                <b> <label for="noasset" id="subgroupassetlabelgeneral">Asset No.</label></b>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="noasset">Asset Category</label>
-                                <br>
-                                <b> <label for="noasset" id="categoryassetlabelgeneral">Asset No.</label></b>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="noasset">Asset Condition</label>
-                                <br>
-                                <b> <label for="noasset" id="conditionassetlabelgeneral">Asset No.</label></b>
-                            </div>
-                        </div>
+                        <label for="cars">Asset Sub Group:</label>
+                        <select id="subgroups" name="subgroups" class="form-control">
+
+                        </select>
                         <br>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label for="noasset">Asset Initial Cond</label>
-                                <br>
-                                <b> <label for="noasset" id="initialassetlabelgeneral">Asset No.</label></b>
-                            </div>
-                        </div>
-                    </div>
+                        <label for="cars">Asset Category:</label>
+                        <select id="categories" name="categories" class="form-control">
 
-                    <div class="tab-pane fade" id="colored-rounded-justified-tab2">
-                        <h4><span class="font-weight-semibold">Purchase Info</span></h4>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label for="noasset">No PO.</label>
-                                <br>
-                                <b> <label for="noasset" id="nopolabelpurchase">Asset No.</label></b>
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="noasset">Purchase Price</label>
-                                <br>
-                                <b> <label for="noasset" id="purchasepricelabelpurchase">Asset No.</label></b>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="noasset">Posting Date</label>
-                                <br>
-                                <b> <label for="noasset" id="postingdatelabelpurchase">Asset No.</label></b>
-                            </div>
-                        </div>
+                        </select>
                         <br>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <label for="noasset">Purchase From</label>
-                                <br>
-                                <b> <label for="noasset" id="purchasefromlabelpurchase">Asset No.</label></b>
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="noasset">PPN</label>
-                                <br>
-                                <b> <label for="noasset" id="ppnlabelpurchase">Asset No.</label></b>
-                            </div>
+                        <b>Asset Choose</b>
+                        <br><br>
+                        <div id="chooseaset" style="max-height:100px !important;">
 
                         </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label for="noasset">Total Purchase Price</label>
-                                <br>
-                                <b> <label for="noasset" id="totalpurchasepricelabelpurchase">Asset No.</label></b>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="noasset">Economical Life Time</label>
-                                <br>
-                                <b> <label for="noasset" id="economicallifetimelabelpurchase">Asset No.</label></b>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="noasset">Cost Per Month</label>
-                                <br>
-                                <b> <label for="noasset" id="costpermonthlabelpurchase">Asset No.</label></b>
-                            </div>
-                        </div>
-                        <br>
-
                     </div>
-                    <div class="tab-pane fade" id="depreciation">
-                        <div class="row" style="height:100% !important;margin-right:1px !important; overflow-y:auto;">
-                            <div class="col-md-12">
-                                <h4><span class="font-weight-semibold">Depreciation Info</span></h4>
-                                <table id="mydatatable" class="table table-hover table-bordered display ">
-                                    <thead>
-                                        <tr>
-                                            <th>Month</th>
-                                            <th>Depreciation</th>
-                                            <th>Book Value</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="depreciationtablebody">
-                                        <!-- <tr>
-                                            <td>1</td>
-                                            <td>Rp 1.000.000</td>
-                                            <td>Rp 11.000.000</td>
-                                            <td><b><i style = "font-size:17px; color : #26a69a;font-weight:bold;" class="mi-check"></i><b></td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Rp 1.000.000</td>
-                                            <td>Rp 11.000.000</td>
-                                            <td><b><i style = "font-size:17px; color : #ebba34;font-weight:bold;" class="mi-timer"></i><b></td>
-                                        
-                                        </tr> -->
+                    <div class="tab-pane fade show " id="second">
+                        <h4><span class="font-weight-semibold">Price</span></h4>
+                        <div id="priceadd"></div>
 
-                                    </tbody>
-
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="colored-rounded-justified-tab3">
-                        <h4><span class="font-weight-semibold">Warranty Info</span></h4>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="noasset">Start Date</label>
-                                <br>
-                                <b> <label for="noasset" id="startdatelabelwarranty">Asset No.</label></b>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="noasset">End Date</label>
-                                <br>
-                                <b> <label for="noasset" id="enddatelabelwarranty">Asset No.</label></b>
-                            </div>
-                        </div>
+                        <button type = "button" class='btn btn-info' id="buttonaddsale"
+                            style="float:right; position: relative ;bottom:20px;right:20px;">complease</button>
                     </div>
 
-                    <div class="tab-pane fade" id="colored-rounded-justified-tab4">
-                        <h4><span class="font-weight-semibold">Attachment</span></h4>
-                        <div id="myattach"></div>
-                    </div>
-                    <div class="tab-pane fade" id="additionalinfo">
-                        <h4><span class="font-weight-semibold">Additional Info</span></h4>
-                        <div id="containercustominfo"></div>
-                    </div>
+
                 </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade " id="myModalDetailTransaction">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
+                <h5 class="modal-title">Transaction Detail</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+
+            </div>
+            <div class="modal-body" >
+
+            <label for="cars" style="font-size:11pt;"><b>Transaction Section</b></label><br><br>
+            <label for="idgroup" id = "detailnotransaction">Transaction No : -</label><br>
+            <label for="idgroup" id = "detaildate">Transaction Date : -</label><br>
+            <!-- <label for="idgroup" id = "detailcreate">Created By: -</label><br> -->
+            <hr style = "border-top: 3px dashed #d4d4d4;">
+            <label for="cars" style="font-size:11pt;"><b>Asset Section</b></label><br>
+            <label for="idgroup" id = "detailqty">Asset Count : 8 pcs</label><br>
+            <label for="idgroup">Asset List: </label>
+            <br><br>
+            <div id = "listtransaction">
+
+            </div>
+
             </div>
 
         </div>
@@ -636,7 +533,7 @@ if($resconditions -> num_rows>0)
     });
 
     function loadData() {
-    
+
         var dt = $("#datatable_serverside").DataTable({
             processing: true,
             deferRender: true,
@@ -654,8 +551,7 @@ if($resconditions -> num_rows>0)
                     tipe: "load"
                 }
             },
-            columns: [
-                {
+            columns: [{
                     name: 'approval',
                     className: 'text-center align-middle'
                 },
@@ -665,14 +561,6 @@ if($resconditions -> num_rows>0)
                 },
                 {
                     name: 'Transaction',
-                    className: 'text-center align-middle'
-                },
-                {
-                    name: 'No Asset',
-                    className: 'text-center align-middle'
-                },
-                {
-                    name: 'Name',
                     className: 'text-center align-middle'
                 }
             ]
@@ -712,34 +600,31 @@ if($resconditions -> num_rows>0)
                 var approval = $("#statusapproval" + badge[0].id).text();
                 var status = $("#status" + badge[0].id).text();
                 var myapproval = "";
-             
-                if(approval.toLowerCase().includes("pending"))
-                {
+
+                if (approval.toLowerCase().includes("pending")) {
                     myapproval = "<span style = 'color:#e37e02'><i class='mi-info'></i> Pending </span>";
-                }
-                else if(approval.toLowerCase().includes("rejected"))
-                {
+                } else if (approval.toLowerCase().includes("rejected")) {
                     myapproval = "<span style = 'color:#e32702'><i class='mi-cancel'></i>Rejected </span>";
-                }
-                else if(approval.toLowerCase().includes("accepted"))
-                {
+                } else if (approval.toLowerCase().includes("accepted")) {
                     myapproval = "<span style = 'color:#2aa602'><i class='mi-check-box'></i> Accepted </span>";
                 }
-                var company = $("#company"+ badge[0].id).text();
-                var contactname = $("#contactname"+ badge[0].id).text();
-                card = '<span class = "mi-subdirectory-arrow-right" style = "font-size: 3em;height:100px;float:left;margin-left:10px"></span><div class="card" style = "min-width:250px !important;float:left;margin-left:10px;"><div class="card-header header-elements-inline"><h5 class="card-title">Lend Detail</h5></div>	<div class="card-body" style="text-align:left;"><p>Branch : <b>' +
-                        branchroom + ' </b></p> <p>Room : <b>' + room + 
-                        ' </b></div></div> 	</div> <div class="card" style = "min-width:250px !important;float:left;margin-left:10px;"><div class="card-header header-elements-inline"><h5 class="card-title"> Company Detail</h5><div class="header-elements"><div class="list-icons"></div></div></div>	<div class="card-body" style="text-align:left;"><p>Company : <b>' +
-                        company + ' </b></p> <p>Contact Name : <b>' + contactname+
-                        ' </b></p></div>	</div></div><div class="card" style = "min-width:250px !important;float:left;margin-left:10px;"><div class="card-header header-elements-inline"><h5 class="card-title"> Lend Status</h5><div class="header-elements"><div class="list-icons"></div></div></div>	<div class="card-body" style="text-align:left; "><p>Start Date : <b>' +
-                        startdate + ' </b></p><p>End Date : <b>' + duedate +
-                        ' </b></p><p>Approval : <b>'+myapproval+'</b></p> <p>Status : <b style = "' + "stringcolor" + '"> ' + status +
-                        '</b></p></div>	</div>';
-                        // <div style = "text-align:left;margin-top:10px;"> <div class = "row"><div style = "float:left;padding:5px;margin-left:20px;"><label for="cars" style="font-size:10pt;"><b>User Section</b></label><br><label>Nik : 11212</label> <br><label>Branch : Surabaya</label><br><label>Email : Email</label><br><label>Rank : Rank</label><br><br><label for="cars" style="font-size:10pt;"></div><div style = "float:left;padding:5px;margin-left:10px;"><label for="cars" style="font-size:10pt;"><b>User Section</b></label><br><label>Nik : 11212</label> <br><label>Branch : Surabaya</label><br><label>Email : Email</label><br><label>Rank : Rank</label><br><br><label for="cars" style="font-size:10pt;"></div><div style = "float:left;padding:5px;;margin-left:10px;"><label for="cars" style="font-size:10pt;"><b>User Section</b></label><br><label>Nik : 11212</label> <br><label>Branch : Surabaya</label><br><label>Email : Email</label><br><label>Rank : Rank</label><br><br><label for="cars" style="font-size:10pt;"></div></div></div>
+                var company = $("#company" + badge[0].id).text();
+                var contactname = $("#contactname" + badge[0].id).text();
+                card =
+                    '<span class = "mi-subdirectory-arrow-right" style = "font-size: 3em;height:100px;float:left;margin-left:10px"></span><div class="card" style = "min-width:250px !important;float:left;margin-left:10px;"><div class="card-header header-elements-inline"><h5 class="card-title">Lend Detail</h5></div>	<div class="card-body" style="text-align:left;"><p>Branch : <b>' +
+                    branchroom + ' </b></p> <p>Room : <b>' + room +
+                    ' </b></div></div> 	</div> <div class="card" style = "min-width:250px !important;float:left;margin-left:10px;"><div class="card-header header-elements-inline"><h5 class="card-title"> Company Detail</h5><div class="header-elements"><div class="list-icons"></div></div></div>	<div class="card-body" style="text-align:left;"><p>Company : <b>' +
+                    company + ' </b></p> <p>Contact Name : <b>' + contactname +
+                    ' </b></p></div>	</div></div><div class="card" style = "min-width:250px !important;float:left;margin-left:10px;"><div class="card-header header-elements-inline"><h5 class="card-title"> Lend Status</h5><div class="header-elements"><div class="list-icons"></div></div></div>	<div class="card-body" style="text-align:left; "><p>Start Date : <b>' +
+                    startdate + ' </b></p><p>End Date : <b>' + duedate +
+                    ' </b></p><p>Approval : <b>' + myapproval + '</b></p> <p>Status : <b style = "' +
+                    "stringcolor" + '"> ' + status +
+                    '</b></p></div>	</div>';
+                // <div style = "text-align:left;margin-top:10px;"> <div class = "row"><div style = "float:left;padding:5px;margin-left:20px;"><label for="cars" style="font-size:10pt;"><b>User Section</b></label><br><label>Nik : 11212</label> <br><label>Branch : Surabaya</label><br><label>Email : Email</label><br><label>Rank : Rank</label><br><br><label for="cars" style="font-size:10pt;"></div><div style = "float:left;padding:5px;margin-left:10px;"><label for="cars" style="font-size:10pt;"><b>User Section</b></label><br><label>Nik : 11212</label> <br><label>Branch : Surabaya</label><br><label>Email : Email</label><br><label>Rank : Rank</label><br><br><label for="cars" style="font-size:10pt;"></div><div style = "float:left;padding:5px;;margin-left:10px;"><label for="cars" style="font-size:10pt;"><b>User Section</b></label><br><label>Nik : 11212</label> <br><label>Branch : Surabaya</label><br><label>Email : Email</label><br><label>Rank : Rank</label><br><br><label for="cars" style="font-size:10pt;"></div></div></div>
 
                 row.child(card).show();
-                      
-                     
+
+
 
                 // Add to the 'open' array
                 if (idx === -1) {
@@ -995,7 +880,7 @@ if($resconditions -> num_rows>0)
                             allowOutsideClick: false,
                         }).then((result) => {
                             $("#myform").trigger("reset");
-                            $("#canceladd").click();
+                            
                         });
                     } else {
                         Swal.fire({
@@ -1225,7 +1110,7 @@ if($resconditions -> num_rows>0)
     }
     $(document).ready(function () {
 
-        $("#relation").on("change", function(){
+        $("#relation").on("change", function () {
             var text = $("#relation option:selected").text();
             // alert(text);
             var split = text.split(" - ");
@@ -1241,17 +1126,68 @@ if($resconditions -> num_rows>0)
                 }
             });
             $.ajax({
-                url: "process/master_transaction_lend_personel.php",
+                url: "process/master_transaction_sale.php",
                 method: 'POST',
                 data: {
-                    tipe: "getassetlist",
+                    tipe: "getsubgroup",
                     idgroup: myid
                 },
                 success: function (result) {
 
                     // alert(result);
-                    $("#asset").html(result);
-                    $("#asset").trigger("change");
+                    $("#subgroups").html("");
+                    $("#subgroups").html(result);
+                    $("#subgroups").trigger("change");
+                }
+
+            })
+        }).trigger("change");
+        $("#subgroups").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_sale.php",
+                method: 'POST',
+                data: {
+                    tipe: "getcategory",
+                    idsubgroup: myid
+                },
+                success: function (result) {
+
+                    // alert(result);
+                    $("#categories").html("");
+                    $("#categories").html(result);
+                    $("#categories").trigger("change");
+                }
+
+            })
+        }).trigger("change");
+
+
+        $("#categories").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_sale.php",
+                method: 'POST',
+                data: {
+                    tipe: "getasset",
+                    idcategory: myid
+                },
+                success: function (result) {
+                    selected = [];
+                    $("#priceadd").html("");
+                    // alert(result);
+                    $("#chooseaset").html("");
+                    $("#chooseaset").html(result);
                 }
 
             })
@@ -1427,437 +1363,30 @@ if($resconditions -> num_rows>0)
         // alert(purchaseprice);
     }
 </script>
-                                <th>#</th>
-                                <th>Date</th>
-                                <th>Transaction</th>
-                                <th>Asset</th>
-                                <th>Room</th>
-                                <th>Contact</th>
-                                <th>Company</th>
-                                <th>Start Date</th>
-                                <th>Due Date</th>
-                                <th>Approval</th>
-                                <th>Status</th>
-                                
-                            </tr>
-                        </thead>
-    </tbody>
-        <tr>
-            <td><span class='pointer-element badge badge-success'><i class='icon-plus3'></i></span></td>
-            <td>2020-02-12</td>
-            <td>TRX-11</td>
-            <td>Vas Bunga</td>
-            <td>Ruangan Pencakar Langit</td>
-            <td>Mr. Paijo</td>
-            <td>08384838343</td>
-            <td>2021-09-12 19:00:00</td>
-            <td>2021-09-21 19:00:00</td>
-            <td><span class="badge badge-success">Approved</span></td>
-            <td><span class="badge " style = "background-color:#26a69a;color:white;">Borrowed</span></td>
-        </tr>
-        <tr>
-            <td><span class='pointer-element badge badge-success'><i class='icon-plus3'></i></span></td>
-            <td>2020-02-12</td>
-            <td>TRX-14</td>
-            <td>Meja</td>
-            <td>Ruangan Tamu</td>
-            <td>Mr. Kevin</td>
-            <td>0838281712</td>
-            <td>2021-09-13 19:00:00</td>
-            <td>2021-09-21 19:00:00</td>
-            <td><span class="badge badge-success">Approved</span></td>
-            <td><span class="badge badge-success">Returned</span></td>
-        </tr>
-        <tr>
-            <td><span class='pointer-element badge badge-success'><i class='icon-plus3'></i></span></td>
-            <td>2020-02-13</td>
-            <td>TRX-12</td>
-            <td>Speaker</td>
-            <td>Ruangan Pencakar Langit</td>
-            <td>Mrs. Lisa</td>
-            <td>08283717232</td>
-            <td>2021-09-15 19:00:00</td>
-            <td>2021-09-21 19:00:00</td>
-            <td><span class="badge badge-danger">Rejected</span></td>
-            <td><span class="badge badge-danger">Rejected</span></td>
-        </tr>
+<th>#</th>
+<th>Date</th>
+<th>Transaction</th>
+<th>Asset</th>
+<th>Room</th>
+<th>Contact</th>
+<th>Company</th>
+<th>Start Date</th>
+<th>Due Date</th>
+<th>Approval</th>
+<th>Status</th>
+
+</tr>
+</thead>
+<tbody>
+
 
 </tbody>
 
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+</table>
 </div>
-<div class="modal fade " id="myModal">
-    <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content">
-            <!-- <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
-						<h5 class="modal-title">Add Assets</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
-
-					</div> -->
-            <div class="modal-body">
-                <div class="card">
-                    <!-- <div class="card-header bg-white header-elements-inline">
-						<h6 class="card-title"> Asset <?php echo $_SESSION['namasister']; ?></h6>
-						<div class="header-elements">
-							<div class="list-icons">
-		                		<a class="list-icons-item" data-action="collapse"></a>
-		                		<a class="list-icons-item" data-action="reload"></a>
-		                		<a class="list-icons-item" data-action="remove"></a>
-		                	</div>
-	                	</div>
-					</div> -->
-                    <center>
-                        <h4><span class="font-weight-semibold">Add Asset Form</span></h4>
-                        <h6 style="color:grey;">Please fill any requirement data to add asset</h6>
-                    </center>
-                    <form class="wizard-form steps-validation" id="myform" method="post" enctype="multipart/form-data"
-                        data-fouc>
-                        <input type="hidden" name="tipe" value="addassetform">
-                        <h6>General</h6>
-                        <fieldset>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="noasset">No Asset</label><input type="text"
-                                            class="form-control required" name="noasset" id="noasset" />
-
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <!-- <label for="noasset">No Asset</label><input type="text" class = "form-control"  name="noasset" id="noasset" /> -->
-
-                                        <label for="name">Name</label><input type="text" class="form-control required"
-                                            name="name" id="name" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-
-                                        <label for="idgroup">Group</label>
-                                        <select class="form-control required" name="group" id="group"
-                                            onchange="searchsubgroup(this)">
-                                            <?php
-                                                for($i = 0 ; $i < count($myasset); $i++)
-                                                {
-                                                    echo '<option value = "'.$myasset[$i]['id'].'">'.$myasset[$i]['nama'].'</option>';
-                                                }
-                                                ?>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="idinitialcondition">Initial Condition</label>
-                                        <select class="form-control" name="initialcondition" id="initialcondition">
-                                            <?php
-                                            for($i = 0 ; $i < count($myinitial); $i++)
-                                            {
-                                                echo '<option value = "'.$myinitial[$i]['id'].'">'.$myinitial[$i]['initial_condition'].'</option>';
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="idsubgroup">Subgroup</label>
-                                        <select class="form-control required" name="subgroup" id="subgroup"
-                                            onchange="searchcategory(this)">
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="idcondition">Condition</label>
-                                        <select class="form-control required" name="condition" id="condition">
-                                            <?php
-                                for($i = 0 ; $i < count($myconditions); $i++)
-                                {
-                                    echo '<option value = "'.$myconditions[$i]['id'].'">'.$myconditions[$i]['name'].'</option>';
-                                }
-                                ?>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="idcategory">Category</label>
-                                        <select class="form-control required" id="category" name="category">
-                                        </select>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </fieldset>
-
-                        <h6>Purchase</h6>
-                        <fieldset>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="noasset">No. PO</label>
-                                        <input type="text" class="form-control required" name="nopo" id="nopo" />
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Purchase From:</label>
-                                        <select name="relation" data-placeholder="Choose a Country..."
-                                            class="form-control form-control-select2 required" data-fouc>
-                                            <?php
-                                            for($i = 0 ; $i < count($myrelation); $i++)
-                                            {
-                                                echo '<option value = "'.$myrelation[$i]['id'].'">'.$myrelation[$i]['company'].'</option>';
-                                            }
-                                        ?>
-
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="noasset">Posting Date</label>
-                                        <div class="input-group">
-                                            <span class="input-group-prepend">
-                                                <span class="input-group-text"><i class="icon-calendar22"></i></span>
-                                            </span>
-                                            <input type="text" class="form-control pickadate required"
-                                                name="postingdate" id="postingdate" value="<?php date_default_timezone_set('Asia/Jakarta');
-echo date('d-m-Y');?>">
-
-                                        </div>
-                                        <input type="checkbox" name="statuspostingdate" id="statuspostingdate"
-                                            value="yes" style="margin-top:10px;margin-left:10px;"> &nbsp <label>After
-                                            15?</label>
-
-                                        <!-- <input type="date" class = "form-control required"  name="postingdate" id="postingdate" /> -->
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="noasset">Purchase Price</label>
-                                        <input type="text" class="form-control required" name="purchaseprice"
-                                            id="purchaseprice" value="0" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="noasset">PPN</label>
-                                        <!-- <input type="text" class = "form-control required"  name="ppn" id="ppn" /> -->
-                                        <select data-placeholder="Choose PPN" name="ppn" id='ppn'
-                                            class="form-control form-control-select2 required" onchange="setppn(this)"
-                                            data-fouc>
-                                            <option value="0">No PPN</option>
-                                            <option value="0.1">10%</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="noasset">Total Purchase Price</label>
-                                        <input type="text" class="form-control required" name="totalpurchaseprice"
-                                            id="totalpurchaseprice" value="0" readonly />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="noasset">Economical Life Time</label>
-                                        <div class="input-group">
-                                            <span class="input-group-prepend">
-                                                <span class="input-group-text">MONTH</span>
-                                            </span>
-                                            <input type="text" class="form-control required" name="economicallifetime"
-                                                value="0" id="economicallifetime"
-                                                onkeyup="javascript:return isNumber(event)" />
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="noasset">Cost Per Month</label>
-                                        <input type="text" class="form-control required" name="costpermonth"
-                                            id="costpermonth" value="0" readonly />
-                                    </div>
-                                </div>
-                            </div>
-
-                        </fieldset>
-
-                        <h6>Waranty Period & Image</h6>
-                        <fieldset>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Start : </label>
-                                        <input type="text" class="form-control pickadate required" name="startwarranty"
-                                            id="startwarranty" value="<?php date_default_timezone_set('Asia/Jakarta');
-echo date('d-m-Y');?>">
-                                        <!-- <input type="text" name="experience-company" placeholder="Start Warranty" class="form-control" id = "startwarranty"> -->
-                                    </div>
-
-
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>End:</label>
-                                        <input type="text" class="form-control pickadate required" name="endwarranty"
-                                            id="endwarranty" value="<?php date_default_timezone_set('Asia/Jakarta');
-echo date('d-m-Y');?>">
-                                    </div>
-
-
-                                </div>
-
-
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <!-- <label class="d-block">Attachment:</label> -->
-                                        <!-- <p class="font-weight-semibold">Multiple file upload example:</p> -->
-
-                                        <div class="form-group row">
-                                            <label
-                                                class="col-lg-2 col-form-label font-weight-semibold">Attachment:</label>
-                                            <div class="col-lg-10">
-                                                <input type="file" name="myfile[]" class="file-input"
-                                                    multiple="multiple" data-fouc>
-                                                <span class="form-text text-muted">Automatically convert a file input to
-                                                    a bootstrap file input widget by setting its class as
-                                                    <code>file-input</code>.</span>
-                                            </div>
-                                        </div>
-                                        <!-- <input type="file" name="resume" class="form-input-styled required" multiple data-fouc> -->
-                                        <span class="form-text text-muted">Accepted image only</span>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </fieldset>
-
-                        <h6>Custom</h6>
-                        <fieldset>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Template : </label>
-                                        <input type="hidden" id="template" name="template">
-                                        <b><label id="templatename">-</label></b>
-                                    </div>
-
-
-                                </div>
-
-
-
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <input type="hidden" name="idcustomquestion" id="idcustomquestion">
-                                    <div class="form-group" id="customquestion">
-
-                                    </div>
-
-
-                                </div>
-
-
-
-                            </div>
-
-                        </fieldset>
-
-
-                    </form>
-                </div>
-
-                <!-- <form id = "myform">
-						<div class="form-group">
-                        <label for="idgroup">Sister Company</label><input type="text" class = "form-control" name="idgroup" id="idgroup" value = "<?php echo $_SESSION['namasister']; ?>" disabled />
-                        <br class="clear" /> 
-                        <label for="idgroup">Group</label>
-                        <select class="form-control" id="group">
-                                <?php
-                                for($i = 0 ; $i < count($myasset); $i++)
-                                {
-                                    echo '<option value = "'.$myasset[$i]['id'].'">'.$myasset[$i]['nama'].'</option>';
-                                }
-                                ?>
-                            </select>
-                        <br class="clear" /> 
-                        <label for="idsubgroup">Subgroup</label>
-                        <select class="form-control" id="subgroup">
-                            </select>
-                        <br class="clear" /> 
-                        <label for="idcategory">Category</label>
-                        <select class="form-control" id="category">
-                            </select>
-                        <br class="clear" /> 
-                        <label for="idinitialcondition">Initial Condition</label>
-                        <select class="form-control" id="initialcondition">
-                                <?php
-                                for($i = 0 ; $i < count($myinitial); $i++)
-                                {
-                                    echo '<option value = "'.$myinitial[$i]['id'].'">'.$myinitial[$i]['initial_condition'].'</option>';
-                                }
-                                ?>
-                            </select>
-                        <br class="clear" /> 
-                        <label for="idcondition">Condition</label>
-                        <select class="form-control" id="condition">
-                                <?php
-                                for($i = 0 ; $i < count($myconditions); $i++)
-                                {
-                                    echo '<option value = "'.$myconditions[$i]['id'].'">'.$myconditions[$i]['name'].'</option>';
-                                }
-                                ?>
-                            </select>
-                        <br class="clear" /> 
-                        <label for="noasset">No Asset</label><input type="text" class = "form-control"  name="noasset" id="noasset" />
-                        <br class="clear" /> 
-                        <label for="name">Name</label><input type="text" class = "form-control"  name="name" id="name" />
-                        <br class="clear" />  
-                        <br class="clear" /> 
-							
-						</div>
-					</form> -->
-            </div>
-            <!-- <div class="modal-footer">
-						<button type="button" class="btn btn-primary" onclick="adddata()">Save</button>
-						<button type="button" class="btn btn-secondary" data-dismiss="modal" id = "canceladd">Cancel</button>
-					</div> -->
-        </div>
-    </div>
+</div>
+</div>
+</div>
 </div>
 
 <div class="modal fade" id="myModaledit">
@@ -1934,213 +1463,19 @@ echo date('d-m-Y');?>">
         </div>
     </div>
 </div>
-<div class="modal fade" id="myModalDisplay">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
-                <h5 class="modal-title">Asset Display</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
 
-            </div>
-            <div class="modal-body" style="padding:10px !important;">
-
-                <ul class="nav nav-tabs nav-tabs-solid border-0 nav-justified rounded" id="mynav"
-                    style="margin-top:10px;">
-                    <li class="nav-item"><a id="myfirst" href="#first" class="nav-link rounded-left active"
-                            data-toggle="tab">General</a></li>
-                    <li class="nav-item"><a href="#colored-rounded-justified-tab2" class="nav-link"
-                            data-toggle="tab">Purchase</a></li>
-                    <li class="nav-item"><a id = "mydepreciation" href="#depreciation" class="nav-link"
-                            data-toggle="tab">Depreciation</a></li>
-                    <li class="nav-item"><a href="#colored-rounded-justified-tab3" class="nav-link"
-                            data-toggle="tab">Warranty </a></li>
-                    <li class="nav-item"><a href="#colored-rounded-justified-tab4" class="nav-link"
-                            data-toggle="tab">Image </a></li>
-                    <li class="nav-item"><a href="#additionalinfo" class="nav-link" data-toggle="tab">Custom</a></li>
-
-                </ul>
-
-                <div class="tab-content" style="margin-left:10px;">
-                    <div class="tab-pane fade show active" id="first">
-                        <h4><span class="font-weight-semibold">General Info</span></h4>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label for="noasset">Asset No.</label>
-                                <br>
-                                <b> <label for="noasset" id="noassetlabelgeneral">Asset No.</label></b>
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="noasset">Asset Name</label>
-                                <br>
-                                <b> <label for="noasset" id="nameassetlabelgeneral">Asset No.</label></b>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="noasset">Asset Group</label>
-                                <br>
-                                <b> <label for="noasset" id="groupassetlabelgeneral">Asset No.</label></b>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label for="noasset">Asset Subgroup</label>
-                                <br>
-                                <b> <label for="noasset" id="subgroupassetlabelgeneral">Asset No.</label></b>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="noasset">Asset Category</label>
-                                <br>
-                                <b> <label for="noasset" id="categoryassetlabelgeneral">Asset No.</label></b>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="noasset">Asset Condition</label>
-                                <br>
-                                <b> <label for="noasset" id="conditionassetlabelgeneral">Asset No.</label></b>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label for="noasset">Asset Initial Cond</label>
-                                <br>
-                                <b> <label for="noasset" id="initialassetlabelgeneral">Asset No.</label></b>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="colored-rounded-justified-tab2">
-                        <h4><span class="font-weight-semibold">Purchase Info</span></h4>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label for="noasset">No PO.</label>
-                                <br>
-                                <b> <label for="noasset" id="nopolabelpurchase">Asset No.</label></b>
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="noasset">Purchase Price</label>
-                                <br>
-                                <b> <label for="noasset" id="purchasepricelabelpurchase">Asset No.</label></b>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="noasset">Posting Date</label>
-                                <br>
-                                <b> <label for="noasset" id="postingdatelabelpurchase">Asset No.</label></b>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <label for="noasset">Purchase From</label>
-                                <br>
-                                <b> <label for="noasset" id="purchasefromlabelpurchase">Asset No.</label></b>
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="noasset">PPN</label>
-                                <br>
-                                <b> <label for="noasset" id="ppnlabelpurchase">Asset No.</label></b>
-                            </div>
-
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label for="noasset">Total Purchase Price</label>
-                                <br>
-                                <b> <label for="noasset" id="totalpurchasepricelabelpurchase">Asset No.</label></b>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="noasset">Economical Life Time</label>
-                                <br>
-                                <b> <label for="noasset" id="economicallifetimelabelpurchase">Asset No.</label></b>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="noasset">Cost Per Month</label>
-                                <br>
-                                <b> <label for="noasset" id="costpermonthlabelpurchase">Asset No.</label></b>
-                            </div>
-                        </div>
-                        <br>
-                       
-                    </div>
-                    <div class="tab-pane fade" id="depreciation">
-                        <div class="row" style="height:100% !important;margin-right:1px !important; overflow-y:auto;">
-                            <div class="col-md-12">
-                                <h4><span class="font-weight-semibold">Depreciation Info</span></h4>
-                                <table  id="mydatatable" class="table table-hover table-bordered display ">
-                                    <thead >
-                                        <tr >
-                                            <th>Month</th>
-                                            <th>Depreciation</th>
-                                            <th>Book Value</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id = "depreciationtablebody">
-                                        <!-- <tr>
-                                            <td>1</td>
-                                            <td>Rp 1.000.000</td>
-                                            <td>Rp 11.000.000</td>
-                                            <td><b><i style = "font-size:17px; color : #26a69a;font-weight:bold;" class="mi-check"></i><b></td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Rp 1.000.000</td>
-                                            <td>Rp 11.000.000</td>
-                                            <td><b><i style = "font-size:17px; color : #ebba34;font-weight:bold;" class="mi-timer"></i><b></td>
-                                        
-                                        </tr> -->
-                                       
-                                    </tbody>
-
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="colored-rounded-justified-tab3">
-                        <h4><span class="font-weight-semibold">Warranty Info</span></h4>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="noasset">Start Date</label>
-                                <br>
-                                <b> <label for="noasset" id="startdatelabelwarranty">Asset No.</label></b>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="noasset">End Date</label>
-                                <br>
-                                <b> <label for="noasset" id="enddatelabelwarranty">Asset No.</label></b>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="colored-rounded-justified-tab4">
-                        <h4><span class="font-weight-semibold">Attachment</span></h4>
-                        <div id="myattach"></div>
-                    </div>
-                    <div class="tab-pane fade" id="additionalinfo">
-                        <h4><span class="font-weight-semibold">Additional Info</span></h4>
-                        <div id="containercustominfo"></div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
 </body>
 
 </html>
 <script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>
 <script>
+    var selected = [];
     // $('body').scrollspy({ target: '.sidebar' });
     $("#group").trigger('change');
     var myopenid = "";
     var globaltotalpurchaseprice = 0;
     var globalcostpermonth = 0;
+
     function openmodaldisplay(element) {
         //general
         myopenid = element.id;
@@ -2171,8 +1506,8 @@ echo date('d-m-Y');?>">
         var economicalpurchase = $("#economical" + myid).val();
         var costpermonthpurchase = $("#costpermonth" + myid).val();
 
-         globaltotalpurchaseprice = parseInt(totalpurchasepurchase);
-         globalcostpermonth = parseInt(costpermonthpurchase);
+        globaltotalpurchaseprice = parseInt(totalpurchasepurchase);
+        globalcostpermonth = parseInt(costpermonthpurchase);
 
         $("#nopolabelpurchase").text(nopopurchase);
         $("#purchasefromlabelpurchase").text(purchasefrompurchase);
@@ -2523,7 +1858,7 @@ echo date('d-m-Y');?>">
         });
     }).trigger('change');
 
-   
+
 
 
     function mytemplatechange(element) {
@@ -2547,7 +1882,7 @@ echo date('d-m-Y');?>">
                 if (result == "none") {
                     $("#customquestion").html(
                         "<span style = 'color:grey;'>There is no custom field on this template, Go Ahead</span>"
-                        );
+                    );
                     $("#idcustomquestion").val("");
                 } else {
                     var splitresult = result.split("~~");
@@ -2655,7 +1990,7 @@ echo date('d-m-Y');?>">
                 if (result == "none") {
                     $("#containercustominfo").html(
                         "<span style = 'color:grey;'>Oops, there is no custom field on this template</span>"
-                        );
+                    );
 
                 } else {
                     $("#containercustominfo").html(result);
@@ -2666,6 +2001,9 @@ echo date('d-m-Y');?>">
             }
         });
     }
+    function startmodal(){
+            $("#myfirst").click();
+        }
     $(document).ready(function () {
 
         $("a[href='#additionalinfo']").on("click", function () {
@@ -2674,44 +2012,145 @@ echo date('d-m-Y');?>">
             getallanswercustomquestion(myid);
 
         });
-        $("#mydepreciation").on("click", function(){
+        var ongoingidasset = [];
+        var ongoingpriceasset = [];
+        $("#mysecond").on("click", function () {
+            $("#priceadd").html("");
+            ongoingidasset = [];
+            var item = 0;
+            var counter = 1;
+            $("input:checkbox[class=mycheckbox]:checked").each(function () {
+                var myvalue = this.value;
+                var split = myvalue.split("-");
+                var id = split[0];
+                ongoingidasset.push(id);
+                var name = split[1];
+                $("#priceadd").append("<label><b>" + counter + "</b>." + name +
+                    "</label> <input type = 'text' class = 'form-control' id = 'price" +
+                    id + "' placeholder = 'Place price here'> <br><br>");
+                counter += 1;
+                item += 1;
+            });
+            if (item == 0) {
+                $("#buttonaddsale").css("display", "none");
+            } else {
+                $("#buttonaddsale").css("display", "block");
+                $("#buttonaddsale").css("position", "absolute");
+            }
+
+
+        });
+       
+        $("#buttonaddsale").on("click", function () {
+            var inputempty = 0;
+            ongoingpriceasset = [];
+            $("#myModalAddSale input:text").each(function () {
+                var myvalue = this.value;
+                // alert(myvalue);
+                if (myvalue == "") {
+                    inputempty += 1;
+                }
+            });
+            if (inputempty == 0) {
+
+                $("input:checkbox[class=mycheckbox]:checked").each(function () {
+                    selected.push($(this).val());
+                });
+                for (var i = 0; i < ongoingidasset.length; i++) {
+                    var mypricevalues = $("#price" + ongoingidasset[i]).val();
+                    ongoingpriceasset.push(mypricevalues);
+                }
+                // alert(ongoingidasset + "~" + ongoingpriceasset);
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: "process/master_transaction_sale.php",
+                    method: 'POST',
+                    data: {
+                        tipe: "add",
+                        myselectedprice: ongoingpriceasset,
+                        myselected: ongoingidasset
+                    },
+                    success: function (result) {
+                        if (result == "sukses") {
+                            $("#priceadd").html("");
+                            success();
+                            Swal.fire({
+                                title: 'Data Saved',
+                                text: 'Data Inputted Successfully',
+                                icon: 'success',
+                                confirmButtonColor: '#53d408',
+                                allowOutsideClick: false,
+                            }).then((result) => {
+                              
+                                $("#myform").trigger("reset");
+                                $("#myModalAddSale").modal("toggle");
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Insert Error',
+                                text: 'Error inserting data',
+                                confirmButtonColor: '#e00d0d',
+                            });
+                        }
+
+
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Price is empty ',
+                    text: 'There is an empty price input on this form !',
+                    confirmButtonColor: '#e00d0d',
+                });
+            }
+
+        });
+        $("#mydepreciation").on("click", function () {
             $("#depreciationtablebody").html("");
             var postingdate = $("#postingdateraw" + myopenid).val();
-            var totalmonth = $("#totalmonth"+myopenid).val();
-            
+            var totalmonth = $("#totalmonth" + myopenid).val();
+
             var date1 = new Date(postingdate);
             var date2 = new Date(Date.now());
-            var diffYears = date2.getFullYear()-date1.getFullYear();
-            var diffMonths = date2.getMonth()-date1.getMonth();
-            var diffDays = date2.getDate()-date1.getDate();
+            var diffYears = date2.getFullYear() - date1.getFullYear();
+            var diffMonths = date2.getMonth() - date1.getMonth();
+            var diffDays = date2.getDate() - date1.getDate();
 
-            var months = (diffYears*12 + diffMonths);
-            var totalprice =  globaltotalpurchaseprice;
+            var months = (diffYears * 12 + diffMonths);
+            var totalprice = globaltotalpurchaseprice;
             // alert(date1);
-            for(var i = 0 ; i < parseInt(totalmonth); i++)
-            {
-                var month = i+1;
-                    totalprice -= globalcostpermonth;
-                if((i+1)<=parseInt(months))
-                {
-                   
-                    var mystring = '<tr><td>'+month+'</td><td>Rp '+globalcostpermonth+'</td><td>Rp '+totalprice+'</td><td><b><i style = "font-size:17px; color : #26a69a;font-weight:bold;" class="mi-check"></i><b></td></tr>';
+            for (var i = 0; i < parseInt(totalmonth); i++) {
+                var month = i + 1;
+                totalprice -= globalcostpermonth;
+                if ((i + 1) <= parseInt(months)) {
+
+                    var mystring = '<tr><td>' + month + '</td><td>Rp ' + globalcostpermonth +
+                        '</td><td>Rp ' + totalprice +
+                        '</td><td><b><i style = "font-size:17px; color : #26a69a;font-weight:bold;" class="mi-check"></i><b></td></tr>';
+                    $("#depreciationtablebody").append(mystring);
+                } else {
+                    var mystring = '<tr><td>' + month + '</td><td>Rp ' + globalcostpermonth +
+                        '</td><td>Rp ' + totalprice +
+                        '</td><td><b><i style = "font-size:17px; color : #ebba34;font-weight:bold;" class="mi-timer"></i><b></td></tr>';
                     $("#depreciationtablebody").append(mystring);
                 }
-                else{
-                    var mystring = '<tr><td>'+month+'</td><td>Rp '+globalcostpermonth+'</td><td>Rp '+totalprice+'</td><td><b><i style = "font-size:17px; color : #ebba34;font-weight:bold;" class="mi-timer"></i><b></td></tr>';
-                    $("#depreciationtablebody").append(mystring);
-                }
-              
+
             }
-           
-                                        // <tr>
-                                        //     <td>1</td>
-                                        //     <td>Rp 1.000.000</td>
-                                        //     <td>Rp 11.000.000</td>
-                                        //     <td><b><i style = "font-size:17px; color : #ebba34;font-weight:bold;" class="mi-timer"></i><b></td>
-                                        
-                                        // </tr>
+
+            // <tr>
+            //     <td>1</td>
+            //     <td>Rp 1.000.000</td>
+            //     <td>Rp 11.000.000</td>
+            //     <td><b><i style = "font-size:17px; color : #ebba34;font-weight:bold;" class="mi-timer"></i><b></td>
+
+            // </tr>
         });
 
         $('#templates').trigger('change');
@@ -2749,7 +2188,7 @@ echo date('d-m-Y');?>">
                     if (result == "another") {
                         $("#containercustominfo").html(
                             "<span style = 'color:red;'>Please choose another category, this category doesnt have template</span>"
-                            );
+                        );
 
                         $("#template").val("");
 
@@ -2763,7 +2202,7 @@ echo date('d-m-Y');?>">
                         if (mysplittter[1] == "none") {
                             $("#containercustominfo").html(
                                 "<span style = 'color:grey;'>Oops, there is no custom field on this template</span>"
-                                );
+                            );
                             $("#idcustomquestion").val("");
                         } else {
 
@@ -2827,5 +2266,50 @@ echo date('d-m-Y');?>">
             $("#costpermonth").val(costpermonth);
         }
         // alert(purchaseprice);
+    }
+    function openmodaldetailtransaction(element){
+        var myid = element.id;
+        var notransaction = $("#notransaction" + myid).text();
+        var datetransaction = $("#mydate" + myid).text();
+        var createdby = $("#nama" + myid).text();
+        var mydate = new Date(datetransaction);
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+        ];
+        $("#detailnotransaction").text("Transaction No : " + notransaction);
+        // $("#detailcreate").text("Created By : " + createdby)
+        $("#detaildate").text("Transaction Date : " + mydate.getDate() + " " + monthNames[mydate.getMonth()] + " " + mydate.getFullYear());
+           $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_sale.php",
+                method: 'POST',
+                data: {
+                    tipe: "getdetailtransaction",
+                    idtransaction: myid
+                },
+                success: function (result) {
+                    // alert(result);
+                    if(result == "")
+                    {
+                        $("#detailqty").html("Asset Count : 0 pcs");
+                        $("#listtransaction").html("");
+                        $("#listtransaction").html(result);
+                    }
+                    else{
+                        var mysplit = result.split("||");
+                        var qty = mysplit[0];
+                        var data = mysplit[1];
+                        $("#listtransaction").html("");
+                        $("#listtransaction").html(data);
+                        $("#detailqty").html("Asset Count : "+qty+" pcs");
+                    }
+                    
+                }
+            });
+
     }
 </script>

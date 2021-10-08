@@ -2,24 +2,25 @@
 require_once 'layout/header.php';
 require_once 'layout/sidebar.php';
 require_once 'layout/footer.php';
-$sqlrelation = "select * from relation where status = 'Active'";
-$resrelation = $conn->query($sqlrelation);
-$myrelation = array();
-if($resrelation -> num_rows>0)
+$sessionidsister = $idlist;
+$sqlsister  = "select * from location_sister_company where id != '$sessionidsister'";
+$ressister = $conn->query($sqlsister);
+$mysister = array();
+if($ressister -> num_rows>0)
 {
-	while($j = mysqli_fetch_array($resrelation))
+	while($j = mysqli_fetch_array($ressister))
 	{
-		$myrelation[] = $j;
+		$mysister[] = $j;
 	}
 }
-$sqltemplate = "select * from template where status = 'Active'";
-$restemplate = $conn->query($sqltemplate);
-$mytemplate = array();
-if($restemplate -> num_rows>0)
+$sqlbranchfrom = "select lbranch.idbranch, lbranch.branch from location_setup_sister_branch lssb inner join location_branch lbranch on lbranch.idbranch = lssb.idbranch where lssb.idsistercompany = '$sessionidsister'";
+$resbranchfrom = $conn->query($sqlbranchfrom);
+$mybranch = array();
+if($resbranchfrom -> num_rows>0)
 {
-	while($j = mysqli_fetch_array($restemplate))
+	while($j = mysqli_fetch_array($resbranchfrom))
 	{
-		$mytemplate[] = $j;
+		$mybranch[] = $j;
 	}
 }
 $sqlasset = "select * from kategori_asset";
@@ -32,40 +33,18 @@ if($resasset -> num_rows>0)
 		$myasset[] = $j;
 	}
 }
-$sqlinitial = "select * from initial_condition";
-$resinitial  = $conn->query($sqlinitial);
-$myinitial = array();
-if($resinitial -> num_rows>0)
-{
-	while($j = mysqli_fetch_array($resinitial))
-	{
-		$myinitial[] = $j;
-	}
-}
-$sqlconditions = "select * from conditions";
-$resconditions  = $conn->query($sqlconditions);
-$myconditions = array();
-if($resconditions -> num_rows>0)
-{
-	while($j = mysqli_fetch_array($resconditions))
-	{
-		$myconditions[] = $j;
-	}
-}
 ?>
 
 <head>
     <style>
-        
-        #myModalDisplay{
+        #myModalDisplay {
             height: 95vh !important;
         }
+
         .modal-body {
             width: 100%;
             height: 95vh !important;
-            padding: 0 !important;
-            margin: 0 !important;
-            
+
         }
 
         .fileinput-upload-button {
@@ -87,9 +66,12 @@ if($resconditions -> num_rows>0)
             <div class="page-title d-flex">
                 <div class="row" style="width:100%;">
                     <div class="col-xl-12">
-                        <a href="#myModal" data-toggle="modal"><button type="button" style = "background-color:#26a69a !important; color:white; width:200px;" class="btn btn-indigo btn-labeled btn-labeled-left" onclick="cancel()" data-toggle="modal" data-target="#modal_form">
-                            <b><i class="icon-plus-circle2"></i></b> Add Transaction
-                        </button></a>
+                        <a href="#myModalAdd" data-toggle="modal"><button type="button"
+                                style="background-color:#26a69a !important; color:white; width:200px;"
+                                class="btn btn-indigo btn-labeled btn-labeled-left" onclick="cancel()"
+                                data-toggle="modal" data-target="#modal_form">
+                                <b><i class="icon-plus-circle2"></i></b> Add Transaction
+                            </button></a>
                     </div>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -105,54 +87,19 @@ if($resconditions -> num_rows>0)
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>No. Trx </th>
-                                <th>No. Asset</th>
-                                <th>Asset</th>
-                                <th>From Sister Company</th>
-                                <th>To Sister Company</th>
-                                <th>Condition</th>
                                 <th>Approval</th>
-                                <th>Lead Time</th>
-                                
+                                <th>No. Transaction </th>
+                                <th>From Sister Company</th>
+                                <th>From Branch</th>
+                                <th>From Rooom</th>
+                                <th>To Sister Company</th>
+                                <th>To Branch</th>
+
                             </tr>
                         </thead>
-    </tbody>
-        <tr>
-            <td><span class='pointer-element badge badge-success'><i class='icon-plus3'></i></span></td>
-            <td>TRX-11</td>
-            <td>132131</td>
-            <td>Meja</td>
-            <td>PT KKS</td>
-            <td>PT JMG</td>
-            <td>Good</td>
-            <td><span class="badge badge-success">Approved</span></td>
-            <td>2021-09-12</td>
-     
-        </tr>
-        <tr>
-            <td><span class='pointer-element badge badge-success'><i class='icon-plus3'></i></span></td>
-            <td>TRX-12</td>
-            <td>515121321</td>
-            <td>Kursi</td>
-            <td>PT JMG</td>
-            <td>CV BAS</td>
-            <td>Half</td>
-            <td><span class="badge badge-danger">Rejected</span></td>
-            <td>2021-09-12</td>
-        </tr>
-        <tr>
-            <td><span class='pointer-element badge badge-success'><i class='icon-plus3'></i></span></td>
-            <td>TRX-13</td>
-            <td>6623123</td>
-            <td>Printer</td>
-            <td>PT MBI</td>
-            <td>CV KAI</td>
-            <td>Good</td>
-            <td><span class="badge badge-success">Approved</span></td>
-            <td>2021-09-13</td>
-        </tr>
+                        </tbody>
 
-</tbody>
+                        </tbody>
 
                     </table>
                 </div>
@@ -160,375 +107,37 @@ if($resconditions -> num_rows>0)
         </div>
     </div>
 </div>
-<div class="modal fade " id="myModal">
-    <div class="modal-dialog modal-xl" role="document">
+<div class="modal fade " id="myModalDetailTransaction">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
-            <!-- <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
-						<h5 class="modal-title">Add Assets</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
+            <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
+                <h5 class="modal-title">Transaction Detail</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
 
-					</div> -->
+            </div>
             <div class="modal-body">
-                <div class="card">
-                    <!-- <div class="card-header bg-white header-elements-inline">
-						<h6 class="card-title"> Asset <?php echo $_SESSION['namasister']; ?></h6>
-						<div class="header-elements">
-							<div class="list-icons">
-		                		<a class="list-icons-item" data-action="collapse"></a>
-		                		<a class="list-icons-item" data-action="reload"></a>
-		                		<a class="list-icons-item" data-action="remove"></a>
-		                	</div>
-	                	</div>
-					</div> -->
-                    <center>
-                        <h4><span class="font-weight-semibold">Add Asset Form</span></h4>
-                        <h6 style="color:grey;">Please fill any requirement data to add asset</h6>
-                    </center>
-                    <form class="wizard-form steps-validation" id="myform" method="post" enctype="multipart/form-data"
-                        data-fouc>
-                        <input type="hidden" name="tipe" value="addassetform">
-                        <h6>General</h6>
-                        <fieldset>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="noasset">No Asset</label><input type="text"
-                                            class="form-control required" name="noasset" id="noasset" />
 
+                <label for="cars" style="font-size:11pt;"><b>Transaction Section</b></label><br><br>
+                <label for="idgroup" id="detailnotransaction">Transaction No : -</label><br>
+                <label for="idgroup" id="detaildate">Transaction Date : -</label><br>
+                <!-- <label for="idgroup" id = "detailcreate">Created By: -</label><br> -->
+                <hr style="border-top: 3px dashed #d4d4d4;">
+                <label for="cars" style="font-size:11pt;"><b>Asset Section</b></label><br>
+                <label for="idgroup" id="detailqty">Asset Count : 8 pcs</label><br>
+                <label for="idgroup">Asset List: </label>
+                <br><br>
+                <div id="listtransaction">
 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <!-- <label for="noasset">No Asset</label><input type="text" class = "form-control"  name="noasset" id="noasset" /> -->
-
-                                        <label for="name">Name</label><input type="text" class="form-control required"
-                                            name="name" id="name" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-
-                                        <label for="idgroup">Group</label>
-                                        <select class="form-control required" name="group" id="group"
-                                            onchange="searchsubgroup(this)">
-                                            <?php
-                                                for($i = 0 ; $i < count($myasset); $i++)
-                                                {
-                                                    echo '<option value = "'.$myasset[$i]['id'].'">'.$myasset[$i]['nama'].'</option>';
-                                                }
-                                                ?>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="idinitialcondition">Initial Condition</label>
-                                        <select class="form-control" name="initialcondition" id="initialcondition">
-                                            <?php
-                                            for($i = 0 ; $i < count($myinitial); $i++)
-                                            {
-                                                echo '<option value = "'.$myinitial[$i]['id'].'">'.$myinitial[$i]['initial_condition'].'</option>';
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="idsubgroup">Subgroup</label>
-                                        <select class="form-control required" name="subgroup" id="subgroup"
-                                            onchange="searchcategory(this)">
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="idcondition">Condition</label>
-                                        <select class="form-control required" name="condition" id="condition">
-                                            <?php
-                                for($i = 0 ; $i < count($myconditions); $i++)
-                                {
-                                    echo '<option value = "'.$myconditions[$i]['id'].'">'.$myconditions[$i]['name'].'</option>';
-                                }
-                                ?>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="idcategory">Category</label>
-                                        <select class="form-control required" id="category" name="category">
-                                        </select>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </fieldset>
-
-                        <h6>Purchase</h6>
-                        <fieldset>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="noasset">No. PO</label>
-                                        <input type="text" class="form-control required" name="nopo" id="nopo" />
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Purchase From:</label>
-                                        <select name="relation" data-placeholder="Choose a Country..."
-                                            class="form-control form-control-select2 required" data-fouc>
-                                            <?php
-                                            for($i = 0 ; $i < count($myrelation); $i++)
-                                            {
-                                                echo '<option value = "'.$myrelation[$i]['id'].'">'.$myrelation[$i]['company'].'</option>';
-                                            }
-                                        ?>
-
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="noasset">Posting Date</label>
-                                        <div class="input-group">
-                                            <span class="input-group-prepend">
-                                                <span class="input-group-text"><i class="icon-calendar22"></i></span>
-                                            </span>
-                                            <input type="text" class="form-control pickadate required"
-                                                name="postingdate" id="postingdate" value="<?php date_default_timezone_set('Asia/Jakarta');
-echo date('d-m-Y');?>">
-
-                                        </div>
-                                        <input type="checkbox" name="statuspostingdate" id="statuspostingdate"
-                                            value="yes" style="margin-top:10px;margin-left:10px;"> &nbsp <label>After
-                                            15?</label>
-
-                                        <!-- <input type="date" class = "form-control required"  name="postingdate" id="postingdate" /> -->
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="noasset">Purchase Price</label>
-                                        <input type="text" class="form-control required" name="purchaseprice"
-                                            id="purchaseprice" value="0" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="noasset">PPN</label>
-                                        <!-- <input type="text" class = "form-control required"  name="ppn" id="ppn" /> -->
-                                        <select data-placeholder="Choose PPN" name="ppn" id='ppn'
-                                            class="form-control form-control-select2 required" onchange="setppn(this)"
-                                            data-fouc>
-                                            <option value="0">No PPN</option>
-                                            <option value="0.1">10%</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="noasset">Total Purchase Price</label>
-                                        <input type="text" class="form-control required" name="totalpurchaseprice"
-                                            id="totalpurchaseprice" value="0" readonly />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="noasset">Economical Life Time</label>
-                                        <div class="input-group">
-                                            <span class="input-group-prepend">
-                                                <span class="input-group-text">MONTH</span>
-                                            </span>
-                                            <input type="text" class="form-control required" name="economicallifetime"
-                                                value="0" id="economicallifetime"
-                                                onkeyup="javascript:return isNumber(event)" />
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="noasset">Cost Per Month</label>
-                                        <input type="text" class="form-control required" name="costpermonth"
-                                            id="costpermonth" value="0" readonly />
-                                    </div>
-                                </div>
-                            </div>
-
-                        </fieldset>
-
-                        <h6>Waranty Period & Image</h6>
-                        <fieldset>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Start : </label>
-                                        <input type="text" class="form-control pickadate required" name="startwarranty"
-                                            id="startwarranty" value="<?php date_default_timezone_set('Asia/Jakarta');
-echo date('d-m-Y');?>">
-                                        <!-- <input type="text" name="experience-company" placeholder="Start Warranty" class="form-control" id = "startwarranty"> -->
-                                    </div>
-
-
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>End:</label>
-                                        <input type="text" class="form-control pickadate required" name="endwarranty"
-                                            id="endwarranty" value="<?php date_default_timezone_set('Asia/Jakarta');
-echo date('d-m-Y');?>">
-                                    </div>
-
-
-                                </div>
-
-
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <!-- <label class="d-block">Attachment:</label> -->
-                                        <!-- <p class="font-weight-semibold">Multiple file upload example:</p> -->
-
-                                        <div class="form-group row">
-                                            <label
-                                                class="col-lg-2 col-form-label font-weight-semibold">Attachment:</label>
-                                            <div class="col-lg-10">
-                                                <input type="file" name="myfile[]" class="file-input"
-                                                    multiple="multiple" data-fouc>
-                                                <span class="form-text text-muted">Automatically convert a file input to
-                                                    a bootstrap file input widget by setting its class as
-                                                    <code>file-input</code>.</span>
-                                            </div>
-                                        </div>
-                                        <!-- <input type="file" name="resume" class="form-input-styled required" multiple data-fouc> -->
-                                        <span class="form-text text-muted">Accepted image only</span>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </fieldset>
-
-                        <h6>Custom</h6>
-                        <fieldset>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Template : </label>
-                                        <input type="hidden" id="template" name="template">
-                                        <b><label id="templatename">-</label></b>
-                                    </div>
-
-
-                                </div>
-
-
-
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <input type="hidden" name="idcustomquestion" id="idcustomquestion">
-                                    <div class="form-group" id="customquestion">
-
-                                    </div>
-
-
-                                </div>
-
-
-
-                            </div>
-
-                        </fieldset>
-
-
-                    </form>
                 </div>
 
-                <!-- <form id = "myform">
-						<div class="form-group">
-                        <label for="idgroup">Sister Company</label><input type="text" class = "form-control" name="idgroup" id="idgroup" value = "<?php echo $_SESSION['namasister']; ?>" disabled />
-                        <br class="clear" /> 
-                        <label for="idgroup">Group</label>
-                        <select class="form-control" id="group">
-                                <?php
-                                for($i = 0 ; $i < count($myasset); $i++)
-                                {
-                                    echo '<option value = "'.$myasset[$i]['id'].'">'.$myasset[$i]['nama'].'</option>';
-                                }
-                                ?>
-                            </select>
-                        <br class="clear" /> 
-                        <label for="idsubgroup">Subgroup</label>
-                        <select class="form-control" id="subgroup">
-                            </select>
-                        <br class="clear" /> 
-                        <label for="idcategory">Category</label>
-                        <select class="form-control" id="category">
-                            </select>
-                        <br class="clear" /> 
-                        <label for="idinitialcondition">Initial Condition</label>
-                        <select class="form-control" id="initialcondition">
-                                <?php
-                                for($i = 0 ; $i < count($myinitial); $i++)
-                                {
-                                    echo '<option value = "'.$myinitial[$i]['id'].'">'.$myinitial[$i]['initial_condition'].'</option>';
-                                }
-                                ?>
-                            </select>
-                        <br class="clear" /> 
-                        <label for="idcondition">Condition</label>
-                        <select class="form-control" id="condition">
-                                <?php
-                                for($i = 0 ; $i < count($myconditions); $i++)
-                                {
-                                    echo '<option value = "'.$myconditions[$i]['id'].'">'.$myconditions[$i]['name'].'</option>';
-                                }
-                                ?>
-                            </select>
-                        <br class="clear" /> 
-                        <label for="noasset">No Asset</label><input type="text" class = "form-control"  name="noasset" id="noasset" />
-                        <br class="clear" /> 
-                        <label for="name">Name</label><input type="text" class = "form-control"  name="name" id="name" />
-                        <br class="clear" />  
-                        <br class="clear" /> 
-							
-						</div>
-					</form> -->
             </div>
-            <!-- <div class="modal-footer">
-						<button type="button" class="btn btn-primary" onclick="adddata()">Save</button>
-						<button type="button" class="btn btn-secondary" data-dismiss="modal" id = "canceladd">Cancel</button>
-					</div> -->
+
         </div>
     </div>
 </div>
+
 
 <div class="modal fade" id="myModaledit">
     <div class="modal-dialog" role="document">
@@ -622,7 +231,7 @@ echo date('d-m-Y');?>">
                             data-toggle="tab">General</a></li>
                     <li class="nav-item"><a href="#colored-rounded-justified-tab2" class="nav-link"
                             data-toggle="tab">Purchase</a></li>
-                    <li class="nav-item"><a id = "mydepreciation" href="#depreciation" class="nav-link"
+                    <li class="nav-item"><a id="mydepreciation" href="#depreciation" class="nav-link"
                             data-toggle="tab">Depreciation</a></li>
                     <li class="nav-item"><a href="#colored-rounded-justified-tab3" class="nav-link"
                             data-toggle="tab">Warranty </a></li>
@@ -735,22 +344,22 @@ echo date('d-m-Y');?>">
                             </div>
                         </div>
                         <br>
-                       
+
                     </div>
                     <div class="tab-pane fade" id="depreciation">
                         <div class="row" style="height:100% !important;margin-right:1px !important; overflow-y:auto;">
                             <div class="col-md-12">
                                 <h4><span class="font-weight-semibold">Depreciation Info</span></h4>
-                                <table  id="mydatatable" class="table table-hover table-bordered display ">
-                                    <thead >
-                                        <tr >
+                                <table id="mydatatable" class="table table-hover table-bordered display ">
+                                    <thead>
+                                        <tr>
                                             <th>Month</th>
                                             <th>Depreciation</th>
                                             <th>Book Value</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
-                                    <tbody id = "depreciationtablebody">
+                                    <tbody id="depreciationtablebody">
                                         <!-- <tr>
                                             <td>1</td>
                                             <td>Rp 1.000.000</td>
@@ -764,7 +373,7 @@ echo date('d-m-Y');?>">
                                             <td><b><i style = "font-size:17px; color : #ebba34;font-weight:bold;" class="mi-timer"></i><b></td>
                                         
                                         </tr> -->
-                                       
+
                                     </tbody>
 
                                 </table>
@@ -801,16 +410,101 @@ echo date('d-m-Y');?>">
         </div>
     </div>
 </div>
+<div class="modal fade" id="myModalAdd">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
+                <h5 class="modal-title">Add Transaction</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="myforms">
+                    <div class="form-group">
+                        <label for="cars" style="font-size:11pt;"><b>Mutation Section</b></label><br>
+                        <label for="cars">From Branch : </label>
+                        <select id="branchfrom" name="branchfrom" class="form-control">
+                            <?php
+                                        for($i = 0 ; $i < count($mybranch); $i++)
+                                        {                                            
+                                                echo '<option value="'.$mybranch[$i]['idbranch'].'">'.$mybranch[$i]['branch'].'</option>';                                       
+                                        }
+                                ?>
+                        </select><br>
+                        <label for="cars">From Room : </label>
+                        <select id="room" name="room" class="form-control">
+
+                        </select><br>
+                        <label for="cars"> To Sister Company : </label>
+                        <select id="sisterto" name="sisterto" class="form-control">
+                            <?php
+                                        for($i = 0 ; $i < count($mysister); $i++)
+                                        {                                            
+                                                echo '<option value="'.$mysister[$i]['id'].'">'.$mysister[$i]['name'].'</option>';                                       
+                                        }
+                                ?>
+                        </select><br>
+                        <label for="cars">To Branch : </label>
+                        <select id="branchto" name="branchto" class="form-control">
+
+                        </select>
+                        <br>
+                        <label for="cars" style="font-size:11pt;"><b>Asset Section</b></label><br>
+                        <label for="cars">Asset Group:</label>
+                        <select id="groups" name="groups" class="form-control">
+                            <?php
+                                        for($i = 0 ; $i < count($myasset); $i++)
+                                        {                                            
+                                                echo '<option value="'.$myasset[$i]['id'].'">'.$myasset[$i]['nama'].'</option>';                                       
+                                        }
+                                ?>
+                        </select>
+                        <br>
+                        <label for="cars">Asset Sub Group:</label>
+                        <select id="subgroups" name="subgroups" class="form-control">
+
+                        </select>
+                        <br>
+                        <label for="cars">Asset Category:</label>
+                        <select id="categories" name="categories" class="form-control">
+
+                        </select>
+                        <br>
+                        <b>Asset Choose</b>
+                        <br><br>
+                        <div id="chooseaset" style="max-height:100px !important;">
+
+                        </div>
+
+                        <br>
+                        <br>
+                        <div style="float:right;margin-bottom:20px;">
+                            <button type="button" class="btn btn-primary" style="margin-right:10px;"
+                                onclick="adddata()">Save</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                id="canceladd">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
 </body>
 
 </html>
 <script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>
 <script>
+    var selected = [];
+    // $("#sisterto").trigger("change");
     // $('body').scrollspy({ target: '.sidebar' });
     $("#group").trigger('change');
     var myopenid = "";
     var globaltotalpurchaseprice = 0;
     var globalcostpermonth = 0;
+
     function openmodaldisplay(element) {
         //general
         myopenid = element.id;
@@ -841,8 +535,8 @@ echo date('d-m-Y');?>">
         var economicalpurchase = $("#economical" + myid).val();
         var costpermonthpurchase = $("#costpermonth" + myid).val();
 
-         globaltotalpurchaseprice = parseInt(totalpurchasepurchase);
-         globalcostpermonth = parseInt(costpermonthpurchase);
+        globaltotalpurchaseprice = parseInt(totalpurchasepurchase);
+        globalcostpermonth = parseInt(costpermonthpurchase);
 
         $("#nopolabelpurchase").text(nopopurchase);
         $("#purchasefromlabelpurchase").text(purchasefrompurchase);
@@ -927,11 +621,12 @@ echo date('d-m-Y');?>">
 
     };
     $(function () {
-        // loadData();
+        loadData();
     });
 
     function loadData() {
-        $("#datatable_serverside").DataTable({
+
+        var dt = $("#datatable_serverside").DataTable({
             processing: true,
             deferRender: true,
             serverSide: true,
@@ -942,58 +637,125 @@ echo date('d-m-Y');?>">
                 [0, 'asc']
             ],
             ajax: {
-                url: 'process/masterassets.php',
+                url: 'process/master_transaction_mutation.php',
                 method: 'POST',
                 data: {
                     tipe: "load"
                 }
             },
-            columns: [
-
-                {
-                    name: '#',
+            columns: [{
+                    name: 'approval',
                     className: 'text-center align-middle'
                 },
                 {
-                    name: 'No Asset',
+                    name: 'date',
                     className: 'text-center align-middle'
                 },
                 {
-                    name: 'Name',
+                    name: 'Transaction',
                     className: 'text-center align-middle'
                 },
                 {
-                    name: 'Initial Condition',
+                    name: 'From Sister',
                     className: 'text-center align-middle'
                 },
                 {
-                    name: 'Condition',
+                    name: 'From Branch',
                     className: 'text-center align-middle'
                 },
                 {
-                    name: 'Group',
+                    name: 'From Room',
                     className: 'text-center align-middle'
                 },
                 {
-                    name: 'SubGroup',
+                    name: 'To Sister',
                     className: 'text-center align-middle'
                 },
                 {
-                    name: 'Category',
-                    className: 'text-center align-middle'
-                },
-                {
-                    name: 'Status',
-                    className: 'text-center align-middle'
-                },
-                {
-                    name: 'Action',
-                    searchable: false,
-                    orderable: false,
+                    name: 'To Branch',
                     className: 'text-center align-middle'
                 }
-
             ]
+        });
+
+        var detailRows = [];
+
+        $('#datatable_serverside tbody').on('click', 'tr td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = dt.row(tr);
+            var idx = $.inArray(tr.attr('id'), detailRows);
+
+            var badge = tr.find('span.badge');
+            //  alert(idtest);
+            var icon = tr.find('i');
+            if (row.child.isShown()) {
+                tr.removeClass('details');
+                row.child.hide();
+
+                detailRows.splice(idx, 1);
+
+                tr.removeClass('shown');
+                badge.first().removeClass('badge-danger');
+                badge.first().addClass('badge-success');
+                icon.first().removeClass('icon-minus3');
+                icon.first().addClass('icon-plus3');
+            } else {
+                tr.addClass('details');
+                var branchroom = $("#branch" + badge[0].id).text();
+                var room = $("#room" + badge[0].id).text();
+                var nik = $("#nik" + badge[0].id).text();
+                var name = $("#namakaryawan" + badge[0].id).text();
+                var startdate = $("#startdate" + badge[0].id).text();
+                var duedate = $("#duedate" + badge[0].id).text();
+                var rank = $("#rank" + badge[0].id).val();
+                var email = $("#email" + badge[0].id).val();
+                var approval = $("#statusapproval" + badge[0].id).text();
+                var status = $("#status" + badge[0].id).text();
+                var myapproval = "";
+
+                if (approval.toLowerCase().includes("pending")) {
+                    myapproval = "<span style = 'color:#e37e02'><i class='mi-info'></i> Pending </span>";
+                } else if (approval.toLowerCase().includes("rejected")) {
+                    myapproval = "<span style = 'color:#e32702'><i class='mi-cancel'></i>Rejected </span>";
+                } else if (approval.toLowerCase().includes("accepted")) {
+                    myapproval = "<span style = 'color:#2aa602'><i class='mi-check-box'></i> Accepted </span>";
+                }
+                var company = $("#company" + badge[0].id).text();
+                var contactname = $("#contactname" + badge[0].id).text();
+                card =
+                    '<span class = "mi-subdirectory-arrow-right" style = "font-size: 3em;height:100px;float:left;margin-left:10px"></span><div class="card" style = "min-width:250px !important;float:left;margin-left:10px;"><div class="card-header header-elements-inline"><h5 class="card-title">Lend Detail</h5></div>	<div class="card-body" style="text-align:left;"><p>Branch : <b>' +
+                    branchroom + ' </b></p> <p>Room : <b>' + room +
+                    ' </b></div></div> 	</div> <div class="card" style = "min-width:250px !important;float:left;margin-left:10px;"><div class="card-header header-elements-inline"><h5 class="card-title"> Company Detail</h5><div class="header-elements"><div class="list-icons"></div></div></div>	<div class="card-body" style="text-align:left;"><p>Company : <b>' +
+                    company + ' </b></p> <p>Contact Name : <b>' + contactname +
+                    ' </b></p></div>	</div></div><div class="card" style = "min-width:250px !important;float:left;margin-left:10px;"><div class="card-header header-elements-inline"><h5 class="card-title"> Lend Status</h5><div class="header-elements"><div class="list-icons"></div></div></div>	<div class="card-body" style="text-align:left; "><p>Start Date : <b>' +
+                    startdate + ' </b></p><p>End Date : <b>' + duedate +
+                    ' </b></p><p>Approval : <b>' + myapproval + '</b></p> <p>Status : <b style = "' +
+                    "stringcolor" + '"> ' + status +
+                    '</b></p></div>	</div>';
+                // <div style = "text-align:left;margin-top:10px;"> <div class = "row"><div style = "float:left;padding:5px;margin-left:20px;"><label for="cars" style="font-size:10pt;"><b>User Section</b></label><br><label>Nik : 11212</label> <br><label>Branch : Surabaya</label><br><label>Email : Email</label><br><label>Rank : Rank</label><br><br><label for="cars" style="font-size:10pt;"></div><div style = "float:left;padding:5px;margin-left:10px;"><label for="cars" style="font-size:10pt;"><b>User Section</b></label><br><label>Nik : 11212</label> <br><label>Branch : Surabaya</label><br><label>Email : Email</label><br><label>Rank : Rank</label><br><br><label for="cars" style="font-size:10pt;"></div><div style = "float:left;padding:5px;;margin-left:10px;"><label for="cars" style="font-size:10pt;"><b>User Section</b></label><br><label>Nik : 11212</label> <br><label>Branch : Surabaya</label><br><label>Email : Email</label><br><label>Rank : Rank</label><br><br><label for="cars" style="font-size:10pt;"></div></div></div>
+
+                row.child(card).show();
+
+
+
+                // Add to the 'open' array
+                if (idx === -1) {
+                    detailRows.push(tr.attr('id'));
+                }
+                //  detailRows
+                tr.addClass('shown');
+                badge.first().removeClass('badge-success');
+                badge.first().addClass('badge-danger');
+                icon.first().removeClass('icon-plus3');
+                icon.first().addClass('icon-minus3');
+            }
+            //  onclickdatarow();
+        });
+
+        dt.on('draw', function () {
+            $.each(detailRows, function (i, id) {
+                $('#' + id + ' td.details-control').trigger('click');
+            });
         });
     };
 
@@ -1194,68 +956,81 @@ echo date('d-m-Y');?>">
     }).trigger('change');
 
     function adddata() {
-        var group = $("#group").val();
-        var subgroup = $('#subgroup').val();
-        var category = $('#category').val();
-        var initialcondition = $('#initialcondition').val();
-        var condition = $('#condition').val();
-        var noasset = $('#noasset').val();
-        var name = $('#name').val();
-        if (noasset == "" || name == "" || group == null || subgroup == null || category == null || initialcondition ==
-            null || condition == null) {
+
+
+        $("input:checkbox[class=mycheckbox]:checked").each(function () {
+            selected.push($(this).val());
+
+        });
+
+        var myselect = selected;
+
+        var branchfrom = $("#branchfrom").val();
+        var room = $('#room').val();
+        var sisterto = $('#sisterto').val();
+        var branchto = $('#branchto').val();
+        if (selected.length > 0) {
+            if (branchfrom == null || room == null || sisterto == null ||  branchto == null ) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Empty Field',
+                    text: 'Requirement data cannot be empty',
+                    confirmButtonColor: '#e00d0d',
+                });
+            } else {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: "process/master_transaction_mutation.php",
+                    method: 'POST',
+                    data: {
+                        tipe: "add",
+                        mybranchfrom: branchfrom,
+                        myroom: room,
+                        mysisterto: sisterto,
+                        mybranchto: branchto,
+                        myselected: myselect
+
+                    },
+                    success: function (result) {
+                        //    alert(result);
+                        if (result == "sukses") {
+                            success();
+                            Swal.fire({
+                                title: 'Data Saved',
+                                text: 'Data Inputted Successfully',
+                                icon: 'success',
+                                confirmButtonColor: '#53d408',
+                                allowOutsideClick: false,
+                            }).then((result) => {
+                                $("#myform").trigger("reset");
+                                $("#canceladd").click();
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Insert Error',
+                                text: 'Insert error for this mutation',
+                                confirmButtonColor: '#e00d0d',
+                            });
+                        }
+
+
+                    }
+                });
+            }
+        } else {
             Swal.fire({
                 icon: 'error',
-                title: 'Empty Field',
-                text: 'Requirement data cannot be empty',
+                title: 'No Asset Checked ',
+                text: 'Please choose at least 1 asset to be placed',
                 confirmButtonColor: '#e00d0d',
             });
-        } else {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                url: "process/masterassets.php",
-                method: 'POST',
-                data: {
-                    tipe: "add",
-                    group: group,
-                    subgroup: subgroup,
-                    category: category,
-                    initialcondition: initialcondition,
-                    condition: condition,
-                    noasset: noasset,
-                    name: name
-
-                },
-                success: function (result) {
-                    //    alert(result);
-                    if (result == "sukses") {
-                        success();
-                        Swal.fire({
-                            title: 'Data Saved',
-                            text: 'Data Inputted Successfully',
-                            icon: 'success',
-                            confirmButtonColor: '#53d408',
-                            allowOutsideClick: false,
-                        }).then((result) => {
-                            $("#myform").trigger("reset");
-                            $("#canceladd").click();
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Data Exists',
-                            text: 'Duplicate Entry For This Asset',
-                            confirmButtonColor: '#e00d0d',
-                        });
-                    }
-
-
-                }
-            });
         }
+
 
 
     }
@@ -1350,7 +1125,7 @@ echo date('d-m-Y');?>">
                 if (result == "none") {
                     $("#customquestion").html(
                         "<span style = 'color:grey;'>There is no custom field on this template, Go Ahead</span>"
-                        );
+                    );
                     $("#idcustomquestion").val("");
                 } else {
                     var splitresult = result.split("~~");
@@ -1458,7 +1233,7 @@ echo date('d-m-Y');?>">
                 if (result == "none") {
                     $("#containercustominfo").html(
                         "<span style = 'color:grey;'>Oops, there is no custom field on this template</span>"
-                        );
+                    );
 
                 } else {
                     $("#containercustominfo").html(result);
@@ -1477,44 +1252,162 @@ echo date('d-m-Y');?>">
             getallanswercustomquestion(myid);
 
         });
-        $("#mydepreciation").on("click", function(){
+        $("#groups").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_dispose.php",
+                method: 'POST',
+                data: {
+                    tipe: "getsubgroup",
+                    idgroup: myid
+                },
+                success: function (result) {
+
+                    // alert(result);
+                    $("#subgroups").html("");
+                    $("#subgroups").html(result);
+                    $("#subgroups").trigger("change");
+                }
+
+            })
+        }).trigger("change");
+        $("#subgroups").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_dispose.php",
+                method: 'POST',
+                data: {
+                    tipe: "getcategory",
+                    idsubgroup: myid
+                },
+                success: function (result) {
+
+                    // alert(result);
+                    $("#categories").html("");
+                    $("#categories").html(result);
+                    $("#categories").trigger("change");
+                }
+
+            })
+        }).trigger("change");
+
+
+        $("#categories").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_dispose.php",
+                method: 'POST',
+                data: {
+                    tipe: "getasset",
+                    idcategory: myid
+                },
+                success: function (result) {
+                    selected = [];
+                    // alert(result);
+                    $("#chooseaset").html("");
+                    $("#chooseaset").html(result);
+                }
+
+            })
+        }).trigger("change");
+        $("#sisterto").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_mutation.php",
+                method: 'POST',
+                data: {
+                    tipe: "getbranch",
+                    idsister: myid
+                },
+                success: function (result) {
+                    $("#branchto").html("");
+                    $("#branchto").append(result);
+
+                }
+
+            })
+        }).trigger("change");
+        $("#branchfrom").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_mutation.php",
+                method: 'POST',
+                data: {
+                    tipe: "getroom",
+                    idbranch: myid
+                },
+                success: function (result) {
+                    $("#room").html("");
+                    $("#room").append(result);
+
+                }
+
+            })
+        }).trigger("change");
+        $("#mydepreciation").on("click", function () {
             $("#depreciationtablebody").html("");
             var postingdate = $("#postingdateraw" + myopenid).val();
-            var totalmonth = $("#totalmonth"+myopenid).val();
-            
+            var totalmonth = $("#totalmonth" + myopenid).val();
+
             var date1 = new Date(postingdate);
             var date2 = new Date(Date.now());
-            var diffYears = date2.getFullYear()-date1.getFullYear();
-            var diffMonths = date2.getMonth()-date1.getMonth();
-            var diffDays = date2.getDate()-date1.getDate();
+            var diffYears = date2.getFullYear() - date1.getFullYear();
+            var diffMonths = date2.getMonth() - date1.getMonth();
+            var diffDays = date2.getDate() - date1.getDate();
 
-            var months = (diffYears*12 + diffMonths);
-            var totalprice =  globaltotalpurchaseprice;
+            var months = (diffYears * 12 + diffMonths);
+            var totalprice = globaltotalpurchaseprice;
             // alert(date1);
-            for(var i = 0 ; i < parseInt(totalmonth); i++)
-            {
-                var month = i+1;
-                    totalprice -= globalcostpermonth;
-                if((i+1)<=parseInt(months))
-                {
-                   
-                    var mystring = '<tr><td>'+month+'</td><td>Rp '+globalcostpermonth+'</td><td>Rp '+totalprice+'</td><td><b><i style = "font-size:17px; color : #26a69a;font-weight:bold;" class="mi-check"></i><b></td></tr>';
+            for (var i = 0; i < parseInt(totalmonth); i++) {
+                var month = i + 1;
+                totalprice -= globalcostpermonth;
+                if ((i + 1) <= parseInt(months)) {
+
+                    var mystring = '<tr><td>' + month + '</td><td>Rp ' + globalcostpermonth +
+                        '</td><td>Rp ' + totalprice +
+                        '</td><td><b><i style = "font-size:17px; color : #26a69a;font-weight:bold;" class="mi-check"></i><b></td></tr>';
+                    $("#depreciationtablebody").append(mystring);
+                } else {
+                    var mystring = '<tr><td>' + month + '</td><td>Rp ' + globalcostpermonth +
+                        '</td><td>Rp ' + totalprice +
+                        '</td><td><b><i style = "font-size:17px; color : #ebba34;font-weight:bold;" class="mi-timer"></i><b></td></tr>';
                     $("#depreciationtablebody").append(mystring);
                 }
-                else{
-                    var mystring = '<tr><td>'+month+'</td><td>Rp '+globalcostpermonth+'</td><td>Rp '+totalprice+'</td><td><b><i style = "font-size:17px; color : #ebba34;font-weight:bold;" class="mi-timer"></i><b></td></tr>';
-                    $("#depreciationtablebody").append(mystring);
-                }
-              
+
             }
-           
-                                        // <tr>
-                                        //     <td>1</td>
-                                        //     <td>Rp 1.000.000</td>
-                                        //     <td>Rp 11.000.000</td>
-                                        //     <td><b><i style = "font-size:17px; color : #ebba34;font-weight:bold;" class="mi-timer"></i><b></td>
-                                        
-                                        // </tr>
+
+            // <tr>
+            //     <td>1</td>
+            //     <td>Rp 1.000.000</td>
+            //     <td>Rp 11.000.000</td>
+            //     <td><b><i style = "font-size:17px; color : #ebba34;font-weight:bold;" class="mi-timer"></i><b></td>
+
+            // </tr>
         });
 
         $('#templates').trigger('change');
@@ -1552,7 +1445,7 @@ echo date('d-m-Y');?>">
                     if (result == "another") {
                         $("#containercustominfo").html(
                             "<span style = 'color:red;'>Please choose another category, this category doesnt have template</span>"
-                            );
+                        );
 
                         $("#template").val("");
 
@@ -1566,7 +1459,7 @@ echo date('d-m-Y');?>">
                         if (mysplittter[1] == "none") {
                             $("#containercustominfo").html(
                                 "<span style = 'color:grey;'>Oops, there is no custom field on this template</span>"
-                                );
+                            );
                             $("#idcustomquestion").val("");
                         } else {
 
@@ -1630,5 +1523,52 @@ echo date('d-m-Y');?>">
             $("#costpermonth").val(costpermonth);
         }
         // alert(purchaseprice);
+    }
+
+    function openmodaldetailtransaction(element) {
+
+        var myid = element.id;
+        // alert(myid);
+        var notransaction = $("#notransaction" + myid).text();
+        var datetransaction = $("#mydate" + myid).text();
+        var createdby = $("#nama" + myid).text();
+        var mydate = new Date(datetransaction);
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+        $("#detailnotransaction").text("Transaction No : " + notransaction);
+        // $("#detailcreate").text("Created By : " + createdby)
+        $("#detaildate").text("Transaction Date : " + mydate.getDate() + " " + monthNames[mydate.getMonth()] + " " +
+            mydate.getFullYear());
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "process/master_transaction_mutation.php",
+            method: 'POST',
+            data: {
+                tipe: "getdetailtransaction",
+                idtransaction: myid
+            },
+            success: function (result) {
+                // alert(result);
+                if (result == "") {
+                    $("#detailqty").html("Asset Count : 0 pcs");
+                    $("#listtransaction").html("");
+                    $("#listtransaction").html(result);
+                } else {
+                    var mysplit = result.split("||");
+                    var qty = mysplit[0];
+                    var data = mysplit[1];
+                    $("#listtransaction").html("");
+                    $("#listtransaction").html(data);
+                    $("#detailqty").html("Asset Count : " + qty + " pcs");
+                }
+
+            }
+        });
+
     }
 </script>

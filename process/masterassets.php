@@ -92,6 +92,9 @@ if($tipe == "load")
     if($query_data) {
         while($row = mysqli_fetch_assoc($query_data)) {
             $mystats = "";
+            $myinfo = "";
+            if($row['status_transaction'] == "newasset")
+             { $myinfo = '<i class="mi-info" style = "color:#e37e02;"></i> &nbsp';}
             if($row['status'] == "Active")
             {
                 $myactionsetto = "InActive";
@@ -113,12 +116,13 @@ if($tipe == "load")
             $response['data'][] = [
                 "<a href= '#myModalDisplay'  data-toggle='modal'><span class='pointer-element badge badge-success' id ='".$row['id']."' onclick = 'openmodaldisplay(this)'  data-id='".$row['id']."'><i class='icon-plus3'></i></span></a>",
                 "<label id ='noasset".$row['id']."'>".$row['noasset']."</label>",
-                "<label id ='name".$row['id']."'>".$row['name']."</label>",
+                "<label id ='name".$row['id']."'> $myinfo".$row['name']."</label>",
                 "<label id ='initial".$row['id']."'>".$row['initial_condition']."</label>",
                 "<label id ='condition".$row['id']."'>".$row['conditions']."</label>",
                 "<label id ='group".$row['id']."'>".$row['groupname']."</label>",
                 "<label id ='subgroup".$row['id']."'>".$row['subgroupname']."</label>",
                 "<label id ='category".$row['id']."'>".$row['categoryname']."</label>",
+                "<label id ='mystatustransaction".$row['id']."'>".$row['status_transaction']."</label>",
                 "<label id ='status".$row['id']."'>".$mystats."</label>"
                 ."<input type = 'hidden' id = 'nopo".$row['id']."' value = '".$row['noPo']."'>"
                 ."<input type = 'hidden' id = 'relation".$row['id']."'  value = '".$row['myrelation']."'>"
@@ -367,7 +371,7 @@ else if($tipe == "addassetform")
     $mysessionsistercompany = $_SESSION['idsister'];
     $sql = "INSERT into asset values(NULL, '$mysessionsistercompany', '$group', '$subgroup', '$category', '$initialcondition', 
     '$condition', '$template','$noasset', '$assetname','$nopo', '$relation', '$postingdate', '$statuspostingdate', '$totalmonth', '$purchaseprice', '$ppn', '$totalpurchaseprice',
-    '$economicallifetime', '$costpermonth', '$mystartwarranty', '$myendwarranty', '$myfile', 'Active')";
+    '$economicallifetime', '$costpermonth', '$mystartwarranty', '$myendwarranty', '$myfile', 'Active', 'newasset')";
     $res = $conn->query($sql);
     if(($conn -> affected_rows)>0)
     {

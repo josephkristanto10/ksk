@@ -130,8 +130,6 @@ if($resconditions -> num_rows>0)
                                 <th>Approval</th>
                                 <th>Date</th>
                                 <th>No. Transaction</th>
-                                <th>ID Asset</th>
-                                <th>Asset</th>
 
                             </tr>
                         </thead>
@@ -157,7 +155,7 @@ if($resconditions -> num_rows>0)
                      
                      
                         
-                        <label for="cars" style="font-size:11pt;"><b>Asset Section</b></label><br>
+                    <label for="cars" style="font-size:11pt;"><b>Asset Section</b></label><br>
                         <label for="cars">Asset Group:</label>
                         <select id="groups" name="groups" class="form-control">
                             <?php
@@ -168,43 +166,21 @@ if($resconditions -> num_rows>0)
                                 ?>
                         </select>
                         <br>
-                        <label for="cars">Asset:</label>
-                        <select id="asset" name="asset" class="form-control">
+                        <label for="cars">Asset Sub Group:</label>
+                        <select id="subgroups" name="subgroups" class="form-control">
 
                         </select>
                         <br>
-                        <b>Asset Preview</b>
-                        <div class="row">
+                        <label for="cars">Asset Category:</label>
+                        <select id="categories" name="categories" class="form-control">
 
-                            <div class="col-md-6">
-                                <br>
-                                <label>No Asset</label>
-                                <br>
-                                <label id="noassetpreview">1123</label>
-                            </div>
-                            <div class="col-md-6">
-                                <br>
-                                <label>Asset</label>
-                                <br>
-                                <label id="assetpreview">Good</label>
-                            </div>
+                        </select>
+                        <br>
+                        <b>Asset Choose</b>
+                        <br><br>
+                        <div id="chooseaset" style="max-height:100px !important;">
+
                         </div>
-                        <div class="row">
-
-                            <div class="col-md-6">
-                                <br>
-                                <label>Initial Condition</label>
-                                <br>
-                                <label id="initialpreview">Good</label>
-                            </div>
-                            <div class="col-md-6">
-                                <br>
-                                <label>Condition</label>
-                                <br>
-                                <label id="conditionpreview">Good</label>
-                            </div>
-                        </div>
-
 
                         <br>
                         <br>
@@ -666,14 +642,6 @@ if($resconditions -> num_rows>0)
                 {
                     name: 'Transaction',
                     className: 'text-center align-middle'
-                },
-                {
-                    name: 'No Asset',
-                    className: 'text-center align-middle'
-                },
-                {
-                    name: 'Name',
-                    className: 'text-center align-middle'
                 }
             ]
         });
@@ -959,16 +927,12 @@ if($resconditions -> num_rows>0)
     }).trigger('change');
 
     function adddata() {
-        var group = $('#groups').val();
-        var asset = $('#asset').val();
-        if (group == null || asset == null) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Empty Field',
-                text: 'Requirement data cannot be empty',
-                confirmButtonColor: '#e00d0d',
-            });
-        } else {
+        $("input:checkbox[class=mycheckbox]:checked").each(function () {
+            selected.push($(this).val());
+
+        });
+        var myselect = selected;
+        if (selected.length > 0) {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -979,8 +943,7 @@ if($resconditions -> num_rows>0)
                 method: 'POST',
                 data: {
                     tipe: "add",
-                    mygroup: group,
-                    myasset: asset
+                    myselected : myselect
 
                 },
                 success: function (result) {
@@ -1010,6 +973,16 @@ if($resconditions -> num_rows>0)
                 }
             });
         }
+        else{
+            Swal.fire({
+                icon: 'error',
+                title: 'No Asset Checked ',
+                text: 'Please choose at least 1 asset to be placed',
+                confirmButtonColor: '#e00d0d',
+            });
+        }
+            
+        
 
 
     }
@@ -1934,198 +1907,32 @@ echo date('d-m-Y');?>">
         </div>
     </div>
 </div>
-<div class="modal fade" id="myModalDisplay">
-    <div class="modal-dialog" role="document">
+
+<div class="modal fade " id="myModalDetailTransaction">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
-                <h5 class="modal-title">Asset Display</h5>
+                <h5 class="modal-title">Transaction Detail</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
 
             </div>
-            <div class="modal-body" style="padding:10px !important;">
+            <div class="modal-body" >
 
-                <ul class="nav nav-tabs nav-tabs-solid border-0 nav-justified rounded" id="mynav"
-                    style="margin-top:10px;">
-                    <li class="nav-item"><a id="myfirst" href="#first" class="nav-link rounded-left active"
-                            data-toggle="tab">General</a></li>
-                    <li class="nav-item"><a href="#colored-rounded-justified-tab2" class="nav-link"
-                            data-toggle="tab">Purchase</a></li>
-                    <li class="nav-item"><a id = "mydepreciation" href="#depreciation" class="nav-link"
-                            data-toggle="tab">Depreciation</a></li>
-                    <li class="nav-item"><a href="#colored-rounded-justified-tab3" class="nav-link"
-                            data-toggle="tab">Warranty </a></li>
-                    <li class="nav-item"><a href="#colored-rounded-justified-tab4" class="nav-link"
-                            data-toggle="tab">Image </a></li>
-                    <li class="nav-item"><a href="#additionalinfo" class="nav-link" data-toggle="tab">Custom</a></li>
+            <label for="cars" style="font-size:11pt;"><b>Transaction Section</b></label><br><br>
+            <label for="idgroup" id = "detailnotransaction">Transaction No : -</label><br>
+            <label for="idgroup" id = "detaildate">Transaction Date : -</label><br>
+            <!-- <label for="idgroup" id = "detailcreate">Created By: -</label><br> -->
+            <hr style = "border-top: 3px dashed #d4d4d4;">
+            <label for="cars" style="font-size:11pt;"><b>Asset Section</b></label><br>
+            <label for="idgroup" id = "detailqty">Asset Count : 8 pcs</label><br>
+            <label for="idgroup">Asset List: </label>
+            <br><br>
+            <div id = "listtransaction">
 
-                </ul>
+            </div>
 
-                <div class="tab-content" style="margin-left:10px;">
-                    <div class="tab-pane fade show active" id="first">
-                        <h4><span class="font-weight-semibold">General Info</span></h4>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label for="noasset">Asset No.</label>
-                                <br>
-                                <b> <label for="noasset" id="noassetlabelgeneral">Asset No.</label></b>
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="noasset">Asset Name</label>
-                                <br>
-                                <b> <label for="noasset" id="nameassetlabelgeneral">Asset No.</label></b>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="noasset">Asset Group</label>
-                                <br>
-                                <b> <label for="noasset" id="groupassetlabelgeneral">Asset No.</label></b>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label for="noasset">Asset Subgroup</label>
-                                <br>
-                                <b> <label for="noasset" id="subgroupassetlabelgeneral">Asset No.</label></b>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="noasset">Asset Category</label>
-                                <br>
-                                <b> <label for="noasset" id="categoryassetlabelgeneral">Asset No.</label></b>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="noasset">Asset Condition</label>
-                                <br>
-                                <b> <label for="noasset" id="conditionassetlabelgeneral">Asset No.</label></b>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label for="noasset">Asset Initial Cond</label>
-                                <br>
-                                <b> <label for="noasset" id="initialassetlabelgeneral">Asset No.</label></b>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="colored-rounded-justified-tab2">
-                        <h4><span class="font-weight-semibold">Purchase Info</span></h4>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label for="noasset">No PO.</label>
-                                <br>
-                                <b> <label for="noasset" id="nopolabelpurchase">Asset No.</label></b>
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="noasset">Purchase Price</label>
-                                <br>
-                                <b> <label for="noasset" id="purchasepricelabelpurchase">Asset No.</label></b>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="noasset">Posting Date</label>
-                                <br>
-                                <b> <label for="noasset" id="postingdatelabelpurchase">Asset No.</label></b>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <label for="noasset">Purchase From</label>
-                                <br>
-                                <b> <label for="noasset" id="purchasefromlabelpurchase">Asset No.</label></b>
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="noasset">PPN</label>
-                                <br>
-                                <b> <label for="noasset" id="ppnlabelpurchase">Asset No.</label></b>
-                            </div>
-
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label for="noasset">Total Purchase Price</label>
-                                <br>
-                                <b> <label for="noasset" id="totalpurchasepricelabelpurchase">Asset No.</label></b>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="noasset">Economical Life Time</label>
-                                <br>
-                                <b> <label for="noasset" id="economicallifetimelabelpurchase">Asset No.</label></b>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="noasset">Cost Per Month</label>
-                                <br>
-                                <b> <label for="noasset" id="costpermonthlabelpurchase">Asset No.</label></b>
-                            </div>
-                        </div>
-                        <br>
-                       
-                    </div>
-                    <div class="tab-pane fade" id="depreciation">
-                        <div class="row" style="height:100% !important;margin-right:1px !important; overflow-y:auto;">
-                            <div class="col-md-12">
-                                <h4><span class="font-weight-semibold">Depreciation Info</span></h4>
-                                <table  id="mydatatable" class="table table-hover table-bordered display ">
-                                    <thead >
-                                        <tr >
-                                            <th>Month</th>
-                                            <th>Depreciation</th>
-                                            <th>Book Value</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id = "depreciationtablebody">
-                                        <!-- <tr>
-                                            <td>1</td>
-                                            <td>Rp 1.000.000</td>
-                                            <td>Rp 11.000.000</td>
-                                            <td><b><i style = "font-size:17px; color : #26a69a;font-weight:bold;" class="mi-check"></i><b></td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Rp 1.000.000</td>
-                                            <td>Rp 11.000.000</td>
-                                            <td><b><i style = "font-size:17px; color : #ebba34;font-weight:bold;" class="mi-timer"></i><b></td>
-                                        
-                                        </tr> -->
-                                       
-                                    </tbody>
-
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="colored-rounded-justified-tab3">
-                        <h4><span class="font-weight-semibold">Warranty Info</span></h4>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="noasset">Start Date</label>
-                                <br>
-                                <b> <label for="noasset" id="startdatelabelwarranty">Asset No.</label></b>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="noasset">End Date</label>
-                                <br>
-                                <b> <label for="noasset" id="enddatelabelwarranty">Asset No.</label></b>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="colored-rounded-justified-tab4">
-                        <h4><span class="font-weight-semibold">Attachment</span></h4>
-                        <div id="myattach"></div>
-                    </div>
-                    <div class="tab-pane fade" id="additionalinfo">
-                        <h4><span class="font-weight-semibold">Additional Info</span></h4>
-                        <div id="containercustominfo"></div>
-                    </div>
-                </div>
             </div>
 
         </div>
@@ -2136,7 +1943,7 @@ echo date('d-m-Y');?>">
 </html>
 <script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>
 <script>
-    // $('body').scrollspy({ target: '.sidebar' });
+    var selected = [];
     $("#group").trigger('change');
     var myopenid = "";
     var globaltotalpurchaseprice = 0;
@@ -2202,21 +2009,6 @@ echo date('d-m-Y');?>">
 
         $("a[href='#additionalinfo']").attr("id", myid);
         $("#myfirst").click();
-        // $('.myimg').on('click', function(){
-        //     var animWidth, $this=$(this);
-        //     if( $this.hasClass('wide') ){
-        //         animWidth=159;
-        //         $this.animate({width:'100px'}, "slow");
-        //         $('.myimg').removeClass("wide");
-        //     }else{
-        //         animWidth=593;
-        //         // $('.myimg').removeClass("wide");
-        //         $this.animate({width:'200px'}, "slow");
-        //          $('.myimg').addClass("wide");
-        //     }
-
-        //     // alert("test");
-        //   });
     }
 
     function mytoggleenlarge(element) {
@@ -2257,75 +2049,8 @@ echo date('d-m-Y');?>">
 
     };
     $(function () {
-        // loadData();
     });
 
-    // function loadData() {
-    //     $("#datatable_serverside").DataTable({
-    //         processing: true,
-    //         deferRender: true,
-    //         serverSide: true,
-    //         destroy: true,
-    //         iDisplayInLength: 10,
-    //         scrollX: true,
-    //         order: [
-    //             [0, 'asc']
-    //         ],
-    //         ajax: {
-    //             url: 'process/masterassets.php',
-    //             method: 'POST',
-    //             data: {
-    //                 tipe: "load"
-    //             }
-    //         },
-    //         columns: [
-
-    //             {
-    //                 name: '#',
-    //                 className: 'text-center align-middle'
-    //             },
-    //             {
-    //                 name: 'No Asset',
-    //                 className: 'text-center align-middle'
-    //             },
-    //             {
-    //                 name: 'Name',
-    //                 className: 'text-center align-middle'
-    //             },
-    //             {
-    //                 name: 'Initial Condition',
-    //                 className: 'text-center align-middle'
-    //             },
-    //             {
-    //                 name: 'Condition',
-    //                 className: 'text-center align-middle'
-    //             },
-    //             {
-    //                 name: 'Group',
-    //                 className: 'text-center align-middle'
-    //             },
-    //             {
-    //                 name: 'SubGroup',
-    //                 className: 'text-center align-middle'
-    //             },
-    //             {
-    //                 name: 'Category',
-    //                 className: 'text-center align-middle'
-    //             },
-    //             {
-    //                 name: 'Status',
-    //                 className: 'text-center align-middle'
-    //             },
-    //             {
-    //                 name: 'Action',
-    //                 searchable: false,
-    //                 orderable: false,
-    //                 className: 'text-center align-middle'
-    //             }
-
-    //         ]
-    //     });
-    // };
 
     // Reload table
     function success() {
@@ -2674,6 +2399,79 @@ echo date('d-m-Y');?>">
             getallanswercustomquestion(myid);
 
         });
+        $("#groups").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_dispose.php",
+                method: 'POST',
+                data: {
+                    tipe: "getsubgroup",
+                    idgroup: myid
+                },
+                success: function (result) {
+
+                    // alert(result);
+                    $("#subgroups").html("");
+                    $("#subgroups").html(result);
+                    $("#subgroups").trigger("change");
+                }
+
+            })
+        }).trigger("change");
+        $("#subgroups").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_dispose.php",
+                method: 'POST',
+                data: {
+                    tipe: "getcategory",
+                    idsubgroup: myid
+                },
+                success: function (result) {
+
+                    // alert(result);
+                    $("#categories").html("");
+                    $("#categories").html(result);
+                    $("#categories").trigger("change");
+                }
+
+            })
+        }).trigger("change");
+
+
+        $("#categories").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_dispose.php",
+                method: 'POST',
+                data: {
+                    tipe: "getasset",
+                    idcategory: myid
+                },
+                success: function (result) {
+                    selected = [];
+                    // alert(result);
+                    $("#chooseaset").html("");
+                    $("#chooseaset").html(result);
+                }
+
+            })
+        }).trigger("change");
         $("#mydepreciation").on("click", function(){
             $("#depreciationtablebody").html("");
             var postingdate = $("#postingdateraw" + myopenid).val();
@@ -2827,5 +2625,50 @@ echo date('d-m-Y');?>">
             $("#costpermonth").val(costpermonth);
         }
         // alert(purchaseprice);
+    }
+    function openmodaldetailtransaction(element){
+        var myid = element.id;
+        var notransaction = $("#notransaction" + myid).text();
+        var datetransaction = $("#mydate" + myid).text();
+        var createdby = $("#nama" + myid).text();
+        var mydate = new Date(datetransaction);
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+        ];
+        $("#detailnotransaction").text("Transaction No : " + notransaction);
+        // $("#detailcreate").text("Created By : " + createdby)
+        $("#detaildate").text("Transaction Date : " + mydate.getDate() + " " + monthNames[mydate.getMonth()] + " " + mydate.getFullYear());
+           $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_dispose.php",
+                method: 'POST',
+                data: {
+                    tipe: "getdetailtransaction",
+                    idtransaction: myid
+                },
+                success: function (result) {
+                    // alert(result);
+                    if(result == "")
+                    {
+                        $("#detailqty").html("Asset Count : 0 pcs");
+                        $("#listtransaction").html("");
+                        $("#listtransaction").html(result);
+                    }
+                    else{
+                        var mysplit = result.split("||");
+                        var qty = mysplit[0];
+                        var data = mysplit[1];
+                        $("#listtransaction").html("");
+                        $("#listtransaction").html(data);
+                        $("#detailqty").html("Asset Count : "+qty+" pcs");
+                    }
+                    
+                }
+            });
+
     }
 </script>

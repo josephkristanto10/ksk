@@ -56,15 +56,21 @@ if($resconditions -> num_rows>0)
 
 <head>
     <style>
-        
+        #pillnav .active{
+            background-color: #26a69a !important;
+        }
+        #pillnavadd .active{
+            background-color: #26a69a !important;
+        }
         #myModalDisplay{
             height: 95vh !important;
+        }
+        #myModalAddData{
+            height:80vh !important;
         }
         .modal-body {
             width: 100%;
             height: 95vh !important;
-            padding: 0 !important;
-            margin: 0 !important;
             
         }
 
@@ -87,7 +93,7 @@ if($resconditions -> num_rows>0)
             <div class="page-title d-flex">
                 <div class="row" style="width:100%;">
                     <div class="col-xl-12">
-                        <a href="#myModal" data-toggle="modal"><button type="button" style = "background-color:#26a69a !important; color:white; width:200px;" class="btn btn-indigo btn-labeled btn-labeled-left" onclick="cancel()" data-toggle="modal" data-target="#modal_form">
+                        <a href="#myModalAddData" onclick = "openmodaladd()" data-toggle="modal"><button type="button" style = "background-color:#26a69a !important; color:white; width:200px;" class="btn btn-indigo btn-labeled btn-labeled-left" onclick="cancel()" data-toggle="modal" data-target="#modal_form">
                             <b><i class="icon-plus-circle2"></i></b> Add Transaction
                         </button></a>
                     </div>
@@ -100,41 +106,28 @@ if($resconditions -> num_rows>0)
         <div class="row">
             <div class="col-xl-12">
                 <div class="card">
-
-                    <table id="datatable_serverside" class="table table-hover table-bordered display nowrap w-100">
+                <h5><span class="font-weight-semibold" >Return Transaction Type :  </span></h5>
+                <ul class="nav nav-pills" id = "pillnav">
+									<li class="nav-item" id = "transactionpersonal"><a href="#left-icon-pill1" class="nav-link active" data-toggle="tab"><i class="mi-person-outline  mr-2"></i>Personal </a></li>
+									<li class="nav-item" id = "transactiondepartment"><a href="#left-icon-pill2" class="nav-link" data-toggle="tab"><i class="icon-briefcase3  mr-2"></i> Department</a></li>
+                                    <li class="nav-item" id = "transactionrelation"><a href="#left-icon-pill2" class="nav-link" data-toggle="tab"><i class="icon-users2 mr-2"></i> Relation</a></li>
+                                  
+								</ul>
+                                <hr style = "margin-top:0;">
+                             
+                    <table id="datatable_serverside" class="table table-hover table-bordered display nowrap w-100" >
                         <thead>
                             <tr>
-                                <th>#</th>
-                              
+                                <!-- <th>#</th> -->
+                                <th>Approval</th>
+                                <th>Date</th>
                                 <th>No Trx Return</th>
                                 <th>No Trx Lend</th>
-                                <th>Asset</th>
-                                <th>Returned Date</th>
                                 
                             </tr>
                         </thead>
-    </tbody>
-        <tr>
-            <td><span class='pointer-element badge badge-success'><i class='icon-plus3'></i></span></td>
-            <td>TRX-11</td>
-            <td>TRXret-1</td>
-            <td>Vas Bunga</td>
-            <td>2021-09-12</td>
-        </tr>
-        <tr>
-        <td><span class='pointer-element badge badge-success'><i class='icon-plus3'></i></span></td>
-            <td>TRX-11</td>
-            <td>TRXret-1</td>
-            <td>Vas Bunga</td>
-            <td>2021-09-12</td>
-        </tr>
-        <tr>
-        <td><span class='pointer-element badge badge-success'><i class='icon-plus3'></i></span></td>
-            <td>TRX-11</td>
-            <td>TRXret-1</td>
-            <td>Vas Bunga</td>
-            <td>2021-09-12</td>
-        </tr>
+    <tbody>
+  
 
 </tbody>
 
@@ -785,11 +778,58 @@ echo date('d-m-Y');?>">
         </div>
     </div>
 </div>
+<div class="modal fade" id="myModalAddData">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
+                <h5 class="modal-title">Add Transaction</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="myforms">
+                    <div class="form-group">
+                        <!-- <label for="cars" style="font-size:11pt;"><b>Relation Section</b></label><br> -->
+                        <ul class="nav nav-pills nav-justified" id = "pillnavadd">
+									<li class="nav-item" id = "transactionpersonaladd"><a id = "transacadd1" href="#left-icon-pill1" class="nav-link active" data-toggle="tab"><i class="mi-person-outline  mr-2"></i>Personal </a></li>
+									<li class="nav-item" id = "transactiondepartmentadd"><a href="#left-icon-pill2" class="nav-link" data-toggle="tab"><i class="icon-briefcase3  mr-2"></i> Department</a></li>
+                                    <li class="nav-item" id = "transactionrelationadd"><a id = "" href="#left-icon-pill2" class="nav-link" data-toggle="tab"><i class="icon-users2 mr-2"></i> Relation</a></li>
+                                  
+								</ul>
+                                <label for="cars" style="font-size:11pt;">Transaction Lend </label> 
+                                <select class = "form-control" id = "selecttransactionlend"> </select><br>
+                                <label for="cars" style="font-size:11pt;">Asset List :  </label> 
+                                <div id = "assetlist"></div>
+                                
+                        <br>
+                        <br>
+                        <div style="float:right;margin-bottom:20px;">
+                            <button type="button" class="btn btn-primary" style="margin-right:10px;"
+                                onclick="adddata()">Save</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                id="canceladd">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+
 </body>
 
 </html>
 <script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>
 <script>
+    var mychoice = "personal";
     // $('body').scrollspy({ target: '.sidebar' });
     $("#group").trigger('change');
     var myopenid = "";
@@ -911,11 +951,11 @@ echo date('d-m-Y');?>">
 
     };
     $(function () {
-        // loadData();
+        loadData();
     });
 
     function loadData() {
-        $("#datatable_serverside").DataTable({
+        var dt = $("#datatable_serverside").DataTable({
             processing: true,
             deferRender: true,
             serverSide: true,
@@ -926,58 +966,124 @@ echo date('d-m-Y');?>">
                 [0, 'asc']
             ],
             ajax: {
-                url: 'process/masterassets.php',
+                url: 'process/master_transaction_lend_return.php',
                 method: 'POST',
                 data: {
-                    tipe: "load"
+                    tipe: "load",
+                    choice : mychoice
+
                 }
             },
             columns: [
-
+                // {
+                //     name: '#',
+                //     className: 'text-center align-middle',
+                //     class: "details-control"
+                // },
                 {
-                    name: '#',
-                    className: 'text-center align-middle'
+                    name: 'StatusApproval',
+                    className: 'text-center align-middle',
+                    orderable: true
                 },
                 {
-                    name: 'No Asset',
-                    className: 'text-center align-middle'
+                    name: 'date',
+                    className: 'text-center align-middle',
+                    orderable: true
                 },
                 {
-                    name: 'Name',
-                    className: 'text-center align-middle'
+                    name: 'Transaction Return',
+                    className: 'text-center align-middle',
+                    orderable: true
                 },
                 {
-                    name: 'Initial Condition',
-                    className: 'text-center align-middle'
-                },
-                {
-                    name: 'Condition',
-                    className: 'text-center align-middle'
-                },
-                {
-                    name: 'Group',
-                    className: 'text-center align-middle'
-                },
-                {
-                    name: 'SubGroup',
-                    className: 'text-center align-middle'
-                },
-                {
-                    name: 'Category',
-                    className: 'text-center align-middle'
-                },
-                {
-                    name: 'Status',
-                    className: 'text-center align-middle'
-                },
-                {
-                    name: 'Action',
-                    searchable: false,
-                    orderable: false,
-                    className: 'text-center align-middle'
+                    name: 'notransaction',
+                    className: 'text-center align-middle',
+                       orderable: false
                 }
-
             ]
+        });
+
+        var detailRows = [];
+
+        $('#datatable_serverside tbody').on('click', 'tr td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = dt.row(tr);
+            var idx = $.inArray(tr.attr('id'), detailRows);
+
+            var badge = tr.find('span.badge');
+            //  alert(idtest);
+            var icon = tr.find('i');
+            if (row.child.isShown()) {
+                tr.removeClass('details');
+                row.child.hide();
+
+                detailRows.splice(idx, 1);
+
+                tr.removeClass('shown');
+                badge.first().removeClass('badge-danger');
+                badge.first().addClass('badge-success');
+                icon.first().removeClass('icon-minus3');
+                icon.first().addClass('icon-plus3');
+            } else {
+                tr.addClass('details');
+                var branchroom = $("#branch" + badge[0].id).text();
+                var room = $("#room" + badge[0].id).text();
+                var nik = $("#nik" + badge[0].id).text();
+                var name = $("#namakaryawan" + badge[0].id).text();
+                var startdate = $("#startdate" + badge[0].id).text();
+                var duedate = $("#duedate" + badge[0].id).text();
+                var rank = $("#rank" + badge[0].id).val();
+                var email = $("#email" + badge[0].id).val();
+                var approval = $("#statusapproval" + badge[0].id).text();
+                var status = $("#status" + badge[0].id).text();
+                var myapproval = "";
+             
+                if(approval.toLowerCase().includes("pending"))
+                {
+                    myapproval = "<span style = 'color:#e37e02'><i class='mi-info'></i> Pending </span>";
+                }
+                else if(approval.toLowerCase().includes("rejected"))
+                {
+                    myapproval = "<span style = 'color:#e32702'><i class='mi-cancel'></i>Rejected </span>";
+                }
+                else if(approval.toLowerCase().includes("accepted"))
+                {
+                    myapproval = "<span style = 'color:#2aa602'><i class='mi-check-box'></i> Accepted </span>";
+                }
+                var company = $("#company"+ badge[0].id).text();
+                var contactname = $("#contactname"+ badge[0].id).text();
+                card = '<span class = "mi-subdirectory-arrow-right" style = "font-size: 3em;height:100px;float:left;margin-left:10px"></span><div class="card" style = "min-width:250px !important;float:left;margin-left:10px;"><div class="card-header header-elements-inline"><h5 class="card-title">Lend Detail</h5></div>	<div class="card-body" style="text-align:left;"><p>Branch : <b>' +
+                        branchroom + ' </b></p> <p>Room : <b>' + room + 
+                        ' </b></div></div> 	</div> <div class="card" style = "min-width:250px !important;float:left;margin-left:10px;"><div class="card-header header-elements-inline"><h5 class="card-title"> Company Detail</h5><div class="header-elements"><div class="list-icons"></div></div></div>	<div class="card-body" style="text-align:left;"><p>Company : <b>' +
+                        company + ' </b></p> <p>Contact Name : <b>' + contactname+
+                        ' </b></p></div>	</div></div><div class="card" style = "min-width:250px !important;float:left;margin-left:10px;"><div class="card-header header-elements-inline"><h5 class="card-title"> Lend Status</h5><div class="header-elements"><div class="list-icons"></div></div></div>	<div class="card-body" style="text-align:left; "><p>Start Date : <b>' +
+                        startdate + ' </b></p><p>End Date : <b>' + duedate +
+                        ' </b></p><p>Approval : <b>'+myapproval+'</b></p> <p>Status : <b style = "' + "stringcolor" + '"> ' + status +
+                        '</b></p></div>	</div>';
+                        // <div style = "text-align:left;margin-top:10px;"> <div class = "row"><div style = "float:left;padding:5px;margin-left:20px;"><label for="cars" style="font-size:10pt;"><b>User Section</b></label><br><label>Nik : 11212</label> <br><label>Branch : Surabaya</label><br><label>Email : Email</label><br><label>Rank : Rank</label><br><br><label for="cars" style="font-size:10pt;"></div><div style = "float:left;padding:5px;margin-left:10px;"><label for="cars" style="font-size:10pt;"><b>User Section</b></label><br><label>Nik : 11212</label> <br><label>Branch : Surabaya</label><br><label>Email : Email</label><br><label>Rank : Rank</label><br><br><label for="cars" style="font-size:10pt;"></div><div style = "float:left;padding:5px;;margin-left:10px;"><label for="cars" style="font-size:10pt;"><b>User Section</b></label><br><label>Nik : 11212</label> <br><label>Branch : Surabaya</label><br><label>Email : Email</label><br><label>Rank : Rank</label><br><br><label for="cars" style="font-size:10pt;"></div></div></div>
+
+                row.child(card).show();
+                      
+                     
+
+                // Add to the 'open' array
+                if (idx === -1) {
+                    detailRows.push(tr.attr('id'));
+                }
+                //  detailRows
+                tr.addClass('shown');
+                badge.first().removeClass('badge-success');
+                badge.first().addClass('badge-danger');
+                icon.first().removeClass('icon-plus3');
+                icon.first().addClass('icon-minus3');
+            }
+            //  onclickdatarow();
+        });
+
+        dt.on('draw', function () {
+            $.each(detailRows, function (i, id) {
+                $('#' + id + ' td.details-control').trigger('click');
+            });
         });
     };
 
@@ -1400,7 +1506,10 @@ echo date('d-m-Y');?>">
 
 
     }
-
+    function openmodaladd(){
+              $("#transactionpersonaladd").click();
+     
+         }
     function isNumber(event) {
         // var iKeyCode = (evt.which) ? evt.which : event.keyCode;
 
@@ -1453,8 +1562,112 @@ echo date('d-m-Y');?>">
             }
         });
     }
+  var globaladdtransaction = "";
     $(document).ready(function () {
-
+     
+        $("#transactionpersonaladd").click();
+        $("#transactionpersonaladd").on("click",function(){
+            $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "process/master_transaction_lend_return.php",
+            method: 'POST',
+            data: {
+                tipe: "gettransactionlend",
+                transaction : "personal"
+            },
+            success: function (result) {
+                $("#selecttransactionlend").html("");
+                $("#selecttransactionlend").html(result);
+                globaladdtransaction = "personal";
+                $("#selecttransactionlend").trigger("change");
+            
+            }
+        });
+       });
+       $("#transactiondepartmentadd").on("click",function(){
+            $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "process/master_transaction_lend_return.php",
+            method: 'POST',
+            data: {
+                tipe: "gettransactionlend",
+                transaction : "department"
+            },
+            success: function (result) {
+                $("#selecttransactionlend").html("");
+                $("#selecttransactionlend").html(result);
+                globaladdtransaction = "department";
+                $("#selecttransactionlend").trigger("change");
+             
+            }
+        });
+       });
+       $("#transactionrelationadd").on("click",function(){
+            $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "process/master_transaction_lend_return.php",
+            method: 'POST',
+            data: {
+                tipe: "gettransactionlend",
+                transaction : "relation"
+            },
+            success: function (result) {
+                $("#selecttransactionlend").html("");
+                $("#selecttransactionlend").html(result);
+                globaladdtransaction = "relation";
+                $("#selecttransactionlend").trigger("change");
+               
+            }
+        });
+       });
+       $("#selecttransactionlend").on("change", function(){
+           var myvalues = this.value;
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "process/master_transaction_lend_return.php",
+            method: 'POST',
+            data: {
+                tipe: "getdetailtransactionadd",
+                idtransaction : myvalues,
+                mytransaction : globaladdtransaction 
+            },
+            success: function (result) {
+                var mysplit = result.split("||");
+                        var qty = mysplit[0];
+                        var data = mysplit[1];
+                $("#assetlist").html("");
+                $("#assetlist").html(data);
+            }
+        });
+       }).trigger("change");
+       $("#transactionpersonal").on("click",function(){
+            mychoice = "personal";
+            loadData();
+       });
+       $("#transactiondepartment").on("click",function(){
+            mychoice = "department";
+            loadData();
+       });
+       $("#transactionrelation").on("click",function(){
+            mychoice = "relation";
+            loadData();
+       });
         $("a[href='#additionalinfo']").on("click", function () {
             var myid = this.id;
             // alert("test");

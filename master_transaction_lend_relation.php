@@ -132,8 +132,6 @@ if($resconditions -> num_rows>0)
                                 <th>Date</th>
                                 <th>Transaction</th>
                                 <th>Branch</th>
-                                <th>No. Asset</th>
-                                <th>Asset</th>
                                 <th>Company</th>
                                 <th>Contact</th>
                                 <th>Room</th>
@@ -277,6 +275,33 @@ if($resconditions -> num_rows>0)
                             <input type="text" class="form-control pickadate required" name="enddate" id="enddate"
                                 value="<?php date_default_timezone_set('Asia/Jakarta');
 echo date('d-m-Y');?>">
+
+                        </div>
+                        <hr>
+                        <label for="cars" style="font-size:11pt;"><b>Asset Section</b></label><br>
+                        <label for="cars">Asset Group:</label>
+                        <select id="groups" name="groups" class="form-control">
+                            <?php
+                                        for($i = 0 ; $i < count($mykategoriasset); $i++)
+                                        {                                            
+                                                echo '<option value="'.$mykategoriasset[$i]['id'].'">'.$mykategoriasset[$i]['nama'].'</option>';                                       
+                                        }
+                                ?>
+                        </select>
+                        <br>
+                        <label for="cars">Asset Sub Group:</label>
+                        <select id="subgroups" name="subgroups" class="form-control">
+
+                        </select>
+                        <br>
+                        <label for="cars">Asset Category:</label>
+                        <select id="categories" name="categories" class="form-control">
+
+                        </select>
+                        <br>
+                        <b>Asset Choose</b>
+                        <br><br>
+                        <div id="chooseaset" style="max-height:100px !important;">
 
                         </div>
 
@@ -574,11 +599,42 @@ echo date('d-m-Y');?>">
         </div>
     </div>
 </div>
+<div class="modal fade " id="myModalDetailTransaction">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
+                <h5 class="modal-title">Transaction Detail</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+
+            </div>
+            <div class="modal-body" >
+
+            <label for="cars" style="font-size:11pt;"><b>Transaction Section</b></label><br><br>
+            <label for="idgroup" id = "detailnotransaction">Transaction No : -</label><br>
+            <label for="idgroup" id = "detaildate">Transaction Date : -</label><br>
+            <!-- <label for="idgroup" id = "detailcreate">Created By: -</label><br> -->
+            <hr style = "border-top: 3px dashed #d4d4d4;">
+            <label for="cars" style="font-size:11pt;"><b>Asset Section</b></label><br>
+            <label for="idgroup" id = "detailqty">Asset Count : 8 pcs</label><br>
+            <label for="idgroup">Asset List: </label>
+            <br><br>
+            <div id = "listtransaction">
+
+            </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
 </body>
 
 </html>
 <script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>
 <script>
+    var selected = [];
     $('#mystartdate').pickadate({
         format: 'dd-mm-yyyy'
     });
@@ -749,14 +805,6 @@ echo date('d-m-Y');?>">
                 },
                 {
                     name: 'Branch',
-                    className: 'text-center align-middle'
-                },
-                {
-                    name: 'No Asset',
-                    className: 'text-center align-middle'
-                },
-                {
-                    name: 'Name',
                     className: 'text-center align-middle'
                 },
                 {
@@ -1067,14 +1115,19 @@ echo date('d-m-Y');?>">
     }).trigger('change');
 
     function adddata() {
+        $("input:checkbox[class=mycheckbox]:checked").each(function () {
+            selected.push($(this).val());
+
+        });
+        
+        var myselect = selected;
         var relation = $("#relation").val();
-        var group = $('#groups').val();
-        var asset = $('#asset').val();
         var branch = $('#branchroom').val();
         var room = $('#room').val();
         var startdate = $('#mystartdate').val();
         var enddate = $('#enddate').val();
-        if (startdate == "" || enddate == "" || relation == null || group == null|| asset == null  || room == null) {
+        if (selected.length > 0) {
+            if (startdate == "" || enddate == "" || relation == null  || room == null) {
             Swal.fire({
                 icon: 'error',
                 title: 'Empty Field',
@@ -1093,8 +1146,7 @@ echo date('d-m-Y');?>">
                 data: {
                     tipe: "add",
                     myrelation: relation,
-                    mygroup: group,
-                    myasset: asset,
+                    myselected: myselect,
                     mybranch: branch,
                     myroom: room,
                     mystart: startdate,
@@ -1129,6 +1181,16 @@ echo date('d-m-Y');?>">
             });
         }
 
+        }
+        else{
+            Swal.fire({
+                icon: 'error',
+                title: 'No Asset Checked ',
+                text: 'Please choose at least 1 asset to be placed',
+                confirmButtonColor: '#e00d0d',
+            });
+        }
+   
 
     }
 
@@ -2249,6 +2311,7 @@ echo date('d-m-Y');?>">
         </div>
     </div>
 </div>
+
 </body>
 
 </html>
@@ -2792,6 +2855,79 @@ echo date('d-m-Y');?>">
             getallanswercustomquestion(myid);
 
         });
+        $("#groups").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_lend_relation.php",
+                method: 'POST',
+                data: {
+                    tipe: "getsubgroup",
+                    idgroup: myid
+                },
+                success: function (result) {
+
+                    // alert(result);
+                    $("#subgroups").html("");
+                    $("#subgroups").html(result);
+                    $("#subgroups").trigger("change");
+                }
+
+            })
+        }).trigger("change");
+        $("#subgroups").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_lend_relation.php",
+                method: 'POST',
+                data: {
+                    tipe: "getcategory",
+                    idsubgroup: myid
+                },
+                success: function (result) {
+
+                    // alert(result);
+                    $("#categories").html("");
+                    $("#categories").html(result);
+                    $("#categories").trigger("change");
+                }
+
+            })
+        }).trigger("change");
+
+
+        $("#categories").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_lend_relation.php",
+                method: 'POST',
+                data: {
+                    tipe: "getasset",
+                    idcategory: myid
+                },
+                success: function (result) {
+                    selected = [];
+                    // alert(result);
+                    $("#chooseaset").html("");
+                    $("#chooseaset").html(result);
+                }
+
+            })
+        }).trigger("change");
         $("#mydepreciation").on("click", function(){
             $("#depreciationtablebody").html("");
             var postingdate = $("#postingdateraw" + myopenid).val();
@@ -2945,5 +3081,50 @@ echo date('d-m-Y');?>">
             $("#costpermonth").val(costpermonth);
         }
         // alert(purchaseprice);
+    }
+    function openmodaldetailtransaction(element){
+        var myid = element.id;
+        var notransaction = $("#notransaction" + myid).text();
+        var datetransaction = $("#mydate" + myid).text();
+        var createdby = $("#nama" + myid).text();
+        var mydate = new Date(datetransaction);
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+        ];
+        $("#detailnotransaction").text("Transaction No : " + notransaction);
+        // $("#detailcreate").text("Created By : " + createdby)
+        $("#detaildate").text("Transaction Date : " + mydate.getDate() + " " + monthNames[mydate.getMonth()] + " " + mydate.getFullYear());
+           $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_lend_relation.php",
+                method: 'POST',
+                data: {
+                    tipe: "getdetailtransaction",
+                    idtransaction: myid
+                },
+                success: function (result) {
+                    // alert(result);
+                    if(result == "")
+                    {
+                        $("#detailqty").html("Asset Count : 0 pcs");
+                        $("#listtransaction").html("");
+                        $("#listtransaction").html(result);
+                    }
+                    else{
+                        var mysplit = result.split("||");
+                        var qty = mysplit[0];
+                        var data = mysplit[1];
+                        $("#listtransaction").html("");
+                        $("#listtransaction").html(data);
+                        $("#detailqty").html("Asset Count : "+qty+" pcs");
+                    }
+                    
+                }
+            });
+
     }
 </script>

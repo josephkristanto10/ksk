@@ -115,10 +115,12 @@
                         <div class="text-uppercase font-size-xs line-height-xs">Transaction</div> <i class="icon-menu"
                             title="Master"></i>
                     </li>
-                    <li class="nav-item nav-item-submenu  <?php echo ($myurl == "master_transaction_disp_department.php" || $myurl == "master_transaction_disp_department_branch.php" || $myurl == "master_transaction_lend_personel.php" || $myurl == "master_transaction_lend_relation.php" || $myurl == "master_transaction_lend_other_branch.php" || $myurl == "master_transaction_lend_return.php" || $myurl == "master_transaction_sale.php"  || $myurl == "master_transaction_mutation.php" || $myurl == "master_transaction_dispose.php"  ) ? " nav-item-open" : ''; ?>">
-                        <a href="#" class="nav-link <?php echo ($myurl == "master_transaction_disp_department.php" || $myurl == "master_transaction_disp_department_branch.php" || $myurl == "master_transaction_lend_personel.php" || $myurl == "master_transaction_lend_relation.php"  || $myurl == "master_transaction_lend_other_branch.php" || $myurl == "master_transaction_lend_return.php" || $myurl == "master_transaction_sale.php" || $myurl == "master_transaction_mutation.php"  || $myurl == "master_transaction_dispose.php" ) ? " active" : ''; ?>"> <span>Transaction</span></a>
-                        <ul class="nav nav-group-sub" data-submenu-title="Basic tables" style = "<?php echo ($myurl == "master_transaction_disp_department.php" || $myurl == "master_transaction_disp_department_branch.php" || $myurl == "master_transaction_lend_personel.php"  || $myurl == "master_transaction_lend_relation.php" || $myurl == "master_transaction_lend_other_branch.php"  || $myurl == "master_transaction_lend_return.php" || $myurl == "master_transaction_sale.php" || $myurl == "master_transaction_mutation.php"  || $myurl == "master_transaction_dispose.php"  ) ? " display:block;" : ''; ?>">
-                            <li class="nav-item"><a href="master_transaction_disp_department.php" class="nav-link <?php echo ($myurl == "master_transaction_disp_department.php"  ) ? " active" : ''; ?>"> <span>Displacement 1 Departement</span></a></li>
+                    <li class="nav-item nav-item-submenu  <?php echo ($myurl == "master_transaction_disp_new_asset.php" ||$myurl == "master_transaction_disp_department.php" || $myurl == "master_transaction_disp_department_branch.php" || $myurl == "master_transaction_lend_personel.php" || $myurl == "master_transaction_lend_relation.php" || $myurl == "master_transaction_lend_other_branch.php" || $myurl == "master_transaction_lend_return.php" || $myurl == "master_transaction_lend_extension.php"  || $myurl == "master_transaction_sale.php"  || $myurl == "master_transaction_mutation.php" || $myurl == "master_transaction_dispose.php"  ) ? " nav-item-open" : ''; ?>">
+                        <a href="#" class="nav-link <?php echo ($myurl == "master_transaction_disp_new_asset.php" ||$myurl == "master_transaction_disp_department.php" || $myurl == "master_transaction_disp_department_branch.php" || $myurl == "master_transaction_lend_personel.php" || $myurl == "master_transaction_lend_relation.php"  || $myurl == "master_transaction_lend_other_branch.php" || $myurl == "master_transaction_lend_return.php"  || $myurl == "master_transaction_lend_extension.php" || $myurl == "master_transaction_sale.php" || $myurl == "master_transaction_mutation.php"  || $myurl == "master_transaction_dispose.php" ) ? " active" : ''; ?>"> <span>Transaction</span></a>
+                        <ul class="nav nav-group-sub" data-submenu-title="Basic tables" style = "<?php echo ($myurl == "master_transaction_disp_new_asset.php" ||$myurl == "master_transaction_disp_department.php" || $myurl == "master_transaction_disp_department_branch.php" || $myurl == "master_transaction_lend_personel.php"  || $myurl == "master_transaction_lend_relation.php" || $myurl == "master_transaction_lend_other_branch.php" || $myurl == "master_transaction_lend_extension.php" || $myurl == "master_transaction_lend_return.php" || $myurl == "master_transaction_sale.php" || $myurl == "master_transaction_mutation.php"  || $myurl == "master_transaction_dispose.php"  ) ? " display:block;" : ''; ?>">
+                        <li class="nav-item"><a href="master_transaction_disp_new_asset.php" class="nav-link <?php echo ($myurl == "master_transaction_disp_new_asset.php"  ) ? " active" : ''; ?>"> <span>Displacement New Asset</span></a></li>
+                            </li>    
+                        <li class="nav-item"><a href="master_transaction_disp_department.php" class="nav-link <?php echo ($myurl == "master_transaction_disp_department.php"  ) ? " active" : ''; ?>"> <span>Displacement 1 Departement</span></a></li>
                             </li>
                             <li class="nav-item"><a href="master_transaction_disp_department_branch.php" class="nav-link <?php echo ($myurl == "master_transaction_disp_department_branch.php"  ) ? " active" : ''; ?>">
                                     <span>Displacement to OtherDepartement/Branch</span></a></li>
@@ -138,7 +140,7 @@
                             <li class="nav-item"><a href="master_transaction_lend_other_branch.php" class="nav-link <?php echo ($myurl == "master_transaction_lend_other_branch.php"  ) ? " active" : ''; ?>">
                                     <span>Lend To Other Departement/Branch</span></a></li>
                             </li>
-                            <li class="nav-item"><a href="masterdepartment.php" class="nav-link <?php echo ($myurl == "masterdepartment.php"  ) ? " active" : ''; ?>">
+                            <li class="nav-item"><a href="master_transaction_lend_extension.php" class="nav-link <?php echo ($myurl == "master_transaction_lend_extension.php"  ) ? " active" : ''; ?>">
                                     <span>Lend Extension</span></a></li>
                             </li>
                             <li class="nav-item"><a href="master_transaction_lend_return.php" class="nav-link <?php echo ($myurl == "master_transaction_lend_return.php"  ) ? " active" : ''; ?>">
@@ -147,9 +149,9 @@
                             <li class="nav-item"><a href="master_transaction_sale.php" class="nav-link <?php echo ($myurl == "master_transaction_sale.php"  ) ? " active" : ''; ?>">
                                     <span>Sale</span></a></li>
                             </li>
-                            <li class="nav-item"><a href="master_transaction_mutation.php" class="nav-link <?php echo ($myurl == "master_transaction_mutation.php"  ) ? " active" : ''; ?>">
+                            <!-- <li class="nav-item"><a href="master_transaction_mutation.php" class="nav-link <?php echo ($myurl == "master_transaction_mutation.php"  ) ? " active" : ''; ?>">
                                     <span>Mutation</span></a></li>
-                            </li>
+                            </li> -->
                             <li class="nav-item"><a href="master_transaction_dispose.php" class="nav-link <?php echo ($myurl == "master_transaction_dispose.php"  ) ? " active" : ''; ?>">
                                     <span>Dispose</span></a></li>
                             </li>

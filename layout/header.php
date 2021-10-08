@@ -82,7 +82,7 @@ if(!isset($_SESSION['iduser']))
 	<link href="assets/css/components.min.css" rel="stylesheet" type="text/css">
 	<link href="assets/css/colors.min.css" rel="stylesheet" type="text/css">
 	<!-- <link href="assets/css/colors.min.css" rel="stylesheet" type="text/css"> -->
-	<link rel="shortcut icon" type="image/png" href="assets/logonexus.png" />
+	<link rel="shortcut icon" type="image/png" href="<?=$url;?>assets/icon.png" />
 	<!-- /global stylesheets -->
 
 	<!-- Core JS files -->

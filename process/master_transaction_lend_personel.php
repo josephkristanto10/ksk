@@ -7,8 +7,6 @@ if($tipe == "load")
 {
 
     $where_like = [
-        'name',
-        'noasset',
         'branch',
         'room',
         'nik',
@@ -29,11 +27,10 @@ if($tipe == "load")
     
     $total_data = mysqli_query($conn, 
     
-    "select tltp.*, lbranch.branch, lbranchroom.branch as branchroom, asset.noasset, asset.name, karyawan.nama, karyawan.email, rank.rank, lroom.room FROM transaction_lend_to_personal tltp
+    "select tltp.*, lbranch.branch, lbranchroom.branch as branchroom, karyawan.nama, karyawan.email, rank.rank, lroom.room FROM transaction_lend_to_personal tltp
     inner join location_setup_sister_branch lbranchsetup on lbranchsetup.idbranch = tltp.idbranch
     inner join location_branch lbranch on lbranch.idbranch = lbranchsetup.idbranch 
     inner join location_branch lbranchroom on lbranchroom.idbranch = lbranchsetup.idbranch 
-    inner join asset on asset.id = tltp.idasset
     inner join karyawan on karyawan.nik = tltp.nik
     	inner join rank on rank.id = karyawan.idrank
     inner join location_room lroom on lroom.id = tltp.room  
@@ -43,57 +40,49 @@ if($tipe == "load")
 );
     
     if(empty($search)) {
-        $query_data = mysqli_query($conn, "select tltp.*, lbranch.branch, lbranchroom.branch as branchroom, asset.noasset, asset.name, karyawan.nama, karyawan.email, rank.rank, lroom.room FROM transaction_lend_to_personal tltp
+        $query_data = mysqli_query($conn, "select tltp.*, lbranch.branch, lbranchroom.branch as branchroom, karyawan.nama, karyawan.email, rank.rank, lroom.room FROM transaction_lend_to_personal tltp
         inner join location_setup_sister_branch lbranchsetup on lbranchsetup.idbranch = tltp.idbranch
         inner join location_branch lbranch on lbranch.idbranch = lbranchsetup.idbranch 
         inner join location_branch lbranchroom on lbranchroom.idbranch = lbranchsetup.idbranch 
-        inner join asset on asset.id = tltp.idasset
         inner join karyawan on karyawan.nik = tltp.nik
             inner join rank on rank.id = karyawan.idrank
         inner join location_room lroom on lroom.id = tltp.room  
         where lbranchsetup.idsistercompany = '$myses' ORDER BY $order $dir LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "select tltp.*, lbranch.branch, lbranchroom.branch as branchroom, asset.noasset, asset.name, karyawan.nama, karyawan.email, rank.rank, lroom.room FROM transaction_lend_to_personal tltp
+        $total_filtered = mysqli_query($conn, "select tltp.*, lbranch.branch, lbranchroom.branch as branchroom, karyawan.nama, karyawan.email, rank.rank, lroom.room FROM transaction_lend_to_personal tltp
         inner join location_setup_sister_branch lbranchsetup on lbranchsetup.idbranch = tltp.idbranch
         inner join location_branch lbranch on lbranch.idbranch = lbranchsetup.idbranch 
         inner join location_branch lbranchroom on lbranchroom.idbranch = lbranchsetup.idbranch 
-        inner join asset on asset.id = tltp.idasset
         inner join karyawan on karyawan.nik = tltp.nik
             inner join rank on rank.id = karyawan.idrank
         inner join location_room lroom on lroom.id = tltp.room  
-        where lbranchsetup.idsistercompany = '$myses' ");
+        where lbranchsetup.idsistercompany = '$myses'");
     } else {
-        $query_data = mysqli_query($conn, "select tltp.*, lbranch.branch, lbranchroom.branch as branchroom, asset.noasset, asset.name, karyawan.nama, karyawan.email, rank.rank, lroom.room FROM transaction_lend_to_personal tltp
+        $query_data = mysqli_query($conn, "select tltp.*, lbranch.branch, lbranchroom.branch as branchroom, karyawan.nama, karyawan.email, rank.rank, lroom.room FROM transaction_lend_to_personal tltp
         inner join location_setup_sister_branch lbranchsetup on lbranchsetup.idbranch = tltp.idbranch
         inner join location_branch lbranch on lbranch.idbranch = lbranchsetup.idbranch 
         inner join location_branch lbranchroom on lbranchroom.idbranch = lbranchsetup.idbranch 
-        inner join asset on asset.id = tltp.idasset
         inner join karyawan on karyawan.nik = tltp.nik
             inner join rank on rank.id = karyawan.idrank
         inner join location_room lroom on lroom.id = tltp.room  
         where lbranchsetup.idsistercompany = '$myses' and (
             tltp.notransaction LIKE '%$search%' 
         OR lbranch.branch LIKE '%$search%'
-        OR asset.noasset LIKE '%$search%'
-        OR asset.name LIKE '%$search%'
         OR karyawan.nama LIKE '%$search%'
         OR lroom.room LIKE '%$search%' 
         OR tltp.approval LIKE '%$search%'
         OR tltp.status LIKE '%$search%' )  ORDER BY $order $dir LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "select tltp.*, lbranch.branch, lbranchroom.branch as branchroom, asset.noasset, asset.name, karyawan.nama, karyawan.email, rank.rank, lroom.room FROM transaction_lend_to_personal tltp
+        $total_filtered = mysqli_query($conn, "select tltp.*, lbranch.branch, lbranchroom.branch as branchroom, karyawan.nama, karyawan.email, rank.rank, lroom.room FROM transaction_lend_to_personal tltp
         inner join location_setup_sister_branch lbranchsetup on lbranchsetup.idbranch = tltp.idbranch
         inner join location_branch lbranch on lbranch.idbranch = lbranchsetup.idbranch 
         inner join location_branch lbranchroom on lbranchroom.idbranch = lbranchsetup.idbranch 
-        inner join asset on asset.id = tltp.idasset
         inner join karyawan on karyawan.nik = tltp.nik
             inner join rank on rank.id = karyawan.idrank
         inner join location_room lroom on lroom.id = tltp.room  
         where lbranchsetup.idsistercompany = '$myses' and (
             tltp.notransaction LIKE '%$search%' 
         OR lbranch.branch LIKE '%$search%'
-        OR asset.noasset LIKE '%$search%'
-        OR asset.name LIKE '%$search%'
         OR karyawan.nama LIKE '%$search%'
         OR lroom.room LIKE '%$search%' 
         OR tltp.approval LIKE '%$search%'
@@ -122,10 +111,8 @@ if($tipe == "load")
                 "<span class='pointer-element badge badge-success' id ='".$row['id']."' data-id='".$row['id']."'><i class='icon-plus3'></i></span>",
                 "<b><label id ='statusapproval".$row['id']."'  >".$myapproval."</label></b>",
                 "<label id ='mydate".$row['id']."'>".$row['mydate']."</label>",
-                "<label id ='notransaction".$row['id']."'>".$row['notransaction']."</label>",
+                "<a href = '#myModalDetailTransaction' id = '".$row['id']."' onclick = openmodaldetailtransaction(this) data-toggle='modal'><label id ='notransaction".$row['id']."'>".$row['notransaction']."</label></a>",
                 "<label id ='branch".$row['id']."'>".$row['branch']."</label>",
-                "<label id ='noasset".$row['id']."'>".$row['noasset']."</label>",
-                "<label id ='assetname".$row['id']."'>".$row['name']."</label>",
                 "<label id ='room".$row['id']."'>".$row['room']."</label>",
                 "<label id ='nik".$row['id']."'>".$row['nik']."</label>",
                 "<label id ='namakaryawan".$row['id']."'>".$row['nama']."</label>",
@@ -356,120 +343,14 @@ else if($tipe == "getroom")
     }
     echo $mystring;
 }
-else if($tipe == "addassetform")
-{
- 
-    $statuspostingdate = "no";
-    $date1= date_create($_POST['postingdate']);
-   
-    $date2=date_create(date("Y-m-d"));
-    $diff=date_diff($date1,$date2);
-    $perbedaan =  $diff->format("%m");
-    if($perbedaan < 0)
-    {
-        $perbedaan = 0;
-    }
-    if(isset($_POST['statuspostingdate']))
-    {
-        $perbedaan+=1;
-        $statuspostingdate =  "yes";
-    }
-    $totalmonth = $perbedaan; 
-    $noasset = $_POST['noasset'];
-    $assetname = $_POST['name'];
-    $group = $_POST['group'];
-    $initialcondition = $_POST['initialcondition'];
-    $subgroup = $_POST['subgroup'];
-    $condition = $_POST['condition'];
-    $category = $_POST['category'];
-    $nopo = $_POST['nopo'];
-    $relation = $_POST['relation'];
-    $postingdate = date_format(date_create($_POST['postingdate']), "Y-m-d");
-    $purchaseprice = $_POST['purchaseprice'];
-    $ppn = $_POST['ppn'];
-    $totalpurchaseprice = $_POST['totalpurchaseprice'];
-    $costpermonth = $_POST['costpermonth'];
-    $economicallifetime = $_POST['economicallifetime'];
 
-    $startwarranty = date_format(date_create($_POST['startwarranty']), "Y-m-d");
-    $endwarranty = date_format(date_create($_POST['endwarranty']), "Y-m-d");
-    $template = $_POST['template'];
-    
-    $mystartwarranty = NULL;
-    $myendwarranty = NULL;
-    $myfile = "";
-    if(isset($_POST['startwarranty']))
-    {
-        $mystartwarranty = $_POST['startwarranty'];
-    }
-    if(isset($_POST['endwarranty']))
-    {
-        $myendwarranty = $_POST['endwarranty'];
-    }
-    if(isset($_FILES['myfile']['tmp_name']))
-    {
-        if(!is_dir("../assets/attach/")) {
-            mkdir("../assets/attach/");
-        }
-        
-        // echo "test";
-        // echo count($_POST['myfile']);
-        $jumlah = count($_FILES['myfile']['tmp_name']);
-        for($i = 0 ; $i < $jumlah;$i++)
-        {
-            $filename = "$noasset"."_".date("Y_m_d_H_i_s")."_".$_FILES['myfile']['name'][$i];
-            // $filename = $_FILES['myfile']['name'][$i];
-            if($i == 0 )
-            {
-                $myfile .= $filename;
-            }
-            else{
-                $myfile .= ",".$filename;
-            }
-            move_uploaded_file($_FILES["myfile"]["tmp_name"][$i], "../assets/attach/".$filename);
-       
-        }
-        // $file = $_FILES['myfile']['tmp_name'];
-    }
-    // echo $myfile;
-    $mysessionsistercompany = $_SESSION['idsister'];
-    $sql = "INSERT into asset values(NULL, '$mysessionsistercompany', '$group', '$subgroup', '$category', '$initialcondition', 
-    '$condition', '$template','$noasset', '$assetname','$nopo', '$relation', '$postingdate', '$statuspostingdate', '$totalmonth', '$purchaseprice', '$ppn', '$totalpurchaseprice',
-    '$economicallifetime', '$costpermonth', '$mystartwarranty', '$myendwarranty', '$myfile', 'Active')";
-    $res = $conn->query($sql);
-    if(($conn -> affected_rows)>0)
-    {
-        $last_id = $conn->insert_id;
-        if($_POST['idcustomquestion']!="" && $_POST['idcustomquestion']!="none")
-        {
-            $splitidcustom = explode(',', $_POST['idcustomquestion']);
-            for($i = 0 ;$i < count($splitidcustom); $i++)
-            {
-                $currentid = $splitidcustom[$i];
-                $currentvalue = $_POST['custom'.$currentid];
-                $sqlinsertanswer = "INSERT into custom_template_answer values(NULL, '$currentid', '$last_id' , '$currentvalue')";
-                $resinsertanswer = $conn->query($sqlinsertanswer);
-            }
-        }
-        echo "sukses";
-
-    }
-    else{
-        echo "tidak";
-    }
-    
-
-
-}
 else if($tipe == "add"){
 
-
+    $myselectedlist = $_POST['myselected'];
     $idsister = $myses;
     $mybranchpersonel = $_POST['mybranchpersonel'];
     $mydepartment = $_POST['mydepartment'];
     $myuser = $_POST['myuser'];
-    $mygroup = $_POST['mygroup'];
-    $myasset = $_POST['myasset'];
     $mybranchroom = $_POST['mybranchroom'];
     $myroom = $_POST['myroom'];
     $mystart = $_POST['mystart'];
@@ -481,8 +362,17 @@ else if($tipe == "add"){
     $convertend = date_format($dateend,"Y-m-d");
     $mydate = date("Y-m-d");
     $sql = "INSERT INTO `transaction_lend_to_personal`
-    VALUES (NULL, 'TRX-0000', '$mybranchpersonel', '$myasset', '$myuser', '$mybranchroom', '$myroom', '$convertstart', '$convertend', 'pending', 'waiting', '$mydate');";
+    VALUES (NULL, 'TRX-0000', '$mybranchpersonel', '$myuser', '$mybranchroom', '$myroom', '$convertstart', '$convertend', 'pending', 'waiting', '$mydate');";
     $res = $conn->query($sql);
+    $last_id = $conn->insert_id;
+    for($i = 0 ;  $i < count($myselectedlist) ; $i++)
+    {
+        $sqlupdate  = "UPDATE asset set status_transaction = 'placed' where id = '".$myselectedlist[$i]."'";
+        $resupdate =  $conn->query($sqlupdate);
+        $sqls = "INSERT INTO `transaction_lend_to_personal_log` VALUES (NULL, '$last_id', '".$myselectedlist[$i]."')";
+        $ress = $conn->query($sqls);
+      
+    }
     if(($conn -> affected_rows)>0)
     {
         echo "sukses";
@@ -573,6 +463,95 @@ else if($tipe == "getroom")
         while($r = mysqli_fetch_array($res))
         {
             $mystring .= "<option value = '".$r['id']."'> ".$r['room']."</option>";
+        }
+    }
+    echo $mystring;
+}
+else if($tipe == "getdetailtransaction")
+{
+    $idtransaction = $_POST['idtransaction'];
+    $sql = "select tltp.*, asset.name as assetname, asset.noasset  from transaction_lend_to_personal_log tltp inner join asset on asset.id = tltp.idasset where idtransaksi = '$idtransaction'";
+    $res = $conn->query($sql);
+    $mystring = "";
+    $mycountasset = 0;
+    $mynumber = 1;
+    if($res->num_rows>0)
+    {
+        $mycounter = 1;
+        while($r = mysqli_fetch_array($res))
+        {
+            $mycountasset += 1;
+            $mystring .= "<div class = 'row' style = 'margin-left:5px;'><label style = 'display:block;float:left;heigth:100px;font-size:12pt;' ><b>$mynumber. </b> &nbsp </label><label style = 'display:block;float:left' >".$r['assetname']."<br>".$r['noasset']."</label></div><br>";
+            $mynumber ++;
+            
+        }
+        echo $mycountasset."||".$mystring;
+    }
+    else
+    {
+        echo "";
+    }
+
+}
+else if($tipe == "getasset")
+{
+    $idcategory = $_POST['idcategory'];
+    $sql =  "select * from asset where idcategory = '$idcategory' and status_transaction = 'placed'";
+    $res = $conn->query($sql);
+    $mystring = "";
+    if($res->num_rows>0)
+    {
+        $mycounter = 1;
+        while($r = mysqli_fetch_array($res))
+        {
+            if($mycounter == 1)
+            {
+                $mystring .= "<div class = 'row'><div class = 'col-md-6'><input class = 'mycheckbox' type = 'checkbox' value = '".$r['id']."' > ".$r['name']."</div>";
+                $mycounter = 2;
+            }
+            else{
+                $mystring .= "<div class = 'col-md-6'><input class = 'mycheckbox' type = 'checkbox' value = '".$r['id']."' > ".$r['name']."</div></div><br>";
+                $mycounter = 1;
+            }
+            
+        }
+        echo $mystring;
+    }
+    else
+    {
+        echo "";
+    }
+   
+
+}
+else if($tipe == "getsubgroup")
+{
+    $idgroup = $_POST['idgroup'];
+    $sql = "SELECT ks.* from kategori_subgroup ks inner join kategori_asset ka on ka.id = ks.idkategoriaset
+     where ka.id = '$idgroup'";
+    $res = $conn->query($sql);
+    $mystring = "";
+    if($res -> num_rows>0)
+    {
+        while($r = mysqli_fetch_array($res))
+        {
+            $mystring .= "<option value = '".$r['id']."'> ".$r['subgroup']."</option>";
+        }
+    }
+    echo $mystring;
+}
+else if($tipe == "getcategory")
+{
+    $idsubgroup = $_POST['idsubgroup'];
+    $sql = "SELECT kcs.* from kategori_categorysubgroup kcs 
+    where kcs.idsubgroup = '$idsubgroup'";
+    $res = $conn->query($sql);
+    $mystring = "";
+    if($res -> num_rows>0)
+    {
+        while($r = mysqli_fetch_array($res))
+        {
+            $mystring .= "<option value = '".$r['id']."'> ".$r['category']."</option>";
         }
     }
     echo $mystring;
