@@ -176,7 +176,7 @@ if(!isset($_SESSION['iduser']))
 </head>
 
 <body class = 'custom-scrollbars'>
-	<div class="navbar navbar-expand-md navbar-dark" style = "height:60px;z-index:10000;">
+	<div class="navbar navbar-expand-md sticky-top navbar-dark" style = "height:60px;z-index:10000;">
 	
 	<div class="navbar navbar-dark bg-dark-100 navbar-static border-0" style="height:55px;margin-top:0px;margin-left:20px;margin-right:20px;">
 				<div class="navbar-brand flex-fill wmin-0 text-center">

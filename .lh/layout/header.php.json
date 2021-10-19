@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 330,
+            "activePatchIndex": 331,
             "patches": [
                 {
                     "date": 1630468397363,
@@ -1328,6 +1328,10 @@
                 {
                     "date": 1634284676454,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -132,9 +132,10 @@\n \t<script src=\"<?=$url;?>global_assets/js/plugins/uploaders/fileinput/fileinput.min.js\"></script>\r\n <script src=\"<?=$url;?>global_assets/js/demo_pages/uploader_bootstrap.js\"></script>\r\n <script src=\"<?=$url;?>global_assets/js/plugins/ui/perfect_scrollbar.min.js\"></script>\r\n <script src=\"<?=$url;?>global_assets/js/demo_pages/layout_fixed_sidebar_custom.js\"></script>\r\n-<script src=\"../../../../global_assets/js/demo_pages/form_select2.js\"></script>\t<!-- <script src=\"<?=$url;?>global_assets/js/demo_pages/uploader_plupload.js\"></script> -->\r\n+<script src=\"<?=$url;?>global_assets/js/demo_pages/form_select2.js\"></script>\r\n+\t<!-- <script src=\"<?=$url;?>global_assets/js/demo_pages/uploader_plupload.js\"></script> -->\r\n \t<style>\r\n \t\tth {\r\n \t\t\tbackground-color: #324148;\r\n \t\t\tcolor: white;\r\n"
+                },
+                {
+                    "date": 1634621463468,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -175,9 +175,9 @@\n \t</style>\r\n </head>\r\n \r\n <body class = 'custom-scrollbars'>\r\n-\t<div class=\"navbar navbar-expand-md navbar-dark\" style = \"height:60px;z-index:10000;\">\r\n+\t<div class=\"navbar navbar-expand-md sticky-top navbar-dark\" style = \"height:60px;z-index:10000;\">\r\n \t\r\n \t<div class=\"navbar navbar-dark bg-dark-100 navbar-static border-0\" style=\"height:55px;margin-top:0px;margin-left:20px;margin-right:20px;\">\r\n \t\t\t\t<div class=\"navbar-brand flex-fill wmin-0 text-center\">\r\n \t\t\t\t\t<a href=\"ksk/dashboards.php\" class=\"d-inline-block\">\r\n"
                 }
             ],
             "date": 1630468397363,
