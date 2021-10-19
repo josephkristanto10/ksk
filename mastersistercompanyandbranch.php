@@ -29,17 +29,21 @@ if($resbranch->num_rows>0)
 
 
 ?>
-
+<style>
+	.select2-results{
+		display:none !important;
+	}
+</style>
 		<div class="content-wrapper">
 			<div class="page-header page-header-light">
 				<div class="page-header-content header-elements-md-inline">
-					<h4><span class="font-weight-semibold">Setup Sister Company & Branch</span></h4>
+					<h4><span class="font-weight-semibold">Master Branch</span></h4>
 					<div class="page-title d-flex">
 						<div class="row" style="width:100%;">
 							<div class="col-xl-12">
 							<a href="#myModal" data-toggle="modal"> <button type="button" style = "background-color:#26a69a !important; color:white; width:250px;" class="btn btn-indigo btn-labeled btn-labeled-left" onclick="cancel()" data-toggle="modal" data-target="#modal_form">
-                            <b><i class="icon-plus-circle2"></i></b> Setup Sister Company & Branch
-                        </button>></a>
+                            <b><i class="icon-plus-circle2"></i></b> Add Branch
+                        </button></a>
 							</div>
 						</div>
 						<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -80,28 +84,26 @@ if($resbranch->num_rows>0)
 					<div class="modal-body">
 						<div class="form-group">
 						<label for="code">Code</label>
-    					<input type="text" class="form-control" id="code" disabled>
+    					<input type="text" class="form-control" id="code" value = "CCD">
 						<br>
 					
 							<label for="cars">Sister Company:</label>
-							<select id="sister" name="sister" class="form-control">
-							<?php 
-									for($i = 0 ; $i < count($listsister); $i++)
-									{
-										echo '<option value="'.$listsister[$i]['id'].'">'.$listsister[$i]['code'].' - '.$listsister[$i]['name'].'</option>';
-									}
-								?>
-							</select>
 							<br>
+							<b><label for="cars"><?= $_SESSION['namasister'];?></label></b>
+							<br><br>
 							<label for="cars">Branch:</label>
-							<select id="branch" name="branch" class="form-control">
-							<?php 
-									for($i = 0 ; $i < count($listbranch); $i++)
-									{
-										echo '<option value="'.$listbranch[$i]['idbranch'].'">'.$listbranch[$i]['code'].' - '.$listbranch[$i]['branch'].'</option>';
-									}
-								?>
-							</select>
+							<input type="text" class="form-control" id="branch">
+							<br>
+							<label for="cars">Phone:</label>
+							<select class="form-control select-multiple-tags" id = "phone" multiple="multiple" data-fouc>
+					
+									</select>
+							<br><br>
+							<label for="cars">Telephone:</label>
+							<select class="form-control select-multiple-tags" id = "telp" multiple="multiple" data-fouc>
+					
+									</select>
+							<br>
 							<br>
 						<label for="description">Description</label>
     					<input type="text" class="form-control" id="description">
@@ -134,24 +136,23 @@ if($resbranch->num_rows>0)
 						<br>
 					
 							<label for="cars">Sister Company:</label>
-							<select id="sisteredit" name="sisteredit" class="form-control">
-							<?php 
-									for($i = 0 ; $i < count($listsister); $i++)
-									{
-										echo '<option value="'.$listsister[$i]['id'].'">'.$listsister[$i]['code'].' - '.$listsister[$i]['name'].'</option>';
-									}
-								?>
-							</select>
+							<br>
+							<b><label id = "sisteredit"></label></b>
+							<br>
 							<br>
 							<label for="cars">Branch:</label>
-							<select id="branchedit" name="branchedit" class="form-control">
-							<?php 
-									for($i = 0 ; $i < count($listbranch); $i++)
-									{
-										echo '<option value="'.$listbranch[$i]['idbranch'].'">'.$listbranch[$i]['code'].' - '.$listbranch[$i]['branch'].'</option>';
-									}
-								?>
-							</select>
+							<input type="text" class="form-control" id="branchedit">
+							<br>
+							<label for="cars">Phone:</label>
+							<select class="form-control select-multiple-tags" id = "phoneedit" multiple="multiple" data-fouc>
+					
+									</select>
+							<br><br>
+							<label for="cars">Telephone:</label>
+							<select class="form-control select-multiple-tags" id = "telpedit" multiple="multiple" data-fouc>
+					
+									</select>
+							<br>
 							<br>
 						<label for="description">Description</label>
     					<input type="text" class="form-control" id="descriptionedit">
@@ -174,7 +175,7 @@ if($resbranch->num_rows>0)
 
 <script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>
 <script>
-	
+
 	$(function() {
       loadData();
    });
@@ -212,19 +213,60 @@ if($resbranch->num_rows>0)
    var globalsister = "";
    var globalbranch = "";
    function openmodaledit(element){
-
+	
+	// alert(arrayphone.length);
+	
 	var idelement = element.id.split("-");
 	var idsister = idelement[2];
 	var idbranch = idelement[3];
+	var myphone = $("#phone_"+idelement[1]).val();
+	$("#phoneedit").html("");
+	var splitmyphone = myphone.split(",");
+	if(splitmyphone.length > 0)
+	{
+		for(var i = 0 ; i < splitmyphone.length; i++){
+			if(splitmyphone[i] == "")
+			{
+				$("#phoneedit").append("<option >"+splitmyphone[i]+"</option>");
+			}
+			else
+			{
+				$("#phoneedit").append("<option selected = 'selected'>"+splitmyphone[i]+"</option>");
+			}
+		
+		}
+	
+	}
+	var mytelp = $("#telp_"+idelement[1]).val();
+	$("#telpedit").html("");
+	var splitmytelp = mytelp.split(",");
+	if(splitmytelp.length > 0)
+	{
+		for(var i = 0 ; i < splitmytelp.length; i++){
+			if(splitmytelp[i] == "")
+			{
+				$("#telpedit").append("<option >"+splitmytelp[i]+"</option>");
+			}
+			else
+			{
+				$("#telpedit").append("<option selected = 'selected'>"+splitmytelp[i]+"</option>");
+			}
 
+		}
+	
+	}
+
+	var sistername = $("#sister"+idelement[1]).text();
+	var branchname = $("#branch"+idelement[1]).text();
+	$("#sisteredit").text(sistername);
+	$("#branchedit").val(branchname);
 	globalsister = idsister;
 	globalbranch = idbranch;
 
 	var code = $("#code" + idelement[1]).text();
+	$("#codeedit").val(code);
 	var desc = $("#desc" + idelement[1]).text();
 
-	$('#sisteredit option[value='+idsister+']').prop('selected', true);
-	$('#branchedit option[value='+idbranch+']').prop('selected', true);
 	$("#sisteredit").trigger('change');
 	$("#branchedit").trigger('change');
 
@@ -234,16 +276,19 @@ if($resbranch->num_rows>0)
 }
 
 function adddata(){
+	var myphone = $("#phone").val();
+	var mytelp = $("#telp").val();
+
+	// alert(myphone);
        var mycode = $("#code").val();
-       var mysister = $("#sister").val();
        var mybranch = $("#branch").val();
        var mydesc = $("#description").val();
-      if(mysister == null || mybranch == null || mycode == ""|| mydesc == "")
+      if( mybranch == "" || mycode == ""|| mydesc == "")
       {
                       Swal.fire({
                             icon: 'error',
                             title: 'Empty Field',
-                            text: 'Branch / Description tidak boleh kosong',
+                            text: 'Requirement field cannot be empty',
                             confirmButtonColor: '#e00d0d',
                         });
       }
@@ -260,12 +305,14 @@ function adddata(){
                 data: {
                     tipe: "add",
                     code : mycode,
-                    sister : mysister,
                     branch : mybranch,
+					telp : mytelp,
+					phone : myphone,
                     desc : mydesc
                     
                 },
                 success: function (result) {
+				
                     if(result == "sukses")
                     {
                         success();
@@ -365,6 +412,15 @@ function adddata(){
 }
 
 function changedata(){
+	var changephone = $("#phoneedit").val();
+	var changetelp = $("#telpedit").val();
+	if(changetelp == "")
+	{
+		changetelp = "";
+	}
+	if(changephone == ""){
+		changephone = "";
+	}
 	var changeid = $("#idchange").val();
 	var changecode = $("#codeedit").val();
        var changesister = $("#sisteredit").val();
@@ -390,6 +446,8 @@ function changedata(){
                 method: 'POST',
                 data: {
                     tipe: "changedata",
+					mytelp : changetelp,
+					myphone : changephone,
 					myid : changeid,
 					mycode : changecode,
                     mysister : changesister,

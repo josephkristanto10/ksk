@@ -1,6 +1,7 @@
 <?php
 session_start();
 require '../connection.php';
+$myses = $_SESSION['idsister'];
 $tipe = $_POST['tipe'];
 if($tipe == "load")
 {
@@ -24,7 +25,7 @@ if($tipe == "load")
     $sessionidsister = $_SESSION['idsister'];
     
     $total_data = mysqli_query($conn, 
-    "SELECT lbranch.idbranch, lsc.id as idsister, lscb.idsetupsisterbranch, lscb.code, lsc.name as sistername, lbranch.branch, lscb.description, lscb.status
+    "SELECT lbranch.phone, lbranch.telp, lbranch.idbranch, lsc.id as idsister, lscb.idsetupsisterbranch, lscb.code, lsc.name as sistername, lbranch.branch, lscb.description, lscb.status
      FROM `location_setup_sister_branch` lscb 
     inner join location_sister_company lsc on lsc.id = lscb.idsistercompany 
     inner join location_branch lbranch on lbranch.idbranch = lscb.idbranch
@@ -33,20 +34,20 @@ if($tipe == "load")
 );
     
     if(empty($search)) {
-        $query_data = mysqli_query($conn, "SELECT lbranch.idbranch, lsc.id as idsister, lscb.idsetupsisterbranch, lscb.code, lsc.name as sistername, lbranch.branch, lscb.description, lscb.status
+        $query_data = mysqli_query($conn, "SELECT lbranch.phone, lbranch.telp, lbranch.idbranch, lsc.id as idsister, lscb.idsetupsisterbranch, lscb.code, lsc.name as sistername, lbranch.branch, lscb.description, lscb.status
         FROM `location_setup_sister_branch` lscb 
        inner join location_sister_company lsc on lsc.id = lscb.idsistercompany 
        inner join location_branch lbranch on lbranch.idbranch = lscb.idbranch
        where lsc.id = '".$sessionidsister."'   ORDER BY $order $dir LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "SELECT lbranch.idbranch, lsc.id as idsister, lscb.idsetupsisterbranch, lscb.code, lsc.name as sistername, lbranch.branch, lscb.description, lscb.status
+        $total_filtered = mysqli_query($conn, "SELECT lbranch.phone, lbranch.telp, lbranch.idbranch, lsc.id as idsister, lscb.idsetupsisterbranch, lscb.code, lsc.name as sistername, lbranch.branch, lscb.description, lscb.status
         FROM `location_setup_sister_branch` lscb 
        inner join location_sister_company lsc on lsc.id = lscb.idsistercompany 
        inner join location_branch lbranch on lbranch.idbranch = lscb.idbranch
        where lsc.id = '".$sessionidsister."'  ");
 
     } else {
-        $query_data = mysqli_query($conn, "SELECT lbranch.idbranch, lsc.id as idsister, lscb.idsetupsisterbranch, lscb.code, lsc.name as sistername, lbranch.branch, lscb.description, lscb.status
+        $query_data = mysqli_query($conn, "SELECT lbranch.phone, lbranch.telp, lbranch.idbranch, lsc.id as idsister, lscb.idsetupsisterbranch, lscb.code, lsc.name as sistername, lbranch.branch, lscb.description, lscb.status
         FROM `location_setup_sister_branch` lscb 
        inner join location_sister_company lsc on lsc.id = lscb.idsistercompany 
        inner join location_branch lbranch on lbranch.idbranch = lscb.idbranch
@@ -57,7 +58,7 @@ if($tipe == "load")
         OR lsc.name LIKE '%$search%' 
         OR lbranch.branch LIKE '%$search%' )  ORDER BY $order $dir LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "SELECT lbranch.idbranch, lsc.id as idsister, lscb.idsetupsisterbranch, lscb.code, lsc.name as sistername, lbranch.branch, lscb.description, lscb.status
+        $total_filtered = mysqli_query($conn, "SELECT lbranch.phone, lbranch.telp, lbranch.idbranch, lsc.id as idsister, lscb.idsetupsisterbranch, lscb.code, lsc.name as sistername, lbranch.branch, lscb.description, lscb.status
         FROM `location_setup_sister_branch` lscb 
        inner join location_sister_company lsc on lsc.id = lscb.idsistercompany 
        inner join location_branch lbranch on lbranch.idbranch = lscb.idbranch
@@ -94,7 +95,7 @@ if($tipe == "load")
                 "<label id ='sister".$row['idsetupsisterbranch']."'>".$row['sistername']."</label>",
                 "<label id ='branch".$row['idsetupsisterbranch']."'>".$row['branch']."</label>",
                 "<label id ='desc".$row['idsetupsisterbranch']."'>".$row['description']."</label>",
-                "<label id ='status".$row['idsetupsisterbranch']."'>".$mystats."</label>",
+                "<label id ='status".$row['idsetupsisterbranch']."'>".$mystats."</label>"."<input type = 'hidden' id = 'telp_".$row['idsetupsisterbranch']."' value = '".$row['telp']."'>"."<input type = 'hidden' id = 'phone_".$row['idsetupsisterbranch']."' value = '".$row['phone']."'>",
                 ' <div class="list-icons">
                 <div class="dropdown">
                     <a href="#" class="list-icons-item" data-toggle="dropdown">
@@ -128,37 +129,115 @@ if($tipe == "load")
 }
 else if($tipe == "add"){
     $code = $_POST['code'];
-    $sister = $_POST['sister'];
+    $sister = $myses;
+    $telp = $_POST['telp'];
+    $phone = $_POST['phone']; 
     $branch = $_POST['branch'];
     $desc = $_POST['desc'];
+    $mytelp = "";
+    $myphone = "";
+ 
+    if($telp > 0)
+    {
+        for($i = 0 ; $i< count($telp); $i++)
+        {
+            if($i == 0)
+            {
+                $mytelp .= $telp[$i];
+            }
+            else
+            {
+                $mytelp .= ",".$telp[$i]; 
+            }
+       
+        }
+    }
+    if($phone > 0)
+    {
+        for($i = 0 ; $i< count($phone); $i++)
+        {
+            if($i == 0)
+            {
+                $myphone .= $phone[$i];
+            }
+            else
+            {
+                $myphone .= ",".$phone[$i]; 
+            }
+       
+        }
+    }
+    
 
-
-    $sql = "INSERT into location_setup_sister_branch values(NULL,'".$code."', '".$sister."', '".$branch."', '".$desc."', 'Active')";
+    $sql = "INSERT into location_branch values(NULL, '".$code."', '".$branch."', '".$desc."', '".$mytelp."' , '".$myphone."' , 'Active')";
     $res = $conn->query($sql);
+    $last_id = $conn->insert_id;
     if(($conn -> affected_rows)>0)
     {
-        echo "sukses";
+        $sql = "INSERT into location_setup_sister_branch values(NULL,'".$code."', '".$sister."', '".$last_id."', '".$desc."', 'Active')";
+        $res = $conn->query($sql);
+        if(($conn -> affected_rows)>0)
+        {
+            echo "sukses";
+        }
+        else{
+            echo "tidak";
+        }
     }
     else{
         echo "tidak";
     }
+ 
     // echo $sql;
 }
 else if($tipe == "changedata")
 {
-
-
+    $telp = $_POST['mytelp'];
+    $phone = $_POST['myphone']; 
+    $mytelp = "";
+    $myphone = "";
+    if($telp > 0)
+    {
+        for($i = 0 ; $i< count($telp); $i++)
+        {
+            if($i == 0)
+            {
+                $mytelp .= $telp[$i];
+            }
+            else
+            {
+                $mytelp .= ",".$telp[$i]; 
+            }
+       
+        }
+    }
+    if($phone > 0)
+    {
+        for($i = 0 ; $i< count($phone); $i++)
+        {
+            if($i == 0)
+            {
+                $myphone .= $phone[$i];
+            }
+            else
+            {
+                $myphone .= ",".$phone[$i]; 
+            }
+       
+        }
+    }
     $id  = $_POST['myid'];
-    $code = $_POST['mycode'];
-    $sister = $_POST['mysister'];
     $branch = $_POST['mybranch'];
     $desc = $_POST['mydesc'];
-    $sql = "update location_setup_sister_branch set 
-           code = '".$code."', 
-           idsistercompany = '".$sister."', 
-           idbranch = '".$branch."',
-           description = '".$desc."' 
-            where idsetupsisterbranch = '".$id."'";
+    $sqlselect = "select idbranch from location_setup_sister_branch where idsetupsisterbranch = '$id'";
+    $resselect = $conn->query($sqlselect);
+    $myidbranch = mysqli_fetch_array($resselect);
+    $sql = "update location_branch set 
+           branch = '".$branch."',
+           description = '".$desc."', 
+           telp = '".$mytelp."', 
+           phone = '".$myphone."'
+            where idbranch = '".$myidbranch['idbranch']."'";
     $res = $conn->query($sql);
     if(($conn -> affected_rows)>0)
     {

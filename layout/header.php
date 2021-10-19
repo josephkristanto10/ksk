@@ -132,6 +132,8 @@ if(!isset($_SESSION['iduser']))
 	<script src="<?=$url;?>global_assets/js/plugins/uploaders/fileinput/fileinput.min.js"></script>
 <script src="<?=$url;?>global_assets/js/demo_pages/uploader_bootstrap.js"></script>
 <script src="<?=$url;?>global_assets/js/plugins/ui/perfect_scrollbar.min.js"></script>
+<script src="<?=$url;?>global_assets/js/demo_pages/layout_fixed_sidebar_custom.js"></script>
+<script src="<?=$url;?>global_assets/js/demo_pages/form_select2.js"></script>
 	<!-- <script src="<?=$url;?>global_assets/js/demo_pages/uploader_plupload.js"></script> -->
 	<style>
 		th {
@@ -174,7 +176,7 @@ if(!isset($_SESSION['iduser']))
 </head>
 
 <body class = 'custom-scrollbars'>
-	<div class="navbar navbar-expand-md navbar-dark" style = "height:60px;">
+	<div class="navbar navbar-expand-md navbar-dark" style = "height:60px;z-index:10000;">
 	
 	<div class="navbar navbar-dark bg-dark-100 navbar-static border-0" style="height:55px;margin-top:0px;margin-left:20px;margin-right:20px;">
 				<div class="navbar-brand flex-fill wmin-0 text-center">

@@ -4,7 +4,7 @@
      
 ?>
 <div class="page-content">
-    <div class="sidebar sidebar-dark sidebar-main sidebar-expand-md">
+    <div class="sidebar sidebar-dark sidebar-main sidebar-fixed sidebar-expand-md">
         <div class="sidebar-mobile-toggler text-center">
             <a href="#" class="sidebar-mobile-main-toggle">
                 <i class="icon-arrow-left8"></i>
@@ -43,10 +43,10 @@
             
             <!-- <div class="card card-sidebar-mobile"> -->
                 <ul class="nav nav-sidebar" data-nav-type="accordion">
-                    <li class="nav-item-header">
+                    <!-- <li class="nav-item-header">
                         <div class="text-uppercase font-size-xs line-height-xs">Main</div> <i class="icon-menu"
                             title="Main"></i>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a href="dashboard.php" class="nav-link ">
                             <i class="icon-home4"></i>
@@ -55,12 +55,12 @@
                             </span>
                         </a>
                     </li>
-                    <li class="nav-item-header">
+                    <!-- <li class="nav-item-header">
                         <div class="text-uppercase font-size-xs line-height-xs">Asset</div> <i class="icon-menu"
                             title="Master"></i>
-                    </li>
+                    </li> -->
                     <li class="nav-item nav-item-submenu <?php echo ($myurl == "masterkategoriassets.php" || $myurl == "mastersubkategoriassets.php" || $myurl == "mastercategorysubgroup.php" || $myurl == "mastercondition.php" || $myurl == "masterinitialcondition.php" || $myurl == "masterfuel.php" || $myurl == "masterdrivingforce.php" || $myurl == "masterassets.php" || $myurl == "mastertemplate.php" ) ? " nav-item-open" : ''; ?>">
-                        <a href="#" class="nav-link <?php echo ($myurl == "masterkategoriassets.php" || $myurl == "mastersubkategoriassets.php" || $myurl == "mastercategorysubgroup.php" || $myurl == "masterfuel.php" || $myurl == "masterdrivingforce.php"|| $myurl == "masterassets.php" || $myurl == "mastertemplate.php" ) ? " nav-item-open" : ''; ?>"><i class="icon-table2"></i> <span>Asset</span></a>
+                        <a href="#" class="nav-link <?php echo ($myurl == "masterkategoriassets.php" || $myurl == "mastersubkategoriassets.php" || $myurl == "mastercategorysubgroup.php" || $myurl == "masterfuel.php" || $myurl == "masterdrivingforce.php"|| $myurl == "masterassets.php" || $myurl == "mastertemplate.php" ) ? " nav-item-open" : ''; ?>"><i class="icon-box "></i> <span>Asset</span></a>
                         <ul class="nav nav-group-sub" data-submenu-title="Basic tables" style = "<?php echo ($myurl == "masterkategoriassets.php" || $myurl == "mastersubkategoriassets.php" || $myurl == "mastercategorysubgroup.php" || $myurl == "mastercondition.php" || $myurl == "masterinitialcondition.php" || $myurl == "masterfuel.php" || $myurl == "masterdrivingforce.php" || $myurl == "masterassets.php" || $myurl == "mastertemplate.php") ? "display:block;" : ''; ?>">
                              <li class="nav-item"><a href="masterassets.php" class="nav-link <?php echo ($myurl == "masterassets.php"  ) ? " active" : ''; ?>">Assets</a>
                             <li class="nav-item nav-item-submenu <?php echo ($myurl == "masterkategoriassets.php" || $myurl == "mastersubkategoriassets.php" || $myurl == "mastercategorysubgroup.php" ) ? " nav-item-open" : ''; ?>">
@@ -111,12 +111,12 @@
                     </li>
                     
                     <!-- Transaction -->
-                    <li class="nav-item-header">
+                    <!-- <li class="nav-item-header">
                         <div class="text-uppercase font-size-xs line-height-xs">Transaction</div> <i class="icon-menu"
                             title="Master"></i>
-                    </li>
+                    </li> -->
                     <li class="nav-item nav-item-submenu  <?php echo ($myurl == "master_transaction_disp_new_asset.php" ||$myurl == "master_transaction_disp_department.php" || $myurl == "master_transaction_disp_department_branch.php" || $myurl == "master_transaction_lend_personel.php" || $myurl == "master_transaction_lend_relation.php" || $myurl == "master_transaction_lend_other_branch.php" || $myurl == "master_transaction_lend_return.php" || $myurl == "master_transaction_lend_extension.php"  || $myurl == "master_transaction_sale.php"  || $myurl == "master_transaction_mutation.php" || $myurl == "master_transaction_dispose.php"  ) ? " nav-item-open" : ''; ?>">
-                        <a href="#" class="nav-link <?php echo ($myurl == "master_transaction_disp_new_asset.php" ||$myurl == "master_transaction_disp_department.php" || $myurl == "master_transaction_disp_department_branch.php" || $myurl == "master_transaction_lend_personel.php" || $myurl == "master_transaction_lend_relation.php"  || $myurl == "master_transaction_lend_other_branch.php" || $myurl == "master_transaction_lend_return.php"  || $myurl == "master_transaction_lend_extension.php" || $myurl == "master_transaction_sale.php" || $myurl == "master_transaction_mutation.php"  || $myurl == "master_transaction_dispose.php" ) ? " active" : ''; ?>"> <span>Transaction</span></a>
+                        <a href="#" class="nav-link <?php echo ($myurl == "master_transaction_disp_new_asset.php" ||$myurl == "master_transaction_disp_department.php" || $myurl == "master_transaction_disp_department_branch.php" || $myurl == "master_transaction_lend_personel.php" || $myurl == "master_transaction_lend_relation.php"  || $myurl == "master_transaction_lend_other_branch.php" || $myurl == "master_transaction_lend_return.php"  || $myurl == "master_transaction_lend_extension.php" || $myurl == "master_transaction_sale.php" || $myurl == "master_transaction_mutation.php"  || $myurl == "master_transaction_dispose.php" ) ? " active" : ''; ?>"> <i class="mi-import-export "></i><span>Transaction</span></a>
                         <ul class="nav nav-group-sub" data-submenu-title="Basic tables" style = "<?php echo ($myurl == "master_transaction_disp_new_asset.php" ||$myurl == "master_transaction_disp_department.php" || $myurl == "master_transaction_disp_department_branch.php" || $myurl == "master_transaction_lend_personel.php"  || $myurl == "master_transaction_lend_relation.php" || $myurl == "master_transaction_lend_other_branch.php" || $myurl == "master_transaction_lend_extension.php" || $myurl == "master_transaction_lend_return.php" || $myurl == "master_transaction_sale.php" || $myurl == "master_transaction_mutation.php"  || $myurl == "master_transaction_dispose.php"  ) ? " display:block;" : ''; ?>">
                         <li class="nav-item"><a href="master_transaction_disp_new_asset.php" class="nav-link <?php echo ($myurl == "master_transaction_disp_new_asset.php"  ) ? " active" : ''; ?>"> <span>Displacement New Asset</span></a></li>
                             </li>    
@@ -162,12 +162,12 @@
 
 
                     <!-- Document -->
-                    <li class="nav-item-header">
+                    <!-- <li class="nav-item-header">
                         <div class="text-uppercase font-size-xs line-height-xs">Document</div> <i class="icon-menu"
                             title="Master"></i>
-                    </li>
+                    </li> -->
                     <li class="nav-item nav-item-submenu  <?php echo ($myurl == "masterdocument.php" || $myurl == "masterdocumentdisplacementnew.php" || $myurl == "masterdocumentdisplacementotherrack.php" || $myurl == "masterdocumentlend.php" || $myurl == "masterdocumentdispose.php"  ) ? " nav-item-open" : ''; ?>">
-                        <a href="#" class="nav-link <?php echo ($myurl == "masterdocument.php" || $myurl == "masterdocumentdisplacementnew.php" || $myurl == "masterdocumentdisplacementotherrack.php" || $myurl == "masterdocumentlend.php"  || $myurl == "masterdocumentdispose.php" ) ? " active" : ''; ?>"> <span>Document</span></a>
+                        <a href="#" class="nav-link <?php echo ($myurl == "masterdocument.php" || $myurl == "masterdocumentdisplacementnew.php" || $myurl == "masterdocumentdisplacementotherrack.php" || $myurl == "masterdocumentlend.php"  || $myurl == "masterdocumentdispose.php" ) ? " active" : ''; ?>">  <i class="icon-files-empty "></i> <span>Document</span></a>
                         <ul class="nav nav-group-sub" data-submenu-title="Basic tables" style = "<?php echo ($myurl == "masterdocument.php" || $myurl == "masterdocumentdisplacementnew.php" || $myurl == "masterdocumentdisplacementotherrack.php"  || $myurl == "masterdocumentlend.php" || $myurl == "masterdocumentdispose.php") ? " display:block;" : ''; ?>">
                             <li class="nav-item"><a href="masterdocument.php" class="nav-link <?php echo ($myurl == "masterdocument.php"  ) ? " active" : ''; ?>"> <span>Add Document</span></a></li>
                             </li>
@@ -195,10 +195,10 @@
 
                         </ul>
                         </li>
-                    <li class="nav-item-header">
+                    <!-- <li class="nav-item-header">
                         <div class="text-uppercase font-size-xs line-height-xs">Master</div> <i class="icon-menu"
                             title="Master"></i>
-                    </li>
+                    </li> -->
                     <li class="nav-item nav-item-submenu <?php 
                 echo ($myurl == "masterlocationSisterCompany.php" || 
                       $myurl == "masterlocationBranch.php"  || 
@@ -253,16 +253,12 @@
                                 <span>Province</span></a></li>
                         <li class="nav-item"><a href="mastercity.php" class="nav-link <?php echo ($myurl == "mastercity.php"  ) ? " active" : ''; ?>">
                                 <span>City</span></a></li> -->
-                        <li class="nav-item"><a href="masterlocationSisterCompany.php" class="nav-link <?php echo ($myurl == "masterlocationSisterCompany.php"  ) ? " active" : ''; ?>">Sister
-                                Company</a></li>
-                        <li class="nav-item"><a href="masterlocationBranch.php" class="nav-link <?php echo ($myurl == "masterlocationBranch.php"  ) ? " active" : ''; ?>">Branch</a></li>
-                        <li class="nav-item"><a href="mastersistercompanyandbranch.php" class="nav-link <?php echo ($myurl == "mastersistercompanyandbranch.php"  ) ? " active" : ''; ?>">Sister Company
-                                & Branch</a></li>
+                       
+                        <!-- <li class="nav-item"><a href="masterlocationBranch.php" class="nav-link <?php echo ($myurl == "masterlocationBranch.php"  ) ? " active" : ''; ?>">Branch</a></li> -->
+                     
                         <li class="nav-item"><a href="masterlocationbuilding.php" class="nav-link <?php echo ($myurl == "masterlocationbuilding.php"  ) ? " active" : ''; ?>">Building</a>
                         </li>
-                        <li class="nav-item"><a href="masterlocationfloor.php" class="nav-link <?php echo ($myurl == "masterlocationfloor.php"  ) ? " active" : ''; ?>">Floor</a></li>
-                        <li class="nav-item"><a href="masterlocationSetupfloor.php" class="nav-link <?php echo ($myurl == "masterlocationSetupfloor.php"  ) ? " active" : ''; ?>">Building &
-                                Floor</a></li>
+                     
                         <li class="nav-item"><a href="masterlocationrooms.php" class="nav-link <?php echo ($myurl == "masterlocationrooms.php"  ) ? " active" : ''; ?>">Rooms</a></li>
                         <li class="nav-item"><a href="masterrack.php" class="nav-link <?php echo ($myurl == "masterrack.php"  ) ? " active" : ''; ?>">Rack</a></li>
                         <!-- <li class="nav-item"><a href="mastersubrack.php" class="nav-link <?php echo ($myurl == "mastersubrack.php"  ) ? " active" : ''; ?>">Sub Rack</a></li> -->
@@ -281,18 +277,42 @@
                  
 
                     <li class="nav-item nav-item-submenu  <?php echo ($myurl == "masterdivision.php" || $myurl == "masterdepartment.php"  ) ? " nav-item-open" : ''; ?>">
-                        <a href="#" class="nav-link"><i class="icon-table2"></i> <span>Department</span></a>
+                        <a href="#" class="nav-link"><i class="icon-office "></i> <span>Department</span></a>
                         <ul class="nav nav-group-sub" data-submenu-title="Basic tables" style = "<?php echo ($myurl == "masterdivision.php" || $myurl == "masterdepartment.php"  ) ? " display:block;" : ''; ?>">
-                            <li class="nav-item"><a href="masterdivision.php" class="nav-link <?php echo ($myurl == "masterdivision.php"  ) ? " active" : ''; ?>"><i
-                                        class="icon-width"></i> <span>Division</span></a></li>
+                            <li class="nav-item"><a href="masterdivision.php" class="nav-link <?php echo ($myurl == "masterdivision.php"  ) ? " active" : ''; ?>"></i> <span>Division</span></a></li>
                             </li>
-                            <li class="nav-item"><a href="masterdepartment.php" class="nav-link <?php echo ($myurl == "masterdepartment.php"  ) ? " active" : ''; ?>"><i class="icon-width"></i>
+                            <li class="nav-item"><a href="masterdepartment.php" class="nav-link <?php echo ($myurl == "masterdepartment.php"  ) ? " active" : ''; ?>">
                                     <span>Department</span></a></li>
                             </li>
 
                         </ul>
                    </li>
-                   <li class="nav-item"><a href = "masterrank.php" class="nav-link <?php echo ($myurl == "masterrank.php") ? "active" : ''; ?>"><i class="icon-width"></i> <span>Status & Personal Rank</span></a>
+                   <li class="nav-item nav-item-submenu  <?php echo ($myurl == "masterdivision.php" || $myurl == "masterdepartment.php"  ) ? " nav-item-open" : ''; ?>">
+                        <a href="#" class="nav-link"><i class="mi-person "></i> <span>Contact</span></a>
+                        <ul class="nav nav-group-sub" data-submenu-title="Basic tables" style = "<?php echo ($myurl == "masterdivision.php" || $myurl == "masterdepartment.php"  ) ? " display:block;" : ''; ?>">
+                        <li class="nav-item"><a href = "masterrank.php" class="nav-link <?php echo ($myurl == "masterrank.php") ? "active" : ''; ?>"> <span>Status & Personal Rank</span></a>
+                    </li>
+                    <li class="nav-item"><a href="masterstaff.php" class="nav-link <?php echo ($myurl == "masterstaff.php") ? "active" : ''; ?>">
+                                <span>Personel</span></a></li>
+                    <li class="nav-item"><a href="masterreason.php" class="nav-link <?php echo ($myurl == "masterreason.php") ? "active" : ''; ?>">
+                                <span>Reason</span></a></li>
+                    <li class="nav-item"><a href="masterrelation.php" class="nav-link <?php echo ($myurl == "masterrelation.php") ? "active" : ''; ?>">
+                                <span>Relation</span></a></li>
+
+                     <li class="nav-item"><a href="mastersupplier.php" class="nav-link <?php echo ($myurl == "mastersupplier.php") ? "active" : ''; ?>">
+                                <span>Supplier</span></a></li>
+
+                        </ul>
+                   </li>
+                   <li class="nav-item nav-item-submenu  <?php echo ($myurl == "masterdivision.php" || $myurl == "masterdepartment.php"  ) ? " nav-item-open" : ''; ?>">
+                        <a href="#" class="nav-link"><i class="mi-settings "></i> <span>Setting</span></a>
+                        <ul class="nav nav-group-sub" data-submenu-title="Basic tables" style = "<?php echo ($myurl == "masterdivision.php" || $myurl == "masterdepartment.php"  ) ? " display:block;" : ''; ?>">
+                        <li class="nav-item"><a href="masterlocationSisterCompany.php" class="nav-link <?php echo ($myurl == "masterlocationSisterCompany.php"  ) ? " active" : ''; ?>">Company</a></li>
+                        <li class="nav-item"><a href="mastersistercompanyandbranch.php" class="nav-link <?php echo ($myurl == "mastersistercompanyandbranch.php"  ) ? " active" : ''; ?>">Branch</a></li>
+                        <li class="nav-item"><a href="masterlocationfloor.php" class="nav-link <?php echo ($myurl == "masterlocationfloor.php"  ) ? " active" : ''; ?>">Floor</a></li>
+                        <li class="nav-item"><a href="masterlocationSetupfloor.php" class="nav-link <?php echo ($myurl == "masterlocationSetupfloor.php"  ) ? " active" : ''; ?>">Building &
+                                Floor</a></li>
+                        <!-- <li class="nav-item"><a href = "masterrank.php" class="nav-link <?php echo ($myurl == "masterrank.php") ? "active" : ''; ?>"><i class="icon-width"></i> <span>Status & Personal Rank</span></a>
                     </li>
                     <li class="nav-item"><a href="masterstaff.php" class="nav-link <?php echo ($myurl == "masterstaff.php") ? "active" : ''; ?>"><i class="icon-width"></i>
                                 <span>Personel</span></a></li>
@@ -302,7 +322,12 @@
                                 <span>Relation</span></a></li>
 
                      <li class="nav-item"><a href="mastersupplier.php" class="nav-link <?php echo ($myurl == "mastersupplier.php") ? "active" : ''; ?>"><i class="icon-width"></i>
-                                <span>Supplier</span></a></li>
+                                <span>Supplier</span></a></li> --> 
+                                <!-- <li class="nav-item"><a href="mastersupplier.php" class="nav-link <?php echo ($myurl == "mastersupplier.php") ? "active" : ''; ?>"><i class="icon-width"></i>
+                                <span>test</span></a></li> -->
+                        </ul>
+                   </li>
+                 
                            
                 <!-- <li class="nav-item nav-item-submenu ">
                     <a href="#" class="nav-link "><i class="icon-table2"></i> <span>User Asset</span></a>

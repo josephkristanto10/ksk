@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 324,
+            "activePatchIndex": 330,
             "patches": [
                 {
                     "date": 1630468397363,
@@ -1304,6 +1304,30 @@
                 {
                     "date": 1633662309048,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,9 +81,9 @@\n \t<link href=\"assets/css/layout.min.css\" rel=\"stylesheet\" type=\"text/css\">\r\n \t<link href=\"assets/css/components.min.css\" rel=\"stylesheet\" type=\"text/css\">\r\n \t<link href=\"assets/css/colors.min.css\" rel=\"stylesheet\" type=\"text/css\">\r\n \t<!-- <link href=\"assets/css/colors.min.css\" rel=\"stylesheet\" type=\"text/css\"> -->\r\n-\t<link rel=\"shortcut icon\" type=\"image/png\" href=\"assets/logonexus.png\" />\r\n+\t<link rel=\"shortcut icon\" type=\"image/png\" href=\"<?=$url;?>assets/icon.png\" />\r\n \t<!-- /global stylesheets -->\r\n \r\n \t<!-- Core JS files -->\r\n \t<script src=\"<?=$url;?>global_assets/js/main/jquery.min.js\"></script>\r\n"
+                },
+                {
+                    "date": 1633926250765,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -173,9 +173,9 @@\n \t</style>\r\n </head>\r\n \r\n <body class = 'custom-scrollbars'>\r\n-\t<div class=\"navbar navbar-expand-md navbar-dark\" style = \"height:60px;\">\r\n+\t<div class=\"navbar navbar-expand-md navbar-dark\" style = \"height:60px;z-index:10000;\">\r\n \t\r\n \t<div class=\"navbar navbar-dark bg-dark-100 navbar-static border-0\" style=\"height:55px;margin-top:0px;margin-left:20px;margin-right:20px;\">\r\n \t\t\t\t<div class=\"navbar-brand flex-fill wmin-0 text-center\">\r\n \t\t\t\t\t<a href=\"ksk/dashboards.php\" class=\"d-inline-block\">\r\n"
+                },
+                {
+                    "date": 1633926293376,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -131,8 +131,9 @@\n \t<script src=\"<?=$url;?>global_assets/js/plugins/uploaders/fileinput/plugins/sortable.min.js\"></script>\r\n \t<script src=\"<?=$url;?>global_assets/js/plugins/uploaders/fileinput/fileinput.min.js\"></script>\r\n <script src=\"<?=$url;?>global_assets/js/demo_pages/uploader_bootstrap.js\"></script>\r\n <script src=\"<?=$url;?>global_assets/js/plugins/ui/perfect_scrollbar.min.js\"></script>\r\n+<script src=\"../../../../global_assets/js/demo_pages/layout_fixed_sidebar_custom.js\"></script>\r\n \t<!-- <script src=\"<?=$url;?>global_assets/js/demo_pages/uploader_plupload.js\"></script> -->\r\n \t<style>\r\n \t\tth {\r\n \t\t\tbackground-color: #324148;\r\n"
+                },
+                {
+                    "date": 1633926298559,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -131,9 +131,9 @@\n \t<script src=\"<?=$url;?>global_assets/js/plugins/uploaders/fileinput/plugins/sortable.min.js\"></script>\r\n \t<script src=\"<?=$url;?>global_assets/js/plugins/uploaders/fileinput/fileinput.min.js\"></script>\r\n <script src=\"<?=$url;?>global_assets/js/demo_pages/uploader_bootstrap.js\"></script>\r\n <script src=\"<?=$url;?>global_assets/js/plugins/ui/perfect_scrollbar.min.js\"></script>\r\n-<script src=\"../../../../global_assets/js/demo_pages/layout_fixed_sidebar_custom.js\"></script>\r\n+<script src=\"<?=$url;?>global_assets/js/demo_pages/layout_fixed_sidebar_custom.js\"></script>\r\n \t<!-- <script src=\"<?=$url;?>global_assets/js/demo_pages/uploader_plupload.js\"></script> -->\r\n \t<style>\r\n \t\tth {\r\n \t\t\tbackground-color: #324148;\r\n"
+                },
+                {
+                    "date": 1634284662413,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -131,9 +131,10 @@\n \t<script src=\"<?=$url;?>global_assets/js/plugins/uploaders/fileinput/plugins/sortable.min.js\"></script>\r\n \t<script src=\"<?=$url;?>global_assets/js/plugins/uploaders/fileinput/fileinput.min.js\"></script>\r\n <script src=\"<?=$url;?>global_assets/js/demo_pages/uploader_bootstrap.js\"></script>\r\n <script src=\"<?=$url;?>global_assets/js/plugins/ui/perfect_scrollbar.min.js\"></script>\r\n-<script src=\"<?=$url;?>global_assets/js/demo_pages/layout_fixed_sidebar_custom.js\"></script>\r\n+<script src=\"<?=$url;?>global_assets/js/demo_pages/layout_fixed_sidebar_custom.js\"></script\r\n+<script src=\"../../../../global_assets/js/demo_pages/form_select2.js\"></script>>\r\n \t<!-- <script src=\"<?=$url;?>global_assets/js/demo_pages/uploader_plupload.js\"></script> -->\r\n \t<style>\r\n \t\tth {\r\n \t\t\tbackground-color: #324148;\r\n"
+                },
+                {
+                    "date": 1634284670500,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -131,11 +131,10 @@\n \t<script src=\"<?=$url;?>global_assets/js/plugins/uploaders/fileinput/plugins/sortable.min.js\"></script>\r\n \t<script src=\"<?=$url;?>global_assets/js/plugins/uploaders/fileinput/fileinput.min.js\"></script>\r\n <script src=\"<?=$url;?>global_assets/js/demo_pages/uploader_bootstrap.js\"></script>\r\n <script src=\"<?=$url;?>global_assets/js/plugins/ui/perfect_scrollbar.min.js\"></script>\r\n-<script src=\"<?=$url;?>global_assets/js/demo_pages/layout_fixed_sidebar_custom.js\"></script\r\n-<script src=\"../../../../global_assets/js/demo_pages/form_select2.js\"></script>>\r\n-\t<!-- <script src=\"<?=$url;?>global_assets/js/demo_pages/uploader_plupload.js\"></script> -->\r\n+<script src=\"<?=$url;?>global_assets/js/demo_pages/layout_fixed_sidebar_custom.js\"></script>\r\n+<script src=\"../../../../global_assets/js/demo_pages/form_select2.js\"></script>\t<!-- <script src=\"<?=$url;?>global_assets/js/demo_pages/uploader_plupload.js\"></script> -->\r\n \t<style>\r\n \t\tth {\r\n \t\t\tbackground-color: #324148;\r\n \t\t\tcolor: white;\r\n"
+                },
+                {
+                    "date": 1634284676454,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -132,9 +132,10 @@\n \t<script src=\"<?=$url;?>global_assets/js/plugins/uploaders/fileinput/fileinput.min.js\"></script>\r\n <script src=\"<?=$url;?>global_assets/js/demo_pages/uploader_bootstrap.js\"></script>\r\n <script src=\"<?=$url;?>global_assets/js/plugins/ui/perfect_scrollbar.min.js\"></script>\r\n <script src=\"<?=$url;?>global_assets/js/demo_pages/layout_fixed_sidebar_custom.js\"></script>\r\n-<script src=\"../../../../global_assets/js/demo_pages/form_select2.js\"></script>\t<!-- <script src=\"<?=$url;?>global_assets/js/demo_pages/uploader_plupload.js\"></script> -->\r\n+<script src=\"<?=$url;?>global_assets/js/demo_pages/form_select2.js\"></script>\r\n+\t<!-- <script src=\"<?=$url;?>global_assets/js/demo_pages/uploader_plupload.js\"></script> -->\r\n \t<style>\r\n \t\tth {\r\n \t\t\tbackground-color: #324148;\r\n \t\t\tcolor: white;\r\n"
                 }
             ],
             "date": 1630468397363,
