@@ -1,6 +1,6 @@
 <?php
         $uriSegments = explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
-        $myurl = $uriSegments[2];
+        $myurl = $uriSegments[count($uriSegments)-1];
      
 ?>
 <div class="page-content">
@@ -287,9 +287,9 @@
 
                         </ul>
                    </li>
-                   <li class="nav-item nav-item-submenu  <?php echo ($myurl == "masterdivision.php" || $myurl == "masterdepartment.php"  ) ? " nav-item-open" : ''; ?>">
+                   <li class="nav-item nav-item-submenu  <?php echo ($myurl == "masterrank.php" || $myurl == "masterstaff.php" || $myurl == "masterreason.php" || $myurl == "masterrelation.php"  || $myurl == "mastersupplier.php"  ) ? " nav-item-open" : ''; ?>">
                         <a href="#" class="nav-link"><i class="mi-person "></i> <span>Contact</span></a>
-                        <ul class="nav nav-group-sub" data-submenu-title="Basic tables" style = "<?php echo ($myurl == "masterdivision.php" || $myurl == "masterdepartment.php"  ) ? " display:block;" : ''; ?>">
+                        <ul class="nav nav-group-sub" data-submenu-title="Basic tables" style = "<?php echo ($myurl == "masterrank.php" || $myurl == "masterstaff.php" || $myurl == "masterreason.php" || $myurl == "masterrelation.php"  || $myurl == "mastersupplier.php"   ) ? " display:block;" : ''; ?>">
                         <li class="nav-item"><a href = "masterrank.php" class="nav-link <?php echo ($myurl == "masterrank.php") ? "active" : ''; ?>"> <span>Status & Personal Rank</span></a>
                     </li>
                     <li class="nav-item"><a href="masterstaff.php" class="nav-link <?php echo ($myurl == "masterstaff.php") ? "active" : ''; ?>">
