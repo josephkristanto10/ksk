@@ -93,7 +93,7 @@ if($tipe == "load")
             $response['data'][] = [
                 "<label id ='code".$row['idsetupsisterbranch']."'>".$row['code']."</label>",
                 "<label id ='sister".$row['idsetupsisterbranch']."'>".$row['sistername']."</label>",
-                "<label id ='branch".$row['idsetupsisterbranch']."'>".$row['branch']."</label>",
+                "<a href = '#myModalDetail' id = 'detail_".$row['idsetupsisterbranch']."' data-toggle = 'modal' onclick = 'opendetail(this)'><label id ='branch".$row['idsetupsisterbranch']."'>".$row['branch']."</label></a>",
                 "<label id ='desc".$row['idsetupsisterbranch']."'>".$row['description']."</label>",
                 "<label id ='status".$row['idsetupsisterbranch']."'>".$mystats."</label>"."<input type = 'hidden' id = 'telp_".$row['idsetupsisterbranch']."' value = '".$row['telp']."'>"."<input type = 'hidden' id = 'phone_".$row['idsetupsisterbranch']."' value = '".$row['phone']."'>",
                 ' <div class="list-icons">

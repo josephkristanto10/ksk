@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 331,
+            "activePatchIndex": 336,
             "patches": [
                 {
                     "date": 1630468397363,
@@ -1332,6 +1332,26 @@
                 {
                     "date": 1634621463468,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -175,9 +175,9 @@\n \t</style>\r\n </head>\r\n \r\n <body class = 'custom-scrollbars'>\r\n-\t<div class=\"navbar navbar-expand-md navbar-dark\" style = \"height:60px;z-index:10000;\">\r\n+\t<div class=\"navbar navbar-expand-md sticky-top navbar-dark\" style = \"height:60px;z-index:10000;\">\r\n \t\r\n \t<div class=\"navbar navbar-dark bg-dark-100 navbar-static border-0\" style=\"height:55px;margin-top:0px;margin-left:20px;margin-right:20px;\">\r\n \t\t\t\t<div class=\"navbar-brand flex-fill wmin-0 text-center\">\r\n \t\t\t\t\t<a href=\"ksk/dashboards.php\" class=\"d-inline-block\">\r\n"
+                },
+                {
+                    "date": 1634621955856,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -145,9 +145,15 @@\n \t\ttd {\r\n \t\t\tcolor: #000000 !important;\r\n \t\t\ttext-align: center;\r\n \t\t}\r\n-\r\n+\t\t#myModaledit.modal-dialog {\r\n+\t\t\t-webkit-transform: translate(0, -50%);\r\n+\t\t\t-o-transform: translate(0, -50%);\r\n+\t\t\ttransform: translate(0, -50%);\r\n+\t\t\ttop: 50%;\r\n+\t\t\tmargin: 0 auto;\r\n+\t\t}\r\n \t\t#myModal .modal-dialog {\r\n \t\t\t-webkit-transform: translate(0, -50%);\r\n \t\t\t-o-transform: translate(0, -50%);\r\n \t\t\ttransform: translate(0, -50%);\r\n"
+                },
+                {
+                    "date": 1634621984387,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -145,15 +145,9 @@\n \t\ttd {\r\n \t\t\tcolor: #000000 !important;\r\n \t\t\ttext-align: center;\r\n \t\t}\r\n-\t\t#myModaledit.modal-dialog {\r\n-\t\t\t-webkit-transform: translate(0, -50%);\r\n-\t\t\t-o-transform: translate(0, -50%);\r\n-\t\t\ttransform: translate(0, -50%);\r\n-\t\t\ttop: 50%;\r\n-\t\t\tmargin: 0 auto;\r\n-\t\t}\r\n+\t\r\n \t\t#myModal .modal-dialog {\r\n \t\t\t-webkit-transform: translate(0, -50%);\r\n \t\t\t-o-transform: translate(0, -50%);\r\n \t\t\ttransform: translate(0, -50%);\r\n"
+                },
+                {
+                    "date": 1634622041203,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -145,9 +145,15 @@\n \t\ttd {\r\n \t\t\tcolor: #000000 !important;\r\n \t\t\ttext-align: center;\r\n \t\t}\r\n-\t\r\n+\t\t#myModaledit .modal-dialog {\r\n+\t\t\t-webkit-transform: translate(0, -50%);\r\n+\t\t\t-o-transform: translate(0, -50%);\r\n+\t\t\ttransform: translate(0, -50%);\r\n+\t\t\ttop: 50%;\r\n+\t\t\tmargin: 0 auto;\r\n+\t\t}\r\n \t\t#myModal .modal-dialog {\r\n \t\t\t-webkit-transform: translate(0, -50%);\r\n \t\t\t-o-transform: translate(0, -50%);\r\n \t\t\ttransform: translate(0, -50%);\r\n"
+                },
+                {
+                    "date": 1634622662293,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -145,8 +145,15 @@\n \t\ttd {\r\n \t\t\tcolor: #000000 !important;\r\n \t\t\ttext-align: center;\r\n \t\t}\r\n+\t\t#myModalDetailTransaction .modal-dialog {\r\n+\t\t\t-webkit-transform: translate(0, -50%);\r\n+\t\t\t-o-transform: translate(0, -50%);\r\n+\t\t\ttransform: translate(0, -50%);\r\n+\t\t\ttop: 50%;\r\n+\t\t\tmargin: 0 auto;\r\n+\t\t}\r\n \t\t#myModaledit .modal-dialog {\r\n \t\t\t-webkit-transform: translate(0, -50%);\r\n \t\t\t-o-transform: translate(0, -50%);\r\n \t\t\ttransform: translate(0, -50%);\r\n"
+                },
+                {
+                    "date": 1634622744139,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -149,9 +149,9 @@\n \t\t#myModalDetailTransaction .modal-dialog {\r\n \t\t\t-webkit-transform: translate(0, -50%);\r\n \t\t\t-o-transform: translate(0, -50%);\r\n \t\t\ttransform: translate(0, -50%);\r\n-\t\t\ttop: 50%;\r\n+\t\t\ttop: 50% !important;\r\n \t\t\tmargin: 0 auto;\r\n \t\t}\r\n \t\t#myModaledit .modal-dialog {\r\n \t\t\t-webkit-transform: translate(0, -50%);\r\n@@ -188,9 +188,9 @@\n \t</style>\r\n </head>\r\n \r\n <body class = 'custom-scrollbars'>\r\n-\t<div class=\"navbar navbar-expand-md sticky-top navbar-dark\" style = \"height:60px;z-index:10000;\">\r\n+\t<div class=\"navbar navbar-expand-md sticky-top navbar-dark\" style = \"height:60px>\r\n \t\r\n \t<div class=\"navbar navbar-dark bg-dark-100 navbar-static border-0\" style=\"height:55px;margin-top:0px;margin-left:20px;margin-right:20px;\">\r\n \t\t\t\t<div class=\"navbar-brand flex-fill wmin-0 text-center\">\r\n \t\t\t\t\t<a href=\"ksk/dashboards.php\" class=\"d-inline-block\">\r\n"
                 }
             ],
             "date": 1630468397363,

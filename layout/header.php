@@ -146,7 +146,20 @@ if(!isset($_SESSION['iduser']))
 			color: #000000 !important;
 			text-align: center;
 		}
-
+		#myModalDetailTransaction .modal-dialog {
+			-webkit-transform: translate(0, -50%);
+			-o-transform: translate(0, -50%);
+			transform: translate(0, -50%);
+			top: 50% !important;
+			margin: 0 auto;
+		}
+		#myModaledit .modal-dialog {
+			-webkit-transform: translate(0, -50%);
+			-o-transform: translate(0, -50%);
+			transform: translate(0, -50%);
+			top: 50%;
+			margin: 0 auto;
+		}
 		#myModal .modal-dialog {
 			-webkit-transform: translate(0, -50%);
 			-o-transform: translate(0, -50%);
@@ -176,7 +189,7 @@ if(!isset($_SESSION['iduser']))
 </head>
 
 <body class = 'custom-scrollbars'>
-	<div class="navbar navbar-expand-md sticky-top navbar-dark" style = "height:60px;z-index:10000;">
+	<div class="navbar navbar-expand-md sticky-top navbar-dark" style = "height:60px;">
 	
 	<div class="navbar navbar-dark bg-dark-100 navbar-static border-0" style="height:55px;margin-top:0px;margin-left:20px;margin-right:20px;">
 				<div class="navbar-brand flex-fill wmin-0 text-center">

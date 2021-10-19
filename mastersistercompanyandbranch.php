@@ -168,7 +168,40 @@ if($resbranch->num_rows>0)
 			</div>
 		</div>
 		<!-- End Modal -->
+		<div class="modal fade" id="myModalDetail">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header" style="background-color:#324148;color:white;height:60px;">
+						<h5 class="modal-title">Detail Branch</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
 
+					</div>
+					<div class="modal-body">
+						<form id = "myformedit">
+						<div class="form-group">
+							<input type = "hidden" id = "idchange">
+					
+							<label for="cars">Phone:</label>
+							<select class=" select-multiple-tags" id = "phonedetail" multiple="multiple" disabled data-fouc>
+					
+									</select>
+							<br><br>
+							<label for="cars">Telephone:</label>
+							<select class=" select-multiple-tags" id = "telpdetail" multiple="multiple" disabled data-fouc>
+					
+									</select>
+							<br>
+							<br>
+						
+						</div>
+								</form>
+					</div>
+				
+				</div>
+			</div>
+		</div>
 </body>
 
 </html>
@@ -210,6 +243,46 @@ if($resbranch->num_rows>0)
       $('#datatable_serverside').DataTable().ajax.reload(null, false);
    };
 
+   function opendetail(element){
+
+	var idelement = element.id.split("_");
+	var myphone = $("#phone_"+idelement[1]).val();
+	$("#phonedetail").html("");
+	var splitmyphone = myphone.split(",");
+	if(splitmyphone.length > 0)
+	{
+		for(var i = 0 ; i < splitmyphone.length; i++){
+			if(splitmyphone[i] == "")
+			{
+				$("#phonedetail").append("<option >"+splitmyphone[i]+"</option>");
+			}
+			else
+			{
+				$("#phonedetail").append("<option selected = 'selected'>"+splitmyphone[i]+"</option>");
+			}
+		
+		}
+	
+	}
+	var mytelp = $("#telp_"+idelement[1]).val();
+	$("#telpdetail").html("");
+	var splitmytelp = mytelp.split(",");
+	if(splitmytelp.length > 0)
+	{
+		for(var i = 0 ; i < splitmytelp.length; i++){
+			if(splitmytelp[i] == "")
+			{
+				$("#telpdetail").append("<option >"+splitmytelp[i]+"</option>");
+			}
+			else
+			{
+				$("#telpdetail").append("<option selected = 'selected'>"+splitmytelp[i]+"</option>");
+			}
+
+		}
+	
+	}
+   }
    var globalsister = "";
    var globalbranch = "";
    function openmodaledit(element){
