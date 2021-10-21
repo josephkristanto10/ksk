@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 60,
+            "activePatchIndex": 62,
             "patches": [
                 {
                     "date": 1632819039637,
@@ -248,6 +248,14 @@
                 {
                     "date": 1633420486870,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1143,9 +1143,9 @@\n                 'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')\r\n             }\r\n         });\r\n         $.ajax({\r\n-            url: \"process/master_transaction_disp_department.php\",\r\n+            url: \"process/master_transaction_disp_department_branch.php\",\r\n             method: 'POST',\r\n             data: {\r\n                 tipe: \"getdetailtransaction\",\r\n                 idtransaction: myid\r\n"
+                },
+                {
+                    "date": 1634789548487,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1168,5 +1168,8 @@\n             }\r\n         });\r\n \r\n     }\r\n+    $('.sidebar').animate({\r\n+        scrollTop: $(\"#testingid\").offset().top\r\n+    }, 2000);\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1634789797757,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1169,7 +1169,7 @@\n         });\r\n \r\n     }\r\n     $('.sidebar').animate({\r\n-        scrollTop: $(\"#testingid\").offset().top\r\n+        scrollTop: $(\"#setupfloor\").offset().top\r\n     }, 2000);\r\n </script>\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1632819039637,

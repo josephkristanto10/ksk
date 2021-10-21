@@ -1754,7 +1754,7 @@ require_once 'layout/footer.php';
 
 
 			<!-- Footer -->
-			<div class="navbar navbar-expand-lg navbar-light">
+			<div id = "foots" class="navbar navbar-expand-lg navbar-light">
 				<div class="text-center d-lg-none w-100">
 					<button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse" data-target="#navbar-footer">
 						<i class="icon-unfold mr-2"></i>
@@ -1784,3 +1784,6 @@ require_once 'layout/footer.php';
 
 </body>
 </html>
+<script>
+  
+</script>

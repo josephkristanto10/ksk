@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 3,
+            "activePatchIndex": 11,
             "patches": [
                 {
                     "date": 1631719294255,
@@ -20,6 +20,38 @@
                 {
                     "date": 1631721285392,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n <?php\n require_once 'layout/header.php';\n require_once 'layout/sidebar.php';\n require_once 'layout/footer.php';\n+?>\n \t\t<div class=\"content-wrapper\">\n \t\t\t<div class=\"page-header page-header-light\">\n \t\t\t\t<div class=\"page-header-content header-elements-md-inline\">\n \t\t\t\t\t<div class=\"page-title d-flex\">\n"
+                },
+                {
+                    "date": 1634789160078,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1783,4 +1783,7 @@\n \t<!-- /page content -->\n \n </body>\n </html>\n+<script>\n+\t$(\"#testingid\").scrollTop( $( \"#message_list\" ).prop( \"scrollHeight\" ) );\n+</script>\n"
+                },
+                {
+                    "date": 1634789167270,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1784,6 +1784,7 @@\n \n </body>\n </html>\n <script>\n-\t$(\"#testingid\").scrollTop( $( \"#message_list\" ).prop( \"scrollHeight\" ) );\n+\t$(\"#testingid\").scrollTop( $( \"#testingid\" ).prop( \"scrollHeight\" ) );\n+\t$(\"#message_list\").perfectScrollbar('update');\n </script>\n"
+                },
+                {
+                    "date": 1634789209009,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1753,9 +1753,9 @@\n \t\t\t<!-- /content area -->\n \n \n \t\t\t<!-- Footer -->\n-\t\t\t<div class=\"navbar navbar-expand-lg navbar-light\">\n+\t\t\t<div id = \"foots\" class=\"navbar navbar-expand-lg navbar-light\">\n \t\t\t\t<div class=\"text-center d-lg-none w-100\">\n \t\t\t\t\t<button type=\"button\" class=\"navbar-toggler dropdown-toggle\" data-toggle=\"collapse\" data-target=\"#navbar-footer\">\n \t\t\t\t\t\t<i class=\"icon-unfold mr-2\"></i>\n \t\t\t\t\t\tFooter\n@@ -1785,6 +1785,6 @@\n </body>\n </html>\n <script>\n \t$(\"#testingid\").scrollTop( $( \"#testingid\" ).prop( \"scrollHeight\" ) );\n-\t$(\"#message_list\").perfectScrollbar('update');\n+\t$(\"#testingid\").perfectScrollbar('update');\n </script>\n"
+                },
+                {
+                    "date": 1634789217363,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1784,7 +1784,7 @@\n \n </body>\n </html>\n <script>\n-\t$(\"#testingid\").scrollTop( $( \"#testingid\" ).prop( \"scrollHeight\" ) );\n-\t$(\"#testingid\").perfectScrollbar('update');\n+\t$(\"#foots\").scrollTop( $( \"#foots\" ).prop( \"scrollHeight\" ) );\n+\t$(\"#foots\").perfectScrollbar('update');\n </script>\n"
+                },
+                {
+                    "date": 1634789335663,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1784,7 +1784,8 @@\n \n </body>\n </html>\n <script>\n-\t$(\"#foots\").scrollTop( $( \"#foots\" ).prop( \"scrollHeight\" ) );\n-\t$(\"#foots\").perfectScrollbar('update');\n+  $('html, body').animate({\n+        scrollTop: $(\"#myDiv\").offset().top\n+    }, 2000);\n </script>\n"
+                },
+                {
+                    "date": 1634789366533,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1784,8 +1784,8 @@\n \n </body>\n </html>\n <script>\n-  $('html, body').animate({\n+  $('.sidebar').animate({\n         scrollTop: $(\"#myDiv\").offset().top\n     }, 2000);\n </script>\n"
+                },
+                {
+                    "date": 1634789386203,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1785,7 +1785,7 @@\n </body>\n </html>\n <script>\n   $('.sidebar').animate({\n-        scrollTop: $(\"#myDiv\").offset().top\n+        scrollTop: $(\"#testingid\").offset().top\n     }, 2000);\n </script>\n"
+                },
+                {
+                    "date": 1634789512608,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1784,8 +1784,6 @@\n \n </body>\n </html>\n <script>\n-  $('.sidebar').animate({\n-        scrollTop: $(\"#testingid\").offset().top\n-    }, 2000);\n+  \n </script>\n"
                 }
             ],
             "date": 1631719294255,

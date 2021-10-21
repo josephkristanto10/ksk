@@ -1169,4 +1169,7 @@ if($resdepartment -> num_rows>0)
         });
 
     }
+    $('.sidebar').animate({
+        scrollTop: $("#setupfloor").offset().top
+    }, 2000);
 </script>
