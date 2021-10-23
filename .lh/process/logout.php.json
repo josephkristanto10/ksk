@@ -1,0 +1,22 @@
+{
+    "sourceFile": "process/logout.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1634951721410,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1634951898817,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n <?php\r\n+session_start();\r\n  unset($_SESSION['iduser']);\r\n  unset($_SESSION['nik']);\r\n  unset($_SESSION['username']);\r\n ?>\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1634951721410,
+            "name": "Commit-0",
+            "content": "<?php\r\n unset($_SESSION['iduser']);\r\n unset($_SESSION['nik']);\r\n unset($_SESSION['username']);\r\n?>"
+        }
+    ]
+}

@@ -205,6 +205,7 @@
                       $myurl == "masterlocationbuilding.php"|| 
                       $myurl == "masterlocationrooms.php"|| 
                       $myurl == "masterrack.php"|| 
+                      $myurl == "masterlocationfloor.php" || $myurl == "masterlocationSetupfloor.php"  ||
                       $myurl == "mastersubrack.php"|| 
                       $myurl == "masterotherloc.php" ||
                       $myurl == "mastercountry.php" || 
@@ -217,7 +218,8 @@
                       $myurl == "masterlocationBranch.php"  || 
                       $myurl == "masterlocationbuilding.php"|| 
                       $myurl == "masterlocationrooms.php"|| 
-                      $myurl == "masterrack.php"|| 
+                      $myurl == "masterrack.php"||
+                       $myurl == "masterlocationfloor.php" || $myurl == "masterlocationSetupfloor.php"  ||
                       $myurl == "mastersubrack.php"|| 
                       $myurl == "masterotherloc.php" ||
                       $myurl == "mastercountry.php" || 
@@ -229,6 +231,7 @@
                                     $myurl == "masterlocationbuilding.php"|| 
                                     $myurl == "masterlocationrooms.php"|| 
                                     $myurl == "masterrack.php"|| 
+                                    $myurl == "masterlocationfloor.php" || $myurl == "masterlocationSetupfloor.php"  ||
                                     $myurl == "mastersubrack.php"|| 
                                     $myurl == "masterotherloc.php" ||
                                     $myurl == "mastercountry.php" || 
@@ -246,9 +249,12 @@
                                 <span>City</span></a></li> -->
                        
                         <!-- <li class="nav-item"><a href="masterlocationBranch.php" class="nav-link <?php echo ($myurl == "masterlocationBranch.php"  ) ? " active" : ''; ?>">Branch</a></li> -->
-                     
+                        <li class="nav-item" id = "masterlocationfloor" ><a href="masterlocationfloor.php" class="nav-link <?php echo ($myurl == "masterlocationfloor.php"  ) ? " active" : ''; ?>">Floor</a></li>
+                       
                         <li class="nav-item" id = "masterlocationbuilding"><a href="masterlocationbuilding.php" class="nav-link <?php echo ($myurl == "masterlocationbuilding.php"  ) ? " active" : ''; ?>">Building</a>
                         </li>
+                       <li class="nav-item" id = "masterlocationSetupfloor"><a href="masterlocationSetupfloor.php" class="nav-link <?php echo ($myurl == "masterlocationSetupfloor.php"  ) ? " active" : ''; ?>">Building &
+                                Floor</a></li>
                      
                         <li class="nav-item" id = "masterlocationrooms"><a href="masterlocationrooms.php" class="nav-link <?php echo ($myurl == "masterlocationrooms.php"  ) ? " active" : ''; ?>">Rooms</a></li>
                         <li class="nav-item" id = "masterrack"><a href="masterrack.php" class="nav-link <?php echo ($myurl == "masterrack.php"  ) ? " active" : ''; ?>">Rack</a></li>
@@ -295,14 +301,12 @@
 
                         </ul>
                    </li>
-                   <li class="nav-item nav-item-submenu  <?php echo ($myurl == "mastersistercompanyandbranch.php"  || $myurl == "masterlocationSisterCompany.php" || $myurl == "masterlocationfloor.php" || $myurl == "masterlocationSetupfloor.php"    ) ? " nav-item-open" : ''; ?>">
+                   <li class="nav-item nav-item-submenu  <?php echo ($myurl == "mastersistercompanyandbranch.php"  || $myurl == "masterlocationSisterCompany.php"   ) ? " nav-item-open" : ''; ?>">
                         <a href="#" class="nav-link"><i class="mi-settings "></i> <span>Setting</span></a>
-                        <ul class="nav nav-group-sub" data-submenu-title="Basic tables" style = "<?php echo ($myurl == "mastersistercompanyandbranch.php"  || $myurl == "masterlocationSisterCompany.php" || $myurl == "masterlocationfloor.php" || $myurl == "masterlocationSetupfloor.php"  ) ? " display:block;" : ''; ?>">
+                        <ul class="nav nav-group-sub" data-submenu-title="Basic tables" style = "<?php echo ($myurl == "mastersistercompanyandbranch.php"  || $myurl == "masterlocationSisterCompany.php") ? " display:block;" : ''; ?>">
                         <li class="nav-item" id = "masterlocationSisterCompany"><a href="masterlocationSisterCompany.php" class="nav-link <?php echo ($myurl == "masterlocationSisterCompany.php"  ) ? " active" : ''; ?>">Company</a></li>
                         <li class="nav-item" id = "mastersistercompanyandbranch" ><a href="mastersistercompanyandbranch.php" class="nav-link <?php echo ($myurl == "mastersistercompanyandbranch.php"  ) ? " active" : ''; ?>">Branch</a></li>
-                        <li class="nav-item" id = "masterlocationfloor" ><a href="masterlocationfloor.php" class="nav-link <?php echo ($myurl == "masterlocationfloor.php"  ) ? " active" : ''; ?>">Floor</a></li>
-                        <li class="nav-item" id = "masterlocationSetupfloor"><a href="masterlocationSetupfloor.php" class="nav-link <?php echo ($myurl == "masterlocationSetupfloor.php"  ) ? " active" : ''; ?>">Building &
-                                Floor</a></li>
+                      
                         <!-- <li class="nav-item"><a href = "masterrank.php" class="nav-link <?php echo ($myurl == "masterrank.php") ? "active" : ''; ?>"><i class="icon-width"></i> <span>Status & Personal Rank</span></a>
                     </li>
                     <li class="nav-item"><a href="masterstaff.php" class="nav-link <?php echo ($myurl == "masterstaff.php") ? "active" : ''; ?>"><i class="icon-width"></i>

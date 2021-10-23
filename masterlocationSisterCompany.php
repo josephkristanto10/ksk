@@ -27,12 +27,12 @@ if($resholding->num_rows>0)
         <div class="content-wrapper">
             <div class="page-header page-header-light">
             <div class="page-header-content header-elements-md-inline">
-                <h4><span class="font-weight-semibold">Master Sister Company</span></h4> 
+                <h4><span class="font-weight-semibold">Master Company</span></h4> 
                     <div class="page-title d-flex">
                         <div class = "row" style = "width:100%;">
                             <div class = "col-xl-12" >
 							<a href="#myModal" data-toggle="modal">  <button type="button" style = "background-color:#26a69a !important; color:white; width:200px;" class="btn btn-indigo btn-labeled btn-labeled-left" onclick="cancel()" data-toggle="modal" data-target="#modal_form">
-                            <b><i class="icon-plus-circle2"></i></b> Add Sister Company
+                            <b><i class="icon-plus-circle2"></i></b> Add Company
                         </button></a>
                             </div>
                         </div>
@@ -71,7 +71,7 @@ if($resholding->num_rows>0)
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header" style="background-color:#324148;color:white;height:60px;">
-						<h5 class="modal-title">Add Sister Company</h5>
+						<h5 class="modal-title">Add Company</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">×</span>
 						</button>
@@ -143,7 +143,7 @@ if($resholding->num_rows>0)
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header" style="background-color:#324148;color:white;height:60px;">
-						<h5 class="modal-title">Edit Sister Company</h5>
+						<h5 class="modal-title">Edit Company</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">×</span>
 						</button>

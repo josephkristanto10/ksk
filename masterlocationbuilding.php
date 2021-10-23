@@ -20,7 +20,7 @@ if($res -> num_rows>0)
 		<div class="content-wrapper">
 			<div class="page-header page-header-light">
 				<div class="page-header-content header-elements-md-inline">
-					<h4><span class="font-weight-semibold">Master Locations Building</span></h4>
+					<h4><span class="font-weight-semibold">Master Building</span></h4>
 					<div class="page-title d-flex">
 						<div class="row" style="width:100%;">
 							<div class="col-xl-12">
@@ -42,7 +42,7 @@ if($res -> num_rows>0)
 									<tr>
 										<th>Code</th>
 										<th>Building Name</th>
-										<th>Location</th>
+										<th>Branch</th>
 										<th>Description</th>
 										<th class="text-center">Status</th>
 										<th class="text-center">Action</th>
@@ -59,7 +59,7 @@ if($res -> num_rows>0)
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header" style="background-color:#324148;color:white;height:60px;">
-						<h5 class="modal-title">Add Location Building</h5>
+						<h5 class="modal-title">Add Building</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">×</span>
 						</button>
@@ -101,7 +101,7 @@ if($res -> num_rows>0)
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header" style="background-color:#324148;color:white;height:60px;">
-						<h5 class="modal-title">Add Location Building</h5>
+						<h5 class="modal-title">Add Building</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">×</span>
 						</button>

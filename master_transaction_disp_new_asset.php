@@ -113,7 +113,7 @@ if($resdepartment -> num_rows>0)
             <div class="col-xl-12">
                 <div class="card">
 
-                    <table id="datatable_serverside" class="table table-hover table-bordered display nowrap w-100">
+                    <table id="datatable_serverside"  class="table table-hover table-bordered display nowrap w-100">
                         <thead>
                             <tr>
                                 <th>Approval</th>
@@ -482,14 +482,14 @@ if($resdepartment -> num_rows>0)
 
                         </select>
                         <br>
-                        <label for="cars">Asset Category:</label>
+                        <label for="cars">Asset Category:</label> <a href = "#selectasset" onclick = "openselectasset(this)" data-toggle="modal" data-backdrop="static" data-keyboard="false">select asset</a>
                         <select id="categories" name="categories" class="form-control">
 
                         </select>
                         <br>
                         <b>Asset Choose</b>
                         <br><br>
-                        <div id="chooseaset" style="max-height:100px !important;">
+                        <div id="containerpilihaset" style="max-height:100px !important;">
 
                         </div>
 
@@ -510,11 +510,105 @@ if($resdepartment -> num_rows>0)
         </div>
     </div>
 </div>
+<div class="modal fade" id="selectasset">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
+                <h5 class="modal-title">Select Asset</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="myforms">
+                    <div class="form-group">
+                    <label for="cars">Group: &nbsp <b><label id = "grouptitleselectasset">-</label></b></label><br>
+                    <label for="cars">Sub Group: &nbsp <b><label id = "subgrouptitleselectasset">-</label></b></label><br>
+                    <label for="cars">Category:  &nbsp <b><label id = "categoriestitleselectasset">-</label></b></label><br>
+                    <table id="datatable_asset" class="table table-hover table-bordered display nowrap w-100">
+                        <thead >
+                            <tr>
+                                 <th  >#</th>
+                                <th>No. Asset</th>
+                                <th>Name</th>
+                                <th>Condition</th>
+                                <th>Initial Condition</th>
+
+                            </tr>
+                        </thead>
+                        </tbody>
+                                    <!-- <tr>
+                                        <td><input type = "checkbox" value = "asdsad"></td>
+                                        <td>1123</td>
+                                        <td>Vas Bunga</td>
+                                        <td>Good</td>
+                                        <td>Very Good</td>
+                                    </tr> -->
+
+                        </tbody>
+
+                    </table>
+                        <div style="float:right;margin-bottom:20px;">
+                            <button type="button" class="btn btn-primary" id = "pilihaset" style="margin-right:10px;"
+                                 onclick = "pilihasset()">Choose</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                id="canceladd">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
 </body>
 
 </html>
 <script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>
 <script>
+var asset = null;
+    $('#selectasset').on('shown.bs.modal', function () {
+        var idcategories = $("#categories").val();
+        if(iddefaultcategories != idcategories)
+        {
+            iddefaultcategories = idcategories;
+            loadasset(idcategories);
+    
+        }
+   
+   asset.columns.adjust();
+}); 
+
+    function pilihasset(){
+        var count = 0;
+        var arrselectedasset = [];
+      
+        $(".checkboxasset").each(function(){
+                var checked =  this.checked;
+              
+                if(checked){
+                    var myid = this.id;
+                    var splitid = myid.split("_");
+                    var myfixid = splitid[1];
+                    var noasset = $("#noasset"+myfixid).text();
+                    var nameasset = $("#name"+myfixid).text();
+                    var conditions = $("#conditions"+myfixid).text();
+                    var initialcondition = $("#initial_condition"+myfixid).text();
+                    arrselectedasset.push(myfixid+"~~"+noasset + "~~" + nameasset + "~~" + conditions + "~~" + initialcondition);
+                    count +=1;
+                }
+          
+                
+        });
+        $("#containerpilihaset").html("");
+        for(var i = 0 ; i < arrselectedasset.length; i++)
+        {
+            var split = arrselectedasset[i].split("~~");
+            $("#containerpilihaset").append("<b>"+split[1] + "</b> <br> " + split[2] + " <br> <br>");
+        }
+
+      $("#selectasset").modal("toggle");
+    }
     var arrayasset = [];
     // $('body').scrollspy({ target: '.sidebar' });
     $("#group").trigger('change');
@@ -522,6 +616,33 @@ if($resdepartment -> num_rows>0)
     var myopenid = "";
     var globaltotalpurchaseprice = 0;
     var globalcostpermonth = 0;
+    
+    var iddefaultcategories = "";
+    function openselectasset(){
+        
+        var idcategories = $("#categories").val();
+        if(iddefaultcategories != idcategories)
+        {
+            iddefaultcategories = idcategories;
+            loadasset(idcategories);
+    
+        }
+     
+        var groups = document.getElementById("groups");
+        var subgroups = document.getElementById("subgroups");
+        var categories = document.getElementById("categories");
+        var strgroups = groups.options[groups.selectedIndex].text;
+        var strsubgroups = subgroups.options[subgroups.selectedIndex].text;
+        var strcategories = categories.options[categories.selectedIndex].text;
+        $("#grouptitleselectasset").text(strgroups);
+        $("#subgrouptitleselectasset").text(strsubgroups);
+        $("#categoriestitleselectasset").text(strcategories);
+     
+        // var asset = document.getElementById("datatable_asset");
+        // console.log(asset);
+     
+
+    }
 
     function openmodaldisplay(element) {
         //general
@@ -584,21 +705,6 @@ if($resdepartment -> num_rows>0)
 
         $("a[href='#additionalinfo']").attr("id", myid);
         $("#myfirst").click();
-        // $('.myimg').on('click', function(){
-        //     var animWidth, $this=$(this);
-        //     if( $this.hasClass('wide') ){
-        //         animWidth=159;
-        //         $this.animate({width:'100px'}, "slow");
-        //         $('.myimg').removeClass("wide");
-        //     }else{
-        //         animWidth=593;
-        //         // $('.myimg').removeClass("wide");
-        //         $this.animate({width:'200px'}, "slow");
-        //          $('.myimg').addClass("wide");
-        //     }
-
-        //     // alert("test");
-        //   });
     }
 
     function mytoggleenlarge(element) {
@@ -612,18 +718,12 @@ if($resdepartment -> num_rows>0)
             status = "found";
         }
         if (status == "found") {
-            // alert("akan mengecil");
-            // animWidth=159;
-            // $(".myimg")..animate({width:'100px'}, "slow")
             $(element).animate({
                 width: '100px',
                 height: '100px'
             }, "slow");
             $(element).removeClass("wide");
         } else {
-            // animWidth=593;
-            // $('.myimg').removeClass("wide");
-            // alert("akan membesar");
             $(".wide").animate({
                 width: '100px',
                 height: '100px'
@@ -641,6 +741,61 @@ if($resdepartment -> num_rows>0)
     $(function () {
         loadData();
     });
+    function loadasset(params){
+        
+      asset = $("#datatable_asset").DataTable({
+            processing: true,
+            deferRender: true,
+            serverSide: true,
+            destroy: true,
+            scrollX:true,
+            responsive: true,
+            autoWidth: true,
+            iDisplayInLength: 10,
+            // scrollX: true,
+            order: [
+                [0, 'asc']
+            ],
+            ajax: {
+                url: 'process/mastergetasset.php',
+                method: 'POST',
+                data: {
+                    tipe: "load",
+                    statusmust : "newasset",
+                    myparam : params
+                },
+               
+            },
+            columns: [{
+                    searchable:false,
+                    orderable:false,
+                    name: '#',
+                    className: 'text-center align-middle'
+                },
+                {
+                    name: 'noasset',
+                    className: 'text-center align-middle'
+                },
+                {
+                    name: 'name',
+                    className: 'text-center align-middle'
+                },
+                {
+                    name: 'conditions',
+                    className: 'text-center align-middle'
+                },
+                {
+                    name: 'initial_condition',
+                    className: 'text-center align-middle'
+                }
+                
+
+            ]
+        });
+      
+     
+        // assets.columns.adjust();
+    };
 
     function loadData() {
         $("#datatable_serverside").DataTable({
