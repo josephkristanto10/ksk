@@ -11,7 +11,7 @@ if($tipe == "load")
         'room',
         'notransaction',
         'nama',
-        'status_approval'
+        'status_approval',
         
     ];
     
@@ -94,7 +94,21 @@ if($tipe == "load")
                 "<a href = '#myModalDetailTransaction' id = '".$row['id']."' onclick = openmodaldetailtransaction(this) data-toggle='modal'><label id ='notransaction".$row['id']."'>".$row['notransaction']."</label></a>",
                 "<label id ='branch".$row['id']."'>".$row['branch']."</label>",
                 "<label id ='room".$row['id']."'>".$row['room']."</label>",
-                "<label id ='nama".$row['id']."'>".$row['nama']."</label>"
+                "<label id ='nama".$row['id']."'>".$row['nama'],
+                ' <div class="list-icons">
+                <div class="dropdown">
+                    <a href="#" class="list-icons-item" data-toggle="dropdown">
+                        <i class="icon-menu9"></i>
+                    </a>
+    
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="#myModalEditTransaction"  data-toggle="modal" class="dropdown-item" id ="click-'.$row['id'].'"  onclick = "openmodaledits(this)"><i class="icon-check"></i>
+                            Edit</a>
+                        
+                   
+                    </div>
+                </div>
+            </div>'
             ];
         }
     }

@@ -49,7 +49,7 @@ if($resholding->num_rows>0)
                                     <tr>
 
                                         <th>Code</th>
-                                        <th>Name</th>
+                                        <th>Company</th>
                                         <th>Desc</th>
                                         <th>Address</th>
                                         <th>Country</th>
@@ -83,9 +83,9 @@ if($resholding->num_rows>0)
 							<label for="code">Code</label>
 							<input type="text" class="form-control" id="code">
 
-                            <br>
-                            <label for="description">Holding Company</label>
-							<select class="form-control" id="holding">
+                            <!-- <br> -->
+                            <label for="description" style = "display:none">Holding Company</label>
+							<select class="form-control" id="holding"  style = "display:none">
                                 <?php
                                 for($i = 0 ; $i < count($holding); $i++)
                                 {
@@ -94,7 +94,7 @@ if($resholding->num_rows>0)
                                 ?>
                             </select>
 							<br>
-							<label for="description">Name</label>
+							<label for="description">Company</label>
 							<input type="text" class="form-control" id="name">
 							<br>
 							<label for="description">Description</label>

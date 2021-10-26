@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 532,
+            "activePatchIndex": 534,
             "patches": [
                 {
                     "date": 1633328329382,
@@ -2136,6 +2136,14 @@
                 {
                     "date": 1634892434928,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -571,14 +571,13 @@\n         var idcategories = $(\"#categories\").val();\r\n         if(iddefaultcategories != idcategories)\r\n         {\r\n             iddefaultcategories = idcategories;\r\n-            \r\n             loadasset(idcategories);\r\n     \r\n         }\r\n    \r\n-   \r\n+   asset.columns.adjust();\r\n }); \r\n \r\n     function pilihasset(){\r\n         var count = 0;\r\n"
+                },
+                {
+                    "date": 1635147929146,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -121,8 +121,9 @@\n                                 <th>Transaction</th>\r\n                                 <th>Branch</th>\r\n                                 <th>Room</th>\r\n                                 <th>Created By</th>\r\n+                                <th>Created By</th>\r\n \r\n                             </tr>\r\n                         </thead>\r\n                         </tbody>\r\n"
+                },
+                {
+                    "date": 1635147930403,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -121,9 +121,9 @@\n                                 <th>Transaction</th>\r\n                                 <th>Branch</th>\r\n                                 <th>Room</th>\r\n                                 <th>Created By</th>\r\n-                                <th> By</th>\r\n+                                <th>By</th>\r\n \r\n                             </tr>\r\n                         </thead>\r\n                         </tbody>\r\n"
                 }
             ],
             "date": 1633328329382,

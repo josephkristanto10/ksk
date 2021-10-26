@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 281,
+            "activePatchIndex": 285,
             "patches": [
                 {
                     "date": 1628505541289,
@@ -1132,6 +1132,22 @@
                 {
                     "date": 1634949651623,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,14 +26,14 @@\n \r\n         <div class=\"content-wrapper\">\r\n             <div class=\"page-header page-header-light\">\r\n             <div class=\"page-header-content header-elements-md-inline\">\r\n-                <h4><span class=\"font-weight-semibold\">Master Sister Company</span></h4> \r\n+                <h4><span class=\"font-weight-semibold\">Master Company</span></h4> \r\n                     <div class=\"page-title d-flex\">\r\n                         <div class = \"row\" style = \"width:100%;\">\r\n                             <div class = \"col-xl-12\" >\r\n \t\t\t\t\t\t\t<a href=\"#myModal\" data-toggle=\"modal\">  <button type=\"button\" style = \"background-color:#26a69a !important; color:white; width:200px;\" class=\"btn btn-indigo btn-labeled btn-labeled-left\" onclick=\"cancel()\" data-toggle=\"modal\" data-target=\"#modal_form\">\r\n-                            <b><i class=\"icon-plus-circle2\"></i></b> Add Sister Company\r\n+                            <b><i class=\"icon-plus-circle2\"></i></b> Add Company\r\n                         </button></a>\r\n                             </div>\r\n                         </div>\r\n                         <a href=\"#\" class=\"header-elements-toggle text-default d-md-none\"><i class=\"icon-more\"></i></a>\r\n@@ -70,9 +70,9 @@\n <div class=\"modal fade\" id=\"myModal\">\r\n \t\t\t<div class=\"modal-dialog\" role=\"document\">\r\n \t\t\t\t<div class=\"modal-content\">\r\n \t\t\t\t\t<div class=\"modal-header\" style=\"background-color:#324148;color:white;height:60px;\">\r\n-\t\t\t\t\t\t<h5 class=\"modal-title\">Add Sister Company</h5>\r\n+\t\t\t\t\t\t<h5 class=\"modal-title\">Add Company</h5>\r\n \t\t\t\t\t\t<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n \t\t\t\t\t\t\t<span aria-hidden=\"true\">×</span>\r\n \t\t\t\t\t\t</button>\r\n \r\n@@ -142,9 +142,9 @@\n         <div class=\"modal fade\" id=\"myModaledit\">\r\n \t\t\t<div class=\"modal-dialog\" role=\"document\">\r\n \t\t\t\t<div class=\"modal-content\">\r\n \t\t\t\t\t<div class=\"modal-header\" style=\"background-color:#324148;color:white;height:60px;\">\r\n-\t\t\t\t\t\t<h5 class=\"modal-title\">Edit Sister Company</h5>\r\n+\t\t\t\t\t\t<h5 class=\"modal-title\">Edit Company</h5>\r\n \t\t\t\t\t\t<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n \t\t\t\t\t\t\t<span aria-hidden=\"true\">×</span>\r\n \t\t\t\t\t\t</button>\r\n \r\n"
+                },
+                {
+                    "date": 1635227431888,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,9 +48,9 @@\n                                 <thead>\r\n                                     <tr>\r\n \r\n                                         <th>Code</th>\r\n-                                        <th>Name</th>\r\n+                                        <th>Company</th>\r\n                                         <th>Desc</th>\r\n                                         <th>Address</th>\r\n                                         <th>Country</th>\r\n                                         <th>Province</th>    \r\n"
+                },
+                {
+                    "date": 1635227504950,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -83,10 +83,10 @@\n \t\t\t\t\t\t\t<label for=\"code\">Code</label>\r\n \t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"code\">\r\n \r\n                             <br>\r\n-                            <label for=\"description\">Holding Company</label>\r\n-\t\t\t\t\t\t\t<select class=\"form-control\" id=\"holding\">\r\n+                            <label for=\"description\" style = \"display:none\">Holding Company</label>\r\n+\t\t\t\t\t\t\t<select class=\"form-control\" id=\"holding\"  style = \"display:none\">\r\n                                 <?php\r\n                                 for($i = 0 ; $i < count($holding); $i++)\r\n                                 {\r\n                                     echo '<option value = \"'.$holding[$i]['id'].'\">'.$holding[$i]['name'].'</option>';\r\n"
+                },
+                {
+                    "date": 1635227515725,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -82,9 +82,9 @@\n \t\t\t\t\t\t<div class=\"form-group\">\r\n \t\t\t\t\t\t\t<label for=\"code\">Code</label>\r\n \t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"code\">\r\n \r\n-                            <br>\r\n+                            <!-- <br> -->\r\n                             <label for=\"description\" style = \"display:none\">Holding Company</label>\r\n \t\t\t\t\t\t\t<select class=\"form-control\" id=\"holding\"  style = \"display:none\">\r\n                                 <?php\r\n                                 for($i = 0 ; $i < count($holding); $i++)\r\n"
+                },
+                {
+                    "date": 1635227522246,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -93,9 +93,9 @@\n                                 }\r\n                                 ?>\r\n                             </select>\r\n \t\t\t\t\t\t\t<br>\r\n-\t\t\t\t\t\t\t<label for=\"description\">Name</label>\r\n+\t\t\t\t\t\t\t<label for=\"description\">Company</label>\r\n \t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"name\">\r\n \t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t<label for=\"description\">Description</label>\r\n \t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"description\">\r\n"
                 }
             ],
             "date": 1628505541289,

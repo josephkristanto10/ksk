@@ -58,7 +58,7 @@ if($resbranch->num_rows>0)
 								<thead>
 									<tr>
 										<th>Code</th>
-										<th>Sister Company</th>
+										<th>Company</th>
 										<th>Branch</th>
 										<th>Description</th>
 										<th class="text-center">Status</th>
@@ -75,7 +75,7 @@ if($resbranch->num_rows>0)
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header" style="background-color:#324148;color:white;height:60px;">
-						<h5 class="modal-title">Add Sister & Branch</h5>
+						<h5 class="modal-title">Add Branch</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">×</span>
 						</button>
@@ -87,7 +87,7 @@ if($resbranch->num_rows>0)
     					<input type="text" class="form-control" id="code" value = "CCD">
 						<br>
 					
-							<label for="cars">Sister Company:</label>
+							<label for="cars">Company:</label>
 							<br>
 							<b><label for="cars"><?= $_SESSION['namasister'];?></label></b>
 							<br><br>

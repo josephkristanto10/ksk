@@ -122,6 +122,7 @@ if($resdepartment -> num_rows>0)
                                 <th>Branch</th>
                                 <th>Room</th>
                                 <th>Created By</th>
+                                <th>Action</th>
 
                             </tr>
                         </thead>
@@ -561,12 +562,80 @@ if($resdepartment -> num_rows>0)
         </div>
     </div>
 </div>
+<div class="modal fade" id="myModalEditTransaction">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
+                <h5 class="modal-title">Edit Asset</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="myforms">
+                    <div class="form-group">
+                       
+
+                        <label for="cars">Asset Category:</label> 
+               
+                        <b><label for="cars" id = "labelassetcategoryedit">-</label></b><br>
+                        <hr>
+                        <!-- <a href = "#selectasset" onclick = "openselectasset(this)" data-toggle="modal" data-backdrop="static" data-keyboard="false">select asset</a>
+                       
+                        <br> -->
+                        Chosen Asset List
+                        <br><br>
+
+                        <table id="datatable_choice_asset" class="table table-hover table-bordered display nowrap w-100">
+                        <thead >
+                            <tr>
+                                 <th>#</th>
+                                <th>No. Asset</th>
+                                <th>Name</th>
+
+                            </tr>
+                        </thead>
+                        </tbody>
+                                    <!-- <tr>
+                                        <td><input type = "checkbox" value = "asdsad"></td>
+                                        <td>1123</td>
+                                        <td>Vas Bunga</td>
+                                        <td>Good</td>
+                                        <td>Very Good</td>
+                                    </tr> -->
+
+                        </tbody>
+
+                    </table>
+                        <div id="containerpilihaset" style="max-height:100px !important;">
+
+                        </div>
+
+
+
+                        <br>
+                        <br>
+                        <div style="float:right;margin-bottom:20px;">
+                            <button type="button" class="btn btn-primary" style="margin-right:10px;"
+                                onclick="adddata()">Save</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                id="canceladd">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 </body>
 
 </html>
 <script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>
 <script>
 var asset = null;
+var chosenasset = null;
     $('#selectasset').on('shown.bs.modal', function () {
         var idcategories = $("#categories").val();
         if(iddefaultcategories != idcategories)
@@ -578,7 +647,70 @@ var asset = null;
    
    asset.columns.adjust();
 }); 
+$('#myModalEditTransaction').on('shown.bs.modal', function () {
+        
+   
+    chosenasset.columns.adjust();
+}); 
 
+function loadchoicesasset(idtransac){
+
+    myid = idtransac;
+  
+    chosenasset = $("#datatable_choice_asset").DataTable({
+            processing: true,
+            deferRender: true,
+            serverSide: true,
+            destroy: true,
+            scrollX:true,
+            responsive: true,
+            autoWidth: true,
+            iDisplayInLength: 10,
+            // scrollX: true,
+            order: [
+                [0, 'asc']
+            ],
+            ajax: {
+                url: 'process/mastergetasset.php',
+                method: 'POST',
+                data: {
+                    tipe: "loadpicked",
+                    idtransaction : myid
+                }
+            },
+            initComplete : function(settings, json){
+             
+                var summarycategory = $("#namecategorysummary").val();
+                $("#labelassetcategoryedit").text(summarycategory);
+
+
+            },
+            columns: [{
+                    searchable:false,
+                    orderable:false,
+                    name: '#',
+                    className: 'text-center align-middle'
+                },
+                {
+                    name: 'noasset',
+                    className: 'text-center align-middle'
+                },
+                {
+                    name: 'asset.name',
+                    className: 'text-center align-middle'
+                }
+                
+
+            ]
+        });
+}
+function openmodaledits(element){
+
+// alert("test");
+    var myelement = element.id.split("-");
+    var myid = myelement[1];
+    loadchoicesasset(myid);
+};
     function pilihasset(){
         var count = 0;
         var arrselectedasset = [];
@@ -601,12 +733,13 @@ var asset = null;
                 
         });
         $("#containerpilihaset").html("");
+        $("#containerpilihaset").append("<table id = 'tablepilihasset' class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Asset Name</th></tr><tbody>");
         for(var i = 0 ; i < arrselectedasset.length; i++)
         {
             var split = arrselectedasset[i].split("~~");
-            $("#containerpilihaset").append("<b>"+split[1] + "</b> <br> " + split[2] + " <br> <br>");
+            $("#tablepilihasset").append("<tr><td>"+split[1] + "</td><td>" + split[2] + "</td></tr>");
         }
-
+        $("#containerpilihaset").append("</tbody></table>");
       $("#selectasset").modal("toggle");
     }
     var arrayasset = [];
@@ -837,6 +970,12 @@ var asset = null;
                 },
                 {
                     name: 'nama',
+                    className: 'text-center align-middle'
+                },
+                {
+                    searchable:false,
+                    orderable:false,
+                    name: 'action',
                     className: 'text-center align-middle'
                 }
 

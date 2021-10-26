@@ -117,3 +117,78 @@ if($tipe == "load")
     
     echo json_encode($response);
 }
+else if($tipe == "loadpicked")
+{
+    $myid = $_POST['idtransaction'];
+    $where_like = [
+        
+        'noasset',
+        'asset.name'
+        
+    ];
+    
+    
+    $response = $_REQUEST;
+    $start    = $response['start'];
+    $length   = $response['length'];
+    $order    = $where_like[$response['order'][0]['column']];
+    $dir      = $response['order'][0]['dir'];
+    $search   = $response['search']['value'];
+    
+    $total_data = mysqli_query($conn, 
+    
+    "SELECT tdnal.*, asset.name, asset.noasset, ksc.id as idcategory, ksc.category FROM transaction_displacement_new_asset_log tdnal 
+    inner join asset on asset.id = tdnal.idasset
+    inner join kategori_categorysubgroup ksc on ksc.id = asset.idcategory where idtransaksi = '$myid'
+    "
+
+);
+    
+    if(empty($search)) {
+        $query_data = mysqli_query($conn, "SELECT tdnal.*, asset.name, asset.noasset, ksc.id as idcategory, ksc.category FROM transaction_displacement_new_asset_log tdnal 
+        inner join asset on asset.id = tdnal.idasset
+        inner join kategori_categorysubgroup ksc on ksc.id = asset.idcategory where idtransaksi = '$myid' ORDER BY $order $dir LIMIT $start, $length");
+    
+        $total_filtered = mysqli_query($conn, "SELECT tdnal.*, asset.name, asset.noasset, ksc.id as idcategory, ksc.category FROM transaction_displacement_new_asset_log tdnal 
+        inner join asset on asset.id = tdnal.idasset
+        inner join kategori_categorysubgroup ksc on ksc.id = asset.idcategory where idtransaksi = '$myid'");
+    } else {
+        $query_data = mysqli_query($conn, "SELECT tdnal.*, asset.name, asset.noasset, ksc.id as idcategory, ksc.category FROM transaction_displacement_new_asset_log tdnal 
+        inner join asset on asset.id = tdnal.idasset
+        inner join kategori_categorysubgroup ksc on ksc.id = asset.idcategory where idtransaksi = '$myid'
+         and ( asset.name LIKE '%$search%' 
+        OR asset.noasset LIKE '%$search%' ) ORDER BY $order $dir LIMIT $start, $length");
+    
+        $total_filtered = mysqli_query($conn, "SELECT tdnal.*, asset.name, asset.noasset, ksc.id as idcategory, ksc.category FROM transaction_displacement_new_asset_log tdnal 
+        inner join asset on asset.id = tdnal.idasset
+        inner join kategori_categorysubgroup ksc on ksc.id = asset.idcategory where idtransaksi = '$myid'
+        and ( asset.name LIKE '%$search%' 
+       OR asset.noasset LIKE '%$search%' )");
+    }
+    
+    $response['data'] = [];
+    
+    if($query_data) {
+        while($row = mysqli_fetch_assoc($query_data)) {
+       
+            // $myrelation = str_replace( " ", ' ', $row['myrelation'] ); 
+            $response['data'][] = [
+                "<input type = 'checkbox' id = 'check_".$row['id']."' class = 'checkboxasset' checked>",
+                "<label id ='noasset".$row['id']."'>".$row['noasset']."</label>",
+                "<label id ='name".$row['id']."'>".$row['name']."</label>"."<input type = 'hidden' value = '".$row['idcategory']."' id = 'idcategorysummary'>"."<input type = 'hidden' value = '".$row['category']."' id = 'namecategorysummary'>"
+            ];
+        }
+    }
+    
+    $response['recordsTotal'] = 0;
+    if($total_data <> FALSE) {
+        $response['recordsTotal'] = mysqli_num_rows($total_data);
+    }
+    
+    $response['recordsFiltered'] = 0;
+    if($total_filtered <> FALSE) {
+        $response['recordsFiltered'] = mysqli_num_rows($total_filtered);
+    }  
+    
+    echo json_encode($response);
+}
