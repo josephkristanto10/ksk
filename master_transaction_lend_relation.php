@@ -138,7 +138,7 @@ if($resconditions -> num_rows>0)
                                 <th>Start Date</th>
                                 <th>Due Date</th>
                                 <th>Status</th>
-
+                                <th>Action</th>
                             </tr>
                         </thead>
 
@@ -188,56 +188,8 @@ if($resconditions -> num_rows>0)
                             </div>
                         </div>
                         <hr>
-                      
-                        
-                        <label for="cars" style="font-size:11pt;"><b>Asset Section</b></label><br>
-                        <label for="cars">Asset Group:</label>
-                        <select id="groups" name="groups" class="form-control">
-                            <?php
-                                        for($i = 0 ; $i < count($mykategoriasset); $i++)
-                                        {                                            
-                                                echo '<option value="'.$mykategoriasset[$i]['id'].'">'.$mykategoriasset[$i]['nama'].'</option>';                                       
-                                        }
-                                ?>
-                        </select>
-                        <br>
-                        <label for="cars">Asset:</label>
-                        <select id="asset" name="asset" class="form-control">
 
-                        </select>
-                        <br>
-                        <b>Asset Preview</b>
-                        <div class="row">
 
-                            <div class="col-md-6">
-                                <br>
-                                <label>No Asset</label>
-                                <br>
-                                <label id="noassetpreview">1123</label>
-                            </div>
-                            <div class="col-md-6">
-                                <br>
-                                <label>Asset</label>
-                                <br>
-                                <label id="assetpreview">Good</label>
-                            </div>
-                        </div>
-                        <div class="row">
-
-                            <div class="col-md-6">
-                                <br>
-                                <label>Initial Condition</label>
-                                <br>
-                                <label id="initialpreview">Good</label>
-                            </div>
-                            <div class="col-md-6">
-                                <br>
-                                <label>Condition</label>
-                                <br>
-                                <label id="conditionpreview">Good</label>
-                            </div>
-                        </div>
-                        <hr>
                         <label for="cars" style="font-size:11pt;"><b>Room Section</b></label><br>
                         <label for="cars">Branch :</label>
                         <select id="branchroom" name="branchroom" class="form-control">
@@ -294,17 +246,17 @@ echo date('d-m-Y');?>">
 
                         </select>
                         <br>
-                        <label for="cars">Asset Category:</label>
+                        <label for="cars">Asset Category:</label><a href="#selectasset" onclick="openselectasset(this)"
+                            data-toggle="modal" data-backdrop="static" data-keyboard="false">select asset</a>
                         <select id="categories" name="categories" class="form-control">
 
                         </select>
                         <br>
                         <b>Asset Choose</b>
                         <br><br>
-                        <div id="chooseaset" style="max-height:100px !important;">
+                        <div id="containerpilihaset" style="max-height:100px !important;">
 
                         </div>
-
 
                         <br>
                         <br>
@@ -609,20 +561,20 @@ echo date('d-m-Y');?>">
                 </button>
 
             </div>
-            <div class="modal-body" >
+            <div class="modal-body">
 
-            <label for="cars" style="font-size:11pt;"><b>Transaction Section</b></label><br><br>
-            <label for="idgroup" id = "detailnotransaction">Transaction No : -</label><br>
-            <label for="idgroup" id = "detaildate">Transaction Date : -</label><br>
-            <!-- <label for="idgroup" id = "detailcreate">Created By: -</label><br> -->
-            <hr style = "border-top: 3px dashed #d4d4d4;">
-            <label for="cars" style="font-size:11pt;"><b>Asset Section</b></label><br>
-            <label for="idgroup" id = "detailqty">Asset Count : 8 pcs</label><br>
-            <label for="idgroup">Asset List: </label>
-            <br><br>
-            <div id = "listtransaction">
+                <label for="cars" style="font-size:11pt;"><b>Transaction Section</b></label><br><br>
+                <label for="idgroup" id="detailnotransaction">Transaction No : -</label><br>
+                <label for="idgroup" id="detaildate">Transaction Date : -</label><br>
+                <!-- <label for="idgroup" id = "detailcreate">Created By: -</label><br> -->
+                <hr style="border-top: 3px dashed #d4d4d4;">
+                <label for="cars" style="font-size:11pt;"><b>Asset Section</b></label><br>
+                <label for="idgroup" id="detailqty">Asset Count : 8 pcs</label><br>
+                <label for="idgroup">Asset List: </label>
+                <br><br>
+                <div id="listtransaction">
 
-            </div>
+                </div>
 
             </div>
 
@@ -634,11 +586,27 @@ echo date('d-m-Y');?>">
 </html>
 <script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>
 <script>
+    // variable pilih asset
+    var idtransaction = "";
+    var idglobalsubgroupedit = "";
+    var idglobalcategoryedit = "";
+    var idglobalidtoroomsedit = "";
+    var idglobalidfromroomsedit = "";
+    var arridselectedassetadd = [];
+    var arridselectedassetedit = [];
+    // end variable
+
     var selected = [];
     $('#mystartdate').pickadate({
         format: 'dd-mm-yyyy'
     });
     $('#enddate').pickadate({
+        format: 'dd-mm-yyyy'
+    });
+    $('#mystartdateedit').pickadate({
+        format: 'dd-mm-yyyy'
+    });
+    $('#enddateedit').pickadate({
         format: 'dd-mm-yyyy'
     });
     // $('body').scrollspy({ target: '.sidebar' });
@@ -767,7 +735,7 @@ echo date('d-m-Y');?>">
     });
 
     function loadData() {
-    
+
         var dt = $("#datatable_serverside").DataTable({
             processing: true,
             deferRender: true,
@@ -785,8 +753,7 @@ echo date('d-m-Y');?>">
                     tipe: "load"
                 }
             },
-            columns: [
-                {
+            columns: [{
                     name: '#',
                     className: 'text-center align-middle',
                     class: "details-control"
@@ -830,6 +797,12 @@ echo date('d-m-Y');?>">
                 {
                     name: 'Status',
                     className: 'text-center align-middle'
+                },
+                {
+                    name: 'action',
+                    searchable: false,
+                    orderable: false,
+                    className: 'text-center align-middle'
                 }
             ]
         });
@@ -868,34 +841,31 @@ echo date('d-m-Y');?>">
                 var approval = $("#statusapproval" + badge[0].id).text();
                 var status = $("#status" + badge[0].id).text();
                 var myapproval = "";
-             
-                if(approval.toLowerCase().includes("pending"))
-                {
+
+                if (approval.toLowerCase().includes("pending")) {
                     myapproval = "<span style = 'color:#e37e02'><i class='mi-info'></i> Pending </span>";
-                }
-                else if(approval.toLowerCase().includes("rejected"))
-                {
+                } else if (approval.toLowerCase().includes("rejected")) {
                     myapproval = "<span style = 'color:#e32702'><i class='mi-cancel'></i>Rejected </span>";
-                }
-                else if(approval.toLowerCase().includes("accepted"))
-                {
+                } else if (approval.toLowerCase().includes("accepted")) {
                     myapproval = "<span style = 'color:#2aa602'><i class='mi-check-box'></i> Accepted </span>";
                 }
-                var company = $("#company"+ badge[0].id).text();
-                var contactname = $("#contactname"+ badge[0].id).text();
-                card = '<span class = "mi-subdirectory-arrow-right" style = "font-size: 3em;height:100px;float:left;margin-left:10px"></span><div class="card" style = "min-width:250px !important;float:left;margin-left:10px;"><div class="card-header header-elements-inline"><h5 class="card-title">Lend Detail</h5></div>	<div class="card-body" style="text-align:left;"><p>Branch : <b>' +
-                        branchroom + ' </b></p> <p>Room : <b>' + room + 
-                        ' </b></div></div> 	</div> <div class="card" style = "min-width:250px !important;float:left;margin-left:10px;"><div class="card-header header-elements-inline"><h5 class="card-title"> Company Detail</h5><div class="header-elements"><div class="list-icons"></div></div></div>	<div class="card-body" style="text-align:left;"><p>Company : <b>' +
-                        company + ' </b></p> <p>Contact Name : <b>' + contactname+
-                        ' </b></p></div>	</div></div><div class="card" style = "min-width:250px !important;float:left;margin-left:10px;"><div class="card-header header-elements-inline"><h5 class="card-title"> Lend Status</h5><div class="header-elements"><div class="list-icons"></div></div></div>	<div class="card-body" style="text-align:left; "><p>Start Date : <b>' +
-                        startdate + ' </b></p><p>End Date : <b>' + duedate +
-                        ' </b></p><p>Approval : <b>'+myapproval+'</b></p> <p>Status : <b style = "' + "stringcolor" + '"> ' + status +
-                        '</b></p></div>	</div>';
-                        // <div style = "text-align:left;margin-top:10px;"> <div class = "row"><div style = "float:left;padding:5px;margin-left:20px;"><label for="cars" style="font-size:10pt;"><b>User Section</b></label><br><label>Nik : 11212</label> <br><label>Branch : Surabaya</label><br><label>Email : Email</label><br><label>Rank : Rank</label><br><br><label for="cars" style="font-size:10pt;"></div><div style = "float:left;padding:5px;margin-left:10px;"><label for="cars" style="font-size:10pt;"><b>User Section</b></label><br><label>Nik : 11212</label> <br><label>Branch : Surabaya</label><br><label>Email : Email</label><br><label>Rank : Rank</label><br><br><label for="cars" style="font-size:10pt;"></div><div style = "float:left;padding:5px;;margin-left:10px;"><label for="cars" style="font-size:10pt;"><b>User Section</b></label><br><label>Nik : 11212</label> <br><label>Branch : Surabaya</label><br><label>Email : Email</label><br><label>Rank : Rank</label><br><br><label for="cars" style="font-size:10pt;"></div></div></div>
+                var company = $("#company" + badge[0].id).text();
+                var contactname = $("#contactname" + badge[0].id).text();
+                card =
+                    '<span class = "mi-subdirectory-arrow-right" style = "font-size: 3em;height:100px;float:left;margin-left:10px"></span><div class="card" style = "min-width:250px !important;float:left;margin-left:10px;"><div class="card-header header-elements-inline"><h5 class="card-title">Lend Detail</h5></div>	<div class="card-body" style="text-align:left;"><p>Branch : <b>' +
+                    branchroom + ' </b></p> <p>Room : <b>' + room +
+                    ' </b></div></div> 	</div> <div class="card" style = "min-width:250px !important;float:left;margin-left:10px;"><div class="card-header header-elements-inline"><h5 class="card-title"> Company Detail</h5><div class="header-elements"><div class="list-icons"></div></div></div>	<div class="card-body" style="text-align:left;"><p>Company : <b>' +
+                    company + ' </b></p> <p>Contact Name : <b>' + contactname +
+                    ' </b></p></div>	</div></div><div class="card" style = "min-width:250px !important;float:left;margin-left:10px;"><div class="card-header header-elements-inline"><h5 class="card-title"> Lend Status</h5><div class="header-elements"><div class="list-icons"></div></div></div>	<div class="card-body" style="text-align:left; "><p>Start Date : <b>' +
+                    startdate + ' </b></p><p>End Date : <b>' + duedate +
+                    ' </b></p><p>Approval : <b>' + myapproval + '</b></p> <p>Status : <b style = "' +
+                    "stringcolor" + '"> ' + status +
+                    '</b></p></div>	</div>';
+                // <div style = "text-align:left;margin-top:10px;"> <div class = "row"><div style = "float:left;padding:5px;margin-left:20px;"><label for="cars" style="font-size:10pt;"><b>User Section</b></label><br><label>Nik : 11212</label> <br><label>Branch : Surabaya</label><br><label>Email : Email</label><br><label>Rank : Rank</label><br><br><label for="cars" style="font-size:10pt;"></div><div style = "float:left;padding:5px;margin-left:10px;"><label for="cars" style="font-size:10pt;"><b>User Section</b></label><br><label>Nik : 11212</label> <br><label>Branch : Surabaya</label><br><label>Email : Email</label><br><label>Rank : Rank</label><br><br><label for="cars" style="font-size:10pt;"></div><div style = "float:left;padding:5px;;margin-left:10px;"><label for="cars" style="font-size:10pt;"><b>User Section</b></label><br><label>Nik : 11212</label> <br><label>Branch : Surabaya</label><br><label>Email : Email</label><br><label>Rank : Rank</label><br><br><label for="cars" style="font-size:10pt;"></div></div></div>
 
                 row.child(card).show();
-                      
-                     
+
+
 
                 // Add to the 'open' array
                 if (idx === -1) {
@@ -1115,74 +1085,70 @@ echo date('d-m-Y');?>">
     }).trigger('change');
 
     function adddata() {
-        $("input:checkbox[class=mycheckbox]:checked").each(function () {
-            selected.push($(this).val());
 
-        });
-        
-        var myselect = selected;
+
+        var myselect = arridselectedassetadd;
         var relation = $("#relation").val();
         var branch = $('#branchroom').val();
         var room = $('#room').val();
         var startdate = $('#mystartdate').val();
         var enddate = $('#enddate').val();
-        if (selected.length > 0) {
-            if (startdate == "" || enddate == "" || relation == null  || room == null) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Empty Field',
-                text: 'Requirement data cannot be empty',
-                confirmButtonColor: '#e00d0d',
-            });
-        } else {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                url: "process/master_transaction_lend_relation.php",
-                method: 'POST',
-                data: {
-                    tipe: "add",
-                    myrelation: relation,
-                    myselected: myselect,
-                    mybranch: branch,
-                    myroom: room,
-                    mystart: startdate,
-                    myend: enddate
-
-                },
-                success: function (result) {
-                    //    alert(result);
-                    if (result == "sukses") {
-                        success();
-                        Swal.fire({
-                            title: 'Data Saved',
-                            text: 'Data Inputted Successfully',
-                            icon: 'success',
-                            confirmButtonColor: '#53d408',
-                            allowOutsideClick: false,
-                        }).then((result) => {
-                            $("#myform").trigger("reset");
-                            $("#canceladd").click();
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Insert Error',
-                            text: 'Error inserting data',
-                            confirmButtonColor: '#e00d0d',
-                        });
+        if (arridselectedassetadd.length > 0) {
+            if (startdate == "" || enddate == "" || relation == null || room == null) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Empty Field',
+                    text: 'Requirement data cannot be empty',
+                    confirmButtonColor: '#e00d0d',
+                });
+            } else {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
+                });
+                $.ajax({
+                    url: "process/master_transaction_lend_relation.php",
+                    method: 'POST',
+                    data: {
+                        tipe: "add",
+                        myrelation: relation,
+                        myselected: myselect,
+                        mybranch: branch,
+                        myroom: room,
+                        mystart: startdate,
+                        myend: enddate
+
+                    },
+                    success: function (result) {
+                        //    alert(result);
+                        if (result == "sukses") {
+                            success();
+                            Swal.fire({
+                                title: 'Data Saved',
+                                text: 'Data Inputted Successfully',
+                                icon: 'success',
+                                confirmButtonColor: '#53d408',
+                                allowOutsideClick: false,
+                            }).then((result) => {
+                                $("#myform").trigger("reset");
+                                $("#canceladd").click();
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Insert Error',
+                                text: 'Error inserting data',
+                                confirmButtonColor: '#e00d0d',
+                            });
+                        }
 
 
-                }
-            });
-        }
+                    }
+                });
+            }
 
-        }
-        else{
+        } else {
             Swal.fire({
                 icon: 'error',
                 title: 'No Asset Checked ',
@@ -1190,7 +1156,7 @@ echo date('d-m-Y');?>">
                 confirmButtonColor: '#e00d0d',
             });
         }
-   
+
 
     }
 
@@ -1404,13 +1370,102 @@ echo date('d-m-Y');?>">
         });
     }
     $(document).ready(function () {
+        $("#groupsedit").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_disp_new_asset.php",
+                method: 'POST',
+                data: {
+                    tipe: "getsubgroup",
+                    idgroup: myid
+                },
+                success: function (result) {
+                    $("#subgroupsedit").html("");
+                    $("#subgroupsedit").html(result).promise().done(function () {
+                        if (!idglobalsubgroupedit == "") {
+                            $('#subgroupsedit').find('option[value="' +
+                                idglobalsubgroupedit +
+                                '"]').prop('selected', true);
+                        }
+                    });
+                    $("#subgroupsedit").trigger("change");
+                }
 
-        $("#relation").on("change", function(){
+            })
+        }).trigger("change");
+        $("#subgroupsedit").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_disp_new_asset.php",
+                method: 'POST',
+                data: {
+                    tipe: "getcategory",
+                    idsubgroup: myid
+                },
+                success: function (result) {
+
+                    // alert(result);
+
+
+                    $("#categoriesedit").html("");
+                    $("#categoriesedit").html(result).promise().done(function () {
+                        if (!idglobalcategoryedit == "") {
+                            $('#categoriesedit').find('option[value="' +
+                                idglobalcategoryedit +
+                                '"]').prop('selected', true);
+                        }
+                    });
+                    $("#categoriesedit").trigger("change");
+                }
+
+            })
+        }).trigger("change");
+        $("#categories").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_disp_department.php",
+                method: 'POST',
+                data: {
+                    tipe: "getasset",
+                    idcategory: myid
+                },
+                success: function (result) {
+                    selected = [];
+                    // alert(result);
+                    $("#chooseaset").html("");
+                    $("#chooseaset").html(result);
+                }
+
+            })
+        }).trigger("change");
+        $("#relation").on("change", function () {
             var text = $("#relation option:selected").text();
             // alert(text);
             var split = text.split(" - ");
             $("#companypreview").text(split[0]);
             $("#contactnamepreview").text(split[1]);
+        }).trigger("change");
+        $("#relationedit").on("change", function () {
+            var text = $("#relationedit option:selected").text();
+            // alert(text);
+            var split = text.split(" - ");
+            $("#companypreviewedit").text(split[0]);
+            $("#contactnamepreviewedit").text(split[1]);
         }).trigger("change");
         $("#groups").trigger('change');
         $("#groups").on("change", function () {
@@ -1473,7 +1528,7 @@ echo date('d-m-Y');?>">
                 }
             });
             $.ajax({
-                url: "process/master_transaction_lend_personel.php",
+                url: "process/master_transaction_lend_relation.php",
                 method: 'POST',
                 data: {
                     tipe: "getroom",
@@ -1482,6 +1537,36 @@ echo date('d-m-Y');?>">
                 success: function (result) {
                     $("#room").html("");
                     $("#room").html(result);
+
+                }
+
+            })
+        }).trigger("change");
+        $("#branchedit").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_lend_relation.php",
+                method: 'POST',
+                data: {
+                    tipe: "getroom",
+                    idbranch: myid
+                },
+                success: function (result) {
+                    $("#roomedit").html("");
+                    $("#roomedit").html(result).promise().done(function () {
+                        if (!globalroom == "") {
+                            // alert(globalid);
+                            $('#roomedit').find('option[value="' + globalroom +
+                                '"]').prop('selected', true);
+                        }
+
+                    });
+                    $("#roomedit").trigger('change');
 
                 }
 
@@ -1607,11 +1692,11 @@ echo date('d-m-Y');?>">
         // alert(purchaseprice);
     }
 </script>
-                               
-                </div>
-            </div>
-        </div>
-    </div>
+
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="modal fade " id="myModal">
     <div class="modal-dialog modal-xl" role="document">
@@ -2075,7 +2160,7 @@ echo date('d-m-Y');?>">
                             data-toggle="tab">General</a></li>
                     <li class="nav-item"><a href="#colored-rounded-justified-tab2" class="nav-link"
                             data-toggle="tab">Purchase</a></li>
-                    <li class="nav-item"><a id = "mydepreciation" href="#depreciation" class="nav-link"
+                    <li class="nav-item"><a id="mydepreciation" href="#depreciation" class="nav-link"
                             data-toggle="tab">Depreciation</a></li>
                     <li class="nav-item"><a href="#colored-rounded-justified-tab3" class="nav-link"
                             data-toggle="tab">Warranty </a></li>
@@ -2188,22 +2273,22 @@ echo date('d-m-Y');?>">
                             </div>
                         </div>
                         <br>
-                       
+
                     </div>
                     <div class="tab-pane fade" id="depreciation">
                         <div class="row" style="height:100% !important;margin-right:1px !important; overflow-y:auto;">
                             <div class="col-md-12">
                                 <h4><span class="font-weight-semibold">Depreciation Info</span></h4>
-                                <table  id="mydatatable" class="table table-hover table-bordered display ">
-                                    <thead >
-                                        <tr >
+                                <table id="mydatatable" class="table table-hover table-bordered display ">
+                                    <thead>
+                                        <tr>
                                             <th>Month</th>
                                             <th>Depreciation</th>
                                             <th>Book Value</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
-                                    <tbody id = "depreciationtablebody">
+                                    <tbody id="depreciationtablebody">
                                         <!-- <tr>
                                             <td>1</td>
                                             <td>Rp 1.000.000</td>
@@ -2217,7 +2302,7 @@ echo date('d-m-Y');?>">
                                             <td><b><i style = "font-size:17px; color : #ebba34;font-weight:bold;" class="mi-timer"></i><b></td>
                                         
                                         </tr> -->
-                                       
+
                                     </tbody>
 
                                 </table>
@@ -2254,6 +2339,228 @@ echo date('d-m-Y');?>">
         </div>
     </div>
 </div>
+<!-- Modal Choose Aset -->
+<div class="modal fade" id="selectasset">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
+                <h5 class="modal-title">Select Asset</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="myforms">
+                    <div class="form-group">
+                        <label for="cars">Group: &nbsp <b><label id="grouptitleselectasset">-</label></b></label><br>
+                        <label for="cars">Sub Group: &nbsp <b><label
+                                    id="subgrouptitleselectasset">-</label></b></label><br>
+                        <label for="cars">Category: &nbsp <b><label
+                                    id="categoriestitleselectasset">-</label></b></label><br>
+                        <table id="datatable_asset" class="table table-hover table-bordered display nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>No. Asset</th>
+                                    <th>Name</th>
+                                    <th>Condition</th>
+                                    <th>Initial Condition</th>
+
+                                </tr>
+                            </thead>
+                            </tbody>
+                            </tbody>
+
+                        </table>
+                        <div style="float:right;margin-bottom:20px;">
+                            <button type="button" class="btn btn-primary" id="pilihaset" style="margin-right:10px;"
+                                onclick="pilihasset()">Choose</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                id="canceladd">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModalEditTransactions">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
+                <h5 class="modal-title">Edit Transaction</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="myforms">
+                    <div class="form-group">
+                        <label for="cars" style="font-size:11pt;"><b>Relation Section</b></label><br>
+                        <label for="cars">Company:</label>
+                        <select id="relationedit" name="relation" class="form-control">
+                            <?php
+                                        for($i = 0 ; $i < count($myrelation); $i++)
+                                        {                                            
+                                                echo '<option value="'.$myrelation[$i]['id'].'">'.$myrelation[$i]['company']." - ".$myrelation[$i]['contactname'].'</option>';                                       
+                                        }
+                                ?>
+                        </select>
+                        <br>
+                        <b>Company Preview</b>
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <br>
+                                <label>Company</label>
+                                <br>
+                                <label id="companypreviewedit">-</label>
+                            </div>
+                            <div class="col-md-6">
+                                <br>
+                                <label>Contact</label>
+                                <br>
+                                <label id="contactnamepreviewedit">-</label>
+                            </div>
+                        </div>
+                        <hr>
+
+
+                        <label for="cars" style="font-size:11pt;"><b>Room Section</b></label><br>
+                        <label for="cars">Branch :</label>
+                        <select id="branchedit" name="branchedit" class="form-control">
+                            <?php
+                                        for($i = 0 ; $i < count($mybranch); $i++)
+                                        {                                            
+                                                echo '<option value="'.$mybranch[$i]['idbranch'].'">'.$mybranch[$i]['branch'].'</option>';                                       
+                                        }
+                                ?>
+                        </select>
+                        <br>
+                        <label for="cars">Room :</label>
+                        <select id="roomedit" name="room" class="form-control">
+
+                        </select>
+                        <br>
+                        <hr>
+                        <label for="cars">Start Date</label>
+                        <div class="input-group">
+                            <span class="input-group-prepend">
+                                <span class="input-group-text"><i class="icon-calendar22"></i></span>
+                            </span>
+                            <input type="text" class="form-control pickadate required" name="mystartdate"
+                                id="mystartdateedit" value="<?php echo date('d-m-Y');?>">
+
+                        </div>
+
+                        <br>
+
+                        <label for="cars">Due Date:</label>
+                        <div class="input-group">
+                            <span class="input-group-prepend">
+                                <span class="input-group-text"><i class="icon-calendar22"></i></span>
+                            </span>
+                            <input type="text" class="form-control pickadate required" name="enddate" id="enddateedit"
+                                value="<?php date_default_timezone_set('Asia/Jakarta');
+echo date('d-m-Y');?>">
+
+                        </div>
+
+                        <label for="cars">Asset Group:</label>
+                        <select id="groupsedit" name="groupsedit" class="form-control">
+                            <?php
+                                        for($i = 0 ; $i < count($mykategoriasset); $i++)
+                                        {                                            
+                                                echo '<option value="'.$mykategoriasset[$i]['id'].'">'.$mykategoriasset[$i]['nama'].'</option>';                                       
+                                        }
+                                ?>
+                        </select>
+                        <br>
+                        <label for="cars">Asset Sub Group:</label>
+                        <select id="subgroupsedit" name="subgroupsedit" class="form-control">
+                        </select>
+                        <br>
+                        <label for="cars">Asset Category:</label> <a href="#selectassetedit"
+                            onclick="openselectassetedit(this)" data-toggle="modal" data-backdrop="static"
+                            data-keyboard="false">select asset</a>
+                        <select id="categoriesedit" name="categoriesedit" class="form-control">
+                        </select>
+                        <br>
+                        <b>Asset Choose</b>
+                        <br><br>
+                        <div id="containerpilihasetedit" style="max-height:100px !important;">
+                        </div>
+                        <br>
+                        <br>
+                        <div style="float:right;">
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" style="margin-right:10px;margin-top:10px;"
+                    onclick="editdata()">Save</button>
+                <button type="button" class="btn btn-secondary" style="margin-right:30px;margin-top:10px;"
+                    data-dismiss="modal" id="canceledittransaction">Cancel</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="selectassetedit">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
+                <h5 class="modal-title">Select Asset</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="myforms">
+                    <div class="form-group">
+                        <label for="cars">Group: &nbsp <b><label
+                                    id="grouptitleselectassetedit">-</label></b></label><br>
+                        <label for="cars">Sub Group: &nbsp <b><label
+                                    id="subgrouptitleselectassetedit">-</label></b></label><br>
+                        <label for="cars">Category: &nbsp <b><label
+                                    id="categoriestitleselectassetedit">-</label></b></label><br>
+                        <table id="datatable_asset_edit" class="table table-hover table-bordered display nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>No. Asset</th>
+                                    <th>Name</th>
+                                    <th>Condition</th>
+                                    <th>Initial Condition</th>
+
+                                </tr>
+                            </thead>
+                            </tbody>
+
+                            </tbody>
+
+                        </table>
+                        <div style="float:right;margin-bottom:20px;">
+                            <button type="button" class="btn btn-primary" id="pilihaset" style="margin-right:10px;"
+                                onclick="pilihassetedit()">Choose</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                id="canceladd">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- End Modal Choose Asset -->
+
 
 </body>
 
@@ -2265,6 +2572,7 @@ echo date('d-m-Y');?>">
     var myopenid = "";
     var globaltotalpurchaseprice = 0;
     var globalcostpermonth = 0;
+
     function openmodaldisplay(element) {
         //general
         myopenid = element.id;
@@ -2295,8 +2603,8 @@ echo date('d-m-Y');?>">
         var economicalpurchase = $("#economical" + myid).val();
         var costpermonthpurchase = $("#costpermonth" + myid).val();
 
-         globaltotalpurchaseprice = parseInt(totalpurchasepurchase);
-         globalcostpermonth = parseInt(costpermonthpurchase);
+        globaltotalpurchaseprice = parseInt(totalpurchasepurchase);
+        globalcostpermonth = parseInt(costpermonthpurchase);
 
         $("#nopolabelpurchase").text(nopopurchase);
         $("#purchasefromlabelpurchase").text(purchasefrompurchase);
@@ -2647,7 +2955,7 @@ echo date('d-m-Y');?>">
         });
     }).trigger('change');
 
-   
+
 
 
     function mytemplatechange(element) {
@@ -2671,7 +2979,7 @@ echo date('d-m-Y');?>">
                 if (result == "none") {
                     $("#customquestion").html(
                         "<span style = 'color:grey;'>There is no custom field on this template, Go Ahead</span>"
-                        );
+                    );
                     $("#idcustomquestion").val("");
                 } else {
                     var splitresult = result.split("~~");
@@ -2779,7 +3087,7 @@ echo date('d-m-Y');?>">
                 if (result == "none") {
                     $("#containercustominfo").html(
                         "<span style = 'color:grey;'>Oops, there is no custom field on this template</span>"
-                        );
+                    );
 
                 } else {
                     $("#containercustominfo").html(result);
@@ -2871,44 +3179,45 @@ echo date('d-m-Y');?>">
 
             })
         }).trigger("change");
-        $("#mydepreciation").on("click", function(){
+        $("#mydepreciation").on("click", function () {
             $("#depreciationtablebody").html("");
             var postingdate = $("#postingdateraw" + myopenid).val();
-            var totalmonth = $("#totalmonth"+myopenid).val();
-            
+            var totalmonth = $("#totalmonth" + myopenid).val();
+
             var date1 = new Date(postingdate);
             var date2 = new Date(Date.now());
-            var diffYears = date2.getFullYear()-date1.getFullYear();
-            var diffMonths = date2.getMonth()-date1.getMonth();
-            var diffDays = date2.getDate()-date1.getDate();
+            var diffYears = date2.getFullYear() - date1.getFullYear();
+            var diffMonths = date2.getMonth() - date1.getMonth();
+            var diffDays = date2.getDate() - date1.getDate();
 
-            var months = (diffYears*12 + diffMonths);
-            var totalprice =  globaltotalpurchaseprice;
+            var months = (diffYears * 12 + diffMonths);
+            var totalprice = globaltotalpurchaseprice;
             // alert(date1);
-            for(var i = 0 ; i < parseInt(totalmonth); i++)
-            {
-                var month = i+1;
-                    totalprice -= globalcostpermonth;
-                if((i+1)<=parseInt(months))
-                {
-                   
-                    var mystring = '<tr><td>'+month+'</td><td>Rp '+globalcostpermonth+'</td><td>Rp '+totalprice+'</td><td><b><i style = "font-size:17px; color : #26a69a;font-weight:bold;" class="mi-check"></i><b></td></tr>';
+            for (var i = 0; i < parseInt(totalmonth); i++) {
+                var month = i + 1;
+                totalprice -= globalcostpermonth;
+                if ((i + 1) <= parseInt(months)) {
+
+                    var mystring = '<tr><td>' + month + '</td><td>Rp ' + globalcostpermonth +
+                        '</td><td>Rp ' + totalprice +
+                        '</td><td><b><i style = "font-size:17px; color : #26a69a;font-weight:bold;" class="mi-check"></i><b></td></tr>';
+                    $("#depreciationtablebody").append(mystring);
+                } else {
+                    var mystring = '<tr><td>' + month + '</td><td>Rp ' + globalcostpermonth +
+                        '</td><td>Rp ' + totalprice +
+                        '</td><td><b><i style = "font-size:17px; color : #ebba34;font-weight:bold;" class="mi-timer"></i><b></td></tr>';
                     $("#depreciationtablebody").append(mystring);
                 }
-                else{
-                    var mystring = '<tr><td>'+month+'</td><td>Rp '+globalcostpermonth+'</td><td>Rp '+totalprice+'</td><td><b><i style = "font-size:17px; color : #ebba34;font-weight:bold;" class="mi-timer"></i><b></td></tr>';
-                    $("#depreciationtablebody").append(mystring);
-                }
-              
+
             }
-           
-                                        // <tr>
-                                        //     <td>1</td>
-                                        //     <td>Rp 1.000.000</td>
-                                        //     <td>Rp 11.000.000</td>
-                                        //     <td><b><i style = "font-size:17px; color : #ebba34;font-weight:bold;" class="mi-timer"></i><b></td>
-                                        
-                                        // </tr>
+
+            // <tr>
+            //     <td>1</td>
+            //     <td>Rp 1.000.000</td>
+            //     <td>Rp 11.000.000</td>
+            //     <td><b><i style = "font-size:17px; color : #ebba34;font-weight:bold;" class="mi-timer"></i><b></td>
+
+            // </tr>
         });
 
         $('#templates').trigger('change');
@@ -2946,7 +3255,7 @@ echo date('d-m-Y');?>">
                     if (result == "another") {
                         $("#containercustominfo").html(
                             "<span style = 'color:red;'>Please choose another category, this category doesnt have template</span>"
-                            );
+                        );
 
                         $("#template").val("");
 
@@ -2960,7 +3269,7 @@ echo date('d-m-Y');?>">
                         if (mysplittter[1] == "none") {
                             $("#containercustominfo").html(
                                 "<span style = 'color:grey;'>Oops, there is no custom field on this template</span>"
-                                );
+                            );
                             $("#idcustomquestion").val("");
                         } else {
 
@@ -3025,49 +3334,446 @@ echo date('d-m-Y');?>">
         }
         // alert(purchaseprice);
     }
-    function openmodaldetailtransaction(element){
+
+    function openmodaldetailtransaction(element) {
         var myid = element.id;
         var notransaction = $("#notransaction" + myid).text();
         var datetransaction = $("#mydate" + myid).text();
         var createdby = $("#nama" + myid).text();
         var mydate = new Date(datetransaction);
         const monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
+            "July", "August", "September", "October", "November", "December"
         ];
         $("#detailnotransaction").text("Transaction No : " + notransaction);
         // $("#detailcreate").text("Created By : " + createdby)
-        $("#detaildate").text("Transaction Date : " + mydate.getDate() + " " + monthNames[mydate.getMonth()] + " " + mydate.getFullYear());
-           $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        $("#detaildate").text("Transaction Date : " + mydate.getDate() + " " + monthNames[mydate.getMonth()] + " " +
+            mydate.getFullYear());
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "process/master_transaction_lend_relation.php",
+            method: 'POST',
+            data: {
+                tipe: "getdetailtransaction",
+                idtransaction: myid
+            },
+            success: function (result) {
+                // alert(result);
+                if (result == "") {
+                    $("#detailqty").html("Asset Count : 0 pcs");
+                    $("#listtransaction").html("");
+                    $("#listtransaction").html(result);
+                } else {
+                    var mysplit = result.split("||");
+                    var qty = mysplit[0];
+                    var data = mysplit[1];
+                    $("#listtransaction").html("");
+                    $("#listtransaction").html(data);
+                    $("#detailqty").html("Asset Count : " + qty + " pcs");
                 }
-            });
-            $.ajax({
-                url: "process/master_transaction_lend_relation.php",
-                method: 'POST',
-                data: {
-                    tipe: "getdetailtransaction",
-                    idtransaction: myid
-                },
-                success: function (result) {
-                    // alert(result);
-                    if(result == "")
-                    {
-                        $("#detailqty").html("Asset Count : 0 pcs");
-                        $("#listtransaction").html("");
-                        $("#listtransaction").html(result);
-                    }
-                    else{
-                        var mysplit = result.split("||");
-                        var qty = mysplit[0];
-                        var data = mysplit[1];
-                        $("#listtransaction").html("");
-                        $("#listtransaction").html(data);
-                        $("#detailqty").html("Asset Count : "+qty+" pcs");
-                    }
-                    
-                }
-            });
+
+            }
+        });
 
     }
+
+    // Asset Choose Section
+    var asset = null;
+    var assetedit = null;
+    var chosenasset = null;
+    var iddefaultcategories = "";
+    $('#selectasset').on('shown.bs.modal', function () {
+        var idcategories = $("#categories").val();
+        if (iddefaultcategories != idcategories) {
+            iddefaultcategories = idcategories;
+            loadasset(idcategories);
+        }
+        asset.columns.adjust();
+    });
+
+    function openselectasset() {
+
+        var idcategories = $("#categories").val();
+        if (iddefaultcategories != idcategories) {
+            iddefaultcategories = idcategories;
+            loadasset(idcategories);
+
+        }
+
+        var groups = document.getElementById("groups");
+        var subgroups = document.getElementById("subgroups");
+        var categories = document.getElementById("categories");
+        var strgroups = groups.options[groups.selectedIndex].text;
+        var strsubgroups = subgroups.options[subgroups.selectedIndex].text;
+        var strcategories = categories.options[categories.selectedIndex].text;
+        $("#grouptitleselectasset").text(strgroups);
+        $("#subgrouptitleselectasset").text(strsubgroups);
+        $("#categoriestitleselectasset").text(strcategories);
+    }
+
+    function openselectassetedit() {
+
+        var idcategories = $("#categoriesedit").val();
+        var groups = document.getElementById("groupsedit");
+        var subgroups = document.getElementById("subgroupsedit");
+        var categories = document.getElementById("categoriesedit");
+        var strgroups = groups.options[groups.selectedIndex].text;
+        var strsubgroups = subgroups.options[subgroups.selectedIndex].text;
+        var strcategories = categories.options[categories.selectedIndex].text;
+
+        $("#grouptitleselectassetedit").text(strgroups);
+        $("#subgrouptitleselectassetedit").text(strsubgroups);
+        $("#categoriestitleselectassetedit").text(strcategories);
+        if (iddefaultcategories != idcategories) {
+            iddefaultcategories = idcategories;
+            loadassetedit(idcategories);
+        }
+    }
+
+    function loadasset(params) {
+
+        asset = $("#datatable_asset").DataTable({
+            processing: true,
+            deferRender: true,
+            serverSide: true,
+            destroy: true,
+            scrollX: true,
+            responsive: true,
+            autoWidth: true,
+            iDisplayInLength: 10,
+            // scrollX: true,
+            order: [
+                [0, 'asc']
+            ],
+            ajax: {
+                url: 'process/mastergetasset.php',
+                method: 'POST',
+                data: {
+                    tipe: "load",
+                    statusmust: "placed",
+                    myparam: params
+                },
+
+            },
+            columns: [{
+                    searchable: false,
+                    orderable: false,
+                    name: '#',
+                    className: 'text-center align-middle'
+                },
+                {
+                    name: 'noasset',
+                    className: 'text-center align-middle'
+                },
+                {
+                    name: 'name',
+                    className: 'text-center align-middle'
+                },
+                {
+                    name: 'conditions',
+                    className: 'text-center align-middle'
+                },
+                {
+                    name: 'initial_condition',
+                    className: 'text-center align-middle'
+                }
+            ]
+        });
+    };
+
+    function loadassetedit(params) {
+
+        assetedit = $("#datatable_asset_edit").DataTable({
+            processing: true,
+            deferRender: true,
+            serverSide: true,
+            destroy: true,
+            scrollX: true,
+            responsive: true,
+            autoWidth: true,
+            iDisplayInLength: 10,
+            // scrollX: true,
+            order: [
+                [0, 'asc']
+            ],
+            ajax: {
+                url: 'process/mastergetasset.php',
+                method: 'POST',
+                data: {
+                    tipe: "loadexisting",
+                    statusmust: "placed",
+                    assetexisting: arridselectedassetedit,
+                    myparam: params
+                },
+
+            },
+            columns: [{
+                    searchable: false,
+                    orderable: false,
+                    name: '#',
+                    className: 'text-center align-middle'
+                },
+                {
+                    name: 'noasset',
+                    className: 'text-center align-middle'
+                },
+                {
+                    name: 'name',
+                    className: 'text-center align-middle'
+                },
+                {
+                    name: 'conditions',
+                    className: 'text-center align-middle'
+                },
+                {
+                    name: 'initial_condition',
+                    className: 'text-center align-middle'
+                }
+            ]
+        });
+    };
+
+
+
+
+    function pilihasset() {
+        var count = 0;
+        var arrselectedasset = [];
+        arridselectedassetadd = [];
+        $(".checkboxasset").each(function () {
+            var checked = this.checked;
+
+            if (checked) {
+                var myid = this.id;
+                var splitid = myid.split("_");
+                var myfixid = splitid[1];
+                arridselectedassetadd.push(myfixid);
+                var noasset = $("#noasset" + myfixid).text();
+                var nameasset = $("#name" + myfixid).text();
+                var conditions = $("#conditions" + myfixid).text();
+                var initialcondition = $("#initial_condition" + myfixid).text();
+                arrselectedasset.push(myfixid + "~~" + noasset + "~~" + nameasset + "~~" + conditions + "~~" +
+                    initialcondition);
+                count += 1;
+            }
+
+
+        });
+        $("#containerpilihaset").html("");
+        $("#containerpilihaset").append(
+            "<table id = 'tablepilihasset' class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Asset Name</th></tr><tbody>"
+        );
+        for (var i = 0; i < arrselectedasset.length; i++) {
+            var split = arrselectedasset[i].split("~~");
+            $("#tablepilihasset").append("<tr><td>" + split[1] + "</td><td>" + split[2] + "</td></tr>");
+        }
+        $("#containerpilihaset").append("</tbody></table>");
+        $("#selectasset").modal("toggle");
+    }
+
+
+    function pilihassetedit() {
+        var count = 0;
+        var arrselectedasset = [];
+        arridselectedassetedit = [];
+        $(".checkboxassetedit").each(function () {
+            var checked = this.checked;
+
+            if (checked) {
+                var myid = this.id;
+                var splitid = myid.split("_");
+                var myfixid = splitid[1];
+                arridselectedassetedit.push(myfixid);
+                var noasset = $("#noassetedit" + myfixid).text();
+                var nameasset = $("#nameedit" + myfixid).text();
+                var conditions = $("#conditionsedit" + myfixid).text();
+                var initialcondition = $("#initial_conditionedit" + myfixid).text();
+                arrselectedasset.push(myfixid + "~~" + noasset + "~~" + nameasset + "~~" + conditions + "~~" +
+                    initialcondition);
+                count += 1;
+            }
+
+
+        });
+
+        $("#containerpilihasetedit").html("");
+        $("#containerpilihasetedit").append(
+            "<table id = 'tablepilihassetedit' class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Asset Name</th></tr><tbody>"
+        );
+        for (var i = 0; i < arrselectedasset.length; i++) {
+            var split = arrselectedasset[i].split("~~");
+            $("#tablepilihassetedit").append("<tr><td>" + split[1] + "</td><td>" + split[2] + "</td></tr>");
+        }
+        $("#containerpilihasetedit").append("</tbody></table>");
+        $("#selectassetedit").modal("toggle");
+    };
+
+    var globalroom = "";
+    var idbranchroomedit = "";
+    var globaliddepartment = "";
+    var globalnik = "";
+
+
+    function openmodaledits(element) {
+
+        var myelement = element.id.split("-");
+        var myid = myelement[1];
+        idtransaction = myid;
+        var idgroup = $("#group_" + myid).val();
+        var subgroup = $("#subgroup_" + myid).val();
+        var category = $("#category_" + myid).val();
+
+        //optional
+        var idrelation_ = $("#idrelation_" + myid).val();
+        var idbranch_ = $("#idbranch_" + myid).val();
+        var idroom_ = $("#idroom_" + myid).val();
+
+        var iddepartment = $("#iddepartment_" + myid).val();
+        var branch = $("#idbranchpersonel_" + myid).val();
+        var nik = $("#nik" + myid).text();
+        var branchroom_ = $("#branchroom_" + myid).val();
+        var idroom_ = $("#idroom_" + myid).val();
+        var remarks = $("#remark" + myid).text();
+        var startdate = $("#startdate" + myid).text();
+        var enddate = $("#duedate" + myid).text();
+
+        globalroom = idroom_;
+        idbranchroomedit = branchroom_;
+        globaliddepartment = iddepartment;
+        globalnik = nik;
+
+        var datearray = startdate.split("-");
+        var newstartdate = datearray[2] + '-' + datearray[1] + '-' + datearray[0];
+        var dateendarray = enddate.split("-");
+        var newenddate = dateendarray[2] + '-' + dateendarray[1] + '-' + dateendarray[0];
+
+        $("#mystartdateedit").val(newstartdate);
+        $("#enddateedit").val(newenddate);
+        // $("#relationedit").val()
+        // $("#remarkedit").val(remarks);
+
+        $('#relationedit option[value=' + idrelation_ + ']').prop('selected', true);
+        $('#relationedit').trigger("change");
+
+
+
+        $('#branchedit option[value=' + idbranch_ + ']').prop('selected', true);
+        $('#branchedit').trigger("change");
+
+        // $('#departmentedit option[value=' + iddepartment + ']').prop('selected', true);
+        // $('#departmentedit').trigger("change");
+
+
+
+
+        // $('#fromroomedit option[value=' + fromroom + ']').prop('selected', true);
+        // $('#fromroomedit').trigger("change");
+
+
+        //end optional
+
+        idglobalsubgroupedit = subgroup;
+        idglobalcategoryedit = category;
+        $('#groupsedit option[value=' + idgroup + ']').prop('selected', true);
+        $('#groupsedit').trigger("change");
+        asseteditshow();
+    };
+
+    function asseteditshow() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "process/mastergetasset.php",
+            method: 'POST',
+            data: {
+                tipe: "getassettransactionlendrelation",
+                myidtransaction: idtransaction
+
+            },
+            success: function (result) {
+                var jsonparse = JSON.parse(result);
+                $("#containerpilihasetedit").html("");
+                $("#containerpilihasetedit").html(jsonparse.data.mystring);
+                arridselectedassetedit = jsonparse.data.myarray;
+
+            }
+        });
+    };
+
+    function editdata() {
+        if (arridselectedassetedit.length > 0) {
+            // var myselects = arridselectedassetedit;
+            var idtransactions = idtransaction;
+            var myselect = arridselectedassetedit;
+            var relation = $("#relationedit").val();
+            var branch = $('#branchedit').val();
+            var room = $('#roomedit').val();
+            var startdate = $('#mystartdateedit').val();
+            var enddate = $('#enddateedit').val();
+            if (startdate == "" || enddate == "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Empty Field',
+                    text: 'Requirement data cannot be empty',
+                    confirmButtonColor: '#e00d0d',
+                });
+            } else {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: "process/master_transaction_lend_relation.php",
+                    method: 'POST',
+                    data: {
+                        tipe: "edit",
+                        myrelation: relation,
+                        myselected: myselect,
+                        mybranch: branch,
+                        myroom: room,
+                        mystart: startdate,
+                        myend: enddate,
+                        mytransactions: idtransactions
+
+                    },
+                    success: function (result) {
+                        //    console.log(result);
+
+
+                        Swal.fire({
+                            title: 'Data Saved',
+                            text: 'Data Changed Successfully',
+                            icon: 'success',
+                            confirmButtonColor: '#53d408',
+                            allowOutsideClick: false,
+                        }).then((result) => {
+                            success();
+                            // $("#myforms").trigger("reset");
+                            $("#canceledittransaction").click();
+                        });
+                    }
+
+
+
+                });
+            }
+
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'No Asset Checked ',
+                text: 'Please choose at least 1 asset to be placed',
+                confirmButtonColor: '#e00d0d',
+            });
+        }
+    }
+
+    // end choose aset 
 </script>

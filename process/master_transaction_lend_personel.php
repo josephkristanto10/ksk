@@ -27,66 +27,76 @@ if($tipe == "load")
     
     $total_data = mysqli_query($conn, 
     
-    "select tltp.*, lbranch.branch, lbranchroom.branch as branchroom, karyawan.nama, karyawan.email, rank.rank, lroom.room FROM transaction_lend_to_personal tltp
+    "select tltp.*, lbranch.branch, lbranchroom.branch as branchroom, karyawan.nama, karyawan.email, rank.rank, lroom.room , asset.idgroup, asset.idsubgroup, asset.idcategory  FROM transaction_lend_to_personal tltp
     inner join location_setup_sister_branch lbranchsetup on lbranchsetup.idbranch = tltp.idbranch
     inner join location_branch lbranch on lbranch.idbranch = lbranchsetup.idbranch 
     inner join location_branch lbranchroom on lbranchroom.idbranch = lbranchsetup.idbranch 
     inner join karyawan on karyawan.nik = tltp.nik
-    	inner join rank on rank.id = karyawan.idrank
-    inner join location_room lroom on lroom.id = tltp.room  
-    where lbranchsetup.idsistercompany = '$myses'
+        inner join rank on rank.id = karyawan.idrank
+    inner join location_room lroom on lroom.id = tltp.room
+    inner join transaction_lend_to_personal_log tlotpl on tlotpl.idtransaksi =  tltp.id
+    inner join asset on asset.id = tlotpl.idasset   
+    where lbranchsetup.idsistercompany = '$myses' group by tltp.id
     "
 
 );
     
     if(empty($search)) {
-        $query_data = mysqli_query($conn, "select tltp.*, lbranch.branch, lbranchroom.branch as branchroom, karyawan.nama, karyawan.email, rank.rank, lroom.room FROM transaction_lend_to_personal tltp
+        $query_data = mysqli_query($conn, "select tltp.*, lbranch.branch, lbranchroom.branch as branchroom, karyawan.nama, karyawan.email, rank.rank, lroom.room , asset.idgroup, asset.idsubgroup, asset.idcategory  FROM transaction_lend_to_personal tltp
         inner join location_setup_sister_branch lbranchsetup on lbranchsetup.idbranch = tltp.idbranch
         inner join location_branch lbranch on lbranch.idbranch = lbranchsetup.idbranch 
         inner join location_branch lbranchroom on lbranchroom.idbranch = lbranchsetup.idbranch 
         inner join karyawan on karyawan.nik = tltp.nik
             inner join rank on rank.id = karyawan.idrank
-        inner join location_room lroom on lroom.id = tltp.room  
-        where lbranchsetup.idsistercompany = '$myses' ORDER BY $order $dir LIMIT $start, $length");
+        inner join location_room lroom on lroom.id = tltp.room
+        inner join transaction_lend_to_personal_log tlotpl on tlotpl.idtransaksi =  tltp.id
+        inner join asset on asset.id = tlotpl.idasset   
+        where lbranchsetup.idsistercompany = '$myses'  group by tltp.id ORDER BY $order $dir LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "select tltp.*, lbranch.branch, lbranchroom.branch as branchroom, karyawan.nama, karyawan.email, rank.rank, lroom.room FROM transaction_lend_to_personal tltp
+        $total_filtered = mysqli_query($conn, "select tltp.*, lbranch.branch, lbranchroom.branch as branchroom, karyawan.nama, karyawan.email, rank.rank, lroom.room , asset.idgroup, asset.idsubgroup, asset.idcategory  FROM transaction_lend_to_personal tltp
         inner join location_setup_sister_branch lbranchsetup on lbranchsetup.idbranch = tltp.idbranch
         inner join location_branch lbranch on lbranch.idbranch = lbranchsetup.idbranch 
         inner join location_branch lbranchroom on lbranchroom.idbranch = lbranchsetup.idbranch 
         inner join karyawan on karyawan.nik = tltp.nik
             inner join rank on rank.id = karyawan.idrank
-        inner join location_room lroom on lroom.id = tltp.room  
-        where lbranchsetup.idsistercompany = '$myses'");
+        inner join location_room lroom on lroom.id = tltp.room
+        inner join transaction_lend_to_personal_log tlotpl on tlotpl.idtransaksi =  tltp.id
+        inner join asset on asset.id = tlotpl.idasset   
+        where lbranchsetup.idsistercompany = '$myses' group by tltp.id");
     } else {
-        $query_data = mysqli_query($conn, "select tltp.*, lbranch.branch, lbranchroom.branch as branchroom, karyawan.nama, karyawan.email, rank.rank, lroom.room FROM transaction_lend_to_personal tltp
+        $query_data = mysqli_query($conn, "select tltp.*, lbranch.branch, lbranchroom.branch as branchroom, karyawan.nama, karyawan.email, rank.rank, lroom.room , asset.idgroup, asset.idsubgroup, asset.idcategory  FROM transaction_lend_to_personal tltp
         inner join location_setup_sister_branch lbranchsetup on lbranchsetup.idbranch = tltp.idbranch
         inner join location_branch lbranch on lbranch.idbranch = lbranchsetup.idbranch 
         inner join location_branch lbranchroom on lbranchroom.idbranch = lbranchsetup.idbranch 
         inner join karyawan on karyawan.nik = tltp.nik
             inner join rank on rank.id = karyawan.idrank
-        inner join location_room lroom on lroom.id = tltp.room  
+        inner join location_room lroom on lroom.id = tltp.room
+        inner join transaction_lend_to_personal_log tlotpl on tlotpl.idtransaksi =  tltp.id
+        inner join asset on asset.id = tlotpl.idasset   
         where lbranchsetup.idsistercompany = '$myses' and (
             tltp.notransaction LIKE '%$search%' 
         OR lbranch.branch LIKE '%$search%'
         OR karyawan.nama LIKE '%$search%'
         OR lroom.room LIKE '%$search%' 
         OR tltp.approval LIKE '%$search%'
-        OR tltp.status LIKE '%$search%' )  ORDER BY $order $dir LIMIT $start, $length");
+        OR tltp.status LIKE '%$search%' ) group by tltp.id  ORDER BY $order $dir LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "select tltp.*, lbranch.branch, lbranchroom.branch as branchroom, karyawan.nama, karyawan.email, rank.rank, lroom.room FROM transaction_lend_to_personal tltp
+        $total_filtered = mysqli_query($conn, "select tltp.*, lbranch.branch, lbranchroom.branch as branchroom, karyawan.nama, karyawan.email, rank.rank, lroom.room , asset.idgroup, asset.idsubgroup, asset.idcategory  FROM transaction_lend_to_personal tltp
         inner join location_setup_sister_branch lbranchsetup on lbranchsetup.idbranch = tltp.idbranch
         inner join location_branch lbranch on lbranch.idbranch = lbranchsetup.idbranch 
         inner join location_branch lbranchroom on lbranchroom.idbranch = lbranchsetup.idbranch 
         inner join karyawan on karyawan.nik = tltp.nik
             inner join rank on rank.id = karyawan.idrank
-        inner join location_room lroom on lroom.id = tltp.room  
+        inner join location_room lroom on lroom.id = tltp.room
+        inner join transaction_lend_to_personal_log tlotpl on tlotpl.idtransaksi =  tltp.id
+        inner join asset on asset.id = tlotpl.idasset  
         where lbranchsetup.idsistercompany = '$myses' and (
             tltp.notransaction LIKE '%$search%' 
         OR lbranch.branch LIKE '%$search%'
         OR karyawan.nama LIKE '%$search%'
         OR lroom.room LIKE '%$search%' 
         OR tltp.approval LIKE '%$search%'
-        OR tltp.status LIKE '%$search%' ) ");
+        OR tltp.status LIKE '%$search%' ) group by tltp.id ");
     }
     
     $response['data'] = [];
@@ -117,11 +127,32 @@ if($tipe == "load")
                 "<label id ='nik".$row['id']."'>".$row['nik']."</label>",
                 "<label id ='namakaryawan".$row['id']."'>".$row['nama']."</label>",
                 "<label id ='startdate".$row['id']."'>".$row['start_date']."</label>",
-                "<label id ='duedate".$row['id']."'>".$row['due_date']."</label>",
+                "<label id ='duedate".$row['id']."'>".$row['due_date']."</label>".
+                "<input type = 'hidden' id = 'category_".$row['id']."' value = '".$row['idcategory']."'>".
+                "<input type = 'hidden' id = 'subgroup_".$row['id']."' value = '".$row['idsubgroup']."'>".
+                "<input type = 'hidden' id = 'group_".$row['id']."' value = '".$row['idgroup']."'>".
+                "<input type = 'hidden' id = 'branchroom_".$row['id']."' value = '".$row['idbranchroom']."'>".
+                "<input type = 'hidden' id = 'idroom_".$row['id']."' value = '".$row['room']."'>"
+                ."<input type = 'hidden' id = 'idbranchpersonel_".$row['id']."' value = '".$row['idbranch']."'>"
+                ."<input type = 'hidden' id = 'iddepartment_".$row['id']."' value = '".$row['id_department']."'>",
                 "<label id ='status".$row['id']."'>".$row['status']."</label>"
                 ."<input type = 'hidden' id = 'email".$row['id']."' value = '".$row['email']."'>"
                 ."<input type = 'hidden' id = 'rank".$row['id']."' value = '".$row['rank']."'>"
                 ."<input type = 'hidden' id = 'branchroom".$row['id']."' value = '".$row['branchroom']."'>",
+                ' <div class="list-icons">
+                <div class="dropdown">
+                    <a href="#" class="list-icons-item" data-toggle="dropdown">
+                        <i class="icon-menu9"></i>
+                    </a>
+    
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="#myModalEditTransactions"  data-toggle="modal" class="dropdown-item" id ="click-'.$row['id'].'"  onclick = "openmodaledits(this)"><i class="icon-check"></i>
+                            Edit</a>
+                        
+                   
+                    </div>
+                </div>
+            </div>'
             ];
         }
     }
@@ -362,7 +393,7 @@ else if($tipe == "add"){
     $convertend = date_format($dateend,"Y-m-d");
     $mydate = date("Y-m-d");
     $sql = "INSERT INTO `transaction_lend_to_personal`
-    VALUES (NULL, 'TRX-0000', '$mybranchpersonel', '$myuser', '$mybranchroom', '$myroom', '$convertstart', '$convertend', 'pending', 'waiting', '$mydate');";
+    VALUES (NULL, 'TRX-0000', '$mydepartment', '$mybranchpersonel', '$myuser', '$mybranchroom', '$myroom', '$convertstart', '$convertend', 'pending', 'waiting', '$mydate');";
     $res = $conn->query($sql);
     $last_id = $conn->insert_id;
     for($i = 0 ;  $i < count($myselectedlist) ; $i++)
@@ -381,6 +412,40 @@ else if($tipe == "add"){
         echo "tidak";
     }
     // echo $sql;
+}
+else if($tipe == "edit")
+{
+
+    $myselectedlist = $_POST['myselected'];
+    $idsister = $myses;
+    $mybranchpersonel = $_POST['mybranchpersonel'];
+    $mydepartment = $_POST['mydepartment'];
+    $myuser = $_POST['myuser'];
+    $mybranchroom = $_POST['mybranchroom'];
+    $myroom = $_POST['myroom'];
+    $mystart = $_POST['mystart'];
+    $myend = $_POST['myend'];
+    date_default_timezone_set("Asia/Bangkok");
+    $datestart=date_create($mystart);
+    $dateend=date_create($myend);
+    $convertstart = date_format($datestart,"Y-m-d");
+    $convertend = date_format($dateend,"Y-m-d");
+    $mydate = date("Y-m-d");
+    $mytransactions = $_POST['mytransactions'];
+
+    $sql = "update transaction_lend_to_personal set id_department = '$mydepartment', idbranch = '$mybranchpersonel', nik = '$myuser', idbranchroom = '$mybranchroom', room = '$myroom' , start_date = '$convertstart', due_date = '$convertend' where id = '$mytransactions'";
+    $res = $conn->query($sql);
+    // echo $sql;
+    $sql = "delete from transaction_lend_to_personal_log where idtransaksi = '$mytransactions'";
+    $res = $conn->query($sql);
+
+  
+
+    for($i = 0 ; $i< count($myselectedlist); $i++)
+    {
+        $sql = "insert into transaction_lend_to_personal_log values(NULL, '$mytransactions', '".$myselectedlist[$i]."')";
+        $ress = $conn->query($sql);
+    }
 }
 else if($tipe == "changedata")
 {

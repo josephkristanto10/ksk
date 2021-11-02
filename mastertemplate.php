@@ -46,8 +46,8 @@ if($res->num_rows>0)
                         <table id = "datatable_serverside" class="table table-hover table-bordered display nowrap w-100">
                                 <thead>
                                     <tr>  
+                                    <th>Id</th>
                                         <th>Template</th>
-                                        <th>Asset Qty</th>
                                         <th class="text-center">Status</th>
                                         <th class="text-center">Action</th>
                                     </tr>
@@ -151,15 +151,18 @@ $(function() {
          destroy: true,
          iDisplayInLength: 10,
          scrollX: true,
-         order: [[0, 'asc']],
+         order: [[0, 'desc']],
          ajax: { 
             url: 'process/mastertemplate.php',
             method: 'POST',
             data: { tipe: "load"  }
         },
+        columnDefs: [
+			{ targets: [0], visible: false},
+			],
          columns: [
+            { name: 'Id', className: 'text-center align-middle' },
             { name: 'Template', className: 'text-center align-middle' },
-            { name: 'AssetQty', className: 'text-center align-middle' },
             { name: 'Status', className: 'text-center align-middle' },
             { name: 'Action', searchable: false, orderable: false, className: 'text-center align-middle' }
             

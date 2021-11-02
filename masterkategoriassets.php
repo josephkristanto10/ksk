@@ -29,6 +29,7 @@ $res = $conn->query($sql);
                             <table id="datatable_serverside" class="table table-hover table-bordered display nowrap w-100">
                                 <thead>
                                     <tr class="text-center">
+                                    <th>Id</th>
                                         <th>Group</th>
 										<th>Assign To</th>
                                         <th>Description</th>
@@ -61,6 +62,9 @@ $res = $conn->query($sql);
 							<br>
 							<label for="description">Description</label>
 							<input type="text" class="form-control" id="description">
+                            <br> 
+								<input type = "checkbox"  onchange="checkchangecategory(this)"> Same as group name<br>
+								<br>
 							<br>
 							<label for="description">Assign To</label>
 							<br>
@@ -71,7 +75,7 @@ $res = $conn->query($sql);
 							<br>
 							<div style="float:right;margin-bottom:20px;">
 								<button type="button" name = "mybutton" class="btn btn-primary" style="margin-right:10px;"
-									 onclick = "adddata()">Submit</button>
+									 onclick = "adddata()">Save</button>
 								<button type="button" id= "closemodal" class="btn btn-secondary" data-dismiss="modal">Close</button>
 							</div>
 						</div>
@@ -110,8 +114,8 @@ $res = $conn->query($sql);
 							<br>
 							<div style="float:right;margin-bottom:20px;">
 								<button type="button" name = "mybutton" class="btn btn-primary" style="margin-right:10px;"
-									 onclick = "changedata()">Change Data</button>
-								<button type="button" id= "closemodaledit" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									 onclick = "changedata()">Save</button>
+								<button type="button" id= "closemodaledit" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
 							</div>
 						</div>
                             </form>
@@ -205,13 +209,20 @@ function loadData() {
          destroy: true,
          iDisplayInLength: 10,
          scrollX: true,
-         order: [[0, 'asc']],
+         order: [[0, 'desc']],
          ajax: { 
             url: 'process/masterkategoriassetsprocess.php',
             method: 'POST',
             data: { tipe: "load"  }
         },
+        columnDefs: [
+			{ targets: [0], visible: false},
+			],
+			order: [
+				[0, 'desc']
+			],
          columns: [
+            { name: 'Id', searchable: false, className: 'text-center align-middle' },
             { name: 'nama', searchable: false, className: 'text-center align-middle' },
             { name: 'assignto', searchable: false, className: 'text-center align-middle' },
             { name: 'description', className: 'text-center align-middle' },
@@ -403,4 +414,19 @@ function setstatus(setactionto){
             });
 }
 
+function checkchangecategory(element)
+	{
+		var mycategory = $("#group").val();
+
+		var mycheck = element.checked;
+		if(mycheck)
+		{
+			$("#description").val(mycategory);
+		}
+		else
+		{
+			$("#description").val("");
+		}
+		
+	}
 </script>

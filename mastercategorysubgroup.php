@@ -4,7 +4,7 @@ require_once 'layout/sidebar.php';
 require_once 'layout/footer.php';
 $sql = "select *, c.description as categorydesc from kategori_categorysubgroup c inner join kategori_asset ka on ka.id = c.idgroup inner join kategori_subgroup ks on ks.id = c.idsubgroup ";
 $res = $conn->query($sql);
-$sqlaset = "select * from kategori_asset";
+$sqlaset = "select * from kategori_asset where status = 'Active'";
 $resultkategoriaset = $conn->query($sqlaset);
 if($resultkategoriaset -> num_rows>0)
 {
@@ -56,7 +56,7 @@ if($restemplate->num_rows>0)
 								class="table table-hover table-bordered display nowrap w-100">
 								<thead>
 									<tr>
-
+									<th>Id</th>
 										<th>Group</th>
 										<th>Sub Group</th>
 										<th>Category</th>
@@ -103,6 +103,14 @@ if($restemplate->num_rows>0)
 								<select id="subgroup" name="subgroup" class="form-control">
 								</select>
 								<br>
+								<label for="code">Category</label>
+								<input type="text" class="form-control" id="category" >
+								<br>
+								<label for="description">Description</label>
+								<input type="text" class="form-control" id="descriptionadd">
+								<br> 
+								<input type = "checkbox" id = "description" onchange="checkchangecategory(this)"> Same as category name<br>
+								<br>
 								<label for="cars">Template :</label>
 								<select id="template" name="template" class="form-control">
 									<?php
@@ -115,15 +123,7 @@ if($restemplate->num_rows>0)
 										}
 								?>
 								</select>
-								<br>
-								<label for="code">Category</label>
-								<input type="text" class="form-control" id="category" >
-								<br>
 								
-
-								
-								<label for="description">Description</label>
-								<input type="text" class="form-control" id="descriptionadd">
 
 							</div>
 						</form>
@@ -182,6 +182,9 @@ if($restemplate->num_rows>0)
 								<label for="code">Category</label>
 								<input type="text" class="form-control" id="categoryedit">
 								<br>
+								<label for="description">Description</label>
+								<input type="text" class="form-control" id="descriptionedit">
+								<br>
 								<label for="cars">Template :</label>
 								<select id="templateedit" name="templateedit" class="form-control">
 									<?php
@@ -194,9 +197,7 @@ if($restemplate->num_rows>0)
 										}
 								?>
 								</select>
-								<br>
-								<label for="description">Description</label>
-								<input type="text" class="form-control" id="descriptionedit">
+							
 
 							</div>
 						</form>
@@ -230,8 +231,11 @@ if($restemplate->num_rows>0)
 			destroy: true,
 			iDisplayInLength: 10,
 			scrollX: true,
+			columnDefs: [
+			{ targets: [0], visible: false},
+			],
 			order: [
-				[0, 'asc']
+				[0, 'desc']
 			],
 			ajax: {
 				url: 'process/masterkategoricategorysubgroup.php',
@@ -240,7 +244,13 @@ if($restemplate->num_rows>0)
 					tipe: "load"
 				}
 			},
-			columns: [{
+			columns: [
+				{
+					name: 'Id',
+					searchable: false,
+					className: 'text-center align-middle'
+				},
+				{
 					name: 'Group',
 					searchable: false,
 					className: 'text-center align-middle'
@@ -529,4 +539,19 @@ if($restemplate->num_rows>0)
 			}
 		});
 	}).trigger('change');
+	function checkchangecategory(element)
+	{
+		var mycategory = $("#category").val();
+
+		var mycheck = element.checked;
+		if(mycheck)
+		{
+			$("#descriptionadd").val(mycategory);
+		}
+		else
+		{
+			$("#descriptionadd").val("");
+		}
+		
+	}
 </script>

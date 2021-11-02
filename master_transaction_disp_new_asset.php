@@ -511,6 +511,80 @@ if($resdepartment -> num_rows>0)
         </div>
     </div>
 </div>
+<div class="modal fade" id="myModalEditTransactions">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
+                <h5 class="modal-title">Edit Transaction</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="myforms">
+                    <div class="form-group">
+                        <label for="cars">Branch:</label>
+                        <select id="branchedit" name="branchedit" class="form-control">
+                            <?php
+                                        for($i = 0 ; $i < count($mybranch); $i++)
+                                        {                                            
+                                                echo '<option value="'.$mybranch[$i]['idbranch'].'">'.$mybranch[$i]['branch'].'</option>';                                       
+                                        }
+                                ?>
+                        </select>
+
+                        <br>
+                        <label for="cars">Room:</label>
+                        <select id="roomedit" name="roomedit" class="form-control">
+                        </select>
+                        <hr>
+
+                        <label for="cars">Asset Group:</label>
+                        <select id="groupsedit" name="groupsedit" class="form-control">
+                            <?php
+                                        for($i = 0 ; $i < count($mykategoriasset); $i++)
+                                        {                                            
+                                                echo '<option value="'.$mykategoriasset[$i]['id'].'">'.$mykategoriasset[$i]['nama'].'</option>';                                       
+                                        }
+                                ?>
+                        </select>
+                        <br>
+                        <label for="cars">Asset Sub Group:</label>
+                        <select id="subgroupsedit" name="subgroupsedit" class="form-control">
+
+                        </select>
+                        <br>
+                        <label for="cars">Asset Category:</label> <a href = "#selectassetedit" onclick = "openselectassetedit(this)" data-toggle="modal" data-backdrop="static" data-keyboard="false">select asset</a>
+                        <select id="categoriesedit" name="categoriesedit" class="form-control">
+
+                        </select>
+                        <br>
+                        <b>Asset Choose</b>
+                        <br><br>
+                        <div id="containerpilihasetedit" style="max-height:100px !important;">
+
+                        </div>
+
+
+
+                        <br>
+                        <br>
+                        <div style="float:right;">
+                        
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                         <button type="button" class="btn btn-primary" style="margin-right:10px;margin-top:10px;"
+                                onclick="editdata()">Save</button>
+                            <button type="button" class="btn btn-secondary" style="margin-right:30px;margin-top:10px;" data-dismiss="modal"
+                                id="canceledittransaction">Cancel</button>
+                                    </div>
+
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="selectasset">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
@@ -552,6 +626,50 @@ if($resdepartment -> num_rows>0)
                         <div style="float:right;margin-bottom:20px;">
                             <button type="button" class="btn btn-primary" id = "pilihaset" style="margin-right:10px;"
                                  onclick = "pilihasset()">Choose</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                id="canceladd">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="selectassetedit">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
+                <h5 class="modal-title">Select Asset</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="myforms">
+                    <div class="form-group">
+                    <label for="cars">Group: &nbsp <b><label id = "grouptitleselectassetedit">-</label></b></label><br>
+                    <label for="cars">Sub Group: &nbsp <b><label id = "subgrouptitleselectassetedit">-</label></b></label><br>
+                    <label for="cars">Category:  &nbsp <b><label id = "categoriestitleselectassetedit">-</label></b></label><br>
+                    <table id="datatable_asset_edit" class="table table-hover table-bordered display nowrap w-100">
+                        <thead >
+                            <tr>
+                                 <th>#</th>
+                                <th>No. Asset</th>
+                                <th>Name</th>
+                                <th>Condition</th>
+                                <th>Initial Condition</th>
+
+                            </tr>
+                        </thead>
+                        </tbody>
+
+                        </tbody>
+
+                    </table>
+                        <div style="float:right;margin-bottom:20px;">
+                            <button type="button" class="btn btn-primary" id = "pilihaset" style="margin-right:10px;"
+                                 onclick = "pilihassetedit()">Choose</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"
                                 id="canceladd">Cancel</button>
                         </div>
@@ -634,7 +752,9 @@ if($resdepartment -> num_rows>0)
 </html>
 <script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>
 <script>
+
 var asset = null;
+var assetedit = null;
 var chosenasset = null;
     $('#selectasset').on('shown.bs.modal', function () {
         var idcategories = $("#categories").val();
@@ -647,9 +767,19 @@ var chosenasset = null;
    
    asset.columns.adjust();
 }); 
-$('#myModalEditTransaction').on('shown.bs.modal', function () {
-        
+$('#selectassetedit').on('shown.bs.modal', function () {
+        var idcategories = $("#categories").val();
+        if(iddefaultcategories != idcategories)
+        {
+            iddefaultcategories = idcategories;
+            // loadassetedit(idcategories);
+    
+        }
    
+        assetedit.columns.adjust();
+}); 
+$('#myModalEditTransaction').on('shown.bs.modal', function () {
+    
     chosenasset.columns.adjust();
 }); 
 
@@ -704,17 +834,33 @@ function loadchoicesasset(idtransac){
             ]
         });
 }
+var idtransaction = "";
+var idglobalsubgroupedit = "";
+var idglobalcategoryedit = "";
 function openmodaledits(element){
 
 // alert("test");
     var myelement = element.id.split("-");
     var myid = myelement[1];
-    loadchoicesasset(myid);
+    idtransaction = myid;
+    // alert()
+    // var idcategory = $("#category_"+myid).val();
+    // var idsubgroup = $("#category_"+myid).val();
+    var idgroup = $("#group_"+myid).val();
+    var subgroup = $("#subgroup_"+myid).val();
+    var category = $("#category_"+myid).val();
+    idglobalsubgroupedit = subgroup;
+    idglobalcategoryedit = category;
+    
+    $('#groupsedit option[value=' + idgroup + ']').prop('selected', true);
+    $('#groupsedit').trigger("change");
+    asseteditshow();
 };
+    var arridselectedassetadd = [];
     function pilihasset(){
         var count = 0;
         var arrselectedasset = [];
-      
+      arridselectedassetadd = [];
         $(".checkboxasset").each(function(){
                 var checked =  this.checked;
               
@@ -722,6 +868,7 @@ function openmodaledits(element){
                     var myid = this.id;
                     var splitid = myid.split("_");
                     var myfixid = splitid[1];
+                    arridselectedassetadd.push(myfixid);
                     var noasset = $("#noasset"+myfixid).text();
                     var nameasset = $("#name"+myfixid).text();
                     var conditions = $("#conditions"+myfixid).text();
@@ -741,6 +888,40 @@ function openmodaledits(element){
         }
         $("#containerpilihaset").append("</tbody></table>");
       $("#selectasset").modal("toggle");
+    }
+    var arridselectedassetedit = [];
+    function pilihassetedit(){
+        var count = 0;
+        var arrselectedasset = [];
+      arridselectedassetedit = [];
+        $(".checkboxassetedit").each(function(){
+                var checked =  this.checked;
+              
+                if(checked){
+                    var myid = this.id;
+                    var splitid = myid.split("_");
+                    var myfixid = splitid[1];
+                    arridselectedassetedit.push(myfixid);
+                    var noasset = $("#noassetedit"+myfixid).text();
+                    var nameasset = $("#nameedit"+myfixid).text();
+                    var conditions = $("#conditionsedit"+myfixid).text();
+                    var initialcondition = $("#initial_conditionedit"+myfixid).text();
+                    arrselectedasset.push(myfixid+"~~"+noasset + "~~" + nameasset + "~~" + conditions + "~~" + initialcondition);
+                    count +=1;
+                }
+          
+                
+        });
+       
+        $("#containerpilihasetedit").html("");
+        $("#containerpilihasetedit").append("<table id = 'tablepilihassetedit' class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Asset Name</th></tr><tbody>");
+        for(var i = 0 ; i < arrselectedasset.length; i++)
+        {
+            var split = arrselectedasset[i].split("~~");
+            $("#tablepilihassetedit").append("<tr><td>"+split[1] + "</td><td>" + split[2] + "</td></tr>");
+        }
+        $("#containerpilihasetedit").append("</tbody></table>");
+      $("#selectassetedit").modal("toggle");
     }
     var arrayasset = [];
     // $('body').scrollspy({ target: '.sidebar' });
@@ -775,6 +956,25 @@ function openmodaledits(element){
         // console.log(asset);
      
 
+    }
+    function openselectassetedit(){
+        
+        var idcategories = $("#categoriesedit").val();
+        var groups = document.getElementById("groupsedit");
+        var subgroups = document.getElementById("subgroupsedit");
+        var categories = document.getElementById("categoriesedit");
+        var strgroups = groups.options[groups.selectedIndex].text;
+        var strsubgroups = subgroups.options[subgroups.selectedIndex].text;
+        var strcategories = categories.options[categories.selectedIndex].text;
+
+        $("#grouptitleselectassetedit").text(strgroups);
+        $("#subgrouptitleselectassetedit").text(strsubgroups);
+        $("#categoriestitleselectassetedit").text(strcategories);
+        if(iddefaultcategories != idcategories)
+        {
+            iddefaultcategories = idcategories;
+            loadassetedit(idcategories);
+        }
     }
 
     function openmodaldisplay(element) {
@@ -929,6 +1129,86 @@ function openmodaledits(element){
      
         // assets.columns.adjust();
     };
+    function asseteditshow(){
+        
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "process/mastergetasset.php",
+            method: 'POST',
+            data: {
+                tipe: "getassettransaction",
+                myidtransaction: idtransaction
+
+            },
+            success: function (result) {
+                var jsonparse = JSON.parse(result);
+                $("#containerpilihasetedit").html("");
+                $("#containerpilihasetedit").html(jsonparse.data.mystring);
+                arridselectedassetedit = jsonparse.data.myarray;
+                
+            }
+        });
+    }
+    function loadassetedit(params){
+        
+        assetedit = $("#datatable_asset_edit").DataTable({
+              processing: true,
+              deferRender: true,
+              serverSide: true,
+              destroy: true,
+              scrollX:true,
+              responsive: true,
+              autoWidth: true,
+              iDisplayInLength: 10,
+              // scrollX: true,
+              order: [
+                  [0, 'asc']
+              ],
+              ajax: {
+                  url: 'process/mastergetasset.php',
+                  method: 'POST',
+                  data: {
+                      tipe: "loadexisting",
+                      statusmust : "newasset",
+                      assetexisting: arridselectedassetedit,
+                      myparam : params
+                  },
+                 
+              },
+              columns: [{
+                      searchable:false,
+                      orderable:false,
+                      name: '#',
+                      className: 'text-center align-middle'
+                  },
+                  {
+                      name: 'noasset',
+                      className: 'text-center align-middle'
+                  },
+                  {
+                      name: 'name',
+                      className: 'text-center align-middle'
+                  },
+                  {
+                      name: 'conditions',
+                      className: 'text-center align-middle'
+                  },
+                  {
+                      name: 'initial_condition',
+                      className: 'text-center align-middle'
+                  }
+                  
+  
+              ]
+          });
+        
+       
+          // assets.columns.adjust();
+      };
 
     function loadData() {
         $("#datatable_serverside").DataTable({
@@ -1178,14 +1458,86 @@ function openmodaledits(element){
             }
         });
     }).trigger('change');
+    function editdata(){
+        
+        if (arridselectedassetedit.length > 0) {
+            var selects = arridselectedassetedit;
+            var branch = $('#branchedit').val();
+            var room = $('#roomedit').val();
+            if (branch == null || room == null) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Empty Field',
+                    text: 'Requirement data cannot be empty',
+                    confirmButtonColor: '#e00d0d',
+                });
+            } else {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: "process/mastergetasset.php",
+                    method: 'POST',
+                    data: {
+                        tipe: "edit",
+                        mytransaction:idtransaction,
+                        myselected: selects,
+                        myroom: room,
+                        mytable: "transaction_displacement_new_asset_log",
+                        mybranch: branch
 
+                    },
+                    success: function (myresult) {
+                        console.log(myresult);
+                        // selected = [];
+                        //    alert(result);
+                        // if (result == "sukses") {
+                         
+                            Swal.fire({
+                                title: 'Data Saved',
+                                text: 'Data Inputted Successfully',
+                                icon: 'success',
+                                confirmButtonColor: '#53d408',
+                                allowOutsideClick: false,
+                            }).then((result) => {
+                                   success();
+                                // $("#categories").trigger("change");
+                                // $("#myforms").trigger("reset");
+                                $("#canceledittransaction").click();
+
+                            });
+                        // } else {
+                        //     Swal.fire({
+                        //         icon: 'error',
+                        //         title: 'Insert Error ',
+                        //         text: 'Please check your data',
+                        //         confirmButtonColor: '#e00d0d',
+                        //     });
+                        // }
+
+
+                    }
+                });
+            }
+
+            //Clear array
+
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'No Asset Checked ',
+                text: 'Please choose at least 1 asset to be placed',
+                confirmButtonColor: '#e00d0d',
+            });
+        }
+
+    }
     function adddata() {
-        $("input:checkbox[class=mycheckbox]:checked").each(function () {
-            selected.push($(this).val());
-
-        });
-        if (selected.length > 0) {
-            var selects = selected;
+     
+        if (arridselectedassetadd.length > 0) {
+            var selects = arridselectedassetadd;
             var branch = $('#branch').val();
             var room = $('#room').val();
             if (branch == null || room == null) {
@@ -1206,7 +1558,7 @@ function openmodaledits(element){
                     method: 'POST',
                     data: {
                         tipe: "add",
-                        myselected: selected,
+                        myselected: selects,
                         myroom: room,
                         mybranch: branch
 
@@ -1494,6 +1846,42 @@ function openmodaledits(element){
 
             })
         }).trigger("change");
+        $("#groupsedit").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_disp_new_asset.php",
+                method: 'POST',
+                data: {
+                    tipe: "getsubgroup",
+                    idgroup: myid
+                },
+                success: function (result) {
+                    // idglobalsubgroupedit = subgroup;
+    // idglobalcategoryedit = category;
+                    // alert(result);
+                   
+                    $("#subgroupsedit").html("");
+                    $("#subgroupsedit").html(result).promise().done(function () {
+                        // alert(idglobalsubgroupedit);
+                        if (!idglobalsubgroupedit == "") {
+                            // alert(idglobalsubgroupedit);
+                            // alert(idglobalsubgroupedit);
+                        $('#subgroupsedit').find('option[value="' + idglobalsubgroupedit +
+                                '"]').prop('selected', true);
+                        }
+                     
+
+});
+                    $("#subgroupsedit").trigger("change");
+                }
+
+            })
+        }).trigger("change");
         $("#subgroups").on("change", function () {
             var myid = this.value;
             $.ajaxSetup({
@@ -1514,6 +1902,37 @@ function openmodaledits(element){
                     $("#categories").html("");
                     $("#categories").html(result);
                     $("#categories").trigger("change");
+                }
+
+            })
+        }).trigger("change");
+        $("#subgroupsedit").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_disp_new_asset.php",
+                method: 'POST',
+                data: {
+                    tipe: "getcategory",
+                    idsubgroup: myid
+                },
+                success: function (result) {
+
+                    // alert(result);
+
+               
+                    $("#categoriesedit").html("");
+                    $("#categoriesedit").html(result).promise().done(function () {
+                        if (!idglobalcategoryedit == "") {
+                        $('#categoriesedit').find('option[value="' + idglobalcategoryedit +
+                                '"]').prop('selected', true);
+                        }
+                    });
+                    $("#categoriesedit").trigger("change");
                 }
 
             })
@@ -1591,6 +2010,28 @@ function openmodaledits(element){
                 success: function (result) {
                     $("#room").html("");
                     $("#room").append(result);
+
+                }
+
+            })
+        }).trigger("change");
+        $("#branchedit").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_disp_new_asset.php",
+                method: 'POST',
+                data: {
+                    tipe: "getroom",
+                    idbranch: myid
+                },
+                success: function (result) {
+                    $("#roomedit").html("");
+                    $("#roomedit").append(result);
 
                 }
 

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 109,
+            "activePatchIndex": 265,
             "patches": [
                 {
                     "date": 1634799397854,
@@ -444,6 +444,630 @@
                 {
                     "date": 1635153385040,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -122,9 +122,9 @@\n     $myid = $_POST['idtransaction'];\r\n     $where_like = [\r\n         \r\n         'noasset',\r\n-        'name'\r\n+        'asset.name'\r\n         \r\n     ];\r\n     \r\n     \r\n"
+                },
+                {
+                    "date": 1635402352841,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -116,8 +116,9 @@\n     }  \r\n     \r\n     echo json_encode($response);\r\n }\r\n+else if($tipe == \"getassettransaction\")\r\n else if($tipe == \"loadpicked\")\r\n {\r\n     $myid = $_POST['idtransaction'];\r\n     $where_like = [\r\n"
+                },
+                {
+                    "date": 1635402359495,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -117,8 +117,11 @@\n     \r\n     echo json_encode($response);\r\n }\r\n else if($tipe == \"getassettransaction\")\r\n+{\r\n+    $\r\n+}\r\n else if($tipe == \"loadpicked\")\r\n {\r\n     $myid = $_POST['idtransaction'];\r\n     $where_like = [\r\n"
+                },
+                {
+                    "date": 1635402375272,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -118,9 +118,9 @@\n     echo json_encode($response);\r\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n-    $\r\n+    $idtransac = $_POST['myidtransaction'];\r\n }\r\n else if($tipe == \"loadpicked\")\r\n {\r\n     $myid = $_POST['idtransaction'];\r\n"
+                },
+                {
+                    "date": 1635402388632,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -119,8 +119,9 @@\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $idtransac = $_POST['myidtransaction'];\r\n+    \r\n }\r\n else if($tipe == \"loadpicked\")\r\n {\r\n     $myid = $_POST['idtransaction'];\r\n"
+                },
+                {
+                    "date": 1635402409339,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -119,9 +119,9 @@\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $idtransac = $_POST['myidtransaction'];\r\n-    \r\n+    $sql = \"select * from transaction_displacement_new_asset_log\"\r\n }\r\n else if($tipe == \"loadpicked\")\r\n {\r\n     $myid = $_POST['idtransaction'];\r\n"
+                },
+                {
+                    "date": 1635402419258,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -119,9 +119,9 @@\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $idtransac = $_POST['myidtransaction'];\r\n-    $sql = \"select * from transaction_displacement_new_asset_log\"\r\n+    $sql = \"select * from transaction_displacement_new_asset_log where idtransaksi = '$idtransac'\"\r\n }\r\n else if($tipe == \"loadpicked\")\r\n {\r\n     $myid = $_POST['idtransaction'];\r\n"
+                },
+                {
+                    "date": 1635402456274,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -119,9 +119,9 @@\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $idtransac = $_POST['myidtransaction'];\r\n-    $sql = \"select * from transaction_displacement_new_asset_log where idtransaksi = '$idtransac'\"\r\n+    $sql = \"select * from transaction_displacement_new_asset_log tdasl inner join product on product.id = tdasl  where tdasl.idtransaksi = '$idtransac'\"\r\n }\r\n else if($tipe == \"loadpicked\")\r\n {\r\n     $myid = $_POST['idtransaction'];\r\n"
+                },
+                {
+                    "date": 1635402465590,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -119,9 +119,9 @@\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $idtransac = $_POST['myidtransaction'];\r\n-    $sql = \"select * from transaction_displacement_new_asset_log tdasl inner join product on product.id = tdasl  where tdasl.idtransaksi = '$idtransac'\"\r\n+    $sql = \"select * from transaction_displacement_new_asset_log tdasl inner join product on asset.id = tdasl.  where tdasl.idtransaksi = '$idtransac'\"\r\n }\r\n else if($tipe == \"loadpicked\")\r\n {\r\n     $myid = $_POST['idtransaction'];\r\n"
+                },
+                {
+                    "date": 1635402472134,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -119,9 +119,9 @@\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $idtransac = $_POST['myidtransaction'];\r\n-    $sql = \"select * from transaction_displacement_new_asset_log tdasl inner join product on asset.id = tdasl.  where tdasl.idtransaksi = '$idtransac'\"\r\n+    $sql = \"select * from transaction_displacement_new_asset_log tdasl inner join product on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\"\r\n }\r\n else if($tipe == \"loadpicked\")\r\n {\r\n     $myid = $_POST['idtransaction'];\r\n"
+                },
+                {
+                    "date": 1635402557834,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -119,9 +119,9 @@\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $idtransac = $_POST['myidtransaction'];\r\n-    $sql = \"select * from transaction_displacement_new_asset_log tdasl inner join product on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\"\r\n+    $sql = \"select * from transaction_displacement_new_asset_log tdasl inner join product on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n }\r\n else if($tipe == \"loadpicked\")\r\n {\r\n     $myid = $_POST['idtransaction'];\r\n"
+                },
+                {
+                    "date": 1635402568290,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -120,8 +120,9 @@\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select * from transaction_displacement_new_asset_log tdasl inner join product on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n+    $res = $conn->query($sql);\r\n }\r\n else if($tipe == \"loadpicked\")\r\n {\r\n     $myid = $_POST['idtransaction'];\r\n"
+                },
+                {
+                    "date": 1635402576912,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -121,8 +121,10 @@\n {\r\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select * from transaction_displacement_new_asset_log tdasl inner join product on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n+    $mysql = \"\"\r\n+    containerpilihasetedit\r\n }\r\n else if($tipe == \"loadpicked\")\r\n {\r\n     $myid = $_POST['idtransaction'];\r\n"
+                },
+                {
+                    "date": 1635402594086,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -121,9 +121,10 @@\n {\r\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select * from transaction_displacement_new_asset_log tdasl inner join product on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n-    $mysql = \"\"\r\n+    $mysql = \"<table>\";\r\n+\r\n     containerpilihasetedit\r\n }\r\n else if($tipe == \"loadpicked\")\r\n {\r\n"
+                },
+                {
+                    "date": 1635402605950,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -122,9 +122,9 @@\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select * from transaction_displacement_new_asset_log tdasl inner join product on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n     $mysql = \"<table>\";\r\n-\r\n+    $mysql = \"</table>\"\r\n     containerpilihasetedit\r\n }\r\n else if($tipe == \"loadpicked\")\r\n {\r\n"
+                },
+                {
+                    "date": 1635402627194,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -121,10 +121,11 @@\n {\r\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select * from transaction_displacement_new_asset_log tdasl inner join product on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n-    $mysql = \"<table>\";\r\n-    $mysql = \"</table>\"\r\n+    $mysql = \"<table><th>No Asset</th><th>No Asset</th>\";\r\n+    if($res = )\r\n+    $mysql = \"</table>\";\r\n     containerpilihasetedit\r\n }\r\n else if($tipe == \"loadpicked\")\r\n {\r\n"
+                },
+                {
+                    "date": 1635402634193,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -121,9 +121,9 @@\n {\r\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select * from transaction_displacement_new_asset_log tdasl inner join product on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n-    $mysql = \"<table><th>No Asset</th><th>No Asset</th>\";\r\n+    $mysql = \"<table><th>No Asset</th><th>Name</th>\";\r\n     if($res = )\r\n     $mysql = \"</table>\";\r\n     containerpilihasetedit\r\n }\r\n"
+                },
+                {
+                    "date": 1635402663405,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -122,9 +122,9 @@\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select * from transaction_displacement_new_asset_log tdasl inner join product on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n     $mysql = \"<table><th>No Asset</th><th>Name</th>\";\r\n-    if($res = )\r\n+    if($res->)\r\n     $mysql = \"</table>\";\r\n     containerpilihasetedit\r\n }\r\n else if($tipe == \"loadpicked\")\r\n"
+                },
+                {
+                    "date": 1635402677539,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -122,9 +122,9 @@\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select * from transaction_displacement_new_asset_log tdasl inner join product on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n     $mysql = \"<table><th>No Asset</th><th>Name</th>\";\r\n-    if($res->)\r\n+    if($res->$)\r\n     $mysql = \"</table>\";\r\n     containerpilihasetedit\r\n }\r\n else if($tipe == \"loadpicked\")\r\n"
+                },
+                {
+                    "date": 1635402688667,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -122,9 +122,12 @@\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select * from transaction_displacement_new_asset_log tdasl inner join product on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n     $mysql = \"<table><th>No Asset</th><th>Name</th>\";\r\n-    if($res->$)\r\n+    if($res->num_rows >0)\r\n+    {\r\n+\r\n+    }\r\n     $mysql = \"</table>\";\r\n     containerpilihasetedit\r\n }\r\n else if($tipe == \"loadpicked\")\r\n"
+                },
+                {
+                    "date": 1635402733062,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -126,10 +126,10 @@\n     if($res->num_rows >0)\r\n     {\r\n \r\n     }\r\n-    $mysql = \"</table>\";\r\n-    containerpilihasetedit\r\n+    $mysql .= \"</table>\";\r\n+\r\n }\r\n else if($tipe == \"loadpicked\")\r\n {\r\n     $myid = $_POST['idtransaction'];\r\n"
+                },
+                {
+                    "date": 1635402741747,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -124,9 +124,12 @@\n     $res = $conn->query($sql);\r\n     $mysql = \"<table><th>No Asset</th><th>Name</th>\";\r\n     if($res->num_rows >0)\r\n     {\r\n-\r\n+        while($r = mysqli_fetch_array($res))\r\n+        {\r\n+            \r\n+        }\r\n     }\r\n     $mysql .= \"</table>\";\r\n \r\n }\r\n"
+                },
+                {
+                    "date": 1635402760749,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -121,14 +121,14 @@\n {\r\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select * from transaction_displacement_new_asset_log tdasl inner join product on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n-    $mysql = \"<table><th>No Asset</th><th>Name</th>\";\r\n+    $mysql = \"<table><tr><th>No Asset</th><th>Name</th></tr>\";\r\n     if($res->num_rows >0)\r\n     {\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n-            \r\n+            $mysql\r\n         }\r\n     }\r\n     $mysql .= \"</table>\";\r\n \r\n"
+                },
+                {
+                    "date": 1635402768812,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -121,14 +121,14 @@\n {\r\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select * from transaction_displacement_new_asset_log tdasl inner join product on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n-    $mysql = \"<table><tr><th>No Asset</th><th>Name</th></tr>\";\r\n+    $mystring = \"<table><tr><th>No Asset</th><th>Name</th></tr>\";\r\n     if($res->num_rows >0)\r\n     {\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n-            $mysql\r\n+            $mysql .= \r\n         }\r\n     }\r\n     $mysql .= \"</table>\";\r\n \r\n"
+                },
+                {
+                    "date": 1635402783249,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -126,12 +126,12 @@\n     if($res->num_rows >0)\r\n     {\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n-            $mysql .= \r\n+            $mystring .= ;\r\n         }\r\n     }\r\n-    $mysql .= \"</table>\";\r\n+    $mystring .= \"</table>\";\r\n \r\n }\r\n else if($tipe == \"loadpicked\")\r\n {\r\n"
+                },
+                {
+                    "date": 1635402796846,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -126,9 +126,9 @@\n     if($res->num_rows >0)\r\n     {\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n-            $mystring .= ;\r\n+            $mystring .= \"<tr>\";\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n \r\n"
+                },
+                {
+                    "date": 1635402801949,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -126,9 +126,9 @@\n     if($res->num_rows >0)\r\n     {\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n-            $mystring .= \"<tr>\";\r\n+            $mystring .= \"<tr></tr>\";\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n \r\n"
+                },
+                {
+                    "date": 1635402809057,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -126,9 +126,9 @@\n     if($res->num_rows >0)\r\n     {\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n-            $mystring .= \"<tr></tr>\";\r\n+            $mystring .= \"<tr><td></td></tr>\";\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n \r\n"
+                },
+                {
+                    "date": 1635402826041,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -119,9 +119,9 @@\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $idtransac = $_POST['myidtransaction'];\r\n-    $sql = \"select * from transaction_displacement_new_asset_log tdasl inner join product on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n+    $sql = \"select asset.noasset, asset.name from transaction_displacement_new_asset_log tdasl inner join product on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n     $mystring = \"<table><tr><th>No Asset</th><th>Name</th></tr>\";\r\n     if($res->num_rows >0)\r\n     {\r\n"
+                },
+                {
+                    "date": 1635402833860,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -126,9 +126,9 @@\n     if($res->num_rows >0)\r\n     {\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n-            $mystring .= \"<tr><td></td></tr>\";\r\n+            $mystring .= \"<tr><td>\"..\"</td></tr>\";\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n \r\n"
+                },
+                {
+                    "date": 1635402840196,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -126,9 +126,9 @@\n     if($res->num_rows >0)\r\n     {\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n-            $mystring .= \"<tr><td>\"..\"</td></tr>\";\r\n+            $mystring .= \"<tr><td>\".$r['noasset'].\"</td></tr>\";\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n \r\n"
+                },
+                {
+                    "date": 1635402848084,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -126,9 +126,9 @@\n     if($res->num_rows >0)\r\n     {\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n-            $mystring .= \"<tr><td>\".$r['noasset'].\"</td></tr>\";\r\n+            $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\"..\"</td></tr>\";\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n \r\n"
+                },
+                {
+                    "date": 1635402854435,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -126,9 +126,9 @@\n     if($res->num_rows >0)\r\n     {\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n-            $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\"..\"</td></tr>\";\r\n+            $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['noasset'].\"</td></tr>\";\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n \r\n"
+                },
+                {
+                    "date": 1635402861595,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -126,9 +126,9 @@\n     if($res->num_rows >0)\r\n     {\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n-            $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['noasset'].\"</td></tr>\";\r\n+            $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n \r\n"
+                },
+                {
+                    "date": 1635402866776,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -130,8 +130,9 @@\n             $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n+    echo $mystring\r\n \r\n }\r\n else if($tipe == \"loadpicked\")\r\n {\r\n"
+                },
+                {
+                    "date": 1635402973131,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -119,9 +119,9 @@\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $idtransac = $_POST['myidtransaction'];\r\n-    $sql = \"select asset.noasset, asset.name from transaction_displacement_new_asset_log tdasl inner join product on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n+    $sql = \"select asset.noasset, asset.name from transaction_displacement_new_asset_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n     $mystring = \"<table><tr><th>No Asset</th><th>Name</th></tr>\";\r\n     if($res->num_rows >0)\r\n     {\r\n@@ -130,9 +130,9 @@\n             $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n-    echo $mystring\r\n+    echo $mystring;\r\n \r\n }\r\n else if($tipe == \"loadpicked\")\r\n {\r\n"
+                },
+                {
+                    "date": 1635403038842,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -121,9 +121,9 @@\n {\r\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select asset.noasset, asset.name from transaction_displacement_new_asset_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n-    $mystring = \"<table><tr><th>No Asset</th><th>Name</th></tr>\";\r\n+    $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n     if($res->num_rows >0)\r\n     {\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n"
+                },
+                {
+                    "date": 1635404275637,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -133,8 +133,9 @@\n     $mystring .= \"</table>\";\r\n     echo $mystring;\r\n \r\n }\r\n+\r\n else if($tipe == \"loadpicked\")\r\n {\r\n     $myid = $_POST['idtransaction'];\r\n     $where_like = [\r\n"
+                },
+                {
+                    "date": 1635404316419,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -116,8 +116,123 @@\n     }  \r\n     \r\n     echo json_encode($response);\r\n }\r\n+else if($tipe == \"\")\r\n+{\r\n+    $statusmust = $_POST['statusmust'];\r\n+    $params = $_POST['myparam'];\r\n+    $where_like = [\r\n+        \r\n+        'noasset',\r\n+        'name',\r\n+        'conditions',\r\n+        'initial_condition',\r\n+        'initial_condition'\r\n+        \r\n+    ];\r\n+    \r\n+    \r\n+    $response = $_REQUEST;\r\n+    $start    = $response['start'];\r\n+    $length   = $response['length'];\r\n+    $order    = $where_like[$response['order'][0]['column']];\r\n+    $dir      = $response['order'][0]['dir'];\r\n+    $search   = $response['search']['value'];\r\n+    \r\n+    $total_data = mysqli_query($conn, \r\n+    \r\n+    \"SELECT ka.nama as groupname, ks.subgroup as subgroupname, kc.category as categoryname, ic.initial_condition, c.name as conditions, relation.company as myrelation, asset.* FROM `asset`\r\n+    inner join relation on relation.id = asset.purchase_from \r\n+    inner join kategori_asset ka on ka.id = asset.idgroup\r\n+    inner join kategori_subgroup ks on ks.id = asset.idsubgroup\r\n+    inner join kategori_categorysubgroup kc on kc.id = asset.idcategory\r\n+    inner join conditions c on c.id = asset.idcondition\r\n+    inner join initial_condition ic on ic.id = asset.idinitialcondition\r\n+     where asset.status_transaction = '$statusmust' and asset.idcategory = '$params'\r\n+    \"\r\n+\r\n+);\r\n+    \r\n+    if(empty($search)) {\r\n+        $query_data = mysqli_query($conn, \"SELECT ka.nama as groupname, ks.subgroup as subgroupname, kc.category as categoryname, ic.initial_condition, c.name as conditions, relation.company as myrelation, asset.* FROM `asset`\r\n+         inner join relation on relation.id = asset.purchase_from \r\n+        inner join kategori_asset ka on ka.id = asset.idgroup\r\n+        inner join kategori_subgroup ks on ks.id = asset.idsubgroup\r\n+        inner join kategori_categorysubgroup kc on kc.id = asset.idcategory\r\n+        inner join conditions c on c.id = asset.idcondition\r\n+        inner join initial_condition ic on ic.id = asset.idinitialcondition \r\n+        where asset.status_transaction = '$statusmust' and asset.idcategory = '$params' ORDER BY $order $dir LIMIT $start, $length\");\r\n+    \r\n+        $total_filtered = mysqli_query($conn, \"SELECT ka.nama as groupname, ks.subgroup as subgroupname, kc.category as categoryname, ic.initial_condition, c.name as conditions, relation.company as myrelation, asset.* FROM `asset`\r\n+         inner join relation on relation.id = asset.purchase_from \r\n+        inner join kategori_asset ka on ka.id = asset.idgroup\r\n+        inner join kategori_subgroup ks on ks.id = asset.idsubgroup\r\n+        inner join kategori_categorysubgroup kc on kc.id = asset.idcategory\r\n+        inner join conditions c on c.id = asset.idcondition\r\n+        inner join initial_condition ic on ic.id = asset.idinitialcondition  where asset.status_transaction = '$statusmust' and asset.idcategory = '$params' \");\r\n+    } else {\r\n+        $query_data = mysqli_query($conn, \"SELECT ka.nama as groupname, ks.subgroup as subgroupname, kc.category as categoryname, ic.initial_condition, c.name as conditions, relation.company as myrelation, asset.* FROM `asset`\r\n+         inner join relation on relation.id = asset.purchase_from \r\n+        inner join kategori_asset ka on ka.id = asset.idgroup\r\n+        inner join kategori_subgroup ks on ks.id = asset.idsubgroup\r\n+        inner join kategori_categorysubgroup kc on kc.id = asset.idcategory\r\n+        inner join conditions c on c.id = asset.idcondition\r\n+        inner join initial_condition ic on ic.id = asset.idinitialcondition \r\n+        where (asset.status_transaction = '$statusmust' and asset.idcategory = '$params') and ( ka.nama LIKE '%$search%' \r\n+        OR ks.subgroup LIKE '%$search%'\r\n+        OR kc.category LIKE '%$search%'\r\n+        OR ic.initial_condition LIKE '%$search%'\r\n+        OR c.name LIKE '%$search%'\r\n+        OR asset.noasset LIKE '%$search%'\r\n+        OR asset.name LIKE '%$search%'\r\n+        OR asset.status LIKE '%$search%' ) ORDER BY $order $dir LIMIT $start, $length\");\r\n+    \r\n+        $total_filtered = mysqli_query($conn, \"SELECT ka.nama as groupname, ks.subgroup as subgroupname, kc.category as categoryname, ic.initial_condition, c.name as conditions, relation.company as myrelation, asset.* FROM `asset`\r\n+         inner join relation on relation.id = asset.purchase_from \r\n+        inner join kategori_asset ka on ka.id = asset.idgroup\r\n+        inner join kategori_subgroup ks on ks.id = asset.idsubgroup\r\n+        inner join kategori_categorysubgroup kc on kc.id = asset.idcategory\r\n+        inner join conditions c on c.id = asset.idcondition \r\n+        inner join initial_condition ic on ic.id = asset.idinitialcondition \r\n+        where (asset.status_transaction = '$statusmust' and asset.idcategory = '$params') and ( ka.nama LIKE '%$search%' \r\n+        OR ks.subgroup LIKE '%$search%'\r\n+        OR kc.category LIKE '%$search%'\r\n+        OR ic.initial_condition LIKE '%$search%'\r\n+        OR c.name LIKE '%$search%'\r\n+        OR asset.noasset LIKE '%$search%'\r\n+        OR asset.name LIKE '%$search%'\r\n+        OR asset.status LIKE '%$search%' )\");\r\n+    }\r\n+    \r\n+    $response['data'] = [];\r\n+    \r\n+    if($query_data) {\r\n+        while($row = mysqli_fetch_assoc($query_data)) {\r\n+       \r\n+            // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n+            $response['data'][] = [\r\n+                \"<input type = 'checkbox' id = 'check_\".$row['id'].\"' class = 'checkboxasset'>\",\r\n+                \"<label id ='noasset\".$row['id'].\"'>\".$row['noasset'].\"</label>\",\r\n+                \"<label id ='name\".$row['id'].\"'>\".$row['name'].\"</label>\",\r\n+                \"<label id ='conditions\".$row['id'].\"'>\".$row['conditions'].\"</label>\",\r\n+                \"<label id ='initial_condition\".$row['id'].\"'>\".$row['initial_condition'].\"</label>\"\r\n+            ];\r\n+        }\r\n+    }\r\n+    \r\n+    $response['recordsTotal'] = 0;\r\n+    if($total_data <> FALSE) {\r\n+        $response['recordsTotal'] = mysqli_num_rows($total_data);\r\n+    }\r\n+    \r\n+    $response['recordsFiltered'] = 0;\r\n+    if($total_filtered <> FALSE) {\r\n+        $response['recordsFiltered'] = mysqli_num_rows($total_filtered);\r\n+    }  \r\n+    \r\n+    echo json_encode($response);\r\n+}\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select asset.noasset, asset.name from transaction_displacement_new_asset_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n"
+                },
+                {
+                    "date": 1635404325988,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -116,9 +116,9 @@\n     }  \r\n     \r\n     echo json_encode($response);\r\n }\r\n-else if($tipe == \"\")\r\n+else if($tipe == \"loadexisting\")\r\n {\r\n     $statusmust = $_POST['statusmust'];\r\n     $params = $_POST['myparam'];\r\n     $where_like = [\r\n"
+                },
+                {
+                    "date": 1635405334271,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -210,9 +210,9 @@\n         while($row = mysqli_fetch_assoc($query_data)) {\r\n        \r\n             // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n             $response['data'][] = [\r\n-                \"<input type = 'checkbox' id = 'check_\".$row['id'].\"' class = 'checkboxasset'>\",\r\n+                \"<input type = 'checkbox' id = 'check_\".$row['id'].\"' class = 'checkboxassetedit'>\",\r\n                 \"<label id ='noasset\".$row['id'].\"'>\".$row['noasset'].\"</label>\",\r\n                 \"<label id ='name\".$row['id'].\"'>\".$row['name'].\"</label>\",\r\n                 \"<label id ='conditions\".$row['id'].\"'>\".$row['conditions'].\"</label>\",\r\n                 \"<label id ='initial_condition\".$row['id'].\"'>\".$row['initial_condition'].\"</label>\"\r\n"
+                },
+                {
+                    "date": 1635405432782,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -211,9 +211,9 @@\n        \r\n             // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n             $response['data'][] = [\r\n                 \"<input type = 'checkbox' id = 'check_\".$row['id'].\"' class = 'checkboxassetedit'>\",\r\n-                \"<label id ='noasset\".$row['id'].\"'>\".$row['noasset'].\"</label>\",\r\n+                \"<label id ='noassetedit\".$row['id'].\"'>\".$row['noasset'].\"</label>\",\r\n                 \"<label id ='name\".$row['id'].\"'>\".$row['name'].\"</label>\",\r\n                 \"<label id ='conditions\".$row['id'].\"'>\".$row['conditions'].\"</label>\",\r\n                 \"<label id ='initial_condition\".$row['id'].\"'>\".$row['initial_condition'].\"</label>\"\r\n             ];\r\n"
+                },
+                {
+                    "date": 1635405440124,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -212,11 +212,11 @@\n             // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n             $response['data'][] = [\r\n                 \"<input type = 'checkbox' id = 'check_\".$row['id'].\"' class = 'checkboxassetedit'>\",\r\n                 \"<label id ='noassetedit\".$row['id'].\"'>\".$row['noasset'].\"</label>\",\r\n-                \"<label id ='name\".$row['id'].\"'>\".$row['name'].\"</label>\",\r\n-                \"<label id ='conditions\".$row['id'].\"'>\".$row['conditions'].\"</label>\",\r\n-                \"<label id ='initial_condition\".$row['id'].\"'>\".$row['initial_condition'].\"</label>\"\r\n+                \"<label id ='nameedit\".$row['id'].\"'>\".$row['name'].\"</label>\",\r\n+                \"<label id ='conditionsedit\".$row['id'].\"'>\".$row['conditions'].\"</label>\",\r\n+                \"<label id ='initial_conditionedit\".$row['id'].\"'>\".$row['initial_condition'].\"</label>\"\r\n             ];\r\n         }\r\n     }\r\n     \r\n"
+                },
+                {
+                    "date": 1635406121307,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -233,8 +233,9 @@\n     echo json_encode($response);\r\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n+    $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select asset.noasset, asset.name from transaction_displacement_new_asset_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n     $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n"
+                },
+                {
+                    "date": 1635406128997,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -242,8 +242,9 @@\n     if($res->num_rows >0)\r\n     {\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n+            $arrayid[] = \r\n             $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n"
+                },
+                {
+                    "date": 1635406141162,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -235,16 +235,16 @@\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n-    $sql = \"select asset.noasset, asset.name from transaction_displacement_new_asset_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n+    $sql = \"select asset.id,asset.noasset, asset.name from transaction_displacement_new_asset_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n     $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n     if($res->num_rows >0)\r\n     {\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n-            $arrayid[] = \r\n+            $arrayid[] = $r['id']\r\n             $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n"
+                },
+                {
+                    "date": 1635406157270,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -235,21 +235,21 @@\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n-    $sql = \"select asset.id,asset.noasset, asset.name from transaction_displacement_new_asset_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n+    $sql = \"select asset.id, asset.noasset, asset.name from transaction_displacement_new_asset_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n     $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n     if($res->num_rows >0)\r\n     {\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n-            $arrayid[] = $r['id']\r\n+            $arrayid[] = $r['id'];\r\n             $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n-    echo $mystring;\r\n+    echo $arrayid.$mystring;\r\n \r\n }\r\n \r\n else if($tipe == \"loadpicked\")\r\n"
+                },
+                {
+                    "date": 1635406162548,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -247,9 +247,9 @@\n             $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n-    echo $arrayid.$mystring;\r\n+    echo $arrayid.\"||\".$mystring;\r\n \r\n }\r\n \r\n else if($tipe == \"loadpicked\")\r\n"
+                },
+                {
+                    "date": 1635406241321,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -247,9 +247,9 @@\n             $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n-    echo $arrayid.\"||\".$mystring;\r\n+    echo print($arrayid).\"||\".$mystring;\r\n \r\n }\r\n \r\n else if($tipe == \"loadpicked\")\r\n"
+                },
+                {
+                    "date": 1635406397179,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -248,8 +248,13 @@\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n     echo print($arrayid).\"||\".$mystring;\r\n+    $response[] = array(\r\n+        'CLIENTID' => trim($row['CLIENTID']),\r\n+        'NAME' => trim($row['NAME'])\r\n+    );\r\n+    echo $response\r\n \r\n }\r\n \r\n else if($tipe == \"loadpicked\")\r\n"
+                },
+                {
+                    "date": 1635406402288,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -247,14 +247,14 @@\n             $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n-    echo print($arrayid).\"||\".$mystring;\r\n+    // echo print($arrayid).\"||\".$mystring;\r\n     $response[] = array(\r\n         'CLIENTID' => trim($row['CLIENTID']),\r\n         'NAME' => trim($row['NAME'])\r\n     );\r\n-    echo $response\r\n+    echo $response;\r\n \r\n }\r\n \r\n else if($tipe == \"loadpicked\")\r\n"
+                },
+                {
+                    "date": 1635406411809,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -249,9 +249,9 @@\n     }\r\n     $mystring .= \"</table>\";\r\n     // echo print($arrayid).\"||\".$mystring;\r\n     $response[] = array(\r\n-        'CLIENTID' => trim($row['CLIENTID']),\r\n+        'mystring' => $mystring,\r\n         'NAME' => trim($row['NAME'])\r\n     );\r\n     echo $response;\r\n \r\n"
+                },
+                {
+                    "date": 1635406434409,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -250,9 +250,9 @@\n     $mystring .= \"</table>\";\r\n     // echo print($arrayid).\"||\".$mystring;\r\n     $response[] = array(\r\n         'mystring' => $mystring,\r\n-        'NAME' => trim($row['NAME'])\r\n+        'myarray' => $arrayid\r\n     );\r\n     echo $response;\r\n \r\n }\r\n"
+                },
+                {
+                    "date": 1635406484459,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -250,9 +250,9 @@\n     $mystring .= \"</table>\";\r\n     // echo print($arrayid).\"||\".$mystring;\r\n     $response[] = array(\r\n         'mystring' => $mystring,\r\n-        'myarray' => $arrayid\r\n+        'myarray' => trim($arrayid)\r\n     );\r\n     echo $response;\r\n \r\n }\r\n"
+                },
+                {
+                    "date": 1635406534796,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -250,9 +250,9 @@\n     $mystring .= \"</table>\";\r\n     // echo print($arrayid).\"||\".$mystring;\r\n     $response[] = array(\r\n         'mystring' => $mystring,\r\n-        'myarray' => trim($arrayid)\r\n+        'myarray' => $arrayid\r\n     );\r\n     echo $response;\r\n \r\n }\r\n"
+                },
+                {
+                    "date": 1635406607590,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -250,9 +250,9 @@\n     $mystring .= \"</table>\";\r\n     // echo print($arrayid).\"||\".$mystring;\r\n     $response[] = array(\r\n         'mystring' => $mystring,\r\n-        'myarray' => $arrayid\r\n+        'myarray' => json_encode($arrayid)\r\n     );\r\n     echo $response;\r\n \r\n }\r\n"
+                },
+                {
+                    "date": 1635406627018,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -252,9 +252,9 @@\n     $response[] = array(\r\n         'mystring' => $mystring,\r\n         'myarray' => json_encode($arrayid)\r\n     );\r\n-    echo $response;\r\n+    return $response;\r\n \r\n }\r\n \r\n else if($tipe == \"loadpicked\")\r\n"
+                },
+                {
+                    "date": 1635406683871,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -250,11 +250,11 @@\n     $mystring .= \"</table>\";\r\n     // echo print($arrayid).\"||\".$mystring;\r\n     $response[] = array(\r\n         'mystring' => $mystring,\r\n-        'myarray' => json_encode($arrayid)\r\n+        'myarray' => $arrayid\r\n     );\r\n-    return $response;\r\n+    return json_encode($response);\r\n \r\n }\r\n \r\n else if($tipe == \"loadpicked\")\r\n"
+                },
+                {
+                    "date": 1635406704250,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -248,9 +248,9 @@\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n     // echo print($arrayid).\"||\".$mystring;\r\n-    $response[] = array(\r\n+    $response[\"data\"] = array(\r\n         'mystring' => $mystring,\r\n         'myarray' => $arrayid\r\n     );\r\n     return json_encode($response);\r\n"
+                },
+                {
+                    "date": 1635406788810,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -248,12 +248,12 @@\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n     // echo print($arrayid).\"||\".$mystring;\r\n-    $response[\"data\"] = array(\r\n-        'mystring' => $mystring,\r\n-        'myarray' => $arrayid\r\n-    );\r\n+    // $response[\"data\"] = array(\r\n+    //     'mystring' => $mystring,\r\n+    //     'myarray' => $arrayid\r\n+    // );\r\n     return json_encode($response);\r\n \r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1635406795400,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -252,9 +252,9 @@\n     // $response[\"data\"] = array(\r\n     //     'mystring' => $mystring,\r\n     //     'myarray' => $arrayid\r\n     // );\r\n-    return json_encode($response);\r\n+    return json_encode($arrayid);\r\n \r\n }\r\n \r\n else if($tipe == \"loadpicked\")\r\n"
+                },
+                {
+                    "date": 1635406827704,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -247,13 +247,13 @@\n             $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n-    // echo print($arrayid).\"||\".$mystring;\r\n-    // $response[\"data\"] = array(\r\n-    //     'mystring' => $mystring,\r\n-    //     'myarray' => $arrayid\r\n-    // );\r\n+    echo print($arrayid).\"||\".$mystring;\r\n+    $response[\"data\"] = array(\r\n+        'mystring' => $mystring,\r\n+        'myarray' => \"test\"\r\n+    );\r\n     return json_encode($arrayid);\r\n \r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1635406843040,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -247,9 +247,9 @@\n             $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n-    echo print($arrayid).\"||\".$mystring;\r\n+    // echo print($arrayid).\"||\".$mystring;\r\n     $response[\"data\"] = array(\r\n         'mystring' => $mystring,\r\n         'myarray' => \"test\"\r\n     );\r\n"
+                },
+                {
+                    "date": 1635406910127,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -248,12 +248,12 @@\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n     // echo print($arrayid).\"||\".$mystring;\r\n-    $response[\"data\"] = array(\r\n-        'mystring' => $mystring,\r\n-        'myarray' => \"test\"\r\n-    );\r\n+    // $response[\"data\"] = array(\r\n+    //     'mystring' => $mystring,\r\n+    //     'myarray' => \"test\"\r\n+    // );\r\n     return json_encode($arrayid);\r\n \r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1635406917691,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -252,9 +252,11 @@\n     // $response[\"data\"] = array(\r\n     //     'mystring' => $mystring,\r\n     //     'myarray' => \"test\"\r\n     // );\r\n-    return json_encode($arrayid);\r\n+    return json_encode(array(\r\n+        \r\n+    ));\r\n \r\n }\r\n \r\n else if($tipe == \"loadpicked\")\r\n"
+                },
+                {
+                    "date": 1635406922789,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -253,9 +253,10 @@\n     //     'mystring' => $mystring,\r\n     //     'myarray' => \"test\"\r\n     // );\r\n     return json_encode(array(\r\n-        \r\n+        'mystring' => $mystring,\r\n+        //     'myarray' => \"test\"\r\n     ));\r\n \r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1635406933269,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -254,9 +254,9 @@\n     //     'myarray' => \"test\"\r\n     // );\r\n     return json_encode(array(\r\n         'mystring' => $mystring,\r\n-        //     'myarray' => \"test\"\r\n+            'myarray' => \"test\"\r\n     ));\r\n \r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1635407241028,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -252,12 +252,9 @@\n     // $response[\"data\"] = array(\r\n     //     'mystring' => $mystring,\r\n     //     'myarray' => \"test\"\r\n     // );\r\n-    return json_encode(array(\r\n-        'mystring' => $mystring,\r\n-            'myarray' => \"test\"\r\n-    ));\r\n+    return json_encode();\r\n \r\n }\r\n \r\n else if($tipe == \"loadpicked\")\r\n"
+                },
+                {
+                    "date": 1635407258562,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -252,9 +252,9 @@\n     // $response[\"data\"] = array(\r\n     //     'mystring' => $mystring,\r\n     //     'myarray' => \"test\"\r\n     // );\r\n-    return json_encode();\r\n+    return $arrayid;\r\n \r\n }\r\n \r\n else if($tipe == \"loadpicked\")\r\n"
+                },
+                {
+                    "date": 1635407302542,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -233,9 +233,9 @@\n     echo json_encode($response);\r\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n-    $arrayid = array();\r\n+    $arrayid = 'array()';\r\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select asset.id, asset.noasset, asset.name from transaction_displacement_new_asset_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n     $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n"
+                },
+                {
+                    "date": 1635407327521,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -233,13 +233,14 @@\n     echo json_encode($response);\r\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n-    $arrayid = 'array()';\r\n+    $arrayid = '';\r\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select asset.id, asset.noasset, asset.name from transaction_displacement_new_asset_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n     $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n+    $index = 0; \r\n     if($res->num_rows >0)\r\n     {\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n"
+                },
+                {
+                    "date": 1635407336430,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -243,9 +243,13 @@\n     if($res->num_rows >0)\r\n     {\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n-            $arrayid[] = $r['id'];\r\n+            if($index == 0)\r\n+            {\r\n+                $arrayid[] = $r['id'];\r\n+            }\r\n+           \r\n             $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n"
+                },
+                {
+                    "date": 1635407343967,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -233,9 +233,9 @@\n     echo json_encode($response);\r\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n-    $arrayid = '';\r\n+    $arrayid = \"\";\r\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select asset.id, asset.noasset, asset.name from transaction_displacement_new_asset_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n     $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n@@ -245,9 +245,9 @@\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n             if($index == 0)\r\n             {\r\n-                $arrayid[] = $r['id'];\r\n+                $arrayid .= $r['id'];\r\n             }\r\n            \r\n             $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n         }\r\n"
+                },
+                {
+                    "date": 1635407349354,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -247,8 +247,12 @@\n             if($index == 0)\r\n             {\r\n                 $arrayid .= $r['id'];\r\n             }\r\n+            else\r\n+            {\r\n+                \r\n+            }\r\n            \r\n             $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n         }\r\n     }\r\n"
+                },
+                {
+                    "date": 1635407359230,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -249,9 +249,9 @@\n                 $arrayid .= $r['id'];\r\n             }\r\n             else\r\n             {\r\n-                \r\n+                $arrayid .= \",\".$r['id'];\r\n             }\r\n            \r\n             $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n         }\r\n"
+                },
+                {
+                    "date": 1635407380608,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -261,9 +261,9 @@\n     // $response[\"data\"] = array(\r\n     //     'mystring' => $mystring,\r\n     //     'myarray' => \"test\"\r\n     // );\r\n-    return $arrayid;\r\n+    return $arrayid.\"||\".$mystring;\r\n \r\n }\r\n \r\n else if($tipe == \"loadpicked\")\r\n"
+                },
+                {
+                    "date": 1635407390952,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -261,9 +261,9 @@\n     // $response[\"data\"] = array(\r\n     //     'mystring' => $mystring,\r\n     //     'myarray' => \"test\"\r\n     // );\r\n-    return $arrayid.\"||\".$mystring;\r\n+    echo $arrayid.\"||\".$mystring;\r\n \r\n }\r\n \r\n else if($tipe == \"loadpicked\")\r\n"
+                },
+                {
+                    "date": 1635407422611,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -233,27 +233,18 @@\n     echo json_encode($response);\r\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n-    $arrayid = \"\";\r\n+    $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select asset.id, asset.noasset, asset.name from transaction_displacement_new_asset_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n     $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n-    $index = 0; \r\n     if($res->num_rows >0)\r\n     {\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n-            if($index == 0)\r\n-            {\r\n-                $arrayid .= $r['id'];\r\n-            }\r\n-            else\r\n-            {\r\n-                $arrayid .= \",\".$r['id'];\r\n-            }\r\n-           \r\n+            $arrayid[] = $r['id'];\r\n             $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n@@ -261,9 +252,9 @@\n     // $response[\"data\"] = array(\r\n     //     'mystring' => $mystring,\r\n     //     'myarray' => \"test\"\r\n     // );\r\n-    echo $arrayid.\"||\".$mystring;\r\n+    return $arrayid;\r\n \r\n }\r\n \r\n else if($tipe == \"loadpicked\")\r\n"
+                },
+                {
+                    "date": 1635407431017,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -248,12 +248,12 @@\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n     // echo print($arrayid).\"||\".$mystring;\r\n-    // $response[\"data\"] = array(\r\n-    //     'mystring' => $mystring,\r\n-    //     'myarray' => \"test\"\r\n-    // );\r\n+    $response[\"data\"] = array(\r\n+        'mystring' => $mystring,\r\n+        'myarray' => \"test\"\r\n+    );\r\n     return $arrayid;\r\n \r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1635407449633,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -252,9 +252,9 @@\n     $response[\"data\"] = array(\r\n         'mystring' => $mystring,\r\n         'myarray' => \"test\"\r\n     );\r\n-    return $arrayid;\r\n+    echo json_encode($response);\r\n \r\n }\r\n \r\n else if($tipe == \"loadpicked\")\r\n"
+                },
+                {
+                    "date": 1635407474500,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -250,9 +250,9 @@\n     $mystring .= \"</table>\";\r\n     // echo print($arrayid).\"||\".$mystring;\r\n     $response[\"data\"] = array(\r\n         'mystring' => $mystring,\r\n-        'myarray' => \"test\"\r\n+        'myarray' => $arrayid\r\n     );\r\n     echo json_encode($response);\r\n \r\n }\r\n"
+                },
+                {
+                    "date": 1635408607208,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -118,8 +118,9 @@\n     echo json_encode($response);\r\n }\r\n else if($tipe == \"loadexisting\")\r\n {\r\n+    $assetexisting = $_POST['assetexisting'];\r\n     $statusmust = $_POST['statusmust'];\r\n     $params = $_POST['myparam'];\r\n     $where_like = [\r\n         \r\n"
+                },
+                {
+                    "date": 1635408706225,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -211,8 +211,9 @@\n         while($row = mysqli_fetch_assoc($query_data)) {\r\n        \r\n             // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n             $response['data'][] = [\r\n+                for($i = 0; assetexisting)\r\n                 \"<input type = 'checkbox' id = 'check_\".$row['id'].\"' class = 'checkboxassetedit'>\",\r\n                 \"<label id ='noassetedit\".$row['id'].\"'>\".$row['noasset'].\"</label>\",\r\n                 \"<label id ='nameedit\".$row['id'].\"'>\".$row['name'].\"</label>\",\r\n                 \"<label id ='conditionsedit\".$row['id'].\"'>\".$row['conditions'].\"</label>\",\r\n"
+                },
+                {
+                    "date": 1635408718528,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -211,9 +211,12 @@\n         while($row = mysqli_fetch_assoc($query_data)) {\r\n        \r\n             // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n             $response['data'][] = [\r\n-                for($i = 0; assetexisting)\r\n+                for($i = 0; $i < count(assetexisting); $i++)\r\n+                {\r\n+                    \r\n+                }\r\n                 \"<input type = 'checkbox' id = 'check_\".$row['id'].\"' class = 'checkboxassetedit'>\",\r\n                 \"<label id ='noassetedit\".$row['id'].\"'>\".$row['noasset'].\"</label>\",\r\n                 \"<label id ='nameedit\".$row['id'].\"'>\".$row['name'].\"</label>\",\r\n                 \"<label id ='conditionsedit\".$row['id'].\"'>\".$row['conditions'].\"</label>\",\r\n"
+                },
+                {
+                    "date": 1635408731424,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -213,10 +213,10 @@\n             // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n             $response['data'][] = [\r\n                 for($i = 0; $i < count(assetexisting); $i++)\r\n                 {\r\n-                    \r\n-                }\r\n+\r\n+                };\r\n                 \"<input type = 'checkbox' id = 'check_\".$row['id'].\"' class = 'checkboxassetedit'>\",\r\n                 \"<label id ='noassetedit\".$row['id'].\"'>\".$row['noasset'].\"</label>\",\r\n                 \"<label id ='nameedit\".$row['id'].\"'>\".$row['name'].\"</label>\",\r\n                 \"<label id ='conditionsedit\".$row['id'].\"'>\".$row['conditions'].\"</label>\",\r\n"
+                },
+                {
+                    "date": 1635408737632,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -213,11 +213,11 @@\n             // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n             $response['data'][] = [\r\n                 for($i = 0; $i < count(assetexisting); $i++)\r\n                 {\r\n-\r\n-                };\r\n-                \"<input type = 'checkbox' id = 'check_\".$row['id'].\"' class = 'checkboxassetedit'>\",\r\n+                    \"<input type = 'checkbox' id = 'check_\".$row['id'].\"' class = 'checkboxassetedit'>\"\r\n+                }\r\n+           ,\r\n                 \"<label id ='noassetedit\".$row['id'].\"'>\".$row['noasset'].\"</label>\",\r\n                 \"<label id ='nameedit\".$row['id'].\"'>\".$row['name'].\"</label>\",\r\n                 \"<label id ='conditionsedit\".$row['id'].\"'>\".$row['conditions'].\"</label>\",\r\n                 \"<label id ='initial_conditionedit\".$row['id'].\"'>\".$row['initial_condition'].\"</label>\"\r\n"
+                },
+                {
+                    "date": 1635408751241,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -211,9 +211,9 @@\n         while($row = mysqli_fetch_assoc($query_data)) {\r\n        \r\n             // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n             $response['data'][] = [\r\n-                for($i = 0; $i < count(assetexisting); $i++)\r\n+                for($i = 0; $i < count($assetexisting); $i++)\r\n                 {\r\n                     \"<input type = 'checkbox' id = 'check_\".$row['id'].\"' class = 'checkboxassetedit'>\"\r\n                 }\r\n            ,\r\n"
+                },
+                {
+                    "date": 1635408760568,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -214,9 +214,9 @@\n             $response['data'][] = [\r\n                 for($i = 0; $i < count($assetexisting); $i++)\r\n                 {\r\n                     \"<input type = 'checkbox' id = 'check_\".$row['id'].\"' class = 'checkboxassetedit'>\"\r\n-                }\r\n+                };\r\n            ,\r\n                 \"<label id ='noassetedit\".$row['id'].\"'>\".$row['noasset'].\"</label>\",\r\n                 \"<label id ='nameedit\".$row['id'].\"'>\".$row['name'].\"</label>\",\r\n                 \"<label id ='conditionsedit\".$row['id'].\"'>\".$row['conditions'].\"</label>\",\r\n"
+                },
+                {
+                    "date": 1635408766034,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -211,12 +211,9 @@\n         while($row = mysqli_fetch_assoc($query_data)) {\r\n        \r\n             // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n             $response['data'][] = [\r\n-                for($i = 0; $i < count($assetexisting); $i++)\r\n-                {\r\n-                    \"<input type = 'checkbox' id = 'check_\".$row['id'].\"' class = 'checkboxassetedit'>\"\r\n-                };\r\n+             \r\n            ,\r\n                 \"<label id ='noassetedit\".$row['id'].\"'>\".$row['noasset'].\"</label>\",\r\n                 \"<label id ='nameedit\".$row['id'].\"'>\".$row['name'].\"</label>\",\r\n                 \"<label id ='conditionsedit\".$row['id'].\"'>\".$row['conditions'].\"</label>\",\r\n"
+                },
+                {
+                    "date": 1635408771512,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -212,9 +212,9 @@\n        \r\n             // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n             $response['data'][] = [\r\n              \r\n-           ,\r\n+                    ,\r\n                 \"<label id ='noassetedit\".$row['id'].\"'>\".$row['noasset'].\"</label>\",\r\n                 \"<label id ='nameedit\".$row['id'].\"'>\".$row['name'].\"</label>\",\r\n                 \"<label id ='conditionsedit\".$row['id'].\"'>\".$row['conditions'].\"</label>\",\r\n                 \"<label id ='initial_conditionedit\".$row['id'].\"'>\".$row['initial_condition'].\"</label>\"\r\n"
+                },
+                {
+                    "date": 1635408786077,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -208,9 +208,13 @@\n     $response['data'] = [];\r\n     \r\n     if($query_data) {\r\n         while($row = mysqli_fetch_assoc($query_data)) {\r\n-       \r\n+            $mcheck = \"\"\r\n+            for($i = 0; $i < count($assetexisting); $i++)\r\n+            {\r\n+                \"<input type = 'checkbox' id = 'check_\".$row['id'].\"' class = 'checkboxassetedit'>\"\r\n+            }\r\n             // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n             $response['data'][] = [\r\n              \r\n                     ,\r\n"
+                },
+                {
+                    "date": 1635408791984,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -208,9 +208,9 @@\n     $response['data'] = [];\r\n     \r\n     if($query_data) {\r\n         while($row = mysqli_fetch_assoc($query_data)) {\r\n-            $mcheck = \"\"\r\n+            $mcheck =  \"<input type = 'checkbox' id = 'check_\".$row['id'].\"' class = 'checkboxassetedit'>\"\r\n             for($i = 0; $i < count($assetexisting); $i++)\r\n             {\r\n                 \"<input type = 'checkbox' id = 'check_\".$row['id'].\"' class = 'checkboxassetedit'>\"\r\n             }\r\n"
+                },
+                {
+                    "date": 1635408855037,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -208,12 +208,13 @@\n     $response['data'] = [];\r\n     \r\n     if($query_data) {\r\n         while($row = mysqli_fetch_assoc($query_data)) {\r\n-            $mcheck =  \"<input type = 'checkbox' id = 'check_\".$row['id'].\"' class = 'checkboxassetedit'>\"\r\n+            $mcheck =  \"<input type = 'checkbox' id = 'check_\".$row['id'].\"' class = 'checkboxassetedit'>\";\r\n             for($i = 0; $i < count($assetexisting); $i++)\r\n             {\r\n-                \"<input type = 'checkbox' id = 'check_\".$row['id'].\"' class = 'checkboxassetedit'>\"\r\n+                if($assetexisting[$i] == $row[''])\r\n+                \"<input type = 'checkbox' id = 'check_\".$row['id'].\"' class = 'checkboxassetedit'>\";\r\n             }\r\n             // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n             $response['data'][] = [\r\n              \r\n"
+                },
+                {
+                    "date": 1635408883677,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -211,9 +211,12 @@\n         while($row = mysqli_fetch_assoc($query_data)) {\r\n             $mcheck =  \"<input type = 'checkbox' id = 'check_\".$row['id'].\"' class = 'checkboxassetedit'>\";\r\n             for($i = 0; $i < count($assetexisting); $i++)\r\n             {\r\n-                if($assetexisting[$i] == $row[''])\r\n+                if($assetexisting[$i] == $row['id'])\r\n+                {\r\n+                    \r\n+                }\r\n                 \"<input type = 'checkbox' id = 'check_\".$row['id'].\"' class = 'checkboxassetedit'>\";\r\n             }\r\n             // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n             $response['data'][] = [\r\n"
+                },
+                {
+                    "date": 1635408889455,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -213,11 +213,11 @@\n             for($i = 0; $i < count($assetexisting); $i++)\r\n             {\r\n                 if($assetexisting[$i] == $row['id'])\r\n                 {\r\n-                    \r\n+                   $mcheck \"<input type = 'checkbox' id = 'check_\".$row['id'].\"' class = 'checkboxassetedit'>\";\r\n                 }\r\n-                \"<input type = 'checkbox' id = 'check_\".$row['id'].\"' class = 'checkboxassetedit'>\";\r\n+            \r\n             }\r\n             // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n             $response['data'][] = [\r\n              \r\n"
+                },
+                {
+                    "date": 1635408895170,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -213,9 +213,9 @@\n             for($i = 0; $i < count($assetexisting); $i++)\r\n             {\r\n                 if($assetexisting[$i] == $row['id'])\r\n                 {\r\n-                   $mcheck \"<input type = 'checkbox' id = 'check_\".$row['id'].\"' class = 'checkboxassetedit'>\";\r\n+                   $mcheck =  \"<input type = 'checkbox' id = 'check_\".$row['id'].\"' class = 'checkboxassetedit' checked>\";\r\n                 }\r\n             \r\n             }\r\n             // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n"
+                },
+                {
+                    "date": 1635408904877,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -220,9 +220,9 @@\n             }\r\n             // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n             $response['data'][] = [\r\n              \r\n-                    ,\r\n+                   $mcheck ,\r\n                 \"<label id ='noassetedit\".$row['id'].\"'>\".$row['noasset'].\"</label>\",\r\n                 \"<label id ='nameedit\".$row['id'].\"'>\".$row['name'].\"</label>\",\r\n                 \"<label id ='conditionsedit\".$row['id'].\"'>\".$row['conditions'].\"</label>\",\r\n                 \"<label id ='initial_conditionedit\".$row['id'].\"'>\".$row['initial_condition'].\"</label>\"\r\n"
+                },
+                {
+                    "date": 1635410247097,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -241,8 +241,9 @@\n     }  \r\n     \r\n     echo json_encode($response);\r\n }\r\n+else if($tipe == \"deleteitemontransaction\")\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n"
+                },
+                {
+                    "date": 1635411880869,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -241,9 +241,12 @@\n     }  \r\n     \r\n     echo json_encode($response);\r\n }\r\n-else if($tipe == \"deleteitemontransaction\")\r\n+else if($tipe == \"edit\")\r\n+{\r\n+\r\n+}\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n"
+                },
+                {
+                    "date": 1635411888249,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -241,9 +241,9 @@\n     }  \r\n     \r\n     echo json_encode($response);\r\n }\r\n-else if($tipe == \"edit\")\r\n+else if($tipe == \"edittransaction\")\r\n {\r\n \r\n }\r\n else if($tipe == \"getassettransaction\")\r\n"
+                },
+                {
+                    "date": 1635411907497,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -243,9 +243,15 @@\n     echo json_encode($response);\r\n }\r\n else if($tipe == \"edittransaction\")\r\n {\r\n+    $idsister = $myses;\r\n \r\n+    $mybranch = $_POST['mybranch'];\r\n+    $myroom = $_POST['myroom'];\r\n+    $myselectedlist = $_POST['myselected'];\r\n+    $nikuser = $_SESSION['nik'];\r\n+    mytransaction\r\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $arrayid = array();\r\n"
+                },
+                {
+                    "date": 1635411932759,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -249,9 +249,9 @@\n     $mybranch = $_POST['mybranch'];\r\n     $myroom = $_POST['myroom'];\r\n     $myselectedlist = $_POST['myselected'];\r\n     $nikuser = $_SESSION['nik'];\r\n-    mytransaction\r\n+    mytransaction = $_POST['mytransaction']\r\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $arrayid = array();\r\n"
+                },
+                {
+                    "date": 1635411960896,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -249,9 +249,9 @@\n     $mybranch = $_POST['mybranch'];\r\n     $myroom = $_POST['myroom'];\r\n     $myselectedlist = $_POST['myselected'];\r\n     $nikuser = $_SESSION['nik'];\r\n-    mytransaction = $_POST['mytransaction']\r\n+    $mytransaction = $_POST['mytransaction'];\r\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $arrayid = array();\r\n"
+                },
+                {
+                    "date": 1635411979404,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -250,8 +250,9 @@\n     $myroom = $_POST['myroom'];\r\n     $myselectedlist = $_POST['myselected'];\r\n     $nikuser = $_SESSION['nik'];\r\n     $mytransaction = $_POST['mytransaction'];\r\n+    $sql = \"delete from\"\r\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $arrayid = array();\r\n"
+                },
+                {
+                    "date": 1635411992998,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -241,9 +241,9 @@\n     }  \r\n     \r\n     echo json_encode($response);\r\n }\r\n-else if($tipe == \"edittransaction\")\r\n+else if($tipe == \"edittransactionnewasset\")\r\n {\r\n     $idsister = $myses;\r\n \r\n     $mybranch = $_POST['mybranch'];\r\n"
+                },
+                {
+                    "date": 1635412059228,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -250,9 +250,9 @@\n     $myroom = $_POST['myroom'];\r\n     $myselectedlist = $_POST['myselected'];\r\n     $nikuser = $_SESSION['nik'];\r\n     $mytransaction = $_POST['mytransaction'];\r\n-    $sql = \"delete from\"\r\n+    $sql = \"delete from transaction_displacement_new_asset_log where \"\r\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $arrayid = array();\r\n"
+                },
+                {
+                    "date": 1635412080781,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -249,10 +249,11 @@\n     $mybranch = $_POST['mybranch'];\r\n     $myroom = $_POST['myroom'];\r\n     $myselectedlist = $_POST['myselected'];\r\n     $nikuser = $_SESSION['nik'];\r\n+    $mytable = $_POST['mytable'];\r\n     $mytransaction = $_POST['mytransaction'];\r\n-    $sql = \"delete from transaction_displacement_new_asset_log where \"\r\n+    $sql = \"delete from transaction_displacement_new_asset_log where \";\r\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $arrayid = array();\r\n"
+                },
+                {
+                    "date": 1635412089904,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -251,9 +251,9 @@\n     $myselectedlist = $_POST['myselected'];\r\n     $nikuser = $_SESSION['nik'];\r\n     $mytable = $_POST['mytable'];\r\n     $mytransaction = $_POST['mytransaction'];\r\n-    $sql = \"delete from transaction_displacement_new_asset_log where \";\r\n+    $sql = \"delete from \"..\" where \";\r\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $arrayid = array();\r\n"
+                },
+                {
+                    "date": 1635412105520,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -251,9 +251,9 @@\n     $myselectedlist = $_POST['myselected'];\r\n     $nikuser = $_SESSION['nik'];\r\n     $mytable = $_POST['mytable'];\r\n     $mytransaction = $_POST['mytransaction'];\r\n-    $sql = \"delete from \"..\" where \";\r\n+    $sql = \"delete from \".$mytable.\" where idtransaksi = '$mytransaction'\";\r\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $arrayid = array();\r\n"
+                },
+                {
+                    "date": 1635412120121,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -252,8 +252,9 @@\n     $nikuser = $_SESSION['nik'];\r\n     $mytable = $_POST['mytable'];\r\n     $mytransaction = $_POST['mytransaction'];\r\n     $sql = \"delete from \".$mytable.\" where idtransaksi = '$mytransaction'\";\r\n+    $res = $con->query($sql);\r\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $arrayid = array();\r\n"
+                },
+                {
+                    "date": 1635412127567,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -252,9 +252,9 @@\n     $nikuser = $_SESSION['nik'];\r\n     $mytable = $_POST['mytable'];\r\n     $mytransaction = $_POST['mytransaction'];\r\n     $sql = \"delete from \".$mytable.\" where idtransaksi = '$mytransaction'\";\r\n-    $res = $con->query($sql);\r\n+    $res = $conn->query($sql);\r\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $arrayid = array();\r\n"
+                },
+                {
+                    "date": 1635412187890,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -253,8 +253,10 @@\n     $mytable = $_POST['mytable'];\r\n     $mytransaction = $_POST['mytransaction'];\r\n     $sql = \"delete from \".$mytable.\" where idtransaksi = '$mytransaction'\";\r\n     $res = $conn->query($sql);\r\n+\r\n+    \r\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $arrayid = array();\r\n"
+                },
+                {
+                    "date": 1635412210670,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -254,9 +254,12 @@\n     $mytransaction = $_POST['mytransaction'];\r\n     $sql = \"delete from \".$mytable.\" where idtransaksi = '$mytransaction'\";\r\n     $res = $conn->query($sql);\r\n \r\n-    \r\n+    for($i = 0 ; $i< count($myselectedlist); $i++)\r\n+    {\r\n+        \r\n+    }\r\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n     $arrayid = array();\r\n"
+                },
+                {
+                    "date": 1635412291677,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -256,9 +256,9 @@\n     $res = $conn->query($sql);\r\n \r\n     for($i = 0 ; $i< count($myselectedlist); $i++)\r\n     {\r\n-        \r\n+        $sql = \"insert into \"..\"\"\r\n     }\r\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n"
+                },
+                {
+                    "date": 1635412296832,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -256,9 +256,9 @@\n     $res = $conn->query($sql);\r\n \r\n     for($i = 0 ; $i< count($myselectedlist); $i++)\r\n     {\r\n-        $sql = \"insert into \"..\"\"\r\n+        $sql = \"insert into \".$mytable.\"\"\r\n     }\r\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n"
+                },
+                {
+                    "date": 1635412321509,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -256,9 +256,9 @@\n     $res = $conn->query($sql);\r\n \r\n     for($i = 0 ; $i< count($myselectedlist); $i++)\r\n     {\r\n-        $sql = \"insert into \".$mytable.\"\"\r\n+        $sql = \"insert into \".$mytable.\" values(NULL)\"\r\n     }\r\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n"
+                },
+                {
+                    "date": 1635412361193,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -256,9 +256,9 @@\n     $res = $conn->query($sql);\r\n \r\n     for($i = 0 ; $i< count($myselectedlist); $i++)\r\n     {\r\n-        $sql = \"insert into \".$mytable.\" values(NULL)\"\r\n+        $sql = \"insert into \".$mytable.\" values(NULL, '$mytransacion', \"..\")\";\r\n     }\r\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n"
+                },
+                {
+                    "date": 1635412369557,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -256,9 +256,9 @@\n     $res = $conn->query($sql);\r\n \r\n     for($i = 0 ; $i< count($myselectedlist); $i++)\r\n     {\r\n-        $sql = \"insert into \".$mytable.\" values(NULL, '$mytransacion', \"..\")\";\r\n+        $sql = \"insert into \".$mytable.\" values(NULL, '$mytransacion', \".$myselectedlist[$i].\")\";\r\n     }\r\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n"
+                },
+                {
+                    "date": 1635412386536,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -257,8 +257,9 @@\n \r\n     for($i = 0 ; $i< count($myselectedlist); $i++)\r\n     {\r\n         $sql = \"insert into \".$mytable.\" values(NULL, '$mytransacion', \".$myselectedlist[$i].\")\";\r\n+        $ress = $conn->query($sql);\r\n     }\r\n }\r\n else if($tipe == \"getassettransaction\")\r\n {\r\n"
+                },
+                {
+                    "date": 1635412506134,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -256,9 +256,9 @@\n     $res = $conn->query($sql);\r\n \r\n     for($i = 0 ; $i< count($myselectedlist); $i++)\r\n     {\r\n-        $sql = \"insert into \".$mytable.\" values(NULL, '$mytransacion', \".$myselectedlist[$i].\")\";\r\n+        $sql = \"insert into \".$mytable.\" values(NULL, '$mytransaction', \".$myselectedlist[$i].\")\";\r\n         $ress = $conn->query($sql);\r\n     }\r\n }\r\n else if($tipe == \"getassettransaction\")\r\n"
+                },
+                {
+                    "date": 1635412608955,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -256,9 +256,9 @@\n     $res = $conn->query($sql);\r\n \r\n     for($i = 0 ; $i< count($myselectedlist); $i++)\r\n     {\r\n-        $sql = \"insert into \".$mytable.\" values(NULL, '$mytransaction', \".$myselectedlist[$i].\")\";\r\n+        $sql = \"insert into \".$mytable.\" values(NULL, '$mytransaction', '\".$myselectedlist[$i].\"')\";\r\n         $ress = $conn->query($sql);\r\n     }\r\n }\r\n else if($tipe == \"getassettransaction\")\r\n"
+                },
+                {
+                    "date": 1635412770419,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -254,8 +254,10 @@\n     $mytransaction = $_POST['mytransaction'];\r\n     $sql = \"delete from \".$mytable.\" where idtransaksi = '$mytransaction'\";\r\n     $res = $conn->query($sql);\r\n \r\n+    echo $sql;\r\n+\r\n     for($i = 0 ; $i< count($myselectedlist); $i++)\r\n     {\r\n         $sql = \"insert into \".$mytable.\" values(NULL, '$mytransaction', '\".$myselectedlist[$i].\"')\";\r\n         $ress = $conn->query($sql);\r\n"
+                },
+                {
+                    "date": 1635412877533,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -241,9 +241,9 @@\n     }  \r\n     \r\n     echo json_encode($response);\r\n }\r\n-else if($tipe == \"edittransactionnewasset\")\r\n+else if($tipe == \"edit\")\r\n {\r\n     $idsister = $myses;\r\n \r\n     $mybranch = $_POST['mybranch'];\r\n"
+                },
+                {
+                    "date": 1635412899028,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -254,9 +254,9 @@\n     $mytransaction = $_POST['mytransaction'];\r\n     $sql = \"delete from \".$mytable.\" where idtransaksi = '$mytransaction'\";\r\n     $res = $conn->query($sql);\r\n \r\n-    echo $sql;\r\n+  \r\n \r\n     for($i = 0 ; $i< count($myselectedlist); $i++)\r\n     {\r\n         $sql = \"insert into \".$mytable.\" values(NULL, '$mytransaction', '\".$myselectedlist[$i].\"')\";\r\n"
+                },
+                {
+                    "date": 1635412909766,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n <?php\r\n require '../connection.php';\r\n session_start();\r\n+$myses = $_SESSION['idsister'];\r\n $tipe = $_POST['tipe'];\r\n if($tipe == \"load\")\r\n {\r\n     $statusmust = $_POST['statusmust'];\r\n"
+                },
+                {
+                    "date": 1635426370837,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -253,8 +253,9 @@\n     $nikuser = $_SESSION['nik'];\r\n     $mytable = $_POST['mytable'];\r\n     $mytransaction = $_POST['mytransaction'];\r\n     $sql = \"delete from \".$mytable.\" where idtransaksi = '$mytransaction'\";\r\n+    $sql = \"delete from \".$mytable.\" where idtransaksi = '$mytransaction'\";\r\n     $res = $conn->query($sql);\r\n \r\n   \r\n \r\n"
+                },
+                {
+                    "date": 1635426386665,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -252,10 +252,10 @@\n     $myselectedlist = $_POST['myselected'];\r\n     $nikuser = $_SESSION['nik'];\r\n     $mytable = $_POST['mytable'];\r\n     $mytransaction = $_POST['mytransaction'];\r\n+    $sql = \"update \".$mytable.\" set  where idtransaksi = '$mytransaction'\";\r\n     $sql = \"delete from \".$mytable.\" where idtransaksi = '$mytransaction'\";\r\n-    $sql = \"delete from \".$mytable.\" where idtransaksi = '$mytransaction'\";\r\n     $res = $conn->query($sql);\r\n \r\n   \r\n \r\n"
+                },
+                {
+                    "date": 1635426424060,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -252,9 +252,9 @@\n     $myselectedlist = $_POST['myselected'];\r\n     $nikuser = $_SESSION['nik'];\r\n     $mytable = $_POST['mytable'];\r\n     $mytransaction = $_POST['mytransaction'];\r\n-    $sql = \"update \".$mytable.\" set  where idtransaksi = '$mytransaction'\";\r\n+    $sql = \"update \".$mytable.\" set idbranch = '$mybranch' where idtransaksi = '$mytransaction'\";\r\n     $sql = \"delete from \".$mytable.\" where idtransaksi = '$mytransaction'\";\r\n     $res = $conn->query($sql);\r\n \r\n   \r\n"
+                },
+                {
+                    "date": 1635426434306,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -252,9 +252,9 @@\n     $myselectedlist = $_POST['myselected'];\r\n     $nikuser = $_SESSION['nik'];\r\n     $mytable = $_POST['mytable'];\r\n     $mytransaction = $_POST['mytransaction'];\r\n-    $sql = \"update \".$mytable.\" set idbranch = '$mybranch' where idtransaksi = '$mytransaction'\";\r\n+    $sql = \"update \".$mytable.\" set idbranch = '$mybranch', idroom = '$myroom' where idtransaksi = '$mytransaction'\";\r\n     $sql = \"delete from \".$mytable.\" where idtransaksi = '$mytransaction'\";\r\n     $res = $conn->query($sql);\r\n \r\n   \r\n"
+                },
+                {
+                    "date": 1635426446620,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -253,8 +253,10 @@\n     $nikuser = $_SESSION['nik'];\r\n     $mytable = $_POST['mytable'];\r\n     $mytransaction = $_POST['mytransaction'];\r\n     $sql = \"update \".$mytable.\" set idbranch = '$mybranch', idroom = '$myroom' where idtransaksi = '$mytransaction'\";\r\n+    $res = $conn->query($sql);\r\n+\r\n     $sql = \"delete from \".$mytable.\" where idtransaksi = '$mytransaction'\";\r\n     $res = $conn->query($sql);\r\n \r\n   \r\n"
+                },
+                {
+                    "date": 1635426467005,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -254,9 +254,8 @@\n     $mytable = $_POST['mytable'];\r\n     $mytransaction = $_POST['mytransaction'];\r\n     $sql = \"update \".$mytable.\" set idbranch = '$mybranch', idroom = '$myroom' where idtransaksi = '$mytransaction'\";\r\n     $res = $conn->query($sql);\r\n-\r\n     $sql = \"delete from \".$mytable.\" where idtransaksi = '$mytransaction'\";\r\n     $res = $conn->query($sql);\r\n \r\n   \r\n"
+                },
+                {
+                    "date": 1635426711943,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -251,8 +251,10 @@\n     $myroom = $_POST['myroom'];\r\n     $myselectedlist = $_POST['myselected'];\r\n     $nikuser = $_SESSION['nik'];\r\n     $mytable = $_POST['mytable'];\r\n+    $mytabletransaction = $_POST['mytable'];\r\n+    str_replace(\"_log\", \"\", $my_str);\r\n     $mytransaction = $_POST['mytransaction'];\r\n     $sql = \"update \".$mytable.\" set idbranch = '$mybranch', idroom = '$myroom' where idtransaksi = '$mytransaction'\";\r\n     $res = $conn->query($sql);\r\n     $sql = \"delete from \".$mytable.\" where idtransaksi = '$mytransaction'\";\r\n"
+                },
+                {
+                    "date": 1635426721112,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -252,9 +252,9 @@\n     $myselectedlist = $_POST['myselected'];\r\n     $nikuser = $_SESSION['nik'];\r\n     $mytable = $_POST['mytable'];\r\n     $mytabletransaction = $_POST['mytable'];\r\n-    str_replace(\"_log\", \"\", $my_str);\r\n+    $mytabletransaction = str_replace(\"_log\", \"\", $mytabletransaction);\r\n     $mytransaction = $_POST['mytransaction'];\r\n     $sql = \"update \".$mytable.\" set idbranch = '$mybranch', idroom = '$myroom' where idtransaksi = '$mytransaction'\";\r\n     $res = $conn->query($sql);\r\n     $sql = \"delete from \".$mytable.\" where idtransaksi = '$mytransaction'\";\r\n"
+                },
+                {
+                    "date": 1635426727305,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -251,10 +251,10 @@\n     $myroom = $_POST['myroom'];\r\n     $myselectedlist = $_POST['myselected'];\r\n     $nikuser = $_SESSION['nik'];\r\n     $mytable = $_POST['mytable'];\r\n-    $mytabletransaction = $_POST['mytable'];\r\n-    $mytabletransaction = str_replace(\"_log\", \"\", $mytabletransaction);\r\n+    $mytabletransactioninput = $_POST['mytable'];\r\n+    $mytabletransaction = str_replace(\"_log\", \"\", $mytabletransactioninput);\r\n     $mytransaction = $_POST['mytransaction'];\r\n     $sql = \"update \".$mytable.\" set idbranch = '$mybranch', idroom = '$myroom' where idtransaksi = '$mytransaction'\";\r\n     $res = $conn->query($sql);\r\n     $sql = \"delete from \".$mytable.\" where idtransaksi = '$mytransaction'\";\r\n"
+                },
+                {
+                    "date": 1635426732977,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -254,9 +254,9 @@\n     $mytable = $_POST['mytable'];\r\n     $mytabletransactioninput = $_POST['mytable'];\r\n     $mytabletransaction = str_replace(\"_log\", \"\", $mytabletransactioninput);\r\n     $mytransaction = $_POST['mytransaction'];\r\n-    $sql = \"update \".$mytable.\" set idbranch = '$mybranch', idroom = '$myroom' where idtransaksi = '$mytransaction'\";\r\n+    $sql = \"update \".$mytabletransaction.\" set idbranch = '$mybranch', idroom = '$myroom' where idtransaksi = '$mytransaction'\";\r\n     $res = $conn->query($sql);\r\n     $sql = \"delete from \".$mytable.\" where idtransaksi = '$mytransaction'\";\r\n     $res = $conn->query($sql);\r\n \r\n"
+                },
+                {
+                    "date": 1635426832268,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -254,9 +254,9 @@\n     $mytable = $_POST['mytable'];\r\n     $mytabletransactioninput = $_POST['mytable'];\r\n     $mytabletransaction = str_replace(\"_log\", \"\", $mytabletransactioninput);\r\n     $mytransaction = $_POST['mytransaction'];\r\n-    $sql = \"update \".$mytabletransaction.\" set idbranch = '$mybranch', idroom = '$myroom' where idtransaksi = '$mytransaction'\";\r\n+    $sql = \"update \".$mytabletransaction.\" set idbranch = '$mybranch', idroom = '$myroom' where id = '$mytransaction'\";\r\n     $res = $conn->query($sql);\r\n     $sql = \"delete from \".$mytable.\" where idtransaksi = '$mytransaction'\";\r\n     $res = $conn->query($sql);\r\n \r\n"
+                },
+                {
+                    "date": 1635426898952,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -256,8 +256,9 @@\n     $mytabletransaction = str_replace(\"_log\", \"\", $mytabletransactioninput);\r\n     $mytransaction = $_POST['mytransaction'];\r\n     $sql = \"update \".$mytabletransaction.\" set idbranch = '$mybranch', idroom = '$myroom' where id = '$mytransaction'\";\r\n     $res = $conn->query($sql);\r\n+    echo $sql;\r\n     $sql = \"delete from \".$mytable.\" where idtransaksi = '$mytransaction'\";\r\n     $res = $conn->query($sql);\r\n \r\n   \r\n"
+                },
+                {
+                    "date": 1635493711794,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -293,8 +293,33 @@\n     echo json_encode($response);\r\n \r\n }\r\n \r\n+else if($tipe == \"getassettransaction\")\r\n+{\r\n+    $arrayid = array();\r\n+    $idtransac = $_POST['myidtransaction'];\r\n+    $sql = \"select asset.id, asset.noasset, asset.name from transaction_displacement_new_asset_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n+    $res = $conn->query($sql);\r\n+    $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n+    if($res->num_rows >0)\r\n+    {\r\n+        while($r = mysqli_fetch_array($res))\r\n+        {\r\n+            $arrayid[] = $r['id'];\r\n+            $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n+        }\r\n+    }\r\n+    $mystring .= \"</table>\";\r\n+    // echo print($arrayid).\"||\".$mystring;\r\n+    $response[\"data\"] = array(\r\n+        'mystring' => $mystring,\r\n+        'myarray' => $arrayid\r\n+    );\r\n+    echo json_encode($response);\r\n+\r\n+}\r\n+\r\n else if($tipe == \"loadpicked\")\r\n {\r\n     $myid = $_POST['idtransaction'];\r\n     $where_like = [\r\n"
+                },
+                {
+                    "date": 1635493717906,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -293,9 +293,9 @@\n     echo json_encode($response);\r\n \r\n }\r\n \r\n-else if($tipe == \"getassettransaction\")\r\n+else if($tipe == \"getassettransactionnewdepartment\")\r\n {\r\n     $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select asset.id, asset.noasset, asset.name from transaction_displacement_new_asset_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n"
+                },
+                {
+                    "date": 1635493732799,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -293,13 +293,13 @@\n     echo json_encode($response);\r\n \r\n }\r\n \r\n-else if($tipe == \"getassettransactionnewdepartment\")\r\n+else if($tipe == \"getassettransactiondepartment\")\r\n {\r\n     $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n-    $sql = \"select asset.id, asset.noasset, asset.name from transaction_displacement_new_asset_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n+    $sql = \"select asset.id, asset.noasset, asset.name from transaction_displacement_new_department_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n     $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n     if($res->num_rows >0)\r\n     {\r\n"
+                },
+                {
+                    "date": 1635493846119,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -297,9 +297,9 @@\n else if($tipe == \"getassettransactiondepartment\")\r\n {\r\n     $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n-    $sql = \"select asset.id, asset.noasset, asset.name from transaction_displacement_new_department_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n+    $sql = \"select asset.id, asset.noasset, asset.name from transaction_displacement_department_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n     $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n     if($res->num_rows >0)\r\n     {\r\n"
+                },
+                {
+                    "date": 1635658290257,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -317,8 +317,12 @@\n     );\r\n     echo json_encode($response);\r\n \r\n }\r\n+else\r\n+{\r\n+    \r\n+}\r\n \r\n else if($tipe == \"loadpicked\")\r\n {\r\n     $myid = $_POST['idtransaction'];\r\n"
+                },
+                {
+                    "date": 1635658307003,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -319,9 +319,28 @@\n \r\n }\r\n else\r\n {\r\n-    \r\n+    $arrayid = array();\r\n+    $idtransac = $_POST['myidtransaction'];\r\n+    $sql = \"select asset.id, asset.noasset, asset.name from transaction_displacement_o_department_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n+    $res = $conn->query($sql);\r\n+    $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n+    if($res->num_rows >0)\r\n+    {\r\n+        while($r = mysqli_fetch_array($res))\r\n+        {\r\n+            $arrayid[] = $r['id'];\r\n+            $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n+        }\r\n+    }\r\n+    $mystring .= \"</table>\";\r\n+    // echo print($arrayid).\"||\".$mystring;\r\n+    $response[\"data\"] = array(\r\n+        'mystring' => $mystring,\r\n+        'myarray' => $arrayid\r\n+    );\r\n+    echo json_encode($response);\r\n }\r\n \r\n else if($tipe == \"loadpicked\")\r\n {\r\n"
+                },
+                {
+                    "date": 1635658315129,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -321,9 +321,9 @@\n else\r\n {\r\n     $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n-    $sql = \"select asset.id, asset.noasset, asset.name from transaction_displacement_o_department_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n+    $sql = \"select asset.id, asset.noasset, asset.name from transaction_displacement_other_department_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n     $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n     if($res->num_rows >0)\r\n     {\r\n"
+                },
+                {
+                    "date": 1635658331642,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -317,9 +317,9 @@\n     );\r\n     echo json_encode($response);\r\n \r\n }\r\n-else\r\n+else if($tipe == \"getassettransactiondepartment\")\r\n {\r\n     $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select asset.id, asset.noasset, asset.name from transaction_displacement_other_department_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n"
+                },
+                {
+                    "date": 1635658340864,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -317,9 +317,9 @@\n     );\r\n     echo json_encode($response);\r\n \r\n }\r\n-else if($tipe == \"getassettransactiondepartment\")\r\n+else if($tipe == \"getassettransactiondepartmentbranch\")\r\n {\r\n     $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select asset.id, asset.noasset, asset.name from transaction_displacement_other_department_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n"
+                },
+                {
+                    "date": 1635670094795,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -340,8 +340,12 @@\n         'myarray' => $arrayid\r\n     );\r\n     echo json_encode($response);\r\n }\r\n+else if($tipe  == \"getassettransactionlendpersonel\")\r\n+{\r\n+    \r\n+}\r\n \r\n else if($tipe == \"loadpicked\")\r\n {\r\n     $myid = $_POST['idtransaction'];\r\n"
+                },
+                {
+                    "date": 1635670101077,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -342,9 +342,28 @@\n     echo json_encode($response);\r\n }\r\n else if($tipe  == \"getassettransactionlendpersonel\")\r\n {\r\n-    \r\n+    $arrayid = array();\r\n+    $idtransac = $_POST['myidtransaction'];\r\n+    $sql = \"select asset.id, asset.noasset, asset.name from transaction_displacement_other_department_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n+    $res = $conn->query($sql);\r\n+    $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n+    if($res->num_rows >0)\r\n+    {\r\n+        while($r = mysqli_fetch_array($res))\r\n+        {\r\n+            $arrayid[] = $r['id'];\r\n+            $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n+        }\r\n+    }\r\n+    $mystring .= \"</table>\";\r\n+    // echo print($arrayid).\"||\".$mystring;\r\n+    $response[\"data\"] = array(\r\n+        'mystring' => $mystring,\r\n+        'myarray' => $arrayid\r\n+    );\r\n+    echo json_encode($response);\r\n }\r\n \r\n else if($tipe == \"loadpicked\")\r\n {\r\n"
+                },
+                {
+                    "date": 1635670169948,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -344,9 +344,9 @@\n else if($tipe  == \"getassettransactionlendpersonel\")\r\n {\r\n     $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n-    $sql = \"select asset.id, asset.noasset, asset.name from transaction_displacement_other_department_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n+    $sql = \"select asset.id, asset.noasset, asset.name from transaction_lend_to_personal_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n     $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n     if($res->num_rows >0)\r\n     {\r\n"
+                },
+                {
+                    "date": 1635736362836,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -364,8 +364,32 @@\n     );\r\n     echo json_encode($response);\r\n }\r\n \r\n+else if($tipe  == \"getassettransactionlendpersonel\")\r\n+{\r\n+    $arrayid = array();\r\n+    $idtransac = $_POST['myidtransaction'];\r\n+    $sql = \"select asset.id, asset.noasset, asset.name from transaction_lend_to_personal_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n+    $res = $conn->query($sql);\r\n+    $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n+    if($res->num_rows >0)\r\n+    {\r\n+        while($r = mysqli_fetch_array($res))\r\n+        {\r\n+            $arrayid[] = $r['id'];\r\n+            $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n+        }\r\n+    }\r\n+    $mystring .= \"</table>\";\r\n+    // echo print($arrayid).\"||\".$mystring;\r\n+    $response[\"data\"] = array(\r\n+        'mystring' => $mystring,\r\n+        'myarray' => $arrayid\r\n+    );\r\n+    echo json_encode($response);\r\n+}\r\n+\r\n else if($tipe == \"loadpicked\")\r\n {\r\n     $myid = $_POST['idtransaction'];\r\n     $where_like = [\r\n"
+                },
+                {
+                    "date": 1635736368047,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -363,9 +363,8 @@\n         'myarray' => $arrayid\r\n     );\r\n     echo json_encode($response);\r\n }\r\n-\r\n else if($tipe  == \"getassettransactionlendpersonel\")\r\n {\r\n     $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n@@ -387,9 +386,8 @@\n         'myarray' => $arrayid\r\n     );\r\n     echo json_encode($response);\r\n }\r\n-\r\n else if($tipe == \"loadpicked\")\r\n {\r\n     $myid = $_POST['idtransaction'];\r\n     $where_like = [\r\n"
+                },
+                {
+                    "date": 1635736375972,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -363,9 +363,9 @@\n         'myarray' => $arrayid\r\n     );\r\n     echo json_encode($response);\r\n }\r\n-else if($tipe  == \"getassettransactionlendpersonel\")\r\n+else if($tipe  == \"getassettransactionlendrelation\")\r\n {\r\n     $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select asset.id, asset.noasset, asset.name from transaction_lend_to_personal_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n"
+                },
+                {
+                    "date": 1635736383483,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -367,9 +367,9 @@\n else if($tipe  == \"getassettransactionlendrelation\")\r\n {\r\n     $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n-    $sql = \"select asset.id, asset.noasset, asset.name from transaction_lend_to_personal_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n+    $sql = \"select asset.id, asset.noasset, asset.name from transaction_lend_to_relation_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n     $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n     if($res->num_rows >0)\r\n     {\r\n"
+                },
+                {
+                    "date": 1635758062781,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -386,8 +386,12 @@\n         'myarray' => $arrayid\r\n     );\r\n     echo json_encode($response);\r\n }\r\n+else if($tipe == \"getassettransactionlendrelation\")\r\n+{\r\n+    \r\n+}\r\n else if($tipe == \"loadpicked\")\r\n {\r\n     $myid = $_POST['idtransaction'];\r\n     $where_like = [\r\n"
+                },
+                {
+                    "date": 1635758068352,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -388,9 +388,28 @@\n     echo json_encode($response);\r\n }\r\n else if($tipe == \"getassettransactionlendrelation\")\r\n {\r\n-    \r\n+    $arrayid = array();\r\n+    $idtransac = $_POST['myidtransaction'];\r\n+    $sql = \"select asset.id, asset.noasset, asset.name from transaction_lend_to_relation_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n+    $res = $conn->query($sql);\r\n+    $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n+    if($res->num_rows >0)\r\n+    {\r\n+        while($r = mysqli_fetch_array($res))\r\n+        {\r\n+            $arrayid[] = $r['id'];\r\n+            $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n+        }\r\n+    }\r\n+    $mystring .= \"</table>\";\r\n+    // echo print($arrayid).\"||\".$mystring;\r\n+    $response[\"data\"] = array(\r\n+        'mystring' => $mystring,\r\n+        'myarray' => $arrayid\r\n+    );\r\n+    echo json_encode($response);\r\n }\r\n else if($tipe == \"loadpicked\")\r\n {\r\n     $myid = $_POST['idtransaction'];\r\n"
+                },
+                {
+                    "date": 1635758086682,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -386,9 +386,9 @@\n         'myarray' => $arrayid\r\n     );\r\n     echo json_encode($response);\r\n }\r\n-else if($tipe == \"getassettransactionlendrelation\")\r\n+else if($tipe == \"getassettransactionlendotherdepartment\")\r\n {\r\n     $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select asset.id, asset.noasset, asset.name from transaction_lend_to_relation_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n"
+                },
+                {
+                    "date": 1635758095805,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -390,9 +390,9 @@\n else if($tipe == \"getassettransactionlendotherdepartment\")\r\n {\r\n     $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n-    $sql = \"select asset.id, asset.noasset, asset.name from transaction_lend_to_relation_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n+    $sql = \"select asset.id, asset.noasset, asset.name from transaction_lend_to_department_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n     $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n     if($res->num_rows >0)\r\n     {\r\n"
                 }
             ],
             "date": 1634799397854,

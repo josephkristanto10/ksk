@@ -8,6 +8,7 @@ if($tipe == "load")
 {
 
     $where_like = [
+        'id',
         'template',
         'status'
         
@@ -22,21 +23,21 @@ if($tipe == "load")
     $sessionidsister = $_SESSION['idsister'];
     
     $total_data = mysqli_query($conn, 
-    "select template.id, template.template, count(asset.id) as jumlahaset, template.status, template.created_by, template.created_at, template.updated_by from template left join asset on asset.idtemplate = template.id GROUP by  template.id'
+    "select * from template
     "
 );
     
     if(empty($search)) {
-        $query_data = mysqli_query($conn, "select template.id, template.template, count(asset.id) as jumlahaset, template.status, template.created_by, template.created_at, template.updated_by from template left join asset on asset.idtemplate = template.id GROUP by  template.id ORDER BY $order $dir LIMIT $start, $length");
+        $query_data = mysqli_query($conn, "select * from template ORDER BY $order $dir LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "select template.id, template.template, count(asset.id) as jumlahaset, template.status, template.created_by, template.created_at, template.updated_by from template left join asset on asset.idtemplate = template.id GROUP by  template.id");
+        $total_filtered = mysqli_query($conn, "select * from template ");
 
     } else {
-        $query_data = mysqli_query($conn, "select template.id, template.template, count(asset.id) as jumlahaset, template.status, template.created_by, template.created_at, template.updated_by from template left join asset on asset.idtemplate = template.id GROUP by  template.id   
+        $query_data = mysqli_query($conn, "select * from template 
         where template.template LIKE '%$search%'  
         ORDER BY $order $dir LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "select template.id, template.template, count(asset.id) as jumlahaset, template.status, template.created_by, template.created_at, template.updated_by from template left join asset on asset.idtemplate = template.id GROUP by  template.id  
+        $total_filtered = mysqli_query($conn, "select * from template 
         where template.template LIKE '%$search%'  ");
     }
     
@@ -62,8 +63,8 @@ if($tipe == "load")
             
             $response['data'][] = [
            
+                "<label id ='idtemplate".$row['id']."'>".$row['id']."</label>",
                 "<label id ='template".$row['id']."'>".$row['template']."</label>",
-                "<label id ='template".$row['id']."'>".$row['jumlahaset']."</label>",
                 "<label id ='status".$row['id']."'>".$mystats."</label>",
                 ' <div class="list-icons">
                 <div class="dropdown">

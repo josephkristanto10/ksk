@@ -5,6 +5,7 @@ if($tipe == "load")
 {
 
     $where_like = [
+        'idsubgroup',
         'nama',
         'subgroup',
         'description',
@@ -19,10 +20,10 @@ if($tipe == "load")
     $dir      = $response['order'][0]['dir'];
     $search   = $response['search']['value'];
     
-    $total_data = mysqli_query($conn, "select *, ks.description as subgroupdesc, ks.id as idsubgroup, ks.status as statussubgroup from kategori_subgroup ks inner join kategori_asset ka on ka.id = ks.idkategoriaset");
+    $total_data = mysqli_query($conn, "select *, ks.description as subgroupdesc, ks.id as idsubgroup, ks.status as statussubgroup from kategori_subgroup ks inner join kategori_asset ka on ka.id = ks.idkategoriaset order by ks.id desc");
     
     if(empty($search)) {
-        $query_data = mysqli_query($conn, "select *, ks.description as subgroupdesc, ks.id as idsubgroup, ks.status as statussubgroup from kategori_subgroup ks inner join kategori_asset ka on ka.id = ks.idkategoriaset ORDER BY $order $dir LIMIT $start, $length");
+        $query_data = mysqli_query($conn, "select *, ks.description as subgroupdesc, ks.id as idsubgroup, ks.status as statussubgroup from kategori_subgroup ks inner join kategori_asset ka on ka.id = ks.idkategoriaset ORDER BY $order $dir,  ks.id desc LIMIT $start, $length");
     
         $total_filtered = mysqli_query($conn, "select *, ks.description as subgroupdesc, ks.id as idsubgroup, ks.status as statussubgroup from kategori_subgroup ks inner join kategori_asset ka on ka.id = ks.idkategoriaset");
     } else {
@@ -52,6 +53,7 @@ if($tipe == "load")
             }
             
             $response['data'][] = [
+                "<label id ='idsubgroup".$row['idsubgroup']."'>".$row['idsubgroup']."</label>",
                 "<label id ='nama".$row['idsubgroup']."'>".$row['nama']."</label>",
                 "<label id ='subgroup".$row['idsubgroup']."'>".$row['subgroup']."</label>",
                 "<label id ='description".$row['idsubgroup']."'>".$row['subgroupdesc']."</label>",

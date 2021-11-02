@@ -45,6 +45,7 @@ if($res->num_rows>0)
                         <table id = "datatable_serverside" class="table table-hover table-bordered display nowrap w-100">
                                 <thead>
                                     <tr>  
+                                    <th>Id</th>
                                         <th>Initial Condition</th>
                                         <th>Description</th>
                                         <th class="text-center">Status</th>
@@ -78,6 +79,9 @@ if($res->num_rows>0)
 							<br>
                             <label for="description">Description</label>
 							<input type="text" class="form-control" id="description">
+                            <br> 
+								<input type = "checkbox"  onchange="checkchangecategory(this)"> Same as category name<br>
+								<br>
 							<br>
 							<br>
 							<div style = "float:right;margin-bottom:20px;">
@@ -140,13 +144,17 @@ $(function() {
          destroy: true,
          iDisplayInLength: 10,
          scrollX: true,
-         order: [[0, 'asc']],
+         order: [[0, 'desc']],
+         columnDefs: [
+			{ targets: [0], visible: false},
+			],
          ajax: { 
             url: 'process/masterinitialcondition.php',
             method: 'POST',
             data: { tipe: "load"  }
         },
          columns: [
+            { name: 'Id', className: 'text-center align-middle' },
             { name: 'Initial_Condition', className: 'text-center align-middle' },
             { name: 'Description', className: 'text-center align-middle' },
             { name: 'Status', className: 'text-center align-middle' },
@@ -405,4 +413,19 @@ $("#country").on('change', function(){
                 }
             });
 }
+function checkchangecategory(element)
+	{
+		var mycategory = $("#initialcondition").val();
+
+		var mycheck = element.checked;
+		if(mycheck)
+		{
+			$("#description").val(mycategory);
+		}
+		else
+		{
+			$("#description").val("");
+		}
+		
+	}
 </script>

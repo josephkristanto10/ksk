@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 28,
+            "activePatchIndex": 29,
             "patches": [
                 {
                     "date": 1629817875783,
@@ -120,6 +120,10 @@
                 {
                     "date": 1629820035427,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -101,9 +101,9 @@\n {\r\n     $id  = $_POST['myid'];\r\n     $divisi = $_POST['mydivisi'];\r\n     $description = $_POST['mydescription'];\r\n-    $sql = \"update divisi set divisi = '\".$group.\"', description = '\".$description.\"' where id = '\".$id.\"'\";\r\n+    $sql = \"update divisi set divisi = '\".$divisi.\"', description = '\".$description.\"' where id = '\".$id.\"'\";\r\n     $res = $conn->query($sql);\r\n     if(($conn -> affected_rows)>0)\r\n     {\r\n         echo \"sukses\";\r\n"
+                },
+                {
+                    "date": 1635833440286,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,9 +86,9 @@\n }\r\n else if($tipe == \"add\"){\r\n     $divisi = $_POST['mydivisi'];\r\n     $description = $_POST['mydescription'];\r\n-    $sql = \"INSERT into divisi values(NULL, '\".$divisi.\"', '\".$description.\"', 'Active')\";\r\n+    $sql = \"INSERT into divisi values(NULL,'1', '\".$divisi.\"', '\".$description.\"', 'Active')\";\r\n     $res = $conn->query($sql);\r\n     if(($conn -> affected_rows)>0)\r\n     {\r\n         echo \"sukses\";\r\n"
                 }
             ],
             "date": 1629817875783,

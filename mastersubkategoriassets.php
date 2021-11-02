@@ -2,7 +2,7 @@
 require_once 'layout/header.php';
 require_once 'layout/sidebar.php';
 require_once 'layout/footer.php';
-$sql = "select * from kategori_asset";
+$sql = "select * from kategori_asset where status = 'Active'";
 $res = $conn->query($sql);
 $res2 = $conn->query($sql);
 ?>
@@ -29,7 +29,7 @@ $res2 = $conn->query($sql);
 							<table id = "datatable_serverside" class="table table-hover table-bordered display nowrap w-100">
 								<thead>
 									<tr>
-
+                                    <th>ID</th>
 										<th>Group</th>
 										<th>Sub Group</th>
 										<th>Description</th>
@@ -58,11 +58,7 @@ $res2 = $conn->query($sql);
 					<div class="modal-body">
 						<form id = "myformadd">
 						<div class="form-group">
-						<label for="code">Sub Group</label>
-    					<input type="text" class="form-control" id="subgroupadd">
-						<br>
-					
-							<label for="cars">Group:</label>
+                        <label for="cars">Group:</label>
 							<select id="groupadd" name="groupadd" class="form-control">
 								<?php 
 								if($res->num_rows>0)
@@ -77,9 +73,16 @@ $res2 = $conn->query($sql);
 							</select>
 							
 							<br>
+						<label for="code">Sub Group</label>
+    					<input type="text" class="form-control" id="subgroupadd">
+						<br>
+					
+						
 						<label for="description">Description</label>
     					<input type="text" class="form-control" id="descriptionadd">
-
+                        <br> 
+								<input type = "checkbox" id = "description" onchange="checkchangecategory(this)"> Same as sub group name<br>
+								<br>
 						</div>
 							</form>
 					</div>
@@ -104,11 +107,7 @@ $res2 = $conn->query($sql);
 						<form id = "myformedit">
 						<div class="form-group">
 						<input type = "hidden" id = "idchange">
-						<label for="code">Sub Group</label>
-    					<input type="text" class="form-control" id="subgroupedit">
-						<br>
-					
-							<label for="carss">Group:</label>
+                        <label for="carss">Group:</label>
 							
 							<select id="groupedit" name="groupedit" class="form-control">
 								<?php 
@@ -122,6 +121,11 @@ $res2 = $conn->query($sql);
 								?>
 							</select>
 							<br>
+						<label for="code">Sub Group</label>
+    					<input type="text" class="form-control" id="subgroupedit">
+						<br>
+					
+							
 						<label for="description">Description</label>
     					<input type="text" class="form-control" id="descriptionedit">
 
@@ -158,13 +162,19 @@ $res2 = $conn->query($sql);
          destroy: true,
          iDisplayInLength: 10,
          scrollX: true,
-         order: [[0, 'asc']],
+         columnDefs: [
+			{ targets: [0], visible: false},
+			],
+			order: [
+				[0, 'desc']
+			],
          ajax: { 
             url: 'process/masterkategorisubgroup.php',
             method: 'POST',
             data: { tipe: "load"  }
         },
          columns: [
+            { name: 'Id', searchable: false, className: 'text-center align-middle' },
             { name: 'Group', searchable: false, className: 'text-center align-middle' },
             { name: 'SubGroup', searchable: false, className: 'text-center align-middle' },
             { name: 'Description', className: 'text-center align-middle' },
@@ -330,4 +340,19 @@ $res2 = $conn->query($sql);
                 }
             });
 }
+function checkchangecategory(element)
+	{
+		var mycategory = $("#subgroupadd").val();
+
+		var mycheck = element.checked;
+		if(mycheck)
+		{
+			$("#descriptionadd").val(mycategory);
+		}
+		else
+		{
+			$("#descriptionadd").val("");
+		}
+		
+	}
 	</script>

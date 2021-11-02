@@ -22,7 +22,7 @@ if($restemplate -> num_rows>0)
 		$mytemplate[] = $j;
 	}
 }
-$sqlasset = "select * from kategori_asset";
+$sqlasset = "select * from kategori_asset where status = 'Active'";
 $resasset  = $conn->query($sqlasset);
 $myasset = array();
 if($resasset -> num_rows>0)
@@ -32,7 +32,7 @@ if($resasset -> num_rows>0)
 		$myasset[] = $j;
 	}
 }
-$sqlinitial = "select * from initial_condition";
+$sqlinitial = "select * from initial_condition where status = 'Active'";
 $resinitial  = $conn->query($sqlinitial);
 $myinitial = array();
 if($resinitial -> num_rows>0)
@@ -42,7 +42,7 @@ if($resinitial -> num_rows>0)
 		$myinitial[] = $j;
 	}
 }
-$sqlconditions = "select * from conditions";
+$sqlconditions = "select * from conditions where status = 'Active'";
 $resconditions  = $conn->query($sqlconditions);
 $myconditions = array();
 if($resconditions -> num_rows>0)
@@ -104,6 +104,7 @@ if($resconditions -> num_rows>0)
                     <table id="datatable_serverside" class="table table-hover table-bordered display nowrap w-100">
                         <thead>
                             <tr>
+                            <th>Id</th>
                                 <th>#</th>
                                 <th>No Asset</th>
                                 <th>Name</th>
@@ -244,6 +245,37 @@ if($resconditions -> num_rows>0)
                                 </div>
 
                             </div>
+                        </fieldset>
+                        <h6>Custom</h6>
+                        <fieldset>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Template : </label>
+                                        <input type="hidden" id="template" name="template">
+                                        <b><label id="templatename">-</label></b>
+                                    </div>
+
+
+                                </div>
+
+
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input type="hidden" name="idcustomquestion" id="idcustomquestion">
+                                    <div class="form-group" id="customquestion">
+
+                                    </div>
+
+
+                                </div>
+
+
+
+                            </div>
+
                         </fieldset>
 
                         <h6>Purchase</h6>
@@ -401,37 +433,7 @@ echo date('d-m-Y');?>">
                             </div>
                         </fieldset>
 
-                        <h6>Custom</h6>
-                        <fieldset>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Template : </label>
-                                        <input type="hidden" id="template" name="template">
-                                        <b><label id="templatename">-</label></b>
-                                    </div>
-
-
-                                </div>
-
-
-
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <input type="hidden" name="idcustomquestion" id="idcustomquestion">
-                                    <div class="form-group" id="customquestion">
-
-                                    </div>
-
-
-                                </div>
-
-
-
-                            </div>
-
-                        </fieldset>
+                 
 
 
                     </form>
@@ -906,9 +908,12 @@ echo date('d-m-Y');?>">
             destroy: true,
             iDisplayInLength: 10,
             scrollX: true,
-            order: [
-                [0, 'asc']
-            ],
+            columnDefs: [
+			{ targets: [0], visible: false},
+			],
+			order: [
+				[0, 'desc']
+			],
             ajax: {
                 url: 'process/masterassets.php',
                 method: 'POST',
@@ -917,7 +922,11 @@ echo date('d-m-Y');?>">
                 }
             },
             columns: [
-
+                {
+                    name: 'id',
+                    searchable:false,
+                    className: 'text-center align-middle'
+                },
                 {
                     name: '#',
                     className: 'text-center align-middle'

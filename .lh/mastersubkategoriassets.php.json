@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 290,
+            "activePatchIndex": 309,
             "patches": [
                 {
                     "date": 1628248487932,
@@ -1168,6 +1168,82 @@
                 {
                     "date": 1632472219289,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,10 +12,11 @@\n \t\t\t\t\t<h4><span class=\"font-weight-semibold\">Master Sub Group</span></h4>\r\n \t\t\t\t\t<div class=\"page-title d-flex\">\r\n \t\t\t\t\t\t<div class=\"row\" style=\"width:100%;\">\r\n \t\t\t\t\t\t\t<div class=\"col-xl-12\">\r\n-\t\t\t\t\t\t\t<a href=\"#myModal\" data-toggle=\"modal\"><button class=\"btn btn-info\" style=\"background-color:#26a69a !important;width:200px;\"><i\r\n-\t\t\t\t\t\t\t\t\t\tclass=\"icon-add\"></i> &nbsp Add Sub Group </button></a>\r\n+\t\t\t\t\t\t\t<a href=\"#myModal\" data-toggle=\"modal\"><button type=\"button\" style = \"background-color:#26a69a !important; color:white; width:200px;\" class=\"btn btn-indigo btn-labeled btn-labeled-left\" onclick=\"cancel()\" data-toggle=\"modal\" data-target=\"#modal_form\">\r\n+                            <b><i class=\"icon-plus-circle2\"></i></b> Add Category\r\n+                        </button></a>\r\n \t\t\t\t\t\t\t</div>\r\n \t\t\t\t\t\t</div>\r\n \t\t\t\t\t\t<a href=\"#\" class=\"header-elements-toggle text-default d-md-none\"><i class=\"icon-more\"></i></a>\r\n \t\t\t\t\t</div>\r\n"
+                },
+                {
+                    "date": 1635823869911,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n \t\t\t\t\t<div class=\"page-title d-flex\">\r\n \t\t\t\t\t\t<div class=\"row\" style=\"width:100%;\">\r\n \t\t\t\t\t\t\t<div class=\"col-xl-12\">\r\n \t\t\t\t\t\t\t<a href=\"#myModal\" data-toggle=\"modal\"><button type=\"button\" style = \"background-color:#26a69a !important; color:white; width:200px;\" class=\"btn btn-indigo btn-labeled btn-labeled-left\" onclick=\"cancel()\" data-toggle=\"modal\" data-target=\"#modal_form\">\r\n-                            <b><i class=\"icon-plus-circle2\"></i></b> Add Category\r\n+                            <b><i class=\"icon-plus-circle2\"></i></b> Add Sub Group\r\n                         </button></a>\r\n \t\t\t\t\t\t\t</div>\r\n \t\t\t\t\t\t</div>\r\n \t\t\t\t\t\t<a href=\"#\" class=\"header-elements-toggle text-default d-md-none\"><i class=\"icon-more\"></i></a>\r\n@@ -61,23 +61,9 @@\n \t\t\t\t\t\t<label for=\"code\">Sub Group</label>\r\n     \t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"subgroupadd\">\r\n \t\t\t\t\t\t<br>\r\n \t\t\t\t\t\r\n-\t\t\t\t\t\t\t<label for=\"cars\">Group:</label>\r\n-\t\t\t\t\t\t\t<select id=\"groupadd\" name=\"groupadd\" class=\"form-control\">\r\n-\t\t\t\t\t\t\t\t<?php \r\n-\t\t\t\t\t\t\t\tif($res->num_rows>0)\r\n-\t\t\t\t\t\t\t\t{\r\n-\t\t\t\t\t\t\t\t\twhile($r = mysqli_fetch_array($res))\r\n-\t\t\t\t\t\t\t\t\t{\r\n-\t\t\t\t\t\t\t\t\t\techo '<option value=\"'.$r['id'].'\">'.$r['nama'].'</option>';\r\n-\t\t\t\t\t\t\t\t\t}\r\n-\t\t\t\t\t\t\t\t}\r\n-\t\t\t\t\t\t\t\t\r\n-\t\t\t\t\t\t\t\t?>\r\n-\t\t\t\t\t\t\t</select>\r\n-\t\t\t\t\t\t\t\r\n-\t\t\t\t\t\t\t<br>\r\n+\t\t\t\t\t\t\r\n \t\t\t\t\t\t<label for=\"description\">Description</label>\r\n     \t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"descriptionadd\">\r\n \r\n \t\t\t\t\t\t</div>\r\n"
+                },
+                {
+                    "date": 1635823876950,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,8 +57,23 @@\n \t\t\t\t\t</div>\r\n \t\t\t\t\t<div class=\"modal-body\">\r\n \t\t\t\t\t\t<form id = \"myformadd\">\r\n \t\t\t\t\t\t<div class=\"form-group\">\r\n+                        <label for=\"cars\">Group:</label>\r\n+\t\t\t\t\t\t\t<select id=\"groupadd\" name=\"groupadd\" class=\"form-control\">\r\n+\t\t\t\t\t\t\t\t<?php \r\n+\t\t\t\t\t\t\t\tif($res->num_rows>0)\r\n+\t\t\t\t\t\t\t\t{\r\n+\t\t\t\t\t\t\t\t\twhile($r = mysqli_fetch_array($res))\r\n+\t\t\t\t\t\t\t\t\t{\r\n+\t\t\t\t\t\t\t\t\t\techo '<option value=\"'.$r['id'].'\">'.$r['nama'].'</option>';\r\n+\t\t\t\t\t\t\t\t\t}\r\n+\t\t\t\t\t\t\t\t}\r\n+\t\t\t\t\t\t\t\t\r\n+\t\t\t\t\t\t\t\t?>\r\n+\t\t\t\t\t\t\t</select>\r\n+\t\t\t\t\t\t\t\r\n+\t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t<label for=\"code\">Sub Group</label>\r\n     \t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"subgroupadd\">\r\n \t\t\t\t\t\t<br>\r\n \t\t\t\t\t\r\n"
+                },
+                {
+                    "date": 1635824138177,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -104,13 +104,9 @@\n \t\t\t\t\t<div class=\"modal-body\">\r\n \t\t\t\t\t\t<form id = \"myformedit\">\r\n \t\t\t\t\t\t<div class=\"form-group\">\r\n \t\t\t\t\t\t<input type = \"hidden\" id = \"idchange\">\r\n-\t\t\t\t\t\t<label for=\"code\">Sub Group</label>\r\n-    \t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"subgroupedit\">\r\n-\t\t\t\t\t\t<br>\r\n-\t\t\t\t\t\r\n-\t\t\t\t\t\t\t<label for=\"carss\">Group:</label>\r\n+                        <label for=\"carss\">Group:</label>\r\n \t\t\t\t\t\t\t\r\n \t\t\t\t\t\t\t<select id=\"groupedit\" name=\"groupedit\" class=\"form-control\">\r\n \t\t\t\t\t\t\t\t<?php \r\n \t\t\t\t\t\t\t\tif($res2->num_rows>0)\r\n@@ -122,8 +118,13 @@\n \t\t\t\t\t\t\t\t}\r\n \t\t\t\t\t\t\t\t?>\r\n \t\t\t\t\t\t\t</select>\r\n \t\t\t\t\t\t\t<br>\r\n+\t\t\t\t\t\t<label for=\"code\">Sub Group</label>\r\n+    \t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"subgroupedit\">\r\n+\t\t\t\t\t\t<br>\r\n+\t\t\t\t\t\r\n+\t\t\t\t\t\t\t\r\n \t\t\t\t\t\t<label for=\"description\">Description</label>\r\n     \t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"descriptionedit\">\r\n \r\n \t\t\t\t\t\t</div>\r\n"
+                },
+                {
+                    "date": 1635825989335,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -167,8 +167,9 @@\n             data: { tipe: \"load\"  }\r\n         },\r\n          columns: [\r\n             { name: 'Group', searchable: false, className: 'text-center align-middle' },\r\n+            { name: 'Group', searchable: false, className: 'text-center align-middle' },\r\n             { name: 'SubGroup', searchable: false, className: 'text-center align-middle' },\r\n             { name: 'Description', className: 'text-center align-middle' },\r\n             { name: 'Status', className: 'text-center align-middle' },\r\n             { name: 'Action', searchable: false, orderable: false, className: 'text-center align-middle' }\r\n"
+                },
+                {
+                    "date": 1635825996777,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -159,17 +159,17 @@\n          serverSide: true,\r\n          destroy: true,\r\n          iDisplayInLength: 10,\r\n          scrollX: true,\r\n-         order: [[0, 'asc']],\r\n+         order: [[0, 'desc']],\r\n          ajax: { \r\n             url: 'process/masterkategorisubgroup.php',\r\n             method: 'POST',\r\n             data: { tipe: \"load\"  }\r\n         },\r\n          columns: [\r\n+            { name: 'Id', searchable: false, className: 'text-center align-middle' },\r\n             { name: 'Group', searchable: false, className: 'text-center align-middle' },\r\n-            { name: 'Group', searchable: false, className: 'text-center align-middle' },\r\n             { name: 'SubGroup', searchable: false, className: 'text-center align-middle' },\r\n             { name: 'Description', className: 'text-center align-middle' },\r\n             { name: 'Status', className: 'text-center align-middle' },\r\n             { name: 'Action', searchable: false, orderable: false, className: 'text-center align-middle' }\r\n"
+                },
+                {
+                    "date": 1635826005633,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -159,9 +159,14 @@\n          serverSide: true,\r\n          destroy: true,\r\n          iDisplayInLength: 10,\r\n          scrollX: true,\r\n-         order: [[0, 'desc']],\r\n+         columnDefs: [\r\n+\t\t\t{ targets: [0], visible: false},\r\n+\t\t\t],\r\n+\t\t\torder: [\r\n+\t\t\t\t[0, 'desc']\r\n+\t\t\t],\r\n          ajax: { \r\n             url: 'process/masterkategorisubgroup.php',\r\n             method: 'POST',\r\n             data: { tipe: \"load\"  }\r\n"
+                },
+                {
+                    "date": 1635826018154,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n \t\t\t\t\t\t<div class=\"card\">\r\n \t\t\t\t\t\t\t<table id = \"datatable_serverside\" class=\"table table-hover table-bordered display nowrap w-100\">\r\n \t\t\t\t\t\t\t\t<thead>\r\n \t\t\t\t\t\t\t\t\t<tr>\r\n-\r\n+                                    <th>Group</th>\r\n \t\t\t\t\t\t\t\t\t\t<th>Group</th>\r\n \t\t\t\t\t\t\t\t\t\t<th>Sub Group</th>\r\n \t\t\t\t\t\t\t\t\t\t<th>Description</th>\r\n \t\t\t\t\t\t\t\t\t\t<th class=\"text-center\">Status</th>\r\n"
+                },
+                {
+                    "date": 1635826023708,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n \t\t\t\t\t\t<div class=\"card\">\r\n \t\t\t\t\t\t\t<table id = \"datatable_serverside\" class=\"table table-hover table-bordered display nowrap w-100\">\r\n \t\t\t\t\t\t\t\t<thead>\r\n \t\t\t\t\t\t\t\t\t<tr>\r\n-                                    <th>Group</th>\r\n+                                    <th>ID</th>\r\n \t\t\t\t\t\t\t\t\t\t<th>Group</th>\r\n \t\t\t\t\t\t\t\t\t\t<th>Sub Group</th>\r\n \t\t\t\t\t\t\t\t\t\t<th>Description</th>\r\n \t\t\t\t\t\t\t\t\t\t<th class=\"text-center\">Status</th>\r\n"
+                },
+                {
+                    "date": 1635826198904,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -160,9 +160,9 @@\n          destroy: true,\r\n          iDisplayInLength: 10,\r\n          scrollX: true,\r\n          columnDefs: [\r\n-\t\t\t{ targets: [0], visible: false},\r\n+\t\t\t{ targets: [0], visible: true},\r\n \t\t\t],\r\n \t\t\torder: [\r\n \t\t\t\t[0, 'desc']\r\n \t\t\t],\r\n"
+                },
+                {
+                    "date": 1635826563517,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -163,9 +163,9 @@\n          columnDefs: [\r\n \t\t\t{ targets: [0], visible: true},\r\n \t\t\t],\r\n \t\t\torder: [\r\n-\t\t\t\t[0, 'desc']\r\n+\t\t\t\t[0, 'asc']\r\n \t\t\t],\r\n          ajax: { \r\n             url: 'process/masterkategorisubgroup.php',\r\n             method: 'POST',\r\n"
+                },
+                {
+                    "date": 1635826693599,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -163,9 +163,9 @@\n          columnDefs: [\r\n \t\t\t{ targets: [0], visible: true},\r\n \t\t\t],\r\n \t\t\torder: [\r\n-\t\t\t\t[0, 'asc']\r\n+\t\t\t\t[0, 'desc']\r\n \t\t\t],\r\n          ajax: { \r\n             url: 'process/masterkategorisubgroup.php',\r\n             method: 'POST',\r\n"
+                },
+                {
+                    "date": 1635826700379,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -160,9 +160,9 @@\n          destroy: true,\r\n          iDisplayInLength: 10,\r\n          scrollX: true,\r\n          columnDefs: [\r\n-\t\t\t{ targets: [0], visible: true},\r\n+\t\t\t{ targets: [0], visible: false},\r\n \t\t\t],\r\n \t\t\torder: [\r\n \t\t\t\t[0, 'desc']\r\n \t\t\t],\r\n"
+                },
+                {
+                    "date": 1635826812813,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -160,9 +160,9 @@\n          destroy: true,\r\n          iDisplayInLength: 10,\r\n          scrollX: true,\r\n          columnDefs: [\r\n-\t\t\t{ targets: [0], visible: false},\r\n+\t\t\t{ targets: [0], visible: true},\r\n \t\t\t],\r\n \t\t\torder: [\r\n \t\t\t\t[0, 'desc']\r\n \t\t\t],\r\n"
+                },
+                {
+                    "date": 1635826818134,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -160,9 +160,9 @@\n          destroy: true,\r\n          iDisplayInLength: 10,\r\n          scrollX: true,\r\n          columnDefs: [\r\n-\t\t\t{ targets: [0], visible: true},\r\n+\t\t\t{ targets: [0], visible: false},\r\n \t\t\t],\r\n \t\t\torder: [\r\n \t\t\t\t[0, 'desc']\r\n \t\t\t],\r\n"
+                },
+                {
+                    "date": 1635826980191,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n <?php\r\n require_once 'layout/header.php';\r\n require_once 'layout/sidebar.php';\r\n require_once 'layout/footer.php';\r\n-$sql = \"select * from kategori_asset\";\r\n+$sql = \"select * from kategori_asset where status = 'Active'\";\r\n $res = $conn->query($sql);\r\n $res2 = $conn->query($sql);\r\n ?>\r\n \t\t<div class=\"content-wrapper\">\r\n"
+                },
+                {
+                    "date": 1635836478288,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -337,5 +337,20 @@\n                    \r\n                 }\r\n             });\r\n }\r\n+function checkchangecategory(element)\r\n+\t{\r\n+\t\tvar mycategory = $(\"#category\").val();\r\n+\r\n+\t\tvar mycheck = element.checked;\r\n+\t\tif(mycheck)\r\n+\t\t{\r\n+\t\t\t$(\"#descriptionadd\").val(mycategory);\r\n+\t\t}\r\n+\t\telse\r\n+\t\t{\r\n+\t\t\t$(\"#descriptionadd\").val(\"\");\r\n+\t\t}\r\n+\t\t\r\n+\t}\r\n \t</script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635836521678,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -79,9 +79,11 @@\n \t\t\t\t\t\r\n \t\t\t\t\t\t\r\n \t\t\t\t\t\t<label for=\"description\">Description</label>\r\n     \t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"descriptionadd\">\r\n-\r\n+                        <br> \r\n+\t\t\t\t\t\t\t\t<input type = \"checkbox\" id = \"description\" onchange=\"checkchangecategory(this)\"> Same as category name<br>\r\n+\t\t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t</div>\r\n \t\t\t\t\t\t\t</form>\r\n \t\t\t\t\t</div>\r\n \t\t\t\t\t<div class=\"modal-footer\">\r\n@@ -339,9 +341,9 @@\n             });\r\n }\r\n function checkchangecategory(element)\r\n \t{\r\n-\t\tvar mycategory = $(\"#category\").val();\r\n+\t\tvar mycategory = $(\"#subgroup\").val();\r\n \r\n \t\tvar mycheck = element.checked;\r\n \t\tif(mycheck)\r\n \t\t{\r\n"
+                },
+                {
+                    "date": 1635836550053,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -341,9 +341,9 @@\n             });\r\n }\r\n function checkchangecategory(element)\r\n \t{\r\n-\t\tvar mycategory = $(\"#subgroup\").val();\r\n+\t\tvar mycategory = $(\"#subgroupadd\").val();\r\n \r\n \t\tvar mycheck = element.checked;\r\n \t\tif(mycheck)\r\n \t\t{\r\n"
+                },
+                {
+                    "date": 1635836665486,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -80,9 +80,9 @@\n \t\t\t\t\t\t\r\n \t\t\t\t\t\t<label for=\"description\">Description</label>\r\n     \t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"descriptionadd\">\r\n                         <br> \r\n-\t\t\t\t\t\t\t\t<input type = \"checkbox\" id = \"description\" onchange=\"checkchangecategory(this)\"> Same as category name<br>\r\n+\t\t\t\t\t\t\t\t<input type = \"checkbox\" id = \"description\" onchange=\"checkchangecategory(this)\"> Same as sub group name<br>\r\n \t\t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t</div>\r\n \t\t\t\t\t\t\t</form>\r\n \t\t\t\t\t</div>\r\n"
                 }
             ],
             "date": 1628248487932,

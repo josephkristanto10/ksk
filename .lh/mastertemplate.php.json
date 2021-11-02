@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 54,
+            "activePatchIndex": 61,
             "patches": [
                 {
                     "date": 1632055243385,
@@ -224,6 +224,34 @@
                 {
                     "date": 1632064686279,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,9 +47,8 @@\n                                 <thead>\r\n                                     <tr>  \r\n                                         <th>Template</th>\r\n                                         <th>Asset Qty</th>\r\n-                                        <th>Custom Field</th>\r\n                                         <th class=\"text-center\">Status</th>\r\n                                         <th class=\"text-center\">Action</th>\r\n                                     </tr>\r\n                                 </thead>\r\n"
+                },
+                {
+                    "date": 1635824053169,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,9 +46,8 @@\n                         <table id = \"datatable_serverside\" class=\"table table-hover table-bordered display nowrap w-100\">\r\n                                 <thead>\r\n                                     <tr>  \r\n                                         <th>Template</th>\r\n-                                        <th>Asset Qty</th>\r\n                                         <th class=\"text-center\">Status</th>\r\n                                         <th class=\"text-center\">Action</th>\r\n                                     </tr>\r\n                                 </thead>\r\n"
+                },
+                {
+                    "date": 1635824060282,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -157,9 +157,8 @@\n             data: { tipe: \"load\"  }\r\n         },\r\n          columns: [\r\n             { name: 'Template', className: 'text-center align-middle' },\r\n-            { name: 'AssetQty', className: 'text-center align-middle' },\r\n             { name: 'Status', className: 'text-center align-middle' },\r\n             { name: 'Action', searchable: false, orderable: false, className: 'text-center align-middle' }\r\n             \r\n          ]\r\n"
+                },
+                {
+                    "date": 1635827249289,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -157,8 +157,9 @@\n             data: { tipe: \"load\"  }\r\n         },\r\n          columns: [\r\n             { name: 'Template', className: 'text-center align-middle' },\r\n+            { name: 'Template', className: 'text-center align-middle' },\r\n             { name: 'Status', className: 'text-center align-middle' },\r\n             { name: 'Action', searchable: false, orderable: false, className: 'text-center align-middle' }\r\n             \r\n          ]\r\n"
+                },
+                {
+                    "date": 1635827262673,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -155,11 +155,14 @@\n             url: 'process/mastertemplate.php',\r\n             method: 'POST',\r\n             data: { tipe: \"load\"  }\r\n         },\r\n+        columnDefs: [\r\n+\t\t\t{ targets: [0], visible: false},\r\n+\t\t\t],\r\n          columns: [\r\n+            { name: 'Id', className: 'text-center align-middle' },\r\n             { name: 'Template', className: 'text-center align-middle' },\r\n-            { name: 'Template', className: 'text-center align-middle' },\r\n             { name: 'Status', className: 'text-center align-middle' },\r\n             { name: 'Action', searchable: false, orderable: false, className: 'text-center align-middle' }\r\n             \r\n          ]\r\n"
+                },
+                {
+                    "date": 1635827275464,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,8 +45,9 @@\n \r\n                         <table id = \"datatable_serverside\" class=\"table table-hover table-bordered display nowrap w-100\">\r\n                                 <thead>\r\n                                     <tr>  \r\n+                                    <th>Template</th>\r\n                                         <th>Template</th>\r\n                                         <th class=\"text-center\">Status</th>\r\n                                         <th class=\"text-center\">Action</th>\r\n                                     </tr>\r\n"
+                },
+                {
+                    "date": 1635827280906,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,9 +45,9 @@\n \r\n                         <table id = \"datatable_serverside\" class=\"table table-hover table-bordered display nowrap w-100\">\r\n                                 <thead>\r\n                                     <tr>  \r\n-                                    <th>Template</th>\r\n+                                    <th>Id</th>\r\n                                         <th>Template</th>\r\n                                         <th class=\"text-center\">Status</th>\r\n                                         <th class=\"text-center\">Action</th>\r\n                                     </tr>\r\n"
+                },
+                {
+                    "date": 1635827380650,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -150,9 +150,9 @@\n          serverSide: true,\r\n          destroy: true,\r\n          iDisplayInLength: 10,\r\n          scrollX: true,\r\n-         order: [[0, 'asc']],\r\n+         order: [[0, 'desc']],\r\n          ajax: { \r\n             url: 'process/mastertemplate.php',\r\n             method: 'POST',\r\n             data: { tipe: \"load\"  }\r\n"
                 }
             ],
             "date": 1632055243385,

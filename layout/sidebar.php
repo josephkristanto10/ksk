@@ -81,16 +81,7 @@
                                 <ul class="nav nav-group-sub" data-submenu-title="Basic tables" style = "<?php echo ($myurl == "mastertemplate.php" || $myurl == "masterinitialcondition.php"  ) ? " display:block;" : ''; ?>">
                                 <li class="nav-item" id = "mastertemplate"><a href="mastertemplate.php" class="nav-link <?php echo ($myurl == "mastertemplate.php"  ) ? " active" : ''; ?>">Template List</a>
                                     </li>
-                                <?php $sql = "select * from template"; $res = $conn->query($sql);
-                                if($res->num_rows>0)
-                                {
-                                    while($r = mysqli_fetch_array($res))
-                                    {
-                                        echo '<li class="nav-item"><a class="nav-link" >'.$r['template'].'</a></li>';
-                                    }
-                              
-                                }
-                                ?>
+                            
                                 </ul>
                             </li>
                             <li class="nav-item nav-item-submenu <?php echo ($myurl == "mastercondition.php" || $myurl == "masterinitialcondition.php"  ) ? " nav-item-open" : ''; ?>">

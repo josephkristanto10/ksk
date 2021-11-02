@@ -5,6 +5,7 @@ if($tipe == "load")
 {
 
     $where_like = [
+        'id',
         'nama',
         'assignto',
         'description',
@@ -26,9 +27,9 @@ if($tipe == "load")
     
         $total_filtered = mysqli_query($conn, "select * from kategori_asset ");
     } else {
-        $query_data = mysqli_query($conn, "select * from kategori_asset WHERE nama LIKE '%$search%' OR assignto LIKE '%$search%' ORDER BY $order $dir LIMIT $start, $length");
+        $query_data = mysqli_query($conn, "select * from kategori_asset WHERE nama LIKE '%$search%' OR assignto LIKE '%$search%' ORDER BY $order $dir  LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "select * from kategori_asset WHERE nama LIKE '%$search%' OR assignto LIKE '%$search%'");
+        $total_filtered = mysqli_query($conn, "select * from kategori_asset WHERE nama LIKE '%$search%' OR assignto LIKE '%$search%' ");
     }
     
     $response['data'] = [];
@@ -52,6 +53,7 @@ if($tipe == "load")
             }
             
             $response['data'][] = [
+                "<label id ='id".$row['id']."'>".$row['id']."</label>",
                 "<label id ='nama".$row['id']."'>".$row['nama']."</label>",
                 "<label id ='assignto".$row['id']."'>".$row['assignto']."</label>",
                 "<label id ='description".$row['id']."'>".$row['description']."</label>",

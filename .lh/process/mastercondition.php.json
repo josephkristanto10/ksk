@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 42,
+            "activePatchIndex": 45,
             "patches": [
                 {
                     "date": 1630466101501,
@@ -176,6 +176,18 @@
                 {
                     "date": 1630475769584,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -127,9 +127,9 @@\n     }\r\n     else{\r\n         echo \"tidak\";\r\n     }\r\n-    echo $sql;\r\n+    // echo $sql;\r\n }\r\n else if($tipe == \"setstatus\")\r\n {\r\n     $myid = $_POST['myidchange'];\r\n"
+                },
+                {
+                    "date": 1635827854951,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n if($tipe == \"load\")\r\n {\r\n \r\n     $where_like = [\r\n+        'id',\r\n         'name',\r\n         'description',\r\n         'status'\r\n         \r\n"
+                },
+                {
+                    "date": 1635827861147,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -63,8 +63,9 @@\n             }\r\n             \r\n             $response['data'][] = [\r\n                 \"<label id ='name\".$row['id'].\"'>\".$row['name'].\"</label>\",\r\n+                \"<label id ='name\".$row['id'].\"'>\".$row['name'].\"</label>\",\r\n               \r\n                 \"<label id ='description\".$row['id'].\"'>\".$row['description'].\"</label>\",\r\n                 \"<label id ='status\".$row['id'].\"'>\".$mystats.\"</label>\",\r\n                 ' <div class=\"list-icons\">\r\n"
+                },
+                {
+                    "date": 1635827867085,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,10 +62,10 @@\n                 Set Active</a>'\";\r\n             }\r\n             \r\n             $response['data'][] = [\r\n+                \"<label id ='idcondition\".$row['id'].\"'>\".$row['id'].\"</label>\",\r\n                 \"<label id ='name\".$row['id'].\"'>\".$row['name'].\"</label>\",\r\n-                \"<label id ='name\".$row['id'].\"'>\".$row['name'].\"</label>\",\r\n               \r\n                 \"<label id ='description\".$row['id'].\"'>\".$row['description'].\"</label>\",\r\n                 \"<label id ='status\".$row['id'].\"'>\".$mystats.\"</label>\",\r\n                 ' <div class=\"list-icons\">\r\n"
                 }
             ],
             "date": 1630466101501,

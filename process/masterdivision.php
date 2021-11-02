@@ -87,7 +87,7 @@ if($tipe == "load")
 else if($tipe == "add"){
     $divisi = $_POST['mydivisi'];
     $description = $_POST['mydescription'];
-    $sql = "INSERT into divisi values(NULL, '".$divisi."', '".$description."', 'Active')";
+    $sql = "INSERT into divisi values(NULL,'1', '".$divisi."', '".$description."', 'Active')";
     $res = $conn->query($sql);
     if(($conn -> affected_rows)>0)
     {

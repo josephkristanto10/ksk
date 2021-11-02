@@ -24,49 +24,60 @@ if($tipe == "load")
     
     $total_data = mysqli_query($conn, 
     
-    "SELECT tdna.*, lbranch.branch, lroom.room, karyawan.nama FROM transaction_displacement_new_asset tdna
+    "SELECT tdna.*, lbranch.branch, lroom.room, karyawan.nama, asset.idgroup, asset.idsubgroup, asset.idcategory FROM transaction_displacement_new_asset tdna
     inner join location_branch lbranch on lbranch.idbranch = tdna.idbranch
     inner join location_room lroom on lroom.id = tdna.idroom
     inner join karyawan on karyawan.nik = tdna.created_by
-    where tdna.idsister = '$myses'
+    inner join transaction_displacement_new_asset_log tdnal on tdna.id = tdnal.idtransaksi
+    inner join asset on asset.id = tdnal.idasset
+    where tdna.idsister = '$myses' group by tdna.id
+
     "
 
 );
     
     if(empty($search)) {
-        $query_data = mysqli_query($conn, "SELECT tdna.*, lbranch.branch, lroom.room, karyawan.nama FROM transaction_displacement_new_asset tdna
+        $query_data = mysqli_query($conn, "SELECT tdna.*, lbranch.branch, lroom.room, karyawan.nama, asset.idgroup, asset.idsubgroup, asset.idcategory FROM transaction_displacement_new_asset tdna
         inner join location_branch lbranch on lbranch.idbranch = tdna.idbranch
         inner join location_room lroom on lroom.id = tdna.idroom
         inner join karyawan on karyawan.nik = tdna.created_by
-        where tdna.idsister = '$myses' ORDER BY $order $dir LIMIT $start, $length");
+        inner join transaction_displacement_new_asset_log tdnal on tdna.id = tdnal.idtransaksi
+        inner join asset on asset.id = tdnal.idasset
+        where tdna.idsister = '$myses' group by tdna.id ORDER BY $order $dir LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "SELECT tdna.*, lbranch.branch, lroom.room, karyawan.nama FROM transaction_displacement_new_asset tdna
+        $total_filtered = mysqli_query($conn, "SELECT tdna.*, lbranch.branch, lroom.room, karyawan.nama, asset.idgroup, asset.idsubgroup, asset.idcategory FROM transaction_displacement_new_asset tdna
         inner join location_branch lbranch on lbranch.idbranch = tdna.idbranch
         inner join location_room lroom on lroom.id = tdna.idroom
         inner join karyawan on karyawan.nik = tdna.created_by
-        where tdna.idsister = '$myses' ");
+        inner join transaction_displacement_new_asset_log tdnal on tdna.id = tdnal.idtransaksi
+        inner join asset on asset.id = tdnal.idasset
+        where tdna.idsister = '$myses' group by tdna.id ");
     } else {
-        $query_data = mysqli_query($conn, "SELECT tdna.*, lbranch.branch, lroom.room, karyawan.nama FROM transaction_displacement_new_asset tdna
+        $query_data = mysqli_query($conn, "SELECT tdna.*, lbranch.branch, lroom.room, karyawan.nama, asset.idgroup, asset.idsubgroup, asset.idcategory FROM transaction_displacement_new_asset tdna
         inner join location_branch lbranch on lbranch.idbranch = tdna.idbranch
         inner join location_room lroom on lroom.id = tdna.idroom
         inner join karyawan on karyawan.nik = tdna.created_by
+        inner join transaction_displacement_new_asset_log tdnal on tdna.id = tdnal.idtransaksi
+        inner join asset on asset.id = tdnal.idasset
         where tdna.idsister = '$myses' and (
             tdna.notransaction LIKE '%$search%' 
         OR lbranch.branch LIKE '%$search%'
         OR lroom.room LIKE '%$search%'
         OR karyawan.nama LIKE '%$search%'
-        OR tdna.status_approval LIKE '%$search%' )  ORDER BY $order $dir LIMIT $start, $length");
+        OR tdna.status_approval LIKE '%$search%' )  group by tdna.id ORDER BY $order $dir LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "SELECT tdna.*, lbranch.branch, lroom.room, karyawan.nama FROM transaction_displacement_new_asset tdna
+        $total_filtered = mysqli_query($conn, "SELECT tdna.*, lbranch.branch, lroom.room, karyawan.nama, asset.idgroup, asset.idsubgroup, asset.idcategory FROM transaction_displacement_new_asset tdna
         inner join location_branch lbranch on lbranch.idbranch = tdna.idbranch
         inner join location_room lroom on lroom.id = tdna.idroom
         inner join karyawan on karyawan.nik = tdna.created_by
+        inner join transaction_displacement_new_asset_log tdnal on tdna.id = tdnal.idtransaksi
+        inner join asset on asset.id = tdnal.idasset
         where tdna.idsister = '$myses' and (
             tdna.notransaction LIKE '%$search%' 
         OR lbranch.branch LIKE '%$search%'
         OR lroom.room LIKE '%$search%'
         OR karyawan.nama LIKE '%$search%'
-        OR tdna.status_approval LIKE '%$search%' ) ");
+        OR tdna.status_approval LIKE '%$search%' )  group by tdna.id");
     }
     
     $response['data'] = [];
@@ -94,7 +105,7 @@ if($tipe == "load")
                 "<a href = '#myModalDetailTransaction' id = '".$row['id']."' onclick = openmodaldetailtransaction(this) data-toggle='modal'><label id ='notransaction".$row['id']."'>".$row['notransaction']."</label></a>",
                 "<label id ='branch".$row['id']."'>".$row['branch']."</label>",
                 "<label id ='room".$row['id']."'>".$row['room']."</label>",
-                "<label id ='nama".$row['id']."'>".$row['nama'],
+                "<label id ='nama".$row['id']."'>".$row['nama']."</label>"."<input type = 'hidden' id = 'category_".$row['id']."' value = '".$row['idcategory']."'>"."<input type = 'hidden' id = 'subgroup_".$row['id']."' value = '".$row['idsubgroup']."'>"."<input type = 'hidden' id = 'group_".$row['id']."' value = '".$row['idgroup']."'>",
                 ' <div class="list-icons">
                 <div class="dropdown">
                     <a href="#" class="list-icons-item" data-toggle="dropdown">
@@ -102,7 +113,7 @@ if($tipe == "load")
                     </a>
     
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a href="#myModalEditTransaction"  data-toggle="modal" class="dropdown-item" id ="click-'.$row['id'].'"  onclick = "openmodaledits(this)"><i class="icon-check"></i>
+                        <a href="#myModalEditTransactions"  data-toggle="modal" class="dropdown-item" id ="click-'.$row['id'].'"  onclick = "openmodaledits(this)"><i class="icon-check"></i>
                             Edit</a>
                         
                    

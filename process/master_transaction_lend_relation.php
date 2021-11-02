@@ -23,56 +23,66 @@ if($tipe == "load")
     
     $total_data = mysqli_query($conn, 
     
-    "SELECT tltr.*, lbranch.branch, relation.company, relation.contactname, lroom.room FROM transaction_lend_to_relation tltr
+    "SELECT tltr.*, tltr.room as idroom, lbranch.branch, relation.company, relation.contactname, lroom.room  , asset.idgroup, asset.idsubgroup, asset.idcategory  FROM transaction_lend_to_relation tltr
     inner join location_setup_sister_branch lbranchsetup on lbranchsetup.idbranch = tltr.idbranch
     inner join location_branch lbranch on lbranch.idbranch = lbranchsetup.idbranch 
     inner join relation on relation.id  = tltr.relation
     inner join location_room lroom on lroom.id = tltr.room
-    where lbranchsetup.idsistercompany = '$myses'
+        inner join transaction_lend_to_relation_log tlotrl on tlotrl.idtransaksi =  tltr.id
+        inner join asset on asset.id = tlotrl.idasset 
+    where lbranchsetup.idsistercompany = '$myses' group by tltr.id
     "
 
 );
     
     if(empty($search)) {
-        $query_data = mysqli_query($conn, "SELECT tltr.*, lbranch.branch, relation.company, relation.contactname, lroom.room FROM transaction_lend_to_relation tltr
+        $query_data = mysqli_query($conn, "SELECT tltr.*, tltr.room as idroom, lbranch.branch, relation.company, relation.contactname, lroom.room  , asset.idgroup, asset.idsubgroup, asset.idcategory  FROM transaction_lend_to_relation tltr
         inner join location_setup_sister_branch lbranchsetup on lbranchsetup.idbranch = tltr.idbranch
         inner join location_branch lbranch on lbranch.idbranch = lbranchsetup.idbranch 
         inner join relation on relation.id  = tltr.relation
         inner join location_room lroom on lroom.id = tltr.room
-        where lbranchsetup.idsistercompany = '$myses' ORDER BY $order $dir LIMIT $start, $length");
+        inner join transaction_lend_to_relation_log tlotrl on tlotrl.idtransaksi =  tltr.id
+        inner join asset on asset.id = tlotrl.idasset 
+        where lbranchsetup.idsistercompany = '$myses' group by tltr.id ORDER BY $order $dir LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "SELECT tltr.*, lbranch.branch, relation.company, relation.contactname, lroom.room FROM transaction_lend_to_relation tltr
+        $total_filtered = mysqli_query($conn, "SELECT tltr.*, tltr.room as idroom, lbranch.branch, relation.company, relation.contactname, lroom.room  , asset.idgroup, asset.idsubgroup, asset.idcategory  FROM transaction_lend_to_relation tltr
         inner join location_setup_sister_branch lbranchsetup on lbranchsetup.idbranch = tltr.idbranch
         inner join location_branch lbranch on lbranch.idbranch = lbranchsetup.idbranch 
         inner join relation on relation.id  = tltr.relation
         inner join location_room lroom on lroom.id = tltr.room
-        where lbranchsetup.idsistercompany = '$myses'");
+        inner join transaction_lend_to_relation_log tlotrl on tlotrl.idtransaksi =  tltr.id
+        inner join asset on asset.id = tlotrl.idasset 
+        where lbranchsetup.idsistercompany = '$myses' group by tltr.id");
     } else {
-        $query_data = mysqli_query($conn, "SELECT tltr.*, lbranch.branch, relation.company, relation.contactname, lroom.room FROM transaction_lend_to_relation tltr
+        $query_data = mysqli_query($conn, "SELECT tltr.*, tltr.room as idroom, lbranch.branch, relation.company, relation.contactname, lroom.room  , asset.idgroup, asset.idsubgroup, asset.idcategory  FROM transaction_lend_to_relation tltr
         inner join location_setup_sister_branch lbranchsetup on lbranchsetup.idbranch = tltr.idbranch
         inner join location_branch lbranch on lbranch.idbranch = lbranchsetup.idbranch 
         inner join relation on relation.id  = tltr.relation
         inner join location_room lroom on lroom.id = tltr.room
+        inner join transaction_lend_to_relation_log tlotrl on tlotrl.idtransaksi =  tltr.id
+        inner join asset on asset.id = tlotrl.idasset 
         where lbranchsetup.idsistercompany = '$myses' and (
             tltr.notransaction LIKE '%$search%' 
         OR lbranch.branch LIKE '%$search%'
         OR relation.contactname LIKE '%$search%' 
         OR relation.company LIKE '%$search%' 
         OR tltr.approval LIKE '%$search%'
-        OR tltr.status LIKE '%$search%' )  ORDER BY $order $dir LIMIT $start, $length");
+        OR tltr.status LIKE '%$search%' )  group by tltr.id ORDER BY $order $dir LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "SELECT tltr.*, lbranch.branch, relation.company, relation.contactname, lroom.room FROM transaction_lend_to_relation tltr
+        $total_filtered = mysqli_query($conn, "SELECT tltr.*, tltr.room as idroom, lbranch.branch, relation.company, relation.contactname, lroom.room , asset.idgroup, asset.idsubgroup, asset.idcategory   FROM transaction_lend_to_relation tltr
         inner join location_setup_sister_branch lbranchsetup on lbranchsetup.idbranch = tltr.idbranch
         inner join location_branch lbranch on lbranch.idbranch = lbranchsetup.idbranch 
         inner join relation on relation.id  = tltr.relation
         inner join location_room lroom on lroom.id = tltr.room
+        inner join transaction_lend_to_relation_log tlotrl on tlotrl.idtransaksi =  tltr.id
+        inner join asset on asset.id = tlotrl.idasset 
         where lbranchsetup.idsistercompany = '$myses' and (
             tltr.notransaction LIKE '%$search%' 
         OR lbranch.branch LIKE '%$search%'
         OR relation.contactname LIKE '%$search%' 
         OR relation.company LIKE '%$search%' 
         OR tltr.approval LIKE '%$search%'
-        OR tltr.status LIKE '%$search%' )");
+        OR tltr.status LIKE '%$search%' ) group by tltr.id");
     }
     
     $response['data'] = [];
@@ -104,7 +114,27 @@ if($tipe == "load")
                 "<label id ='room".$row['id']."'>".$row['room']."</label>",
                 "<label id ='startdate".$row['id']."'>".$row['start_date']."</label>",
                 "<label id ='duedate".$row['id']."'>".$row['due_date']."</label>",
-                "<label id ='status".$row['id']."'>".$row['status']."</label>"
+                "<label id ='status".$row['id']."'>".$row['status']."</label>".
+                "<input type = 'hidden' id = 'category_".$row['id']."' value = '".$row['idcategory']."'>".
+                "<input type = 'hidden' id = 'subgroup_".$row['id']."' value = '".$row['idsubgroup']."'>".
+                "<input type = 'hidden' id = 'group_".$row['id']."' value = '".$row['idgroup']."'>".
+                "<input type = 'hidden' id = 'idrelation_".$row['id']."' value = '".$row['relation']."'>".
+                "<input type = 'hidden' id = 'idbranch_".$row['id']."' value = '".$row['idbranch']."'>".
+                "<input type = 'hidden' id = 'idroom_".$row['id']."' value = '".$row['idroom']."'>",
+                ' <div class="list-icons">
+                <div class="dropdown">
+                    <a href="#" class="list-icons-item" data-toggle="dropdown">
+                        <i class="icon-menu9"></i>
+                    </a>
+    
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="#myModalEditTransactions"  data-toggle="modal" class="dropdown-item" id ="click-'.$row['id'].'"  onclick = "openmodaledits(this)"><i class="icon-check"></i>
+                            Edit</a>
+                        
+                   
+                    </div>
+                </div>
+            </div>'
             ];
         }
     }
@@ -120,6 +150,38 @@ if($tipe == "load")
     }  
     
     echo json_encode($response);
+}
+else if($tipe == "edit")
+{
+    $myrelation = $_POST['myrelation'];
+    $myselectedlist = $_POST['myselected'];
+    $mybranch = $_POST['mybranch'];
+    $myroom = $_POST['myroom'];
+    $mystart = $_POST['mystart'];
+    $myend = $_POST['myend'];
+    date_default_timezone_set("Asia/Bangkok");
+    $datestart=date_create($mystart);
+    $dateend=date_create($myend);
+    $convertstart = date_format($datestart,"Y-m-d");
+    $convertend = date_format($dateend,"Y-m-d");
+    $mydate = date("Y-m-d");
+
+  
+    $mytransactions = $_POST['mytransactions'];
+
+    $sql = "update transaction_lend_to_relation set idbranch = '$mybranch', relation = '$myrelation', room = '$myroom' , start_date = '$convertstart', due_date = '$convertend' where id = '$mytransactions'";
+    $res = $conn->query($sql);
+    // echo $sql;
+    $sql = "delete from transaction_lend_to_relation_log where idtransaksi = '$mytransactions'";
+    $res = $conn->query($sql);
+
+  
+
+    for($i = 0 ; $i< count($myselectedlist); $i++)
+    {
+        $sql = "insert into transaction_lend_to_relation_log values(NULL, '$mytransactions', '".$myselectedlist[$i]."')";
+        $ress = $conn->query($sql);
+    }
 }
 else if($tipe == "getassetdesc")
 {

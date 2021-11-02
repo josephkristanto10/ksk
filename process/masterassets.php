@@ -6,6 +6,7 @@ if($tipe == "load")
 {
 
     $where_like = [
+        'id',
         'groupname',
         'subgroupname',
         'categoryname',
@@ -114,6 +115,7 @@ if($tipe == "load")
             $enddate = date_format(date_create($row['end_date']), "d-m-Y");
             // $myrelation = str_replace( " ", ' ', $row['myrelation'] ); 
             $response['data'][] = [
+                "<label id ='idasset".$row['id']."'>".$row['id']."</label>",
                 "<a href= '#myModalDisplay'  data-toggle='modal'><span class='pointer-element badge badge-success' id ='".$row['id']."' onclick = 'openmodaldisplay(this)'  data-id='".$row['id']."'><i class='icon-plus3'></i></span></a>",
                 "<label id ='noasset".$row['id']."'>".$row['noasset']."</label>",
                 "<label id ='name".$row['id']."'> $myinfo".$row['name']."</label>",

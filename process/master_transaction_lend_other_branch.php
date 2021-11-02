@@ -25,36 +25,44 @@ if($tipe == "load")
     
     $total_data = mysqli_query($conn, 
     
-    "SELECT tltd.*, lbranch.branch, depa.department, lroom.room FROM transaction_lend_to_department tltd
+    "SELECT tltd.*, tltd.room as idroom, tltd.department as iddepart, lbranch.branch, depa.department, lroom.room , asset.idgroup, asset.idsubgroup, asset.idcategory  FROM transaction_lend_to_department tltd
     inner join location_setup_sister_branch lssb on lssb.idbranch = tltd.idbranch
     inner join location_branch lbranch on lbranch.idbranch = lssb.idbranch
     inner join department depa on depa.id = tltd.department
-    inner join location_room lroom on lroom.id = tltd.room
+    inner join location_room lroom on lroom.id = tltd.room 
+    inner join transaction_lend_to_department_log tltdl on tltdl.idtransaksi =  tltd.id 
+        inner join asset on asset.id = tltdl.idasset 
      where lssb.idsistercompany = '$myses' group by tltd.id
     "
 
 );
     
     if(empty($search)) {
-        $query_data = mysqli_query($conn, "SELECT tltd.*, lbranch.branch, depa.department, lroom.room FROM transaction_lend_to_department tltd
+        $query_data = mysqli_query($conn, "SELECT tltd.*, tltd.room as idroom, tltd.department as iddepart, lbranch.branch, depa.department, lroom.room , asset.idgroup, asset.idsubgroup, asset.idcategory  FROM transaction_lend_to_department tltd
         inner join location_setup_sister_branch lssb on lssb.idbranch = tltd.idbranch
         inner join location_branch lbranch on lbranch.idbranch = lssb.idbranch
         inner join department depa on depa.id = tltd.department
-        inner join location_room lroom on lroom.id = tltd.room
+        inner join location_room lroom on lroom.id = tltd.room 
+        inner join transaction_lend_to_department_log tltdl on tltdl.idtransaksi =  tltd.id 
+        inner join asset on asset.id = tltdl.idasset 
          where lssb.idsistercompany = '$myses' group by tltd.id ORDER BY $order $dir LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "SELECT tltd.*, lbranch.branch, depa.department, lroom.room FROM transaction_lend_to_department tltd
+        $total_filtered = mysqli_query($conn, "SELECT tltd.*, tltd.room as idroom, tltd.department as iddepart, lbranch.branch, depa.department, lroom.room , asset.idgroup, asset.idsubgroup, asset.idcategory  FROM transaction_lend_to_department tltd
         inner join location_setup_sister_branch lssb on lssb.idbranch = tltd.idbranch
         inner join location_branch lbranch on lbranch.idbranch = lssb.idbranch
         inner join department depa on depa.id = tltd.department
-        inner join location_room lroom on lroom.id = tltd.room
+        inner join location_room lroom on lroom.id = tltd.room 
+        inner join transaction_lend_to_department_log tltdl on tltdl.idtransaksi =  tltd.id 
+        inner join asset on asset.id = tltdl.idasset 
          where lssb.idsistercompany = '$myses' group by tltd.id");
     } else {
-        $query_data = mysqli_query($conn, "SELECT tltd.*, lbranch.branch, depa.department, lroom.room FROM transaction_lend_to_department tltd
+        $query_data = mysqli_query($conn, "SELECT tltd.*, tltd.room as idroom, tltd.department as iddepart, lbranch.branch, depa.department, lroom.room , asset.idgroup, asset.idsubgroup, asset.idcategory  FROM transaction_lend_to_department tltd
         inner join location_setup_sister_branch lssb on lssb.idbranch = tltd.idbranch
         inner join location_branch lbranch on lbranch.idbranch = lssb.idbranch
         inner join department depa on depa.id = tltd.department
-        inner join location_room lroom on lroom.id = tltd.room
+        inner join location_room lroom on lroom.id = tltd.room 
+        inner join transaction_lend_to_department_log tltdl on tltdl.idtransaksi =  tltd.id 
+        inner join asset on asset.id = tltdl.idasset 
          where lssb.idsistercompany = '$myses' and (
             tltd.notransaction LIKE '%$search%' 
         OR lbranch.branch LIKE '%$search%'
@@ -64,11 +72,13 @@ if($tipe == "load")
         OR tltd.approval LIKE '%$search%'
         OR tltd.status LIKE '%$search%' )  group by tltd.id  ORDER BY $order $dir LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "SELECT tltd.*, lbranch.branch, depa.department, lroom.room FROM transaction_lend_to_department tltd
+        $total_filtered = mysqli_query($conn, "SELECT tltd.*, tltd.department as iddepart, tltd.room as idroom, lbranch.branch, depa.department, lroom.room , asset.idgroup, asset.idsubgroup, asset.idcategory  FROM transaction_lend_to_department tltd
         inner join location_setup_sister_branch lssb on lssb.idbranch = tltd.idbranch
         inner join location_branch lbranch on lbranch.idbranch = lssb.idbranch
         inner join department depa on depa.id = tltd.department
-        inner join location_room lroom on lroom.id = tltd.room
+        inner join location_room lroom on lroom.id = tltd.room 
+        inner join transaction_lend_to_department_log tltdl on tltdl.idtransaksi =  tltd.id 
+        inner join asset on asset.id = tltdl.idasset 
          where lssb.idsistercompany = '$myses' and (
             tltd.notransaction LIKE '%$search%' 
         OR lbranch.branch LIKE '%$search%'
@@ -107,7 +117,26 @@ if($tipe == "load")
                 "<label id ='department".$row['id']."'>".$row['department']."</label>",
                 "<label id ='startdate".$row['id']."'>".$row['start_date']."</label>",
                 "<label id ='duedate".$row['id']."'>".$row['due_date']."</label>",
-                "<label id ='status".$row['id']."'>".$row['status']."</label>"
+                "<label id ='status".$row['id']."'>".$row['status']."</label>"."<input type = 'hidden' id = 'category_".$row['id']."' value = '".$row['idcategory']."'>".
+                "<input type = 'hidden' id = 'subgroup_".$row['id']."' value = '".$row['idsubgroup']."'>".
+                "<input type = 'hidden' id = 'group_".$row['id']."' value = '".$row['idgroup']."'>".
+                "<input type = 'hidden' id = 'iddepartment_".$row['id']."' value = '".$row['iddepart']."'>".
+                "<input type = 'hidden' id = 'idbranch_".$row['id']."' value = '".$row['idbranch']."'>".
+                "<input type = 'hidden' id = 'idroom_".$row['id']."' value = '".$row['idroom']."'>",
+                ' <div class="list-icons">
+                <div class="dropdown">
+                    <a href="#" class="list-icons-item" data-toggle="dropdown">
+                        <i class="icon-menu9"></i>
+                    </a>
+    
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="#myModalEditTransactions"  data-toggle="modal" class="dropdown-item" id ="click-'.$row['id'].'"  onclick = "openmodaledits(this)"><i class="icon-check"></i>
+                            Edit</a>
+                        
+                   
+                    </div>
+                </div>
+            </div>'
             ];
         }
     }
@@ -364,6 +393,39 @@ else if($tipe == "add"){
         echo "tidak";
     }
     // echo $sql;
+}
+else if($tipe == "edit"){
+   
+
+$myselectedlist = $_POST['myselected'];
+$mydepartment = $_POST['mydepartment'];
+$mybranch = $_POST['mybranch'];
+$myroom = $_POST['myroom'];
+$mystart = $_POST['mystart'];
+$myend = $_POST['myend'];
+date_default_timezone_set("Asia/Bangkok");
+$datestart=date_create($mystart);
+$dateend=date_create($myend);
+$convertstart = date_format($datestart,"Y-m-d");
+$convertend = date_format($dateend,"Y-m-d");
+$mydate = date("Y-m-d");
+
+  
+    $mytransactions = $_POST['mytransactions'];
+
+    $sql = "update transaction_lend_to_department set idbranch = '$mybranch', department = '$mydepartment', room = '$myroom', start_date = '$convertstart', due_date = '$convertend' where id = '$mytransactions'";
+    $res = $conn->query($sql);
+    // echo $sql;
+    $sql = "delete from transaction_lend_to_department_log where idtransaksi = '$mytransactions'";
+    $res = $conn->query($sql);
+
+  
+
+    for($i = 0 ; $i< count($myselectedlist); $i++)
+    {
+        $sql = "insert into transaction_lend_to_department_log values(NULL, '$mytransactions', '".$myselectedlist[$i]."')";
+        $ress = $conn->query($sql);
+    }
 }
 else if($tipe == "changedata")
 {

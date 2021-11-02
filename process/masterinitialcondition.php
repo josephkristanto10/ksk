@@ -5,6 +5,7 @@ if($tipe == "load")
 {
 
     $where_like = [
+        'id',
         'initial_condition',
         'description',
         'status'
@@ -62,6 +63,7 @@ if($tipe == "load")
             }
             
             $response['data'][] = [
+                "<label id ='id".$row['id']."'>".$row['id']."</label>",
                 "<label id ='name".$row['id']."'>".$row['initial_condition']."</label>",
                 "<label id ='description".$row['id']."'>".$row['description']."</label>",
                 "<label id ='status".$row['id']."'>".$mystats."</label>",

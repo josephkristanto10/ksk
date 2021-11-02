@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 71,
+            "activePatchIndex": 80,
             "patches": [
                 {
                     "date": 1630465420399,
@@ -292,6 +292,42 @@
                 {
                     "date": 1630575995307,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n <?php\r\n require_once 'layout/header.php';\r\n require_once 'layout/sidebar.php';\r\n+require_once 'layout/footer.php';\r\n $sql = \"select * from country\";\r\n $res = $conn->query($sql);\r\n $mycountry = array();\r\n if($res->num_rows>0)\r\n"
+                },
+                {
+                    "date": 1635827812105,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,18 +1,8 @@\n <?php\r\n require_once 'layout/header.php';\r\n require_once 'layout/sidebar.php';\r\n require_once 'layout/footer.php';\r\n-$sql = \"select * from country\";\r\n-$res = $conn->query($sql);\r\n-$mycountry = array();\r\n-if($res->num_rows>0)\r\n-{\r\n-    while($r = mysqli_fetch_array($res))\r\n-    {\r\n-        $mycountry[] = $r;\r\n-    }\r\n-}\r\n \r\n ?>\r\n \r\n         <div class=\"content-wrapper\">\r\n"
+                },
+                {
+                    "date": 1635827819349,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,8 +35,9 @@\n \r\n                         <table id = \"datatable_serverside\" class=\"table table-hover table-bordered display nowrap w-100\">\r\n                                 <thead>\r\n                                     <tr>  \r\n+                                    <th>Condition</th>\r\n                                         <th>Condition</th>\r\n                                         <th>Description</th>\r\n                                         <th class=\"text-center\">Status</th>\r\n                                         <th class=\"text-center\">Action</th>\r\n"
+                },
+                {
+                    "date": 1635827831929,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n \r\n                         <table id = \"datatable_serverside\" class=\"table table-hover table-bordered display nowrap w-100\">\r\n                                 <thead>\r\n                                     <tr>  \r\n-                                    <th>Condition</th>\r\n+                                    <th>Id</th>\r\n                                         <th>Condition</th>\r\n                                         <th>Description</th>\r\n                                         <th class=\"text-center\">Status</th>\r\n                                         <th class=\"text-center\">Action</th>\r\n@@ -132,8 +132,11 @@\n          destroy: true,\r\n          iDisplayInLength: 10,\r\n          scrollX: true,\r\n          order: [[0, 'asc']],\r\n+         columnDefs: [\r\n+\t\t\t{ targets: [0], visible: false},\r\n+\t\t\t],\r\n          ajax: { \r\n             url: 'process/mastercondition.php',\r\n             method: 'POST',\r\n             data: { tipe: \"load\"  }\r\n"
+                },
+                {
+                    "date": 1635827837966,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -141,8 +141,9 @@\n             method: 'POST',\r\n             data: { tipe: \"load\"  }\r\n         },\r\n          columns: [\r\n+            { name: 'Id', className: 'text-center align-middle' },\r\n             { name: 'Condition', className: 'text-center align-middle' },\r\n             { name: 'Description', className: 'text-center align-middle' },\r\n             { name: 'Status', className: 'text-center align-middle' },\r\n             { name: 'Action', searchable: false, orderable: false, className: 'text-center align-middle' }\r\n"
+                },
+                {
+                    "date": 1635827883255,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -131,9 +131,9 @@\n          serverSide: true,\r\n          destroy: true,\r\n          iDisplayInLength: 10,\r\n          scrollX: true,\r\n-         order: [[0, 'asc']],\r\n+         order: [[0, 'desc']],\r\n          columnDefs: [\r\n \t\t\t{ targets: [0], visible: false},\r\n \t\t\t],\r\n          ajax: { \r\n"
+                },
+                {
+                    "date": 1635837073576,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,8 +69,12 @@\n \t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"condition\">\r\n \t\t\t\t\t\t\t<br>\r\n                             <label for=\"description\">Description</label>\r\n \t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"description\">\r\n+\r\n+                            <br> \r\n+\t\t\t\t\t\t\t\t<input type = \"checkbox\" id = \"description\" onchange=\"checkchangecategory(this)\"> Same as category name<br>\r\n+\t\t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t<div style = \"float:right;margin-bottom:20px;\">\r\n \t\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-primary\" style = \"margin-right:10px;\" onclick=\"adddata()\">Save</button>\r\n"
+                },
+                {
+                    "date": 1635837079460,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -71,9 +71,9 @@\n                             <label for=\"description\">Description</label>\r\n \t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"description\">\r\n \r\n                             <br> \r\n-\t\t\t\t\t\t\t\t<input type = \"checkbox\" id = \"description\" onchange=\"checkchangecategory(this)\"> Same as category name<br>\r\n+\t\t\t\t\t\t\t\t<input type = \"checkbox\" onchange=\"checkchangecategory(this)\"> Same as category name<br>\r\n \t\t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t<div style = \"float:right;margin-bottom:20px;\">\r\n"
+                },
+                {
+                    "date": 1635837153040,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -404,5 +404,20 @@\n                    \r\n                 }\r\n             });\r\n }\r\n+function checkchangecategory(element)\r\n+\t{\r\n+\t\tvar mycategory = $(\"#initialcondition\").val();\r\n+\r\n+\t\tvar mycheck = element.checked;\r\n+\t\tif(mycheck)\r\n+\t\t{\r\n+\t\t\t$(\"#description\").val(mycategory);\r\n+\t\t}\r\n+\t\telse\r\n+\t\t{\r\n+\t\t\t$(\"#description\").val(\"\");\r\n+\t\t}\r\n+\t\t\r\n+\t}\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635837170808,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -406,9 +406,9 @@\n             });\r\n }\r\n function checkchangecategory(element)\r\n \t{\r\n-\t\tvar mycategory = $(\"#initialcondition\").val();\r\n+\t\tvar mycategory = $(\"#condition\").val();\r\n \r\n \t\tvar mycheck = element.checked;\r\n \t\tif(mycheck)\r\n \t\t{\r\n"
                 }
             ],
             "date": 1630465420399,

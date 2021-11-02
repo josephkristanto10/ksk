@@ -5,6 +5,7 @@ if($tipe == "load")
 {
 
     $where_like = [
+        'id',
         'nama',
         'subgroup',
         'category',
@@ -21,10 +22,10 @@ if($tipe == "load")
     $dir      = $response['order'][0]['dir'];
     $search   = $response['search']['value'];
     
-    $total_data = mysqli_query($conn, "select c.id, ka.id as idgroup , ks.id as idsubgroup, ka.nama as namagroup, ks.subgroup as namasubgroup, c.category , c.description as categorydesc, c.status, template.id as idtemplate, template.template from kategori_categorysubgroup c inner join kategori_asset ka on ka.id = c.idgroup inner join kategori_subgroup ks on ks.id = c.idsubgroup inner join template on template.id = c.idtemplate");
+    $total_data = mysqli_query($conn, "select c.id, ka.id as idgroup , ks.id as idsubgroup, ka.nama as namagroup, ks.subgroup as namasubgroup, c.category , c.description as categorydesc, c.status, template.id as idtemplate, template.template from kategori_categorysubgroup c inner join kategori_asset ka on ka.id = c.idgroup inner join kategori_subgroup ks on ks.id = c.idsubgroup inner join template on template.id = c.idtemplate order by c.id desc");
     
     if(empty($search)) {
-        $query_data = mysqli_query($conn, "select c.id, ka.id as idgroup , ks.id as idsubgroup, ka.nama as namagroup, ks.subgroup as namasubgroup, c.category , c.description as categorydesc, c.status, template.id as idtemplate, template.template from kategori_categorysubgroup c inner join kategori_asset ka on ka.id = c.idgroup inner join kategori_subgroup ks on ks.id = c.idsubgroup inner join template on template.id = c.idtemplate ORDER BY $order $dir LIMIT $start, $length");
+        $query_data = mysqli_query($conn, "select c.id, ka.id as idgroup , ks.id as idsubgroup, ka.nama as namagroup, ks.subgroup as namasubgroup, c.category , c.description as categorydesc, c.status, template.id as idtemplate, template.template from kategori_categorysubgroup c inner join kategori_asset ka on ka.id = c.idgroup inner join kategori_subgroup ks on ks.id = c.idsubgroup inner join template on template.id = c.idtemplate ORDER BY $order $dir, c.id desc LIMIT $start, $length");
     
         $total_filtered = mysqli_query($conn, "select c.id, ka.id as idgroup , ks.id as idsubgroup, ka.nama as namagroup, ks.subgroup as namasubgroup, c.category , c.description as categorydesc, c.status, template.id as idtemplate, template.template from kategori_categorysubgroup c inner join kategori_asset ka on ka.id = c.idgroup inner join kategori_subgroup ks on ks.id = c.idsubgroup inner join template on template.id = c.idtemplate");
     } else {
@@ -54,6 +55,7 @@ if($tipe == "load")
             }
             
             $response['data'][] = [
+                "<label id ='id".$row['id']."'>".$row['id']."</label>",
                 "<label id ='nama".$row['id']."'>".$row['namagroup']."</label>",
                 "<label id ='subgroup".$row['id']."'>".$row['namasubgroup']."</label>",
                 "<label id ='category".$row['id']."'>".$row['category']."</label>",
