@@ -104,6 +104,9 @@ $res = $conn->query($sql);
 							<br>
 							<label for="description">Description</label>
 							<input type="text" class="form-control" id="descriptionedit">
+                            <br> 
+								<input type = "checkbox"  onchange="checkchangecategoryedit(this)"> Same as group name<br>
+								
 							<br>
 							<label for="description">Assign To</label>
 							<br>
@@ -147,8 +150,17 @@ function adddata(){
             $("input:checkbox[class=cb]:checked").each(function(){
                 selected.push($(this).val());
             });
-
-            $.ajaxSetup({
+            if(group == "")
+            {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Empty Field',
+                    text: 'Requirement data cannot be empty',
+                    confirmButtonColor: '#e00d0d',
+                });
+            }
+            else{
+                $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
@@ -200,6 +212,9 @@ function adddata(){
                   
                 }
             });
+            }
+
+           
 }
 function loadData() {
       $("#datatable_serverside").DataTable({
@@ -272,51 +287,62 @@ function changedata(){
             $("input:checkbox[class=cbedit]:checked").each(function(){
                 selected.push($(this).val());
             });
-
-            $.ajaxSetup({
+            if(group == "")
+            {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Empty Field',
+                    text: 'Requirement data cannot be empty',
+                    confirmButtonColor: '#e00d0d',
+                });
+            }
+            else{
+                $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-            });
-            $.ajax({
-                url: "process/masterkategoriassetsprocess.php",
-                method: 'POST',
-                data: {
-                    tipe: "change",
-                    idchange : myid,
-                    descrip: description,
-                    mygroup : group,
-                    myselect : selected
-                    
-                },
-                success: function (result) {
-                    if(result == "sukses")
-                    {
-                        success();
-                        Swal.fire({
-                                title: 'Data Changed',
-                                text: 'Data Changed Successfully',
-                                icon: 'success',
-                                confirmButtonColor: '#53d408',
-                                allowOutsideClick: false,
-                            }).then((result) => {
-                                $("#myformedit").trigger("reset");
-                                $("#closemodaledit").click();
+                });
+                $.ajax({
+                    url: "process/masterkategoriassetsprocess.php",
+                    method: 'POST',
+                    data: {
+                        tipe: "change",
+                        idchange : myid,
+                        descrip: description,
+                        mygroup : group,
+                        myselect : selected
+                        
+                    },
+                    success: function (result) {
+                        if(result == "sukses")
+                        {
+                            success();
+                            Swal.fire({
+                                    title: 'Data Changed',
+                                    text: 'Data Changed Successfully',
+                                    icon: 'success',
+                                    confirmButtonColor: '#53d408',
+                                    allowOutsideClick: false,
+                                }).then((result) => {
+                                    $("#myformedit").trigger("reset");
+                                    $("#closemodaledit").click();
+                                });
+                        }
+                        else{
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Duplicated Group Name',
+                                text: 'Duplicate Entry For This Group',
+                                confirmButtonColor: '#e00d0d',
                             });
+                        }
+                    
+                    
+                    
                     }
-                    else{
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Duplicated Group Name',
-                            text: 'Duplicate Entry For This Group',
-                            confirmButtonColor: '#e00d0d',
-                        });
-                    }
-                   
-                  
-                  
-                }
-            });
+                });
+            }
+         
 }
 
 $(".cbedit").change(function() {
@@ -429,4 +455,21 @@ function checkchangecategory(element)
 		}
 		
 	}
+    function checkchangecategoryedit(element)
+	{
+		var mycategory = $("#groupedit").val();
+
+		var mycheck = element.checked;
+		if(mycheck)
+		{
+			$("#descriptionedit").val(mycategory);
+		}
+		else
+		{
+			$("#descriptionedit").val("");
+		}
+		
+	}
+
+    
 </script>

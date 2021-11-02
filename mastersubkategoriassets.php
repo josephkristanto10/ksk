@@ -194,8 +194,17 @@ $res2 = $conn->query($sql);
 	var group = $("#groupedit").val();
 	var subgroup = $("#subgroupedit").val();
 	var descriptiongroup = $("#descriptionedit").val();
-
-	$.ajaxSetup({
+	if(subgroup == "")
+	{
+		Swal.fire({
+                    icon: 'error',
+                    title: 'Empty Field',
+                    text: 'Requirement data cannot be empty',
+                    confirmButtonColor: '#e00d0d',
+                });
+	}
+	else {
+		$.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
@@ -240,6 +249,8 @@ $res2 = $conn->query($sql);
                   
                 }
             });
+	}
+
 
 	
    }
@@ -258,9 +269,19 @@ $res2 = $conn->query($sql);
 	var group = $("#groupadd").val();
     var subgroup = $('#subgroupadd').val();
     var description = $('#descriptionadd').val();
-           
-
-            $.ajaxSetup({
+    
+	if(subgroup == "")
+	{
+		Swal.fire({
+                    icon: 'error',
+                    title: 'Empty Field',
+                    text: 'Requirement data cannot be empty',
+                    confirmButtonColor: '#e00d0d',
+                });
+	}
+	else
+	{
+		$.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
@@ -303,6 +324,9 @@ $res2 = $conn->query($sql);
                   
                 }
             });
+	}
+
+          
 }
 
    //setinactive active

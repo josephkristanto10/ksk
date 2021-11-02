@@ -106,7 +106,9 @@ require_once 'layout/footer.php';
 							<br>
                             <label for="description">Description</label>
 							<input type="text" class="form-control" id="descriptionedit">
-							<br>
+                            <br> 
+								<input type = "checkbox" onchange="checkchangecategoryedit(this)"> Same as category name<br>
+							
 							<br>
 							<div style = "float:right;margin-bottom:20px;">
 							<button type="button" class="btn btn-primary" style = "margin-right:10px;" onclick="changedata()">Save</button>
@@ -176,12 +178,12 @@ $(function() {
 	 var changeid = $("#idchange").val();
 	 var changecondition = $("#conditionedit").val();
 	 var changedescription = $("#descriptionedit").val();
-	 if(changecondition == "" || changedescription == "")
+	 if(changecondition == "" )
 	 {
 						Swal.fire({
                             icon: 'error',
                             title: 'Empty Field',
-                            text: 'Condition / Description cannot be empty',
+                            text: 'Requirement data cannot be empty',
                             confirmButtonColor: '#e00d0d',
                         });
 	 }
@@ -236,12 +238,12 @@ $(function() {
    function adddata(){
 	var condition = $("#condition").val();
     var description = $('#description').val();
-    if(condition == "" || description == "")
+    if(condition == "" )
     {
                          Swal.fire({
                             icon: 'error',
                             title: 'Empty Field',
-                            text: 'Condition / Description cannot be empty',
+                            text: 'Requirement data cannot be empty',
                             confirmButtonColor: '#e00d0d',
                         });
     }
@@ -417,6 +419,21 @@ function checkchangecategory(element)
 		else
 		{
 			$("#description").val("");
+		}
+		
+	}
+    function checkchangecategoryedit(element)
+	{
+		var mycategory = $("#conditionedit").val();
+
+		var mycheck = element.checked;
+		if(mycheck)
+		{
+			$("#descriptionedit").val(mycategory);
+		}
+		else
+		{
+			$("#descriptionedit").val("");
 		}
 		
 	}

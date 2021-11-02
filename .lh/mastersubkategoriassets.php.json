@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 309,
+            "activePatchIndex": 314,
             "patches": [
                 {
                     "date": 1628248487932,
@@ -1244,6 +1244,26 @@
                 {
                     "date": 1635836665486,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -80,9 +80,9 @@\n \t\t\t\t\t\t\r\n \t\t\t\t\t\t<label for=\"description\">Description</label>\r\n     \t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"descriptionadd\">\r\n                         <br> \r\n-\t\t\t\t\t\t\t\t<input type = \"checkbox\" id = \"description\" onchange=\"checkchangecategory(this)\"> Same as category name<br>\r\n+\t\t\t\t\t\t\t\t<input type = \"checkbox\" id = \"description\" onchange=\"checkchangecategory(this)\"> Same as sub group name<br>\r\n \t\t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t</div>\r\n \t\t\t\t\t\t\t</form>\r\n \t\t\t\t\t</div>\r\n"
+                },
+                {
+                    "date": 1635844117750,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -257,9 +257,9 @@\n    function adddata(){\r\n \tvar group = $(\"#groupadd\").val();\r\n     var subgroup = $('#subgroupadd').val();\r\n     var description = $('#descriptionadd').val();\r\n-           \r\n+    \r\n \r\n             $.ajaxSetup({\r\n                 headers: {\r\n                     'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')\r\n"
+                },
+                {
+                    "date": 1635844124482,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -258,8 +258,12 @@\n \tvar group = $(\"#groupadd\").val();\r\n     var subgroup = $('#subgroupadd').val();\r\n     var description = $('#descriptionadd').val();\r\n     \r\n+\tif(subgroup == \"\")\r\n+\t{\r\n+\t\t\r\n+\t}\r\n \r\n             $.ajaxSetup({\r\n                 headers: {\r\n                     'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')\r\n"
+                },
+                {
+                    "date": 1635844131685,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -260,12 +260,13 @@\n     var description = $('#descriptionadd').val();\r\n     \r\n \tif(subgroup == \"\")\r\n \t{\r\n-\t\t\r\n+\r\n \t}\r\n-\r\n-            $.ajaxSetup({\r\n+\telse\r\n+\t{\r\n+\t\t$.ajaxSetup({\r\n                 headers: {\r\n                     'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')\r\n                 }\r\n             });\r\n@@ -306,8 +307,11 @@\n                   \r\n                   \r\n                 }\r\n             });\r\n+\t}\r\n+\r\n+          \r\n }\r\n \r\n    //setinactive active\r\n    function setstatus(setactionto){\r\n"
+                },
+                {
+                    "date": 1635844178498,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -260,9 +260,14 @@\n     var description = $('#descriptionadd').val();\r\n     \r\n \tif(subgroup == \"\")\r\n \t{\r\n-\r\n+\t\tSwal.fire({\r\n+                    icon: 'error',\r\n+                    title: 'Empty Field',\r\n+                    text: 'Requirement data cannot be empty',\r\n+                    confirmButtonColor: '#e00d0d',\r\n+                });\r\n \t}\r\n \telse\r\n \t{\r\n \t\t$.ajaxSetup({\r\n"
+                },
+                {
+                    "date": 1635844234500,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -193,10 +193,19 @@\n \tvar myid = $(\"#idchange\").val();\r\n \tvar group = $(\"#groupedit\").val();\r\n \tvar subgroup = $(\"#subgroupedit\").val();\r\n \tvar descriptiongroup = $(\"#descriptionedit\").val();\r\n-\r\n-\t$.ajaxSetup({\r\n+\tif(subgroup == \"\")\r\n+\t{\r\n+\t\tSwal.fire({\r\n+                    icon: 'error',\r\n+                    title: 'Empty Field',\r\n+                    text: 'Requirement data cannot be empty',\r\n+                    confirmButtonColor: '#e00d0d',\r\n+                });\r\n+\t}\r\n+\telse {\r\n+\t\t$.ajaxSetup({\r\n                 headers: {\r\n                     'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')\r\n                 }\r\n             });\r\n@@ -239,9 +248,11 @@\n                   \r\n                   \r\n                 }\r\n             });\r\n+\t}\r\n \r\n+\r\n \t\r\n    }\r\n    function openmodaledit(element){\r\n \tvar idelement = element.id.split(\"-\");\r\n"
                 }
             ],
             "date": 1628248487932,

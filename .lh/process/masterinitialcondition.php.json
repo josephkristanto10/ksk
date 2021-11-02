@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 21,
+            "activePatchIndex": 23,
             "patches": [
                 {
                     "date": 1630476128486,
@@ -92,6 +92,14 @@
                 {
                     "date": 1635827718606,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,10 +62,10 @@\n                 Set Active</a>'\";\r\n             }\r\n             \r\n             $response['data'][] = [\r\n+                \"<label id ='id\".$row['id'].\"'>\".$row['id'].\"</label>\",\r\n                 \"<label id ='name\".$row['id'].\"'>\".$row['initial_condition'].\"</label>\",\r\n-                \"<label id ='name\".$row['id'].\"'>\".$row['initial_condition'].\"</label>\",\r\n                 \"<label id ='description\".$row['id'].\"'>\".$row['description'].\"</label>\",\r\n                 \"<label id ='status\".$row['id'].\"'>\".$mystats.\"</label>\",\r\n                 ' <div class=\"list-icons\">\r\n                 <div class=\"dropdown\">\r\n"
+                },
+                {
+                    "date": 1635845916231,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -72,9 +72,9 @@\n                     <a href=\"#\" class=\"list-icons-item\" data-toggle=\"dropdown\">\r\n                         <i class=\"icon-menu9\"></i>\r\n                     </a>\r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n-                    <a href=\"#editModal\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodal(this)\"><i class=\"icon-check\"></i>\r\n+                    <a href=\"#editModal\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodaledit(this)\"><i class=\"icon-check\"></i>\r\n                         Edit</a>\r\n                     \r\n                     '.$myaction.'\r\n                \r\n"
+                },
+                {
+                    "date": 1635845940349,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -72,9 +72,9 @@\n                     <a href=\"#\" class=\"list-icons-item\" data-toggle=\"dropdown\">\r\n                         <i class=\"icon-menu9\"></i>\r\n                     </a>\r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n-                    <a href=\"#editModal\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodaledit(this)\"><i class=\"icon-check\"></i>\r\n+                    <a href=\"#myModaledit\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodaledit(this)\"><i class=\"icon-check\"></i>\r\n                         Edit</a>\r\n                     \r\n                     '.$myaction.'\r\n                \r\n"
                 }
             ],
             "date": 1630476128486,

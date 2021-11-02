@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 518,
+            "activePatchIndex": 534,
             "patches": [
                 {
                     "date": 1628517819558,
@@ -2080,6 +2080,70 @@
                 {
                     "date": 1635836743455,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -549,9 +549,9 @@\n \t\t\t$(\"#descriptionadd\").val(mycategory);\r\n \t\t}\r\n \t\telse\r\n \t\t{\r\n-\t\t\t$(\"#descriptionadd\").val(\"mycategory\");\r\n+\t\t\t$(\"#descriptionadd\").val(\"\");\r\n \t\t}\r\n \t\t\r\n \t}\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635844367635,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -183,9 +183,12 @@\n \t\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"categoryedit\">\r\n \t\t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t\t<label for=\"description\">Description</label>\r\n \t\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"descriptionedit\">\r\n+\t\t\t\t\t\t\t\t<br> \r\n+\t\t\t\t\t\t\t\t<input type = \"checkbox\" id = \"description\" onchange=\"checkchangecategory(this)\"> Same as category name<br>\r\n \t\t\t\t\t\t\t\t<br>\r\n+\t\t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t\t<label for=\"cars\">Template :</label>\r\n \t\t\t\t\t\t\t\t<select id=\"templateedit\" name=\"templateedit\" class=\"form-control\">\r\n \t\t\t\t\t\t\t\t\t<?php\r\n \t\t\t\t\t\t\t\t\t\tif(count($mytemplate)>0)\r\n"
+                },
+                {
+                    "date": 1635844381313,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -184,11 +184,11 @@\n \t\t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t\t<label for=\"description\">Description</label>\r\n \t\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"descriptionedit\">\r\n \t\t\t\t\t\t\t\t<br> \r\n-\t\t\t\t\t\t\t\t<input type = \"checkbox\" id = \"description\" onchange=\"checkchangecategory(this)\"> Same as category name<br>\r\n+\t\t\t\t\t\t\t\t<input type = \"checkbox\" id = \"description\" onchange=\"checkchangecategoryedit(this)\"> Same as category name<br>\r\n+\t\t\t\t\t\t\t\t\r\n \t\t\t\t\t\t\t\t<br>\r\n-\t\t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t\t<label for=\"cars\">Template :</label>\r\n \t\t\t\t\t\t\t\t<select id=\"templateedit\" name=\"templateedit\" class=\"form-control\">\r\n \t\t\t\t\t\t\t\t\t<?php\r\n \t\t\t\t\t\t\t\t\t\tif(count($mytemplate)>0)\r\n@@ -556,5 +556,20 @@\n \t\t\t$(\"#descriptionadd\").val(\"\");\r\n \t\t}\r\n \t\t\r\n \t}\r\n+\tfunction checkchangecategory(element)\r\n+\t{\r\n+\t\tvar mycategory = $(\"#category\").val();\r\n+\r\n+\t\tvar mycheck = element.checked;\r\n+\t\tif(mycheck)\r\n+\t\t{\r\n+\t\t\t$(\"#descriptionadd\").val(mycategory);\r\n+\t\t}\r\n+\t\telse\r\n+\t\t{\r\n+\t\t\t$(\"#descriptionadd\").val(\"\");\r\n+\t\t}\r\n+\t\t\r\n+\t}\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635844387402,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -558,14 +558,14 @@\n \t\t\r\n \t}\r\n \tfunction checkchangecategory(element)\r\n \t{\r\n-\t\tvar mycategory = $(\"#category\").val();\r\n+\t\tvar mycategory = $(\"#categoryedit\").val();\r\n \r\n \t\tvar mycheck = element.checked;\r\n \t\tif(mycheck)\r\n \t\t{\r\n-\t\t\t$(\"#descriptionadd\").val(mycategory);\r\n+\t\t\t$(\"#descriptionedikt\").val(mycategory);\r\n \t\t}\r\n \t\telse\r\n \t\t{\r\n \t\t\t$(\"#descriptionadd\").val(\"\");\r\n"
+                },
+                {
+                    "date": 1635844416470,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -556,20 +556,20 @@\n \t\t\t$(\"#descriptionadd\").val(\"\");\r\n \t\t}\r\n \t\t\r\n \t}\r\n-\tfunction checkchangecategory(element)\r\n+\tfunction checkchangecategoryedit(element)\r\n \t{\r\n \t\tvar mycategory = $(\"#categoryedit\").val();\r\n \r\n \t\tvar mycheck = element.checked;\r\n \t\tif(mycheck)\r\n \t\t{\r\n-\t\t\t$(\"#descriptionedikt\").val(mycategory);\r\n+\t\t\t$(\"#descriptionedit\").val(mycategory);\r\n \t\t}\r\n \t\telse\r\n \t\t{\r\n-\t\t\t$(\"#descriptionadd\").val(\"\");\r\n+\t\t\t$(\"#descriptionedit\").val(\"\");\r\n \t\t}\r\n \t\t\r\n \t}\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635844475575,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -354,14 +354,13 @@\n \t\tvar changecategory = $(\"#categoryedit\").val();\r\n \t\tvar changegroup = $(\"#groupedit\").val();\r\n \t\tvar changesubgroup = $(\"#subgroupedit\").val();\r\n \t\tvar changetemplate = $(\"#templateedit\").val();\r\n-\t\tvar changedescription = $('#descriptionedit').val();\r\n-\t\tif (changecategory == \"\" || changesubgroup == null || changedescription == \"\") {\r\n+\t\tif (changecategory == \"\" || changesubgroup == null ) {\r\n \t\t\tSwal.fire({\r\n \t\t\t\ticon: 'error',\r\n \t\t\t\ttitle: 'Empty Field',\r\n-\t\t\t\ttext: 'Group / Subgroup / Category / Description Is Empy',\r\n+\t\t\t\ttext: 'Requirement data cannot be empty',,\r\n \t\t\t\tconfirmButtonColor: '#e00d0d',\r\n \t\t\t});\r\n \t\t} else {\r\n \t\t\t$.ajaxSetup({\r\n"
+                },
+                {
+                    "date": 1635844510251,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -420,9 +420,9 @@\n \t\tif (mycat == \"\" || mysubgroup == null) {\r\n \t\t\tSwal.fire({\r\n \t\t\t\ticon: 'error',\r\n \t\t\t\ttitle: 'Empty Field',\r\n-\t\t\t\ttext: 'Group / Category Is Empy',\r\n+\t\t\t\ttext: 'Requirement data cannot be empty',\r\n \t\t\t\tconfirmButtonColor: '#e00d0d',\r\n \t\t\t});\r\n \t\t} else {\r\n \r\n"
+                },
+                {
+                    "date": 1635844545121,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -358,9 +358,9 @@\n \t\tif (changecategory == \"\" || changesubgroup == null ) {\r\n \t\t\tSwal.fire({\r\n \t\t\t\ticon: 'error',\r\n \t\t\t\ttitle: 'Empty Field',\r\n-\t\t\t\ttext: 'Requirement data cannot be empty',,\r\n+\t\t\t\ttext: 'Requirement data cannot be empty',\r\n \t\t\t\tconfirmButtonColor: '#e00d0d',\r\n \t\t\t});\r\n \t\t} else {\r\n \t\t\t$.ajaxSetup({\r\n"
+                },
+                {
+                    "date": 1635844720845,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -503,8 +503,9 @@\n \t\t\t\t\t\t\t$('#subgroupedit').find('option[value=\"' + globalid + '\"]').prop(\r\n \t\t\t\t\t\t\t\t'selected', true);\r\n \t\t\t\t\t\t}\r\n \t\t\t\t\t});\r\n+\t\t\t\t\t$(\"#subgroupedit\")\r\n \t\t\t\t}\r\n \r\n \r\n \r\n"
+                },
+                {
+                    "date": 1635844759092,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -496,16 +496,16 @@\n \t\t\t\t\t// $(\"#subgroupedit\").prop(\"disabled\", true);\r\n \r\n \t\t\t\t} else {\r\n \t\t\t\t\t$(\"#subgroupedit\").html(result).promise().done(function () {\r\n-\r\n+\t\t\t\t\t\talert(globalid);\r\n \t\t\t\t\t\tif (!globalid == \"\") {\r\n \t\t\t\t\t\t\t// alert(globalid);\r\n \t\t\t\t\t\t\t$('#subgroupedit').find('option[value=\"' + globalid + '\"]').prop(\r\n \t\t\t\t\t\t\t\t'selected', true);\r\n \t\t\t\t\t\t}\r\n \t\t\t\t\t});\r\n-\t\t\t\t\t$(\"#subgroupedit\")\r\n+\t\t\t\t\t$(\"#subgroupedit\").trigger(\"change\");\r\n \t\t\t\t}\r\n \r\n \r\n \r\n"
+                },
+                {
+                    "date": 1635844833160,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -496,9 +496,9 @@\n \t\t\t\t\t// $(\"#subgroupedit\").prop(\"disabled\", true);\r\n \r\n \t\t\t\t} else {\r\n \t\t\t\t\t$(\"#subgroupedit\").html(result).promise().done(function () {\r\n-\t\t\t\t\t\talert(globalid);\r\n+\t\t\t\t\t\t// alert(globalid);\r\n \t\t\t\t\t\tif (!globalid == \"\") {\r\n \t\t\t\t\t\t\t// alert(globalid);\r\n \t\t\t\t\t\t\t$('#subgroupedit').find('option[value=\"' + globalid + '\"]').prop(\r\n \t\t\t\t\t\t\t\t'selected', true);\r\n"
+                },
+                {
+                    "date": 1635844863557,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -337,8 +337,9 @@\n \r\n \t\tvar namagrup = $(\"#nama\" + idelement[1]).text();\r\n \t\tvar subgruop = $(\"#subgroup\" + idelement[1]).text();\r\n \t\tglobalid = idelement[3];\r\n+\t\talert(globalid);\r\n \t\tvar category = $(\"#category\" + idelement[1]).text();\r\n \t\tvar descgruop = $(\"#description\" + idelement[1]).text();\r\n \t\tvar selectgroup = $('#groupedit option[value=' + idelement[2] + ']').prop('selected', true);\r\n \t\tvar templateselect = $('#templateedit option[value=' + idelement[4] + ']').prop('selected', true);\r\n"
+                },
+                {
+                    "date": 1635844962836,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -476,8 +476,9 @@\n \t}\r\n \t//    function changegroupedit(myid)\r\n \t$(\"#groupedit\").on('change', function () {\r\n \t\tvar myid = this.value;\r\n+\t\talert(myid);\r\n \t\t$.ajaxSetup({\r\n \t\t\theaders: {\r\n \t\t\t\t'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')\r\n \t\t\t}\r\n"
+                },
+                {
+                    "date": 1635844973055,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -476,9 +476,9 @@\n \t}\r\n \t//    function changegroupedit(myid)\r\n \t$(\"#groupedit\").on('change', function () {\r\n \t\tvar myid = this.value;\r\n-\t\talert(myid);\r\n+\t\talert(\"test\"+ myid);\r\n \t\t$.ajaxSetup({\r\n \t\t\theaders: {\r\n \t\t\t\t'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')\r\n \t\t\t}\r\n"
+                },
+                {
+                    "date": 1635844987056,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -476,9 +476,9 @@\n \t}\r\n \t//    function changegroupedit(myid)\r\n \t$(\"#groupedit\").on('change', function () {\r\n \t\tvar myid = this.value;\r\n-\t\talert(\"test\"+ myid);\r\n+\t\r\n \t\t$.ajaxSetup({\r\n \t\t\theaders: {\r\n \t\t\t\t'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')\r\n \t\t\t}\r\n"
+                },
+                {
+                    "date": 1635845678114,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -537,11 +537,11 @@\n \t\t\t\t} else {\r\n \t\t\t\t\t$(\"#subgroup\").html(result);\r\n \t\t\t\t\t$('#subgroup').removeAttr('disabled')\r\n \t\t\t\t}\r\n+\t\t\t\t$('#subgroup')\r\n \r\n \r\n-\r\n \t\t\t}\r\n \t\t});\r\n \t}).trigger('change');\r\n \tfunction checkchangecategory(element)\r\n"
+                },
+                {
+                    "date": 1635845683778,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -537,9 +537,9 @@\n \t\t\t\t} else {\r\n \t\t\t\t\t$(\"#subgroup\").html(result);\r\n \t\t\t\t\t$('#subgroup').removeAttr('disabled')\r\n \t\t\t\t}\r\n-\t\t\t\t$('#subgroup')\r\n+\t\t\t\t$('#subgroup').trigger(\"change\");\r\n \r\n \r\n \t\t\t}\r\n \t\t});\r\n"
                 }
             ],
             "date": 1628517819558,

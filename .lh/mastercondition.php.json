@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 80,
+            "activePatchIndex": 89,
             "patches": [
                 {
                     "date": 1630465420399,
@@ -328,6 +328,42 @@
                 {
                     "date": 1635837170808,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -406,9 +406,9 @@\n             });\r\n }\r\n function checkchangecategory(element)\r\n \t{\r\n-\t\tvar mycategory = $(\"#initialcondition\").val();\r\n+\t\tvar mycategory = $(\"#condition\").val();\r\n \r\n \t\tvar mycheck = element.checked;\r\n \t\tif(mycheck)\r\n \t\t{\r\n"
+                },
+                {
+                    "date": 1635846194101,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -105,10 +105,14 @@\n \t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"conditionedit\">\r\n \t\t\t\t\t\t\t<br>\r\n                             <label for=\"description\">Description</label>\r\n \t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"descriptionedit\">\r\n+                            <br> \r\n+\t\t\t\t\t\t\t\t<input type = \"checkbox\" onchange=\"checkchangecategory(this)\"> Same as category name<br>\r\n+\t\t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t<br>\r\n+\t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t<div style = \"float:right;margin-bottom:20px;\">\r\n \t\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-primary\" style = \"margin-right:10px;\" onclick=\"changedata()\">Save</button>\r\n \t\t\t\t\t\t<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\" id = \"canceledit\">Cancel</button>\r\n \t\t\t\t\t\t\t</div>\r\n"
+                },
+                {
+                    "date": 1635846199174,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -107,12 +107,10 @@\n                             <label for=\"description\">Description</label>\r\n \t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"descriptionedit\">\r\n                             <br> \r\n \t\t\t\t\t\t\t\t<input type = \"checkbox\" onchange=\"checkchangecategory(this)\"> Same as category name<br>\r\n-\t\t\t\t\t\t\t\t<br>\r\n+\t\t\t\t\t\t\t\r\n \t\t\t\t\t\t\t<br>\r\n-\t\t\t\t\t\t\t<br>\r\n-\t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t<div style = \"float:right;margin-bottom:20px;\">\r\n \t\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-primary\" style = \"margin-right:10px;\" onclick=\"changedata()\">Save</button>\r\n \t\t\t\t\t\t<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\" id = \"canceledit\">Cancel</button>\r\n \t\t\t\t\t\t\t</div>\r\n"
+                },
+                {
+                    "date": 1635846204715,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -106,9 +106,9 @@\n \t\t\t\t\t\t\t<br>\r\n                             <label for=\"description\">Description</label>\r\n \t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"descriptionedit\">\r\n                             <br> \r\n-\t\t\t\t\t\t\t\t<input type = \"checkbox\" onchange=\"checkchangecategory(this)\"> Same as category name<br>\r\n+\t\t\t\t\t\t\t\t<input type = \"checkbox\" onchange=\"checkchangecategoryedit(this)\"> Same as category name<br>\r\n \t\t\t\t\t\t\t\r\n \t\t\t\t\t\t\t<br>\r\n \t\t\t\t\t\t\t<div style = \"float:right;margin-bottom:20px;\">\r\n \t\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-primary\" style = \"margin-right:10px;\" onclick=\"changedata()\">Save</button>\r\n"
+                },
+                {
+                    "date": 1635846210516,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -421,5 +421,20 @@\n \t\t\t$(\"#description\").val(\"\");\r\n \t\t}\r\n \t\t\r\n \t}\r\n+    function checkchangecategory(element)\r\n+\t{\r\n+\t\tvar mycategory = $(\"#condition\").val();\r\n+\r\n+\t\tvar mycheck = element.checked;\r\n+\t\tif(mycheck)\r\n+\t\t{\r\n+\t\t\t$(\"#description\").val(mycategory);\r\n+\t\t}\r\n+\t\telse\r\n+\t\t{\r\n+\t\t\t$(\"#description\").val(\"\");\r\n+\t\t}\r\n+\t\t\r\n+\t}\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635846216040,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -421,11 +421,11 @@\n \t\t\t$(\"#description\").val(\"\");\r\n \t\t}\r\n \t\t\r\n \t}\r\n-    function checkchangecategory(element)\r\n+    function checkchangecategoryedit(element)\r\n \t{\r\n-\t\tvar mycategory = $(\"#condition\").val();\r\n+\t\tvar mycategory = $(\"#conditionedit\").val();\r\n \r\n \t\tvar mycheck = element.checked;\r\n \t\tif(mycheck)\r\n \t\t{\r\n"
+                },
+                {
+                    "date": 1635846221700,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -428,13 +428,13 @@\n \r\n \t\tvar mycheck = element.checked;\r\n \t\tif(mycheck)\r\n \t\t{\r\n-\t\t\t$(\"#description\").val(mycategory);\r\n+\t\t\t$(\"#descriptionedit\").val(mycategory);\r\n \t\t}\r\n \t\telse\r\n \t\t{\r\n-\t\t\t$(\"#description\").val(\"\");\r\n+\t\t\t$(\"#descriptionedit\").val(\"\");\r\n \t\t}\r\n \t\t\r\n \t}\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635846238805,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -177,9 +177,9 @@\n    function changedata(){\r\n \t var changeid = $(\"#idchange\").val();\r\n \t var changecondition = $(\"#conditionedit\").val();\r\n \t var changedescription = $(\"#descriptionedit\").val();\r\n-\t if(changecondition == \"\" || changedescription == \"\")\r\n+\t if(changecondition == \"\" )\r\n \t {\r\n \t\t\t\t\t\tSwal.fire({\r\n                             icon: 'error',\r\n                             title: 'Empty Field',\r\n"
+                },
+                {
+                    "date": 1635846243937,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -182,9 +182,9 @@\n \t {\r\n \t\t\t\t\t\tSwal.fire({\r\n                             icon: 'error',\r\n                             title: 'Empty Field',\r\n-                            text: 'Condition / Description cannot be empty',\r\n+                            text: 'Requirement data cannot be empty',\r\n                             confirmButtonColor: '#e00d0d',\r\n                         });\r\n \t }\r\n \t else{\r\n"
+                },
+                {
+                    "date": 1635846256451,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -237,14 +237,14 @@\n    }\r\n    function adddata(){\r\n \tvar condition = $(\"#condition\").val();\r\n     var description = $('#description').val();\r\n-    if(condition == \"\" || description == \"\")\r\n+    if(condition == \"\" )\r\n     {\r\n                          Swal.fire({\r\n                             icon: 'error',\r\n                             title: 'Empty Field',\r\n-                            text: 'Condition / Description cannot be empty',\r\n+                            text: 'Requirement data cannot be empty',\r\n                             confirmButtonColor: '#e00d0d',\r\n                         });\r\n     }\r\n     else{\r\n"
                 }
             ],
             "date": 1630465420399,

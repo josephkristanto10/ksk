@@ -73,7 +73,7 @@ if($tipe == "load")
                         <i class="icon-menu9"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                    <a href="#editModal" data-toggle="modal" class="dropdown-item" id ="click-'.$row['id'].'"  onclick = "openmodal(this)"><i class="icon-check"></i>
+                    <a href="#myModaledit" data-toggle="modal" class="dropdown-item" id ="click-'.$row['id'].'"  onclick = "openmodaledit(this)"><i class="icon-check"></i>
                         Edit</a>
                     
                     '.$myaction.'

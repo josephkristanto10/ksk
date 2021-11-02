@@ -184,6 +184,9 @@ if($restemplate->num_rows>0)
 								<br>
 								<label for="description">Description</label>
 								<input type="text" class="form-control" id="descriptionedit">
+								<br> 
+								<input type = "checkbox" id = "description" onchange="checkchangecategoryedit(this)"> Same as category name<br>
+								
 								<br>
 								<label for="cars">Template :</label>
 								<select id="templateedit" name="templateedit" class="form-control">
@@ -335,6 +338,7 @@ if($restemplate->num_rows>0)
 		var namagrup = $("#nama" + idelement[1]).text();
 		var subgruop = $("#subgroup" + idelement[1]).text();
 		globalid = idelement[3];
+		alert(globalid);
 		var category = $("#category" + idelement[1]).text();
 		var descgruop = $("#description" + idelement[1]).text();
 		var selectgroup = $('#groupedit option[value=' + idelement[2] + ']').prop('selected', true);
@@ -352,12 +356,11 @@ if($restemplate->num_rows>0)
 		var changegroup = $("#groupedit").val();
 		var changesubgroup = $("#subgroupedit").val();
 		var changetemplate = $("#templateedit").val();
-		var changedescription = $('#descriptionedit').val();
-		if (changecategory == "" || changesubgroup == null || changedescription == "") {
+		if (changecategory == "" || changesubgroup == null ) {
 			Swal.fire({
 				icon: 'error',
 				title: 'Empty Field',
-				text: 'Group / Subgroup / Category / Description Is Empy',
+				text: 'Requirement data cannot be empty',
 				confirmButtonColor: '#e00d0d',
 			});
 		} else {
@@ -419,7 +422,7 @@ if($restemplate->num_rows>0)
 			Swal.fire({
 				icon: 'error',
 				title: 'Empty Field',
-				text: 'Group / Category Is Empy',
+				text: 'Requirement data cannot be empty',
 				confirmButtonColor: '#e00d0d',
 			});
 		} else {
@@ -474,6 +477,7 @@ if($restemplate->num_rows>0)
 	//    function changegroupedit(myid)
 	$("#groupedit").on('change', function () {
 		var myid = this.value;
+	
 		$.ajaxSetup({
 			headers: {
 				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -495,13 +499,14 @@ if($restemplate->num_rows>0)
 
 				} else {
 					$("#subgroupedit").html(result).promise().done(function () {
-
+						// alert(globalid);
 						if (!globalid == "") {
 							// alert(globalid);
 							$('#subgroupedit').find('option[value="' + globalid + '"]').prop(
 								'selected', true);
 						}
 					});
+					$("#subgroupedit").trigger("change");
 				}
 
 
@@ -533,7 +538,7 @@ if($restemplate->num_rows>0)
 					$("#subgroup").html(result);
 					$('#subgroup').removeAttr('disabled')
 				}
-
+				$('#subgroup').trigger("change");
 
 
 			}
@@ -551,6 +556,21 @@ if($restemplate->num_rows>0)
 		else
 		{
 			$("#descriptionadd").val("");
+		}
+		
+	}
+	function checkchangecategoryedit(element)
+	{
+		var mycategory = $("#categoryedit").val();
+
+		var mycheck = element.checked;
+		if(mycheck)
+		{
+			$("#descriptionedit").val(mycategory);
+		}
+		else
+		{
+			$("#descriptionedit").val("");
 		}
 		
 	}

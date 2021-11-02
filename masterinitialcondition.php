@@ -80,7 +80,7 @@ if($res->num_rows>0)
                             <label for="description">Description</label>
 							<input type="text" class="form-control" id="description">
                             <br> 
-								<input type = "checkbox"  onchange="checkchangecategory(this)"> Same as category name<br>
+								<input type = "checkbox"  onchange="checkchangecategory(this)"> Same as initial condition name<br>
 								<br>
 							<br>
 							<br>
@@ -114,6 +114,10 @@ if($res->num_rows>0)
 							<br>
                             <label for="description">Description</label>
 							<input type="text" class="form-control" id="descriptionedit">
+                            <br> 
+								<input type = "checkbox"  onchange="checkchangecategoryedit(this)"> Same as initial condition name<br>
+								<br>
+							<br>
 							<br>
 							<br>
 							<div style = "float:right;margin-bottom:20px;">
@@ -185,12 +189,12 @@ $(function() {
 	 var changeid = $("#idchange").val();
 	 var changeinitial = $("#initialconditionedit").val();
 	 var changedescription = $("#descriptionedit").val();
-	 if(changeinitial == "" || changedescription == "" )
+	 if(changeinitial == "" )
 	 {
 						Swal.fire({
                             icon: 'error',
                             title: 'Empty Field',
-                            text: 'Initial Condition / Description cannot be empty',
+                            text: 'Requirement data cannot be empty',
                             confirmButtonColor: '#e00d0d',
                         });
 	 }
@@ -244,12 +248,12 @@ $(function() {
    function adddata(){
 	var initialcondition = $("#initialcondition").val();
     var description = $('#description').val();
-    if(initialcondition == "" || description == "")
+    if(initialcondition == "" )
     {
                          Swal.fire({
                             icon: 'error',
                             title: 'Empty Field',
-                            text: 'Province / City tidak boleh kosong',
+                            text: 'Requirement data cannot be empty',
                             confirmButtonColor: '#e00d0d',
                         });
     }
@@ -428,4 +432,20 @@ function checkchangecategory(element)
 		}
 		
 	}
+    function checkchangecategoryedit(element)
+	{
+		var mycategory = $("#initialconditionedit").val();
+
+		var mycheck = element.checked;
+		if(mycheck)
+		{
+			$("#descriptionedit").val(mycategory);
+		}
+		else
+		{
+			$("#descriptionedit").val("");
+		}
+		
+	}
+    
 </script>
