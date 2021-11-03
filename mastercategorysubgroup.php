@@ -338,7 +338,7 @@ if($restemplate->num_rows>0)
 		var namagrup = $("#nama" + idelement[1]).text();
 		var subgruop = $("#subgroup" + idelement[1]).text();
 		globalid = idelement[3];
-		alert(globalid);
+		// alert(globalid);
 		var category = $("#category" + idelement[1]).text();
 		var descgruop = $("#description" + idelement[1]).text();
 		var selectgroup = $('#groupedit option[value=' + idelement[2] + ']').prop('selected', true);
@@ -356,6 +356,7 @@ if($restemplate->num_rows>0)
 		var changegroup = $("#groupedit").val();
 		var changesubgroup = $("#subgroupedit").val();
 		var changetemplate = $("#templateedit").val();
+		var changedescription = $("#descriptionedit").val();
 		if (changecategory == "" || changesubgroup == null ) {
 			Swal.fire({
 				icon: 'error',

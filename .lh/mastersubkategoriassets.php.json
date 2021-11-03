@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 314,
+            "activePatchIndex": 317,
             "patches": [
                 {
                     "date": 1628248487932,
@@ -1264,6 +1264,18 @@
                 {
                     "date": 1635844234500,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -193,10 +193,19 @@\n \tvar myid = $(\"#idchange\").val();\r\n \tvar group = $(\"#groupedit\").val();\r\n \tvar subgroup = $(\"#subgroupedit\").val();\r\n \tvar descriptiongroup = $(\"#descriptionedit\").val();\r\n-\r\n-\t$.ajaxSetup({\r\n+\tif(subgroup == \"\")\r\n+\t{\r\n+\t\tSwal.fire({\r\n+                    icon: 'error',\r\n+                    title: 'Empty Field',\r\n+                    text: 'Requirement data cannot be empty',\r\n+                    confirmButtonColor: '#e00d0d',\r\n+                });\r\n+\t}\r\n+\telse {\r\n+\t\t$.ajaxSetup({\r\n                 headers: {\r\n                     'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')\r\n                 }\r\n             });\r\n@@ -239,9 +248,11 @@\n                   \r\n                   \r\n                 }\r\n             });\r\n+\t}\r\n \r\n+\r\n \t\r\n    }\r\n    function openmodaledit(element){\r\n \tvar idelement = element.id.split(\"-\");\r\n"
+                },
+                {
+                    "date": 1635911853053,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -220,9 +220,9 @@\n                     mysubgroup : subgroup\r\n                     \r\n                 },\r\n                 success: function (result) {\r\n-\t\t\t\t\talert(result);\r\n+\t\t\t\t\r\n                     if(result == \"sukses\")\r\n                     {\r\n                         success();\r\n                         Swal.fire({\r\n"
+                },
+                {
+                    "date": 1635912279415,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -176,9 +176,9 @@\n          columns: [\r\n             { name: 'Id', searchable: false, className: 'text-center align-middle' },\r\n             { name: 'Group', searchable: false, className: 'text-center align-middle' },\r\n             { name: 'SubGroup', searchable: false, className: 'text-center align-middle' },\r\n-            { name: 'Description', className: 'text-center align-middle' },\r\n+            { name: 'subgroupdesc', className: 'text-center align-middle' },\r\n             { name: 'Status', className: 'text-center align-middle' },\r\n             { name: 'Action', searchable: false, orderable: false, className: 'text-center align-middle' }\r\n             \r\n          ]\r\n"
+                },
+                {
+                    "date": 1635912288383,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -176,9 +176,9 @@\n          columns: [\r\n             { name: 'Id', searchable: false, className: 'text-center align-middle' },\r\n             { name: 'Group', searchable: false, className: 'text-center align-middle' },\r\n             { name: 'SubGroup', searchable: false, className: 'text-center align-middle' },\r\n-            { name: 'subgroupdesc', className: 'text-center align-middle' },\r\n+            { name: 'Description', className: 'text-center align-middle' },\r\n             { name: 'Status', className: 'text-center align-middle' },\r\n             { name: 'Action', searchable: false, orderable: false, className: 'text-center align-middle' }\r\n             \r\n          ]\r\n"
                 }
             ],
             "date": 1628248487932,

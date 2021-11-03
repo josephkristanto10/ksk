@@ -221,7 +221,7 @@ $res2 = $conn->query($sql);
                     
                 },
                 success: function (result) {
-					alert(result);
+				
                     if(result == "sukses")
                     {
                         success();

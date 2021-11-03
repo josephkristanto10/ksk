@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 534,
+            "activePatchIndex": 537,
             "patches": [
                 {
                     "date": 1628517819558,
@@ -2144,6 +2144,18 @@
                 {
                     "date": 1635845683778,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -537,9 +537,9 @@\n \t\t\t\t} else {\r\n \t\t\t\t\t$(\"#subgroup\").html(result);\r\n \t\t\t\t\t$('#subgroup').removeAttr('disabled')\r\n \t\t\t\t}\r\n-\t\t\t\t$('#subgroup')\r\n+\t\t\t\t$('#subgroup').trigger(\"change\");\r\n \r\n \r\n \t\t\t}\r\n \t\t});\r\n"
+                },
+                {
+                    "date": 1635914107259,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -337,9 +337,9 @@\n \r\n \t\tvar namagrup = $(\"#nama\" + idelement[1]).text();\r\n \t\tvar subgruop = $(\"#subgroup\" + idelement[1]).text();\r\n \t\tglobalid = idelement[3];\r\n-\t\talert(globalid);\r\n+\t\t// alert(globalid);\r\n \t\tvar category = $(\"#category\" + idelement[1]).text();\r\n \t\tvar descgruop = $(\"#description\" + idelement[1]).text();\r\n \t\tvar selectgroup = $('#groupedit option[value=' + idelement[2] + ']').prop('selected', true);\r\n \t\tvar templateselect = $('#templateedit option[value=' + idelement[4] + ']').prop('selected', true);\r\n"
+                },
+                {
+                    "date": 1635914177832,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -355,8 +355,9 @@\n \t\tvar changecategory = $(\"#categoryedit\").val();\r\n \t\tvar changegroup = $(\"#groupedit\").val();\r\n \t\tvar changesubgroup = $(\"#subgroupedit\").val();\r\n \t\tvar changetemplate = $(\"#templateedit\").val();\r\n+\t\tvar changetemplate = $(\"#descriptionedit\").val();\r\n \t\tif (changecategory == \"\" || changesubgroup == null ) {\r\n \t\t\tSwal.fire({\r\n \t\t\t\ticon: 'error',\r\n \t\t\t\ttitle: 'Empty Field',\r\n"
+                },
+                {
+                    "date": 1635914183664,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -355,9 +355,9 @@\n \t\tvar changecategory = $(\"#categoryedit\").val();\r\n \t\tvar changegroup = $(\"#groupedit\").val();\r\n \t\tvar changesubgroup = $(\"#subgroupedit\").val();\r\n \t\tvar changetemplate = $(\"#templateedit\").val();\r\n-\t\tvar changetemplate = $(\"#descriptionedit\").val();\r\n+\t\tvar changedescription = $(\"#descriptionedit\").val();\r\n \t\tif (changecategory == \"\" || changesubgroup == null ) {\r\n \t\t\tSwal.fire({\r\n \t\t\t\ticon: 'error',\r\n \t\t\t\ttitle: 'Empty Field',\r\n"
                 }
             ],
             "date": 1628517819558,

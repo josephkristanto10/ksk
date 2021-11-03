@@ -8,7 +8,7 @@ if($tipe == "load")
         'idsubgroup',
         'nama',
         'subgroup',
-        'description',
+        'subgroupdesc',
         'status'
         
     ];
