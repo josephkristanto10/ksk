@@ -1,0 +1,402 @@
+{
+    "sourceFile": "process/delete.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 96,
+            "patches": [
+                {
+                    "date": 1635928380122,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1635928403620,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,8 @@\n <?php\r\n-\r\n+session_start();\r\n+require '../connection.php';\r\n+$tipe = $_POST['tipe'];\r\n+if($tipe == \"\"){\r\n+    \r\n+}\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928410758,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n <?php\r\n session_start();\r\n require '../connection.php';\r\n $tipe = $_POST['tipe'];\r\n-if($tipe == \"\"){\r\n-    \r\n+if($tipe == \"group\"){\r\n+\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928418638,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,7 +2,7 @@\n session_start();\r\n require '../connection.php';\r\n $tipe = $_POST['tipe'];\r\n if($tipe == \"group\"){\r\n-\r\n+    $sql = \"\";\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928481495,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,7 +2,7 @@\n session_start();\r\n require '../connection.php';\r\n $tipe = $_POST['tipe'];\r\n if($tipe == \"group\"){\r\n-    $sql = \"\";\r\n+    $sql = \"select * from \";\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928494677,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,7 +2,7 @@\n session_start();\r\n require '../connection.php';\r\n $tipe = $_POST['tipe'];\r\n if($tipe == \"group\"){\r\n-    $sql = \"select * from \";\r\n+    $sql = \"select * from kategori_subgroup\";\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928513561,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,7 +2,8 @@\n session_start();\r\n require '../connection.php';\r\n $tipe = $_POST['tipe'];\r\n if($tipe == \"group\"){\r\n-    $sql = \"select * from kategori_subgroup\";\r\n+    $id = $_POST['id'];\r\n+    $sql = \"select * from kategori_subgroup where \";\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928533822,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,8 @@\n session_start();\r\n require '../connection.php';\r\n $tipe = $_POST['tipe'];\r\n if($tipe == \"group\"){\r\n-    $id = $_POST['id'];\r\n-    $sql = \"select * from kategori_subgroup where \";\r\n+    $id = $_POST['idgroup'];\r\n+    $sql = \"select count() from kategori_subgroup where \";\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928546348,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,7 @@\n require '../connection.php';\r\n $tipe = $_POST['tipe'];\r\n if($tipe == \"group\"){\r\n     $id = $_POST['idgroup'];\r\n-    $sql = \"select count() from kategori_subgroup where \";\r\n+    $sql = \"select count(id) from kategori_subgroup where \";\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928562743,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,7 @@\n require '../connection.php';\r\n $tipe = $_POST['tipe'];\r\n if($tipe == \"group\"){\r\n     $id = $_POST['idgroup'];\r\n-    $sql = \"select count(id) from kategori_subgroup where \";\r\n+    $sql = \"select count(id) from kategori_subgroup where idkategoriasset =''\";\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928574397,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,7 @@\n require '../connection.php';\r\n $tipe = $_POST['tipe'];\r\n if($tipe == \"group\"){\r\n     $id = $_POST['idgroup'];\r\n-    $sql = \"select count(id) from kategori_subgroup where idkategoriasset =''\";\r\n+    $sql = \"select count(id) as jumlah from kategori_subgroup where idkategoriasset =''\";\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928579748,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,7 @@\n require '../connection.php';\r\n $tipe = $_POST['tipe'];\r\n if($tipe == \"group\"){\r\n     $id = $_POST['idgroup'];\r\n-    $sql = \"select count(id) as jumlah from kategori_subgroup where idkategoriasset =''\";\r\n+    $sql = \"select count(id) as jumlahactive from kategori_subgroup where idkategoriasset ='$id'\";\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928585273,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,7 @@\n require '../connection.php';\r\n $tipe = $_POST['tipe'];\r\n if($tipe == \"group\"){\r\n     $id = $_POST['idgroup'];\r\n-    $sql = \"select count(id) as jumlahactive from kategori_subgroup where idkategoriasset ='$id'\";\r\n+    $sql = \"select count(id) as jumlahactive from kategori_subgroup where idkategoriasset ='$id' and status = 'Active'\";\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928592637,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,6 +4,7 @@\n $tipe = $_POST['tipe'];\r\n if($tipe == \"group\"){\r\n     $id = $_POST['idgroup'];\r\n     $sql = \"select count(id) as jumlahactive from kategori_subgroup where idkategoriasset ='$id' and status = 'Active'\";\r\n+    $res = $conn->query($sql);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928604368,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,6 +5,10 @@\n if($tipe == \"group\"){\r\n     $id = $_POST['idgroup'];\r\n     $sql = \"select count(id) as jumlahactive from kategori_subgroup where idkategoriasset ='$id' and status = 'Active'\";\r\n     $res = $conn->query($sql);\r\n+    if($res->num_rows>0)\r\n+    {\r\n+        \r\n+    }\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928611352,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,8 @@\n     $sql = \"select count(id) as jumlahactive from kategori_subgroup where idkategoriasset ='$id' and status = 'Active'\";\r\n     $res = $conn->query($sql);\r\n     if($res->num_rows>0)\r\n     {\r\n-        \r\n+        echo \"failed\";\r\n     }\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928616386,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,6 +9,9 @@\n     if($res->num_rows>0)\r\n     {\r\n         echo \"failed\";\r\n     }\r\n+    else{\r\n+        \r\n+    }\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928623576,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,13 +5,13 @@\n if($tipe == \"group\"){\r\n     $id = $_POST['idgroup'];\r\n     $sql = \"select count(id) as jumlahactive from kategori_subgroup where idkategoriasset ='$id' and status = 'Active'\";\r\n     $res = $conn->query($sql);\r\n-    if($res->num_rows>0)\r\n+    if($res->num_rows==0)\r\n     {\r\n-        echo \"failed\";\r\n+        \r\n     }\r\n     else{\r\n-        \r\n+        echo \"failed\";\r\n     }\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928646337,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n     $sql = \"select count(id) as jumlahactive from kategori_subgroup where idkategoriasset ='$id' and status = 'Active'\";\r\n     $res = $conn->query($sql);\r\n     if($res->num_rows==0)\r\n     {\r\n-        \r\n+        $sqldelete = \"delete from kategori_asset where id = '$id'\";\r\n     }\r\n     else{\r\n         echo \"failed\";\r\n     }\r\n"
+                },
+                {
+                    "date": 1635928653898,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,9 @@\n     $res = $conn->query($sql);\r\n     if($res->num_rows==0)\r\n     {\r\n         $sqldelete = \"delete from kategori_asset where id = '$id'\";\r\n+        $res = $conn->query($sql);\r\n     }\r\n     else{\r\n         echo \"failed\";\r\n     }\r\n"
+                },
+                {
+                    "date": 1635928726447,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n if($tipe == \"group\"){\r\n     $id = $_POST['idgroup'];\r\n     $sql = \"select count(id) as jumlahactive from kategori_subgroup where idkategoriasset ='$id' and status = 'Active'\";\r\n     $res = $conn->query($sql);\r\n+    $stats = \"\";\r\n     if($res->num_rows==0)\r\n     {\r\n         $sqldelete = \"delete from kategori_asset where id = '$id'\";\r\n         $res = $conn->query($sql);\r\n"
+                },
+                {
+                    "date": 1635928732682,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,9 @@\n         $sqldelete = \"delete from kategori_asset where id = '$id'\";\r\n         $res = $conn->query($sql);\r\n     }\r\n     else{\r\n+        status = \"failed\";\r\n         echo \"failed\";\r\n     }\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928739783,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,13 +8,14 @@\n     $res = $conn->query($sql);\r\n     $stats = \"\";\r\n     if($res->num_rows==0)\r\n     {\r\n+        $status = \"failed\";\r\n         $sqldelete = \"delete from kategori_asset where id = '$id'\";\r\n         $res = $conn->query($sql);\r\n     }\r\n     else{\r\n-        status = \"failed\";\r\n+        $status = \"failed\";\r\n         echo \"failed\";\r\n     }\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928745529,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,14 +8,14 @@\n     $res = $conn->query($sql);\r\n     $stats = \"\";\r\n     if($res->num_rows==0)\r\n     {\r\n-        $status = \"failed\";\r\n+        $status = \"ok\";\r\n         $sqldelete = \"delete from kategori_asset where id = '$id'\";\r\n         $res = $conn->query($sql);\r\n     }\r\n     else{\r\n         $status = \"failed\";\r\n-        echo \"failed\";\r\n+       \r\n     }\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928752227,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,8 @@\n         $res = $conn->query($sql);\r\n     }\r\n     else{\r\n         $status = \"failed\";\r\n-       \r\n     }\r\n+    \r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928817994,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,7 +15,8 @@\n     }\r\n     else{\r\n         $status = \"failed\";\r\n     }\r\n-    \r\n+    $response = [];\r\n+\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928823142,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,7 +16,8 @@\n     else{\r\n         $status = \"failed\";\r\n     }\r\n     $response = [];\r\n+    $response['']\r\n \r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928828651,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,8 @@\n     else{\r\n         $status = \"failed\";\r\n     }\r\n     $response = [];\r\n-    $response['']\r\n+    $response['status']=\r\n \r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928834276,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,8 @@\n     else{\r\n         $status = \"failed\";\r\n     }\r\n     $response = [];\r\n-    $response['status']=\r\n+    $response['status']= $status;\r\n \r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928839462,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,14 +8,14 @@\n     $res = $conn->query($sql);\r\n     $stats = \"\";\r\n     if($res->num_rows==0)\r\n     {\r\n-        $status = \"ok\";\r\n+        $stats = \"ok\";\r\n         $sqldelete = \"delete from kategori_asset where id = '$id'\";\r\n         $res = $conn->query($sql);\r\n     }\r\n     else{\r\n-        $status = \"failed\";\r\n+        $stats = \"failed\";\r\n     }\r\n     $response = [];\r\n     $response['status']= $status;\r\n \r\n"
+                },
+                {
+                    "date": 1635928845815,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,8 @@\n     else{\r\n         $stats = \"failed\";\r\n     }\r\n     $response = [];\r\n-    $response['status']= $status;\r\n-\r\n+    $response['status']= $stats;\r\n+    $response['status']= $stats;\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928871892,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,7 +17,7 @@\n         $stats = \"failed\";\r\n     }\r\n     $response = [];\r\n     $response['status']= $stats;\r\n-    $response['status']= $stats;\r\n+    $response['count']= $stats;\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928880733,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,15 +9,15 @@\n     $stats = \"\";\r\n     if($res->num_rows==0)\r\n     {\r\n         $stats = \"ok\";\r\n-        $sqldelete = \"delete from kategori_asset where id = '$id'\";\r\n-        $res = $conn->query($sql);\r\n+        // $sqldelete = \"delete from kategori_asset where id = '$id'\";\r\n+        // $res = $conn->query($sql);\r\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n     }\r\n     $response = [];\r\n     $response['status']= $stats;\r\n-    $response['count']= $stats;\r\n+    $response['count']= $;\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928900571,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n if($tipe == \"group\"){\r\n     $id = $_POST['idgroup'];\r\n     $sql = \"select count(id) as jumlahactive from kategori_subgroup where idkategoriasset ='$id' and status = 'Active'\";\r\n     $res = $conn->query($sql);\r\n+    $jumlahquery = $res->num_rows;\r\n     $stats = \"\";\r\n     if($res->num_rows==0)\r\n     {\r\n         $stats = \"ok\";\r\n@@ -17,7 +18,7 @@\n         $stats = \"failed\";\r\n     }\r\n     $response = [];\r\n     $response['status']= $stats;\r\n-    $response['count']= $;\r\n+    $response['count']= $re;\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928905718,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n     $sql = \"select count(id) as jumlahactive from kategori_subgroup where idkategoriasset ='$id' and status = 'Active'\";\r\n     $res = $conn->query($sql);\r\n     $jumlahquery = $res->num_rows;\r\n     $stats = \"\";\r\n-    if($res->num_rows==0)\r\n+    if($jumlahquery==0)\r\n     {\r\n         $stats = \"ok\";\r\n         // $sqldelete = \"delete from kategori_asset where id = '$id'\";\r\n         // $res = $conn->query($sql);\r\n"
+                },
+                {
+                    "date": 1635928917855,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n require '../connection.php';\r\n $tipe = $_POST['tipe'];\r\n if($tipe == \"group\"){\r\n     $id = $_POST['idgroup'];\r\n-    $sql = \"select count(id) as jumlahactive from kategori_subgroup where idkategoriasset ='$id' and status = 'Active'\";\r\n+    $sql = \"select id as jumlahactive from kategori_subgroup where idkategoriasset ='$id' and status = 'Active'\";\r\n     $res = $conn->query($sql);\r\n     $jumlahquery = $res->num_rows;\r\n     $stats = \"\";\r\n     if($jumlahquery==0)\r\n"
+                },
+                {
+                    "date": 1635928928666,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,7 +18,7 @@\n         $stats = \"failed\";\r\n     }\r\n     $response = [];\r\n     $response['status']= $stats;\r\n-    $response['count']= $re;\r\n+    $response['count']= $jumlahquery;\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635928936361,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,6 +19,7 @@\n     }\r\n     $response = [];\r\n     $response['status']= $stats;\r\n     $response['count']= $jumlahquery;\r\n+    echo json_encode($response);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635930007343,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,7 +19,8 @@\n     }\r\n     $response = [];\r\n     $response['status']= $stats;\r\n     $response['count']= $jumlahquery;\r\n+    \r\n     echo json_encode($response);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635930025952,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n         $stats = \"failed\";\r\n     }\r\n     $response = [];\r\n     $response['status']= $stats;\r\n-    $response['count']= $jumlahquery;\r\n-    \r\n+    $response['count']= \"select id as jumlahactive from kategori_subgroup where idkategoriasset ='$id' and status = 'Active'\";\r\n+\r\n     echo json_encode($response);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635930069515,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n         $stats = \"failed\";\r\n     }\r\n     $response = [];\r\n     $response['status']= $stats;\r\n-    $response['count']= \"select id as jumlahactive from kategori_subgroup where idkategoriasset ='$id' and status = 'Active'\";\r\n+    $response['count']= \"select id as jumlahactive from kategori_subgroup where idkategoriaset ='$id' and status = 'Active'\";\r\n \r\n     echo json_encode($response);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635930108806,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n         $stats = \"failed\";\r\n     }\r\n     $response = [];\r\n     $response['status']= $stats;\r\n-    $response['count']= \"select id as jumlahactive from kategori_subgroup where idkategoriaset ='$id' and status = 'Active'\";\r\n-\r\n+    $response['count']= $jumlahquery;\r\n+    \r\n     echo json_encode($response);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635930411380,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n require '../connection.php';\r\n $tipe = $_POST['tipe'];\r\n if($tipe == \"group\"){\r\n     $id = $_POST['idgroup'];\r\n-    $sql = \"select id as jumlahactive from kategori_subgroup where idkategoriasset ='$id' and status = 'Active'\";\r\n+    $sql = \"select id as jumlahactive from kategori_subgroup where idkategoriaset ='$id' and status = 'Active'\";\r\n     $res = $conn->query($sql);\r\n     $jumlahquery = $res->num_rows;\r\n     $stats = \"\";\r\n     if($jumlahquery==0)\r\n@@ -18,9 +18,9 @@\n         $stats = \"failed\";\r\n     }\r\n     $response = [];\r\n     $response['status']= $stats;\r\n-    $response['count']= $jumlahquery;\r\n+    $response['jumlah']= $jumlahquery;\r\n     \r\n     echo json_encode($response);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635930446509,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n         $stats = \"failed\";\r\n     }\r\n     $response = [];\r\n     $response['status']= $stats;\r\n-    $response['jumlah']= $jumlahquery;\r\n+    $response['jumlah']= '$jumlahquery';\r\n     \r\n     echo json_encode($response);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635930471403,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n         $stats = \"failed\";\r\n     }\r\n     $response = [];\r\n     $response['status']= $stats;\r\n-    $response['jumlah']= '$jumlahquery';\r\n+    $response['jumlah']= $jumlahquery;\r\n     \r\n     echo json_encode($response);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635930635732,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,10 +17,10 @@\n     else{\r\n         $stats = \"failed\";\r\n     }\r\n     $response = [];\r\n-    $response['status']= $stats;\r\n-    $response['jumlah']= $jumlahquery;\r\n+    $response['status']=>$stats;\r\n+    $response['jumlah']=>$jumlahquery;\r\n     \r\n     echo json_encode($response);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635930659872,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,10 @@\n     else{\r\n         $stats = \"failed\";\r\n     }\r\n     $response = [];\r\n+    $response = json_encode\r\n+    \r\n     $response['status']=>$stats;\r\n     $response['jumlah']=>$jumlahquery;\r\n     \r\n     echo json_encode($response);\r\n"
+                },
+                {
+                    "date": 1635930665166,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n     else{\r\n         $stats = \"failed\";\r\n     }\r\n     $response = [];\r\n-    $response = json_encode\r\n+    $response = json_encode();\r\n     \r\n     $response['status']=>$stats;\r\n     $response['jumlah']=>$jumlahquery;\r\n     \r\n"
+                },
+                {
+                    "date": 1635930670250,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,11 @@\n     else{\r\n         $stats = \"failed\";\r\n     }\r\n     $response = [];\r\n-    $response = json_encode();\r\n+    $response = json_encode(array(\r\n+        \r\n+    ));\r\n     \r\n     $response['status']=>$stats;\r\n     $response['jumlah']=>$jumlahquery;\r\n     \r\n"
+                },
+                {
+                    "date": 1635930682618,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,13 +18,14 @@\n         $stats = \"failed\";\r\n     }\r\n     $response = [];\r\n     $response = json_encode(array(\r\n-        \r\n+       'status'=>$stats;\r\n+        'jumlah'=>$jumlahquery;\r\n+\r\n     ));\r\n     \r\n-    $response['status']=>$stats;\r\n-    $response['jumlah']=>$jumlahquery;\r\n+\r\n     \r\n     echo json_encode($response);\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635930692154,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,10 +18,10 @@\n         $stats = \"failed\";\r\n     }\r\n     $response = [];\r\n     $response = json_encode(array(\r\n-       'status'=>$stats;\r\n-        'jumlah'=>$jumlahquery;\r\n+       'status'=>$stats,\r\n+        'jumlah'=>$jumlahquery,\r\n \r\n     ));\r\n     \r\n \r\n"
+                },
+                {
+                    "date": 1635930697196,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,10 +19,9 @@\n     }\r\n     $response = [];\r\n     $response = json_encode(array(\r\n        'status'=>$stats,\r\n-        'jumlah'=>$jumlahquery,\r\n-\r\n+       'jumlah'=>$jumlahquery,\r\n     ));\r\n     \r\n \r\n     \r\n"
+                },
+                {
+                    "date": 1635930773275,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,7 @@\n        'status'=>$stats,\r\n        'jumlah'=>$jumlahquery,\r\n     ));\r\n     \r\n-\r\n-    \r\n-    echo json_encode($response);\r\n+    echo $response;\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635930866896,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,12 +17,9 @@\n     else{\r\n         $stats = \"failed\";\r\n     }\r\n     $response = [];\r\n-    $response = json_encode(array(\r\n-       'status'=>$stats,\r\n-       'jumlah'=>$jumlahquery,\r\n-    ));\r\n+    $response =\r\n     \r\n     echo $response;\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635930872119,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,10 +16,13 @@\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n     }\r\n-    $response = [];\r\n-    $response =\r\n+    // $response = [];\r\n+    // $response =\r\n     \r\n-    echo $response;\r\n+    echo  json_encode(array(\r\n+        'status'=>$stats,\r\n+        'jumlah'=>$jumlahquery,\r\n+     ));\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635930965143,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n session_start();\r\n require '../connection.php';\r\n $tipe = $_POST['tipe'];\r\n if($tipe == \"group\"){\r\n+    header('Content-type: application/json');\r\n     $id = $_POST['idgroup'];\r\n     $sql = \"select id as jumlahactive from kategori_subgroup where idkategoriaset ='$id' and status = 'Active'\";\r\n     $res = $conn->query($sql);\r\n     $jumlahquery = $res->num_rows;\r\n"
+                },
+                {
+                    "date": 1635931035916,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,10 +11,10 @@\n     $stats = \"\";\r\n     if($jumlahquery==0)\r\n     {\r\n         $stats = \"ok\";\r\n-        // $sqldelete = \"delete from kategori_asset where id = '$id'\";\r\n-        // $res = $conn->query($sql);\r\n+        $sqldelete = \"delete from kategori_asset where id = '$id'\";\r\n+        $res = $conn->query($sql);\r\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n     }\r\n"
+                },
+                {
+                    "date": 1635931059627,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n     if($jumlahquery==0)\r\n     {\r\n         $stats = \"ok\";\r\n         $sqldelete = \"delete from kategori_asset where id = '$id'\";\r\n-        $res = $conn->query($sql);\r\n+        $res = $conn->query($sqldelete);\r\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n     }\r\n"
+                },
+                {
+                    "date": 1635931066322,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n     if($jumlahquery==0)\r\n     {\r\n         $stats = \"ok\";\r\n         $sqldelete = \"delete from kategori_asset where id = '$id'\";\r\n-        $res = $conn->query($sqldelete);\r\n+        $resdelete = $conn->query($sqldelete);\r\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n     }\r\n"
+                },
+                {
+                    "date": 1635931210942,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,5 +25,29 @@\n         'status'=>$stats,\r\n         'jumlah'=>$jumlahquery,\r\n      ));\r\n }\r\n+if($tipe == \"group\"){\r\n+    header('Content-type: application/json');\r\n+    $id = $_POST['idgroup'];\r\n+    $sql = \"select id as jumlahactive from kategori_subgroup where idkategoriaset ='$id' and status = 'Active'\";\r\n+    $res = $conn->query($sql);\r\n+    $jumlahquery = $res->num_rows;\r\n+    $stats = \"\";\r\n+    if($jumlahquery==0)\r\n+    {\r\n+        $stats = \"ok\";\r\n+        $sqldelete = \"delete from kategori_asset where id = '$id'\";\r\n+        $resdelete = $conn->query($sqldelete);\r\n+    }\r\n+    else{\r\n+        $stats = \"failed\";\r\n+    }\r\n+    // $response = [];\r\n+    // $response =\r\n+    \r\n+    echo  json_encode(array(\r\n+        'status'=>$stats,\r\n+        'jumlah'=>$jumlahquery,\r\n+     ));\r\n+}\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635931217596,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,9 @@\n      ));\r\n }\r\n if($tipe == \"group\"){\r\n     header('Content-type: application/json');\r\n-    $id = $_POST['idgroup'];\r\n+    $id = $_POST['idsubgroup'];\r\n     $sql = \"select id as jumlahactive from kategori_subgroup where idkategoriaset ='$id' and status = 'Active'\";\r\n     $res = $conn->query($sql);\r\n     $jumlahquery = $res->num_rows;\r\n     $stats = \"\";\r\n"
+                },
+                {
+                    "date": 1635931241590,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n }\r\n if($tipe == \"group\"){\r\n     header('Content-type: application/json');\r\n     $id = $_POST['idsubgroup'];\r\n-    $sql = \"select id as jumlahactive from kategori_subgroup where idkategoriaset ='$id' and status = 'Active'\";\r\n+    $sql = \"select id as jumlahactive from kategori_categorysubgroup where idkategoriaset ='$id' and status = 'Active'\";\r\n     $res = $conn->query($sql);\r\n     $jumlahquery = $res->num_rows;\r\n     $stats = \"\";\r\n     if($jumlahquery==0)\r\n"
+                },
+                {
+                    "date": 1635931267816,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n }\r\n if($tipe == \"group\"){\r\n     header('Content-type: application/json');\r\n     $id = $_POST['idsubgroup'];\r\n-    $sql = \"select id as jumlahactive from kategori_categorysubgroup where idkategoriaset ='$id' and status = 'Active'\";\r\n+    $sql = \"select id as jumlahactive from kategori_categorysubgroup where idsubgroup ='$id' and status = 'Active'\";\r\n     $res = $conn->query($sql);\r\n     $jumlahquery = $res->num_rows;\r\n     $stats = \"\";\r\n     if($jumlahquery==0)\r\n"
+                },
+                {
+                    "date": 1635931312801,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,11 @@\n     {\r\n         $stats = \"ok\";\r\n         $sqldelete = \"delete from kategori_asset where id = '$id'\";\r\n         $resdelete = $conn->query($sqldelete);\r\n+\r\n+        $sqldelete = \"delete from kategori_asset where id = '$id'\";\r\n+        $resdelete = $conn->query($sqldelete);\r\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n     }\r\n"
+                },
+                {
+                    "date": 1635931318194,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n         $stats = \"ok\";\r\n         $sqldelete = \"delete from kategori_asset where id = '$id'\";\r\n         $resdelete = $conn->query($sqldelete);\r\n \r\n-        $sqldelete = \"delete from kategori_asset where id = '$id'\";\r\n+        $sqldelete = \"delete from kategori_subgroup where id = '$id'\";\r\n         $resdelete = $conn->query($sqldelete);\r\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n"
+                },
+                {
+                    "date": 1635931325290,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n         $stats = \"ok\";\r\n         $sqldelete = \"delete from kategori_asset where id = '$id'\";\r\n         $resdelete = $conn->query($sqldelete);\r\n \r\n-        $sqldelete = \"delete from kategori_subgroup where id = '$id'\";\r\n+        $sqldelete = \"delete from kategori_subgroup where idkategoriaset ='$id'\";\r\n         $resdelete = $conn->query($sqldelete);\r\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n"
+                },
+                {
+                    "date": 1635931355117,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n         $stats = \"ok\";\r\n         $sqldelete = \"delete from kategori_asset where id = '$id'\";\r\n         $resdelete = $conn->query($sqldelete);\r\n \r\n-        $sqldelete = \"delete from kategori_subgroup where idkategoriaset ='$id'\";\r\n+        $sqldeletechild = \"delete from kategori_subgroup where idkategoriaset ='$id'\";\r\n         $resdelete = $conn->query($sqldelete);\r\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n"
+                },
+                {
+                    "date": 1635931363607,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n         $sqldelete = \"delete from kategori_asset where id = '$id'\";\r\n         $resdelete = $conn->query($sqldelete);\r\n \r\n         $sqldeletechild = \"delete from kategori_subgroup where idkategoriaset ='$id'\";\r\n-        $resdelete = $conn->query($sqldelete);\r\n+        $resdeletechild = $conn->query($sqldeletechild);\r\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n     }\r\n@@ -40,8 +40,11 @@\n     {\r\n         $stats = \"ok\";\r\n         $sqldelete = \"delete from kategori_asset where id = '$id'\";\r\n         $resdelete = $conn->query($sqldelete);\r\n+\r\n+        $sqldeletechild = \"delete from kategori_subgroup where idkategoriaset ='$id'\";\r\n+        $resdeletechild = $conn->query($sqldeletechild);\r\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n     }\r\n"
+                },
+                {
+                    "date": 1635931372374,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,12 +38,12 @@\n     $stats = \"\";\r\n     if($jumlahquery==0)\r\n     {\r\n         $stats = \"ok\";\r\n-        $sqldelete = \"delete from kategori_asset where id = '$id'\";\r\n+        $sqldelete = \"delete from kategori_subgroup where id = '$id'\";\r\n         $resdelete = $conn->query($sqldelete);\r\n \r\n-        $sqldeletechild = \"delete from kategori_subgroup where idkategoriaset ='$id'\";\r\n+        $sqldeletechild = \"delete from kategori_categorysubgroup where idkategoriaset ='$id'\";\r\n         $resdeletechild = $conn->query($sqldeletechild);\r\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n"
+                },
+                {
+                    "date": 1635931386730,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n         $stats = \"ok\";\r\n         $sqldelete = \"delete from kategori_subgroup where id = '$id'\";\r\n         $resdelete = $conn->query($sqldelete);\r\n \r\n-        $sqldeletechild = \"delete from kategori_categorysubgroup where idkategoriaset ='$id'\";\r\n+        $sqldeletechild = \"delete from kategori_categorysubgroup where idsubgroup ='$id'\";\r\n         $resdeletechild = $conn->query($sqldeletechild);\r\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n"
+                },
+                {
+                    "date": 1635931404678,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,11 +20,8 @@\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n     }\r\n-    // $response = [];\r\n-    // $response =\r\n-    \r\n     echo  json_encode(array(\r\n         'status'=>$stats,\r\n         'jumlah'=>$jumlahquery,\r\n      ));\r\n"
+                },
+                {
+                    "date": 1635931409849,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,10 +44,8 @@\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n     }\r\n-    // $response = [];\r\n-    // $response =\r\n     \r\n     echo  json_encode(array(\r\n         'status'=>$stats,\r\n         'jumlah'=>$jumlahquery,\r\n"
+                },
+                {
+                    "date": 1635931467679,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n         'status'=>$stats,\r\n         'jumlah'=>$jumlahquery,\r\n      ));\r\n }\r\n-if($tipe == \"group\"){\r\n+else if($tipe == \"subgroup\"){\r\n     header('Content-type: application/json');\r\n     $id = $_POST['idsubgroup'];\r\n     $sql = \"select id as jumlahactive from kategori_categorysubgroup where idsubgroup ='$id' and status = 'Active'\";\r\n     $res = $conn->query($sql);\r\n"
+                },
+                {
+                    "date": 1635931627207,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,5 +50,30 @@\n         'status'=>$stats,\r\n         'jumlah'=>$jumlahquery,\r\n      ));\r\n }\r\n+else if($tipe == \"subgroup\"){\r\n+    header('Content-type: application/json');\r\n+    $id = $_POST['idsubgroup'];\r\n+    $sql = \"select id as jumlahactive from kategori_categorysubgroup where idsubgroup ='$id' and status = 'Active'\";\r\n+    $res = $conn->query($sql);\r\n+    $jumlahquery = $res->num_rows;\r\n+    $stats = \"\";\r\n+    if($jumlahquery==0)\r\n+    {\r\n+        $stats = \"ok\";\r\n+        $sqldelete = \"delete from kategori_subgroup where id = '$id'\";\r\n+        $resdelete = $conn->query($sqldelete);\r\n+\r\n+        $sqldeletechild = \"delete from kategori_categorysubgroup where idsubgroup ='$id'\";\r\n+        $resdeletechild = $conn->query($sqldeletechild);\r\n+    }\r\n+    else{\r\n+        $stats = \"failed\";\r\n+    }\r\n+    \r\n+    echo  json_encode(array(\r\n+        'status'=>$stats,\r\n+        'jumlah'=>$jumlahquery,\r\n+     ));\r\n+}\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635931634997,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,11 +50,11 @@\n         'status'=>$stats,\r\n         'jumlah'=>$jumlahquery,\r\n      ));\r\n }\r\n-else if($tipe == \"subgroup\"){\r\n+else if($tipe == \"category\"){\r\n     header('Content-type: application/json');\r\n-    $id = $_POST['idsubgroup'];\r\n+    $id = $_POST['idcategory'];\r\n     $sql = \"select id as jumlahactive from kategori_categorysubgroup where idsubgroup ='$id' and status = 'Active'\";\r\n     $res = $conn->query($sql);\r\n     $jumlahquery = $res->num_rows;\r\n     $stats = \"\";\r\n"
+                },
+                {
+                    "date": 1635931767904,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -53,9 +53,9 @@\n }\r\n else if($tipe == \"category\"){\r\n     header('Content-type: application/json');\r\n     $id = $_POST['idcategory'];\r\n-    $sql = \"select id as jumlahactive from kategori_categorysubgroup where idsubgroup ='$id' and status = 'Active'\";\r\n+    $sql = \"select id as jumlahactive from asset where idsubgroup ='$id' and status = 'Active'\";\r\n     $res = $conn->query($sql);\r\n     $jumlahquery = $res->num_rows;\r\n     $stats = \"\";\r\n     if($jumlahquery==0)\r\n@@ -75,5 +75,6 @@\n         'status'=>$stats,\r\n         'jumlah'=>$jumlahquery,\r\n      ));\r\n }\r\n+\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635931774393,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -53,9 +53,9 @@\n }\r\n else if($tipe == \"category\"){\r\n     header('Content-type: application/json');\r\n     $id = $_POST['idcategory'];\r\n-    $sql = \"select id as jumlahactive from asset where idsubgroup ='$id' and status = 'Active'\";\r\n+    $sql = \"select id as jumlahactive from asset where idcategory ='$id' and status = 'Active'\";\r\n     $res = $conn->query($sql);\r\n     $jumlahquery = $res->num_rows;\r\n     $stats = \"\";\r\n     if($jumlahquery==0)\r\n"
+                },
+                {
+                    "date": 1635931791908,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -63,9 +63,9 @@\n         $stats = \"ok\";\r\n         $sqldelete = \"delete from kategori_subgroup where id = '$id'\";\r\n         $resdelete = $conn->query($sqldelete);\r\n \r\n-        $sqldeletechild = \"delete from kategori_categorysubgroup where idsubgroup ='$id'\";\r\n+        $sqldeletechild = \"delete from asset where idsubgroup ='$id'\";\r\n         $resdeletechild = $conn->query($sqldeletechild);\r\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n"
+                },
+                {
+                    "date": 1635931798174,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -63,9 +63,9 @@\n         $stats = \"ok\";\r\n         $sqldelete = \"delete from kategori_subgroup where id = '$id'\";\r\n         $resdelete = $conn->query($sqldelete);\r\n \r\n-        $sqldeletechild = \"delete from asset where idsubgroup ='$id'\";\r\n+        $sqldeletechild = \"delete from asset where idcategory ='$id'\";\r\n         $resdeletechild = $conn->query($sqldeletechild);\r\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n"
+                },
+                {
+                    "date": 1635931812727,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,9 +60,9 @@\n     $stats = \"\";\r\n     if($jumlahquery==0)\r\n     {\r\n         $stats = \"ok\";\r\n-        $sqldelete = \"delete from kategori_subgroup where id = '$id'\";\r\n+        $sqldelete = \"delete from kategori_categorysubgroup where id = '$id'\";\r\n         $resdelete = $conn->query($sqldelete);\r\n \r\n         $sqldeletechild = \"delete from asset where idcategory ='$id'\";\r\n         $resdeletechild = $conn->query($sqldeletechild);\r\n"
+                },
+                {
+                    "date": 1635932043224,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -75,6 +75,30 @@\n         'status'=>$stats,\r\n         'jumlah'=>$jumlahquery,\r\n      ));\r\n }\r\n+else if($tipe == \"category\"){\r\n+    header('Content-type: application/json');\r\n+    $id = $_POST['idcategory'];\r\n+    $sql = \"select id as jumlahactive from asset where idcategory ='$id' and status = 'Active'\";\r\n+    $res = $conn->query($sql);\r\n+    $jumlahquery = $res->num_rows;\r\n+    $stats = \"\";\r\n+    if($jumlahquery==0)\r\n+    {\r\n+        $stats = \"ok\";\r\n+        $sqldelete = \"delete from kategori_categorysubgroup where id = '$id'\";\r\n+        $resdelete = $conn->query($sqldelete);\r\n \r\n+        $sqldeletechild = \"delete from asset where idcategory ='$id'\";\r\n+        $resdeletechild = $conn->query($sqldeletechild);\r\n+    }\r\n+    else{\r\n+        $stats = \"failed\";\r\n+    }\r\n+    \r\n+    echo  json_encode(array(\r\n+        'status'=>$stats,\r\n+        'jumlah'=>$jumlahquery,\r\n+     ));\r\n+}\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635932049346,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -75,11 +75,11 @@\n         'status'=>$stats,\r\n         'jumlah'=>$jumlahquery,\r\n      ));\r\n }\r\n-else if($tipe == \"category\"){\r\n+else if($tipe == \"template\"){\r\n     header('Content-type: application/json');\r\n-    $id = $_POST['idcategory'];\r\n+    $id = $_POST['idtemplate'];\r\n     $sql = \"select id as jumlahactive from asset where idcategory ='$id' and status = 'Active'\";\r\n     $res = $conn->query($sql);\r\n     $jumlahquery = $res->num_rows;\r\n     $stats = \"\";\r\n"
+                },
+                {
+                    "date": 1635932456262,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -78,9 +78,9 @@\n }\r\n else if($tipe == \"template\"){\r\n     header('Content-type: application/json');\r\n     $id = $_POST['idtemplate'];\r\n-    $sql = \"select id as jumlahactive from asset where idcategory ='$id' and status = 'Active'\";\r\n+    $sql = \"select id as jumlahactive from asset where idtemplate ='$id' and status = 'Active'\";\r\n     $res = $conn->query($sql);\r\n     $jumlahquery = $res->num_rows;\r\n     $stats = \"\";\r\n     if($jumlahquery==0)\r\n"
+                },
+                {
+                    "date": 1635932472811,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -88,9 +88,9 @@\n         $stats = \"ok\";\r\n         $sqldelete = \"delete from kategori_categorysubgroup where id = '$id'\";\r\n         $resdelete = $conn->query($sqldelete);\r\n \r\n-        $sqldeletechild = \"delete from asset where idcategory ='$id'\";\r\n+        $sqldeletechild = \"delete from asset where idtemplate ='$id'\";\r\n         $resdeletechild = $conn->query($sqldeletechild);\r\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n"
+                },
+                {
+                    "date": 1635932483042,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -85,9 +85,9 @@\n     $stats = \"\";\r\n     if($jumlahquery==0)\r\n     {\r\n         $stats = \"ok\";\r\n-        $sqldelete = \"delete from kategori_categorysubgroup where id = '$id'\";\r\n+        $sqldelete = \"delete from template where id = '$id'\";\r\n         $resdelete = $conn->query($sqldelete);\r\n \r\n         $sqldeletechild = \"delete from asset where idtemplate ='$id'\";\r\n         $resdeletechild = $conn->query($sqldeletechild);\r\n"
+                },
+                {
+                    "date": 1635932705161,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -100,5 +100,9 @@\n         'status'=>$stats,\r\n         'jumlah'=>$jumlahquery,\r\n      ));\r\n }\r\n+else if($tipe == \"idcondition\")\r\n+{\r\n+    \r\n+}\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635932714774,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -100,9 +100,32 @@\n         'status'=>$stats,\r\n         'jumlah'=>$jumlahquery,\r\n      ));\r\n }\r\n-else if($tipe == \"idcondition\")\r\n+else if($tipe == \"condition\")\r\n {\r\n+    idcondition\r\n+    header('Content-type: application/json');\r\n+    $id = $_POST['idtemplate'];\r\n+    $sql = \"select id as jumlahactive from asset where idtemplate ='$id' and status = 'Active'\";\r\n+    $res = $conn->query($sql);\r\n+    $jumlahquery = $res->num_rows;\r\n+    $stats = \"\";\r\n+    if($jumlahquery==0)\r\n+    {\r\n+        $stats = \"ok\";\r\n+        $sqldelete = \"delete from template where id = '$id'\";\r\n+        $resdelete = $conn->query($sqldelete);\r\n+\r\n+        $sqldeletechild = \"delete from asset where idtemplate ='$id'\";\r\n+        $resdeletechild = $conn->query($sqldeletechild);\r\n+    }\r\n+    else{\r\n+        $stats = \"failed\";\r\n+    }\r\n     \r\n+    echo  json_encode(array(\r\n+        'status'=>$stats,\r\n+        'jumlah'=>$jumlahquery,\r\n+     ));\r\n }\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635932719840,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -102,9 +102,8 @@\n      ));\r\n }\r\n else if($tipe == \"condition\")\r\n {\r\n-    idcondition\r\n     header('Content-type: application/json');\r\n     $id = $_POST['idtemplate'];\r\n     $sql = \"select id as jumlahactive from asset where idtemplate ='$id' and status = 'Active'\";\r\n     $res = $conn->query($sql);\r\n"
+                },
+                {
+                    "date": 1635932731049,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -103,10 +103,10 @@\n }\r\n else if($tipe == \"condition\")\r\n {\r\n     header('Content-type: application/json');\r\n-    $id = $_POST['idtemplate'];\r\n-    $sql = \"select id as jumlahactive from asset where idtemplate ='$id' and status = 'Active'\";\r\n+    $id = $_POST['idcondition'];\r\n+    $sql = \"select id as jumlahactive from asset where idcondition ='$id' and status = 'Active'\";\r\n     $res = $conn->query($sql);\r\n     $jumlahquery = $res->num_rows;\r\n     $stats = \"\";\r\n     if($jumlahquery==0)\r\n"
+                },
+                {
+                    "date": 1635932738242,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -114,9 +114,9 @@\n         $stats = \"ok\";\r\n         $sqldelete = \"delete from template where id = '$id'\";\r\n         $resdelete = $conn->query($sqldelete);\r\n \r\n-        $sqldeletechild = \"delete from asset where idtemplate ='$id'\";\r\n+        $sqldeletechild = \"delete from asset where idcondition ='$id'\";\r\n         $resdeletechild = $conn->query($sqldeletechild);\r\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n"
+                },
+                {
+                    "date": 1635932744054,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -111,9 +111,9 @@\n     $stats = \"\";\r\n     if($jumlahquery==0)\r\n     {\r\n         $stats = \"ok\";\r\n-        $sqldelete = \"delete from template where id = '$id'\";\r\n+        $sqldelete = \"delete from condition where id = '$id'\";\r\n         $resdelete = $conn->query($sqldelete);\r\n \r\n         $sqldeletechild = \"delete from asset where idcondition ='$id'\";\r\n         $resdeletechild = $conn->query($sqldeletechild);\r\n"
+                },
+                {
+                    "date": 1635932893365,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -111,9 +111,9 @@\n     $stats = \"\";\r\n     if($jumlahquery==0)\r\n     {\r\n         $stats = \"ok\";\r\n-        $sqldelete = \"delete from condition where id = '$id'\";\r\n+        $sqldelete = \"delete from conditions where id = '$id'\";\r\n         $resdelete = $conn->query($sqldelete);\r\n \r\n         $sqldeletechild = \"delete from asset where idcondition ='$id'\";\r\n         $resdeletechild = $conn->query($sqldeletechild);\r\n"
+                },
+                {
+                    "date": 1635932953759,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -126,5 +126,31 @@\n         'status'=>$stats,\r\n         'jumlah'=>$jumlahquery,\r\n      ));\r\n }\r\n+else if($tipe == \"condition\")\r\n+{\r\n+    header('Content-type: application/json');\r\n+    $id = $_POST['idcondition'];\r\n+    $sql = \"select id as jumlahactive from asset where idcondition ='$id' and status = 'Active'\";\r\n+    $res = $conn->query($sql);\r\n+    $jumlahquery = $res->num_rows;\r\n+    $stats = \"\";\r\n+    if($jumlahquery==0)\r\n+    {\r\n+        $stats = \"ok\";\r\n+        $sqldelete = \"delete from conditions where id = '$id'\";\r\n+        $resdelete = $conn->query($sqldelete);\r\n+\r\n+        $sqldeletechild = \"delete from asset where idcondition ='$id'\";\r\n+        $resdeletechild = $conn->query($sqldeletechild);\r\n+    }\r\n+    else{\r\n+        $stats = \"failed\";\r\n+    }\r\n+    \r\n+    echo  json_encode(array(\r\n+        'status'=>$stats,\r\n+        'jumlah'=>$jumlahquery,\r\n+     ));\r\n+}\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635932958888,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -126,9 +126,9 @@\n         'status'=>$stats,\r\n         'jumlah'=>$jumlahquery,\r\n      ));\r\n }\r\n-else if($tipe == \"condition\")\r\n+else if($tipe == \"initial_condition\")\r\n {\r\n     header('Content-type: application/json');\r\n     $id = $_POST['idcondition'];\r\n     $sql = \"select id as jumlahactive from asset where idcondition ='$id' and status = 'Active'\";\r\n"
+                },
+                {
+                    "date": 1635932963939,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -129,9 +129,9 @@\n }\r\n else if($tipe == \"initial_condition\")\r\n {\r\n     header('Content-type: application/json');\r\n-    $id = $_POST['idcondition'];\r\n+    $id = $_POST['idinitialcondition'];\r\n     $sql = \"select id as jumlahactive from asset where idcondition ='$id' and status = 'Active'\";\r\n     $res = $conn->query($sql);\r\n     $jumlahquery = $res->num_rows;\r\n     $stats = \"\";\r\n"
+                },
+                {
+                    "date": 1635933216672,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -130,9 +130,9 @@\n else if($tipe == \"initial_condition\")\r\n {\r\n     header('Content-type: application/json');\r\n     $id = $_POST['idinitialcondition'];\r\n-    $sql = \"select id as jumlahactive from asset where idcondition ='$id' and status = 'Active'\";\r\n+    $sql = \"select id as jumlahactive from asset where idinitialcondition ='$id' and status = 'Active'\";\r\n     $res = $conn->query($sql);\r\n     $jumlahquery = $res->num_rows;\r\n     $stats = \"\";\r\n     if($jumlahquery==0)\r\n"
+                },
+                {
+                    "date": 1635933222510,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -137,12 +137,12 @@\n     $stats = \"\";\r\n     if($jumlahquery==0)\r\n     {\r\n         $stats = \"ok\";\r\n-        $sqldelete = \"delete from conditions where id = '$id'\";\r\n+        $sqldelete = \"delete from initial_condition where id = '$id'\";\r\n         $resdelete = $conn->query($sqldelete);\r\n \r\n-        $sqldeletechild = \"delete from asset where idcondition ='$id'\";\r\n+        $sqldeletechild = \"delete from asset where idinitialcondition ='$id'\";\r\n         $resdeletechild = $conn->query($sqldeletechild);\r\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n"
+                }
+            ],
+            "date": 1635928380122,
+            "name": "Commit-0",
+            "content": "<?php\r\n\r\n?>"
+        }
+    ]
+}

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 393,
+            "activePatchIndex": 399,
             "patches": [
                 {
                     "date": 1630468397363,
@@ -1580,6 +1580,30 @@
                 {
                     "date": 1634951052874,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -544,9 +544,9 @@\n \r\n \t\t\t\t</li>\r\n \t\t\t\r\n \t\t\t\t<li class=\"nav-item dropdown dropdown-user\">\r\n-\t\t\t\t<a href=\"#\" onclick = \"\" style = \"color:white;margin-top:5px;\" class=\"navbar-nav-link  align-items-center\"\r\n+\t\t\t\t<a href=\"#\" onclick = \"logout()\" style = \"color:white;margin-top:5px;\" class=\"navbar-nav-link  align-items-center\"\r\n \t\t\t\t\t><i class=\"icon-switch2\" style = \"color:white;\"></i> Logout</a>\r\n \t\t\t\t\t<!-- <a href=\"#\" class=\"navbar-nav-link d-flex align-items-center dropdown-toggle\"\r\n \t\t\t\t\t\tdata-toggle=\"dropdown\">\r\n \t\t\t\t\t\t<img src=\"../../../../global_assets/images/placeholders/placeholder.jpg\"\r\n"
+                },
+                {
+                    "date": 1635925255957,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -187,8 +187,9 @@\n \r\n \t\t.card {\r\n \t\t\tpadding: 15px;\r\n \t\t}\r\n+\t\tE7E7E7\r\n \t</style>\r\n </head>\r\n \r\n <body class = 'custom-scrollbars'>\r\n"
+                },
+                {
+                    "date": 1635925261892,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -187,8 +187,11 @@\n \r\n \t\t.card {\r\n \t\t\tpadding: 15px;\r\n \t\t}\r\n+\t\t.table-hover tbody tr:hover {\r\n+    color: #333;\r\n+}\r\n \t\tE7E7E7\r\n \t</style>\r\n </head>\r\n \r\n"
+                },
+                {
+                    "date": 1635925267666,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -188,11 +188,11 @@\n \t\t.card {\r\n \t\t\tpadding: 15px;\r\n \t\t}\r\n \t\t.table-hover tbody tr:hover {\r\n-    color: #333;\r\n-}\r\n-\t\tE7E7E7\r\n+\t\t\tcolor: #E7E7E7;\r\n+\t\t}\r\n+\t\t\r\n \t</style>\r\n </head>\r\n \r\n <body class = 'custom-scrollbars'>\r\n"
+                },
+                {
+                    "date": 1635925283681,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -187,10 +187,10 @@\n \r\n \t\t.card {\r\n \t\t\tpadding: 15px;\r\n \t\t}\r\n-\t\t.table-hover tbody tr:hover {\r\n-\t\t\tcolor: #E7E7E7;\r\n+\t\t tr:hover {\r\n+\t\t\tcolor: #E7E7E7 !important;\r\n \t\t}\r\n \t\t\r\n \t</style>\r\n </head>\r\n"
+                },
+                {
+                    "date": 1635929582489,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -188,11 +188,13 @@\n \t\t.card {\r\n \t\t\tpadding: 15px;\r\n \t\t}\r\n \t\t tr:hover {\r\n-\t\t\tcolor: #E7E7E7 !important;\r\n+\t\t\tbackground-color: #E7E7E7 !important;\r\n \t\t}\r\n-\t\t\r\n+\t\t.swal-button:focus {\r\n+  box-shadow: none;\r\n+}\r\n \t</style>\r\n </head>\r\n \r\n <body class = 'custom-scrollbars'>\r\n"
+                },
+                {
+                    "date": 1635929598649,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -190,10 +190,10 @@\n \t\t}\r\n \t\t tr:hover {\r\n \t\t\tbackground-color: #E7E7E7 !important;\r\n \t\t}\r\n-\t\t.swal-button:focus {\r\n-  box-shadow: none;\r\n+\t\t.swal2-popup .swal2-styled:focus {\r\n+    box-shadow: none !important;\r\n }\r\n \t</style>\r\n </head>\r\n \r\n"
                 }
             ],
             "date": 1630468397363,

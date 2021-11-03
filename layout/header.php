@@ -188,6 +188,12 @@ if(!isset($_SESSION['iduser']))
 		.card {
 			padding: 15px;
 		}
+		 tr:hover {
+			background-color: #E7E7E7 !important;
+		}
+		.swal2-popup .swal2-styled:focus {
+    box-shadow: none !important;
+}
 	</style>
 </head>
 

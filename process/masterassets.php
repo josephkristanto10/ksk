@@ -100,7 +100,7 @@ if($tipe == "load")
             {
                 $myactionsetto = "InActive";
                 $mystats = '<span class="badge badge-success">Active</span>';
-                $myaction = "<a class='dropdown-item' onclick = setstatus('".$row['id']."-".$myactionsetto."')><i class='icon-check'></i>
+                $myaction = "<a class='dropdown-item' onclick = setstatus('".$row['id']."-".$myactionsetto."')><i class='icon-cross'></i>
                 Set InActive</a>'";
             }
             else
@@ -146,8 +146,7 @@ if($tipe == "load")
                     </a>
     
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a href="#myModaledit" data-toggle="modal" class="dropdown-item" id ="click-'.$row['id'].'-'.$row['idgroup'].'-'.$row['idsubgroup'].'-'.$row['idcategory'].'-'.$row['idinitialcondition'].'-'.$row['idcondition'].'"  onclick = "openmodaledit(this)"><i class="icon-check"></i>
-                            Edit</a>
+                      
                         
                         '.$myaction.'
                    
@@ -167,7 +166,8 @@ if($tipe == "load")
     if($total_filtered <> FALSE) {
         $response['recordsFiltered'] = mysqli_num_rows($total_filtered);
     }  
-    
+    // <a href="#myModaledit" data-toggle="modal" class="dropdown-item" id ="click-'.$row['id'].'-'.$row['idgroup'].'-'.$row['idsubgroup'].'-'.$row['idcategory'].'-'.$row['idinitialcondition'].'-'.$row['idcondition'].'"  onclick = "openmodaledit(this)"><i class="icon-check"></i>
+    // </a>
     echo json_encode($response);
 }
 else if($tipe == "gettemplatecategory")

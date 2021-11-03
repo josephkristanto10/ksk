@@ -51,7 +51,7 @@ if($tipe == "load")
             {
                 $myactionsetto = "InActive";
                 $mystats = '<span class="badge badge-success">Active</span>';
-                $myaction = "<a class='dropdown-item' onclick = setstatus('".$row['id']."-".$myactionsetto."')><i class='icon-check'></i>
+                $myaction = "<a class='dropdown-item' onclick = setstatus('".$row['id']."-".$myactionsetto."')><i class='icon-cross'></i>
                 Set InActive</a>'";
             }
             else
@@ -75,9 +75,10 @@ if($tipe == "load")
                     </a>
     
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a href="#myModaledit" data-toggle="modal" class="dropdown-item" id ="click-'.$row['id'].'"  onclick = "openmodaledit(this)"><i class="icon-check"></i>
+                        <a href="#myModaledit" data-toggle="modal" class="dropdown-item" id ="click-'.$row['id'].'"  onclick = "openmodaledit(this)"><i class="icon-pen"></i>
                             Edit</a>
-                        
+                        <a  class="dropdown-item" id ="delete-'.$row['id'].'"  onclick = "deleterow(this)"><i class="icon-trash"></i>
+                            Delete</a>
                         '.$myaction.'
                    
                     </div>

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 78,
+            "activePatchIndex": 84,
             "patches": [
                 {
                     "date": 1630465443919,
@@ -320,6 +320,30 @@
                 {
                     "date": 1635846000108,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -247,9 +247,9 @@\n    }\r\n    function adddata(){\r\n \tvar initialcondition = $(\"#initialcondition\").val();\r\n     var description = $('#description').val();\r\n-    if(initialcondition == \"\" || description == \"\")\r\n+    if(initialcondition == \"\" )\r\n     {\r\n                          Swal.fire({\r\n                             icon: 'error',\r\n                             title: 'Empty Field',\r\n"
+                },
+                {
+                    "date": 1635933019535,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -446,6 +446,61 @@\n \t\t\t$(\"#descriptionedit\").val(\"\");\r\n \t\t}\r\n \t\t\r\n \t}\r\n-    \r\n+    function deleterow(element) {\r\n+        var splitid = element.id.split(\"-\");\r\n+        var myid = splitid[1];\r\n+        Swal.fire({\r\n+            title: 'Do you want to delete this condition?',\r\n+            html: 'You cannot recover this condition after delete',\r\n+            showCancelButton: true,\r\n+            confirmButtonText: 'Delete',\r\n+            confirmButtonColor: '#32d419',\r\n+        }).then((result) => {\r\n+            /* Read more about isConfirmed, isDenied below */\r\n+            if (result.isConfirmed) {\r\n+\r\n+\r\n+                $.ajaxSetup({\r\n+                    headers: {\r\n+                        'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')\r\n+                    }\r\n+                });\r\n+                $.ajax({\r\n+                    url: \"process/delete.php\",\r\n+                    method: 'POST',\r\n+                    data: {\r\n+                        tipe: \"condition\",\r\n+                        idcondition: myid\r\n+\r\n+                    },\r\n+                    success: function (myresult) {\r\n+                        var status = myresult.status;\r\n+                        var jumlah = myresult.jumlah;\r\n+                        if (status == \"ok\") {\r\n+                            success();\r\n+                            Swal.fire({\r\n+                                title: 'Deleted Successfully',\r\n+                                icon: 'success',\r\n+                                confirmButtonText: 'Ok',\r\n+                                confirmButtonColor: '#32d419',\r\n+                            });\r\n+                        } else {\r\n+\r\n+\r\n+                            Swal.fire({\r\n+                                title: 'Delete Failed',\r\n+                                icon: 'error',\r\n+                                html: 'There is <b>' + jumlah +\r\n+                                    \"</b> Condition is active on list of Asset, please delete it first\",\r\n+                                confirmButtonText: 'Ok',\r\n+                                confirmButtonColor: '#32d419',\r\n+                            });\r\n+                        }\r\n+                    }\r\n+                });\r\n+\r\n+            }\r\n+        })\r\n+    }\r\n </script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635933053429,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -450,10 +450,10 @@\n     function deleterow(element) {\r\n         var splitid = element.id.split(\"-\");\r\n         var myid = splitid[1];\r\n         Swal.fire({\r\n-            title: 'Do you want to delete this condition?',\r\n-            html: 'You cannot recover this condition after delete',\r\n+            title: 'Do you want to delete this initial condition?',\r\n+            html: 'You cannot recover this intial condition after delete',\r\n             showCancelButton: true,\r\n             confirmButtonText: 'Delete',\r\n             confirmButtonColor: '#32d419',\r\n         }).then((result) => {\r\n"
+                },
+                {
+                    "date": 1635933060545,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -451,9 +451,9 @@\n         var splitid = element.id.split(\"-\");\r\n         var myid = splitid[1];\r\n         Swal.fire({\r\n             title: 'Do you want to delete this initial condition?',\r\n-            html: 'You cannot recover this intial condition after delete',\r\n+            html: 'You cannot recover this initial condition after delete',\r\n             showCancelButton: true,\r\n             confirmButtonText: 'Delete',\r\n             confirmButtonColor: '#32d419',\r\n         }).then((result) => {\r\n"
+                },
+                {
+                    "date": 1635933068621,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -491,9 +491,9 @@\n                             Swal.fire({\r\n                                 title: 'Delete Failed',\r\n                                 icon: 'error',\r\n                                 html: 'There is <b>' + jumlah +\r\n-                                    \"</b> Condition is active on list of Asset, please delete it first\",\r\n+                                    \"</b> Initial Condition is active on list of Asset, please delete it first\",\r\n                                 confirmButtonText: 'Ok',\r\n                                 confirmButtonColor: '#32d419',\r\n                             });\r\n                         }\r\n"
+                },
+                {
+                    "date": 1635933086193,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -470,9 +470,9 @@\n                     url: \"process/delete.php\",\r\n                     method: 'POST',\r\n                     data: {\r\n                         tipe: \"condition\",\r\n-                        idcondition: myid\r\n+                        initial_condition: myid\r\n \r\n                     },\r\n                     success: function (myresult) {\r\n                         var status = myresult.status;\r\n"
+                },
+                {
+                    "date": 1635933099153,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -469,10 +469,10 @@\n                 $.ajax({\r\n                     url: \"process/delete.php\",\r\n                     method: 'POST',\r\n                     data: {\r\n-                        tipe: \"condition\",\r\n-                        initial_condition: myid\r\n+                        tipe: \"initial_condition\",\r\n+                        idinitialcondition: myid\r\n \r\n                     },\r\n                     success: function (myresult) {\r\n                         var status = myresult.status;\r\n"
                 }
             ],
             "date": 1630465443919,

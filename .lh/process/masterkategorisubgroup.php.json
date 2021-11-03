@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 51,
+            "activePatchIndex": 56,
             "patches": [
                 {
                     "date": 1629695832677,
@@ -212,6 +212,26 @@
                 {
                     "date": 1635914649806,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,8 @@\n     $where_like = [\r\n         'idsubgroup',\r\n         'nama',\r\n         'subgroup',\r\n-        'subgroup',\r\n         'subgroupdesc',\r\n         'statussubgroup'\r\n         \r\n     ];\r\n"
+                },
+                {
+                    "date": 1635931489708,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,9 +66,10 @@\n     \r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n                         <a href=\"#myModaledit\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['idsubgroup'].'\"  onclick = \"openmodaledit(this)\"><i class=\"icon-check\"></i>\r\n                             Edit</a>\r\n-                        \r\n+                            <a  class=\"dropdown-item\" id =\"delete-'.$row['id'].'\"  onclick = \"deleterow(this)\"><i class=\"icon-check\"></i>\r\n+                            Delete</a>\r\n                         '.$myaction.'\r\n                    \r\n                     </div>\r\n                 </div>\r\n"
+                },
+                {
+                    "date": 1635931578530,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,9 +66,9 @@\n     \r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n                         <a href=\"#myModaledit\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['idsubgroup'].'\"  onclick = \"openmodaledit(this)\"><i class=\"icon-check\"></i>\r\n                             Edit</a>\r\n-                            <a  class=\"dropdown-item\" id =\"delete-'.$row['id'].'\"  onclick = \"deleterow(this)\"><i class=\"icon-check\"></i>\r\n+                            <a  class=\"dropdown-item\" id =\"delete-'.$row['idsubgroup'].'\"  onclick = \"deleterow(this)\"><i class=\"icon-check\"></i>\r\n                             Delete</a>\r\n                         '.$myaction.'\r\n                    \r\n                     </div>\r\n"
+                },
+                {
+                    "date": 1635933565583,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,9 +66,9 @@\n     \r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n                         <a href=\"#myModaledit\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['idsubgroup'].'\"  onclick = \"openmodaledit(this)\"><i class=\"icon-check\"></i>\r\n                             Edit</a>\r\n-                            <a  class=\"dropdown-item\" id =\"delete-'.$row['idsubgroup'].'\"  onclick = \"deleterow(this)\"><i class=\"icon-check\"></i>\r\n+                            <a  class=\"dropdown-item\" id =\"delete-'.$row['idsubgroup'].'\"  onclick = \"deleterow(this)\"><i class=\"icon-trash\"></i>\r\n                             Delete</a>\r\n                         '.$myaction.'\r\n                    \r\n                     </div>\r\n"
+                },
+                {
+                    "date": 1635933570645,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -64,9 +64,9 @@\n                         <i class=\"icon-menu9\"></i>\r\n                     </a>\r\n     \r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n-                        <a href=\"#myModaledit\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['idsubgroup'].'\"  onclick = \"openmodaledit(this)\"><i class=\"icon-check\"></i>\r\n+                        <a href=\"#myModaledit\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['idsubgroup'].'\"  onclick = \"openmodaledit(this)\"><i class=\"icon-pen\"></i>\r\n                             Edit</a>\r\n                             <a  class=\"dropdown-item\" id =\"delete-'.$row['idsubgroup'].'\"  onclick = \"deleterow(this)\"><i class=\"icon-trash\"></i>\r\n                             Delete</a>\r\n                         '.$myaction.'\r\n"
+                },
+                {
+                    "date": 1635933583354,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n             if($row['statussubgroup'] == \"Active\")\r\n             {\r\n                 $myactionsetto = \"InActive\";\r\n                 $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n-                $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$row['idsubgroup'].\"-\".$myactionsetto.\"')><i class='icon-check'></i>\r\n+                $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$row['idsubgroup'].\"-\".$myactionsetto.\"')><i class='icon-cross'></i>\r\n                 Set InActive</a>'\";\r\n             }\r\n             else\r\n             {\r\n"
                 }
             ],
             "date": 1629695832677,

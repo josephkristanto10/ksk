@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 59,
+            "activePatchIndex": 63,
             "patches": [
                 {
                     "date": 1632055251340,
@@ -244,6 +244,22 @@
                 {
                     "date": 1635827619050,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,23 +22,23 @@\n     $search   = $response['search']['value'];\r\n     $sessionidsister = $_SESSION['idsister'];\r\n     \r\n     $total_data = mysqli_query($conn, \r\n-    \"select * template\r\n+    \"select * from template\r\n     \"\r\n );\r\n     \r\n     if(empty($search)) {\r\n-        $query_data = mysqli_query($conn, \"select * template ORDER BY $order $dir LIMIT $start, $length\");\r\n+        $query_data = mysqli_query($conn, \"select * from template ORDER BY $order $dir LIMIT $start, $length\");\r\n     \r\n-        $total_filtered = mysqli_query($conn, \"select * template \");\r\n+        $total_filtered = mysqli_query($conn, \"select * from template \");\r\n \r\n     } else {\r\n-        $query_data = mysqli_query($conn, \"select * template \r\n+        $query_data = mysqli_query($conn, \"select * from template \r\n         where template.template LIKE '%$search%'  \r\n         ORDER BY $order $dir LIMIT $start, $length\");\r\n     \r\n-        $total_filtered = mysqli_query($conn, \"select * template \r\n+        $total_filtered = mysqli_query($conn, \"select * from template \r\n         where template.template LIKE '%$search%'  \");\r\n     }\r\n     \r\n     $response['data'] = [];\r\n"
+                },
+                {
+                    "date": 1635932541827,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -74,9 +74,10 @@\n     \r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n                         <a href=\"#myModaledit\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodaledit(this)\"><i class=\"icon-check\"></i>\r\n                             Edit</a>\r\n-                        \r\n+                            <a  class=\"dropdown-item\" id =\"delete-'.$row['idsubgroup'].'\"  onclick = \"deleterow(this)\"><i class=\"icon-check\"></i>\r\n+                            Delete</a>\r\n                         '.$myaction.'\r\n                    \r\n                     </div>\r\n                 </div>\r\n"
+                },
+                {
+                    "date": 1635933438585,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,9 +49,9 @@\n             if($row['status'] == \"Active\")\r\n             {\r\n                 $myactionsetto = \"InActive\";\r\n                 $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n-                $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$row['id'].\"-\".$myactionsetto.\"')><i class='icon-check'></i>\r\n+                $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$row['id'].\"-\".$myactionsetto.\"')><i class='icon-crosss'></i>\r\n                 Set InActive</a>'\";\r\n             }\r\n             else\r\n             {\r\n@@ -74,9 +74,9 @@\n     \r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n                         <a href=\"#myModaledit\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodaledit(this)\"><i class=\"icon-check\"></i>\r\n                             Edit</a>\r\n-                            <a  class=\"dropdown-item\" id =\"delete-'.$row['idsubgroup'].'\"  onclick = \"deleterow(this)\"><i class=\"icon-check\"></i>\r\n+                            <a  class=\"dropdown-item\" id =\"delete-'.$row['id'].'\"  onclick = \"deleterow(this)\"><i class=\"icon-check\"></i>\r\n                             Delete</a>\r\n                         '.$myaction.'\r\n                    \r\n                     </div>\r\n"
+                },
+                {
+                    "date": 1635933444353,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,9 +49,9 @@\n             if($row['status'] == \"Active\")\r\n             {\r\n                 $myactionsetto = \"InActive\";\r\n                 $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n-                $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$row['id'].\"-\".$myactionsetto.\"')><i class='icon-crosss'></i>\r\n+                $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$row['id'].\"-\".$myactionsetto.\"')><i class='icon-cross'></i>\r\n                 Set InActive</a>'\";\r\n             }\r\n             else\r\n             {\r\n"
+                },
+                {
+                    "date": 1635933449881,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -72,11 +72,11 @@\n                         <i class=\"icon-menu9\"></i>\r\n                     </a>\r\n     \r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n-                        <a href=\"#myModaledit\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodaledit(this)\"><i class=\"icon-check\"></i>\r\n+                        <a href=\"#myModaledit\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodaledit(this)\"><i class=\"icon-pen\"></i>\r\n                             Edit</a>\r\n-                            <a  class=\"dropdown-item\" id =\"delete-'.$row['id'].'\"  onclick = \"deleterow(this)\"><i class=\"icon-check\"></i>\r\n+                            <a  class=\"dropdown-item\" id =\"delete-'.$row['id'].'\"  onclick = \"deleterow(this)\"><i class=\"icon-trash\"></i>\r\n                             Delete</a>\r\n                         '.$myaction.'\r\n                    \r\n                     </div>\r\n"
                 }
             ],
             "date": 1632055251340,

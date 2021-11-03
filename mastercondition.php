@@ -437,4 +437,61 @@ function checkchangecategory(element)
 		}
 		
 	}
+
+    function deleterow(element) {
+        var splitid = element.id.split("-");
+        var myid = splitid[1];
+        Swal.fire({
+            title: 'Do you want to delete this condition?',
+            html: 'You cannot recover this condition after delete',
+            showCancelButton: true,
+            confirmButtonText: 'Delete',
+            confirmButtonColor: '#32d419',
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: "process/delete.php",
+                    method: 'POST',
+                    data: {
+                        tipe: "condition",
+                        idcondition: myid
+
+                    },
+                    success: function (myresult) {
+                        var status = myresult.status;
+                        var jumlah = myresult.jumlah;
+                        if (status == "ok") {
+                            success();
+                            Swal.fire({
+                                title: 'Deleted Successfully',
+                                icon: 'success',
+                                confirmButtonText: 'Ok',
+                                confirmButtonColor: '#32d419',
+                            });
+                        } else {
+
+
+                            Swal.fire({
+                                title: 'Delete Failed',
+                                icon: 'error',
+                                html: 'There is <b>' + jumlah +
+                                    "</b> Condition is active on list of Asset, please delete it first",
+                                confirmButtonText: 'Ok',
+                                confirmButtonColor: '#32d419',
+                            });
+                        }
+                    }
+                });
+
+            }
+        })
+    }
 </script>

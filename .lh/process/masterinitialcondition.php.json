@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 23,
+            "activePatchIndex": 29,
             "patches": [
                 {
                     "date": 1630476128486,
@@ -100,6 +100,30 @@
                 {
                     "date": 1635845940349,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -72,9 +72,9 @@\n                     <a href=\"#\" class=\"list-icons-item\" data-toggle=\"dropdown\">\r\n                         <i class=\"icon-menu9\"></i>\r\n                     </a>\r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n-                    <a href=\"#editModal\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodaledit(this)\"><i class=\"icon-check\"></i>\r\n+                    <a href=\"#myModaledit\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodaledit(this)\"><i class=\"icon-check\"></i>\r\n                         Edit</a>\r\n                     \r\n                     '.$myaction.'\r\n                \r\n"
+                },
+                {
+                    "date": 1635933119961,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -74,9 +74,10 @@\n                     </a>\r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n                     <a href=\"#myModaledit\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodaledit(this)\"><i class=\"icon-check\"></i>\r\n                         Edit</a>\r\n-                    \r\n+                        <a  class=\"dropdown-item\" id =\"delete-'.$row['id'].'\"  onclick = \"deleterow(this)\"><i class=\"icon-check\"></i>\r\n+                        Delete</a>\r\n                     '.$myaction.'\r\n                \r\n                 </div>\r\n                 </div>\r\n"
+                },
+                {
+                    "date": 1635933288198,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -74,9 +74,9 @@\n                     </a>\r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n                     <a href=\"#myModaledit\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodaledit(this)\"><i class=\"icon-check\"></i>\r\n                         Edit</a>\r\n-                        <a  class=\"dropdown-item\" id =\"delete-'.$row['id'].'\"  onclick = \"deleterow(this)\"><i class=\"icon-check\"></i>\r\n+                        <a  class=\"dropdown-item\" id =\"delete-'.$row['id'].'\"  onclick = \"deleterow(this)\"><i class=\"mi-trash\"></i>\r\n                         Delete</a>\r\n                     '.$myaction.'\r\n                \r\n                 </div>\r\n"
+                },
+                {
+                    "date": 1635933305284,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -74,9 +74,9 @@\n                     </a>\r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n                     <a href=\"#myModaledit\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodaledit(this)\"><i class=\"icon-check\"></i>\r\n                         Edit</a>\r\n-                        <a  class=\"dropdown-item\" id =\"delete-'.$row['id'].'\"  onclick = \"deleterow(this)\"><i class=\"mi-trash\"></i>\r\n+                        <a  class=\"dropdown-item\" id =\"delete-'.$row['id'].'\"  onclick = \"deleterow(this)\"><i class=\"icon-trash\"></i>\r\n                         Delete</a>\r\n                     '.$myaction.'\r\n                \r\n                 </div>\r\n"
+                },
+                {
+                    "date": 1635933323177,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -72,9 +72,9 @@\n                     <a href=\"#\" class=\"list-icons-item\" data-toggle=\"dropdown\">\r\n                         <i class=\"icon-menu9\"></i>\r\n                     </a>\r\n                     <div class=\"dropdown-menu dropdown-menu-right\">\r\n-                    <a href=\"#myModaledit\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodaledit(this)\"><i class=\"icon-check\"></i>\r\n+                    <a href=\"#myModaledit\" data-toggle=\"modal\" class=\"dropdown-item\" id =\"click-'.$row['id'].'\"  onclick = \"openmodaledit(this)\"><i class=\"icon-pen\"></i>\r\n                         Edit</a>\r\n                         <a  class=\"dropdown-item\" id =\"delete-'.$row['id'].'\"  onclick = \"deleterow(this)\"><i class=\"icon-trash\"></i>\r\n                         Delete</a>\r\n                     '.$myaction.'\r\n"
+                },
+                {
+                    "date": 1635933371836,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,9 +50,9 @@\n             if($row['status'] == \"Active\")\r\n             {\r\n                 $myactionsetto = \"InActive\";\r\n                 $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n-                $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$row['id'].\"-\".$myactionsetto.\"')><i class='icon-check'></i>\r\n+                $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$row['id'].\"-\".$myactionsetto.\"')><i class='icon-times'></i>\r\n                 Set InActive</a>'\";\r\n             }\r\n             else\r\n             {\r\n"
+                },
+                {
+                    "date": 1635933383960,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,9 +50,9 @@\n             if($row['status'] == \"Active\")\r\n             {\r\n                 $myactionsetto = \"InActive\";\r\n                 $mystats = '<span class=\"badge badge-success\">Active</span>';\r\n-                $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$row['id'].\"-\".$myactionsetto.\"')><i class='icon-times'></i>\r\n+                $myaction = \"<a class='dropdown-item' onclick = setstatus('\".$row['id'].\"-\".$myactionsetto.\"')><i class='icon-cross'></i>\r\n                 Set InActive</a>'\";\r\n             }\r\n             else\r\n             {\r\n"
                 }
             ],
             "date": 1630476128486,
