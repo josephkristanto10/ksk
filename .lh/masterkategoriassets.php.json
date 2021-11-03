@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 482,
+            "activePatchIndex": 487,
             "patches": [
                 {
                     "date": 1628248104275,
@@ -1936,6 +1936,26 @@
                 {
                     "date": 1635844274922,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -158,10 +158,10 @@\n                     text: 'Requirement data cannot be empty',\r\n                     confirmButtonColor: '#e00d0d',\r\n                 });\r\n             }\r\n-\r\n-            $.ajaxSetup({\r\n+            else{\r\n+                $.ajaxSetup({\r\n                 headers: {\r\n                     'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')\r\n                 }\r\n             });\r\n@@ -211,8 +211,11 @@\n                     //         });\r\n                   \r\n                 }\r\n             });\r\n+            }\r\n+\r\n+           \r\n }\r\n function loadData() {\r\n       $(\"#datatable_serverside\").DataTable({\r\n          processing: true,\r\n"
+                },
+                {
+                    "date": 1635915562699,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -223,9 +223,9 @@\n          serverSide: true,\r\n          destroy: true,\r\n          iDisplayInLength: 10,\r\n          scrollX: true,\r\n-         order: [[0, 'desc']],\r\n+         order: [[0, 'asc']],\r\n          ajax: { \r\n             url: 'process/masterkategoriassetsprocess.php',\r\n             method: 'POST',\r\n             data: { tipe: \"load\"  }\r\n"
+                },
+                {
+                    "date": 1635915568587,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -223,19 +223,18 @@\n          serverSide: true,\r\n          destroy: true,\r\n          iDisplayInLength: 10,\r\n          scrollX: true,\r\n-         order: [[0, 'asc']],\r\n          ajax: { \r\n             url: 'process/masterkategoriassetsprocess.php',\r\n             method: 'POST',\r\n             data: { tipe: \"load\"  }\r\n         },\r\n         columnDefs: [\r\n-\t\t\t{ targets: [0], visible: false},\r\n+\t\t\t{ targets: [0], visible: true},\r\n \t\t\t],\r\n \t\t\torder: [\r\n-\t\t\t\t[0, 'desc']\r\n+\t\t\t\t[0, 'asc']\r\n \t\t\t],\r\n          columns: [\r\n             { name: 'Id', searchable: false, className: 'text-center align-middle' },\r\n             { name: 'nama', searchable: false, className: 'text-center align-middle' },\r\n"
+                },
+                {
+                    "date": 1635915587092,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -229,9 +229,9 @@\n             method: 'POST',\r\n             data: { tipe: \"load\"  }\r\n         },\r\n         columnDefs: [\r\n-\t\t\t{ targets: [0], visible: true},\r\n+\t\t\t{ targets: [0], visible: false},\r\n \t\t\t],\r\n \t\t\torder: [\r\n \t\t\t\t[0, 'asc']\r\n \t\t\t],\r\n"
+                },
+                {
+                    "date": 1635915605551,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -149,9 +149,9 @@\n             var selected = [];\r\n             $(\"input:checkbox[class=cb]:checked\").each(function(){\r\n                 selected.push($(this).val());\r\n             });\r\n-            if(group == \"\")\r\n+            if(group == \"\" || description == \"\")\r\n             {\r\n                 Swal.fire({\r\n                     icon: 'error',\r\n                     title: 'Empty Field',\r\n"
+                },
+                {
+                    "date": 1635915643246,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -285,9 +285,9 @@\n             var selected = [];\r\n             $(\"input:checkbox[class=cbedit]:checked\").each(function(){\r\n                 selected.push($(this).val());\r\n             });\r\n-            if(group == \"\")\r\n+            if(group == \"\" || description == \"\")\r\n             {\r\n                 Swal.fire({\r\n                     icon: 'error',\r\n                     title: 'Empty Field',\r\n"
                 }
             ],
             "date": 1628248104275,

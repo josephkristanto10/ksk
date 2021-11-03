@@ -150,7 +150,7 @@ function adddata(){
             $("input:checkbox[class=cb]:checked").each(function(){
                 selected.push($(this).val());
             });
-            if(group == "")
+            if(group == "" || description == "")
             {
                 Swal.fire({
                     icon: 'error',
@@ -224,7 +224,6 @@ function loadData() {
          destroy: true,
          iDisplayInLength: 10,
          scrollX: true,
-         order: [[0, 'desc']],
          ajax: { 
             url: 'process/masterkategoriassetsprocess.php',
             method: 'POST',
@@ -234,7 +233,7 @@ function loadData() {
 			{ targets: [0], visible: false},
 			],
 			order: [
-				[0, 'desc']
+				[0, 'asc']
 			],
          columns: [
             { name: 'Id', searchable: false, className: 'text-center align-middle' },
@@ -287,7 +286,7 @@ function changedata(){
             $("input:checkbox[class=cbedit]:checked").each(function(){
                 selected.push($(this).val());
             });
-            if(group == "")
+            if(group == "" || description == "")
             {
                 Swal.fire({
                     icon: 'error',

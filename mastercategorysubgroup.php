@@ -30,7 +30,7 @@ if($restemplate->num_rows>0)
 		<div class="content-wrapper">
 			<div class="page-header page-header-light">
 				<div class="page-header-content header-elements-md-inline">
-					<h4><span class="font-weight-semibold">Master Category Sub Group</span></h4>
+					<h4><span class="font-weight-semibold">Master Category</span></h4>
 					<div class="page-title d-flex">
 						<div class="row" style="width:100%;">
 							<div class="col-xl-12">
@@ -141,7 +141,7 @@ if($restemplate->num_rows>0)
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header" style="background-color:#324148;color:white;height:60px;">
-						<h5 class="modal-title">Edit Category Sub Group</h5>
+						<h5 class="modal-title">Edit Category</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">×</span>
 						</button>
@@ -238,7 +238,7 @@ if($restemplate->num_rows>0)
 			{ targets: [0], visible: false},
 			],
 			order: [
-				[0, 'desc']
+				[0, 'asc']
 			],
 			ajax: {
 				url: 'process/masterkategoricategorysubgroup.php',
@@ -357,7 +357,7 @@ if($restemplate->num_rows>0)
 		var changesubgroup = $("#subgroupedit").val();
 		var changetemplate = $("#templateedit").val();
 		var changedescription = $("#descriptionedit").val();
-		if (changecategory == "" || changesubgroup == null ) {
+		if (changecategory == "" || changesubgroup == null  || changedescription == "") {
 			Swal.fire({
 				icon: 'error',
 				title: 'Empty Field',
@@ -419,7 +419,7 @@ if($restemplate->num_rows>0)
 		var mytemplate = $("#template").val();
 		var mysubgroup = $("#subgroup").val();
 		var mydesc = $("#descriptionadd").val();
-		if (mycat == "" || mysubgroup == null) {
+		if (mycat == "" || mysubgroup == null || mydesc == "") {
 			Swal.fire({
 				icon: 'error',
 				title: 'Empty Field',

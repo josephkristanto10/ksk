@@ -128,6 +128,9 @@ $res2 = $conn->query($sql);
 							
 						<label for="description">Description</label>
     					<input type="text" class="form-control" id="descriptionedit">
+						<br> 
+								<input type = "checkbox" id = "description" onchange="checkchangecategoryedit(this)"> Same as sub group name<br>
+								<br>
 
 						</div>
 							</form>
@@ -166,7 +169,7 @@ $res2 = $conn->query($sql);
 			{ targets: [0], visible: false},
 			],
 			order: [
-				[0, 'desc']
+				[0, 'asc']
 			],
          ajax: { 
             url: 'process/masterkategorisubgroup.php',
@@ -194,7 +197,7 @@ $res2 = $conn->query($sql);
 	var group = $("#groupedit").val();
 	var subgroup = $("#subgroupedit").val();
 	var descriptiongroup = $("#descriptionedit").val();
-	if(subgroup == "")
+	if(subgroup == "" || descriptiongroup == "")
 	{
 		Swal.fire({
                     icon: 'error',
@@ -270,7 +273,7 @@ $res2 = $conn->query($sql);
     var subgroup = $('#subgroupadd').val();
     var description = $('#descriptionadd').val();
     
-	if(subgroup == "")
+	if(subgroup == "" || description == "")
 	{
 		Swal.fire({
                     icon: 'error',
@@ -376,6 +379,21 @@ function checkchangecategory(element)
 		else
 		{
 			$("#descriptionadd").val("");
+		}
+		
+	}
+	function checkchangecategoryedit(element)
+	{
+		var mycategory = $("#subgroupedit").val();
+
+		var mycheck = element.checked;
+		if(mycheck)
+		{
+			$("#descriptionedit").val(mycategory);
+		}
+		else
+		{
+			$("#descriptionedit").val("");
 		}
 		
 	}

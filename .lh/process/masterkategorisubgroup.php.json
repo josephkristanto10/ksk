@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 48,
+            "activePatchIndex": 51,
             "patches": [
                 {
                     "date": 1629695832677,
@@ -200,6 +200,18 @@
                 {
                     "date": 1635912253137,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n     $where_like = [\r\n         'idsubgroup',\r\n         'nama',\r\n         'subgroup',\r\n-        'description',\r\n+        'subgroupdesc',\r\n         'status'\r\n         \r\n     ];\r\n     \r\n"
+                },
+                {
+                    "date": 1635914577799,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n         'idsubgroup',\r\n         'nama',\r\n         'subgroup',\r\n         'subgroupdesc',\r\n-        'status'\r\n+        'statussubgroup'\r\n         \r\n     ];\r\n     \r\n     $response = $_REQUEST;\r\n"
+                },
+                {
+                    "date": 1635914634424,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,9 @@\n     $where_like = [\r\n         'idsubgroup',\r\n         'nama',\r\n         'subgroup',\r\n+        'subgroup',\r\n         'subgroupdesc',\r\n         'statussubgroup'\r\n         \r\n     ];\r\n"
+                },
+                {
+                    "date": 1635914649806,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,8 @@\n     $where_like = [\r\n         'idsubgroup',\r\n         'nama',\r\n         'subgroup',\r\n-        'subgroup',\r\n         'subgroupdesc',\r\n         'statussubgroup'\r\n         \r\n     ];\r\n"
                 }
             ],
             "date": 1629695832677,

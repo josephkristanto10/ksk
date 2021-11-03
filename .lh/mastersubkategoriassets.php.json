@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 317,
+            "activePatchIndex": 327,
             "patches": [
                 {
                     "date": 1628248487932,
@@ -1276,6 +1276,46 @@
                 {
                     "date": 1635912288383,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -176,9 +176,9 @@\n          columns: [\r\n             { name: 'Id', searchable: false, className: 'text-center align-middle' },\r\n             { name: 'Group', searchable: false, className: 'text-center align-middle' },\r\n             { name: 'SubGroup', searchable: false, className: 'text-center align-middle' },\r\n-            { name: 'subgroupdesc', className: 'text-center align-middle' },\r\n+            { name: 'Description', className: 'text-center align-middle' },\r\n             { name: 'Status', className: 'text-center align-middle' },\r\n             { name: 'Action', searchable: false, orderable: false, className: 'text-center align-middle' }\r\n             \r\n          ]\r\n"
+                },
+                {
+                    "date": 1635914628699,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -176,8 +176,9 @@\n          columns: [\r\n             { name: 'Id', searchable: false, className: 'text-center align-middle' },\r\n             { name: 'Group', searchable: false, className: 'text-center align-middle' },\r\n             { name: 'SubGroup', searchable: false, className: 'text-center align-middle' },\r\n+\t\t\t{ name: 'SubGroup', searchable: false, className: 'text-center align-middle' },\r\n             { name: 'Description', className: 'text-center align-middle' },\r\n             { name: 'Status', className: 'text-center align-middle' },\r\n             { name: 'Action', searchable: false, orderable: false, className: 'text-center align-middle' }\r\n             \r\n"
+                },
+                {
+                    "date": 1635914652618,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -176,9 +176,8 @@\n          columns: [\r\n             { name: 'Id', searchable: false, className: 'text-center align-middle' },\r\n             { name: 'Group', searchable: false, className: 'text-center align-middle' },\r\n             { name: 'SubGroup', searchable: false, className: 'text-center align-middle' },\r\n-\t\t\t{ name: 'SubGroup', searchable: false, className: 'text-center align-middle' },\r\n             { name: 'Description', className: 'text-center align-middle' },\r\n             { name: 'Status', className: 'text-center align-middle' },\r\n             { name: 'Action', searchable: false, orderable: false, className: 'text-center align-middle' }\r\n             \r\n"
+                },
+                {
+                    "date": 1635915517407,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -165,9 +165,9 @@\n          columnDefs: [\r\n \t\t\t{ targets: [0], visible: false},\r\n \t\t\t],\r\n \t\t\torder: [\r\n-\t\t\t\t[0, 'desc']\r\n+\t\t\t\t[0, 'asc']\r\n \t\t\t],\r\n          ajax: { \r\n             url: 'process/masterkategorisubgroup.php',\r\n             method: 'POST',\r\n"
+                },
+                {
+                    "date": 1635915676313,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -269,9 +269,9 @@\n \tvar group = $(\"#groupadd\").val();\r\n     var subgroup = $('#subgroupadd').val();\r\n     var description = $('#descriptionadd').val();\r\n     \r\n-\tif(subgroup == \"\")\r\n+\tif(subgroup == \"\" || description == \"\")\r\n \t{\r\n \t\tSwal.fire({\r\n                     icon: 'error',\r\n                     title: 'Empty Field',\r\n"
+                },
+                {
+                    "date": 1635915695704,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -193,9 +193,9 @@\n \tvar myid = $(\"#idchange\").val();\r\n \tvar group = $(\"#groupedit\").val();\r\n \tvar subgroup = $(\"#subgroupedit\").val();\r\n \tvar descriptiongroup = $(\"#descriptionedit\").val();\r\n-\tif(subgroup == \"\")\r\n+\tif(subgroup == \"\" || description == \"\")\r\n \t{\r\n \t\tSwal.fire({\r\n                     icon: 'error',\r\n                     title: 'Empty Field',\r\n"
+                },
+                {
+                    "date": 1635915707974,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -193,9 +193,9 @@\n \tvar myid = $(\"#idchange\").val();\r\n \tvar group = $(\"#groupedit\").val();\r\n \tvar subgroup = $(\"#subgroupedit\").val();\r\n \tvar descriptiongroup = $(\"#descriptionedit\").val();\r\n-\tif(subgroup == \"\" || description == \"\")\r\n+\tif(subgroup == \"\" || descriptiongroup == \"\")\r\n \t{\r\n \t\tSwal.fire({\r\n                     icon: 'error',\r\n                     title: 'Empty Field',\r\n"
+                },
+                {
+                    "date": 1635915884515,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -127,8 +127,11 @@\n \t\t\t\t\t\r\n \t\t\t\t\t\t\t\r\n \t\t\t\t\t\t<label for=\"description\">Description</label>\r\n     \t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"descriptionedit\">\r\n+\t\t\t\t\t\t<br> \r\n+\t\t\t\t\t\t\t\t<input type = \"checkbox\" id = \"description\" onchange=\"checkchangecategory(this)\"> Same as sub group name<br>\r\n+\t\t\t\t\t\t\t\t<br>\r\n \r\n \t\t\t\t\t\t</div>\r\n \t\t\t\t\t\t\t</form>\r\n \t\t\t\t\t</div>\r\n"
+                },
+                {
+                    "date": 1635915897932,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -128,9 +128,9 @@\n \t\t\t\t\t\t\t\r\n \t\t\t\t\t\t<label for=\"description\">Description</label>\r\n     \t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"descriptionedit\">\r\n \t\t\t\t\t\t<br> \r\n-\t\t\t\t\t\t\t\t<input type = \"checkbox\" id = \"description\" onchange=\"checkchangecategory(this)\"> Same as sub group name<br>\r\n+\t\t\t\t\t\t\t\t<input type = \"checkbox\" id = \"description\" onchange=\"checkchangecategoryedit(this)\"> Same as sub group name<br>\r\n \t\t\t\t\t\t\t\t<br>\r\n \r\n \t\t\t\t\t\t</div>\r\n \t\t\t\t\t\t\t</form>\r\n@@ -381,5 +381,20 @@\n \t\t\t$(\"#descriptionadd\").val(\"\");\r\n \t\t}\r\n \t\t\r\n \t}\r\n+\tfunction checkchangecategory(element)\r\n+\t{\r\n+\t\tvar mycategory = $(\"#subgroupadd\").val();\r\n+\r\n+\t\tvar mycheck = element.checked;\r\n+\t\tif(mycheck)\r\n+\t\t{\r\n+\t\t\t$(\"#descriptionadd\").val(mycategory);\r\n+\t\t}\r\n+\t\telse\r\n+\t\t{\r\n+\t\t\t$(\"#descriptionadd\").val(\"\");\r\n+\t\t}\r\n+\t\t\r\n+\t}\r\n \t</script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1635915903301,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -381,11 +381,11 @@\n \t\t\t$(\"#descriptionadd\").val(\"\");\r\n \t\t}\r\n \t\t\r\n \t}\r\n-\tfunction checkchangecategory(element)\r\n+\tfunction checkchangecategoryedit(element)\r\n \t{\r\n-\t\tvar mycategory = $(\"#subgroupadd\").val();\r\n+\t\tvar mycategory = $(\"#subgroupedit\").val();\r\n \r\n \t\tvar mycheck = element.checked;\r\n \t\tif(mycheck)\r\n \t\t{\r\n"
+                },
+                {
+                    "date": 1635915908741,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -388,13 +388,13 @@\n \r\n \t\tvar mycheck = element.checked;\r\n \t\tif(mycheck)\r\n \t\t{\r\n-\t\t\t$(\"#descriptionadd\").val(mycategory);\r\n+\t\t\t$(\"#descriptionedit\").val(mycategory);\r\n \t\t}\r\n \t\telse\r\n \t\t{\r\n-\t\t\t$(\"#descriptionadd\").val(\"\");\r\n+\t\t\t$(\"#descriptionedit\").val(\"\");\r\n \t\t}\r\n \t\t\r\n \t}\r\n \t</script>\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1628248487932,

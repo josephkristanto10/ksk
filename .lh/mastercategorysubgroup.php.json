@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 537,
+            "activePatchIndex": 546,
             "patches": [
                 {
                     "date": 1628517819558,
@@ -2156,6 +2156,42 @@
                 {
                     "date": 1635914183664,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -355,9 +355,9 @@\n \t\tvar changecategory = $(\"#categoryedit\").val();\r\n \t\tvar changegroup = $(\"#groupedit\").val();\r\n \t\tvar changesubgroup = $(\"#subgroupedit\").val();\r\n \t\tvar changetemplate = $(\"#templateedit\").val();\r\n-\t\tvar changetemplate = $(\"#descriptionedit\").val();\r\n+\t\tvar changedescription = $(\"#descriptionedit\").val();\r\n \t\tif (changecategory == \"\" || changesubgroup == null ) {\r\n \t\t\tSwal.fire({\r\n \t\t\t\ticon: 'error',\r\n \t\t\t\ttitle: 'Empty Field',\r\n"
+                },
+                {
+                    "date": 1635915437532,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n \r\n \t\t<div class=\"content-wrapper\">\r\n \t\t\t<div class=\"page-header page-header-light\">\r\n \t\t\t\t<div class=\"page-header-content header-elements-md-inline\">\r\n-\t\t\t\t\t<h4><span class=\"font-weight-semibold\">Master Category Sub Group</span></h4>\r\n+\t\t\t\t\t<h4><span class=\"font-weight-semibold\">Master Category</span></h4>\r\n \t\t\t\t\t<div class=\"page-title d-flex\">\r\n \t\t\t\t\t\t<div class=\"row\" style=\"width:100%;\">\r\n \t\t\t\t\t\t\t<div class=\"col-xl-12\">\r\n \t\t\t\t\t\t\t\t<a href=\"#myModal\" data-toggle=\"modal\">\r\n"
+                },
+                {
+                    "date": 1635915444783,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -140,9 +140,9 @@\n \t\t<div class=\"modal fade\" id=\"myModaledit\">\r\n \t\t\t<div class=\"modal-dialog\" role=\"document\">\r\n \t\t\t\t<div class=\"modal-content\">\r\n \t\t\t\t\t<div class=\"modal-header\" style=\"background-color:#324148;color:white;height:60px;\">\r\n-\t\t\t\t\t\t<h5 class=\"modal-title\">Edit Category Sub Group</h5>\r\n+\t\t\t\t\t\t<h5 class=\"modal-title\">Edit Category</h5>\r\n \t\t\t\t\t\t<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n \t\t\t\t\t\t\t<span aria-hidden=\"true\">×</span>\r\n \t\t\t\t\t\t</button>\r\n \r\n"
+                },
+                {
+                    "date": 1635915480154,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -237,9 +237,9 @@\n \t\t\tcolumnDefs: [\r\n \t\t\t{ targets: [0], visible: false},\r\n \t\t\t],\r\n \t\t\torder: [\r\n-\t\t\t\t[0, 'desc']\r\n+\t\t\t\t[0, 'asc']\r\n \t\t\t],\r\n \t\t\tajax: {\r\n \t\t\t\turl: 'process/masterkategoricategorysubgroup.php',\r\n \t\t\t\tmethod: 'POST',\r\n"
+                },
+                {
+                    "date": 1635915491061,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -234,9 +234,9 @@\n \t\t\tdestroy: true,\r\n \t\t\tiDisplayInLength: 10,\r\n \t\t\tscrollX: true,\r\n \t\t\tcolumnDefs: [\r\n-\t\t\t{ targets: [0], visible: false},\r\n+\t\t\t{ targets: [0], visible: true},\r\n \t\t\t],\r\n \t\t\torder: [\r\n \t\t\t\t[0, 'asc']\r\n \t\t\t],\r\n"
+                },
+                {
+                    "date": 1635915503742,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -234,9 +234,9 @@\n \t\t\tdestroy: true,\r\n \t\t\tiDisplayInLength: 10,\r\n \t\t\tscrollX: true,\r\n \t\t\tcolumnDefs: [\r\n-\t\t\t{ targets: [0], visible: true},\r\n+\t\t\t{ targets: [0], visible: false},\r\n \t\t\t],\r\n \t\t\torder: [\r\n \t\t\t\t[0, 'asc']\r\n \t\t\t],\r\n"
+                },
+                {
+                    "date": 1635915738838,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -418,9 +418,9 @@\n \t\tvar mygroup = $(\"#group\").val();\r\n \t\tvar mytemplate = $(\"#template\").val();\r\n \t\tvar mysubgroup = $(\"#subgroup\").val();\r\n \t\tvar mydesc = $(\"#descriptionadd\").val();\r\n-\t\tif (mycat == \"\" || mysubgroup == null) {\r\n+\t\tif (mycat == \"\" || mysubgroup == null descriptiongroup) {\r\n \t\t\tSwal.fire({\r\n \t\t\t\ticon: 'error',\r\n \t\t\t\ttitle: 'Empty Field',\r\n \t\t\t\ttext: 'Requirement data cannot be empty',\r\n"
+                },
+                {
+                    "date": 1635915746413,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -418,9 +418,9 @@\n \t\tvar mygroup = $(\"#group\").val();\r\n \t\tvar mytemplate = $(\"#template\").val();\r\n \t\tvar mysubgroup = $(\"#subgroup\").val();\r\n \t\tvar mydesc = $(\"#descriptionadd\").val();\r\n-\t\tif (mycat == \"\" || mysubgroup == null descriptiongroup) {\r\n+\t\tif (mycat == \"\" || mysubgroup == null || mydesc == \"\") {\r\n \t\t\tSwal.fire({\r\n \t\t\t\ticon: 'error',\r\n \t\t\t\ttitle: 'Empty Field',\r\n \t\t\t\ttext: 'Requirement data cannot be empty',\r\n"
+                },
+                {
+                    "date": 1635915757170,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -356,9 +356,9 @@\n \t\tvar changegroup = $(\"#groupedit\").val();\r\n \t\tvar changesubgroup = $(\"#subgroupedit\").val();\r\n \t\tvar changetemplate = $(\"#templateedit\").val();\r\n \t\tvar changedescription = $(\"#descriptionedit\").val();\r\n-\t\tif (changecategory == \"\" || changesubgroup == null ) {\r\n+\t\tif (changecategory == \"\" || changesubgroup == null  || mydesc == \"\") {\r\n \t\t\tSwal.fire({\r\n \t\t\t\ticon: 'error',\r\n \t\t\t\ttitle: 'Empty Field',\r\n \t\t\t\ttext: 'Requirement data cannot be empty',\r\n"
+                },
+                {
+                    "date": 1635915994071,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -356,9 +356,9 @@\n \t\tvar changegroup = $(\"#groupedit\").val();\r\n \t\tvar changesubgroup = $(\"#subgroupedit\").val();\r\n \t\tvar changetemplate = $(\"#templateedit\").val();\r\n \t\tvar changedescription = $(\"#descriptionedit\").val();\r\n-\t\tif (changecategory == \"\" || changesubgroup == null  || mydesc == \"\") {\r\n+\t\tif (changecategory == \"\" || changesubgroup == null  || changedescription == \"\") {\r\n \t\t\tSwal.fire({\r\n \t\t\t\ticon: 'error',\r\n \t\t\t\ttitle: 'Empty Field',\r\n \t\t\t\ttext: 'Requirement data cannot be empty',\r\n"
                 }
             ],
             "date": 1628517819558,

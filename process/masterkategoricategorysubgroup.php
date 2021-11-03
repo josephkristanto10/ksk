@@ -9,8 +9,9 @@ if($tipe == "load")
         'nama',
         'subgroup',
         'category',
-        'description',
         'template',
+        'categorydesc',
+       
         'status'
         
     ];

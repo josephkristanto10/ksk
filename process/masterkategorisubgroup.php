@@ -9,7 +9,7 @@ if($tipe == "load")
         'nama',
         'subgroup',
         'subgroupdesc',
-        'status'
+        'statussubgroup'
         
     ];
     
