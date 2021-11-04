@@ -14,7 +14,7 @@ if($tipe == "group"){
     {
         $stats = "ok";
       
-        $sqldeletechild = "delete from kategori_subgroup where idkategoriaset ='$id'";
+        $sqldeletechild = "delete from kategori_asset where id ='$id'";
         $resdeletechild = $conn->query($sqldeletechild);
     }
     else{

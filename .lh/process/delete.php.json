@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 104,
+            "activePatchIndex": 108,
             "patches": [
                 {
                     "date": 1635928380122,
@@ -424,6 +424,22 @@
                 {
                     "date": 1636004578934,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,10 +37,9 @@\n         $stats = \"ok\";\r\n         $sqldelete = \"delete from kategori_subgroup where id = '$id'\";\r\n         $resdelete = $conn->query($sqldelete);\r\n \r\n-        $sqldeletechild = \"delete from kategori_categorysubgroup where idsubgroup ='$id'\";\r\n-        $resdeletechild = $conn->query($sqldeletechild);\r\n+   \r\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n     }\r\n@@ -62,10 +61,9 @@\n         $stats = \"ok\";\r\n         $sqldelete = \"delete from kategori_categorysubgroup where id = '$id'\";\r\n         $resdelete = $conn->query($sqldelete);\r\n \r\n-        $sqldeletechild = \"delete from asset where idcategory ='$id'\";\r\n-        $resdeletechild = $conn->query($sqldeletechild);\r\n+   \r\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n     }\r\n@@ -87,10 +85,9 @@\n         $stats = \"ok\";\r\n         $sqldelete = \"delete from template where id = '$id'\";\r\n         $resdelete = $conn->query($sqldelete);\r\n \r\n-        $sqldeletechild = \"delete from asset where idtemplate ='$id'\";\r\n-        $resdeletechild = $conn->query($sqldeletechild);\r\n+      \r\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n     }\r\n@@ -113,10 +110,9 @@\n         $stats = \"ok\";\r\n         $sqldelete = \"delete from conditions where id = '$id'\";\r\n         $resdelete = $conn->query($sqldelete);\r\n \r\n-        $sqldeletechild = \"delete from asset where idcondition ='$id'\";\r\n-        $resdeletechild = $conn->query($sqldeletechild);\r\n+      \r\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n     }\r\n@@ -139,10 +135,9 @@\n         $stats = \"ok\";\r\n         $sqldelete = \"delete from initial_condition where id = '$id'\";\r\n         $resdelete = $conn->query($sqldelete);\r\n \r\n-        $sqldeletechild = \"delete from asset where idinitialcondition ='$id'\";\r\n-        $resdeletechild = $conn->query($sqldeletechild);\r\n+     \r\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n     }\r\n"
+                },
+                {
+                    "date": 1636005680733,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,10 @@\n         $stats = \"ok\";\r\n       \r\n         $sqldeletechild = \"delete from kategori_subgroup where idkategoriaset ='$id'\";\r\n         $resdeletechild = $conn->query($sqldeletechild);\r\n+        $sqldeletechild = \"delete from kategori_subgroup where idkategoriaset ='$id'\";\r\n+        $resdeletechild = $conn->query($sqldeletechild);\r\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n     }\r\n"
+                },
+                {
+                    "date": 1636005733555,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n     if($jumlahquery==0)\r\n     {\r\n         $stats = \"ok\";\r\n       \r\n-        $sqldeletechild = \"delete from kategori_subgroup where idkategoriaset ='$id'\";\r\n+        $sqldeletechild = \"delete from kategori_asset where idkategoriaset ='$id'\";\r\n         $resdeletechild = $conn->query($sqldeletechild);\r\n         $sqldeletechild = \"delete from kategori_subgroup where idkategoriaset ='$id'\";\r\n         $resdeletechild = $conn->query($sqldeletechild);\r\n     }\r\n"
+                },
+                {
+                    "date": 1636005740356,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n     if($jumlahquery==0)\r\n     {\r\n         $stats = \"ok\";\r\n       \r\n-        $sqldeletechild = \"delete from kategori_asset where idkategoriaset ='$id'\";\r\n+        $sqldeletechild = \"delete from kategori_asset where id ='$id'\";\r\n         $resdeletechild = $conn->query($sqldeletechild);\r\n         $sqldeletechild = \"delete from kategori_subgroup where idkategoriaset ='$id'\";\r\n         $resdeletechild = $conn->query($sqldeletechild);\r\n     }\r\n"
+                },
+                {
+                    "date": 1636005752207,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,10 +15,8 @@\n         $stats = \"ok\";\r\n       \r\n         $sqldeletechild = \"delete from kategori_asset where id ='$id'\";\r\n         $resdeletechild = $conn->query($sqldeletechild);\r\n-        $sqldeletechild = \"delete from kategori_subgroup where idkategoriaset ='$id'\";\r\n-        $resdeletechild = $conn->query($sqldeletechild);\r\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n     }\r\n"
                 }
             ],
             "date": 1635928380122,
