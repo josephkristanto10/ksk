@@ -929,6 +929,8 @@ echo date('d-m-Y');?>">
                 },
                 {
                     name: '#',
+                    searchable:false,
+                    orderable:false,
                     className: 'text-center align-middle'
                 },
                 {

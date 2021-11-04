@@ -7,13 +7,15 @@ if($tipe == "load")
 
     $where_like = [
         'id',
-        'groupname',
-        'subgroupname',
-        'categoryname',
+        '',
         'noasset',
         'name',
         'initial_condition',
         'conditions',
+        'groupname',
+        'subgroupname',
+        'categoryname',
+        'status_transaction',
         'status'
         
     ];
