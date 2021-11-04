@@ -29,9 +29,9 @@ if($tipe == "load")
     
     "SELECT ka.nama as groupname, ks.subgroup as subgroupname, kc.category as categoryname, ic.initial_condition, c.name as conditions, relation.company as myrelation, asset.* FROM `asset`
     inner join relation on relation.id = asset.purchase_from 
-    inner join kategori_asset ka on ka.id = asset.idgroup
-    inner join kategori_subgroup ks on ks.id = asset.idsubgroup
     inner join kategori_categorysubgroup kc on kc.id = asset.idcategory
+    inner join kategori_subgroup ks on ks.id = kc.idsubgroup
+    inner join kategori_asset ka on ka.id = ks.idkategoriaset
     inner join conditions c on c.id = asset.idcondition
     inner join initial_condition ic on ic.id = asset.idinitialcondition
     "
@@ -40,28 +40,28 @@ if($tipe == "load")
     
     if(empty($search)) {
         $query_data = mysqli_query($conn, "SELECT ka.nama as groupname, ks.subgroup as subgroupname, kc.category as categoryname, ic.initial_condition, c.name as conditions, relation.company as myrelation, asset.* FROM `asset`
-         inner join relation on relation.id = asset.purchase_from 
-        inner join kategori_asset ka on ka.id = asset.idgroup
-        inner join kategori_subgroup ks on ks.id = asset.idsubgroup
+        inner join relation on relation.id = asset.purchase_from 
         inner join kategori_categorysubgroup kc on kc.id = asset.idcategory
+        inner join kategori_subgroup ks on ks.id = kc.idsubgroup
+        inner join kategori_asset ka on ka.id = ks.idkategoriaset
         inner join conditions c on c.id = asset.idcondition
         inner join initial_condition ic on ic.id = asset.idinitialcondition ORDER BY $order $dir LIMIT $start, $length");
     
         $total_filtered = mysqli_query($conn, "SELECT ka.nama as groupname, ks.subgroup as subgroupname, kc.category as categoryname, ic.initial_condition, c.name as conditions, relation.company as myrelation, asset.* FROM `asset`
-         inner join relation on relation.id = asset.purchase_from 
-        inner join kategori_asset ka on ka.id = asset.idgroup
-        inner join kategori_subgroup ks on ks.id = asset.idsubgroup
+        inner join relation on relation.id = asset.purchase_from 
         inner join kategori_categorysubgroup kc on kc.id = asset.idcategory
+        inner join kategori_subgroup ks on ks.id = kc.idsubgroup
+        inner join kategori_asset ka on ka.id = ks.idkategoriaset
         inner join conditions c on c.id = asset.idcondition
-        inner join initial_condition ic on ic.id = asset.idinitialcondition ");
+        inner join initial_condition ic on ic.id = asset.idinitialcondition");
     } else {
         $query_data = mysqli_query($conn, "SELECT ka.nama as groupname, ks.subgroup as subgroupname, kc.category as categoryname, ic.initial_condition, c.name as conditions, relation.company as myrelation, asset.* FROM `asset`
-         inner join relation on relation.id = asset.purchase_from 
-        inner join kategori_asset ka on ka.id = asset.idgroup
-        inner join kategori_subgroup ks on ks.id = asset.idsubgroup
+        inner join relation on relation.id = asset.purchase_from 
         inner join kategori_categorysubgroup kc on kc.id = asset.idcategory
+        inner join kategori_subgroup ks on ks.id = kc.idsubgroup
+        inner join kategori_asset ka on ka.id = ks.idkategoriaset
         inner join conditions c on c.id = asset.idcondition
-        inner join initial_condition ic on ic.id = asset.idinitialcondition 
+        inner join initial_condition ic on ic.id = asset.idinitialcondition  
         WHERE ka.nama LIKE '%$search%' 
         OR ks.subgroup LIKE '%$search%'
         OR kc.category LIKE '%$search%'
@@ -72,12 +72,12 @@ if($tipe == "load")
         OR asset.status LIKE '%$search%' ORDER BY $order $dir LIMIT $start, $length");
     
         $total_filtered = mysqli_query($conn, "SELECT ka.nama as groupname, ks.subgroup as subgroupname, kc.category as categoryname, ic.initial_condition, c.name as conditions, relation.company as myrelation, asset.* FROM `asset`
-         inner join relation on relation.id = asset.purchase_from 
-        inner join kategori_asset ka on ka.id = asset.idgroup
-        inner join kategori_subgroup ks on ks.id = asset.idsubgroup
+        inner join relation on relation.id = asset.purchase_from 
         inner join kategori_categorysubgroup kc on kc.id = asset.idcategory
+        inner join kategori_subgroup ks on ks.id = kc.idsubgroup
+        inner join kategori_asset ka on ka.id = ks.idkategoriaset
         inner join conditions c on c.id = asset.idcondition
-        inner join initial_condition ic on ic.id = asset.idinitialcondition 
+        inner join initial_condition ic on ic.id = asset.idinitialcondition  
         WHERE ka.nama LIKE '%$search%' 
         OR ks.subgroup LIKE '%$search%'
         OR kc.category LIKE '%$search%'
