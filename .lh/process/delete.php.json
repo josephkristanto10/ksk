@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 108,
+            "activePatchIndex": 115,
             "patches": [
                 {
                     "date": 1635928380122,
@@ -440,6 +440,34 @@
                 {
                     "date": 1636005752207,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,10 +15,8 @@\n         $stats = \"ok\";\r\n       \r\n         $sqldeletechild = \"delete from kategori_asset where id ='$id'\";\r\n         $resdeletechild = $conn->query($sqldeletechild);\r\n-        $sqldeletechild = \"delete from kategori_subgroup where idkategoriaset ='$id'\";\r\n-        $resdeletechild = $conn->query($sqldeletechild);\r\n     }\r\n     else{\r\n         $stats = \"failed\";\r\n     }\r\n"
+                },
+                {
+                    "date": 1636018792603,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -146,5 +146,6 @@\n         'status'=>$stats,\r\n         'jumlah'=>$jumlahquery,\r\n      ));\r\n }\r\n+else if($tipe == \"customfield\")\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636018803426,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -147,5 +147,29 @@\n         'jumlah'=>$jumlahquery,\r\n      ));\r\n }\r\n else if($tipe == \"customfield\")\r\n+{\r\n+    header('Content-type: application/json');\r\n+    $id = $_POST['idinitialcondition'];\r\n+    $sql = \"select id as jumlahactive from asset where idinitialcondition ='$id' \";\r\n+    $res = $conn->query($sql);\r\n+    $jumlahquery = $res->num_rows;\r\n+    $stats = \"\";\r\n+    if($jumlahquery==0)\r\n+    {\r\n+        $stats = \"ok\";\r\n+        $sqldelete = \"delete from initial_condition where id = '$id'\";\r\n+        $resdelete = $conn->query($sqldelete);\r\n+\r\n+     \r\n+    }\r\n+    else{\r\n+        $stats = \"failed\";\r\n+    }\r\n+    \r\n+    echo  json_encode(array(\r\n+        'status'=>$stats,\r\n+        'jumlah'=>$jumlahquery,\r\n+     ));\r\n+}\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636018836446,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -150,9 +150,9 @@\n else if($tipe == \"customfield\")\r\n {\r\n     header('Content-type: application/json');\r\n     $id = $_POST['idinitialcondition'];\r\n-    $sql = \"select id as jumlahactive from asset where idinitialcondition ='$id' \";\r\n+    $sql = \"select id as jumlahactive from custom_to_template where idcustome ='$id' \";\r\n     $res = $conn->query($sql);\r\n     $jumlahquery = $res->num_rows;\r\n     $stats = \"\";\r\n     if($jumlahquery==0)\r\n"
+                },
+                {
+                    "date": 1636018841648,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -150,9 +150,9 @@\n else if($tipe == \"customfield\")\r\n {\r\n     header('Content-type: application/json');\r\n     $id = $_POST['idinitialcondition'];\r\n-    $sql = \"select id as jumlahactive from custom_to_template where idcustome ='$id' \";\r\n+    $sql = \"select id as jumlahactive from custom_to_template where idcustom ='$id' \";\r\n     $res = $conn->query($sql);\r\n     $jumlahquery = $res->num_rows;\r\n     $stats = \"\";\r\n     if($jumlahquery==0)\r\n"
+                },
+                {
+                    "date": 1636018846807,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -149,9 +149,9 @@\n }\r\n else if($tipe == \"customfield\")\r\n {\r\n     header('Content-type: application/json');\r\n-    $id = $_POST['idinitialcondition'];\r\n+    $id = $_POST['customfield'];\r\n     $sql = \"select id as jumlahactive from custom_to_template where idcustom ='$id' \";\r\n     $res = $conn->query($sql);\r\n     $jumlahquery = $res->num_rows;\r\n     $stats = \"\";\r\n"
+                },
+                {
+                    "date": 1636018868159,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -149,17 +149,17 @@\n }\r\n else if($tipe == \"customfield\")\r\n {\r\n     header('Content-type: application/json');\r\n-    $id = $_POST['customfield'];\r\n+    $id = $_POST['idcustomfield'];\r\n     $sql = \"select id as jumlahactive from custom_to_template where idcustom ='$id' \";\r\n     $res = $conn->query($sql);\r\n     $jumlahquery = $res->num_rows;\r\n     $stats = \"\";\r\n     if($jumlahquery==0)\r\n     {\r\n         $stats = \"ok\";\r\n-        $sqldelete = \"delete from initial_condition where id = '$id'\";\r\n+        $sqldelete = \"delete from folder_custom where id = '$id'\";\r\n         $resdelete = $conn->query($sqldelete);\r\n \r\n      \r\n     }\r\n"
+                },
+                {
+                    "date": 1636100412710,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -75,9 +75,9 @@\n }\r\n else if($tipe == \"template\"){\r\n     header('Content-type: application/json');\r\n     $id = $_POST['idtemplate'];\r\n-    $sql = \"select id as jumlahactive from asset where idtemplate ='$id'\";\r\n+    $sql = \"select id as jumlahactive from kategori_categorysubgroup where idtemplate ='$id'\";\r\n     $res = $conn->query($sql);\r\n     $jumlahquery = $res->num_rows;\r\n     $stats = \"\";\r\n     if($jumlahquery==0)\r\n"
                 }
             ],
             "date": 1635928380122,

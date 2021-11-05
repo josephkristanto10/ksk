@@ -76,7 +76,7 @@ else if($tipe == "category"){
 else if($tipe == "template"){
     header('Content-type: application/json');
     $id = $_POST['idtemplate'];
-    $sql = "select id as jumlahactive from asset where idtemplate ='$id'";
+    $sql = "select id as jumlahactive from kategori_categorysubgroup where idtemplate ='$id'";
     $res = $conn->query($sql);
     $jumlahquery = $res->num_rows;
     $stats = "";
@@ -134,6 +134,31 @@ else if($tipe == "initial_condition")
     {
         $stats = "ok";
         $sqldelete = "delete from initial_condition where id = '$id'";
+        $resdelete = $conn->query($sqldelete);
+
+     
+    }
+    else{
+        $stats = "failed";
+    }
+    
+    echo  json_encode(array(
+        'status'=>$stats,
+        'jumlah'=>$jumlahquery,
+     ));
+}
+else if($tipe == "customfield")
+{
+    header('Content-type: application/json');
+    $id = $_POST['idcustomfield'];
+    $sql = "select id as jumlahactive from custom_to_template where idcustom ='$id' ";
+    $res = $conn->query($sql);
+    $jumlahquery = $res->num_rows;
+    $stats = "";
+    if($jumlahquery==0)
+    {
+        $stats = "ok";
+        $sqldelete = "delete from folder_custom where id = '$id'";
         $resdelete = $conn->query($sqldelete);
 
      

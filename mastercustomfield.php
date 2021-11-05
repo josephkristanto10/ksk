@@ -2,7 +2,7 @@
 require_once 'layout/header.php';
 require_once 'layout/sidebar.php';
 require_once 'layout/footer.php';
-$sql = "SELECT * FROM folder_custom where status_field = 'Active'";
+$sql = "SELECT * FROM folder_custom";
 $res = $conn->query($sql);
 $mycustom = array();
 if($res->num_rows>0)
@@ -14,23 +14,11 @@ if($res->num_rows>0)
 }
 
 ?>
-<style>
-    #mymodals .modal-dialog{
-        -webkit-transform: translate(0, -50%);
-			-o-transform: translate(0, -50%);
-			transform: translate(0, -50%);
-			top: 50%;
-			margin: 0 auto;
-    }
-    /* #mymodals .modal-body {
-			height: 10vh !important;
-			overflow-y: auto;
-		} */
-</style>
+
         <div class="content-wrapper">
             <div class="page-header page-header-light">
             <div class="page-header-content header-elements-md-inline">
-                <h4><span class="font-weight-semibold">Master Template</span></h4> 
+                <h4><span class="font-weight-semibold">Master Custom Field</span></h4> 
                     <div class="page-title d-flex">
                         <div class = "row" style = "width:100%;">
                             <div class = "col-xl-12" >
@@ -59,7 +47,7 @@ if($res->num_rows>0)
                                 <thead>
                                     <tr>  
                                     <th>Id</th>
-                                        <th>Template</th>
+                                        <th>Name</th>
                                         <th class="text-center">Status</th>
                                         <th class="text-center">Action</th>
                                     </tr>
@@ -76,7 +64,7 @@ if($res->num_rows>0)
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header" style="background-color:#324148;color:white;height:60px;">
-						<h5 class="modal-title">Add Template</h5>
+						<h5 class="modal-title">Add Custom Field</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">×</span>
 						</button>
@@ -85,21 +73,8 @@ if($res->num_rows>0)
 					<div class="modal-body">
                         <form id= "myform">
 						<div class="form-group">
-                        <label for="description">Template Name :  </label>
-							<input type="text" class="form-control" id="template">
-							<br>
-                            <label for="description">Custom Field :  </label> <a data-toggle="modal" id = "addcustomfieldmodal" href= "#mymodals"  data-backdrop="static" data-keyboard="false"> + Add custom field</a> <br>
-                            <div id = "listcustomfield">
-                            <?php
-                            for($i = 0 ; $i< count($mycustom); $i++)
-                            {
-                                echo '
-                                <input type="checkbox" class="customfield" value = '.$mycustom[$i]['id'].'>
-                                <label for="custom">'.$mycustom[$i]['name'].'</label><br>';
-                            }
-                            ?>
-                            </div>
-							<br>
+                        <label for="description">Custom Field :  </label>
+							<input type="text" class="form-control" id="customfieldadd">
 							<br>
 							<div style = "float:right;margin-bottom:20px;">
 							<button type="button" class="btn btn-primary" style = "margin-right:10px;" onclick="adddata()">Save</button>
@@ -116,7 +91,7 @@ if($res->num_rows>0)
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header" style="background-color:#324148;color:white;height:60px;">
-						<h5 class="modal-title">Edit Template</h5>
+						<h5 class="modal-title">Edit Custom Field</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">×</span>
 						</button>
@@ -125,42 +100,13 @@ if($res->num_rows>0)
 					<div class="modal-body">
                         <form id= "myformedit">
 						<div class="form-group">
-                        <label for="description">Template Name : </label>
-                        <input type="text" class="form-control" id="templateedit">
+                        <label for="description">Custom Field :  </label>
+							<input type="text" class="form-control" id="customfieldedit">
+						
 							<br>
-                            <label for="description">Custom Field :  </label> <a data-toggle="modal" id = "addcustomfieldmodal" href= "#mymodals"  data-backdrop="static" data-keyboard="false"> + Add custom field</a> <br>
-                            <div id = "listcustomfieldedit">
-                            </div>
 							<div style = "float:right;margin-bottom:20px;">
 							<button type="button" class="btn btn-primary" style = "margin-right:10px;" onclick="changedata()">Save</button>
 						<button type="button" class="btn btn-secondary" data-dismiss="modal" id = "canceledit">Cancel</button>
-							</div>
-						</div>
-                      </form>
-					</div>
-					
-				</div>
-			</div>
-		</div>
-        <div class="modal fade" id="mymodals">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header" style="background-color:#324148;color:white;height:60px;">
-						<h5 class="modal-title">Add Custom Field</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
-
-					</div>
-					<div class="modal-body">
-                        <form id= "myform">
-						<div class="form-group">
-                        <label for="description">Custom Field :  </label>
-							<input type="text" class="form-control" id="customfieldadd">
-							<br>
-							<div style = "float:right;margin-bottom:20px;">
-							<button type="button" class="btn btn-primary" style = "margin-right:10px;" onclick="adddatacustomfield()">Save</button>
-						<button type="button" class="btn btn-secondary" data-dismiss="modal" id = "canceladd" >Cancel</button>
 							</div>
 						</div>
                       </form>
@@ -189,9 +135,9 @@ $(function() {
          destroy: true,
          iDisplayInLength: 10,
          scrollX: true,
-         order: [[0, 'desc']],
+         order: [[0, 'asc']],
          ajax: { 
-            url: 'process/mastertemplate.php',
+            url: 'process/mastercustomfield.php',
             method: 'POST',
             data: { tipe: "load"  }
         },
@@ -199,8 +145,8 @@ $(function() {
 			{ targets: [0], visible: false},
 			],
          columns: [
-            { name: 'Id', className: 'text-center align-middle' },
-            { name: 'Template', className: 'text-center align-middle' },
+            { name: 'id', className: 'text-center align-middle' },
+            { name: 'name', className: 'text-center align-middle' },
             { name: 'Status', className: 'text-center align-middle' },
             { name: 'Action', searchable: false, orderable: false, className: 'text-center align-middle' }
             
@@ -213,26 +159,25 @@ $(function() {
       $('#datatable_serverside').DataTable().ajax.reload(null, false);
    };
    var globalid = "";
-   var globalidtemplate = "";
+   var idcustomfield  = "";
    function openmodaledit(element){
     
 	var idelement = element.id.split("-");
-    globalidtemplate = idelement[1];
-	var template = $("#template" + idelement[1]).text();
-	$("#templateedit").val(template);
-    
+    idcustomfield = idelement[1];
+	var name = $("#name" + idelement[1]).text();
+	$("#customfieldedit").val(name);
+    $("#idchange").val(idelement[1]);
    }
 
    function changedata(){
-	 var changeid = $("#idchange").val();
-	 var changedrivingforce = $("#drivingforceedit").val();
-	 var changedescription = $("#descriptionedit").val();
-	 if(changedrivingforce == "" || changedescription == "")
+	 var changeid = idcustomfield;
+	 var name = $("#customfieldedit").val();
+	 if(name == "" )
 	 {
 						Swal.fire({
                             icon: 'error',
                             title: 'Empty Field',
-                            text: 'Condition / Description cannot be empty',
+                            text: 'Requirement data cannot be empty',
                             confirmButtonColor: '#e00d0d',
                         });
 	 }
@@ -243,13 +188,12 @@ $(function() {
                 }
             });
             $.ajax({
-                url: "process/masterdrivingforce.php",
+                url: "process/mastercustomfield.php",
                 method: 'POST',
                 data: {
                     tipe: "changedata",
 					myid : changeid,
-					mychangedrivingforce: changedrivingforce,
-                    mychangedesription : changedescription
+					customname: name
                     
                 },
                 success: function (result) {
@@ -271,8 +215,8 @@ $(function() {
 					else{
 						Swal.fire({
                             icon: 'error',
-                            title: 'Duplicated Driving Force',
-                            text: 'Duplicate Entry For This Driving Force',
+                            title: 'Duplicated Name',
+                            text: 'Duplicate Entry For This Custom Field Name',
                             confirmButtonColor: '#e00d0d',
                         });
 					}
@@ -285,9 +229,9 @@ $(function() {
 	 }
    }
    function adddata(){
-    var template = $("#template").val();
+    var customfield = $("#customfieldadd").val();
    
-    if(template == "" )
+    if(customfield == "" )
     {
                          Swal.fire({
                             icon: 'error',
@@ -307,12 +251,11 @@ $(function() {
                 }
             });
             $.ajax({
-                url: "process/mastertemplate.php",
+                url: "process/mastercustomfield.php",
                 method: 'POST',
                 data: {
                     tipe: "add",
-                    mytemplate: template,
-                    myselected : selectedcustom
+                    mycustom: customfield
                     
                 },
                 success: function (result) {
@@ -335,7 +278,7 @@ $(function() {
                         Swal.fire({
                             icon: 'error',
                             title: 'Data Exists',
-                            text: 'Duplicate Entry For This template',
+                            text: 'Duplicate Entry For This custom field',
                             confirmButtonColor: '#e00d0d',
                         });
                     }
@@ -436,7 +379,7 @@ $("#country").on('change', function(){
                 }
             });
             $.ajax({
-                url: "process/masterdrivingforce.php",
+                url: "process/mastercustomfield.php",
                 method: 'POST',
                 data: {
                     tipe: "setstatus",
@@ -464,8 +407,8 @@ function deleterow(element) {
         var splitid = element.id.split("-");
         var myid = splitid[1];
         Swal.fire({
-            title: 'Do you want to delete this template?',
-            html: 'You cannot recover this template after delete',
+            title: 'Do you want to delete this custom field?',
+            html: 'You cannot recover this custom field after delete',
             showCancelButton: true,
             confirmButtonText: 'Delete',
             confirmButtonColor: '#32d419',
@@ -483,8 +426,8 @@ function deleterow(element) {
                     url: "process/delete.php",
                     method: 'POST',
                     data: {
-                        tipe: "template",
-                        idtemplate: myid
+                        tipe: "customfield",
+                        idcustomfield: myid
 
                     },
                     success: function (myresult) {
@@ -505,7 +448,7 @@ function deleterow(element) {
                                 title: 'Delete Failed',
                                 icon: 'error',
                                 html: 'There is <b>' + jumlah +
-                                    "</b> Template is active on list of Asset, please delete it first",
+                                    "</b> custom field is active on list of Template, please delete it first",
                                 confirmButtonText: 'Ok',
                                 confirmButtonColor: '#32d419',
                             });
@@ -516,77 +459,4 @@ function deleterow(element) {
             }
         })
     }
-    function getcustomfield(){
-
-    }
-    function adddatacustomfield(){
-    var customfield = $("#customfieldadd").val();
-   
-    if(customfield == "" )
-    {
-                         Swal.fire({
-                            icon: 'error',
-                            title: 'Empty Field',
-                            text: 'Requirement data cannot be empty',
-                            confirmButtonColor: '#e00d0d',
-                        });
-    }
-    else{
-        var selectedcustom = [];
-            $("input:checkbox[class=customfield]:checked").each(function(){
-                selectedcustom.push($(this).val());
-            });
-        $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                url: "process/mastercustomfield.php",
-                method: 'POST',
-                data: {
-                    tipe: "addreturn",
-                    mycustom: customfield
-                    
-                },
-                success: function (myresult) {
-                //    alert(result);
-                console.log(myresult);
-                     if(myresult.status == "sukses")
-                    {
-                        success();
-                        Swal.fire({
-                                title: 'Data Saved',
-                                text: 'Data Inputted Successfully',
-                                icon: 'success',
-                                confirmButtonColor: '#53d408',
-                                allowOutsideClick: false,
-                            }).then((result) => {
-                                // $("#myform").trigger("reset");
-                                // $("#canceladd").click();
-                                var myid =  myresult.id;
-                                $("#listcustomfield").append('<input type="checkbox" class="customfield" value = "'+myid+'"><label for="custom"> &nbsp'+customfield+'</label><br>');
-                                
-                                $('#mymodals').modal('toggle');
-                               
-                            });
-                    }
-                    else{
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Data Exists',
-                            text: 'Duplicate Entry For This custom field',
-                            confirmButtonColor: '#e00d0d',
-                        });
-                    }
-                  
-                  
-                }
-            });
-    }
-          
-}
-$("#addcustomfieldmodal").on('click',function(){
-
-});
 </script>
