@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 13,
+            "activePatchIndex": 14,
             "patches": [
                 {
                     "date": 1633576596719,
@@ -60,6 +60,10 @@
                 {
                     "date": 1633664268340,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1013,9 +1013,9 @@\n                     className: 'text-center align-middle',\r\n                        orderable: false\r\n                 },\r\n                 {\r\n-                    name: 'add_date',\r\n+                    name: 'extended_due_date',\r\n                     className: 'text-center align-middle',\r\n                        orderable: false\r\n                 }\r\n \r\n"
+                },
+                {
+                    "date": 1636384391812,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1658,9 +1658,9 @@\n                 'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')\r\n             }\r\n         });\r\n         $.ajax({\r\n-            url: \"process/master_transaction_lend_return.php\",\r\n+            url: \"process/master_transaction_lend_extension.php\",\r\n             method: 'POST',\r\n             data: {\r\n                 tipe: \"getdetailtransactionadd\",\r\n                 idtransaction : myvalues,\r\n"
                 }
             ],
             "date": 1633576596719,

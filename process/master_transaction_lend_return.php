@@ -572,7 +572,7 @@ else if($tipe == "getdetailtransactionadd")
     }
 
     $res = $conn->query($sql);
-    $mystring = "";
+    $mystring = '<table  id="datatable_serverside" class="table table-hover table-bordered display nowrap w-100" ><tr><th>#</th><th>No Asset</th><th>Name</th></tr>';
     $mycountasset = 0;
     $mynumber = 1;
     if($res->num_rows>0)
@@ -581,18 +581,21 @@ else if($tipe == "getdetailtransactionadd")
         while($r = mysqli_fetch_array($res))
         {
             $mycountasset += 1;
-            if($mycounter == 1)
-            {
-                $mystring .= "<div class = 'row'><div class = 'col-md-6'><label style = 'display:block;float:left;heigth:100px;font-size:12pt;' ><b>$mynumber. </b> &nbsp </label><label style = 'display:block;float:left' >".$r['assetname']."<br>".$r['noasset']."</label></div>";
-                $mycounter = 2;
-            }
-            else{
-                $mystring .= "<div class = 'col-md-6'><label style = 'display:block;float:left;heigth:100px;font-size:12pt;' ><b>$mynumber. </b> &nbsp </label><label style = 'display:block;float:left' >".$r['assetname']."<br>".$r['noasset']."</label></div></div><br>";
-                $mycounter = 1;
-            }
+
+            $mystring .= "<tr><td>$mynumber</td><td>".$r['noasset']."</td><td>".$r['assetname']."</td></tr>";
+            // if($mycounter == 1)
+            // {
+            //     $mystring .= "<div class = 'row'><div class = 'col-md-6'><label style = 'display:block;float:left;heigth:100px;font-size:12pt;' ><b>$mynumber. </b> &nbsp </label><label style = 'display:block;float:left' >".$r['assetname']."<br>".$r['noasset']."</label></div>";
+            //     $mycounter = 2;
+            // }
+            // else{
+            //     $mystring .= "<div class = 'col-md-6'><label style = 'display:block;float:left;heigth:100px;font-size:12pt;' ><b>$mynumber. </b> &nbsp </label><label style = 'display:block;float:left' >".$r['assetname']."<br>".$r['noasset']."</label></div></div><br>";
+            //     $mycounter = 1;
+            // }
             $mynumber ++;
             
         }
+        $mystring .= "</table>";
         echo $mycountasset."||".$mystring;
     }
     else
@@ -654,15 +657,15 @@ else if($tipe == "gettransactionlend")
     $sql = "";
     if($mytrans == "personal")
     {
-        $sql = 'select * from transaction_lend_to_personal tltp where status != "returned" and approval = "approved"';
+        $sql = 'select * from transaction_lend_to_personal tltp where status != "returned" and approval = "accepted"';
     }
     else if($mytrans == "department")
     {
-        $sql = 'select * from transaction_lend_to_department tltd where status != "returned" and approval = "approved"';
+        $sql = 'select * from transaction_lend_to_department tltd where status != "returned" and approval = "accepted"';
     }
     else if($mytrans == "relation")
     {
-        $sql = 'select * from transaction_lend_to_relation tltr where status != "returned" and approval = "approved"';
+        $sql = 'select * from transaction_lend_to_relation tltr where status != "returned" and approval = "accepted"';
     }
  
     $res = $conn->query($sql);

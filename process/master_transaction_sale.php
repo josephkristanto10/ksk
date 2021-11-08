@@ -21,25 +21,30 @@ if($tipe == "load")
     
     $total_data = mysqli_query($conn, 
     
-    "SELECT * from transaction_sale where idsister = '$myses'
+    "SELECT ts.*, asset.idgroup, asset.idsubgroup, asset.idcategory  from transaction_sale ts  inner join transaction_sale_log tsl on tsl.idtransaksi =  ts.id
+    inner join asset on asset.id = tsl.idasset  where idsister = '$myses' group by ts.id
     "
 
 );
     
     if(empty($search)) {
-        $query_data = mysqli_query($conn, "SELECT * from transaction_sale where idsister = '$myses' ORDER BY $order $dir LIMIT $start, $length");
+        $query_data = mysqli_query($conn, "SELECT ts.*, asset.idgroup, asset.idsubgroup, asset.idcategory  from transaction_sale ts 
+         inner join transaction_sale_log tsl on tsl.idtransaksi =  ts.id inner join asset on asset.id = tsl.idasset  where idsister = '$myses' group by ts.id ORDER BY $order $dir LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "SELECT * from transaction_sale where idsister = '$myses'");
+        $total_filtered = mysqli_query($conn, "SELECT ts.*, asset.idgroup, asset.idsubgroup, asset.idcategory  from transaction_sale ts  inner join transaction_sale_log tsl on tsl.idtransaksi =  ts.id
+    inner join asset on asset.id = tsl.idasset  where idsister = '$myses' group by ts.id");
     } else {
-        $query_data = mysqli_query($conn, "SELECT * from transaction_sale where idsister = '$myses' and (
-            transaction_sale.notransaction LIKE '%$search%' 
-        OR transaction_sale.mydate LIKE '%$search%'
-        OR transaction_sale.approval LIKE '%$search%' )  ORDER BY $order $dir LIMIT $start, $length");
+        $query_data = mysqli_query($conn, "SELECT ts.*, asset.idgroup, asset.idsubgroup, asset.idcategory  from transaction_sale ts  inner join transaction_sale_log tsl on tsl.idtransaksi =  ts.id
+    inner join asset on asset.id = tsl.idasset  where idsister = '$myses' and (
+            ts.notransaction LIKE '%$search%' 
+        OR ts.mydate LIKE '%$search%'
+        OR ts.approval LIKE '%$search%' ) group by ts.id  ORDER BY $order $dir LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "SELECT * from transaction_sale where idsister = '$myses' and (
-            transaction_sale.notransaction LIKE '%$search%' 
-        OR transaction_sale.mydate LIKE '%$search%'
-        OR transaction_sale.approval LIKE '%$search%' )");
+        $total_filtered = mysqli_query($conn, "SELECT ts.*, asset.idgroup, asset.idsubgroup, asset.idcategory  from transaction_sale ts  inner join transaction_sale_log tsl on tsl.idtransaksi =  ts.id
+    inner join asset on asset.id = tsl.idasset  where idsister = '$myses' and (
+            ts.notransaction LIKE '%$search%' 
+        OR ts.mydate LIKE '%$search%'
+        OR ts.approval LIKE '%$search%' ) group by ts.id");
     }
     
     $response['data'] = [];
@@ -63,7 +68,24 @@ if($tipe == "load")
             $response['data'][] = [
                 "<b><label id ='statusapproval".$row['id']."'  >".$myapproval."</label></b>",
                 "<label id ='mydate".$row['id']."'>".$row['mydate']."</label>",
-                "<a href = '#myModalDetailTransaction' id = '".$row['id']."' onclick = openmodaldetailtransaction(this) data-toggle='modal'><label id ='notransaction".$row['id']."'>".$row['notransaction']."</label></a>"
+                "<a href = '#myModalDetailTransaction' id = '".$row['id']."' onclick = openmodaldetailtransaction(this) data-toggle='modal'><label id ='notransaction".$row['id']."'>".$row['notransaction']."</label></a>".
+                "<input type = 'hidden' id = 'category_".$row['id']."' value = '".$row['idcategory']."'>".
+                "<input type = 'hidden' id = 'subgroup_".$row['id']."' value = '".$row['idsubgroup']."'>".
+                "<input type = 'hidden' id = 'group_".$row['id']."' value = '".$row['idgroup']."'>",
+                ' <div class="list-icons">
+                <div class="dropdown">
+                    <a href="#" class="list-icons-item" data-toggle="dropdown">
+                        <i class="icon-menu9"></i>
+                    </a>
+    
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="#myModalAddSaleEdit"  data-toggle="modal" class="dropdown-item" id ="click-'.$row['id'].'"  onclick = "openmodaledits(this)"><i class="icon-check"></i>
+                            Edit</a>
+                        
+                   
+                    </div>
+                </div>
+            </div>'
             
             ];
         }
@@ -300,6 +322,32 @@ else if($tipe == "add"){
         $sqlupdate  = "UPDATE asset set status_transaction = 'placed' where id = '".$myselectedlist[$i]."'";
         $resupdate =  $conn->query($sqlupdate);
         $sqls = "INSERT INTO `transaction_sale_log` VALUES (NULL, '$last_id', '".$myselectedlist[$i]."', '".$myselectedprice[$i]."')";
+        $ress = $conn->query($sqls);
+      
+    }
+    // echo $sql;
+    if(($conn -> affected_rows)>0)
+    {
+        echo "sukses";
+    }
+    else{
+        echo "tidak";
+    }
+    // echo $sql;
+}
+else if($tipe == "edit"){
+    $myselectedlist = $_POST['myselected'];
+    $myselectedprice = $_POST['myselectedprice'];
+    $mytransaction = $_POST['mytransaction'];
+    date_default_timezone_set("Asia/Bangkok");
+    $mydate = date("Y-m-d");
+    $sql = "delete from transaction_sale_log where idtransaksi = '$mytransaction'";
+    $res = $conn->query($sql);
+    $last_id = $conn->insert_id;
+    for($i = 0 ;  $i < count($myselectedlist) ; $i++)
+    {
+      
+        $sqls = "INSERT INTO `transaction_sale_log` VALUES (NULL, '$mytransaction', '".$myselectedlist[$i]."', '".$myselectedprice[$i]."')";
         $ress = $conn->query($sqls);
       
     }

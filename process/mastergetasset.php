@@ -387,6 +387,37 @@ else if($tipe  == "getassettransactionlendrelation")
     );
     echo json_encode($response);
 }
+else if($tipe == "getassettransactionsale")
+{
+    $arrayid = array();
+    $idtransac = $_POST['myidtransaction'];
+    $sql = "select asset.id, asset.noasset, asset.name, tdasl.harga from transaction_sale_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'";
+    $res = $conn->query($sql);
+    $counter = 1;
+    $mypricestring = "";
+    $mystring = "<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>";
+    if($res->num_rows >0)
+    {
+        while($r = mysqli_fetch_array($res))
+        {
+            $arrayid[] = $r['id'];
+            
+            $mystring .= "<tr><td>".$r['noasset']."</td><td>".$r['name']."</td></tr>";
+            $mypricestring .="<label><b>".$counter . "</b>." . $r['name'] .
+            "</label> <input type = 'text' class = 'form-control' id = 'priceedit" .
+            $r['id'] . "' placeholder = 'Place price here' value = '". $r['harga']."'> <br><br>";
+            $counter++;
+        }
+    }
+    $mystring .= "</table>";
+    // echo print($arrayid)."||".$mystring;
+    $response["data"] = array(
+        'mystring' => $mystring,
+        'myarray' => $arrayid,
+        'myprice' => $mypricestring
+    );
+    echo json_encode($response);
+}
 else if($tipe  == "getassettransactiondispose")
 {
     $arrayid = array();

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 268,
+            "activePatchIndex": 287,
             "patches": [
                 {
                     "date": 1634799397854,
@@ -1080,6 +1080,82 @@
                 {
                     "date": 1636360718832,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -390,9 +390,9 @@\n else if($tipe  == \"getassettransactiondispose\")\r\n {\r\n     $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n-    $sql = \"select asset.id, asset.noasset, asset.name from transaction_lend_to_relation_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n+    $sql = \"select asset.id, asset.noasset, asset.name from transaction_dispose_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n     $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n     if($res->num_rows >0)\r\n     {\r\n"
+                },
+                {
+                    "date": 1636379629248,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -386,8 +386,12 @@\n         'myarray' => $arrayid\r\n     );\r\n     echo json_encode($response);\r\n }\r\n+else if($tipe == \"getassettransactionsale\")\r\n+{\r\n+    \r\n+}\r\n else if($tipe  == \"getassettransactiondispose\")\r\n {\r\n     $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n"
+                },
+                {
+                    "date": 1636379639009,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -388,9 +388,28 @@\n     echo json_encode($response);\r\n }\r\n else if($tipe == \"getassettransactionsale\")\r\n {\r\n-    \r\n+    $arrayid = array();\r\n+    $idtransac = $_POST['myidtransaction'];\r\n+    $sql = \"select asset.id, asset.noasset, asset.name from transaction_sale_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n+    $res = $conn->query($sql);\r\n+    $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n+    if($res->num_rows >0)\r\n+    {\r\n+        while($r = mysqli_fetch_array($res))\r\n+        {\r\n+            $arrayid[] = $r['id'];\r\n+            $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n+        }\r\n+    }\r\n+    $mystring .= \"</table>\";\r\n+    // echo print($arrayid).\"||\".$mystring;\r\n+    $response[\"data\"] = array(\r\n+        'mystring' => $mystring,\r\n+        'myarray' => $arrayid\r\n+    );\r\n+    echo json_encode($response);\r\n }\r\n else if($tipe  == \"getassettransactiondispose\")\r\n {\r\n     $arrayid = array();\r\n"
+                },
+                {
+                    "date": 1636380965223,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -390,16 +390,17 @@\n else if($tipe == \"getassettransactionsale\")\r\n {\r\n     $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n-    $sql = \"select asset.id, asset.noasset, asset.name from transaction_sale_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n+    $sql = \"select asset.id, asset.noasset, asset.name, tdasl.harga from transaction_sale_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n     $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n     if($res->num_rows >0)\r\n     {\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n             $arrayid[] = $r['id'];\r\n+            \r\n             $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n"
+                },
+                {
+                    "date": 1636380989276,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -392,8 +392,9 @@\n     $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select asset.id, asset.noasset, asset.name, tdasl.harga from transaction_sale_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n+    $mypricestring = \"\";\r\n     $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n     if($res->num_rows >0)\r\n     {\r\n         while($r = mysqli_fetch_array($res))\r\n"
+                },
+                {
+                    "date": 1636381004717,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -401,8 +401,11 @@\n         {\r\n             $arrayid[] = $r['id'];\r\n             \r\n             $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n+            $mypricestring .=\"<label><b>\" + counter + \"</b>.\" + nameasset +\r\n+            \"</label> <input type = 'text' class = 'form-control' id = 'price\" +\r\n+            myfixid + \"' placeholder = 'Place price here'> <br><br>\";\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n     // echo print($arrayid).\"||\".$mystring;\r\n"
+                },
+                {
+                    "date": 1636381020292,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -392,8 +392,9 @@\n     $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select asset.id, asset.noasset, asset.name, tdasl.harga from transaction_sale_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n+    $counter = 0 ;\r\n     $mypricestring = \"\";\r\n     $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n     if($res->num_rows >0)\r\n     {\r\n"
+                },
+                {
+                    "date": 1636381030601,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -392,9 +392,9 @@\n     $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select asset.id, asset.noasset, asset.name, tdasl.harga from transaction_sale_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n-    $counter = 0 ;\r\n+    $counter = 1;\r\n     $mypricestring = \"\";\r\n     $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n     if($res->num_rows >0)\r\n     {\r\n@@ -405,8 +405,9 @@\n             $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n             $mypricestring .=\"<label><b>\" + counter + \"</b>.\" + nameasset +\r\n             \"</label> <input type = 'text' class = 'form-control' id = 'price\" +\r\n             myfixid + \"' placeholder = 'Place price here'> <br><br>\";\r\n+            $counter++;\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n     // echo print($arrayid).\"||\".$mystring;\r\n"
+                },
+                {
+                    "date": 1636381036040,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -402,9 +402,9 @@\n         {\r\n             $arrayid[] = $r['id'];\r\n             \r\n             $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n-            $mypricestring .=\"<label><b>\" + counter + \"</b>.\" + nameasset +\r\n+            $mypricestring .=\"<label><b>\" + $counter + \"</b>.\" + $nameasset +\r\n             \"</label> <input type = 'text' class = 'form-control' id = 'price\" +\r\n             myfixid + \"' placeholder = 'Place price here'> <br><br>\";\r\n             $counter++;\r\n         }\r\n"
+                },
+                {
+                    "date": 1636381045531,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -402,9 +402,9 @@\n         {\r\n             $arrayid[] = $r['id'];\r\n             \r\n             $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n-            $mypricestring .=\"<label><b>\" + $counter + \"</b>.\" + $nameasset +\r\n+            $mypricestring .=\"<label><b>\" + $counter + \"</b>.\" + $r['name'] +\r\n             \"</label> <input type = 'text' class = 'form-control' id = 'price\" +\r\n             myfixid + \"' placeholder = 'Place price here'> <br><br>\";\r\n             $counter++;\r\n         }\r\n"
+                },
+                {
+                    "date": 1636381053469,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -403,9 +403,9 @@\n             $arrayid[] = $r['id'];\r\n             \r\n             $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n             $mypricestring .=\"<label><b>\" + $counter + \"</b>.\" + $r['name'] +\r\n-            \"</label> <input type = 'text' class = 'form-control' id = 'price\" +\r\n+            \"</label> <input type = 'text' class = 'form-control' id = 'priceedit\" +\r\n             myfixid + \"' placeholder = 'Place price here'> <br><br>\";\r\n             $counter++;\r\n         }\r\n     }\r\n"
+                },
+                {
+                    "date": 1636381076107,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -404,9 +404,9 @@\n             \r\n             $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n             $mypricestring .=\"<label><b>\" + $counter + \"</b>.\" + $r['name'] +\r\n             \"</label> <input type = 'text' class = 'form-control' id = 'priceedit\" +\r\n-            myfixid + \"' placeholder = 'Place price here'> <br><br>\";\r\n+            $r['id'] + \"' placeholder = 'Place price here'> <br><br>\";\r\n             $counter++;\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n"
+                },
+                {
+                    "date": 1636381095828,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -412,9 +412,10 @@\n     $mystring .= \"</table>\";\r\n     // echo print($arrayid).\"||\".$mystring;\r\n     $response[\"data\"] = array(\r\n         'mystring' => $mystring,\r\n-        'myarray' => $arrayid\r\n+        'myarray' => $arrayid,\r\n+        'myprice' => $arrayid\r\n     );\r\n     echo json_encode($response);\r\n }\r\n else if($tipe  == \"getassettransactiondispose\")\r\n"
+                },
+                {
+                    "date": 1636381101005,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -413,9 +413,9 @@\n     // echo print($arrayid).\"||\".$mystring;\r\n     $response[\"data\"] = array(\r\n         'mystring' => $mystring,\r\n         'myarray' => $arrayid,\r\n-        'myprice' => $arrayid\r\n+        'myprice' => $mypricestring\r\n     );\r\n     echo json_encode($response);\r\n }\r\n else if($tipe  == \"getassettransactiondispose\")\r\n"
+                },
+                {
+                    "date": 1636381243723,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -413,9 +413,9 @@\n     // echo print($arrayid).\"||\".$mystring;\r\n     $response[\"data\"] = array(\r\n         'mystring' => $mystring,\r\n         'myarray' => $arrayid,\r\n-        'myprice' => $mypricestring\r\n+        'myprice' => \"test\"\r\n     );\r\n     echo json_encode($response);\r\n }\r\n else if($tipe  == \"getassettransactiondispose\")\r\n"
+                },
+                {
+                    "date": 1636381250048,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -402,11 +402,9 @@\n         {\r\n             $arrayid[] = $r['id'];\r\n             \r\n             $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n-            $mypricestring .=\"<label><b>\" + $counter + \"</b>.\" + $r['name'] +\r\n-            \"</label> <input type = 'text' class = 'form-control' id = 'priceedit\" +\r\n-            $r['id'] + \"' placeholder = 'Place price here'> <br><br>\";\r\n+        \r\n             $counter++;\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n"
+                },
+                {
+                    "date": 1636381260964,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -402,9 +402,11 @@\n         {\r\n             $arrayid[] = $r['id'];\r\n             \r\n             $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n-        \r\n+            $mypricestring .=\"<label><b>\" + $counter + \"</b>.\" + $r['name'] +\r\n+            \"</label> <input type = 'text' class = 'form-control' id = 'priceedit\" +\r\n+            $r['id'] + \"' placeholder = 'Place price here'> <br><br>\";\r\n             $counter++;\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n"
+                },
+                {
+                    "date": 1636381275701,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -413,9 +413,9 @@\n     // echo print($arrayid).\"||\".$mystring;\r\n     $response[\"data\"] = array(\r\n         'mystring' => $mystring,\r\n         'myarray' => $arrayid,\r\n-        'myprice' => \"test\"\r\n+        'myprice' => $mypricestring\r\n     );\r\n     echo json_encode($response);\r\n }\r\n else if($tipe  == \"getassettransactiondispose\")\r\n"
+                },
+                {
+                    "date": 1636381408759,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -402,11 +402,11 @@\n         {\r\n             $arrayid[] = $r['id'];\r\n             \r\n             $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n-            $mypricestring .=\"<label><b>\" + $counter + \"</b>.\" + $r['name'] +\r\n-            \"</label> <input type = 'text' class = 'form-control' id = 'priceedit\" +\r\n-            $r['id'] + \"' placeholder = 'Place price here'> <br><br>\";\r\n+            $mypricestring .=\"<label><b>\".$counter . \"</b>.\" . $r['name'] .\r\n+            \"</label> <input type = 'text' class = 'form-control' id = 'priceedit\" .\r\n+            $r['id'] . \"' placeholder = 'Place price here'> <br><br>\";\r\n             $counter++;\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n"
+                },
+                {
+                    "date": 1636381482117,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -404,9 +404,9 @@\n             \r\n             $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n             $mypricestring .=\"<label><b>\".$counter . \"</b>.\" . $r['name'] .\r\n             \"</label> <input type = 'text' class = 'form-control' id = 'priceedit\" .\r\n-            $r['id'] . \"' placeholder = 'Place price here'> <br><br>\";\r\n+            $r['id'] . \"' placeholder = 'Place price here' value = '\". $r['name'].\"'> <br><br>\";\r\n             $counter++;\r\n         }\r\n     }\r\n     $mystring .= \"</table>\";\r\n"
                 }
             ],
             "date": 1634799397854,

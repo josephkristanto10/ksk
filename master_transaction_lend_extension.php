@@ -1659,7 +1659,7 @@ echo date('d-m-Y');?>">
             }
         });
         $.ajax({
-            url: "process/master_transaction_lend_return.php",
+            url: "process/master_transaction_lend_extension.php",
             method: 'POST',
             data: {
                 tipe: "getdetailtransactionadd",

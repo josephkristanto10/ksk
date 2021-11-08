@@ -130,7 +130,7 @@ if($resconditions -> num_rows>0)
                                 <th>Approval</th>
                                 <th>Date</th>
                                 <th>No. Transaction</th>
-
+                                <th>Action</th>
                             </tr>
                         </thead>
 
@@ -140,85 +140,7 @@ if($resconditions -> num_rows>0)
         </div>
     </div>
 </div>
-<!-- <div class="modal fade" id="myModal">
-    <div class="modal-dialog modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
-                <h5 class="modal-title">Add Transaction</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="myforms">
-                    <div class="form-group">
-                     
-                     
-                        
-                        <label for="cars" style="font-size:11pt;"><b>Asset Section</b></label><br>
-                        <label for="cars">Asset Group:</label>
-                        <select id="groups" name="groups" class="form-control">
-                            <?php
-                                        for($i = 0 ; $i < count($mykategoriasset); $i++)
-                                        {                                            
-                                                echo '<option value="'.$mykategoriasset[$i]['id'].'">'.$mykategoriasset[$i]['nama'].'</option>';                                       
-                                        }
-                                ?>
-                        </select>
-                        <br>
-                        <label for="cars">Asset:</label>
-                        <select id="asset" name="asset" class="form-control">
 
-                        </select>
-                        <br>
-                        <b>Asset Preview</b>
-                        <div class="row">
-
-                            <div class="col-md-6">
-                                <br>
-                                <label>No Asset</label>
-                                <br>
-                                <label id="noassetpreview">1123</label>
-                            </div>
-                            <div class="col-md-6">
-                                <br>
-                                <label>Asset</label>
-                                <br>
-                                <label id="assetpreview">Good</label>
-                            </div>
-                        </div>
-                        <div class="row">
-
-                            <div class="col-md-6">
-                                <br>
-                                <label>Initial Condition</label>
-                                <br>
-                                <label id="initialpreview">Good</label>
-                            </div>
-                            <div class="col-md-6">
-                                <br>
-                                <label>Condition</label>
-                                <br>
-                                <label id="conditionpreview">Good</label>
-                            </div>
-                        </div>
-
-
-                        <br>
-                        <br>
-                        <div style="float:right;margin-bottom:20px;">
-                            <button type="button" class="btn btn-primary" style="margin-right:10px;"
-                                onclick="adddata()">Save</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                id="canceladd">Cancel</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-        </div>
-    </div>
-</div> -->
 
 
 </div>
@@ -226,80 +148,6 @@ if($resconditions -> num_rows>0)
 </div>
 </div>
 
-<div class="modal fade" id="myModaledit">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
-                <h5 class="modal-title">Edit Personel</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-
-            </div>
-            <div class="modal-body">
-                <form id="myformedit">
-                    <div class="form-group">
-                        <input type="hidden" id="idchange">
-                        <label for="idgroup">Sister Company</label><input type="text" class="form-control"
-                            name="idgroup" id="idgroup" value="<?php echo $_SESSION['namasister']; ?>" disabled />
-                        <br class="clear" />
-                        <label for="idgroup">Group</label>
-                        <select class="form-control" id="groupedit">
-                            <?php
-                                for($i = 0 ; $i < count($myasset); $i++)
-                                {
-                                    echo '<option value = "'.$myasset[$i]['id'].'">'.$myasset[$i]['nama'].'</option>';
-                                }
-                                ?>
-                        </select>
-                        <br class="clear" />
-                        <label for="idsubgroup">Subgroup</label>
-                        <select class="form-control" id="subgroupedit">
-                        </select>
-                        <br class="clear" />
-                        <label for="idcategory">Category</label>
-                        <select class="form-control" id="categoryedit">
-                        </select>
-                        <br class="clear" />
-                        <label for="idinitialcondition">Initial Condition</label>
-                        <select class="form-control" id="initialconditionedit">
-                            <?php
-                                for($i = 0 ; $i < count($myinitial); $i++)
-                                {
-                                    echo '<option value = "'.$myinitial[$i]['id'].'">'.$myinitial[$i]['initial_condition'].'</option>';
-                                }
-                                ?>
-                        </select>
-                        <br class="clear" />
-                        <label for="idcondition">Condition</label>
-                        <select class="form-control" id="conditionedit">
-                            <?php
-                                for($i = 0 ; $i < count($myconditions); $i++)
-                                {
-                                    echo '<option value = "'.$myconditions[$i]['id'].'">'.$myconditions[$i]['name'].'</option>';
-                                }
-                                ?>
-                        </select>
-                        <br class="clear" />
-                        <label for="noasset">No Asset</label><input type="text" class="form-control" name="noasset"
-                            id="noassetedit" />
-                        <br class="clear" />
-                        <label for="name">Name</label><input type="text" class="form-control" name="name"
-                            id="nameedit" />
-                        <br class="clear" />
-                        <br class="clear" />
-
-
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="changedata()">Save</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="canceledit">Cancel</button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="modal fade" id="myModalAddSale">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
@@ -339,14 +187,15 @@ if($resconditions -> num_rows>0)
 
                         </select>
                         <br>
-                        <label for="cars">Asset Category:</label>
+                        <label for="cars">Asset Category:</label> <a href="#selectasset" onclick="openselectasset(this)"
+                            data-toggle="modal" data-backdrop="static" data-keyboard="false">select asset</a>
                         <select id="categories" name="categories" class="form-control">
 
                         </select>
                         <br>
                         <b>Asset Choose</b>
                         <br><br>
-                        <div id="chooseaset" style="max-height:100px !important;">
+                        <div id="containerpilihaset" style="max-height:100px !important;">
 
                         </div>
                     </div>
@@ -355,7 +204,74 @@ if($resconditions -> num_rows>0)
                         <div id="priceadd"></div>
 
                         <button type = "button" class='btn btn-info' id="buttonaddsale"
-                            style="float:right; position: relative ;bottom:20px;right:20px;">complease</button>
+                            style="float:right; position: relative ;bottom:20px;right:20px;">Save</button>
+                    </div>
+
+
+                </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModalAddSaleEdit">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
+                <h5 class="modal-title">Edit Asset's Sale Transaction </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+
+            </div>
+            <div class="modal-body" style="padding:10px !important;">
+                <form id = "myform" >
+                <ul class="nav nav-tabs nav-tabs-solid border-0 nav-justified rounded" id="mynav"
+                    style="margin-top:10px;">
+                    <li class="nav-item"><a id="myfirstedit" href="#firstedit" class="nav-link rounded-left active"
+                            data-toggle="tab">Asset</a></li>
+                    <li class="nav-item"><a id="mysecondedit" href="#secondedit" class="nav-link" data-toggle="tab">Price</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content" style="margin-left:10px;">
+                    <div class="tab-pane fade show active" id="firstedit">
+                        <h4><span class="font-weight-semibold">Asset Section</span></h4>
+
+                        <label for="cars">Asset Group:</label>
+                        <select id="groupsedit" name="groups" class="form-control">
+                            <?php
+                                        for($i = 0 ; $i < count($mykategoriasset); $i++)
+                                        {                                            
+                                                echo '<option value="'.$mykategoriasset[$i]['id'].'">'.$mykategoriasset[$i]['nama'].'</option>';                                       
+                                        }
+                                ?>
+                        </select>
+                        <br>
+                        <label for="cars">Asset Sub Group:</label>
+                        <select id="subgroupsedit" name="subgroups" class="form-control">
+
+                        </select>
+                        <br>
+                        <label for="cars">Asset Category:</label> <a href="#selectassetedit" onclick="openselectassetedit(this)"
+                            data-toggle="modal" data-backdrop="static" data-keyboard="false">select asset</a>
+                        <select id="categoriesedit" name="categories" class="form-control">
+
+                        </select>
+                        <br>
+                        <b>Asset Choose</b>
+                        <br><br>
+                        <div id="containerpilihasetedit" style="max-height:100px !important;">
+
+                        </div>
+                    </div>
+                    <div class="tab-pane fade show " id="secondedit">
+                        <h4><span class="font-weight-semibold">Price</span></h4>
+                        <div id="priceedit"></div>
+
+                        <button type = "button" class='btn btn-info' id="buttoneditsale"
+                            style="float:right; position: relative ;bottom:20px;right:20px;">Save</button>
                     </div>
 
 
@@ -396,11 +312,248 @@ if($resconditions -> num_rows>0)
         </div>
     </div>
 </div>
+
+<!-- Modal Choose Aset -->
+<div class="modal fade" id="selectasset">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
+                <h5 class="modal-title">Select Asset</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="myforms">
+                    <div class="form-group">
+                        <label for="cars">Group: &nbsp <b><label id="grouptitleselectasset">-</label></b></label><br>
+                        <label for="cars">Sub Group: &nbsp <b><label
+                                    id="subgrouptitleselectasset">-</label></b></label><br>
+                        <label for="cars">Category: &nbsp <b><label
+                                    id="categoriestitleselectasset">-</label></b></label><br>
+                        <table id="datatable_asset" class="table table-hover table-bordered display nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>No. Asset</th>
+                                    <th>Name</th>
+                                    <th>Condition</th>
+                                    <th>Initial Condition</th>
+
+                                </tr>
+                            </thead>
+                            </tbody>
+                            </tbody>
+
+                        </table>
+                        <div style="float:right;margin-bottom:20px;">
+                            <button type="button" class="btn btn-primary" id="pilihaset" style="margin-right:10px;"
+                                onclick="pilihasset()">Choose</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                id="canceladd">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModalEditTransactions">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
+                <h5 class="modal-title">Edit Transaction</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="myforms">
+                    <div class="form-group">
+                        <label for="cars" style="font-size:11pt;"><b>Relation Section</b></label><br>
+                        <label for="cars">Company:</label>
+                        <select id="relationedit" name="relation" class="form-control">
+                            <?php
+                                        for($i = 0 ; $i < count($myrelation); $i++)
+                                        {                                            
+                                                echo '<option value="'.$myrelation[$i]['id'].'">'.$myrelation[$i]['company']." - ".$myrelation[$i]['contactname'].'</option>';                                       
+                                        }
+                                ?>
+                        </select>
+                        <br>
+                        <b>Company Preview</b>
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <br>
+                                <label>Company</label>
+                                <br>
+                                <label id="companypreviewedit">-</label>
+                            </div>
+                            <div class="col-md-6">
+                                <br>
+                                <label>Contact</label>
+                                <br>
+                                <label id="contactnamepreviewedit">-</label>
+                            </div>
+                        </div>
+                        <hr>
+
+
+                        <label for="cars" style="font-size:11pt;"><b>Room Section</b></label><br>
+                        <label for="cars">Branch :</label>
+                        <select id="branchedit" name="branchedit" class="form-control">
+                            <?php
+                                        for($i = 0 ; $i < count($mybranch); $i++)
+                                        {                                            
+                                                echo '<option value="'.$mybranch[$i]['idbranch'].'">'.$mybranch[$i]['branch'].'</option>';                                       
+                                        }
+                                ?>
+                        </select>
+                        <br>
+                        <label for="cars">Room :</label>
+                        <select id="roomedit" name="room" class="form-control">
+
+                        </select>
+                        <br>
+                        <hr>
+                        <label for="cars">Start Date</label>
+                        <div class="input-group">
+                            <span class="input-group-prepend">
+                                <span class="input-group-text"><i class="icon-calendar22"></i></span>
+                            </span>
+                            <input type="text" class="form-control pickadate required" name="mystartdate"
+                                id="mystartdateedit" value="<?php echo date('d-m-Y');?>">
+
+                        </div>
+
+                        <br>
+
+                        <label for="cars">Due Date:</label>
+                        <div class="input-group">
+                            <span class="input-group-prepend">
+                                <span class="input-group-text"><i class="icon-calendar22"></i></span>
+                            </span>
+                            <input type="text" class="form-control pickadate required" name="enddate" id="enddateedit"
+                                value="<?php date_default_timezone_set('Asia/Jakarta');
+echo date('d-m-Y');?>">
+
+                        </div>
+
+                        <label for="cars">Asset Group:</label>
+                        <select id="groupsedit" name="groupsedit" class="form-control">
+                            <?php
+                                        for($i = 0 ; $i < count($mykategoriasset); $i++)
+                                        {                                            
+                                                echo '<option value="'.$mykategoriasset[$i]['id'].'">'.$mykategoriasset[$i]['nama'].'</option>';                                       
+                                        }
+                                ?>
+                        </select>
+                        <br>
+                        <label for="cars">Asset Sub Group:</label>
+                        <select id="subgroupsedit" name="subgroupsedit" class="form-control">
+                        </select>
+                        <br>
+                        <label for="cars">Asset Category:</label> <a href="#selectassetedit"
+                            onclick="openselectassetedit(this)" data-toggle="modal" data-backdrop="static"
+                            data-keyboard="false">select asset</a>
+                        <select id="categoriesedit" name="categoriesedit" class="form-control">
+                        </select>
+                        <br>
+                        <b>Asset Choose</b>
+                        <br><br>
+                        <div id="containerpilihasetedit" style="max-height:100px !important;">
+                        </div>
+                        <br>
+                        <br>
+                        <div style="float:right;">
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" style="margin-right:10px;margin-top:10px;"
+                    onclick="editdata()">Save</button>
+                <button type="button" class="btn btn-secondary" style="margin-right:30px;margin-top:10px;"
+                    data-dismiss="modal" id="canceledittransaction">Cancel</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="selectassetedit">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#324148;color:white;height:60px;">
+                <h5 class="modal-title">Select Asset</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="myforms">
+                    <div class="form-group">
+                        <label for="cars">Group: &nbsp <b><label
+                                    id="grouptitleselectassetedit">-</label></b></label><br>
+                        <label for="cars">Sub Group: &nbsp <b><label
+                                    id="subgrouptitleselectassetedit">-</label></b></label><br>
+                        <label for="cars">Category: &nbsp <b><label
+                                    id="categoriestitleselectassetedit">-</label></b></label><br>
+                        <table id="datatable_asset_edit" class="table table-hover table-bordered display nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>No. Asset</th>
+                                    <th>Name</th>
+                                    <th>Condition</th>
+                                    <th>Initial Condition</th>
+
+                                </tr>
+                            </thead>
+                            </tbody>
+
+                            </tbody>
+
+                        </table>
+                        <div style="float:right;margin-bottom:20px;">
+                            <button type="button" class="btn btn-primary" id="pilihaset" style="margin-right:10px;"
+                                onclick="pilihassetedit()">Choose</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                id="canceladd">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- End Modal Choose Asset -->
 </body>
 
 </html>
 <script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>
 <script>
+
+        var ongoingidasset = [];
+        var ongoingpriceasset = [];
+        var ongoingidassetedit = [];
+        var ongoingpriceassetedit = [];
+       // variable pilih asset
+       var idtransaction = "";
+    var idglobalsubgroupedit = "";
+    var idglobalcategoryedit = "";
+    var idglobalidtoroomsedit = "";
+    var idglobalidfromroomsedit = "";
+    var arridselectedassetadd = [];
+    var arridselectedassetedit = [];
+    // end variable
+
     $('#mystartdate').pickadate({
         format: 'dd-mm-yyyy'
     });
@@ -561,6 +714,10 @@ if($resconditions -> num_rows>0)
                 },
                 {
                     name: 'Transaction',
+                    className: 'text-center align-middle'
+                },
+                {
+                    name: 'Action',
                     className: 'text-center align-middle'
                 }
             ]
@@ -2012,37 +2169,122 @@ if($resconditions -> num_rows>0)
             getallanswercustomquestion(myid);
 
         });
-        var ongoingidasset = [];
-        var ongoingpriceasset = [];
+
+        $("#groupsedit").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_disp_new_asset.php",
+                method: 'POST',
+                data: {
+                    tipe: "getsubgroup",
+                    idgroup: myid
+                },
+                success: function (result) {
+                    $("#subgroupsedit").html("");
+                    $("#subgroupsedit").html(result).promise().done(function () {
+                        if (!idglobalsubgroupedit == "") {
+                            $('#subgroupsedit').find('option[value="' +
+                                idglobalsubgroupedit +
+                                '"]').prop('selected', true);
+                        }
+                    });
+                    $("#subgroupsedit").trigger("change");
+                }
+
+            })
+        }).trigger("change");
+        $("#subgroupsedit").on("change", function () {
+            var myid = this.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "process/master_transaction_disp_new_asset.php",
+                method: 'POST',
+                data: {
+                    tipe: "getcategory",
+                    idsubgroup: myid
+                },
+                success: function (result) {
+
+                    // alert(result);
+
+
+                    $("#categoriesedit").html("");
+                    $("#categoriesedit").html(result).promise().done(function () {
+                        if (!idglobalcategoryedit == "") {
+                            $('#categoriesedit').find('option[value="' +
+                                idglobalcategoryedit +
+                                '"]').prop('selected', true);
+                        }
+                    });
+                    $("#categoriesedit").trigger("change");
+                }
+
+            })
+        }).trigger("change");
+        // $("#categories").on("change", function () {
+        //     var myid = this.value;
+        //     $.ajaxSetup({
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         }
+        //     });
+        //     $.ajax({
+        //         url: "process/master_transaction_disp_department.php",
+        //         method: 'POST',
+        //         data: {
+        //             tipe: "getasset",
+        //             idcategory: myid
+        //         },
+        //         success: function (result) {
+        //             selected = [];
+        //             // alert(result);
+        //             $("#chooseaset").html("");
+        //             $("#chooseaset").html(result);
+        //         }
+
+        //     })
+        // }).trigger("change");
+   
         $("#mysecond").on("click", function () {
-            $("#priceadd").html("");
-            ongoingidasset = [];
+            // $("#priceadd").html("");
+            // ongoingidasset = [];
             var item = 0;
             var counter = 1;
+            // var jumlaharr = arrid
             $("input:checkbox[class=mycheckbox]:checked").each(function () {
-                var myvalue = this.value;
-                var split = myvalue.split("-");
-                var id = split[0];
-                ongoingidasset.push(id);
-                var name = split[1];
-                $("#priceadd").append("<label><b>" + counter + "</b>." + name +
-                    "</label> <input type = 'text' class = 'form-control' id = 'price" +
-                    id + "' placeholder = 'Place price here'> <br><br>");
-                counter += 1;
+                // var myvalue = this.value;
+                // var split = myvalue.split("-");
+                // var id = split[0];
+                // ongoingidasset.push(id);
+                // var name = split[1];
+                // $("#priceadd").append("<label><b>" + counter + "</b>." + name +
+                //     "</label> <input type = 'text' class = 'form-control' id = 'price" +
+                //     id + "' placeholder = 'Place price here'> <br><br>");
+                // counter += 1;
                 item += 1;
             });
-            if (item == 0) {
-                $("#buttonaddsale").css("display", "none");
-            } else {
-                $("#buttonaddsale").css("display", "block");
-                $("#buttonaddsale").css("position", "absolute");
-            }
+            // if (item == 0) {
+            //     $("#buttonaddsale").css("display", "none");
+            // } else {
+            //     $("#buttonaddsale").css("display", "block");
+            //     $("#buttonaddsale").css("position", "absolute");
+            // }
 
 
         });
        
         $("#buttonaddsale").on("click", function () {
             var inputempty = 0;
+            console.log(ongoingidasset);
             ongoingpriceasset = [];
             $("#myModalAddSale input:text").each(function () {
                 var myvalue = this.value;
@@ -2053,9 +2295,7 @@ if($resconditions -> num_rows>0)
             });
             if (inputempty == 0) {
 
-                $("input:checkbox[class=mycheckbox]:checked").each(function () {
-                    selected.push($(this).val());
-                });
+      
                 for (var i = 0; i < ongoingidasset.length; i++) {
                     var mypricevalues = $("#price" + ongoingidasset[i]).val();
                     ongoingpriceasset.push(mypricevalues);
@@ -2089,6 +2329,77 @@ if($resconditions -> num_rows>0)
                               
                                 $("#myform").trigger("reset");
                                 $("#myModalAddSale").modal("toggle");
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Insert Error',
+                                text: 'Error inserting data',
+                                confirmButtonColor: '#e00d0d',
+                            });
+                        }
+
+
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Price is empty ',
+                    text: 'There is an empty price input on this form !',
+                    confirmButtonColor: '#e00d0d',
+                });
+            }
+
+        });
+        $("#buttoneditsale").on("click", function () {
+            var inputempty = 0;
+           
+            ongoingpriceassetedit = [];
+            $("#myModalAddSaleEdit input:text").each(function () {
+                var myvalue = this.value;
+                // alert(myvalue);
+                if (myvalue == "") {
+                    inputempty += 1;
+                }
+            });
+            if (inputempty == 0) {
+
+      
+                for (var i = 0; i < ongoingidassetedit.length; i++) {
+                    var mypricevalues = $("#priceedit" + ongoingidassetedit[i]).val();
+                    ongoingpriceassetedit.push(mypricevalues);
+                }
+                // alert(ongoingidasset + "~" + ongoingpriceasset);
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: "process/master_transaction_sale.php",
+                    method: 'POST',
+                    data: {
+                        tipe: "edit",
+                        myselectedprice: ongoingpriceassetedit,
+                        myselected: ongoingidassetedit,
+                        mytransaction: idtransaction
+                    },
+                    success: function (result) {
+                        if (result == "sukses") {
+                            $("#priceadd").html("");
+                            success();
+                            Swal.fire({
+                                title: 'Data Saved',
+                                text: 'Data Inputted Successfully',
+                                icon: 'success',
+                                confirmButtonColor: '#53d408',
+                                allowOutsideClick: false,
+                            }).then((result) => {
+                              
+                                // $("#myform").trigger("reset");
+                                $("#myModalAddSaleEdit").modal("toggle");
                             });
                         } else {
                             Swal.fire({
@@ -2312,4 +2623,376 @@ if($resconditions -> num_rows>0)
             });
 
     }
+
+     // Asset Choose Section
+     var asset = null;
+    var assetedit = null;
+    var chosenasset = null;
+    var iddefaultcategories = "";
+    $('#selectasset').on('shown.bs.modal', function () {
+        var idcategories = $("#categories").val();
+        if (iddefaultcategories != idcategories) {
+            iddefaultcategories = idcategories;
+            loadasset(idcategories);
+        }
+        asset.columns.adjust();
+    });
+
+    function openselectasset() {
+
+        var idcategories = $("#categories").val();
+        if (iddefaultcategories != idcategories) {
+            iddefaultcategories = idcategories;
+            loadasset(idcategories);
+
+        }
+
+        var groups = document.getElementById("groups");
+        var subgroups = document.getElementById("subgroups");
+        var categories = document.getElementById("categories");
+        var strgroups = groups.options[groups.selectedIndex].text;
+        var strsubgroups = subgroups.options[subgroups.selectedIndex].text;
+        var strcategories = categories.options[categories.selectedIndex].text;
+        $("#grouptitleselectasset").text(strgroups);
+        $("#subgrouptitleselectasset").text(strsubgroups);
+        $("#categoriestitleselectasset").text(strcategories);
+    }
+
+    function openselectassetedit() {
+
+        var idcategories = $("#categoriesedit").val();
+        var groups = document.getElementById("groupsedit");
+        var subgroups = document.getElementById("subgroupsedit");
+        var categories = document.getElementById("categoriesedit");
+        var strgroups = groups.options[groups.selectedIndex].text;
+        var strsubgroups = subgroups.options[subgroups.selectedIndex].text;
+        var strcategories = categories.options[categories.selectedIndex].text;
+
+        $("#grouptitleselectassetedit").text(strgroups);
+        $("#subgrouptitleselectassetedit").text(strsubgroups);
+        $("#categoriestitleselectassetedit").text(strcategories);
+        if (iddefaultcategories != idcategories) {
+            iddefaultcategories = idcategories;
+            loadassetedit(idcategories);
+        }
+    }
+
+    function loadasset(params) {
+
+        asset = $("#datatable_asset").DataTable({
+            processing: true,
+            deferRender: true,
+            serverSide: true,
+            destroy: true,
+            scrollX: true,
+            responsive: true,
+            autoWidth: true,
+            iDisplayInLength: 10,
+            // scrollX: true,
+            order: [
+                [0, 'asc']
+            ],
+            ajax: {
+                url: 'process/mastergetasset.php',
+                method: 'POST',
+                data: {
+                    tipe: "load",
+                    statusmust: "placed",
+                    myparam: params
+                },
+
+            },
+            columns: [{
+                    searchable: false,
+                    orderable: false,
+                    name: '#',
+                    className: 'text-center align-middle'
+                },
+                {
+                    name: 'noasset',
+                    className: 'text-center align-middle'
+                },
+                {
+                    name: 'name',
+                    className: 'text-center align-middle'
+                },
+                {
+                    name: 'conditions',
+                    className: 'text-center align-middle'
+                },
+                {
+                    name: 'initial_condition',
+                    className: 'text-center align-middle'
+                }
+            ]
+        });
+    };
+
+    function loadassetedit(params) {
+
+        assetedit = $("#datatable_asset_edit").DataTable({
+            processing: true,
+            deferRender: true,
+            serverSide: true,
+            destroy: true,
+            scrollX: true,
+            responsive: true,
+            autoWidth: true,
+            iDisplayInLength: 10,
+            // scrollX: true,
+            order: [
+                [0, 'asc']
+            ],
+            ajax: {
+                url: 'process/mastergetasset.php',
+                method: 'POST',
+                data: {
+                    tipe: "loadexisting",
+                    statusmust: "placed",
+                    assetexisting: arridselectedassetedit,
+                    myparam: params
+                },
+
+            },
+            columns: [{
+                    searchable: false,
+                    orderable: false,
+                    name: '#',
+                    className: 'text-center align-middle'
+                },
+                {
+                    name: 'noasset',
+                    className: 'text-center align-middle'
+                },
+                {
+                    name: 'name',
+                    className: 'text-center align-middle'
+                },
+                {
+                    name: 'conditions',
+                    className: 'text-center align-middle'
+                },
+                {
+                    name: 'initial_condition',
+                    className: 'text-center align-middle'
+                }
+            ]
+        });
+    };
+
+
+
+
+    function pilihasset() {
+        var count = 0;
+        var arrselectedasset = [];
+        arridselectedassetadd = [];
+        var counter = 1;
+        $("#priceadd").html("");
+        $(".checkboxasset").each(function () {
+            var checked = this.checked;
+
+            if (checked) {
+                var myid = this.id;
+                var splitid = myid.split("_");
+                var myfixid = splitid[1];
+                ongoingidasset.push(myfixid);
+                arridselectedassetadd.push(myfixid);
+                var noasset = $("#noasset" + myfixid).text();
+                var nameasset = $("#name" + myfixid).text();
+                var conditions = $("#conditions" + myfixid).text();
+                var initialcondition = $("#initial_condition" + myfixid).text();
+                arrselectedasset.push(myfixid + "~~" + noasset + "~~" + nameasset + "~~" + conditions + "~~" +
+                    initialcondition);
+          
+                $("#priceadd").append("<label><b>" + counter + "</b>." + nameasset +
+                    "</label> <input type = 'text' class = 'form-control' id = 'price" +
+                    myfixid + "' placeholder = 'Place price here'> <br><br>");
+                    count += 1;
+                    counter +=1;
+            }
+               
+
+
+        });
+        if (count == 0) {
+                $("#buttonaddsale").css("display", "none");
+            } else {
+          
+                $("#buttonaddsale").css("display", "block");
+                $("#buttonaddsale").css("position", "absolute");
+            }
+
+        $("#containerpilihaset").html("");
+        $("#containerpilihaset").append(
+            "<table id = 'tablepilihasset' class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Asset Name</th></tr><tbody>"
+        );
+        for (var i = 0; i < arrselectedasset.length; i++) {
+            var split = arrselectedasset[i].split("~~");
+            $("#tablepilihasset").append("<tr><td>" + split[1] + "</td><td>" + split[2] + "</td></tr>");
+        }
+        $("#containerpilihaset").append("</tbody></table>");
+        $("#selectasset").modal("toggle");
+    }
+
+
+    function pilihassetedit() {
+        var count = 0;
+        var arrselectedasset = [];
+        arridselectedassetedit = [];
+        $(".checkboxassetedit").each(function () {
+            var checked = this.checked;
+
+            if (checked) {
+                var myid = this.id;
+                var splitid = myid.split("_");
+                var myfixid = splitid[1];
+                arridselectedassetedit.push(myfixid);
+                var noasset = $("#noassetedit" + myfixid).text();
+                var nameasset = $("#nameedit" + myfixid).text();
+                var conditions = $("#conditionsedit" + myfixid).text();
+                var initialcondition = $("#initial_conditionedit" + myfixid).text();
+                arrselectedasset.push(myfixid + "~~" + noasset + "~~" + nameasset + "~~" + conditions + "~~" +
+                    initialcondition);
+                count += 1;
+            }
+
+
+        });
+
+        $("#containerpilihasetedit").html("");
+        $("#containerpilihasetedit").append(
+            "<table id = 'tablepilihassetedit' class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Asset Name</th></tr><tbody>"
+        );
+        for (var i = 0; i < arrselectedasset.length; i++) {
+            var split = arrselectedasset[i].split("~~");
+            $("#tablepilihassetedit").append("<tr><td>" + split[1] + "</td><td>" + split[2] + "</td></tr>");
+        }
+        $("#containerpilihasetedit").append("</tbody></table>");
+        $("#selectassetedit").modal("toggle");
+    };
+
+    var globalroom = "";
+    var idbranchroomedit = "";
+    var globaliddepartment = "";
+    var globalnik = "";
+
+
+    function openmodaledits(element) {
+
+        var myelement = element.id.split("-");
+        var myid = myelement[1];
+        idtransaction = myid;
+        var idgroup = $("#group_" + myid).val();
+        var subgroup = $("#subgroup_" + myid).val();
+        var category = $("#category_" + myid).val();
+
+        //optional
+
+
+        //end optional
+
+        idglobalsubgroupedit = subgroup;
+        idglobalcategoryedit = category;
+        $('#groupsedit option[value=' + idgroup + ']').prop('selected', true);
+        $('#groupsedit').trigger("change");
+        asseteditshow();
+    };
+
+    function asseteditshow() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "process/mastergetasset.php",
+            method: 'POST',
+            data: {
+                tipe: "getassettransactionsale",
+                myidtransaction: idtransaction
+
+            },
+            success: function (result) {
+                var jsonparse = JSON.parse(result);
+                $("#containerpilihasetedit").html("");
+                $("#containerpilihasetedit").html(jsonparse.data.mystring);
+                arridselectedassetedit = jsonparse.data.myarray;
+                ongoingidassetedit= jsonparse.data.myarray;
+                $("#priceedit").html("");
+                $("#priceedit").append(jsonparse.data.myprice);
+            }
+        });
+    };
+
+    function editdata() {
+        if (arridselectedassetedit.length > 0) {
+            // var myselects = arridselectedassetedit;
+            var idtransactions = idtransaction;
+            var myselect = arridselectedassetedit;
+            var relation = $("#relationedit").val();
+            var branch = $('#branchedit').val();
+            var room = $('#roomedit').val();
+            var startdate = $('#mystartdateedit').val();
+            var enddate = $('#enddateedit').val();
+            if (startdate == "" || enddate == "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Empty Field',
+                    text: 'Requirement data cannot be empty',
+                    confirmButtonColor: '#e00d0d',
+                });
+            } else {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: "process/master_transaction_lend_relation.php",
+                    method: 'POST',
+                    data: {
+                        tipe: "edit",
+                        myrelation: relation,
+                        myselected: myselect,
+                        mybranch: branch,
+                        myroom: room,
+                        mystart: startdate,
+                        myend: enddate,
+                        mytransactions: idtransactions
+
+                    },
+                    success: function (result) {
+                        //    console.log(result);
+
+
+                        Swal.fire({
+                            title: 'Data Saved',
+                            text: 'Data Changed Successfully',
+                            icon: 'success',
+                            confirmButtonColor: '#53d408',
+                            allowOutsideClick: false,
+                        }).then((result) => {
+                            success();
+                            // $("#myforms").trigger("reset");
+                            $("#canceledittransaction").click();
+                        });
+                    }
+
+
+
+                });
+            }
+
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'No Asset Checked ',
+                text: 'Please choose at least 1 asset to be placed',
+                confirmButtonColor: '#e00d0d',
+            });
+        }
+    }
+
+    // end choose aset 
 </script>
