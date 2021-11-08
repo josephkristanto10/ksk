@@ -136,21 +136,9 @@ else if($tipe == "add"){
 else if($tipe == "changedata")
 {		
     $id  = $_POST['myid'];
-    $mycode = $_POST['mycode'];
-    $mybranch = $_POST['mybranch'];
-    $mybuilding = $_POST['mybuilding'];
-    $myfloor = $_POST['myfloor'];
-    $myrooms = $_POST['myrooms'];
-    $myrackname = $_POST['myrackname'];
-    $description = $_POST['mydescription'];
-    $sql = "update rack set 
-    idsistercompany = '".$myses."', 
-    idbranch = '".$mybranch."', 
-    idbuilding = '".$mybuilding."', 
-    idfloor = '".$myfloor."', 
-    idroom = '".$myrooms."', 
-    rackname = '".$myrackname."', 
-    description = '".$description."'
+    $template = $_POST['mytemplate'];
+    $sql = "update template set 
+    template = '".$template."' 
     where id = '".$id."'";
     $res = $conn->query($sql);
     if(($conn -> affected_rows)>0)
@@ -263,6 +251,27 @@ else if($tipe == "getprovince")
     else{
         echo "none";
     }
+}
+else if($tipe == "getcustomfieldpertemplate")
+{
+    header('Content-type: application/json');
+    $getid = $_POST['mytemplateid'];
+    $sql = "select fc.* from custom_to_template ctt inner join folder_custom fc on fc.id = ctt.idcustom where ctt.idtemplate = '$getid'";
+    $res = $conn->query($sql);
+    $response = [];
+    if($res->num_rows >0)
+    {   
+        $response['status'] = "ok";
+        while($r = mysqli_fetch_array($res))
+        {
+            $response['name'][] = $r['name'];
+            
+        }
+    }
+    else{
+        $response['status'] = "none";
+    }
+    echo json_encode($response);
 }
 else if($tipe == "getcity")
 {

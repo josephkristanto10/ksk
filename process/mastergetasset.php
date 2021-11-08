@@ -387,6 +387,29 @@ else if($tipe  == "getassettransactionlendrelation")
     );
     echo json_encode($response);
 }
+else if($tipe  == "getassettransactiondispose")
+{
+    $arrayid = array();
+    $idtransac = $_POST['myidtransaction'];
+    $sql = "select asset.id, asset.noasset, asset.name from transaction_dispose_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'";
+    $res = $conn->query($sql);
+    $mystring = "<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>";
+    if($res->num_rows >0)
+    {
+        while($r = mysqli_fetch_array($res))
+        {
+            $arrayid[] = $r['id'];
+            $mystring .= "<tr><td>".$r['noasset']."</td><td>".$r['name']."</td></tr>";
+        }
+    }
+    $mystring .= "</table>";
+    // echo print($arrayid)."||".$mystring;
+    $response["data"] = array(
+        'mystring' => $mystring,
+        'myarray' => $arrayid
+    );
+    echo json_encode($response);
+}
 else if($tipe == "getassettransactionlendotherdepartment")
 {
     $arrayid = array();

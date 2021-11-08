@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 265,
+            "activePatchIndex": 268,
             "patches": [
                 {
                     "date": 1634799397854,
@@ -1068,6 +1068,18 @@
                 {
                     "date": 1635758095805,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -390,9 +390,9 @@\n else if($tipe == \"getassettransactionlendotherdepartment\")\r\n {\r\n     $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n-    $sql = \"select asset.id, asset.noasset, asset.name from transaction_lend_to_relation_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n+    $sql = \"select asset.id, asset.noasset, asset.name from transaction_lend_to_department_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n     $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n     if($res->num_rows >0)\r\n     {\r\n"
+                },
+                {
+                    "date": 1636346642492,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -386,8 +386,31 @@\n         'myarray' => $arrayid\r\n     );\r\n     echo json_encode($response);\r\n }\r\n+else if($tipe  == \"getassettransactionlendrelation\")\r\n+{\r\n+    $arrayid = array();\r\n+    $idtransac = $_POST['myidtransaction'];\r\n+    $sql = \"select asset.id, asset.noasset, asset.name from transaction_lend_to_relation_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n+    $res = $conn->query($sql);\r\n+    $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n+    if($res->num_rows >0)\r\n+    {\r\n+        while($r = mysqli_fetch_array($res))\r\n+        {\r\n+            $arrayid[] = $r['id'];\r\n+            $mystring .= \"<tr><td>\".$r['noasset'].\"</td><td>\".$r['name'].\"</td></tr>\";\r\n+        }\r\n+    }\r\n+    $mystring .= \"</table>\";\r\n+    // echo print($arrayid).\"||\".$mystring;\r\n+    $response[\"data\"] = array(\r\n+        'mystring' => $mystring,\r\n+        'myarray' => $arrayid\r\n+    );\r\n+    echo json_encode($response);\r\n+}\r\n else if($tipe == \"getassettransactionlendotherdepartment\")\r\n {\r\n     $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n"
+                },
+                {
+                    "date": 1636346653109,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -386,9 +386,9 @@\n         'myarray' => $arrayid\r\n     );\r\n     echo json_encode($response);\r\n }\r\n-else if($tipe  == \"getassettransactionlendrelation\")\r\n+else if($tipe  == \"getassettransactiondispose\")\r\n {\r\n     $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n     $sql = \"select asset.id, asset.noasset, asset.name from transaction_lend_to_relation_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n"
+                },
+                {
+                    "date": 1636360718832,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -390,9 +390,9 @@\n else if($tipe  == \"getassettransactiondispose\")\r\n {\r\n     $arrayid = array();\r\n     $idtransac = $_POST['myidtransaction'];\r\n-    $sql = \"select asset.id, asset.noasset, asset.name from transaction_lend_to_relation_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n+    $sql = \"select asset.id, asset.noasset, asset.name from transaction_dispose_log tdasl inner join asset on asset.id = tdasl.idasset where tdasl.idtransaksi = '$idtransac'\";\r\n     $res = $conn->query($sql);\r\n     $mystring = \"<table class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Name</th></tr>\";\r\n     if($res->num_rows >0)\r\n     {\r\n"
                 }
             ],
             "date": 1634799397854,

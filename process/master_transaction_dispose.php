@@ -21,25 +21,40 @@ if($tipe == "load")
     
     $total_data = mysqli_query($conn, 
     
-    "SELECT * from transaction_dispose where idsister = '$myses'
+    "SELECT td.*, asset.idgroup, asset.idsubgroup, asset.idcategory from transaction_dispose td
+    inner join transaction_dispose_log tdl on tdl.idtransaksi =  td.id
+    inner join asset on asset.id = tdl.idasset 
+     where idsister = '$myses' group by td.id
     "
 
 );
     
     if(empty($search)) {
-        $query_data = mysqli_query($conn, "SELECT * from transaction_dispose where idsister = '$myses' ORDER BY $order $dir LIMIT $start, $length");
+        $query_data = mysqli_query($conn, "SELECT td.*, asset.idgroup, asset.idsubgroup, asset.idcategory from transaction_dispose td
+        inner join transaction_dispose_log tdl on tdl.idtransaksi =  td.id
+        inner join asset on asset.id = tdl.idasset 
+         where idsister = '$myses' group by td.id ORDER BY $order $dir LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "SELECT * from transaction_dispose  where idsister = '$myses'");
+        $total_filtered = mysqli_query($conn, "SELECT td.*, asset.idgroup, asset.idsubgroup, asset.idcategory from transaction_dispose td
+        inner join transaction_dispose_log tdl on tdl.idtransaksi =  td.id
+        inner join asset on asset.id = tdl.idasset 
+         where idsister = '$myses' group by td.id");
     } else {
-        $query_data = mysqli_query($conn, "SELECT * from transaction_dispose where idsister = '$myses' and (
+        $query_data = mysqli_query($conn, "SELECT td.*, asset.idgroup, asset.idsubgroup, asset.idcategory from transaction_dispose td
+        inner join transaction_dispose_log tdl on tdl.idtransaksi =  td.id
+        inner join asset on asset.id = tdl.idasset 
+         where idsister = '$myses' and (
             transaction_dispose.notransaction LIKE '%$search%' 
         OR transaction_dispose.mydate LIKE '%$search%'
-        OR transaction_dispose.approval LIKE '%$search%' )  ORDER BY $order $dir LIMIT $start, $length");
+        OR transaction_dispose.approval LIKE '%$search%' ) group by td.id ORDER BY $order $dir LIMIT $start, $length");
     
-        $total_filtered = mysqli_query($conn, "SELECT * from transaction_dispose where idsister = '$myses' and (
+        $total_filtered = mysqli_query($conn, "SELECT td.*, asset.idgroup, asset.idsubgroup, asset.idcategory from transaction_dispose td
+        inner join transaction_dispose_log tdl on tdl.idtransaksi =  td.id
+        inner join asset on asset.id = tdl.idasset 
+         where idsister = '$myses' and (
             transaction_dispose.notransaction LIKE '%$search%' 
         OR transaction_dispose.mydate LIKE '%$search%'
-        OR transaction_dispose.approval LIKE '%$search%' )");
+        OR transaction_dispose.approval LIKE '%$search%' ) group by td.id");
     }
     
     $response['data'] = [];
@@ -62,9 +77,24 @@ if($tipe == "load")
             // $myrelation = str_replace( " ", ' ', $row['myrelation'] ); 
             $response['data'][] = [
                 "<b><label id ='statusapproval".$row['id']."'  >".$myapproval."</label></b>",
-                "<label id ='mydate".$row['id']."'>".$row['mydate']."</label>",
-                "<a href = '#myModalDetailTransaction' id = '".$row['id']."' onclick = openmodaldetailtransaction(this) data-toggle='modal'><label id ='notransaction".$row['id']."'>".$row['notransaction']."</label></a>",
-            
+                "<label id ='mydate".$row['id']."'>".$row['mydate']."</label>"."<input type = 'hidden' id = 'category_".$row['id']."' value = '".$row['idcategory']."'>".
+                "<input type = 'hidden' id = 'subgroup_".$row['id']."' value = '".$row['idsubgroup']."'>".
+                "<input type = 'hidden' id = 'group_".$row['id']."' value = '".$row['idgroup']."'>",
+                "<a href = '#myModalDetailTransaction' id = '".$row['id']."' onclick = openmodaledits(this) data-toggle='modal'><label id ='notransaction".$row['id']."'>".$row['notransaction']."</label></a>",
+                ' <div class="list-icons">
+                <div class="dropdown">
+                    <a href="#" class="list-icons-item" data-toggle="dropdown">
+                        <i class="icon-menu9"></i>
+                    </a>
+    
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="#myModalEditTransactions"  data-toggle="modal" class="dropdown-item" id ="click-'.$row['id'].'"  onclick = "openmodaledits(this)"><i class="icon-check"></i>
+                            Edit</a>
+                        
+                   
+                    </div>
+                </div>
+            </div>'
             ];
         }
     }
@@ -304,6 +334,28 @@ else if($tipe == "add"){
       
     }
     // echo $sql;
+    if(($conn -> affected_rows)>0)
+    {
+        echo "sukses";
+    }
+    else{
+        echo "tidak";
+    }
+    // echo $sql;
+}
+else if($tipe == "edit"){
+
+    $myselectedlist = $_POST['myselected'];
+    $mytransactions = $_POST['mytransactions'];
+    date_default_timezone_set("Asia/Bangkok");
+
+    $sql = "delete from transaction_dispose_log where idtransaksi = '$mytransactions'";
+    $res = $conn->query($sql);
+    for($i = 0 ; $i< count($myselectedlist); $i++)
+    {
+        $sql = "insert into transaction_dispose_log values(NULL, '$mytransactions', '".$myselectedlist[$i]."')";
+        $ress = $conn->query($sql);
+    }
     if(($conn -> affected_rows)>0)
     {
         echo "sukses";
