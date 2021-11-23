@@ -7,11 +7,14 @@ if($tipe == "load")
 {
 
     $where_like = [
+        'id',
+        'status_approval',
+        'mydate',
+        'notransaction',
         'branch',
         'room',
-        'notransaction',
         'nama',
-        'status_approval',
+        
         
     ];
     
@@ -100,6 +103,7 @@ if($tipe == "load")
             // $myrelation = str_replace( " ", ' ', $row['myrelation'] ); 
             $response['data'][] = [
                 // "<a href= '#myModalDisplay'  data-toggle='modal'><span class='pointer-element badge badge-success' id ='".$row['id']."' onclick = 'openmodaldisplay(this)'  data-id='".$row['id']."'><i class='icon-plus3'></i></span></a>",
+                "<b><label id ='id".$row['id']."'  >".$row['id']."</label></b>",
                 "<b><label id ='statusapproval".$row['id']."'  >".$myapproval."</label></b>",
                 "<label id ='mydate".$row['id']."'>".$row['mydate']."</label>",
                 "<a href = '#myModalDetailTransaction' id = '".$row['id']."' onclick = openmodaldetailtransaction(this) data-toggle='modal'><label id ='notransaction".$row['id']."'>".$row['notransaction']."</label></a>",
@@ -277,7 +281,7 @@ else if($tipe == "add"){
 
     for($i = 0 ;  $i < count($myselectedlist) ; $i++)
     {
-        $sqlupdate  = "UPDATE asset set status_transaction = 'placed' where id = '".$myselectedlist[$i]."'";
+        $sqlupdate  = "UPDATE asset set status_transaction = 'newasset' where id = '".$myselectedlist[$i]."'";
         $resupdate =  $conn->query($sqlupdate);
         $sqls = "INSERT INTO `transaction_displacement_new_asset_log` VALUES (NULL, '$last_id', '".$myselectedlist[$i]."')";
         $ress = $conn->query($sqls);

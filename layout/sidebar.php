@@ -245,8 +245,8 @@
                        
                         <li class="nav-item" id = "masterlocationbuilding"><a href="masterlocationbuilding.php" class="nav-link <?php echo ($myurl == "masterlocationbuilding.php"  ) ? " active" : ''; ?>">Building</a>
                         </li>
-                       <li class="nav-item" id = "masterlocationSetupfloor"><a href="masterlocationSetupfloor.php" class="nav-link <?php echo ($myurl == "masterlocationSetupfloor.php"  ) ? " active" : ''; ?>">Building &
-                                Floor</a></li>
+                       <!-- <li class="nav-item" id = "masterlocationSetupfloor"><a href="masterlocationSetupfloor.php" class="nav-link <?php echo ($myurl == "masterlocationSetupfloor.php"  ) ? " active" : ''; ?>">Building &
+                                Floor</a></li> -->
                      
                         <li class="nav-item" id = "masterlocationrooms"><a href="masterlocationrooms.php" class="nav-link <?php echo ($myurl == "masterlocationrooms.php"  ) ? " active" : ''; ?>">Rooms</a></li>
                         <li class="nav-item" id = "masterrack"><a href="masterrack.php" class="nav-link <?php echo ($myurl == "masterrack.php"  ) ? " active" : ''; ?>">Rack</a></li>

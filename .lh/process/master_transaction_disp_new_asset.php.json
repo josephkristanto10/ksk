@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 220,
+            "activePatchIndex": 231,
             "patches": [
                 {
                     "date": 1633330398495,
@@ -888,6 +888,50 @@
                 {
                     "date": 1635237594013,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -104,9 +104,9 @@\n                 \"<label id ='mydate\".$row['id'].\"'>\".$row['mydate'].\"</label>\",\r\n                 \"<a href = '#myModalDetailTransaction' id = '\".$row['id'].\"' onclick = openmodaldetailtransaction(this) data-toggle='modal'><label id ='notransaction\".$row['id'].\"'>\".$row['notransaction'].\"</label></a>\",\r\n                 \"<label id ='branch\".$row['id'].\"'>\".$row['branch'].\"</label>\",\r\n                 \"<label id ='room\".$row['id'].\"'>\".$row['room'].\"</label>\",\r\n-                \"<label id ='nama\".$row['id'].\"'>\".$row['nama'].\"</label>\".\"<input type = 'hidden' id = 'category_\".$row['id'].\"' value = '\".$row['idcategory'].\"'>\".\"<input type = 'hidden' id = 'subgroup_\".$row['id'].\"' value = '\".$row['idsubgroup'].\"'>\".\"<input type = 'hidden' id = 'subgroup_\".$row['id'].\"' value = '\".$row['idgroup'].\"'>\",\r\n+                \"<label id ='nama\".$row['id'].\"'>\".$row['nama'].\"</label>\".\"<input type = 'hidden' id = 'category_\".$row['id'].\"' value = '\".$row['idcategory'].\"'>\".\"<input type = 'hidden' id = 'subgroup_\".$row['id'].\"' value = '\".$row['idsubgroup'].\"'>\".\"<input type = 'hidden' id = 'group_\".$row['id'].\"' value = '\".$row['idgroup'].\"'>\",\r\n                 ' <div class=\"list-icons\">\r\n                 <div class=\"dropdown\">\r\n                     <a href=\"#\" class=\"list-icons-item\" data-toggle=\"dropdown\">\r\n                         <i class=\"icon-menu9\"></i>\r\n"
+                },
+                {
+                    "date": 1637646576961,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -276,9 +276,9 @@\n     $last_id = $conn->insert_id;\r\n \r\n     for($i = 0 ;  $i < count($myselectedlist) ; $i++)\r\n     {\r\n-        $sqlupdate  = \"UPDATE asset set status_transaction = 'placed' where id = '\".$myselectedlist[$i].\"'\";\r\n+        $sqlupdate  = \"UPDATE asset set status_transaction = 'newasset' where id = '\".$myselectedlist[$i].\"'\";\r\n         $resupdate =  $conn->query($sqlupdate);\r\n         $sqls = \"INSERT INTO `transaction_displacement_new_asset_log` VALUES (NULL, '$last_id', '\".$myselectedlist[$i].\"')\";\r\n         $ress = $conn->query($sqls);\r\n       \r\n"
+                },
+                {
+                    "date": 1637649845611,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -100,8 +100,9 @@\n             // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n             $response['data'][] = [\r\n                 // \"<a href= '#myModalDisplay'  data-toggle='modal'><span class='pointer-element badge badge-success' id ='\".$row['id'].\"' onclick = 'openmodaldisplay(this)'  data-id='\".$row['id'].\"'><i class='icon-plus3'></i></span></a>\",\r\n                 \"<b><label id ='statusapproval\".$row['id'].\"'  >\".$myapproval.\"</label></b>\",\r\n+                \"<b><label id ='statusapproval\".$row['id'].\"'  >\".$myapproval.\"</label></b>\",\r\n                 \"<label id ='mydate\".$row['id'].\"'>\".$row['mydate'].\"</label>\",\r\n                 \"<a href = '#myModalDetailTransaction' id = '\".$row['id'].\"' onclick = openmodaldetailtransaction(this) data-toggle='modal'><label id ='notransaction\".$row['id'].\"'>\".$row['notransaction'].\"</label></a>\",\r\n                 \"<label id ='branch\".$row['id'].\"'>\".$row['branch'].\"</label>\",\r\n                 \"<label id ='room\".$row['id'].\"'>\".$row['room'].\"</label>\",\r\n"
+                },
+                {
+                    "date": 1637649850793,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -99,10 +99,10 @@\n             }\r\n             // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n             $response['data'][] = [\r\n                 // \"<a href= '#myModalDisplay'  data-toggle='modal'><span class='pointer-element badge badge-success' id ='\".$row['id'].\"' onclick = 'openmodaldisplay(this)'  data-id='\".$row['id'].\"'><i class='icon-plus3'></i></span></a>\",\r\n+                \"<b><label id ='id\".$row['id'].\"'  >\".$myapproval.\"</label></b>\",\r\n                 \"<b><label id ='statusapproval\".$row['id'].\"'  >\".$myapproval.\"</label></b>\",\r\n-                \"<b><label id ='statusapproval\".$row['id'].\"'  >\".$myapproval.\"</label></b>\",\r\n                 \"<label id ='mydate\".$row['id'].\"'>\".$row['mydate'].\"</label>\",\r\n                 \"<a href = '#myModalDetailTransaction' id = '\".$row['id'].\"' onclick = openmodaldetailtransaction(this) data-toggle='modal'><label id ='notransaction\".$row['id'].\"'>\".$row['notransaction'].\"</label></a>\",\r\n                 \"<label id ='branch\".$row['id'].\"'>\".$row['branch'].\"</label>\",\r\n                 \"<label id ='room\".$row['id'].\"'>\".$row['room'].\"</label>\",\r\n"
+                },
+                {
+                    "date": 1637649857688,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -99,9 +99,9 @@\n             }\r\n             // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n             $response['data'][] = [\r\n                 // \"<a href= '#myModalDisplay'  data-toggle='modal'><span class='pointer-element badge badge-success' id ='\".$row['id'].\"' onclick = 'openmodaldisplay(this)'  data-id='\".$row['id'].\"'><i class='icon-plus3'></i></span></a>\",\r\n-                \"<b><label id ='id\".$row['id'].\"'  >\".$myapproval.\"</label></b>\",\r\n+                \"<b><label id ='id\".$row['id'].\"'  >\".$row['id'].\"</label></b>\",\r\n                 \"<b><label id ='statusapproval\".$row['id'].\"'  >\".$myapproval.\"</label></b>\",\r\n                 \"<label id ='mydate\".$row['id'].\"'>\".$row['mydate'].\"</label>\",\r\n                 \"<a href = '#myModalDetailTransaction' id = '\".$row['id'].\"' onclick = openmodaldetailtransaction(this) data-toggle='modal'><label id ='notransaction\".$row['id'].\"'>\".$row['notransaction'].\"</label></a>\",\r\n                 \"<label id ='branch\".$row['id'].\"'>\".$row['branch'].\"</label>\",\r\n"
+                },
+                {
+                    "date": 1637650012314,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,9 @@\n {\r\n \r\n     $where_like = [\r\n         'branch',\r\n+        'branch',\r\n         'room',\r\n         'notransaction',\r\n         'nama',\r\n         'status_approval',\r\n"
+                },
+                {
+                    "date": 1637650030996,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,10 +6,10 @@\n if($tipe == \"load\")\r\n {\r\n \r\n     $where_like = [\r\n+        'id',\r\n         'branch',\r\n-        'branch',\r\n         'room',\r\n         'notransaction',\r\n         'nama',\r\n         'status_approval',\r\n"
+                },
+                {
+                    "date": 1637650165450,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,9 @@\n {\r\n \r\n     $where_like = [\r\n         'id',\r\n+        'status_approval',\r\n         'branch',\r\n         'room',\r\n         'notransaction',\r\n         'nama',\r\n"
+                },
+                {
+                    "date": 1637650178777,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n         'branch',\r\n         'room',\r\n         'notransaction',\r\n         'nama',\r\n-        'status_approval',\r\n+        'mydate',\r\n         \r\n     ];\r\n     \r\n     $response = $_REQUEST;\r\n"
+                },
+                {
+                    "date": 1637650184254,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,14 +8,15 @@\n \r\n     $where_like = [\r\n         'id',\r\n         'status_approval',\r\n+        'mydate',\r\n         'branch',\r\n         'room',\r\n         'notransaction',\r\n         'nama',\r\n-        'mydate',\r\n         \r\n+        \r\n     ];\r\n     \r\n     $response = $_REQUEST;\r\n     $start    = $response['start'];\r\n"
+                },
+                {
+                    "date": 1637650192039,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,11 +9,12 @@\n     $where_like = [\r\n         'id',\r\n         'status_approval',\r\n         'mydate',\r\n+        'notransaction',\r\n         'branch',\r\n         'room',\r\n-        'notransaction',\r\n+       \r\n         'nama',\r\n         \r\n         \r\n     ];\r\n"
+                },
+                {
+                    "date": 1637650210598,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,8 @@\n         'mydate',\r\n         'notransaction',\r\n         'branch',\r\n         'room',\r\n-       \r\n         'nama',\r\n         \r\n         \r\n     ];\r\n"
                 }
             ],
             "date": 1633330398495,

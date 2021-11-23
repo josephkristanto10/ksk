@@ -98,10 +98,10 @@ if($tipe == "load")
             // $myrelation = str_replace( " ", ' ', $row['myrelation'] ); 
             $response['data'][] = [
                 "<input type = 'checkbox' id = 'check_".$row['id']."' class = 'checkboxasset'>",
-                "<label id ='noasset".$row['id']."'>".$row['noasset']."</label>",
-                "<label id ='name".$row['id']."'>".$row['name']."</label>",
-                "<label id ='conditions".$row['id']."'>".$row['conditions']."</label>",
-                "<label id ='initial_condition".$row['id']."'>".$row['initial_condition']."</label>"
+                "<label id ='noasset_".$row['id']."'>".$row['noasset']."</label>",
+                "<label id ='name_".$row['id']."'>".$row['name']."</label>",
+                "<label id ='conditions_".$row['id']."'>".$row['conditions']."</label>",
+                "<label id ='initial_condition_".$row['id']."'>".$row['initial_condition']."</label>"
             ];
         }
     }
@@ -210,12 +210,14 @@ else if($tipe == "loadexisting")
     
     if($query_data) {
         while($row = mysqli_fetch_assoc($query_data)) {
+            $truecheck = "False";
             $mcheck =  "<input type = 'checkbox' id = 'check_".$row['id']."' class = 'checkboxassetedit'>";
             for($i = 0; $i < count($assetexisting); $i++)
             {
                 if($assetexisting[$i] == $row['id'])
                 {
                    $mcheck =  "<input type = 'checkbox' id = 'check_".$row['id']."' class = 'checkboxassetedit' checked>";
+                   $truecheck = "True";
                 }
             
             }
@@ -223,10 +225,11 @@ else if($tipe == "loadexisting")
             $response['data'][] = [
              
                    $mcheck ,
-                "<label id ='noassetedit".$row['id']."'>".$row['noasset']."</label>",
-                "<label id ='nameedit".$row['id']."'>".$row['name']."</label>",
-                "<label id ='conditionsedit".$row['id']."'>".$row['conditions']."</label>",
-                "<label id ='initial_conditionedit".$row['id']."'>".$row['initial_condition']."</label>"
+                "<label id ='noassetedit_".$row['id']."'>".$row['noasset']."</label>",
+                "<label id ='nameedit_".$row['id']."'>".$row['name']."</label>",
+                "<label id ='conditionsedit_".$row['id']."'>".$row['conditions']."</label>",
+                "<label id ='initial_conditionedit_".$row['id']."'>".$row['initial_condition']."</label>",
+                $truecheck
             ];
         }
     }
