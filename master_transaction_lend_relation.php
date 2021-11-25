@@ -127,6 +127,7 @@ if($resconditions -> num_rows>0)
                     <table id="datatable_serverside" class="table table-hover table-bordered display nowrap w-100">
                         <thead>
                             <tr>
+                            <th>id</th>
                                 <th>#</th>
                                 <th>Approval</th>
                                 <th>Date</th>
@@ -584,8 +585,11 @@ echo date('d-m-Y');?>">
 </body>
 
 </html>
+<script type="text/javascript"
+    src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
 <script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>
 <script>
+
     // variable pilih asset
     var idtransaction = "";
     var idglobalsubgroupedit = "";
@@ -746,6 +750,10 @@ echo date('d-m-Y');?>">
             order: [
                 [0, 'asc']
             ],
+            columnDefs: [{
+                'targets': 0,
+                'visible' :false
+            }],
             ajax: {
                 url: 'process/master_transaction_lend_relation.php',
                 method: 'POST',
@@ -753,7 +761,12 @@ echo date('d-m-Y');?>">
                     tipe: "load"
                 }
             },
-            columns: [{
+            columns: [
+                {
+                    name: 'id',
+                    className: 'text-center align-middle'
+                },
+                {
                     name: '#',
                     className: 'text-center align-middle',
                     class: "details-control"
@@ -1131,6 +1144,8 @@ echo date('d-m-Y');?>">
                                 confirmButtonColor: '#53d408',
                                 allowOutsideClick: false,
                             }).then((result) => {
+                                $("#containerpilihaset").html("");
+                                arridselectedassetadd = [];
                                 $("#myform").trigger("reset");
                                 $("#canceladd").click();
                             });
@@ -2537,7 +2552,7 @@ echo date('d-m-Y');?>">
                                     <th>Name</th>
                                     <th>Condition</th>
                                     <th>Initial Condition</th>
-
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             </tbody>
@@ -3385,14 +3400,29 @@ echo date('d-m-Y');?>">
     var assetedit = null;
     var chosenasset = null;
     var iddefaultcategories = "";
+var iddefaultcategoriesedit = "";
     $('#selectasset').on('shown.bs.modal', function () {
         var idcategories = $("#categories").val();
-        if (iddefaultcategories != idcategories) {
+        if(iddefaultcategories != idcategories)
+        {
             iddefaultcategories = idcategories;
             loadasset(idcategories);
+    
         }
-        asset.columns.adjust();
-    });
+   
+   asset.columns.adjust();
+}); 
+$('#selectassetedit').on('shown.bs.modal', function () {
+        var idcategories = $("#categoriesedit").val();
+        if(iddefaultcategoriesedit != idcategories)
+        {
+            iddefaultcategoriesedit = idcategories;
+            loadassetedit(idcategories);
+    
+        }
+   
+        assetedit.columns.adjust();
+}); 
 
     function openselectasset() {
 
@@ -3458,6 +3488,12 @@ echo date('d-m-Y');?>">
                 },
 
             },
+            columnDefs: [{
+                'targets': 0,
+                'checkboxes': {
+                    'selectRow': true
+                }
+            }],
             columns: [{
                     searchable: false,
                     orderable: false,
@@ -3510,6 +3546,23 @@ echo date('d-m-Y');?>">
                 },
 
             },
+            columnDefs: [{
+                'targets': 0,
+                'checkboxes': {
+                    'selectRow': true
+                },
+                'createdCell':  function (td, cellData, rowData, row, col){
+            
+                    if(rowData[5] === 'True'){
+                        this.api().cell(td).checkboxes.select();
+                    }
+                }
+               },
+               {
+                'targets': 5,
+                visible: false
+                
+               }],
             columns: [{
                     searchable: false,
                     orderable: false,
@@ -3531,6 +3584,10 @@ echo date('d-m-Y');?>">
                 {
                     name: 'initial_condition',
                     className: 'text-center align-middle'
+                },
+                {
+                    name: 'status',
+                    className: 'text-center align-middle'
                 }
             ]
         });
@@ -3543,19 +3600,19 @@ echo date('d-m-Y');?>">
         var count = 0;
         var arrselectedasset = [];
         arridselectedassetadd = [];
-        $(".checkboxasset").each(function () {
+        $("#datatable_asset tbody input[type='checkbox']").each(function () {
             var checked = this.checked;
 
             if (checked) {
                 var myid = this.id;
                 var splitid = myid.split("_");
-                var myfixid = splitid[1];
-                arridselectedassetadd.push(myfixid);
-                var noasset = $("#noasset" + myfixid).text();
-                var nameasset = $("#name" + myfixid).text();
-                var conditions = $("#conditions" + myfixid).text();
-                var initialcondition = $("#initial_condition" + myfixid).text();
-                arrselectedasset.push(myfixid + "~~" + noasset + "~~" + nameasset + "~~" + conditions + "~~" +
+                var myfixid = $(this).closest('td').next('td').find('label').attr('id').split("_");
+                arridselectedassetadd.push(myfixid[1]);
+                var noasset = $("#noasset_" + myfixid[1]).text();
+                var nameasset = $("#name_" + myfixid[1]).text();
+                var conditions = $("#conditions_" + myfixid[1]).text();
+                var initialcondition = $("#initial_condition_" + myfixid[1]).text();
+                arrselectedasset.push(myfixid[1] + "~~" + noasset + "~~" + nameasset + "~~" + conditions + "~~" +
                     initialcondition);
                 count += 1;
             }
@@ -3579,19 +3636,19 @@ echo date('d-m-Y');?>">
         var count = 0;
         var arrselectedasset = [];
         arridselectedassetedit = [];
-        $(".checkboxassetedit").each(function () {
+        $("#datatable_asset_edit tbody input[type='checkbox']").each(function () {
             var checked = this.checked;
 
             if (checked) {
                 var myid = this.id;
                 var splitid = myid.split("_");
-                var myfixid = splitid[1];
-                arridselectedassetedit.push(myfixid);
-                var noasset = $("#noassetedit" + myfixid).text();
-                var nameasset = $("#nameedit" + myfixid).text();
-                var conditions = $("#conditionsedit" + myfixid).text();
-                var initialcondition = $("#initial_conditionedit" + myfixid).text();
-                arrselectedasset.push(myfixid + "~~" + noasset + "~~" + nameasset + "~~" + conditions + "~~" +
+                var myfixid = $(this).closest('td').next('td').find('label').attr('id').split("_");
+                arridselectedassetedit.push(myfixid[1]);
+                var noasset = $("#noassetedit_" + myfixid[1]).text();
+                var nameasset = $("#nameedit_" + myfixid[1]).text();
+                var conditions = $("#conditionsedit_" + myfixid[1]).text();
+                var initialcondition = $("#initial_conditionedit_" + myfixid[1]).text();
+                arrselectedasset.push(myfixid[1] + "~~" + noasset + "~~" + nameasset + "~~" + conditions + "~~" +
                     initialcondition);
                 count += 1;
             }

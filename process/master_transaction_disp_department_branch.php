@@ -7,12 +7,17 @@ if($tipe == "load")
 {
 
     $where_like = [
-        'branchto',
-        'branchfrom',
-        'roomfrom',
-        'toroom',
+        'id',
         'status_approval',
-        'remark'
+        'mydate',
+        'notransaction',        
+        'branchfrom',
+        'branchto',
+        'myfromroom',
+        'toroom',
+        'remark',
+        'lead_time',
+        ''
         
     ];
     
@@ -105,11 +110,12 @@ if($tipe == "load")
             // $myrelation = str_replace( " ", ' ', $row['myrelation'] ); 
             $response['data'][] = [
                 // "<a href= '#myModalDisplay'  data-toggle='modal'><span class='pointer-element badge badge-success' id ='".$row['id']."' onclick = 'openmodaldisplay(this)'  data-id='".$row['id']."'><i class='icon-plus3'></i></span></a>",
+                "<b><label id ='id".$row['id']."'  >".$row['id']."</label></b>",
                 "<b><label id ='statusapproval".$row['id']."'  >".$myapproval."</label></b>",
                 "<label id ='mydate".$row['id']."'>".$row['mydate']."</label>",
                 "<a href = '#myModalDetailTransaction' id = '".$row['id']."' onclick = openmodaldetailtransaction(this) data-toggle='modal'><label id ='notransaction".$row['id']."'>".$row['notransaction']."</label></a>",
                 "<label id ='branchfrom".$row['id']."'>".$row['branchfrom']."</label>",
-                "<label id ='branchfrom".$row['id']."'>".$row['branchto']."</label>",
+                "<label id ='branchto".$row['id']."'>".$row['branchto']."</label>",
                 "<label id ='roomfrom".$row['id']."'>".$row['myfromroom']."</label>",
                 "<label id ='toroom".$row['id']."'>".$row['toroom']."</label>",
                 "<label id ='remark".$row['id']."'>".$row['remark']."</label>"."<input type = 'hidden' id = 'category_".$row['id']."' value = '".$row['idcategory']."'>"."<input type = 'hidden' id = 'subgroup_".$row['id']."' value = '".$row['idsubgroup']."'>"."<input type = 'hidden' id = 'group_".$row['id']."' value = '".$row['idgroup']."'>",

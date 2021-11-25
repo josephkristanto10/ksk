@@ -108,6 +108,7 @@ if($resdepartment -> num_rows>0)
                     <table id="datatable_serverside" class="table table-hover table-bordered display nowrap w-100">
                         <thead>
                             <tr>
+                            <th>ID</th>
                                 <th>Approval</th>
                                 <th>Date</th>
                                 <th>Transaction</th>
@@ -116,7 +117,6 @@ if($resdepartment -> num_rows>0)
                                 <th>Room</th>
                                 <th>toRoom</th>
                                 <th>Remark</th>
-
                                 <th>Lead Time</th>
                                 <th>Action</th>
                             </tr>
@@ -175,7 +175,7 @@ if($resdepartment -> num_rows>0)
                 <form id="myforms">
                     <div class="form-group">
 
-
+                    <label for="cars" style="font-size:11pt;"><b>Data Section</b></label><br><br>
 
                         <label for="cars">Branch From:</label>
                         <select id="branchfrom" name="branchfrom" class="form-control">
@@ -208,9 +208,9 @@ if($resdepartment -> num_rows>0)
                         <label for="cars">Remark :</label>
                         <input id="remark" type="text" class="form-control">
 
-                        <br>
-                        <br>
+                   
                         <hr>
+                        <label for="cars" style="font-size:11pt;"><b>Asset Section</b></label><br><br>
                         <label for="cars">Asset Group:</label>
                         <select id="groups" name="groups" class="form-control">
                             <?php
@@ -313,6 +313,7 @@ if($resdepartment -> num_rows>0)
             <div class="modal-body">
                 <form id="myforms">
                     <div class="form-group">
+                    <label for="cars" style="font-size:11pt;"><b>Data Section</b></label><br><br>
                     <label for="cars">Branch From:</label>
                         <select id="branchfromedit" name="branchfromedit" class="form-control">
                             <?php
@@ -344,7 +345,7 @@ if($resdepartment -> num_rows>0)
                         <label for="cars">Remark :</label>
                         <input id="remarkedit" type="text" class="form-control">
                         <hr>
-
+                        <label for="cars" style="font-size:11pt;"><b>Asset Section</b></label><br><br>
                         <label for="cars">Asset Group:</label>
                         <select id="groupsedit" name="groupsedit" class="form-control">
                             <?php
@@ -414,7 +415,7 @@ if($resdepartment -> num_rows>0)
                                     <th>Name</th>
                                     <th>Condition</th>
                                     <th>Initial Condition</th>
-
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             </tbody>
@@ -441,7 +442,37 @@ if($resdepartment -> num_rows>0)
 
 </html>
 <script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+<script type="text/javascript"
+    src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
 <script>
+
+var asset = null;
+var assetedit = null;
+var chosenasset = null;
+var iddefaultcategories = "";
+var iddefaultcategoriesedit = "";
+    $('#selectasset').on('shown.bs.modal', function () {
+        var idcategories = $("#categories").val();
+        if(iddefaultcategories != idcategories)
+        {
+            iddefaultcategories = idcategories;
+            loadasset(idcategories);
+    
+        }
+   
+   asset.columns.adjust();
+}); 
+$('#selectassetedit').on('shown.bs.modal', function () {
+        var idcategories = $("#categoriesedit").val();
+        if(iddefaultcategoriesedit != idcategories)
+        {
+            iddefaultcategoriesedit = idcategories;
+            loadassetedit(idcategories);
+    
+        }
+   
+        assetedit.columns.adjust();
+}); 
 
     // variable pilih asset
     var idtransaction = "";
@@ -598,8 +629,20 @@ if($resdepartment -> num_rows>0)
                     tipe: "load"
                 }
             },
+            columnDefs: [{
+                'targets': 0,
+                'visible' : false
+            }],
             columns: [
-
+                {
+                    name: 'id',
+                    searchable:false,
+                    className: 'text-center align-middle'
+                },
+                {
+                    name: 'approval',
+                    className: 'text-center align-middle'
+                },
                 {
                     name: 'date',
                     className: 'text-center align-middle'
@@ -628,10 +671,7 @@ if($resdepartment -> num_rows>0)
                     name: 'remark',
                     className: 'text-center align-middle'
                 },
-                {
-                    name: 'approval',
-                    className: 'text-center align-middle'
-                },
+                
                 {
                     name: 'leadtime',
                     className: 'text-center align-middle'
@@ -892,6 +932,8 @@ if($resdepartment -> num_rows>0)
                                 confirmButtonColor: '#53d408',
                                 allowOutsideClick: false,
                             }).then((result) => {
+                                $("#containerpilihaset").html("");
+                                arridselectedassetadd = [];
                                 $("#myforms").trigger("reset");
                                 $("#canceladd").click();
                             });
@@ -1525,8 +1567,7 @@ if($resdepartment -> num_rows>0)
 
 
      // Asset Choose Section
-     var asset = null;
-    var assetedit = null;
+ 
     var chosenasset = null;
     var iddefaultcategories = "";
     $('#selectasset').on('shown.bs.modal', function () {
@@ -1571,8 +1612,8 @@ if($resdepartment -> num_rows>0)
         $("#grouptitleselectassetedit").text(strgroups);
         $("#subgrouptitleselectassetedit").text(strsubgroups);
         $("#categoriestitleselectassetedit").text(strcategories);
-        if (iddefaultcategories != idcategories) {
-            iddefaultcategories = idcategories;
+        if (iddefaultcategoriesedit != idcategories) {
+            iddefaultcategoriesedit = idcategories;
             loadassetedit(idcategories);
         }
     }
@@ -1592,6 +1633,12 @@ if($resdepartment -> num_rows>0)
             order: [
                 [0, 'asc']
             ],
+            columnDefs: [{
+                'targets': 0,
+                'checkboxes': {
+                    'selectRow': true
+                }
+            }],
             ajax: {
                 url: 'process/mastergetasset.php',
                 method: 'POST',
@@ -1654,6 +1701,23 @@ if($resdepartment -> num_rows>0)
                 },
 
             },
+            columnDefs: [{
+                'targets': 0,
+                'checkboxes': {
+                    'selectRow': true
+                },
+                'createdCell':  function (td, cellData, rowData, row, col){
+            
+                    if(rowData[5] === 'True'){
+                        this.api().cell(td).checkboxes.select();
+                    }
+                }
+               },
+               {
+                'targets': 5,
+                visible: true
+                
+               }],
             columns: [{
                     searchable: false,
                     orderable: false,
@@ -1675,6 +1739,10 @@ if($resdepartment -> num_rows>0)
                 {
                     name: 'initial_condition',
                     className: 'text-center align-middle'
+                },
+                {
+                    name: 'status',
+                    className: 'text-center align-middle'
                 }
             ]
         });
@@ -1687,19 +1755,19 @@ if($resdepartment -> num_rows>0)
         var count = 0;
         var arrselectedasset = [];
         arridselectedassetadd = [];
-        $(".checkboxasset").each(function () {
+        $("#datatable_asset tbody input[type='checkbox']").each(function () {
             var checked = this.checked;
 
             if (checked) {
                 var myid = this.id;
                 var splitid = myid.split("_");
-                var myfixid = splitid[1];
-                arridselectedassetadd.push(myfixid);
-                var noasset = $("#noasset" + myfixid).text();
-                var nameasset = $("#name" + myfixid).text();
-                var conditions = $("#conditions" + myfixid).text();
-                var initialcondition = $("#initial_condition" + myfixid).text();
-                arrselectedasset.push(myfixid + "~~" + noasset + "~~" + nameasset + "~~" + conditions + "~~" +
+                var myfixid =  $(this).closest('td').next('td').find('label').attr('id').split("_");
+                arridselectedassetadd.push(myfixid[1]);
+                var noasset = $("#noasset_" + myfixid[1]).text();
+                var nameasset = $("#name_" + myfixid[1]).text();
+                var conditions = $("#conditions_" + myfixid[1]).text();
+                var initialcondition = $("#initial_condition_" + myfixid[1]).text();
+                arrselectedasset.push(myfixid[1] + "~~" + noasset + "~~" + nameasset + "~~" + conditions + "~~" +
                     initialcondition);
                 count += 1;
             }
@@ -1723,19 +1791,19 @@ if($resdepartment -> num_rows>0)
         var count = 0;
         var arrselectedasset = [];
         arridselectedassetedit = [];
-        $(".checkboxassetedit").each(function () {
+        $("#datatable_asset_edit tbody input[type='checkbox']").each(function () {
             var checked = this.checked;
 
             if (checked) {
                 var myid = this.id;
                 var splitid = myid.split("_");
-                var myfixid = splitid[1];
-                arridselectedassetedit.push(myfixid);
-                var noasset = $("#noassetedit" + myfixid).text();
-                var nameasset = $("#nameedit" + myfixid).text();
-                var conditions = $("#conditionsedit" + myfixid).text();
-                var initialcondition = $("#initial_conditionedit" + myfixid).text();
-                arrselectedasset.push(myfixid + "~~" + noasset + "~~" + nameasset + "~~" + conditions + "~~" +
+                var myfixid = $(this).closest('td').next('td').find('label').attr('id').split("_");
+                arridselectedassetedit.push(myfixid[1]);
+                var noasset = $("#noassetedit_" + myfixid[1]).text();
+                var nameasset = $("#nameedit_" + myfixid[1]).text();
+                var conditions = $("#conditionsedit_" + myfixid[1]).text();
+                var initialcondition = $("#initial_conditionedit_" + myfixid[1]).text();
+                arrselectedasset.push(myfixid[1] + "~~" + noasset + "~~" + nameasset + "~~" + conditions + "~~" +
                     initialcondition);
                 count += 1;
             }

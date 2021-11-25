@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 224,
+            "activePatchIndex": 232,
             "patches": [
                 {
                     "date": 1632884923748,
@@ -904,6 +904,38 @@
                 {
                     "date": 1635652991201,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,9 +52,9 @@\n         $query_data = mysqli_query($conn, \"SELECT tdd.*, lbranch.branch, lfromroom.room as myfromroom, ltoroom.room as toroom , asset.idgroup, asset.idsubgroup, asset.idcategory  FROM transaction_displacement_department tdd\r\n         inner join location_branch lbranch on lbranch.idbranch = tdd.idbranch\r\n         inner join location_room lfromroom on lfromroom.id = tdd.idfromroom\r\n         inner join location_room ltoroom on ltoroom.id = tdd.idtoroom \r\n-        iinner join transaction_displacement_department_log tddl on tddl.idtransaksi =  tdd.id\r\n+        inner join transaction_displacement_department_log tddl on tddl.idtransaksi =  tdd.id\r\n      inner join asset on asset.id = tddl.idasset \r\n          where tdd.idsister = '$myses' and (\r\n          tdd.notransaction LIKE '%$search%' \r\n         OR lbranch.branch LIKE '%$search%'\r\n"
+                },
+                {
+                    "date": 1637651905875,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,8 +66,9 @@\n         $total_filtered = mysqli_query($conn, \"SELECT tdd.*, lbranch.branch, lfromroom.room as myfromroom, ltoroom.room as toroom , asset.idgroup, asset.idsubgroup, asset.idcategory  FROM transaction_displacement_department tdd\r\n         inner join location_branch lbranch on lbranch.idbranch = tdd.idbranch\r\n         inner join location_room lfromroom on lfromroom.id = tdd.idfromroom\r\n         inner join location_room ltoroom on ltoroom.id = tdd.idtoroom \r\n+        inner join transaction_displacement_department_log tddl on tddl.idtransaksi =  tdd.id\r\n         inner join asset on asset.id = tddl.idasset where tdd.idsister = '$myses' and (\r\n          tdd.notransaction LIKE '%$search%' \r\n         OR lbranch.branch LIKE '%$search%'\r\n         OR lfromroom.room LIKE '%$search%'\r\n@@ -96,8 +97,9 @@\n             // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n             $response['data'][] = [\r\n                 // \"<a href= '#myModalDisplay'  data-toggle='modal'><span class='pointer-element badge badge-success' id ='\".$row['id'].\"' onclick = 'openmodaldisplay(this)'  data-id='\".$row['id'].\"'><i class='icon-plus3'></i></span></a>\",\r\n                 \"<b><label id ='statusapproval\".$row['id'].\"'  >\".$myapproval.\"</label></b>\",\r\n+                \"<b><label id ='statusapproval\".$row['id'].\"'  >\".$myapproval.\"</label></b>\",\r\n                 \"<label id ='mydate\".$row['id'].\"'>\".$row['mydate'].\"</label>\",\r\n                 \"<a href = '#myModalDetailTransaction' id = '\".$row['id'].\"' onclick = openmodaldetailtransaction(this) data-toggle='modal'><label id ='notransaction\".$row['id'].\"'>\".$row['notransaction'].\"</label></a>\",\r\n                 \"<label id ='branch\".$row['id'].\"'>\".$row['branch'].\"</label>\",\r\n                 \"<label id ='roomfrom\".$row['id'].\"'>\".$row['myfromroom'].\"</label>\",\r\n"
+                },
+                {
+                    "date": 1637651911075,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -96,10 +96,10 @@\n             }\r\n             // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n             $response['data'][] = [\r\n                 // \"<a href= '#myModalDisplay'  data-toggle='modal'><span class='pointer-element badge badge-success' id ='\".$row['id'].\"' onclick = 'openmodaldisplay(this)'  data-id='\".$row['id'].\"'><i class='icon-plus3'></i></span></a>\",\r\n+                \"<b><label id ='id\".$row['id'].\"'  >\".$myapproval.\"</label></b>\",\r\n                 \"<b><label id ='statusapproval\".$row['id'].\"'  >\".$myapproval.\"</label></b>\",\r\n-                \"<b><label id ='statusapproval\".$row['id'].\"'  >\".$myapproval.\"</label></b>\",\r\n                 \"<label id ='mydate\".$row['id'].\"'>\".$row['mydate'].\"</label>\",\r\n                 \"<a href = '#myModalDetailTransaction' id = '\".$row['id'].\"' onclick = openmodaldetailtransaction(this) data-toggle='modal'><label id ='notransaction\".$row['id'].\"'>\".$row['notransaction'].\"</label></a>\",\r\n                 \"<label id ='branch\".$row['id'].\"'>\".$row['branch'].\"</label>\",\r\n                 \"<label id ='roomfrom\".$row['id'].\"'>\".$row['myfromroom'].\"</label>\",\r\n"
+                },
+                {
+                    "date": 1637651928052,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,9 @@\n {\r\n \r\n     $where_like = [\r\n         'branch',\r\n+        'branch',\r\n         'roomfroom',\r\n         'toroom',\r\n         'status_approval',\r\n         'remark'\r\n@@ -96,9 +97,9 @@\n             }\r\n             // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n             $response['data'][] = [\r\n                 // \"<a href= '#myModalDisplay'  data-toggle='modal'><span class='pointer-element badge badge-success' id ='\".$row['id'].\"' onclick = 'openmodaldisplay(this)'  data-id='\".$row['id'].\"'><i class='icon-plus3'></i></span></a>\",\r\n-                \"<b><label id ='id\".$row['id'].\"'  >\".$myapproval.\"</label></b>\",\r\n+                \"<b><label id ='id\".$row['id'].\"'  >\".$row['id'].\"</label></b>\",\r\n                 \"<b><label id ='statusapproval\".$row['id'].\"'  >\".$myapproval.\"</label></b>\",\r\n                 \"<label id ='mydate\".$row['id'].\"'>\".$row['mydate'].\"</label>\",\r\n                 \"<a href = '#myModalDetailTransaction' id = '\".$row['id'].\"' onclick = openmodaldetailtransaction(this) data-toggle='modal'><label id ='notransaction\".$row['id'].\"'>\".$row['notransaction'].\"</label></a>\",\r\n                 \"<label id ='branch\".$row['id'].\"'>\".$row['branch'].\"</label>\",\r\n"
+                },
+                {
+                    "date": 1637651978275,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,13 +6,14 @@\n if($tipe == \"load\")\r\n {\r\n \r\n     $where_like = [\r\n+        'id',\r\n+        'status_approval',\r\n         'branch',\r\n-        'branch',\r\n         'roomfroom',\r\n         'toroom',\r\n-        'status_approval',\r\n+      \r\n         'remark'\r\n         \r\n     ];\r\n     \r\n"
+                },
+                {
+                    "date": 1637651991855,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,10 @@\n \r\n     $where_like = [\r\n         'id',\r\n         'status_approval',\r\n+        'my_date',\r\n+        'my_date',\r\n         'branch',\r\n         'roomfroom',\r\n         'toroom',\r\n       \r\n"
+                },
+                {
+                    "date": 1637652006218,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,13 +9,12 @@\n     $where_like = [\r\n         'id',\r\n         'status_approval',\r\n         'my_date',\r\n-        'my_date',\r\n+        'notransaction',\r\n         'branch',\r\n         'roomfroom',\r\n         'toroom',\r\n-      \r\n         'remark'\r\n         \r\n     ];\r\n     \r\n"
+                },
+                {
+                    "date": 1637652053707,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n         'status_approval',\r\n         'my_date',\r\n         'notransaction',\r\n         'branch',\r\n-        'roomfroom',\r\n+        'myfromroom',\r\n         'toroom',\r\n         'remark'\r\n         \r\n     ];\r\n"
+                },
+                {
+                    "date": 1637652071317,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n \r\n     $where_like = [\r\n         'id',\r\n         'status_approval',\r\n-        'my_date',\r\n+        'mydate',\r\n         'notransaction',\r\n         'branch',\r\n         'myfromroom',\r\n         'toroom',\r\n"
                 }
             ],
             "date": 1632884923748,

@@ -7,6 +7,7 @@ if($tipe == "load")
 {
 
     $where_like = [
+        'id',
         'notransaction',
         'approval'
         
@@ -66,6 +67,7 @@ if($tipe == "load")
             }
             // $myrelation = str_replace( " ", ' ', $row['myrelation'] ); 
             $response['data'][] = [
+                "<label id ='id".$row['id']."'>".$row['id']."</label>",
                 "<b><label id ='statusapproval".$row['id']."'  >".$myapproval."</label></b>",
                 "<label id ='mydate".$row['id']."'>".$row['mydate']."</label>",
                 "<a href = '#myModalDetailTransaction' id = '".$row['id']."' onclick = openmodaldetailtransaction(this) data-toggle='modal'><label id ='notransaction".$row['id']."'>".$row['notransaction']."</label></a>".

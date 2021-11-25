@@ -7,10 +7,13 @@ if($tipe == "load")
 {
 
     $where_like = [
-        'branch',
-        'roomfroom',
-        'toroom',
+        'id',
         'status_approval',
+        'mydate',
+        'notransaction',
+        'branch',
+        'myfromroom',
+        'toroom',
         'remark'
         
     ];
@@ -97,6 +100,7 @@ if($tipe == "load")
             // $myrelation = str_replace( " ", ' ', $row['myrelation'] ); 
             $response['data'][] = [
                 // "<a href= '#myModalDisplay'  data-toggle='modal'><span class='pointer-element badge badge-success' id ='".$row['id']."' onclick = 'openmodaldisplay(this)'  data-id='".$row['id']."'><i class='icon-plus3'></i></span></a>",
+                "<b><label id ='id".$row['id']."'  >".$row['id']."</label></b>",
                 "<b><label id ='statusapproval".$row['id']."'  >".$myapproval."</label></b>",
                 "<label id ='mydate".$row['id']."'>".$row['mydate']."</label>",
                 "<a href = '#myModalDetailTransaction' id = '".$row['id']."' onclick = openmodaldetailtransaction(this) data-toggle='modal'><label id ='notransaction".$row['id']."'>".$row['notransaction']."</label></a>",

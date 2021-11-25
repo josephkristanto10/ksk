@@ -453,6 +453,7 @@ if($resdepartment -> num_rows>0)
             <div class="modal-body">
                 <form id="myforms">
                     <div class="form-group">
+                    <label for="cars" style="font-size:11pt;"><b>Data Section</b></label><br><br>
                         <label for="cars">Branch:</label>
                         <select id="branch" name="branch" class="form-control">
                             <?php
@@ -468,7 +469,7 @@ if($resdepartment -> num_rows>0)
                         <select id="room" name="room" class="form-control">
                         </select>
                         <hr>
-
+                        <label for="cars" style="font-size:11pt;"><b>Asset Section</b></label><br><br>
                         <label for="cars">Asset Group:</label>
                         <select id="groups" name="groups" class="form-control">
                             <?php
@@ -526,6 +527,7 @@ if($resdepartment -> num_rows>0)
             <div class="modal-body">
                 <form id="myforms">
                     <div class="form-group">
+                    <label for="cars" style="font-size:11pt;"><b>Data Section</b></label><br><br>
                         <label for="cars">Branch:</label>
                         <select id="branchedit" name="branchedit" class="form-control">
                             <?php
@@ -541,7 +543,7 @@ if($resdepartment -> num_rows>0)
                         <select id="roomedit" name="roomedit" class="form-control">
                         </select>
                         <hr>
-
+                        <label for="cars" style="font-size:11pt;"><b>Asset Section</b></label><br><br>
                         <label for="cars">Asset Group:</label>
                         <select id="groupsedit" name="groupsedit" class="form-control">
                             <?php
@@ -980,6 +982,7 @@ function openmodaledits(element){
         if(iddefaultcategories != idcategories)
         {
             iddefaultcategories = idcategories;
+            alert(idcategories);
             loadassetedit(idcategories);
         }
     }
@@ -1204,6 +1207,11 @@ function openmodaledits(element){
                         this.api().cell(td).checkboxes.select();
                     }
                 }
+               },
+               {
+                'targets': 5,
+                visible: false
+                
                }],
               columns: [{
                       searchable:false,
@@ -1254,7 +1262,8 @@ function openmodaledits(element){
             columnDefs: [{
                 targets: [0],
                 visible: false
-            }, ],
+            },
+             ],
             ajax: {
                 url: 'process/master_transaction_disp_new_asset.php',
                 method: 'POST',

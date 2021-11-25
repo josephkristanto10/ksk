@@ -127,6 +127,7 @@ if($resconditions -> num_rows>0)
                     <table id="datatable_serverside" class="table table-hover table-bordered display nowrap w-100">
                         <thead>
                             <tr>
+                            <th>Id</th>
                                 <th>Approval</th>
                                 <th>Date</th>
                                 <th>No. Transaction</th>
@@ -198,6 +199,8 @@ if($resconditions -> num_rows>0)
                         <div id="containerpilihaset" style="max-height:100px !important;">
 
                         </div>
+                        <div style = "margin-bottom:10px;">
+                        </div>
                     </div>
                     <div class="tab-pane fade show " id="second">
                         <h4><span class="font-weight-semibold">Price</span></h4>
@@ -262,7 +265,7 @@ if($resconditions -> num_rows>0)
                         <br>
                         <b>Asset Choose</b>
                         <br><br>
-                        <div id="containerpilihasetedit" style="max-height:100px !important;">
+                        <div id="containerpilihasetedit" style="max-height:100px !important;margin-bottom:50px;">
 
                         </div>
                     </div>
@@ -511,7 +514,7 @@ echo date('d-m-Y');?>">
                                     <th>Name</th>
                                     <th>Condition</th>
                                     <th>Initial Condition</th>
-
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             </tbody>
@@ -537,6 +540,8 @@ echo date('d-m-Y');?>">
 </body>
 
 </html>
+<script type="text/javascript"
+    src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
 <script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>
 <script>
 
@@ -704,7 +709,16 @@ echo date('d-m-Y');?>">
                     tipe: "load"
                 }
             },
-            columns: [{
+            columnDefs: [{
+                'targets': 0,
+                'visible':false
+            }],
+            columns: [
+                {
+                    name : "id",
+                    className: 'text-center align-middle'
+                },
+                {
                     name: 'approval',
                     className: 'text-center align-middle'
                 },
@@ -1036,6 +1050,8 @@ echo date('d-m-Y');?>">
                             confirmButtonColor: '#53d408',
                             allowOutsideClick: false,
                         }).then((result) => {
+                            $("#containerpilihaset").html("");
+                                arridselectedassetadd = [];
                             $("#myform").trigger("reset");
                             
                         });
@@ -2326,7 +2342,8 @@ echo date('d-m-Y');?>">
                                 confirmButtonColor: '#53d408',
                                 allowOutsideClick: false,
                             }).then((result) => {
-                              
+                                $("#containerpilihaset").html("");
+                                arridselectedassetadd = [];
                                 $("#myform").trigger("reset");
                                 $("#myModalAddSale").modal("toggle");
                             });
@@ -2365,7 +2382,6 @@ echo date('d-m-Y');?>">
             });
             if (inputempty == 0) {
 
-      
                 for (var i = 0; i < ongoingidassetedit.length; i++) {
                     var mypricevalues = $("#priceedit" + ongoingidassetedit[i]).val();
                     ongoingpriceassetedit.push(mypricevalues);
@@ -2388,7 +2404,7 @@ echo date('d-m-Y');?>">
                     },
                     success: function (result) {
                         if (result == "sukses") {
-                            $("#priceadd").html("");
+                            $("#priceedit").html("");
                             success();
                             Swal.fire({
                                 title: 'Data Saved',
@@ -2702,6 +2718,12 @@ echo date('d-m-Y');?>">
                 },
 
             },
+            columnDefs: [{
+                'targets': 0,
+                'checkboxes': {
+                    'selectRow': true
+                }
+            }],
             columns: [{
                     searchable: false,
                     orderable: false,
@@ -2754,6 +2776,23 @@ echo date('d-m-Y');?>">
                 },
 
             },
+            columnDefs: [{
+                'targets': 0,
+                'checkboxes': {
+                    'selectRow': true
+                },
+                'createdCell':  function (td, cellData, rowData, row, col){
+            
+                    if(rowData[5] === 'True'){
+                        this.api().cell(td).checkboxes.select();
+                    }
+                }
+               },
+               {
+                'targets': 5,
+                visible: false
+                
+               }],
             columns: [{
                     searchable: false,
                     orderable: false,
@@ -2775,6 +2814,10 @@ echo date('d-m-Y');?>">
                 {
                     name: 'initial_condition',
                     className: 'text-center align-middle'
+                },
+                {
+                    name: 'Status',
+                    className: 'text-center align-middle'
                 }
             ]
         });
@@ -2789,25 +2832,25 @@ echo date('d-m-Y');?>">
         arridselectedassetadd = [];
         var counter = 1;
         $("#priceadd").html("");
-        $(".checkboxasset").each(function () {
+        $("#datatable_asset tbody input[type='checkbox']").each(function () {
             var checked = this.checked;
 
             if (checked) {
                 var myid = this.id;
                 var splitid = myid.split("_");
-                var myfixid = splitid[1];
-                ongoingidasset.push(myfixid);
-                arridselectedassetadd.push(myfixid);
-                var noasset = $("#noasset" + myfixid).text();
-                var nameasset = $("#name" + myfixid).text();
-                var conditions = $("#conditions" + myfixid).text();
-                var initialcondition = $("#initial_condition" + myfixid).text();
-                arrselectedasset.push(myfixid + "~~" + noasset + "~~" + nameasset + "~~" + conditions + "~~" +
+                var myfixid = $(this).closest('td').next('td').find('label').attr('id').split("_");
+                ongoingidasset.push(myfixid[1]);
+                arridselectedassetadd.push(myfixid[1]);
+                var noasset = $("#noasset_" + myfixid[1]).text();
+                var nameasset = $("#name_" + myfixid[1]).text();
+                var conditions = $("#conditions_" + myfixid[1]).text();
+                var initialcondition = $("#initial_condition_" + myfixid[1]).text();
+                arrselectedasset.push(myfixid[1] + "~~" + noasset + "~~" + nameasset + "~~" + conditions + "~~" +
                     initialcondition);
           
                 $("#priceadd").append("<label><b>" + counter + "</b>." + nameasset +
                     "</label> <input type = 'text' class = 'form-control' id = 'price" +
-                    myfixid + "' placeholder = 'Place price here'> <br><br>");
+                    myfixid[1] + "' placeholder = 'Place price here'> <br><br>");
                     count += 1;
                     counter +=1;
             }
@@ -2825,13 +2868,13 @@ echo date('d-m-Y');?>">
 
         $("#containerpilihaset").html("");
         $("#containerpilihaset").append(
-            "<table id = 'tablepilihasset' class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Asset Name</th></tr><tbody>"
+            "<table id = 'tablepilihasset' style = 'margin-bottom:50px;' class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Asset Name</th></tr><tbody>"
         );
         for (var i = 0; i < arrselectedasset.length; i++) {
             var split = arrselectedasset[i].split("~~");
             $("#tablepilihasset").append("<tr><td>" + split[1] + "</td><td>" + split[2] + "</td></tr>");
         }
-        $("#containerpilihaset").append("</tbody></table>");
+        $("#containerpilihaset").append("</tbody></table><br>");
         $("#selectasset").modal("toggle");
     }
 
@@ -2840,35 +2883,42 @@ echo date('d-m-Y');?>">
         var count = 0;
         var arrselectedasset = [];
         arridselectedassetedit = [];
-        $(".checkboxassetedit").each(function () {
+        ongoingidassetedit = [];
+        $("#priceedit").html("");
+        $("#datatable_asset_edit tbody input[type='checkbox']").each(function () {
             var checked = this.checked;
 
             if (checked) {
                 var myid = this.id;
                 var splitid = myid.split("_");
-                var myfixid = splitid[1];
-                arridselectedassetedit.push(myfixid);
-                var noasset = $("#noassetedit" + myfixid).text();
-                var nameasset = $("#nameedit" + myfixid).text();
-                var conditions = $("#conditionsedit" + myfixid).text();
-                var initialcondition = $("#initial_conditionedit" + myfixid).text();
-                arrselectedasset.push(myfixid + "~~" + noasset + "~~" + nameasset + "~~" + conditions + "~~" +
+                var myfixid = $(this).closest('td').next('td').find('label').attr('id').split("_");
+                ongoingidassetedit.push(myfixid[1]);
+                arridselectedassetedit.push(myfixid[1]);
+                var noasset = $("#noassetedit_" + myfixid[1]).text();
+                var nameasset = $("#nameedit_" + myfixid[1]).text();
+                var conditions = $("#conditionsedit_" + myfixid[1]).text();
+                var initialcondition = $("#initial_conditionedit_" + myfixid[1]).text();
+                arrselectedasset.push(myfixid[1] + "~~" + noasset + "~~" + nameasset + "~~" + conditions + "~~" +
                     initialcondition);
                 count += 1;
+                 $("#priceedit").append("<label><b>" + count + "</b>." + nameasset +
+                    "</label> <input type = 'text' class = 'form-control' id = 'priceedit" +
+                    myfixid[1] + "' placeholder = 'Place price here'> <br><br>");
             }
+            
 
 
         });
 
         $("#containerpilihasetedit").html("");
         $("#containerpilihasetedit").append(
-            "<table id = 'tablepilihassetedit' class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Asset Name</th></tr><tbody>"
+            "<table id = 'tablepilihassetedit' style = 'margin-bottom:50px;' class = 'table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>Asset Name</th></tr><tbody>"
         );
         for (var i = 0; i < arrselectedasset.length; i++) {
             var split = arrselectedasset[i].split("~~");
             $("#tablepilihassetedit").append("<tr><td>" + split[1] + "</td><td>" + split[2] + "</td></tr>");
         }
-        $("#containerpilihasetedit").append("</tbody></table>");
+        $("#containerpilihasetedit").append("</tbody></table><br>");
         $("#selectassetedit").modal("toggle");
     };
 

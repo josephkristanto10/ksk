@@ -7,6 +7,7 @@ if($tipe == "load")
 {
 
     $where_like = [
+        'id',
         'notransaction',
         'branch',
         'name',
@@ -108,6 +109,7 @@ if($tipe == "load")
             }
             // $myrelation = str_replace( " ", ' ', $row['myrelation'] ); 
             $response['data'][] = [
+                "<b><label id ='id".$row['id']."'  >".$row['id']."</label></b>",
                 "<span class='pointer-element badge badge-success' id ='".$row['id']."' data-id='".$row['id']."'><i class='icon-plus3'></i></span>",
                 "<b><label id ='statusapproval".$row['id']."'  >".$myapproval."</label></b>",
                 "<label id ='mydate".$row['id']."'>".$row['mydate']."</label>",

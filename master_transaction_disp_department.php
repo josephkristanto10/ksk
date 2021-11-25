@@ -108,6 +108,7 @@ if($resdepartment -> num_rows>0)
                     <table id="datatable_serverside" class="table table-hover table-bordered display nowrap w-100">
                         <thead>
                             <tr>
+                            <th>ID</th>
                                 <th>Approval</th>
                                 <th>Date</th>
                                 <th>Transaction</th>
@@ -784,7 +785,7 @@ echo date('d-m-Y');?>">
             <div class="modal-body">
                 <form id="myforms">
                     <div class="form-group">
-
+                    <label for="cars" style="font-size:11pt;"><b>Data Section</b></label><br><br>
                         <label for="cars">Branch:</label>
                         <select id="branch" name="branch" class="form-control">
                             <?php
@@ -815,6 +816,8 @@ echo date('d-m-Y');?>">
                         <br>
                         <label for="cars">Remark :</label>
                         <input id="remark" type="text" class="form-control">
+                        <hr>
+                        <label for="cars" style="font-size:11pt;"><b>Asset Section</b></label><br><br>
                         <label for="cars">Asset Group:</label>
                         <select id="groups" name="groups" class="form-control">
                             <?php
@@ -845,13 +848,16 @@ echo date('d-m-Y');?>">
                         <br>
                         <br>
                         <div style="float:right;margin-bottom:20px;">
-                            <button type="button" class="btn btn-primary" style="margin-right:10px;"
-                                onclick="adddata()">Save</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                id="canceladd">Cancel</button>
+                           
                         </div>
                     </div>
                 </form>
+            </div>
+            <div class = "modal-footer" style = "padding-top:20px;">
+            <button type="button" class="btn btn-primary" style="margin-right:10px;"
+                                onclick="adddata()">Save</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                id="canceladd" style="margin-right:15px;">Cancel</button>
             </div>
 
         </div>
@@ -947,6 +953,7 @@ echo date('d-m-Y');?>">
             <div class="modal-body">
                 <form id="myforms">
                     <div class="form-group">
+                        <label for="cars" style="font-size:11pt;"><b>Data Section</b></label><br><br>
                         <label for="cars">Branch:</label>
                         <select id="branchedit" name="branchedit" class="form-control">
                             <?php
@@ -978,6 +985,7 @@ echo date('d-m-Y');?>">
                         <label for="cars">Remark :</label>
                         <input id="remarkedit" type="text" class="form-control">
                         <hr>
+                        <label for="cars" style="font-size:11pt;"><b>Asset Section</b></label><br><br>
 
                         <label for="cars">Asset Group:</label>
                         <select id="groupsedit" name="groupsedit" class="form-control">
@@ -1048,6 +1056,7 @@ echo date('d-m-Y');?>">
                                     <th>Name</th>
                                     <th>Condition</th>
                                     <th>Initial Condition</th>
+                                    <th>Status</th>
 
                                 </tr>
                             </thead>
@@ -1075,6 +1084,8 @@ echo date('d-m-Y');?>">
 
 </html>
 <script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+<script type="text/javascript"
+    src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
 <script>
     // variable pilih asset
     var idtransaction = "";
@@ -1224,6 +1235,11 @@ echo date('d-m-Y');?>">
             order: [
                 [0, 'asc']
             ],
+            columnDefs: [{
+                targets: [0],
+                visible: false
+            },
+             ],
             ajax: {
                 url: 'process/master_transaction_disp_department.php',
                 method: 'POST',
@@ -1232,7 +1248,11 @@ echo date('d-m-Y');?>">
                 }
             },
             columns: [
-
+                {
+                    name: 'ID',
+                    searchable: false,
+                    className: 'text-center align-middle'
+                },
                 {
                     name: 'date',
                     className: 'text-center align-middle'
@@ -1271,6 +1291,8 @@ echo date('d-m-Y');?>">
                 },
                 {
                     name: 'leadtime',
+                    orderable:false,
+                    searchable:false,
                     className: 'text-center align-middle'
                 },
                 {
@@ -1529,6 +1551,8 @@ echo date('d-m-Y');?>">
                                 confirmButtonColor: '#53d408',
                                 allowOutsideClick: false,
                             }).then((result) => {
+                                $("#containerpilihaset").html("");
+                                arridselectedassetadd = [];
                                 $("#myforms").trigger("reset");
                                 $("#canceladd").click();
                             });
@@ -2235,6 +2259,29 @@ echo date('d-m-Y');?>">
     // Asset Choose Section
     var asset = null;
     var assetedit = null;
+
+    $('#selectasset').on('shown.bs.modal', function () {
+        var idcategories = $("#categories").val();
+        if(iddefaultcategories != idcategories)
+        {
+            iddefaultcategories = idcategories;
+            loadasset(idcategories);
+    
+        }
+   
+   asset.columns.adjust();
+}); 
+$('#selectassetedit').on('shown.bs.modal', function () {
+        var idcategories = $("#categoriesedit").val();
+        if(iddefaultcategories != idcategories)
+        {
+            iddefaultcategories = idcategories;
+            // loadassetedit(idcategories);
+    
+        }
+   
+        assetedit.columns.adjust();
+}); 
     var chosenasset = null;
     var iddefaultcategories = "";
     $('#selectasset').on('shown.bs.modal', function () {
@@ -2300,6 +2347,12 @@ echo date('d-m-Y');?>">
             order: [
                 [0, 'asc']
             ],
+            columnDefs: [{
+                'targets': 0,
+                'checkboxes': {
+                    'selectRow': true
+                }
+            }],
             ajax: {
                 url: 'process/mastergetasset.php',
                 method: 'POST',
@@ -2351,6 +2404,26 @@ echo date('d-m-Y');?>">
             order: [
                 [0, 'asc']
             ],
+            columnDefs: [
+                {
+                'targets': 0,
+                'checkboxes': {
+                    'selectRow': true
+                },
+                'createdCell':  function (td, cellData, rowData, row, col){
+            
+                    if(rowData[5] === 'True'){
+                        this.api().cell(td).checkboxes.select();
+                    }
+                }
+               },
+               {
+                'targets': 5,
+                visible: false
+                
+               }
+               
+               ],
             ajax: {
                 url: 'process/mastergetasset.php',
                 method: 'POST',
@@ -2383,6 +2456,10 @@ echo date('d-m-Y');?>">
                 {
                     name: 'initial_condition',
                     className: 'text-center align-middle'
+                },
+                {
+                    name: 'status',
+                    className: 'text-center align-middle'
                 }
             ]
         });
@@ -2395,19 +2472,19 @@ echo date('d-m-Y');?>">
         var count = 0;
         var arrselectedasset = [];
         arridselectedassetadd = [];
-        $(".checkboxasset").each(function () {
+        $("#datatable_asset tbody input[type='checkbox']").each(function () {
             var checked = this.checked;
 
             if (checked) {
                 var myid = this.id;
                 var splitid = myid.split("_");
-                var myfixid = splitid[1];
-                arridselectedassetadd.push(myfixid);
-                var noasset = $("#noasset" + myfixid).text();
-                var nameasset = $("#name" + myfixid).text();
-                var conditions = $("#conditions" + myfixid).text();
-                var initialcondition = $("#initial_condition" + myfixid).text();
-                arrselectedasset.push(myfixid + "~~" + noasset + "~~" + nameasset + "~~" + conditions + "~~" +
+                var myfixid =  $(this).closest('td').next('td').find('label').attr('id').split("_");
+                arridselectedassetadd.push(myfixid[1]);
+                var noasset = $("#noasset_" + myfixid[1]).text();
+                var nameasset = $("#name_" + myfixid[1]).text();
+                var conditions = $("#conditions_" + myfixid[1]).text();
+                var initialcondition = $("#initial_condition_" + myfixid[1]).text();
+                arrselectedasset.push(myfixid[1] + "~~" + noasset + "~~" + nameasset + "~~" + conditions + "~~" +
                     initialcondition);
                 count += 1;
             }
@@ -2431,19 +2508,19 @@ echo date('d-m-Y');?>">
         var count = 0;
         var arrselectedasset = [];
         arridselectedassetedit = [];
-        $(".checkboxassetedit").each(function () {
+        $("#datatable_asset_edit tbody input[type='checkbox']").each(function () {
             var checked = this.checked;
 
             if (checked) {
                 var myid = this.id;
                 var splitid = myid.split("_");
-                var myfixid = splitid[1];
-                arridselectedassetedit.push(myfixid);
-                var noasset = $("#noassetedit" + myfixid).text();
-                var nameasset = $("#nameedit" + myfixid).text();
-                var conditions = $("#conditionsedit" + myfixid).text();
-                var initialcondition = $("#initial_conditionedit" + myfixid).text();
-                arrselectedasset.push(myfixid + "~~" + noasset + "~~" + nameasset + "~~" + conditions + "~~" +
+                var myfixid = $(this).closest('td').next('td').find('label').attr('id').split("_");
+                arridselectedassetedit.push(myfixid[1]);
+                var noasset = $("#noassetedit_" + myfixid[1]).text();
+                var nameasset = $("#nameedit_" + myfixid[1]).text();
+                var conditions = $("#conditionsedit_" + myfixid[1]).text();
+                var initialcondition = $("#initial_conditionedit_" + myfixid[1]).text();
+                arrselectedasset.push(myfixid[1] + "~~" + noasset + "~~" + nameasset + "~~" + conditions + "~~" +
                     initialcondition);
                 count += 1;
             }

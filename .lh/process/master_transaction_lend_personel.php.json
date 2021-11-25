@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 181,
+            "activePatchIndex": 185,
             "patches": [
                 {
                     "date": 1632985801675,
@@ -732,6 +732,22 @@
                 {
                     "date": 1635759063689,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -432,9 +432,9 @@\n     $convertend = date_format($dateend,\"Y-m-d\");\r\n     $mydate = date(\"Y-m-d\");\r\n     $mytransactions = $_POST['mytransactions'];\r\n \r\n-    $sql = \"update transaction_lend_to_personal set id_department = '$mydepartment', idbranch = '$mybranchpersonel', nik = '$myuser', idbranchroom = '$mybranchroom', room = '$myroom' where id = '$mytransactions'\";\r\n+    $sql = \"update transaction_lend_to_personal set id_department = '$mydepartment', idbranch = '$mybranchpersonel', nik = '$myuser', idbranchroom = '$mybranchroom', room = '$myroom' , start_date = '$convertstart', due_date = '$convertend' where id = '$mytransactions'\";\r\n     $res = $conn->query($sql);\r\n     // echo $sql;\r\n     $sql = \"delete from transaction_lend_to_personal_log where idtransaksi = '$mytransactions'\";\r\n     $res = $conn->query($sql);\r\n"
+                },
+                {
+                    "date": 1637823890928,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,9 @@\n {\r\n \r\n     $where_like = [\r\n         'branch',\r\n+        'branch',\r\n         'room',\r\n         'nik',\r\n         'nama',\r\n         'start_date',\r\n"
+                },
+                {
+                    "date": 1637823902389,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,10 +6,10 @@\n if($tipe == \"load\")\r\n {\r\n \r\n     $where_like = [\r\n+        'id',\r\n         'branch',\r\n-        'branch',\r\n         'room',\r\n         'nik',\r\n         'nama',\r\n         'start_date',\r\n@@ -118,8 +118,9 @@\n                 $myapproval = \"<span style = 'color:#2aa602'><i class='mi-check-box'></i> &nbspAccepted </span>\";\r\n             }\r\n             // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n             $response['data'][] = [\r\n+                \"<b><label id ='statusapproval\".$row['id'].\"'  >\".$myapproval.\"</label></b>\",\r\n                 \"<span class='pointer-element badge badge-success' id ='\".$row['id'].\"' data-id='\".$row['id'].\"'><i class='icon-plus3'></i></span>\",\r\n                 \"<b><label id ='statusapproval\".$row['id'].\"'  >\".$myapproval.\"</label></b>\",\r\n                 \"<label id ='mydate\".$row['id'].\"'>\".$row['mydate'].\"</label>\",\r\n                 \"<a href = '#myModalDetailTransaction' id = '\".$row['id'].\"' onclick = openmodaldetailtransaction(this) data-toggle='modal'><label id ='notransaction\".$row['id'].\"'>\".$row['notransaction'].\"</label></a>\",\r\n"
+                },
+                {
+                    "date": 1637823907720,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -118,9 +118,9 @@\n                 $myapproval = \"<span style = 'color:#2aa602'><i class='mi-check-box'></i> &nbspAccepted </span>\";\r\n             }\r\n             // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n             $response['data'][] = [\r\n-                \"<b><label id ='statusapproval\".$row['id'].\"'  >\".$myapproval.\"</label></b>\",\r\n+                \"<b><label id ='statusapproval\".$row['id'].\"'  >\".$row['id'].\"</label></b>\",\r\n                 \"<span class='pointer-element badge badge-success' id ='\".$row['id'].\"' data-id='\".$row['id'].\"'><i class='icon-plus3'></i></span>\",\r\n                 \"<b><label id ='statusapproval\".$row['id'].\"'  >\".$myapproval.\"</label></b>\",\r\n                 \"<label id ='mydate\".$row['id'].\"'>\".$row['mydate'].\"</label>\",\r\n                 \"<a href = '#myModalDetailTransaction' id = '\".$row['id'].\"' onclick = openmodaldetailtransaction(this) data-toggle='modal'><label id ='notransaction\".$row['id'].\"'>\".$row['notransaction'].\"</label></a>\",\r\n"
+                },
+                {
+                    "date": 1637823920664,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -118,9 +118,9 @@\n                 $myapproval = \"<span style = 'color:#2aa602'><i class='mi-check-box'></i> &nbspAccepted </span>\";\r\n             }\r\n             // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n             $response['data'][] = [\r\n-                \"<b><label id ='statusapproval\".$row['id'].\"'  >\".$row['id'].\"</label></b>\",\r\n+                \"<b><label id ='id\".$row['id'].\"'  >\".$row['id'].\"</label></b>\",\r\n                 \"<span class='pointer-element badge badge-success' id ='\".$row['id'].\"' data-id='\".$row['id'].\"'><i class='icon-plus3'></i></span>\",\r\n                 \"<b><label id ='statusapproval\".$row['id'].\"'  >\".$myapproval.\"</label></b>\",\r\n                 \"<label id ='mydate\".$row['id'].\"'>\".$row['mydate'].\"</label>\",\r\n                 \"<a href = '#myModalDetailTransaction' id = '\".$row['id'].\"' onclick = openmodaldetailtransaction(this) data-toggle='modal'><label id ='notransaction\".$row['id'].\"'>\".$row['notransaction'].\"</label></a>\",\r\n"
                 }
             ],
             "date": 1632985801675,
