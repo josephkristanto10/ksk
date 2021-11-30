@@ -177,8 +177,9 @@ if($resconditions -> num_rows>0)
 
                         </select>
                         <br>
-                        <b>Asset Choose</b> <a href="#selectasset" onclick="openselectasset(this)"
-                            data-toggle="modal" data-backdrop="static" data-keyboard="false">select asset</a>
+                        <b>Asset Choose</b>
+                         <!-- <a href="#selectasset" onclick="openselectasset(this)"
+                            data-toggle="modal" data-backdrop="static" data-keyboard="false">select asset</a> -->
                         <br><br>
                         <div id="containerpilihaset" style="max-height:100px !important;">
 
@@ -193,6 +194,9 @@ if($resconditions -> num_rows>0)
                 </form>
             </div>
             <div class="modal-footer">
+            <a class="btn btn-success" href="#selectasset" onclick="openselectasset(this)"
+                                data-toggle="modal" data-backdrop="static" data-keyboard="false" style = "margin-top:10px;margin-right:10px;"><i
+                                    class="icon-box "></i> &nbsp select asset</a>
             <button type="button" class="btn btn-primary" style="margin-right:15px;margin-top:10px"
                                 onclick="adddata()">Save</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"
@@ -291,8 +295,9 @@ if($resconditions -> num_rows>0)
 
                         </select>
                         <br>
-                        <b>Asset Choose</b> <a href="#selectassetedit" onclick="openselectassetedit(this)"
-                            data-toggle="modal" data-backdrop="static" data-keyboard="false">select asset</a>
+                        <b>Asset Choose</b>
+                         <!-- <a href="#selectassetedit" onclick="openselectassetedit(this)"
+                            data-toggle="modal" data-backdrop="static" data-keyboard="false">select asset</a> -->
                         <br><br>
                         <div id="containerpilihasetedit" style="max-height:100px !important;">
 
@@ -301,6 +306,8 @@ if($resconditions -> num_rows>0)
                 </form>
             </div>
             <div class="modal-footer">
+            <a class = "btn btn-success" href = "#selectassetedit" style="margin-top:10px;" onclick = "openselectassetedit(this)" data-toggle="modal" data-backdrop="static" data-keyboard="false"> <i class="icon-box "></i> &nbsp select asset</a>
+
                 <button type="button" class="btn btn-primary" style="margin-right:10px;margin-top:10px;"
                     onclick="editdata()">Save</button>
                 <button type="button" class="btn btn-secondary" style="margin-right:30px;margin-top:10px;"
@@ -2562,6 +2569,7 @@ echo date('d-m-Y');?>">
         // alert(purchaseprice);
     }
     function openmodaldetailtransaction(element){
+        
         var myid = element.id;
         var notransaction = $("#notransaction" + myid).text();
         var datetransaction = $("#mydate" + myid).text();

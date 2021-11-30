@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 231,
+            "activePatchIndex": 244,
             "patches": [
                 {
                     "date": 1633330398495,
@@ -932,6 +932,58 @@
                 {
                     "date": 1637650210598,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,8 @@\n         'mydate',\r\n         'notransaction',\r\n         'branch',\r\n         'room',\r\n-       \r\n         'nama',\r\n         \r\n         \r\n     ];\r\n"
+                },
+                {
+                    "date": 1638251813798,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -457,8 +457,9 @@\n     $mycountasset = 0;\r\n     if($res->num_rows>0)\r\n     {\r\n         $mycounter = 1;\r\n+        $mystring = \"<table class=\"table table-hover table-bordered display nowrap w-100\">\"\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n             $mycountasset += 1;\r\n             $mystring .= \"<div class = 'row' style = 'margin-left:5px;'><label style = 'display:block;float:left;heigth:100px;font-size:12pt;' ><b>$mynumber. </b> &nbsp </label><label style = 'display:block;float:left' >\".$r['assetname'].\"<br>\".$r['noasset'].\"</label></div><br>\";             \r\n"
+                },
+                {
+                    "date": 1638251819352,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -457,9 +457,9 @@\n     $mycountasset = 0;\r\n     if($res->num_rows>0)\r\n     {\r\n         $mycounter = 1;\r\n-        $mystring = \"<table class=\"table table-hover table-bordered display nowrap w-100\">\"\r\n+        $mystring = \"<table class='table table-hover table-bordered display nowrap w-100'>\";\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n             $mycountasset += 1;\r\n             $mystring .= \"<div class = 'row' style = 'margin-left:5px;'><label style = 'display:block;float:left;heigth:100px;font-size:12pt;' ><b>$mynumber. </b> &nbsp </label><label style = 'display:block;float:left' >\".$r['assetname'].\"<br>\".$r['noasset'].\"</label></div><br>\";             \r\n"
+                },
+                {
+                    "date": 1638251830858,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -465,8 +465,9 @@\n             $mystring .= \"<div class = 'row' style = 'margin-left:5px;'><label style = 'display:block;float:left;heigth:100px;font-size:12pt;' ><b>$mynumber. </b> &nbsp </label><label style = 'display:block;float:left' >\".$r['assetname'].\"<br>\".$r['noasset'].\"</label></div><br>\";             \r\n             $mynumber ++;\r\n             \r\n         }\r\n+        $mystring = \"<table class='table table-hover table-bordered display nowrap w-100'>\";\r\n         echo $mycountasset.\"||\".$mystring;\r\n     }\r\n     else\r\n     {\r\n"
+                },
+                {
+                    "date": 1638251840313,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -465,9 +465,9 @@\n             $mystring .= \"<div class = 'row' style = 'margin-left:5px;'><label style = 'display:block;float:left;heigth:100px;font-size:12pt;' ><b>$mynumber. </b> &nbsp </label><label style = 'display:block;float:left' >\".$r['assetname'].\"<br>\".$r['noasset'].\"</label></div><br>\";             \r\n             $mynumber ++;\r\n             \r\n         }\r\n-        $mystring = \"<table class='table table-hover table-bordered display nowrap w-100'>\";\r\n+        $mystring .= \"</table \";\r\n         echo $mycountasset.\"||\".$mystring;\r\n     }\r\n     else\r\n     {\r\n"
+                },
+                {
+                    "date": 1638251923674,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -457,17 +457,17 @@\n     $mycountasset = 0;\r\n     if($res->num_rows>0)\r\n     {\r\n         $mycounter = 1;\r\n-        $mystring = \"<table class='table table-hover table-bordered display nowrap w-100'>\";\r\n+        $mystring = \"<table class='table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>No Asset</th></tr>\";\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n             $mycountasset += 1;\r\n             $mystring .= \"<div class = 'row' style = 'margin-left:5px;'><label style = 'display:block;float:left;heigth:100px;font-size:12pt;' ><b>$mynumber. </b> &nbsp </label><label style = 'display:block;float:left' >\".$r['assetname'].\"<br>\".$r['noasset'].\"</label></div><br>\";             \r\n             $mynumber ++;\r\n             \r\n         }\r\n-        $mystring .= \"</table \";\r\n+        $mystring .= \"</table>\";\r\n         echo $mycountasset.\"||\".$mystring;\r\n     }\r\n     else\r\n     {\r\n"
+                },
+                {
+                    "date": 1638251936033,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -457,9 +457,9 @@\n     $mycountasset = 0;\r\n     if($res->num_rows>0)\r\n     {\r\n         $mycounter = 1;\r\n-        $mystring = \"<table class='table table-hover table-bordered display nowrap w-100'><tr><th>No Asset</th><th>No Asset</th></tr>\";\r\n+        $mystring = \"<table class='table table-hover table-bordered display nowrap w-100'><tr><th>Asset No</th><th>Asset Name</th></tr>\";\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n             $mycountasset += 1;\r\n             $mystring .= \"<div class = 'row' style = 'margin-left:5px;'><label style = 'display:block;float:left;heigth:100px;font-size:12pt;' ><b>$mynumber. </b> &nbsp </label><label style = 'display:block;float:left' >\".$r['assetname'].\"<br>\".$r['noasset'].\"</label></div><br>\";             \r\n"
+                },
+                {
+                    "date": 1638251959185,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -457,13 +457,13 @@\n     $mycountasset = 0;\r\n     if($res->num_rows>0)\r\n     {\r\n         $mycounter = 1;\r\n-        $mystring = \"<table class='table table-hover table-bordered display nowrap w-100'><tr><th>Asset No</th><th>Asset Name</th></tr>\";\r\n+        $mystring = \"<table class='table table-hover table-bordered display nowrap w-100'><tr><th>#</th><th>Asset No</th><th>Asset Name</th></tr>\";\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n             $mycountasset += 1;\r\n-            $mystring .= \"<div class = 'row' style = 'margin-left:5px;'><label style = 'display:block;float:left;heigth:100px;font-size:12pt;' ><b>$mynumber. </b> &nbsp </label><label style = 'display:block;float:left' >\".$r['assetname'].\"<br>\".$r['noasset'].\"</label></div><br>\";             \r\n+            $mystring .= \"<tr>$mynumber. </b> &nbsp </label><label style = 'display:block;float:left' >\".$r['assetname'].\"<br>\".$r['noasset'].\"</label></div><br>\";             \r\n             $mynumber ++;\r\n             \r\n         }\r\n         $mystring .= \"</table>\";\r\n"
+                },
+                {
+                    "date": 1638251976725,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -461,9 +461,9 @@\n         $mystring = \"<table class='table table-hover table-bordered display nowrap w-100'><tr><th>#</th><th>Asset No</th><th>Asset Name</th></tr>\";\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n             $mycountasset += 1;\r\n-            $mystring .= \"<tr>$mynumber. </b> &nbsp </label><label style = 'display:block;float:left' >\".$r['assetname'].\"<br>\".$r['noasset'].\"</label></div><br>\";             \r\n+            $mystring .= \"<tr>\".$mynumber.\" </b> &nbsp </label><label style = 'display:block;float:left' >\".$r['assetname'].\"<br>\".$r['noasset'].\"</label></div><br>\";             \r\n             $mynumber ++;\r\n             \r\n         }\r\n         $mystring .= \"</table>\";\r\n"
+                },
+                {
+                    "date": 1638251985829,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -461,9 +461,9 @@\n         $mystring = \"<table class='table table-hover table-bordered display nowrap w-100'><tr><th>#</th><th>Asset No</th><th>Asset Name</th></tr>\";\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n             $mycountasset += 1;\r\n-            $mystring .= \"<tr>\".$mynumber.\" </b> &nbsp </label><label style = 'display:block;float:left' >\".$r['assetname'].\"<br>\".$r['noasset'].\"</label></div><br>\";             \r\n+            $mystring .= \"<tr><td>\".$mynumber.\"</td> </b> &nbsp </label><label style = 'display:block;float:left' >\".$r['assetname'].\"<br>\".$r['noasset'].\"</label></div><br>\";             \r\n             $mynumber ++;\r\n             \r\n         }\r\n         $mystring .= \"</table>\";\r\n"
+                },
+                {
+                    "date": 1638251993743,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -461,9 +461,9 @@\n         $mystring = \"<table class='table table-hover table-bordered display nowrap w-100'><tr><th>#</th><th>Asset No</th><th>Asset Name</th></tr>\";\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n             $mycountasset += 1;\r\n-            $mystring .= \"<tr><td>\".$mynumber.\"</td> </b> &nbsp </label><label style = 'display:block;float:left' >\".$r['assetname'].\"<br>\".$r['noasset'].\"</label></div><br>\";             \r\n+            $mystring .= \"<tr><td>\".$mynumber.\"</td>\".$r['assetname'].\"<br>\".$r['noasset'].\"</label></div><br>\";             \r\n             $mynumber ++;\r\n             \r\n         }\r\n         $mystring .= \"</table>\";\r\n"
+                },
+                {
+                    "date": 1638252005272,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -461,9 +461,9 @@\n         $mystring = \"<table class='table table-hover table-bordered display nowrap w-100'><tr><th>#</th><th>Asset No</th><th>Asset Name</th></tr>\";\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n             $mycountasset += 1;\r\n-            $mystring .= \"<tr><td>\".$mynumber.\"</td>\".$r['assetname'].\"<br>\".$r['noasset'].\"</label></div><br>\";             \r\n+            $mystring .= \"<tr><td>\".$mynumber.\"</td><td>\".$r['assetname'].\"</td>\".$r['noasset'].\"</label></div><br>\";             \r\n             $mynumber ++;\r\n             \r\n         }\r\n         $mystring .= \"</table>\";\r\n"
+                },
+                {
+                    "date": 1638252019418,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -461,9 +461,9 @@\n         $mystring = \"<table class='table table-hover table-bordered display nowrap w-100'><tr><th>#</th><th>Asset No</th><th>Asset Name</th></tr>\";\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n             $mycountasset += 1;\r\n-            $mystring .= \"<tr><td>\".$mynumber.\"</td><td>\".$r['assetname'].\"</td>\".$r['noasset'].\"</label></div><br>\";             \r\n+            $mystring .= \"<tr><td>\".$mynumber.\"</td><td>\".$r['assetname'].\"</td><td>\".$r['noasset'].\"</td></tr>\";             \r\n             $mynumber ++;\r\n             \r\n         }\r\n         $mystring .= \"</table>\";\r\n"
+                },
+                {
+                    "date": 1638252047133,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -461,9 +461,9 @@\n         $mystring = \"<table class='table table-hover table-bordered display nowrap w-100'><tr><th>#</th><th>Asset No</th><th>Asset Name</th></tr>\";\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n             $mycountasset += 1;\r\n-            $mystring .= \"<tr><td>\".$mynumber.\"</td><td>\".$r['assetname'].\"</td><td>\".$r['noasset'].\"</td></tr>\";             \r\n+            $mystring .= \"<tr><td>\".$mynumber.\"</td><td>\".$r['noasset'].\"</td><td>\".$r['assetname'].\"</td></tr>\";             \r\n             $mynumber ++;\r\n             \r\n         }\r\n         $mystring .= \"</table>\";\r\n"
                 }
             ],
             "date": 1633330398495,

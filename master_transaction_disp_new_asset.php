@@ -485,7 +485,7 @@ if($resdepartment -> num_rows>0)
 
                         </select>
                         <br>
-                        <label for="cars">Asset Category:</label> <a href = "#selectasset" onclick = "openselectasset(this)" data-toggle="modal" data-backdrop="static" data-keyboard="false">select asset</a>
+                        <label for="cars">Asset Category:</label> 
                         <select id="categories" name="categories" class="form-control">
 
                         </select>
@@ -507,6 +507,7 @@ if($resdepartment -> num_rows>0)
                 </form>
             </div>
             <div class = "modal-footer" style = "padding-top:20px;">
+            <a class = "btn btn-success" href = "#selectasset" onclick = "openselectasset(this)" data-toggle="modal" data-backdrop="static" data-keyboard="false"><i class="icon-box "></i> &nbsp select asset</a>
             <button type="button" class="btn btn-primary" style="margin-right:10px;"
                                 onclick="adddata()">Save</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"
@@ -559,7 +560,7 @@ if($resdepartment -> num_rows>0)
 
                         </select>
                         <br>
-                        <label for="cars">Asset Category:</label> <a href = "#selectassetedit" onclick = "openselectassetedit(this)" data-toggle="modal" data-backdrop="static" data-keyboard="false">select asset</a>
+                        <label for="cars">Asset Category:</label>
                         <select id="categoriesedit" name="categoriesedit" class="form-control">
 
                         </select>
@@ -581,6 +582,7 @@ if($resdepartment -> num_rows>0)
                 </form>
             </div>
             <div class="modal-footer">
+            <a class = "btn btn-success" href = "#selectassetedit" style="margin-top:10px;" onclick = "openselectassetedit(this)" data-toggle="modal" data-backdrop="static" data-keyboard="false"> <i class="icon-box "></i> &nbsp select asset</a>
                          <button type="button" class="btn btn-primary" style="margin-right:10px;margin-top:10px;"
                                 onclick="editdata()">Save</button>
                             <button type="button" class="btn btn-secondary" style="margin-right:15px;margin-top:10px;" data-dismiss="modal"
@@ -982,7 +984,7 @@ function openmodaledits(element){
         if(iddefaultcategories != idcategories)
         {
             iddefaultcategories = idcategories;
-            alert(idcategories);
+            // alert(idcategories);
             loadassetedit(idcategories);
         }
     }

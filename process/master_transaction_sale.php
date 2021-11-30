@@ -459,17 +459,15 @@ else if($tipe == "getdetailtransaction")
     if($res->num_rows>0)
     {
         $mycounter = 1;
+        $mystring = "<table class='table table-hover table-bordered display nowrap w-100'><tr><th>#</th><th>Asset No</th><th>Asset Name</th></tr>";
         while($r = mysqli_fetch_array($res))
         {
             $mycountasset += 1;
-          
-                $mystring .= "<div class = 'row' style = 'margin-left:5px;'><label style = 'display:block;float:left;heigth:100px;font-size:12pt;' ><b>$mynumber. </b> &nbsp </label><label style = 'display:block;float:left' >".$r['assetname']."<br>".$r['noasset']."<br> Rp ".$r['harga']."</label></div><br>";
-             
-            
-        
+            $mystring .= "<tr><td>".$mynumber."</td><td>".$r['noasset']."</td><td>".$r['assetname']."</td></tr>";             
             $mynumber ++;
             
         }
+        $mystring .= "</table>";
         echo $mycountasset."||".$mystring;
     }
     else

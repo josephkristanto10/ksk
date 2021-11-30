@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 86,
+            "activePatchIndex": 87,
             "patches": [
                 {
                     "date": 1633020159770,
@@ -352,6 +352,10 @@
                 {
                     "date": 1637826048575,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,9 +66,9 @@\n                 $myapproval = \"<span style = 'color:#2aa602'><i class='mi-check-box'></i> &nbspAccepted </span>\";\r\n             }\r\n             // $myrelation = str_replace( \" \", ' ', $row['myrelation'] ); \r\n             $response['data'][] = [\r\n-                \"<label id ='mydate\".$row['id'].\"'>\".$row['mydate'].\"</label>\",\r\n+                \"<label id ='id\".$row['id'].\"'>\".$row['id'].\"</label>\",\r\n                 \"<b><label id ='statusapproval\".$row['id'].\"'  >\".$myapproval.\"</label></b>\",\r\n                 \"<label id ='mydate\".$row['id'].\"'>\".$row['mydate'].\"</label>\",\r\n                 \"<a href = '#myModalDetailTransaction' id = '\".$row['id'].\"' onclick = openmodaldetailtransaction(this) data-toggle='modal'><label id ='notransaction\".$row['id'].\"'>\".$row['notransaction'].\"</label></a>\".\r\n                 \"<input type = 'hidden' id = 'category_\".$row['id'].\"' value = '\".$row['idcategory'].\"'>\".\r\n"
+                },
+                {
+                    "date": 1638252403214,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -458,19 +458,17 @@\n     $mynumber = 1;\r\n     if($res->num_rows>0)\r\n     {\r\n         $mycounter = 1;\r\n+        $mystring = \"<table class='table table-hover table-bordered display nowrap w-100'><tr><th>#</th><th>Asset No</th><th>Asset Name</th></tr>\";\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n             $mycountasset += 1;\r\n-          \r\n-                $mystring .= \"<div class = 'row' style = 'margin-left:5px;'><label style = 'display:block;float:left;heigth:100px;font-size:12pt;' ><b>$mynumber. </b> &nbsp </label><label style = 'display:block;float:left' >\".$r['assetname'].\"<br>\".$r['noasset'].\"<br> Rp \".$r['harga'].\"</label></div><br>\";\r\n-             \r\n-            \r\n-        \r\n+            $mystring .= \"<tr><td>\".$mynumber.\"</td><td>\".$r['noasset'].\"</td><td>\".$r['assetname'].\"</td></tr>\";             \r\n             $mynumber ++;\r\n             \r\n         }\r\n+        $mystring .= \"</table>\";\r\n         echo $mycountasset.\"||\".$mystring;\r\n     }\r\n     else\r\n     {\r\n"
                 }
             ],
             "date": 1633020159770,

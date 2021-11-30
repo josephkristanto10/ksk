@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 189,
+            "activePatchIndex": 201,
             "patches": [
                 {
                     "date": 1632820295380,
@@ -764,6 +764,54 @@
                 {
                     "date": 1637825009551,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -751,11 +751,9 @@\n                 [0, 'asc']\r\n             ],\r\n             columnDefs: [{\r\n                 'targets': 0,\r\n-                'checkboxes': {\r\n-                    'selectRow': true\r\n-                }\r\n+                'visible' :false,\r\n             }],\r\n             ajax: {\r\n                 url: 'process/master_transaction_lend_relation.php',\r\n                 method: 'POST',\r\n"
+                },
+                {
+                    "date": 1638239843078,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -261,8 +261,10 @@\n \r\n                         <br>\r\n                         <br>\r\n                         <div style=\"float:right;margin-bottom:20px;\">\r\n+                        <a class = \"btn btn-success\" style = \"margin-top:10px;\" href = \"#selectasset\" onclick = \"openselectasset(this)\" data-toggle=\"modal\" data-backdrop=\"static\" data-keyboard=\"false\"><i class=\"icon-box \"></i> &nbsp select asset</a>\r\n+\r\n                             <button type=\"button\" class=\"btn btn-primary\" style=\"margin-right:10px;\"\r\n                                 onclick=\"adddata()\">Save</button>\r\n                             <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\"\r\n                                 id=\"canceladd\">Cancel</button>\r\n@@ -751,9 +753,9 @@\n                 [0, 'asc']\r\n             ],\r\n             columnDefs: [{\r\n                 'targets': 0,\r\n-                'visible' :false,\r\n+                'visible' :false\r\n             }],\r\n             ajax: {\r\n                 url: 'process/master_transaction_lend_relation.php',\r\n                 method: 'POST',\r\n"
+                },
+                {
+                    "date": 1638239853520,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -246,10 +246,11 @@\n                         <select id=\"subgroups\" name=\"subgroups\" class=\"form-control\">\r\n \r\n                         </select>\r\n                         <br>\r\n-                        <label for=\"cars\">Asset Category:</label><a href=\"#selectasset\" onclick=\"openselectasset(this)\"\r\n-                            data-toggle=\"modal\" data-backdrop=\"static\" data-keyboard=\"false\">select asset</a>\r\n+                        <label for=\"cars\">Asset Category:</label>\r\n+                        <!-- <a href=\"#selectasset\" onclick=\"openselectasset(this)\"\r\n+                            data-toggle=\"modal\" data-backdrop=\"static\" data-keyboard=\"false\">select asset</a> -->\r\n                         <select id=\"categories\" name=\"categories\" class=\"form-control\">\r\n \r\n                         </select>\r\n                         <br>\r\n"
+                },
+                {
+                    "date": 1638239869845,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -272,8 +272,9 @@\n                         </div>\r\n                     </div>\r\n                 </form>\r\n             </div>\r\n+            <div class=\"modal-footer\">\r\n \r\n         </div>\r\n     </div>\r\n </div>\r\n"
+                },
+                {
+                    "date": 1638239876417,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -273,8 +273,10 @@\n                     </div>\r\n                 </form>\r\n             </div>\r\n             <div class=\"modal-footer\">\r\n+                \r\n+            </div>\r\n \r\n         </div>\r\n     </div>\r\n </div>\r\n"
+                },
+                {
+                    "date": 1638239882528,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -262,20 +262,20 @@\n \r\n                         <br>\r\n                         <br>\r\n                         <div style=\"float:right;margin-bottom:20px;\">\r\n-                        <a class = \"btn btn-success\" style = \"margin-top:10px;\" href = \"#selectasset\" onclick = \"openselectasset(this)\" data-toggle=\"modal\" data-backdrop=\"static\" data-keyboard=\"false\"><i class=\"icon-box \"></i> &nbsp select asset</a>\r\n-\r\n-                            <button type=\"button\" class=\"btn btn-primary\" style=\"margin-right:10px;\"\r\n-                                onclick=\"adddata()\">Save</button>\r\n-                            <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\"\r\n-                                id=\"canceladd\">Cancel</button>\r\n+                     \r\n                         </div>\r\n                     </div>\r\n                 </form>\r\n             </div>\r\n             <div class=\"modal-footer\">\r\n-                \r\n+            <a class = \"btn btn-success\" style = \"margin-top:10px;\" href = \"#selectasset\" onclick = \"openselectasset(this)\" data-toggle=\"modal\" data-backdrop=\"static\" data-keyboard=\"false\"><i class=\"icon-box \"></i> &nbsp select asset</a>\r\n+\r\n+<button type=\"button\" class=\"btn btn-primary\" style=\"margin-right:10px;\"\r\n+    onclick=\"adddata()\">Save</button>\r\n+<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\"\r\n+    id=\"canceladd\">Cancel</button>\r\n             </div>\r\n \r\n         </div>\r\n     </div>\r\n"
+                },
+                {
+                    "date": 1638239892352,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -268,9 +268,9 @@\n                     </div>\r\n                 </form>\r\n             </div>\r\n             <div class=\"modal-footer\">\r\n-            <a class = \"btn btn-success\" style = \"margin-top:10px;\" href = \"#selectasset\" onclick = \"openselectasset(this)\" data-toggle=\"modal\" data-backdrop=\"static\" data-keyboard=\"false\"><i class=\"icon-box \"></i> &nbsp select asset</a>\r\n+            <a class = \"btn btn-success\"  href = \"#selectasset\" onclick = \"openselectasset(this)\" data-toggle=\"modal\" data-backdrop=\"static\" data-keyboard=\"false\"><i class=\"icon-box \"></i> &nbsp select asset</a>\r\n \r\n <button type=\"button\" class=\"btn btn-primary\" style=\"margin-right:10px;\"\r\n     onclick=\"adddata()\">Save</button>\r\n <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\"\r\n"
+                },
+                {
+                    "date": 1638239907003,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -273,9 +273,9 @@\n \r\n <button type=\"button\" class=\"btn btn-primary\" style=\"margin-right:10px;\"\r\n     onclick=\"adddata()\">Save</button>\r\n <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\"\r\n-    id=\"canceladd\">Cancel</button>\r\n+    id=\"canceladd\" style = \"margin-right:10px;\">Cancel</button>\r\n             </div>\r\n \r\n         </div>\r\n     </div>\r\n"
+                },
+                {
+                    "date": 1638239929455,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -267,9 +267,9 @@\n                         </div>\r\n                     </div>\r\n                 </form>\r\n             </div>\r\n-            <div class=\"modal-footer\">\r\n+            <div class=\"modal-footer\" style = \"padding:10px;\">\r\n             <a class = \"btn btn-success\"  href = \"#selectasset\" onclick = \"openselectasset(this)\" data-toggle=\"modal\" data-backdrop=\"static\" data-keyboard=\"false\"><i class=\"icon-box \"></i> &nbsp select asset</a>\r\n \r\n <button type=\"button\" class=\"btn btn-primary\" style=\"margin-right:10px;\"\r\n     onclick=\"adddata()\">Save</button>\r\n"
+                },
+                {
+                    "date": 1638239975532,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -267,9 +267,9 @@\n                         </div>\r\n                     </div>\r\n                 </form>\r\n             </div>\r\n-            <div class=\"modal-footer\" style = \"padding:10px;\">\r\n+            <div class=\"modal-footer\" style = \"padding-top:10px;\">\r\n             <a class = \"btn btn-success\"  href = \"#selectasset\" onclick = \"openselectasset(this)\" data-toggle=\"modal\" data-backdrop=\"static\" data-keyboard=\"false\"><i class=\"icon-box \"></i> &nbsp select asset</a>\r\n \r\n <button type=\"button\" class=\"btn btn-primary\" style=\"margin-right:10px;\"\r\n     onclick=\"adddata()\">Save</button>\r\n"
+                },
+                {
+                    "date": 1638239987933,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2521,8 +2521,10 @@\n                     </div>\r\n                 </form>\r\n             </div>\r\n             <div class=\"modal-footer\">\r\n+            <a class = \"btn btn-success\" href = \"#selectassetedit\" style=\"margin-top:10px;margin-right:10px;\" onclick = \"openselectassetedit(this)\" data-toggle=\"modal\" data-backdrop=\"static\" data-keyboard=\"false\"> <i class=\"icon-box \"></i> &nbsp select asset</a>\r\n+\r\n                 <button type=\"button\" class=\"btn btn-primary\" style=\"margin-right:10px;margin-top:10px;\"\r\n                     onclick=\"editdata()\">Save</button>\r\n                 <button type=\"button\" class=\"btn btn-secondary\" style=\"margin-right:30px;margin-top:10px;\"\r\n                     data-dismiss=\"modal\" id=\"canceledittransaction\">Cancel</button>\r\n"
+                },
+                {
+                    "date": 1638239993849,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2520,9 +2520,9 @@\n                         </div>\r\n                     </div>\r\n                 </form>\r\n             </div>\r\n-            <div class=\"modal-footer\">\r\n+            <div class=\"modal-footer\" style = \"padding-top:10px;\">\r\n             <a class = \"btn btn-success\" href = \"#selectassetedit\" style=\"margin-top:10px;margin-right:10px;\" onclick = \"openselectassetedit(this)\" data-toggle=\"modal\" data-backdrop=\"static\" data-keyboard=\"false\"> <i class=\"icon-box \"></i> &nbsp select asset</a>\r\n \r\n                 <button type=\"button\" class=\"btn btn-primary\" style=\"margin-right:10px;margin-top:10px;\"\r\n                     onclick=\"editdata()\">Save</button>\r\n"
+                },
+                {
+                    "date": 1638251524180,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2502,11 +2502,12 @@\n                         <label for=\"cars\">Asset Sub Group:</label>\r\n                         <select id=\"subgroupsedit\" name=\"subgroupsedit\" class=\"form-control\">\r\n                         </select>\r\n                         <br>\r\n-                        <label for=\"cars\">Asset Category:</label> <a href=\"#selectassetedit\"\r\n+                        <label for=\"cars\">Asset Category:</label> \r\n+                        <!-- <a href=\"#selectassetedit\"\r\n                             onclick=\"openselectassetedit(this)\" data-toggle=\"modal\" data-backdrop=\"static\"\r\n-                            data-keyboard=\"false\">select asset</a>\r\n+                            data-keyboard=\"false\">select asset</a> -->\r\n                         <select id=\"categoriesedit\" name=\"categoriesedit\" class=\"form-control\">\r\n                         </select>\r\n                         <br>\r\n                         <b>Asset Choose</b>\r\n"
                 }
             ],
             "date": 1632820295380,

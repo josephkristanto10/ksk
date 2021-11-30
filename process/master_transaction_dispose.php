@@ -82,7 +82,7 @@ if($tipe == "load")
                 "<label id ='mydate".$row['id']."'>".$row['mydate']."</label>"."<input type = 'hidden' id = 'category_".$row['id']."' value = '".$row['idcategory']."'>".
                 "<input type = 'hidden' id = 'subgroup_".$row['id']."' value = '".$row['idsubgroup']."'>".
                 "<input type = 'hidden' id = 'group_".$row['id']."' value = '".$row['idgroup']."'>",
-                "<a href = '#myModalDetailTransaction' id = '".$row['id']."' onclick = openmodaledits(this) data-toggle='modal'><label id ='notransaction".$row['id']."'>".$row['notransaction']."</label></a>",
+                "<a href = '#myModalDetailTransaction' id = '".$row['id']."' onclick = openmodaldetailtransaction(this) data-toggle='modal'><label id ='notransaction".$row['id']."'>".$row['notransaction']."</label></a>",
                 ' <div class="list-icons">
                 <div class="dropdown">
                     <a href="#" class="list-icons-item" data-toggle="dropdown">
@@ -463,13 +463,15 @@ else if($tipe == "getdetailtransaction")
     if($res->num_rows>0)
     {
         $mycounter = 1;
+        $mystring = "<table class='table table-hover table-bordered display nowrap w-100'><tr><th>#</th><th>Asset No</th><th>Asset Name</th></tr>";
         while($r = mysqli_fetch_array($res))
         {
             $mycountasset += 1;
-            $mystring .= "<div class = 'row' style = 'margin-left:5px;'><label style = 'display:block;float:left;heigth:100px;font-size:12pt;' ><b>$mynumber. </b> &nbsp </label><label style = 'display:block;float:left' >".$r['assetname']."<br>".$r['noasset']."</label></div><br>";             
+            $mystring .= "<tr><td>".$mynumber."</td><td>".$r['noasset']."</td><td>".$r['assetname']."</td></tr>";             
             $mynumber ++;
             
         }
+        $mystring .= "</table>";
         echo $mycountasset."||".$mystring;
     }
     else

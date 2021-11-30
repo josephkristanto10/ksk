@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 83,
+            "activePatchIndex": 84,
             "patches": [
                 {
                     "date": 1632905661845,
@@ -340,6 +340,10 @@
                 {
                     "date": 1637820183868,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n if($tipe == \"load\")\r\n {\r\n \r\n     $where_like = [\r\n-        // 'id',\r\n+        'id',\r\n         'status_approval',\r\n         'mydate',\r\n         'notransaction',        \r\n         'branchfrom',\r\n"
+                },
+                {
+                    "date": 1638252319861,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -536,16 +536,17 @@\n     $mynumber = 1;\r\n     if($res->num_rows>0)\r\n     {\r\n         $mycounter = 1;\r\n+        $mystring = \"<table class='table table-hover table-bordered display nowrap w-100'><tr><th>#</th><th>Asset No</th><th>Asset Name</th></tr>\";\r\n         while($r = mysqli_fetch_array($res))\r\n         {\r\n             $mycountasset += 1;\r\n-            $mystring .= \"<div class = 'row' style = 'margin-left:5px;'><label style = 'display:block;float:left;heigth:100px;font-size:12pt;' ><b>$mynumber. </b> &nbsp </label><label style = 'display:block;float:left' >\".$r['assetname'].\"<br>\".$r['noasset'].\"</label></div><br>\";\r\n-             \r\n+            $mystring .= \"<tr><td>\".$mynumber.\"</td><td>\".$r['noasset'].\"</td><td>\".$r['assetname'].\"</td></tr>\";             \r\n             $mynumber ++;\r\n             \r\n         }\r\n+        $mystring .= \"</table>\";\r\n         echo $mycountasset.\"||\".$mystring;\r\n     }\r\n     else\r\n     {\r\n"
                 }
             ],
             "date": 1632905661845,

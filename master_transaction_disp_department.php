@@ -833,8 +833,10 @@ echo date('d-m-Y');?>">
 
                         </select>
                         <br>
-                        <label for="cars">Asset Category:</label><a href="#selectasset" onclick="openselectasset(this)"
-                            data-toggle="modal" data-backdrop="static" data-keyboard="false">select asset</a>
+                        <label for="cars">Asset Category:</label>
+                        <!-- <a href="#selectasset" onclick="openselectasset(this)"
+                            data-toggle="modal" data-backdrop="static" data-keyboard="false">select asset</a> -->
+                            
                         <select id="categories" name="categories" class="form-control">
 
                         </select>
@@ -854,6 +856,7 @@ echo date('d-m-Y');?>">
                 </form>
             </div>
             <div class = "modal-footer" style = "padding-top:20px;">
+            <a class = "btn btn-success" href = "#selectasset"  onclick = "openselectasset(this)" data-toggle="modal" data-backdrop="static" data-keyboard="false"><i class="icon-box "></i> &nbsp select asset</a>
             <button type="button" class="btn btn-primary" style="margin-right:10px;"
                                 onclick="adddata()">Save</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"
@@ -1001,9 +1004,10 @@ echo date('d-m-Y');?>">
                         <select id="subgroupsedit" name="subgroupsedit" class="form-control">
                         </select>
                         <br>
-                        <label for="cars">Asset Category:</label> <a href="#selectassetedit"
+                        <label for="cars">Asset Category:</label> 
+                        <!-- <a href="#selectassetedit"
                             onclick="openselectassetedit(this)" data-toggle="modal" data-backdrop="static"
-                            data-keyboard="false">select asset</a>
+                            data-keyboard="false">select asset</a> -->
                         <select id="categoriesedit" name="categoriesedit" class="form-control">
                         </select>
                         <br>
@@ -1020,6 +1024,7 @@ echo date('d-m-Y');?>">
                 </form>
             </div>
             <div class="modal-footer">
+            <a class = "btn btn-success" href = "#selectassetedit" style="margin-top:10px;" onclick = "openselectassetedit(this)" data-toggle="modal" data-backdrop="static" data-keyboard="false"> <i class="icon-box "></i> &nbsp select asset</a>
                 <button type="button" class="btn btn-primary" style="margin-right:10px;margin-top:10px;"
                     onclick="editdata()">Save</button>
                 <button type="button" class="btn btn-secondary" style="margin-right:30px;margin-top:10px;"
